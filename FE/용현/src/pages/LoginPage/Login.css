@@ -1,0 +1,28 @@
+h2 {
+  text-align: center;
+  }
+  
+form {
+  width: 300px;
+  height: 150px;
+  border: 1px solid;
+  border-radius: 5px;
+  margin: auto;
+  padding: 30px;
+}
+
+label {
+  display: inline-block;
+  font-size: 10px;
+  width: 25%;
+}
+
+input {
+  display: inline-block;
+  width: 70%;
+  height: 30px;
+  border: 1px solid rgb(194, 194, 194);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+  
