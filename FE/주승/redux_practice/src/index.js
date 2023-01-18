@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 // import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+// import reportWebVitals from './reportWebVitals';
 // 여기서 부터 추가 
-import * as serviceWorker from './serviceWorker';
+// import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './modules';
@@ -20,4 +20,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorker.unregister();
+// serviceWorker.unregister();
+
+
+
