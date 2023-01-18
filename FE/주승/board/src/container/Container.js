@@ -4,6 +4,7 @@ import BoardList from '../component/BoardList';
 import BoardNew from '../component/BoardNew';
 import { boardRemove, boardSave, boardSelectRow } from '../module/boardReducer';
 import {KAKAO_AUTH_URL} from "../component/Login";
+import {BrowserRouter as Route, Switch} from 'react-router-dom';
 
 
 function Container() {
