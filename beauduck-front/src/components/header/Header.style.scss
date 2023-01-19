@@ -1,0 +1,59 @@
+.header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    box-shadow: 0px 0px 1px 0px gray;
+
+    .header-content {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        div {
+            width: 20%;
+
+            p, h3 {
+                display: inline-block;
+                line-height: 50px;
+                margin: 0;
+                cursor: pointer;
+
+            }
+        }
+
+        .header-nav {
+            width: 50%;
+            text-align: center;
+
+            p {
+                width: 25%;
+
+                &:hover {
+                    color: black;
+                    font-weight: 600;
+                }
+            }
+
+        }
+        .header-auth {
+            text-align: right;
+
+            p {
+                font-weight: 200;
+                font-size: small;
+            }
+        }
+
+    }
+    &:hover {
+        background-color: #FFE7C1;
+        color: rgb(255, 255, 255);
+    }
+}
