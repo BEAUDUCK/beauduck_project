@@ -1,0 +1,160 @@
+.consulting-div {
+  // border: 1px solid gray;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 10px;
+  // display: grid;
+  height: 120px;
+  background-color: #fdf8e7;
+
+  .consulting-first {
+    // grid-column-start: 1;
+    // grid-column-end: 2;
+    display: inline-block;
+    width: 30%;
+  }
+
+  .consulting-second {
+    // grid-column-start: 2;
+    // grid-column-end: 4;
+    display: inline-block;
+    width: 70%;
+  }
+}
+
+// 컨설팅 방 생성하기 모달
+.consult-create-modal {
+  position: relative;
+  width: 500px;
+  height: 400px;
+  
+  border: 2px solid rgb(220, 220, 220);
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px #bdbdbd;
+
+  div {
+    width: 500px;
+    height: 50px;
+    background-color: #FFF5D1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    h3 {
+      margin: 0;
+      width: 300px;
+      line-height: 50px;
+      font-family: 'Jalnan';
+    }
+
+    .xmark {
+      margin: auto;
+      color: rgb(68, 68, 68);
+      font-size: x-large;
+    }
+
+    p {
+      width: 100px;
+    }
+  }
+
+  form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+    label {
+      display: inline-block;
+      width: 100px;
+      text-align: center;
+      margin-right: 20px;
+    }
+
+    input {
+      width: 270px;
+      height: 30px;
+      margin-bottom: 20px;
+    }
+
+    textarea { 
+      width: 270px;
+      height: 120px;
+    }
+    
+    .normal-btn{
+      margin: auto;
+    };
+  }
+}
+
+.loading-modal {
+  width: 450px;
+  height: 350px;
+  text-align: center;
+  border: 2px solid rgb(220, 220, 220);
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px #bdbdbd;
+
+  .loading-bigbtn {
+    width: 180px;
+    height: 70px;
+
+    background: #FFC368;
+    border-radius: 100px;
+    border: none;
+
+    font-family: 'Jalnan';
+    font-weight: 600;
+    color: white;
+    font-size: xx-large;
+    text-shadow: 1px 1px #bdbdbd;
+
+    margin-top: 50px;
+    margin-bottom: 10px;
+
+    cursor: pointer;
+  }
+
+  h3 {
+    display: inline-block;
+    width: 400px;
+  }
+
+  .back-icon {
+    margin: auto;
+    color:rgb(117, 117, 117);
+    font-size: 25px;
+    cursor: pointer;
+  }
+}
+
+.guest {
+  height: 250px;
+  margin-bottom: 100px;
+
+  .guest-bigbtn {
+    margin-top: 0;
+  }
+
+  .battery{
+    display: block;
+    margin: auto;
+    font-size: 60px;
+  }
+
+  .full {
+    color: #02BC7D;
+  }
+  .less {
+    color: #FC5C65;
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: small;
+    color: gray;
+  }
+
+}
