@@ -1,0 +1,29 @@
+.write-form {
+  width: 80%;
+
+  h2 {
+    display: block;
+    margin-top: 30px;
+  }
+  hr {
+    color: gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  input {
+    width: 100%;
+    padding-left: 10px;
+    border: 1px solid rgb(211, 211, 211);
+  }
+
+  .input-title {
+    margin-top: 20px;
+    margin-bottom: 0;
+    height: 30px;
+  }
+
+  .input-content {
+    margin-top: 0;
+    height: 250px;
+  }
+}
