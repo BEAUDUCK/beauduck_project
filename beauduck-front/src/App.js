@@ -15,8 +15,15 @@ import TogetherPage from './pages/TogetherPage';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faBattery } from '@fortawesome/free-solid-svg-icons';
+import { faBatteryQuarter } from '@fortawesome/free-solid-svg-icons';
+import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
+
 
 library.add(faXmark);
+library.add(faBattery);
+library.add(faBatteryQuarter);
+library.add(faCircleChevronLeft);
 
 function App() {
   return (
