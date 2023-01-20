@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './Header.style.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ const Header = () => {
           <p onClick={() => navigate('/community')}>쑥덕쑥덕</p>
         </div>
         <div className="header-auth">
+          {/* onClick 이벤트 마이페이지로 라우팅 */}
+          <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user" />
           <p>LOGIN/SIGNUP</p>
         </div>
       </div>

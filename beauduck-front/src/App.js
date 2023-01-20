@@ -18,12 +18,19 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faBattery } from '@fortawesome/free-solid-svg-icons';
 import { faBatteryQuarter } from '@fortawesome/free-solid-svg-icons';
 import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
-
-library.add(faXmark);
-library.add(faBattery);
-library.add(faBatteryQuarter);
-library.add(faCircleChevronLeft);
+library.add(
+  faXmark,
+  faBattery,
+  faBatteryQuarter,
+  faCircleChevronLeft,
+  fasStar,
+  farStar,
+  faUser,
+);
 
 function App() {
   return (
