@@ -1,0 +1,54 @@
+.board-list {
+    width: 100%;
+    height: 45px;
+    border-bottom : 1px solid #FFD4B2;
+    p {
+        display: inline-block;
+        width: 15%;
+        text-align: center;
+        color: rgb(77, 77, 77);
+        line-height: 45px;
+        margin: 0;
+    }
+
+    .board-title {
+        width: 40%;
+    }
+}
+
+.board-header {
+    height: 50px;
+    margin-top: 30px;
+    border-bottom : 2px solid #FFD4B2;
+    background-color: #fdf8e7;
+
+    p {
+        color: black;
+        line-height: 50px;
+        margin: 0;
+    }
+}
+
+.comment-list {
+    width: 80%;
+    margin: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    h2 {
+        padding: 0;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+}
+
+.comment-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+}
+
+.user-comment {
+    border: none;
+    padding-top: 20px;
+}

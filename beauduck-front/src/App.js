@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/Header';
-import CommunityPage from './pages/CommunityPage';
-import CommunityWritePage from './pages/CommunityWritePage';
+import BoardPage from './pages/BoardPage';
+import BoardWritePage from './pages/BoardWritePage';
 import ConsultingPage from './pages/ConsultingPage';
 import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
@@ -21,6 +21,8 @@ import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import BoardInfoPage from './pages/BoardInfoPage';
+import BoardQnAPage from './pages/BoardQnAPage';
 
 library.add(
   faXmark,
@@ -49,8 +51,10 @@ function App() {
           {/* 투게덕 */}
           <Route path="/together" element={<TogetherPage />} />
           {/* 쑥덕쑥덕 */}
-          <Route path="/community" element={<CommunityPage />} />
-          <Route path="/community/write" element={<CommunityWritePage />} />
+          <Route path="/board" element={<BoardPage />} />
+          <Route path="/board/write" element={<BoardWritePage />} />
+          <Route path="/board/info/:id" element={<BoardInfoPage />} />
+          <Route path="/board/qna/:id" element={<BoardQnAPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>

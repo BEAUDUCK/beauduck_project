@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import TabButton from '../components/button/TabButton';
-import './Community.style.scss';
+import './Board.style.scss';
 
-const CommunityWritePage = () => {
+const BoardWritePage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -21,9 +21,8 @@ const CommunityWritePage = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <input
+        <textarea
           className="input-content"
-          type="text"
           placeholder="내용을 입력하세요."
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -33,4 +32,4 @@ const CommunityWritePage = () => {
   );
 };
 
-export default CommunityWritePage;
+export default BoardWritePage;
