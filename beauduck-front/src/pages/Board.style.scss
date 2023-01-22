@@ -1,0 +1,133 @@
+.write-form {
+  width: 80%;
+
+  h2 {
+    display: block;
+    margin-top: 30px;
+  }
+  hr {
+    color: gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  input, textarea {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid rgb(211, 211, 211);
+  }
+
+  .input-title {
+    margin-top: 20px;
+    margin-bottom: 0;
+    height: 30px;
+  }
+
+  .input-content {
+    margin-top: 0;
+    height: 250px;
+    resize: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.board-tab {
+  display: flex;
+  justify-content: space-between;
+
+  input {
+    width: 200px;
+    height: 35px;
+    border: #ececec 3px solid;
+    border-radius: 5px;
+    background-color: #F1F1F1;
+    margin-right: 20px;
+  }
+}
+
+.info-board {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+
+  .board-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    min-height: 300px;
+    border-bottom: 2px solid rgb(211, 211, 211);
+
+  }
+}
+
+
+.qna-board {
+  position: relative;
+  width: 60%;
+  margin: auto;
+  margin-top: 50px;
+  border: 2px solid rgb(211, 211, 211);
+  border-radius: 20px;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10%;
+  padding-right: 10%;
+
+  .alpha-mark {
+    font-family: 'Palanquin Dark', sans-serif;
+    font-size: 100px;
+    color: gray;
+    position: absolute;
+    top: -80px;
+    left: -25px;
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+    margin: 0;
+  }
+}
+
+.user-box {
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgb(211, 211, 211);
+
+  .img-replace {
+    width: 60px;
+    height:60px;
+    border-radius: 100px;
+  }
+
+  .user-text {
+    display: inline-block;
+    margin-left: 20px;
+  
+  
+    p {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    span {
+      font-size: 10px;
+      color:rgb(183, 183, 183);
+      padding-right: 5px;
+    }
+
+    .comment-username {
+      font-size: smaller;
+  }
+  
+  .comment-content {
+      font-size: medium;
+  }
+  }
+}
