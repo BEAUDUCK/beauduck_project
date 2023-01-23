@@ -21,6 +21,10 @@ import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faCaretLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { faBackward } from '@fortawesome/free-solid-svg-icons';
+import { faForward } from '@fortawesome/free-solid-svg-icons';
 import BoardInfoPage from './pages/BoardInfoPage';
 import BoardQnAPage from './pages/BoardQnAPage';
 
@@ -32,6 +36,10 @@ library.add(
   fasStar,
   farStar,
   faUser,
+  faCaretLeft,
+  faCaretRight,
+  faBackward,
+  faForward,
 );
 
 function App() {
