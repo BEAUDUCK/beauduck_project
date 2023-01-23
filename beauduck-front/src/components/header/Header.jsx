@@ -20,7 +20,9 @@ const Header = () => {
         <div className="header-auth">
           {/* onClick 이벤트 마이페이지로 라우팅 */}
           <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user" />
-          <p>LOGIN/SIGNUP</p>
+          <p onClick={() => navigate('/login')}> LOGIN</p>
+          <p>/</p>
+          <p onClick={() => navigate('/signup')}>SIGNUP</p>
         </div>
       </div>
     </div>
