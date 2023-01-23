@@ -12,3 +12,7 @@ input, textarea {
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 300;
 }
+
+h1 {
+  font-family: 'Jalnan';
+}

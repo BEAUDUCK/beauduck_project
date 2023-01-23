@@ -1,33 +1,25 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Paging from '../../components/pagination/Paging';
 import './Board.style.scss';
 import BoardListItem from './BoardListItem';
 
-const BoardList = () => {
-  const testList = [
-    {
-      id: 1,
-      title: '글1',
-      member_id: 4,
-      content: '내용내용',
-      count: 4,
-      like: 3,
-    },
-    {
-      id: 2,
-      title: '글2',
-      member_id: 4,
-      content: '내용내용',
-      count: 4,
-      like: 3,
-    },
-    {
-      id: 3,
-      title: '글3',
-      member_id: 4,
-      content: '내용내용',
-      count: 4,
-      like: 3,
-    },
-  ];
+const BoardList = ({ allList }) => {
+  const [currentPosts, setCurrentPosts] = useState([]); // 보여줄 게시글
+  const [page, setPage] = useState(1); // 현재 페이지
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
+  const [postPerPage] = useState(5);
+
+  const indefOfLastPost = page * postPerPage;
+  const indefOfFirstPost = indefOfLastPost - postPerPage;
+
+  useEffect(() => {
+    setCurrentPosts(allList.slice(indefOfFirstPost, indefOfLastPost));
+  }, [indefOfFirstPost, indefOfLastPost, page]);
+
   return (
     <div>
       <div className={['board-list', 'board-header'].join(' ')}>
@@ -37,9 +29,16 @@ const BoardList = () => {
         <p>조회</p>
         <p>좋아요</p>
       </div>
-      {testList.map((item) => (
+      {currentPosts.map((item) => (
         <BoardListItem key={item.id} boardItem={item} />
       ))}
+      <Paging
+        totalCount={allList.length}
+        page={page}
+        postPerPage={postPerPage}
+        pageRangeDisplayed={5}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 };

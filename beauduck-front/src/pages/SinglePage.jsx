@@ -57,8 +57,8 @@ const SinglePage = () => {
         <button className="makeup-recommend-btn">
           나에게 어울리는 메이크업 추천 받기
         </button>
-        <h2>인기 메이크업</h2>
-        <hr />
+        <h2 className="single-h2">인기 메이크업</h2>
+        <hr className="single-hr" />
         <SingleList modeList={testList} />
         <SingleModalCreate />
         <SingleModalExitSurvey />
