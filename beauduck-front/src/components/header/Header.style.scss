@@ -38,6 +38,7 @@
                 &:hover {
                     color: black;
                     font-weight: 600;
+                    border-bottom: 2px solid gray;
                 }
             }
 
@@ -53,8 +54,9 @@
 
     }
     &:hover {
-        background-color: #FFE7C1;
-        color: rgb(255, 255, 255);
+        background-color: #F0DBDB;
+        // background-color: #CCD6A6;
+        color: #FFFBE9;
     }
 }
 

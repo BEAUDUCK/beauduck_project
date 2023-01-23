@@ -15,3 +15,10 @@ color-pick
 ```
 npm install react-color --save
 ```
+
+--- 
+
+페이지네이션 구현
+```
+npm install react-js-pagination
+```
