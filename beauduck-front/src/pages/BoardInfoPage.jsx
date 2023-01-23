@@ -1,9 +1,19 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import BoardCommentList from '../features/board/BoardCommentList';
+import { getInfoBoard, getInfoComments } from '../features/board/BoardSlice';
 
 const BoardInfoPage = () => {
-  const { infoId } = useParams();
-  // state에 저장된 board 값에서 infoId랑 같은거 가져오면됨
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  // const { nowBoard } = useSelector((state) => state.nowBoard);
+
+  useEffect(() => {
+    dispatch(getInfoBoard(id));
+    dispatch(getInfoComments(id));
+  }, [dispatch]);
+
   const testBoard = {
     id: 1,
     title: '글1',

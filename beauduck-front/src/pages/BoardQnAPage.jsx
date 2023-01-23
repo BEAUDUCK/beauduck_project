@@ -1,4 +1,18 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getQaBoard, getQaComments } from '../features/board/BoardSlice';
+
 const BoardQnAPage = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  // const { nowBoard } = useSelector((state) => state.nowBoard);
+
+  useEffect(() => {
+    dispatch(getQaBoard(id));
+    dispatch(getQaComments(id));
+  }, [dispatch]);
+
   const testBoard = {
     id: 1,
     title: '글1',

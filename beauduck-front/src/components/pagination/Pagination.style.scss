@@ -1,0 +1,53 @@
+// .gr {
+//     color: #808080;
+// }
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  padding-left: 0;
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+  }
+}
+  
+ul.pagination li a {
+  text-decoration: none;
+  color: #808080;
+  font-size: 1rem;
+}
+ul.pagination li.active a {
+  font-weight: 800;
+  text-decoration: underline;
+}
+ul.pagination li.active {
+  font-weight: 800;
+}
+ul.pagination li a:hover,
+ul.pagination li a.active {
+  color: #808080;
+}
+.page-selection {
+  width: 48px;
+  height: 30px;
+  color: #808080;
+}
+
+  .one-step {
+    font-size: 1.25rem;
+    vertical-align: -0.18em;
+  }

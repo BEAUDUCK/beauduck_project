@@ -1,17 +1,42 @@
+.board-name {
+  margin-top: 3rem;
+}
+
+.go-back {
+  margin-left: 10%;
+  margin-top: 20px;
+  color: gray;
+  cursor: pointer;
+
+  svg {
+    font-size: 1rem;
+    vertical-align: middle;
+  }
+  
+  span {
+    margin-left: 10px;
+    font-size: 0.8rem;
+  }
+}
+
 .write-form {
   width: 80%;
+  margin: auto;
 
-  h2 {
+  h3 {
     display: block;
     margin-top: 30px;
+    margin-bottom: 0;
+    font-size: 1.5rem;
   }
   hr {
-    color: gray;
-    margin-top: 20px;
+    background-color: gray;
+    margin-top: 10px;
     margin-bottom: 20px;
+    height: 1px;
   }
   input, textarea {
-    width: 100%;
+    width: calc(100% - 20px);
     padding-left: 10px;
     padding-right: 10px;
     border: 1px solid rgb(211, 211, 211);
@@ -20,12 +45,12 @@
   .input-title {
     margin-top: 20px;
     margin-bottom: 0;
-    height: 30px;
+    height: 40px;
   }
 
   .input-content {
     margin-top: 0;
-    height: 250px;
+    height: 300PX;
     resize: none;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -38,7 +63,7 @@
 
   input {
     width: 200px;
-    height: 35px;
+    height: 1.7rem;
     border: #ececec 3px solid;
     border-radius: 5px;
     background-color: #F1F1F1;
