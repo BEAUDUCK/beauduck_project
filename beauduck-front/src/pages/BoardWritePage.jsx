@@ -5,6 +5,7 @@ import './Board.style.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { newInfoBoard, newQaBoard } from '../features/board/BoardSlice';
+import Button from '../components/button/Button';
 
 const BoardWritePage = () => {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ const BoardWritePage = () => {
   const setQa = () => {
     setIsInfo(false);
   };
+
+  console.log(isInfo);
 
   const BoardCreate = () => {
     const newBoard = {
@@ -42,11 +45,22 @@ const BoardWritePage = () => {
         <FontAwesomeIcon icon="fa-solid fa-circle-chevron-left" />
         <span>작성 취소</span>
       </div>
-      <form className="write-form" onSubmit={BoardCreate}>
-        <h3>글쓰기</h3>
+      <form className="write-form">
+        <div className="form-header">
+          <h3>글쓰기</h3>
+          <Button text={'등록'} onClickEvent={BoardCreate} />
+        </div>
         <hr />
-        <TabButton text={'정보게시판'} addClass={isInfo && 'selected'} />
-        <TabButton text={'질문게시판'} addClass={!isInfo && 'selected'} />
+        <TabButton
+          text={'정보게시판'}
+          onClick={setInfo}
+          addClass={isInfo && 'selected'}
+        />
+        <TabButton
+          text={'질문게시판'}
+          onClick={setQa}
+          addClass={!isInfo && 'selected'}
+        />
         <br />
         <input
           className="input-title"
