@@ -1,5 +1,3 @@
-import '../../pages/Board.style.scss';
-
 const BoardCommentListItem = ({ comment }) => {
   return (
     <div className={['user-box', 'user-comment'].join(' ')}>

@@ -1,6 +1,6 @@
-import BoardCommentListItem from './BoardCommentListItem';
+import BoardAnswerListItem from './BoardAnswerListItem';
 
-const BoardCommentList = () => {
+const BoardAnswerList = () => {
   const testComments = [
     {
       id: 1,
@@ -17,14 +17,14 @@ const BoardCommentList = () => {
       created_at: '2023-01-22 17:55',
     },
   ];
+
   return (
-    <div className="comment-list">
-      <h2>댓글</h2>
+    <>
       {testComments.map((item) => (
-        <BoardCommentListItem key={item.id} comment={item} />
+        <BoardAnswerListItem key={item.id} answer={item} />
       ))}
-    </div>
+    </>
   );
 };
 
-export default BoardCommentList;
+export default BoardAnswerList;
