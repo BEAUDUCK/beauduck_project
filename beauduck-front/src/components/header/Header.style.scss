@@ -1,4 +1,11 @@
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 999;
+    
     width: 100%;
     height: 50px;
     display: flex;
@@ -40,6 +47,7 @@
                     font-weight: 600;
                     border-bottom: 2px solid gray;
                 }
+                
             }
 
         }
@@ -54,9 +62,11 @@
 
     }
     &:hover {
-        background-color: #F0DBDB;
+        // background-color: #E6E99D;
+        // background-color: #DAE2B6;
+        // background-color: #F0DBDB;
         // background-color: #CCD6A6;
-        color: #FFFBE9;
+        // color: #FFFBE9;
     }
 }
 

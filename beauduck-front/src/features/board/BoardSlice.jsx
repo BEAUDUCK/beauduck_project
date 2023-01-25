@@ -34,6 +34,15 @@ export const newInfoBoard = createAsyncThunk(
   },
 );
 
+// info 게시판 새로운 댓글 생성
+export const newInfoComment = createAsyncThunk(
+  'board/newInfoComment',
+  async (newComment) => {
+    const res = await axios.post('board/info/comment', newComment);
+    return res.data;
+  },
+);
+
 // qa 게시판 리스트 조회
 export const getQaList = createAsyncThunk('board/getQaList', async () => {
   const res = await axios.get('/board/qa');
@@ -60,6 +69,15 @@ export const newQaBoard = createAsyncThunk(
   'board/newQaBoard',
   async (newBoard) => {
     const res = await axios.post('/board/qa', newBoard);
+    return res.data;
+  },
+);
+
+// qa 게시판 새로운 댓글(답변) 생성
+export const newQaAnswer = createAsyncThunk(
+  'board/newQaAnswer',
+  async (newAnswer) => {
+    const res = await axios.poad('/board/qa/comment', newAnswer);
     return res.data;
   },
 );
@@ -95,6 +113,12 @@ export const boardSlice = createSlice({
         console.log(action.payload);
       })
       .addCase(newQaBoard.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(newInfoComment.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(newQaAnswer.fulfilled, (state, action) => {
         console.log(action.payload);
       });
   },
