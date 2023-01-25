@@ -27,6 +27,7 @@ import { faBackward } from '@fortawesome/free-solid-svg-icons';
 import { faForward } from '@fortawesome/free-solid-svg-icons';
 import BoardInfoPage from './pages/BoardInfoPage';
 import BoardQnAPage from './pages/BoardQnAPage';
+import Footer from './components/footer/Footer';
 
 library.add(
   faXmark,
@@ -66,6 +67,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }

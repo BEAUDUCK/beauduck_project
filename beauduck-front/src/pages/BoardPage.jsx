@@ -111,7 +111,10 @@ const BoardPage = () => {
 
   return (
     <div className="container">
-      <h1 className="board-name">쑥덕쑥덕</h1>
+      <h1 className="board-name">
+        <span>쑥덕</span>
+        <span>쑥덕</span>
+      </h1>
       <p>자유롭게 정보를 공유하고 질문을 등록하세요.</p>
       <div className="board-tab">
         <span>

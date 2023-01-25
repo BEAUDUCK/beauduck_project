@@ -37,6 +37,9 @@ const BoardWritePage = () => {
     } else {
       dispatch(newQaBoard(newBoard));
     }
+    // 네비게이트로 새로 생성한 글로 이동하게 하기
+    setTitle('');
+    setContent('');
   };
 
   return (
