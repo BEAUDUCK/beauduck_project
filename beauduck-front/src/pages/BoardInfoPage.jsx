@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import BoardCommentCreate from '../features/board/BoardCommentCreate';
 import BoardCommentList from '../features/board/BoardCommentList';
 import { getInfoBoard, getInfoComments } from '../features/board/BoardSlice';
 
@@ -26,7 +27,7 @@ const BoardInfoPage = () => {
   };
 
   return (
-    <div className="container">
+    <div className={['container', 'container-colored'].join(' ')}>
       <div className="info-board">
         <h1>{testBoard.title}</h1>
         <div className="user-box">
@@ -45,6 +46,7 @@ const BoardInfoPage = () => {
         </div>
       </div>
       <BoardCommentList />
+      <BoardCommentCreate boardId={id} />
     </div>
   );
 };

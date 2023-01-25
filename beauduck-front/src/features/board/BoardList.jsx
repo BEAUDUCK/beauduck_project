@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Paging from '../../components/pagination/Paging';
-import './Board.style.scss';
 import BoardListItem from './BoardListItem';
 
 const BoardList = ({ allList }) => {

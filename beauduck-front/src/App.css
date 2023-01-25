@@ -1,4 +1,6 @@
 .container {
+  padding-top: 50px;
+  padding-bottom: 50px;
   width: 70%;
   /* display: flex; */
   /* justify-content: center; */
@@ -6,6 +8,10 @@
   /* 컨테이너 중앙 정렬 */
   margin-left: auto;
   margin-right: auto;
+}
+
+.container-colored {
+  background-color: rgb(255, 252, 233, 0.8);
 }
 
 input, textarea {

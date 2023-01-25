@@ -1,10 +1,53 @@
+
 .board-name {
-  margin-top: 3rem;
+  margin-top: 4rem;
+  font-size: 4em;
+  padding: 0;
+  // color: #FFEA20;
+  color: white;
+  text-shadow: 0 0.1em 20px rgba(0, 0, 0, 1), 0.05em -0.03em 0 rgba(0, 0, 0, 1),
+    0.05em 0.005em 0 rgba(0, 0, 0, 1), 0em 0.08em 0 rgba(0, 0, 0, 1),
+    0.05em 0.08em 0 rgba(0, 0, 0, 1), 0px -0.03em 0 rgba(0, 0, 0, 1),
+    -0.03em -0.03em 0 rgba(0, 0, 0, 1), -0.03em 0.08em 0 rgba(0, 0, 0, 1), -0.03em 0 0 rgba(0, 0, 0, 1);
+  span {
+    transform: scale(0.9);
+    display: inline-block;
+  }
+  span:first-child {
+    animation: bop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite
+      alternate;
+  }
+  span:last-child {
+    animation: bopB 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards
+      infinite alternate;
+  }
 }
+
+@keyframes bop {
+  0% {
+    transform: scale(0.9);
+  }
+  50%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bopB {
+  0% {
+    transform: scale(0.9);
+  }
+  80%,
+  100% {
+    transform: scale(1) rotateZ(-3deg);
+  }
+}
+
+//----------------------------
 
 .go-back {
   margin-left: 10%;
-  margin-top: 20px;
+  margin-top: 75px;
   margin-bottom: 5%;
   color: gray;
   cursor: pointer;
@@ -79,10 +122,10 @@
   }
 }
 
-.info-board {
+.info-board{
   width: 80%;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 100px;
 
   h1 {
     margin-bottom: 10px;
@@ -102,18 +145,23 @@
 }
 
 
+//------------------
+
 .qna-board {
   position: relative;
-  width: 60%;
+  width: calc(80% - 100px);
   margin: auto;
-  margin-top: 50px;
-  border: 2px solid rgb(211, 211, 211);
+  margin-top: 80px;
+  margin-bottom: 20px;
+  border: 2px solid rgb(237, 237, 237);
   border-radius: 20px;
+  background-color: white;
+  min-height: 350px;
 
   padding-top: 20px;
   padding-bottom: 20px;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 50px;
+  padding-right: 50px;
 
   .alpha-mark {
     font-family: 'Palanquin Dark', sans-serif;
@@ -129,6 +177,30 @@
   }
 }
 
+.qna-answer {
+  min-height: 200px;
+  margin-top: 30px;
+  margin-bottom: 0;
+
+  .answer-input {
+    border: none;
+    width: 100%;
+    min-height: 120px;
+    resize : none;
+  }
+
+  h4 {
+    margin-bottom: 0;
+  }
+
+  h5 {
+    text-align: right;
+    margin: 0;
+    font-size: medium;
+  }
+}
+
+//---------공통 사용-------------
 .user-box {
   padding-bottom: 20px;
   border-bottom: 2px solid rgb(211, 211, 211);
@@ -163,4 +235,92 @@
       font-size: medium;
   }
   }
+}
+
+//--------------------
+.board-list {
+  width: 100%;
+  height: 45px;
+  border-bottom : 1px solid #D9D9D9;
+  p {
+      display: inline-block;
+      width: 15%;
+      text-align: center;
+      color: rgb(77, 77, 77);
+      line-height: 45px;
+      margin: 0;
+  }
+
+  .board-title {
+      width: 40%;
+  }
+}
+
+.board-header {
+  height: 50px;
+  margin-top: 30px;
+  border-bottom : 2px solid #D9D9D9;
+  background-color: #fffce4;
+
+  p {
+      color: black;
+      line-height: 50px;
+      margin: 0;
+  }
+}
+
+.comment-list {
+  width: 80%;
+  margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  h2 {
+      padding: 0;
+      margin-top: 10px;
+      margin-bottom: 5px;
+  }
+}
+
+.comment-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+}
+
+.user-comment {
+  border: none;
+  padding-top: 20px;
+}
+
+.comment-create {
+  width: calc(80% - 40px);
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 100px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+
+  background-color: white;
+  border: 2px solid #D9D9D9;
+  border-radius: 5px;
+  min-height: 100px;
+
+}
+
+.comment-input {
+  border: none;
+  width: calc(100% - 50px);
+  min-height: 50px;
+  resize : none;
+  // overflow: visible;
+}
+
+.comment-submit-btn {
+  width: 30px;
+  color: gray;
+  cursor: pointer;
+  margin-left: 5px;
 }
