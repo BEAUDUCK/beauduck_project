@@ -1,3 +1,0 @@
-# 기능 명세서
-
-[기능 명세](https://www.notion.so/ae2f1874599842cba11d9635f6fa7642)
