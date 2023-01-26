@@ -17,6 +17,17 @@
 input, textarea {
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 300;
+  border: none;
+  border-radius: 5px;
+  background-color: #F1F1F1;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+textarea { 
+  padding-top: 10px;
+  padding-bottom: 10px;
+  resize: none;
 }
 
 h1 {
