@@ -18,7 +18,13 @@ npm install react-color --save
 
 --- 
 
-페이지네이션 구현
+
+▫ 페이지네이션 구현
 ```
 npm install react-js-pagination
+```
+
+▫ 모달 구현
+```
+npm install --save react-modal
 ```

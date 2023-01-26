@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { newQaAnswer } from './BoardSlice';
 
 const BoardAnswerCreate = ({ boardId }) => {
   const dispatch = useDispatch();
