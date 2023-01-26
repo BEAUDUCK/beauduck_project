@@ -11,14 +11,30 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class BoardInfoEntity{
+public class BoardInfoEntity extends TimeEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int board_id;
-        //    @JsonIgnore => member response안 받아옴
-        private String board_title;
-        private String board_writer;
-        private String board_content;
-        private int board_count;
+        private int id;
+//        @ManyToOne(fetch = FetchType.LAZY)
+//        @JoinColumn(name = "id")
+        private String memberId;
+        private String writer;
+        private String isActive;
+        private String title;
+        private String content;
+        private int count;
+        private int like;
+
+        @Builder
+        public BoardInfoEntity(int id, String memberId, String writer, String isActive, String title, String content, int count, int like) {
+                this.id = id;
+                this.memberId = memberId;
+                this.writer = writer;
+                this.isActive = isActive;
+                this.title = title;
+                this.content = content;
+                this.count = count;
+                this.like = like;
+        }
 
     }
