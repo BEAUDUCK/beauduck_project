@@ -11,14 +11,17 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "board_info")
 public class BoardInfoEntity extends TimeEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 //        @ManyToOne(fetch = FetchType.LAZY)
 //        @JoinColumn(name = "id")
+        @Column(name = "member_id")
         private String memberId;
         private String writer;
+        @Column(name = "is_active")
         private String isActive;
         private String title;
         private String content;

@@ -28,7 +28,7 @@ public class BoardInfoRequestDto {
         this.content = content;
     }
 
-    public BoardInfoEntity ToEntity(){
+    public BoardInfoEntity toEntity(){
         return BoardInfoEntity.builder()
                 .memberId(memberId)
                 .title(title)
