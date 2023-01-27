@@ -12,7 +12,7 @@ const SingleModalInfo = ({ makeupId }) => {
   // const { makeup } = useSelector((state) => state.makeupDetail);
   useEffect(() => {
     dispatch(getMakeupDetail(makeupId));
-  }, [dispatch]);
+  }, [dispatch, makeupId]);
 
   // 지금은 테스트 데이터 넣어놓음
   const makeup = {

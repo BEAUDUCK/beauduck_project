@@ -25,9 +25,11 @@ import { faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { faBackward } from '@fortawesome/free-solid-svg-icons';
 import { faForward } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import BoardInfoPage from './pages/BoardInfoPage';
 import BoardQnAPage from './pages/BoardQnAPage';
 import Footer from './components/footer/Footer';
+import SingleResultPage from './pages/SingleResultPage';
 
 library.add(
   faXmark,
@@ -41,6 +43,7 @@ library.add(
   faCaretRight,
   faBackward,
   faForward,
+  faPlus,
 );
 
 function App() {
@@ -57,6 +60,7 @@ function App() {
           <Route path="/help" element={<ConsultingPage />} />
           {/* 따라해덕 */}
           <Route path="/single" element={<SinglePage />} />
+          <Route path="/single/result" element={<SingleResultPage />} />
           {/* 투게덕 */}
           <Route path="/together" element={<TogetherPage />} />
           {/* 쑥덕쑥덕 */}
