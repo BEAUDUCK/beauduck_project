@@ -38,7 +38,7 @@ public class BoardQaService {
                     .memberId(board.getMemberId())
                     .writer(board.getWriter())
                     .like(board.getLike())
-                    .count(board.getLike())
+                    .count(board.getCount())
                     .title(board.getTitle())
                     .content(board.getContent())
                     .isActive(board.getIsActive())

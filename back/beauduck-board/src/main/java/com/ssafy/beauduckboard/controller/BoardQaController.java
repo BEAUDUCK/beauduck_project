@@ -29,7 +29,7 @@ public class BoardQaController {
 
     @ApiOperation(value = "질문 게시판 리스트 보기", notes = "질문 게시판 정보를 리스트 보기한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
     @GetMapping("/board/qa")
-    public ResponseEntity<?> getBoardList(){
+    public ResponseEntity<?> readBoardList(){
         return new ResponseEntity(boardQaService.readBoardList(), HttpStatus.ACCEPTED);
     }
 
