@@ -19,6 +19,10 @@ public class BoardInfoRequestDto {
     private String writer;
     @ApiParam(value = "정보 게시판 글", required = true)
     private String content;
+    @ApiParam(value = "정보 게시판 조회수", required = true)
+    private int count;
+    @ApiParam(value = "정보 게시판 좋아요수", required = true)
+    private int like;
 
     @Builder
     public BoardInfoRequestDto(String memberId, String title, String writer, String content) {

@@ -40,4 +40,14 @@ public class BoardInfoEntity extends TimeEntity {
                 this.like = like;
         }
 
+        public void update(int id, String memberId, String writer, String title, String content, int count, int like) {
+                this.id = id;
+                this.memberId = memberId;
+                this.writer = writer;
+                this.title = title;
+                this.content = content;
+                this.count = count;
+                this.like = like;
+        }
+
     }
