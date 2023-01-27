@@ -33,10 +33,11 @@ public class BoardInfoService {
 
         BoardInfoResponseDto dto = BoardInfoResponseDto.builder()
                 .writer(newBoard.getWriter())
+                .isActive(newBoard.isActive())
                 .title(newBoard.getTitle())
                 .content(newBoard.getContent())
                 .count(newBoard.getCount())
-                .like(newBoard.getLike())
+                .like(newBoard.getLikes())
                 .build();
 
         return dto;
@@ -50,10 +51,11 @@ public class BoardInfoService {
         for(BoardInfoEntity e: boards) {
             BoardInfoResponseDto dto = BoardInfoResponseDto.builder()
                     .writer(e.getWriter())
+                    .isActive(e.isActive())
                     .title(e.getTitle())
                     .content(e.getContent())
                     .count(e.getCount())
-                    .like(e.getLike())
+                    .like(e.getLikes())
                     .build();
             boardList.add(dto);
         }
@@ -64,7 +66,7 @@ public class BoardInfoService {
     @Transactional
     public int update(int id, BoardInfoRequestDto dto) {
         Optional<BoardInfoEntity> board = boardInfoRepository.findById(id);
-        board.get().update(id, dto.getMemberId(), dto.getWriter(), dto.getTitle(), dto.getContent(), dto.getCount(), dto.getLike());
+        board.get().update(id, dto.getMemberId(), dto.getWriter(), dto.getTitle(), dto.getContent(), dto.getCount(), dto.getLikes());
 
         return id;
     }

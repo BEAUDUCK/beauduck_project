@@ -22,14 +22,14 @@ public class BoardInfoEntity extends TimeEntity {
         private String memberId;
         private String writer;
         @Column(name = "is_active")
-        private String isActive;
+        private boolean isActive;
         private String title;
         private String content;
         private int count;
-        private int like;
+        private int likes;
 
         @Builder
-        public BoardInfoEntity(int id, String memberId, String writer, String isActive, String title, String content, int count, int like) {
+        public BoardInfoEntity(int id, String memberId, String writer, boolean isActive, String title, String content, int count, int like) {
                 this.id = id;
                 this.memberId = memberId;
                 this.writer = writer;
@@ -37,7 +37,7 @@ public class BoardInfoEntity extends TimeEntity {
                 this.title = title;
                 this.content = content;
                 this.count = count;
-                this.like = like;
+                this.likes = like;
         }
 
         public void update(int id, String memberId, String writer, String title, String content, int count, int like) {
@@ -47,7 +47,7 @@ public class BoardInfoEntity extends TimeEntity {
                 this.title = title;
                 this.content = content;
                 this.count = count;
-                this.like = like;
+                this.likes = like;
         }
 
     }

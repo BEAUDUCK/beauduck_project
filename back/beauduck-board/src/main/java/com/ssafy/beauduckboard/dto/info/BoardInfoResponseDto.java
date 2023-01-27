@@ -24,12 +24,14 @@ public class BoardInfoResponseDto {
     private String title;
     @ApiParam(value = "게시판 글쓴이", required = true)
     private String writer;
+    @ApiParam(value = "정보 게시판 삭제여부", required = true)
+    private boolean isActive;
     @ApiParam(value = "게시판 글", required = true)
     private String content;
     @ApiParam(value = "게시판 조회수", required = true)
     private int count;
     @ApiParam(value = "게시판 좋아요수", required = true)
-    private int like;
+    private int likes;
     @ApiParam(value = "생성 시간", required = true)
     private ZonedDateTime createdDate;
     @ApiParam(value = "업데이트 시간", required = true)
@@ -37,15 +39,16 @@ public class BoardInfoResponseDto {
 
     @Builder
     public BoardInfoResponseDto(int id, String memberId, String title,
-                            String writer, String content, int count, int like,
+                            String writer, boolean isActive, String content, int count, int like,
                             ZonedDateTime createdDate, ZonedDateTime updatedDate) {
         this.id = id;
         this.memberId = memberId;
         this.title = title;
         this.writer = writer;
+        this.isActive = isActive;
         this.content = content;
         this.count = count;
-        this.like = like;
+        this.likes = like;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
     }
@@ -55,7 +58,8 @@ public class BoardInfoResponseDto {
                 .memberId(memberId)
                 .title(title)
                 .content(content)
-                .writer("임시작성자")
+                .writer(writer)
+                .isActive(isActive)
                 .build();
     }
 }
