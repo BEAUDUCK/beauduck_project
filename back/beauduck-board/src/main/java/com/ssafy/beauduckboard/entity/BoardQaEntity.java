@@ -22,10 +22,10 @@ public class BoardQaEntity extends TimeEntity {
     private String title;
     private String content;
     private int count;
-    private int like;
+    private int likes;
 
     @Builder
-    public BoardQaEntity(int boardId, String memberId, String writer, Boolean isActive, String title, String content, int count, int like) {
+    public BoardQaEntity(int boardId, String memberId, String writer, Boolean isActive, String title, String content, int count, int likes) {
         this.boardId = boardId;
         this.memberId = memberId;
         this.writer = writer;
@@ -33,8 +33,9 @@ public class BoardQaEntity extends TimeEntity {
         this.title = title;
         this.content = content;
         this.count = count;
-        this.like = like;
+        this.likes = likes;
     }
+
 
     public boolean updateBoard(String title, String content){
         if (title == null) return false;

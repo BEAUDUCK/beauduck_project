@@ -25,6 +25,12 @@ public class BoardQaRequestDto {
     @ApiParam(value = "질문 게시판 삭제 여부", required = true)
     private Boolean isActive;
 
+//    @ApiParam(value = "질문 게시판 삭제 여부", required = true)
+//    private Boolean like;
+//    @ApiParam(value = "질문 게시판 삭제 여부", required = true)
+//    private Boolean count;
+
+
     @Builder
     public BoardQaEntity ToEntity() {
         return BoardQaEntity.builder()

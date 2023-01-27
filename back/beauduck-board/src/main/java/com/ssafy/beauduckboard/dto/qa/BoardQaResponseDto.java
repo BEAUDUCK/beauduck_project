@@ -30,7 +30,7 @@ public class BoardQaResponseDto {
     @ApiParam(value = "질문 게시판 조회수", required = true)
     private int count;
     @ApiParam(value = "질문 게시판 좋아요", required = true)
-    private int like;
+    private int likes;
     @ApiParam(value = "생성 시간", required = true)
     private ZonedDateTime created_date;
     @ApiParam(value = "업데이트 시간", required = true)
@@ -38,7 +38,7 @@ public class BoardQaResponseDto {
 
     @Builder
     public BoardQaResponseDto(int boardId, String memberId, String writer, Boolean isActive, String title,
-                              String content, int count, int like, ZonedDateTime created_date, ZonedDateTime updated_date) {
+                              String content, int count, int likes, ZonedDateTime created_date, ZonedDateTime updated_date) {
         this.boardId = boardId;
         this.memberId = memberId;
         this.writer = writer;
@@ -46,7 +46,7 @@ public class BoardQaResponseDto {
         this.title = title;
         this.content = content;
         this.count = count;
-        this.like = like;
+        this.likes = likes;
         this.created_date = created_date;
         this.updated_date = updated_date;
     }
