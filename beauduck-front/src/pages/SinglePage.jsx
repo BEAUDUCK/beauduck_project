@@ -3,9 +3,19 @@ import Banner from '../components/banner/Banner';
 import SingleList from '../features/single/SingleList';
 import SingleModalCreate from '../features/single/SingleModalCreate ';
 import SingleModalExitSurvey from '../features/single/SingleModalExitSurvey';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getMakeupList } from '../features/single/SingleSlice';
 
 const SinglePage = () => {
-  const testList = [
+  const dispatch = useDispatch();
+  //  const {makeupList} = useSelector(state => state.makeupList);
+
+  useEffect(() => {
+    dispatch(getMakeupList());
+  }, [dispatch]);
+
+  const makeupList = [
     {
       id: 1,
       title: '데일리 메이크업',
@@ -59,7 +69,8 @@ const SinglePage = () => {
         </button>
         <h2 className="single-h2">인기 메이크업</h2>
         <hr className="single-hr" />
-        <SingleList modeList={testList} />
+        <button>만들기</button>
+        <SingleList modeList={makeupList} />
         <SingleModalCreate />
         <SingleModalExitSurvey />
       </div>
