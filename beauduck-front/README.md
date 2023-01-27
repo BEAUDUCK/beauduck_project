@@ -24,7 +24,14 @@ npm install react-color --save
 npm install react-js-pagination
 ```
 
-▫ 모달 구현
+
+▫ 화면 캡쳐 - html2canvas
 ```
-npm install --save react-modal
+npm install --save html2canvas
 ```
+
+▫ 리액트 웹캠 !!    
+```
+npm install react-webcam
+```
+[리액트 웹캠 공식사이트](https://www.npmjs.com/package/react-webcam)

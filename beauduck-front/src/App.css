@@ -14,7 +14,7 @@
   background-color: rgb(255, 252, 233, 0.8);
 }
 
-input, textarea {
+input, textarea, select {
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 300;
   border: none;

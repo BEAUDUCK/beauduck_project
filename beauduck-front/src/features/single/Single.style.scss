@@ -44,10 +44,14 @@
 }
 
 
+// ------ 새 메이크업 만들기 ----------
+
 .makeup-create-modal {
     position: relative;
     width: 500px;
-    height: 600px;
+    height: 650px;
+
+    text-align: center;
     
     border: 2px solid rgb(220, 220, 220);
     border-radius: 10px;
@@ -85,7 +89,7 @@
         margin-left: 50px;
         margin-right: 50px;
         
-        div {
+        .makeup-element {
             display: flex;
             justify-content: center;
             margin-top: 5px;
@@ -93,7 +97,7 @@
             align-items: center;
 
         }
-        label {
+        .total-label {
           display: inline-block;
           width: 80px;
           text-align: center;
@@ -101,7 +105,7 @@
           
         }
     
-        input {
+        .total-input {
           width: 270px;
           height: 30px;
         }
@@ -126,8 +130,109 @@
           margin: auto;
         };
       }
+
+    .makeup-process {
+        width: 400px;
+        height: 280px;
+        // overflow-y: scroll;
+        // overflow-x: hidden;
+        // overflow: auto;
+
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        display: flex;
+        flex-direction: column;
+        // justify-content: space-around;
+        
+        border: 1px solid rgb(220, 220, 220);
+        border-radius: 5px;
+    }
 }
 
+.add-skin {
+    width: 380px;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.add-main-text {
+    display: inline-block;
+    width: 70px;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+    color:#717171;
+}
+
+.add-skin-sub {
+    width: 300px;
+}
+
+.sub-div {
+    display: inline-block;
+    text-align: left;
+    // display: flex;
+    // vertical-align: top;
+    position: relative;
+    width: 100%;
+
+    .plus-mark {
+        display: inline-block;
+        position: absolute; 
+        left: 0%; 
+        top: 7%; 
+    }
+
+    form {
+        margin-left: 25px;
+    }
+
+    select {
+        height: 30px;
+    }
+
+    .add-sub-text {
+        width: 230px;
+        height: 40px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+
+    input[type=color] {
+        width: 50px;
+        border-radius: 100px;
+        background-color: white;
+
+    }
+
+    input[type=file] {
+        background-color: white;
+        padding-left: 0;
+    }
+
+    input[type=file]::file-selector-button {
+        width: 100px;
+        height: 25px;
+        background: #fff;
+        border: 1px solid rgb(216, 216, 216);
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover {
+            background: rgb(130, 130, 130);
+            color: #fff;
+        }
+    }
+}
+
+//-------- 최종 설문 모달 ---------
 
 .survey-modal {
     position: relative;
@@ -171,6 +276,8 @@
     }
 }
 
+
+//-------- 디테일 모달 ------------
 
 .makeup-detail {
     position: absolute;
@@ -292,7 +399,3 @@
 
 }  
 
-
-
-
-  
