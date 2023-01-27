@@ -34,8 +34,8 @@ public class BoardQaService {
 
         for(BoardQaEntity board : boardQaEntities){
             BoardQaResponseDto boardDto = BoardQaResponseDto.builder()
-                    .board_id(board.getBoard_id())
-                    .member_id(board.getMember_id())
+                    .boardId(board.getBoardId())
+                    .memberId(board.getMemberId())
                     .writer(board.getWriter())
                     .like(board.getLike())
                     .count(board.getLike())

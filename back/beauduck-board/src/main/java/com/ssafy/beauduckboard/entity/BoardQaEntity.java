@@ -8,11 +8,14 @@ import java.lang.reflect.Member;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "board_qa")
 public class BoardQaEntity extends TimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int board_id;
-    private String member_id;
+    @Column(name = "id")
+    private int boardId;
+    @Column(name = "member_id")
+    private String memberId;
     private String writer;
     @Column(name = "is_active")
     private Boolean isActive;
@@ -22,9 +25,9 @@ public class BoardQaEntity extends TimeEntity {
     private int like;
 
     @Builder
-    public BoardQaEntity(int board_id, String member_id, String writer, Boolean isActive, String title, String content, int count, int like) {
-        this.board_id = board_id;
-        this.member_id = member_id;
+    public BoardQaEntity(int boardId, String memberId, String writer, Boolean isActive, String title, String content, int count, int like) {
+        this.boardId = boardId;
+        this.memberId = memberId;
         this.writer = writer;
         this.isActive = isActive;
         this.title = title;

@@ -16,9 +16,9 @@ import java.time.ZonedDateTime;
 public class BoardQaResponseDto {
 
     @ApiParam(value = "질문 게시판 id", required = true)
-    private int board_id;
+    private int boardId;
     @ApiParam(value = "질문 게시판 member_id", required = true)
-    private String member_id;
+    private String memberId;
     @ApiParam(value = "질문 게시판 작성자", required = true)
     private String writer;
     @ApiParam(value = "질문 게시판 삭제 여부", required = true)
@@ -37,10 +37,10 @@ public class BoardQaResponseDto {
     private ZonedDateTime updated_date;
 
     @Builder
-    public BoardQaResponseDto(int board_id, String member_id, String writer, Boolean isActive, String title,
+    public BoardQaResponseDto(int boardId, String memberId, String writer, Boolean isActive, String title,
                               String content, int count, int like, ZonedDateTime created_date, ZonedDateTime updated_date) {
-        this.board_id = board_id;
-        this.member_id = member_id;
+        this.boardId = boardId;
+        this.memberId = memberId;
         this.writer = writer;
         this.isActive = isActive;
         this.title = title;

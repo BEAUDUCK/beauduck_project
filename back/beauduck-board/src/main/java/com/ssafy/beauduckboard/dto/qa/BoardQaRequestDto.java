@@ -15,7 +15,7 @@ import java.time.ZonedDateTime;
 public class BoardQaRequestDto {
 
     @ApiParam(value = "질문 게시판 member_id", required = true)
-    private String member_id;
+    private String memberId;
     @ApiParam(value = "질문 게시판 제목", required = true)
     private String title;
     @ApiParam(value = "질문 게시판 작성자", required = true)
@@ -28,7 +28,7 @@ public class BoardQaRequestDto {
     @Builder
     public BoardQaEntity ToEntity() {
         return BoardQaEntity.builder()
-                .member_id(member_id)
+                .memberId(memberId)
                 .title(title)
                 .writer(writer)
                 .content(content)
