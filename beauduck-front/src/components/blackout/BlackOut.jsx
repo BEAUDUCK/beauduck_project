@@ -1,7 +1,7 @@
 import './BlackOut.style.scss';
 
-const BlackOut = () => {
-  return <div className="black-out"></div>;
+const BlackOut = ({ onClickEvent }) => {
+  return <div className="black-out" onClick={onClickEvent}></div>;
 };
 
 export default BlackOut;

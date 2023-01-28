@@ -23,7 +23,7 @@ const SingleListItem = ({ modeItem }) => {
           </div>
         </div>
         {isInfo && <SingleModalInfo isInfo={isInfo} makeupId={modeItem.id} />}
-        {isInfo && <BlackOut />}
+        {isInfo && <BlackOut onClickEvent={isToggleInfo} />}
         {/* <BlackOut /> */}
       </div>
     </>
