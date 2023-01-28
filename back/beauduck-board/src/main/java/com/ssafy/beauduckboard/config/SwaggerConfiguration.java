@@ -30,7 +30,7 @@ public class SwaggerConfiguration {
                 .useDefaultResponseMessages(false)
                 .select()
                 //.apis(RequestHandlerSelectors.any())
-                .apis(RequestHandlerSelectors.basePackage("com.ssafy.board.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.ssafy.beauduckboard.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(commonInfo());
