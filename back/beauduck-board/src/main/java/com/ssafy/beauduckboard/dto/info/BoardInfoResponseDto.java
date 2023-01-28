@@ -12,11 +12,10 @@ import java.time.ZonedDateTime;
 
 @Data
 @NoArgsConstructor
-@ApiModel(value = "BoardResponseDto", description = "정보 게시판 정보")
+@ApiModel(value = "BoardInfoResponseDto", description = "정보 게시판 정보")
 public class BoardInfoResponseDto {
     @ApiParam(value = "게시판 id", required = true)
     private int id;
-    // JsonIgnore => 없으면 serialization 오류남
     @ApiParam(value = "게시판 FK 멤버", required = true)
     @JsonIgnore
     private String memberId;
@@ -39,7 +38,7 @@ public class BoardInfoResponseDto {
 
     @Builder
     public BoardInfoResponseDto(int id, String memberId, String title,
-                            String writer, boolean isActive, String content, int count, int like,
+                            String writer, boolean isActive, String content, int count, int likes,
                             ZonedDateTime createdDate, ZonedDateTime updatedDate) {
         this.id = id;
         this.memberId = memberId;
@@ -48,18 +47,18 @@ public class BoardInfoResponseDto {
         this.isActive = isActive;
         this.content = content;
         this.count = count;
-        this.likes = like;
+        this.likes = likes;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
     }
 
-    public BoardInfoEntity ToEntity(){
-        return BoardInfoEntity.builder()
-                .memberId(memberId)
-                .title(title)
-                .content(content)
-                .writer(writer)
-                .isActive(isActive)
-                .build();
-    }
+//    public BoardInfoEntity ToEntity(){
+//        return BoardInfoEntity.builder()
+//                .memberId(memberId)
+//                .title(title)
+//                .content(content)
+//                .writer(writer)
+//                .isActive(isActive)
+//                .build();
+//    }
 }

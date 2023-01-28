@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@ApiModel(value = "BoardRequestDto", description = "정보 게시판 상세 정보")
+@ApiModel(value = "BoardInfoRequestDto", description = "정보 게시판 요청 정보")
 public class BoardInfoRequestDto {
     @ApiParam(value = "정보 게시판 FK 멤버", required = true)
     private String memberId;
@@ -26,14 +26,15 @@ public class BoardInfoRequestDto {
     @ApiParam(value = "정보 게시판 좋아요수", required = true)
     private int likes;
 
-    @Builder
-    public BoardInfoRequestDto(String memberId, String title, String writer, String content) {
-        this.memberId = memberId;
-        this.title = title;
-        this.writer = writer;
-        this.content = content;
-    }
+//    @Builder
+//    public BoardInfoRequestDto(String memberId, String title, String writer, String content) {
+//        this.memberId = memberId;
+//        this.title = title;
+//        this.writer = writer;
+//        this.content = content;
+//    }
 
+    @Builder
     public BoardInfoEntity toEntity(){
         return BoardInfoEntity.builder()
                 .memberId(memberId)

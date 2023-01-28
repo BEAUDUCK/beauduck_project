@@ -32,12 +32,13 @@ public class BoardInfoService {
         BoardInfoEntity newBoard = board.get();
 
         BoardInfoResponseDto dto = BoardInfoResponseDto.builder()
+                .id(id)
                 .writer(newBoard.getWriter())
                 .isActive(newBoard.isActive())
                 .title(newBoard.getTitle())
                 .content(newBoard.getContent())
                 .count(newBoard.getCount())
-                .like(newBoard.getLikes())
+                .likes(newBoard.getLikes())
                 .build();
 
         return dto;
@@ -50,25 +51,44 @@ public class BoardInfoService {
 
         for(BoardInfoEntity e: boards) {
             BoardInfoResponseDto dto = BoardInfoResponseDto.builder()
+                    .id(e.getId())
                     .writer(e.getWriter())
                     .isActive(e.isActive())
                     .title(e.getTitle())
                     .content(e.getContent())
                     .count(e.getCount())
-                    .like(e.getLikes())
+                    .likes(e.getLikes())
+                    .createdDate(e.getCreated_date())
                     .build();
             boardList.add(dto);
         }
-
         return boardList;
     }
 
+    //게시글 수정
     @Transactional
     public int update(int id, BoardInfoRequestDto dto) {
         Optional<BoardInfoEntity> board = boardInfoRepository.findById(id);
-        board.get().update(id, dto.getMemberId(), dto.getWriter(), dto.getTitle(), dto.getContent(), dto.getCount(), dto.getLikes());
-
-        return id;
+        return board.get().update(id, dto);
     }
+
+//    public int addLikes(int id) {
+//        Optional<BoardInfoEntity> board = boardInfoRepository.findById(id);
+//        if(board==null) return -1;
+//
+//        BoardInfoEntity newBoard = board.get();
+//
+//        BoardInfoResponseDto dto = BoardInfoResponseDto.builder()
+//                .id(id)
+//                .writer(newBoard.getWriter())
+//                .isActive(newBoard.isActive())
+//                .title(newBoard.getTitle())
+//                .content(newBoard.getContent())
+//                .count(newBoard.getCount())
+//                .likes(newBoard.getLikes()+1)
+//                .build();
+//
+//        return id;
+//    }
 
 }

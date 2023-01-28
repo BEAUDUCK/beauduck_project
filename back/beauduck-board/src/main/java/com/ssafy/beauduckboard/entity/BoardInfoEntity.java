@@ -1,6 +1,7 @@
 package com.ssafy.beauduckboard.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.beauduckboard.dto.info.BoardInfoRequestDto;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -40,14 +41,16 @@ public class BoardInfoEntity extends TimeEntity {
                 this.likes = like;
         }
 
-        public void update(int id, String memberId, String writer, String title, String content, int count, int like) {
-                this.id = id;
-                this.memberId = memberId;
-                this.writer = writer;
-                this.title = title;
-                this.content = content;
-                this.count = count;
-                this.likes = like;
+        public int update(int id, BoardInfoRequestDto dto) {
+                if(title==null || content==null) return -1;
+
+                this.title = dto.getTitle();
+                this.content = dto.getContent();
+                this.writer = dto.getWriter();
+                this.count = dto.getCount();
+                this.likes = dto.getLikes();
+
+                return id;
         }
 
     }
