@@ -30,6 +30,7 @@ import BoardInfoPage from './pages/BoardInfoPage';
 import BoardQnAPage from './pages/BoardQnAPage';
 import Footer from './components/footer/Footer';
 import SingleResultPage from './pages/SingleResultPage';
+import SingleModePage from './pages/SingleModePage';
 
 library.add(
   faXmark,
@@ -60,6 +61,7 @@ function App() {
           <Route path="/help" element={<ConsultingPage />} />
           {/* 따라해덕 */}
           <Route path="/single" element={<SinglePage />} />
+          <Route path="/single/mode" element={<SingleModePage />} />
           <Route path="/single/result" element={<SingleResultPage />} />
           {/* 투게덕 */}
           <Route path="/together" element={<TogetherPage />} />
