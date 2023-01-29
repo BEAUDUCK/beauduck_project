@@ -1,9 +1,12 @@
 package com.ssafy.beauduckboard.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.lang.reflect.Member;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,8 +27,12 @@ public class BoardQaEntity extends TimeEntity {
     private int count;
     private int likes;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "boardQaEntity")
+    private List<CommentQaEntity> commentList = new ArrayList<>();
+
     @Builder
-    public BoardQaEntity(int boardId, String memberId, String writer, Boolean isActive, String title, String content, int count, int likes) {
+    public BoardQaEntity(int boardId, String memberId, String writer, Boolean isActive, String title, String content, int count, int likes, List<CommentQaEntity> commentList) {
         this.boardId = boardId;
         this.memberId = memberId;
         this.writer = writer;
@@ -34,6 +41,7 @@ public class BoardQaEntity extends TimeEntity {
         this.content = content;
         this.count = count;
         this.likes = likes;
+        this.commentList = commentList;
     }
 
 
@@ -42,6 +50,11 @@ public class BoardQaEntity extends TimeEntity {
         if (content == null) return false;
         this.title = title;
         this.content = content;
+        return true;
+    }
+
+    public boolean deleteBoard(){
+        this.isActive = false;
         return true;
     }
 
