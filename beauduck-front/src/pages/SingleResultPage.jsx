@@ -1,5 +1,6 @@
 import html2canvas from 'html2canvas';
 import Webcam from 'react-webcam';
+import SingleModalExitSurvey from '../features/single/SingleModalExitSurvey';
 
 const SingleResultPage = () => {
   const downloadCapture = () => {
@@ -37,6 +38,7 @@ const SingleResultPage = () => {
       <button id="pick" onClick={downloadCapture}>
         다운로드
       </button>
+      <SingleModalExitSurvey />
     </div>
   );
 };

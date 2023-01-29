@@ -1,21 +1,55 @@
 .exit-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     width: 400px;
-    border: 1px solid gray;
-    // display: flex;
-    // justify-content: center;
+    height: 250px;
+
+    background-color: white;
+    border: 2px solid rgb(220, 220, 220);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #bdbdbd;
+
     text-align: center;
     padding-bottom: 20px;
 
-    div {
-        // display: flex;
+    .modal-header {
+        width: 400px;
+        height: 50px;
+        background-color: #FFF5D1;
+        text-align: center;
+        display: flex;
+        justify-content: center;
 
         .exit-title {
-            
+            margin: 0;
+            width: 400px;
+            line-height: 50px;
+            font-family: 'Jalnan';
         }
 
-        icon {
-            align-items: right;
+        .xmark {
+            margin: auto;
+            color: rgb(68, 68, 68);
+            font-size: x-large;
+            cursor: pointer;
+
+            position: absolute;
+            top: 12px;
+            right: 20px;
         }
     }
 
+    p {
+        height: 60px;
+        // line-height: 100px;
+        margin-top: 50px;
+        margin-bottom: 25px;
+    }
+
+    a {
+        font-weight: bold;
+    }
 }

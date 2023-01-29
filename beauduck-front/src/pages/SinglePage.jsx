@@ -2,15 +2,21 @@ import './Single.style.scss';
 import Banner from '../components/banner/Banner';
 import SingleList from '../features/single/SingleList';
 import SingleModalCreate from '../features/single/SingleModalCreate ';
-import SingleModalExitSurvey from '../features/single/SingleModalExitSurvey';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getMakeupList } from '../features/single/SingleSlice';
+import { useState } from 'react';
+import SingleModalRecommend from '../features/single/SingleModalRecommend';
+import BlackOut from '../components/blackout/BlackOut';
+import SingelModalNoRecommend from '../features/single/SingleModalNoRecommend';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
   //  const {makeupList} = useSelector(state => state.makeupList);
-
+  const [isRecommend, setIsRecommend] = useState(false);
+  const popRecommend = () => {
+    setIsRecommend(!isRecommend);
+  };
   useEffect(() => {
     dispatch(getMakeupList());
   }, [dispatch]);
@@ -64,15 +70,19 @@ const SinglePage = () => {
     <>
       <Banner bannerStyle={'single-ban'} />
       <div className="container">
-        <button className="makeup-recommend-btn">
+        <button className="makeup-recommend-btn" onClick={popRecommend}>
           나에게 어울리는 메이크업 추천 받기
         </button>
+        {/* 추천 받을 수 있는지 없는지 */}
+        {isRecommend && <SingleModalRecommend popRecommend={popRecommend} />}
+        {isRecommend && <BlackOut onClickEvent={popRecommend} />}
+        {/* <SingelModalNoRecommend /> */}
+
         <h2 className="single-h2">인기 메이크업</h2>
         <hr className="single-hr" />
         <button>만들기</button>
         <SingleList modeList={makeupList} />
         <SingleModalCreate />
-        <SingleModalExitSurvey />
       </div>
     </>
   );
