@@ -35,3 +35,9 @@ npm install --save html2canvas
 npm install react-webcam
 ```
 [리액트 웹캠 공식사이트](https://www.npmjs.com/package/react-webcam)
+
+
+▫ 이미지 슬라이드
+```
+npm i swiper
+```
