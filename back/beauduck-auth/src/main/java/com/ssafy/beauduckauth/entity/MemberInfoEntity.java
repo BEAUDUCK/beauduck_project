@@ -2,8 +2,10 @@ package com.ssafy.beauduckauth.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -11,7 +13,7 @@ import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "member_info")
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 public class MemberInfoEntity {
 
@@ -22,8 +24,11 @@ public class MemberInfoEntity {
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
+
+    @Column(name = "name")
+    private String username;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -35,7 +40,7 @@ public class MemberInfoEntity {
     private int age;
 
     @Column(name = "sex")
-    private int sex;
+    private String sex;
 
     @Column(name = "social_code")
     private String socialCode;
@@ -50,5 +55,18 @@ public class MemberInfoEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     @Column(name = "created_date")
     private ZonedDateTime createDate;
+
+    @Builder
+    public MemberInfoEntity(MemberEntity memberEntity, String username, String phoneNumber, String email, int age, String sex, String socialCode, String accessToken, String externalId){
+        this.memberEntity = memberEntity;
+        this.username = username;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.age = age;
+        this.sex = sex;
+        this.socialCode = socialCode;
+        this.accessToken = accessToken;
+        this.externalId = externalId;
+    }
 
 }
