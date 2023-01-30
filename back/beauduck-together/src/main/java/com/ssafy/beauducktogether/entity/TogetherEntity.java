@@ -24,7 +24,6 @@ public class TogetherEntity extends TimeEntity {
     private String host;
 
     @Builder
-
     public TogetherEntity(int id, Boolean isActive, String title, String content, String host) {
         this.id = id;
         this.isActive = isActive;
