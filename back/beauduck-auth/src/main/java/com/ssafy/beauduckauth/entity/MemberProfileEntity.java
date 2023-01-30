@@ -2,6 +2,7 @@ package com.ssafy.beauduckauth.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -47,4 +48,9 @@ public class MemberProfileEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     @Column(name = "created_date")
     private ZonedDateTime createDate;
+
+    @Builder
+    public MemberProfileEntity(MemberEntity memberEntity){
+        this.memberEntity = memberEntity;
+    }
 }
