@@ -1,6 +1,6 @@
 package com.ssafy.beauduckboard.dto.info;
 
-import com.ssafy.beauduckboard.entity.BoardInfoEntity;
+import com.ssafy.beauduckboard.entity.info.BoardInfoEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;
@@ -21,11 +21,6 @@ public class BoardInfoRequestDto {
     private boolean isActive;
     @ApiParam(value = "정보 게시판 글", required = true)
     private String content;
-    @ApiParam(value = "정보 게시판 조회수", required = true)
-    private int count;
-    @ApiParam(value = "정보 게시판 좋아요수", required = true)
-    private int likes;
-
 //    @Builder
 //    public BoardInfoRequestDto(String memberId, String title, String writer, String content) {
 //        this.memberId = memberId;

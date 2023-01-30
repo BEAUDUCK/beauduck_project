@@ -1,13 +1,10 @@
-package com.ssafy.beauduckboard.entity;
+package com.ssafy.beauduckboard.entity.info;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ssafy.beauduckboard.dto.info.BoardInfoRequestDto;
+import com.ssafy.beauduckboard.entity.TimeEntity;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -41,16 +38,24 @@ public class BoardInfoEntity extends TimeEntity {
                 this.likes = like;
         }
 
-        public int update(int id, BoardInfoRequestDto dto) {
-                if(title==null || content==null) return -1;
+        public boolean update(String title, String content) {
+                if(title==null || content==null) return false;
 
-                this.title = dto.getTitle();
-                this.content = dto.getContent();
-                this.writer = dto.getWriter();
-                this.count = dto.getCount();
-                this.likes = dto.getLikes();
+                this.title = title;
+                this.content = content;
 
-                return id;
+                return true;
         }
+
+        public boolean delete() {
+                this.isActive = false;
+                return true;
+        }
+
+        public boolean updateCount(int count) {
+                this.count = count;
+                return true;
+        }
+
 
     }

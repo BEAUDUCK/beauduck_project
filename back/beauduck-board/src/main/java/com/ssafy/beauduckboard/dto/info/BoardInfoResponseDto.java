@@ -1,7 +1,6 @@
 package com.ssafy.beauduckboard.dto.info;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ssafy.beauduckboard.entity.BoardInfoEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;

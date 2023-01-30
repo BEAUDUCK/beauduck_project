@@ -1,6 +1,7 @@
-package com.ssafy.beauduckboard.entity;
+package com.ssafy.beauduckboard.entity.info;
 
 import com.ssafy.beauduckboard.dto.info.BoardInfoCommentRequestDto;
+import com.ssafy.beauduckboard.entity.TimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "info_comment")
-public class BoardInfoCommentEntity extends TimeEntity{
+public class BoardInfoCommentEntity extends TimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,13 +41,15 @@ public class BoardInfoCommentEntity extends TimeEntity{
         this.likes = likes;
     }
 
-    public int update(int id, BoardInfoCommentRequestDto dto) {
-        if(content==null) return -1;
+    public boolean update(String content) {
+        if(content==null) return false;
 
-        this.content = dto.getContent();
-        this.writer = dto.getWriter();
-        this.likes = dto.getLikes();
+        this.content = content;
+        return true;
+    }
 
-        return id;
+    public boolean delete() {
+        this.isActive = false;
+        return true;
     }
 }

@@ -33,27 +33,36 @@ public class BoardInfoController {
     }
 
     @ApiOperation(value = "게시판 글 상세 조회", notes = "게시글 상세정보를 조회한다.", response = String.class)
-    @GetMapping("/{id}")
-    public ResponseEntity<BoardInfoResponseDto> selectOne(@ApiParam(value = "int(id)", required = true) @PathVariable int id) {
-        BoardInfoResponseDto board = service.selectOne(id);
+    @GetMapping("/{boardId}")
+    public ResponseEntity<BoardInfoResponseDto> selectOne(@ApiParam(value = "int(id)", required = true, example = "3") @PathVariable int boardId) {
+        BoardInfoResponseDto board = service.selectOne(boardId);
         if(board != null)
             return new ResponseEntity<BoardInfoResponseDto>(board, HttpStatus.OK);
         return new ResponseEntity<BoardInfoResponseDto>(board, HttpStatus.NO_CONTENT);
     }
 
     @ApiOperation(value = "게시판 글 작성", notes = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<String> write(@ApiParam(value = "BoardInfoRequestDto", required = true) @RequestBody BoardInfoRequestDto dto) {
-        if(service.insert(dto)>0) {
+        if(service.insert(dto)) {
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
         }
         return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
     }
 
     @ApiOperation(value = "게시판 글 수정", notes = "게시글 내용을 수정한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-    @PatchMapping("/update/{id}")
-    public ResponseEntity<String> update(@ApiParam(value = "int(id)", required = true) @PathVariable int id, @ApiParam(value = "BoardInfoRequestDto", required = true) @RequestBody BoardInfoRequestDto dto) {
-        if(service.update(id, dto)>0) {
+    @PatchMapping("/update/{boardId}")
+    public ResponseEntity<String> update(@ApiParam(value = "int(boardId)", required = true, example = "3") @PathVariable int boardId, @ApiParam(value = "BoardInfoRequestDto", required = true) @RequestBody BoardInfoRequestDto dto) {
+        if(service.update(boardId, dto.getTitle(), dto.getContent())) {
+            return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+        }
+        return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
+    }
+
+    @ApiOperation(value = "게시판 글 삭제", notes = "게시글 내용을 삭제한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+    @DeleteMapping("/{boardId}")
+    public ResponseEntity<String> delete(@ApiParam(value = "int(id)", required = true, example = "3") @PathVariable int boardId) {
+        if(service.delete(boardId)) {
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
         }
         return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
