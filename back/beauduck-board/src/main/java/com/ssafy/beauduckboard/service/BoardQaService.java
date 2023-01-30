@@ -61,7 +61,7 @@ public class BoardQaService {
     public boolean update(int id, BoardQaRequestDto boardQaRequestDto){
         Optional<BoardQaEntity> byId = boardQaRepository.findById(id);
         BoardQaEntity boardQaEntity = byId.get();
-        return boardQaEntity.updateBoard(boardQaRequestDto);
+        return boardQaEntity.updateBoard(boardQaRequestDto.getTitle(), boardQaRequestDto.getContent());
     }
 
     @Transactional

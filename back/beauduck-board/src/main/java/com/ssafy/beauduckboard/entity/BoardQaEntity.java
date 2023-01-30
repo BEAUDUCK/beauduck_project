@@ -1,7 +1,6 @@
 package com.ssafy.beauduckboard.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ssafy.beauduckboard.dto.qa.BoardQaRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -52,11 +51,11 @@ public class BoardQaEntity extends TimeEntity {
     }
 
 
-    public boolean updateBoard(BoardQaRequestDto boardQaRequestDto){
+    public boolean updateBoard(String title, String content){
         if (title == null) return false;
         if (content == null) return false;
-        this.title = boardQaRequestDto.getTitle();
-        this.content = boardQaRequestDto.getContent();
+        this.title = title;
+        this.content = content;
         return true;
     }
 
