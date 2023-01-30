@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './Header.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import logo from '../../assets/logo_original.png';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -8,8 +9,9 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-content">
-        <div>
-          <h3 onClick={() => navigate('/')}>뷰덕</h3>
+        <div onClick={() => navigate('/')}>
+          <img className="header-logo" src={logo} alt="logo" />
+          <h3 className="logo-name">뷰덕</h3>
         </div>
         <div className="header-nav">
           <p onClick={() => navigate('/help')}>도와덕</p>

@@ -33,3 +33,15 @@ textarea {
 h1 {
   font-family: 'Jalnan';
 }
+
+.main-ban {
+  width: 100%;
+  height: 80vh;
+  background-color: #F1F1F1;
+  text-align: center;
+}
+
+.main-logo {
+  width: 500px;
+  height: 500px;
+}
