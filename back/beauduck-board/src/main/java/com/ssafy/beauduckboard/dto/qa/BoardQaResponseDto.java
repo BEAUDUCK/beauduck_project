@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.time.ZonedDateTime;
 
 @Getter
@@ -16,7 +15,7 @@ import java.time.ZonedDateTime;
 public class BoardQaResponseDto {
 
     @ApiParam(value = "질문 게시판 id", required = true)
-    private int boardId;
+    private int id;
     @ApiParam(value = "질문 게시판 member_id", required = true)
     private String memberId;
     @ApiParam(value = "질문 게시판 작성자", required = true)
@@ -37,9 +36,9 @@ public class BoardQaResponseDto {
     private ZonedDateTime updated_date;
 
     @Builder
-    public BoardQaResponseDto(int boardId, String memberId, String writer, Boolean isActive, String title,
+    public BoardQaResponseDto(int id, String memberId, String writer, Boolean isActive, String title,
                               String content, int count, int likes, ZonedDateTime created_date, ZonedDateTime updated_date) {
-        this.boardId = boardId;
+        this.id = id;
         this.memberId = memberId;
         this.writer = writer;
         this.isActive = isActive;

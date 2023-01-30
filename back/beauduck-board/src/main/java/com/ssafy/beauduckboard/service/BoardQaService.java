@@ -1,6 +1,5 @@
 package com.ssafy.beauduckboard.service;
 
-import com.ssafy.beauduckboard.dto.qa.BoardQaDto;
 import com.ssafy.beauduckboard.dto.qa.BoardQaRequestDto;
 import com.ssafy.beauduckboard.dto.qa.BoardQaResponseDto;
 import com.ssafy.beauduckboard.entity.BoardQaEntity;
@@ -20,7 +19,7 @@ public class BoardQaService {
     private final BoardQaRepository boardQaRepository;
 
     @Transactional
-    public boolean createBoard(BoardQaRequestDto boardQaRequestDto){
+    public boolean insert(BoardQaRequestDto boardQaRequestDto){
         BoardQaEntity boardQaEntity = boardQaRepository.save(boardQaRequestDto.ToEntity());
         if (boardQaEntity == null){
             return false;
@@ -28,13 +27,13 @@ public class BoardQaService {
     }
 
     @Transactional
-    public List<BoardQaResponseDto> readBoardList(){
+    public List<BoardQaResponseDto> selectAll(){
         List<BoardQaEntity> boardQaEntities = boardQaRepository.findAllByIsActive(true);
         List<BoardQaResponseDto> boardQaList = new ArrayList<>();
 
         for(BoardQaEntity board : boardQaEntities){
             BoardQaResponseDto boardDto = BoardQaResponseDto.builder()
-                    .boardId(board.getBoardId())
+                    .id(board.getId())
                     .memberId(board.getMemberId())
                     .writer(board.getWriter())
                     .likes(board.getLikes())
@@ -51,27 +50,28 @@ public class BoardQaService {
     }
 
     @Transactional
-    public boolean deleteBoard(int id){
+    public boolean delete(int id){
         Optional<BoardQaEntity> byId = boardQaRepository.findById(id);
         BoardQaEntity boardQaEntity = byId.get();
-        if (boardQaEntity.getBoardId() == 0) return false;
+        if (boardQaEntity.getId() == 0) return false;
         return boardQaEntity.deleteBoard();
     }
 
     @Transactional
-    public boolean updateBoard(int id, BoardQaRequestDto boardQaRequestDto){
+    public boolean update(int id, BoardQaRequestDto boardQaRequestDto){
         Optional<BoardQaEntity> byId = boardQaRepository.findById(id);
         BoardQaEntity boardQaEntity = byId.get();
-        return boardQaEntity.updateBoard(boardQaRequestDto.getTitle(), boardQaRequestDto.getContent());
+        return boardQaEntity.updateBoard(boardQaRequestDto);
     }
 
-    public BoardQaResponseDto readBoard(int id){
+    @Transactional
+    public BoardQaResponseDto selectOne(int id){
         Optional<BoardQaEntity> byId = boardQaRepository.findById(id);
         BoardQaEntity board = byId.get();
 
-
-        return BoardQaResponseDto.builder()
-                .boardId(board.getBoardId())
+        board.updateCount(board.getCount() + 1);
+        BoardQaResponseDto boardQaResponseDto =BoardQaResponseDto.builder()
+                .id(board.getId())
                 .memberId(board.getMemberId())
                 .writer(board.getWriter())
                 .likes(board.getLikes())
@@ -82,6 +82,8 @@ public class BoardQaService {
                 .created_date(board.getCreated_date())
                 .updated_date(board.getUpdated_date())
                 .build();
+
+        return boardQaResponseDto;
     }
 
 

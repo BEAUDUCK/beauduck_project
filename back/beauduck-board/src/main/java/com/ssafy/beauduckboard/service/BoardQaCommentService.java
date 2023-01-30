@@ -1,12 +1,9 @@
 package com.ssafy.beauduckboard.service;
 
-import com.ssafy.beauduckboard.dto.qa.BoardQaRequestDto;
-import com.ssafy.beauduckboard.dto.qa.BoardQaResponseDto;
 import com.ssafy.beauduckboard.dto.qa.CommentQaRequestDto;
 import com.ssafy.beauduckboard.dto.qa.CommentQaResponseDto;
-import com.ssafy.beauduckboard.entity.BoardQaEntity;
-import com.ssafy.beauduckboard.entity.CommentQaEntity;
-import com.ssafy.beauduckboard.repository.CommentQaRepository;
+import com.ssafy.beauduckboard.entity.BoardQaCommentEntity;
+import com.ssafy.beauduckboard.repository.BoardQaCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +14,14 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CommentQaService {
+public class BoardQaCommentService {
 
-    private final CommentQaRepository commentQaRepository;
+    private final BoardQaCommentRepository boardQaCommentRepository;
 
     @Transactional
-    public boolean createComment(CommentQaRequestDto commentQaRequestDto){
+    public boolean insert(CommentQaRequestDto commentQaRequestDto){
 
-        CommentQaEntity commentQaEntity = commentQaRepository.save(commentQaRequestDto.ToEntity());
+        BoardQaCommentEntity commentQaEntity = boardQaCommentRepository.save(commentQaRequestDto.ToEntity());
         if (commentQaEntity == null){
             return false;
         }else return true;
@@ -32,14 +29,14 @@ public class CommentQaService {
 
 
     @Transactional
-    public List<CommentQaResponseDto> readCommentList(int id){
-        List<CommentQaEntity> commentQaEntities = commentQaRepository.findAllByIsActive(true);
+    public List<CommentQaResponseDto> selectAll(int id){
+        List<BoardQaCommentEntity> commentQaEntities = boardQaCommentRepository.findAllByIsActive(true);
         List<CommentQaResponseDto> commentQaList = new ArrayList<>();
 
-        for(CommentQaEntity comment : commentQaEntities){
-            if (comment.getBoardQaEntity().getBoardId() != id) continue;
+        for(BoardQaCommentEntity comment : commentQaEntities){
+            if (comment.getBoardQaEntity().getId() != id) continue;
             CommentQaResponseDto commentDto = CommentQaResponseDto.builder()
-                    .commentQaId(comment.getCommentQaId())
+                    .id(comment.getId())
                     .boardQaEntity(comment.getBoardQaEntity())
                     .memberId(comment.getMemberId())
                     .writer(comment.getWriter())
@@ -56,17 +53,17 @@ public class CommentQaService {
 
 
     @Transactional
-    public boolean updateComment(int id, CommentQaRequestDto commentQaRequestDto){
-        Optional<CommentQaEntity> byId = commentQaRepository.findById(id);
-        CommentQaEntity commentQaEntity = byId.get();
+    public boolean update(int id, CommentQaRequestDto commentQaRequestDto){
+        Optional<BoardQaCommentEntity> byId = boardQaCommentRepository.findById(id);
+        BoardQaCommentEntity commentQaEntity = byId.get();
         return commentQaEntity.updateComment(commentQaRequestDto.getContent());
     }
 
     @Transactional
-    public boolean deleteComment(int id){
-        Optional<CommentQaEntity> byId = commentQaRepository.findById(id);
-        CommentQaEntity commentQaEntity = byId.get();
-        if (commentQaEntity.getCommentQaId() == 0) return false;
+    public boolean delete(int id){
+        Optional<BoardQaCommentEntity> byId = boardQaCommentRepository.findById(id);
+        BoardQaCommentEntity commentQaEntity = byId.get();
+        if (commentQaEntity.getId() == 0) return false;
         return commentQaEntity.deleteComment();
     }
 

@@ -12,12 +12,12 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "qa_comment")
-public class CommentQaEntity extends TimeEntity {
+public class BoardQaCommentEntity extends TimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int CommentQaId;
+    private int id;
     @Column(name = "member_id")
     private String memberId;
     private String writer;
@@ -25,17 +25,14 @@ public class CommentQaEntity extends TimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boardId")
     private BoardQaEntity boardQaEntity;
-
-
     @Column(name = "is_active")
     private Boolean isActive;
     private String content;
     private int likes;
 
     @Builder
-
-    public CommentQaEntity(int commentQaId, String memberId, String writer, BoardQaEntity boardQaEntity, Boolean isActive, String content, int likes) {
-        this.CommentQaId = commentQaId;
+    public BoardQaCommentEntity(int id, String memberId, String writer, BoardQaEntity boardQaEntity, Boolean isActive, String content, int likes) {
+        this.id = id;
         this.memberId = memberId;
         this.writer = writer;
         this.boardQaEntity = boardQaEntity;

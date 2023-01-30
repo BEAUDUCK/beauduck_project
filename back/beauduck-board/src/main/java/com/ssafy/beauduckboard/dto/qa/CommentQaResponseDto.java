@@ -9,10 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.ZonedDateTime;
 
 @Data
@@ -21,7 +17,7 @@ import java.time.ZonedDateTime;
 public class CommentQaResponseDto {
 
     @ApiParam(value = "댓글 id", required = true)
-    private int CommentQaId;
+    private int id;
     @ApiParam(value = "댓글 멤버 id", required = true)
     private String memberId;
     @ApiParam(value = "댓글 작성자", required = true)
@@ -43,11 +39,10 @@ public class CommentQaResponseDto {
     private  ZonedDateTime updated_date;
 
     @Builder
-
-    public CommentQaResponseDto(int commentQaId, String memberId, String writer, BoardQaEntity boardQaEntity,
+    public CommentQaResponseDto(int id, String memberId, String writer, BoardQaEntity boardQaEntity,
                                 Boolean isActive, String content, int likes,
                                 ZonedDateTime created_date, ZonedDateTime updated_date) {
-        this.CommentQaId = commentQaId;
+        this.id = id;
         this.memberId = memberId;
         this.writer = writer;
         this.boardQaEntity = boardQaEntity;

@@ -1,10 +1,10 @@
 package com.ssafy.beauduckboard.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.beauduckboard.dto.qa.BoardQaRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class BoardQaEntity extends TimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int boardId;
+    private int id;
     @Column(name = "member_id")
     private String memberId;
     private String writer;
@@ -29,11 +29,17 @@ public class BoardQaEntity extends TimeEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "boardQaEntity")
-    private List<CommentQaEntity> commentList = new ArrayList<>();
+    private List<BoardQaCommentEntity> commentList = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "boardQaEntity")
+    private List<GalleryQaEntity> galleryList = new ArrayList<>();
 
     @Builder
-    public BoardQaEntity(int boardId, String memberId, String writer, Boolean isActive, String title, String content, int count, int likes, List<CommentQaEntity> commentList) {
-        this.boardId = boardId;
+    public BoardQaEntity(int id, String memberId, String writer, Boolean isActive,
+                         String title, String content, int count, int likes, List<BoardQaCommentEntity> commentList,
+                         List<GalleryQaEntity> galleryList) {
+        this.id = id;
         this.memberId = memberId;
         this.writer = writer;
         this.isActive = isActive;
@@ -42,19 +48,25 @@ public class BoardQaEntity extends TimeEntity {
         this.count = count;
         this.likes = likes;
         this.commentList = commentList;
+        this.galleryList = galleryList;
     }
 
 
-    public boolean updateBoard(String title, String content){
+    public boolean updateBoard(BoardQaRequestDto boardQaRequestDto){
         if (title == null) return false;
         if (content == null) return false;
-        this.title = title;
-        this.content = content;
+        this.title = boardQaRequestDto.getTitle();
+        this.content = boardQaRequestDto.getContent();
         return true;
     }
 
     public boolean deleteBoard(){
         this.isActive = false;
+        return true;
+    }
+
+    public boolean updateCount(int count){
+        this.count = count;
         return true;
     }
 

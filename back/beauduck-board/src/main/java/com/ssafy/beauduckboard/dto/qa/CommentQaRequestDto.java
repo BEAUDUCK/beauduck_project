@@ -1,22 +1,17 @@
 package com.ssafy.beauduckboard.dto.qa;
 
 import com.ssafy.beauduckboard.entity.BoardQaEntity;
-import com.ssafy.beauduckboard.entity.CommentQaEntity;
+import com.ssafy.beauduckboard.entity.BoardQaCommentEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 
 @Data
 @NoArgsConstructor
-@ApiModel(value = "CommentQaRequestDto : 멤버 정보", description = "질문 게시판 댓글 요청 정보를 나타낸다.")
+@ApiModel(value = "CommentQaRequestDto : 댓글 요청 정보", description = "질문 게시판 댓글 요청 정보를 나타낸다.")
 public class CommentQaRequestDto {
 
 
@@ -41,8 +36,8 @@ public class CommentQaRequestDto {
         this.content = content;
     }
 
-    public CommentQaEntity ToEntity(){
-        return CommentQaEntity.builder()
+    public BoardQaCommentEntity ToEntity(){
+        return BoardQaCommentEntity.builder()
                 .memberId(memberId)
                 .writer(writer)
                 .boardQaEntity(boardQaEntity)
