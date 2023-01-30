@@ -9,12 +9,17 @@ const ExitModal = ({
   where,
   whereText,
   onClickEvent,
+  xmarkClickEvent,
 }) => {
   return (
     <div className="exit-modal">
       <div className="modal-header">
         <p className="exit-title">{title}</p>
-        <FontAwesomeIcon icon="xmark" className="xmark" />
+        <FontAwesomeIcon
+          icon="xmark"
+          className="xmark"
+          onClick={xmarkClickEvent}
+        />
       </div>
       <p className="exit-content">
         {content.split('\n').map((text) => (
