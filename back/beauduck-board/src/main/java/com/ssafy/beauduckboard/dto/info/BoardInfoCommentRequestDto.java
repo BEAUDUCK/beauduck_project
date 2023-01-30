@@ -1,6 +1,6 @@
 package com.ssafy.beauduckboard.dto.info;
 
-import com.ssafy.beauduckboard.entity.BoardInfoCommentEntity;
+import com.ssafy.beauduckboard.entity.info.BoardInfoCommentEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Data;
@@ -20,8 +20,7 @@ public class BoardInfoCommentRequestDto {
     private boolean isActive;
     @ApiParam(value = "정보 게시판 댓글 글", required = true)
     private String content;
-    @ApiParam(value = "정보 게시판 댓글 좋아요수", required = true)
-    private int likes;
+
 
     public BoardInfoCommentEntity toEntity() {
         return BoardInfoCommentEntity.builder()
@@ -30,7 +29,6 @@ public class BoardInfoCommentRequestDto {
                 .boardId(this.boardId)
                 .isActive(this.isActive)
                 .content(this.content)
-                .likes(this.likes)
                 .build();
     }
 }
