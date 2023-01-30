@@ -15,10 +15,9 @@ public class MakeupMiddleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    //        @ManyToOne(fetch = FetchType.LAZY)
-//        @JoinColumn(name = "id")
-    @Column(name = "main_id")
-    private int mainId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "main_id")
+    private MakeupMainEntity mainId;
     private String step;
     private String img;
     @Column(name = "color_code")
@@ -26,7 +25,7 @@ public class MakeupMiddleEntity {
     private String content;
 
     @Builder
-    public MakeupMiddleEntity(int id, int mainId, String step, String img, String colorCode, String content) {
+    public MakeupMiddleEntity(int id, MakeupMainEntity mainId, String step, String img, String colorCode, String content) {
         this.id = id;
         this.mainId = mainId;
         this.step = step;

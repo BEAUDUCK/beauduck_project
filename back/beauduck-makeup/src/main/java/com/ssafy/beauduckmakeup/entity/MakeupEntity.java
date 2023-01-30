@@ -6,6 +6,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -28,6 +30,9 @@ public class MakeupEntity extends TimeEntity{
     private int duration;
     private float score;
     private int count;
+    @JsonIgnore
+    @OneToMany(mappedBy = "makeupId")
+    private List<MakeupMainEntity> makeupMainList = new ArrayList<>();
 
     @Builder
     public MakeupEntity(int id, String memberId, String title, String content, String img, int duration, float score, int count) {
