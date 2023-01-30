@@ -17,13 +17,13 @@ import java.time.ZonedDateTime;
 public class MemberProfileEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 
     @Column(name = "nickname")
@@ -50,7 +50,9 @@ public class MemberProfileEntity {
     private ZonedDateTime createDate;
 
     @Builder
-    public MemberProfileEntity(MemberEntity memberEntity){
+    public MemberProfileEntity(MemberEntity memberEntity, String nickName, boolean isPrivate){
         this.memberEntity = memberEntity;
+        this.nickName = nickName;
+        this.isPrivate = isPrivate;
     }
 }

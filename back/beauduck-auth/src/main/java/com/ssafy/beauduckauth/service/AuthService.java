@@ -134,13 +134,17 @@ public class AuthService {
                     .username(name)
                     .sex(sex)
                     .phoneNumber(phone)
-//                    .accessToken(accessToken)
+                    .accessToken(accessToken)
+                    .socialCode(id)
+                    .externalId("")
                     .build();
             memberInfoRepository.save(memberInfoEntity);
 
             MemberProfileEntity memberProfileEntity = MemberProfileEntity.builder()
-                            .memberEntity(entity)
-                                    .build();
+                    .memberEntity(entity)
+                    .nickName("test")
+                    .isPrivate(true)
+                    .build();
             memberProfileRepository.save(memberProfileEntity);
 
             System.out.println("회원 등록 성공");

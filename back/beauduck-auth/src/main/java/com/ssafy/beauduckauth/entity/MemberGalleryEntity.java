@@ -16,7 +16,7 @@ import java.time.ZonedDateTime;
 public class MemberGalleryEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
