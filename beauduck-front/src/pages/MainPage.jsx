@@ -1,17 +1,13 @@
-import Button from '../components/button/Button';
-import Color from '../components/color/Color';
-import ExitModal from '../components/modal/ExitModal';
+import logo from '../assets/logo_original.png';
 
+// 스타일 App.css 에 넣음
 const MainPage = () => {
   return (
-    <div>
-      <h1>메인페이지</h1>
-      <ExitModal
-        title={'정말 나가시겠습니까?'}
-        content={'진행 중이던 세션은 자동으로 종료됩니다.'}
-        btnText={'나가기'}
-      />
-    </div>
+    <>
+      <div className="main-ban">
+        <img className="main-logo" src={logo} alt="logo" />
+      </div>
+    </>
   );
 };
 
