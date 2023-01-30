@@ -44,10 +44,10 @@ spring:
               - public_profile
 
           naver:
-            client-id: 6dAmpqcANRi82B8m751p
-            client-secret: PY91U8BgkE
-#            client-id: V5gN96q3kFtGfUK7PUds
-#            client-secret: Z2RNeixHZU
+#            client-id: 6dAmpqcANRi82B8m751p
+#            client-secret: PY91U8BgkE
+            client-id: V5gN96q3kFtGfUK7PUds
+            client-secret: Z2RNeixHZU
             scope:
               - name
               - email
