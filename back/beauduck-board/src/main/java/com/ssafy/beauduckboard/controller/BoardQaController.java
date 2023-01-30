@@ -35,8 +35,8 @@ public class BoardQaController {
     }
 
     @ApiOperation(value = "질문 게시글 삭제", notes = "성공하면 success.", response = String.class)
-    @DeleteMapping("/{board_id}")
-    public ResponseEntity<?> delete(@ApiParam(value = "board_id", required = true, example="10") @PathVariable("board_id") int id){
+    @DeleteMapping("/{boardId}")
+    public ResponseEntity<?> delete(@ApiParam(value = "board_id", required = true, example="10") @PathVariable("boardId") int id){
         boolean result = boardQaService.delete(id);
         if (result)
             return new ResponseEntity<String>("success", HttpStatus.ACCEPTED);
@@ -46,8 +46,8 @@ public class BoardQaController {
 
 
     @ApiOperation(value = "질문 게시글 수정", notes = "질문 게시글의 id값을 받고 수정한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-    @PatchMapping("/{board_id}")
-    public ResponseEntity<?> update(@ApiParam(value = "board_id", required = true, example="10") @PathVariable("board_id") int  id,
+    @PatchMapping("/{boardId}")
+    public ResponseEntity<?> update(@ApiParam(value = "board_id", required = true, example="10") @PathVariable("boardId") int  id,
                                         @ApiParam(value = "BoardQaRequestDto", required = true) @RequestBody BoardQaRequestDto request){
         boolean result = boardQaService.update(id, request);
         if (result)
@@ -57,8 +57,8 @@ public class BoardQaController {
     }
     
     @ApiOperation(value = "질문 게시글 조회", notes = "성공하면 success.", response = String.class)
-    @GetMapping("/{board_id}")
-    public ResponseEntity<?> selectOne(@ApiParam(value = "board_id", required = true, example="10") @PathVariable("board_id") int  id){
+    @GetMapping("/{boardId}")
+    public ResponseEntity<?> selectOne(@ApiParam(value = "board_id", required = true, example="10") @PathVariable("boardId") int  id){
         return new ResponseEntity(boardQaService.selectOne(id), HttpStatus.ACCEPTED);
     }
 

@@ -29,15 +29,15 @@ public class BoardQaCommentController {
     }
 
     @ApiOperation(value = "질문 게시판 댓글 리스트 전체 조회", notes = "성공하면 success.", response = String.class)
-    @GetMapping("/{board_id}")
-    public ResponseEntity<?> selectAll(@ApiParam(value = "board_id", required = true, example="10") @PathVariable("board_id") int  id){
+    @GetMapping("/{boardId}")
+    public ResponseEntity<?> selectAll(@ApiParam(value = "board_id", required = true, example="10") @PathVariable("boardId") int  id){
         return new ResponseEntity(boardQaCommentService.selectAll(id), HttpStatus.ACCEPTED);
     }
 
 
     @ApiOperation(value = "질문 게시글 댓글 수정", notes = "게시글의 id값을 받고 수정한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-    @PatchMapping("/{comment_id}")
-    public ResponseEntity<?> update(@ApiParam(value = "comment_id", required = true, example="10") @PathVariable("comment_id") int  id,
+    @PatchMapping("/{commentId}")
+    public ResponseEntity<?> update(@ApiParam(value = "comment_id", required = true, example="10") @PathVariable("commentId") int  id,
                                            @ApiParam(value = "CommentQaRequestDto", required = true) @RequestBody CommentQaRequestDto request){
         boolean result = boardQaCommentService.update(id, request);
         if (result)
@@ -47,8 +47,8 @@ public class BoardQaCommentController {
     }
 
     @ApiOperation(value = "질문 게시글 댓글 삭제", notes = "성공하면 success.", response = String.class)
-    @DeleteMapping("/{comment_id}")
-    public ResponseEntity<?> delete(@ApiParam(value = "comment_id", required = true, example="10") @PathVariable("comment_id") int id){
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<?> delete(@ApiParam(value = "comment_id", required = true, example="10") @PathVariable("commentId") int id){
         boolean result = boardQaCommentService.delete(id);
         if (result)
             return new ResponseEntity<String>("success", HttpStatus.ACCEPTED);
