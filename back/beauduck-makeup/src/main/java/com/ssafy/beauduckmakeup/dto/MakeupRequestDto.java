@@ -24,7 +24,7 @@ public class MakeupRequestDto {
     private int duration;
     private float score;
     private int count;
-    private List<MakeupMainEntity> makeupMainList = new ArrayList<>();
+    private List<MakeupMainRequestDto> makeupMainList = new ArrayList<>();
 
     @Builder
     public MakeupEntity toEntity() {

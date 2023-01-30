@@ -2,10 +2,14 @@ package com.ssafy.beauduckmakeup.dto;
 
 import com.ssafy.beauduckmakeup.entity.MakeupEntity;
 import com.ssafy.beauduckmakeup.entity.MakeupMainEntity;
+import com.ssafy.beauduckmakeup.entity.MakeupMiddleEntity;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,6 +19,8 @@ public class MakeupMainRequestDto {
     private int id;
     private MakeupEntity makeupId;
     private String step;
+
+    private List<MakeupMiddleRequestDto> makeupMiddleList = new ArrayList<>();
 
     @Builder
     public MakeupMainEntity toEntity() {

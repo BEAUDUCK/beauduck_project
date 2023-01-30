@@ -20,13 +20,13 @@ public class MakeupMainEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "makeup_id")
     private MakeupEntity makeupId;
     private String step;
     @JsonIgnore
     @OneToMany(mappedBy = "mainId")
-    private List<MakeupMiddleEntity> makeupMiddleEntityList = new ArrayList<>();
+    private List<MakeupMiddleEntity> makeupMiddleList = new ArrayList<>();
 
     @Builder
     public MakeupMainEntity(int id, MakeupEntity makeupId, String step) {

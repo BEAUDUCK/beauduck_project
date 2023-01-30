@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "makeup")
 
-public class MakeupEntity extends TimeEntity{
+public class MakeupEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,4 +45,5 @@ public class MakeupEntity extends TimeEntity{
         this.score = score;
         this.count = count;
     }
+
 }

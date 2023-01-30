@@ -15,7 +15,7 @@ public class MakeupMiddleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "main_id")
     private MakeupMainEntity mainId;
     private String step;
