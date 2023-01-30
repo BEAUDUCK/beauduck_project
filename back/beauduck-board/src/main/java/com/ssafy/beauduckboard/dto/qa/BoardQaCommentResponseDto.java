@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 @Data
 @NoArgsConstructor
 @ApiModel(value = "CommentQaResponseDto : 질문 게시판 댓글 응답 정보", description = "질문 게시판 댓글 응답 정보를 나타낸다.")
-public class CommentQaResponseDto {
+public class BoardQaCommentResponseDto {
 
     @ApiParam(value = "댓글 id", required = true)
     private int id;
@@ -39,9 +39,9 @@ public class CommentQaResponseDto {
     private  ZonedDateTime updated_date;
 
     @Builder
-    public CommentQaResponseDto(int id, String memberId, String writer, BoardQaEntity boardQaEntity,
-                                Boolean isActive, String content, int likes,
-                                ZonedDateTime created_date, ZonedDateTime updated_date) {
+    public BoardQaCommentResponseDto(int id, String memberId, String writer, BoardQaEntity boardQaEntity,
+                                     Boolean isActive, String content, int likes,
+                                     ZonedDateTime created_date, ZonedDateTime updated_date) {
         this.id = id;
         this.memberId = memberId;
         this.writer = writer;

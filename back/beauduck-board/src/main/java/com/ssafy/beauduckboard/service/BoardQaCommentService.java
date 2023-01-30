@@ -1,7 +1,7 @@
 package com.ssafy.beauduckboard.service;
 
-import com.ssafy.beauduckboard.dto.qa.CommentQaRequestDto;
-import com.ssafy.beauduckboard.dto.qa.CommentQaResponseDto;
+import com.ssafy.beauduckboard.dto.qa.BoardQaCommentRequestDto;
+import com.ssafy.beauduckboard.dto.qa.BoardQaCommentResponseDto;
 import com.ssafy.beauduckboard.entity.BoardQaCommentEntity;
 import com.ssafy.beauduckboard.repository.BoardQaCommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +19,9 @@ public class BoardQaCommentService {
     private final BoardQaCommentRepository boardQaCommentRepository;
 
     @Transactional
-    public boolean insert(CommentQaRequestDto commentQaRequestDto){
+    public boolean insert(BoardQaCommentRequestDto boardQaCommentRequestDto){
 
-        BoardQaCommentEntity commentQaEntity = boardQaCommentRepository.save(commentQaRequestDto.ToEntity());
+        BoardQaCommentEntity commentQaEntity = boardQaCommentRepository.save(boardQaCommentRequestDto.ToEntity());
         if (commentQaEntity == null){
             return false;
         }else return true;
@@ -29,13 +29,13 @@ public class BoardQaCommentService {
 
 
     @Transactional
-    public List<CommentQaResponseDto> selectAll(int id){
+    public List<BoardQaCommentResponseDto> selectAll(int id){
         List<BoardQaCommentEntity> commentQaEntities = boardQaCommentRepository.findAllByIsActive(true);
-        List<CommentQaResponseDto> commentQaList = new ArrayList<>();
+        List<BoardQaCommentResponseDto> commentQaList = new ArrayList<>();
 
         for(BoardQaCommentEntity comment : commentQaEntities){
             if (comment.getBoardQaEntity().getId() != id) continue;
-            CommentQaResponseDto commentDto = CommentQaResponseDto.builder()
+            BoardQaCommentResponseDto commentDto = BoardQaCommentResponseDto.builder()
                     .id(comment.getId())
                     .boardQaEntity(comment.getBoardQaEntity())
                     .memberId(comment.getMemberId())
@@ -53,10 +53,10 @@ public class BoardQaCommentService {
 
 
     @Transactional
-    public boolean update(int id, CommentQaRequestDto commentQaRequestDto){
+    public boolean update(int id, BoardQaCommentRequestDto boardQaCommentRequestDto){
         Optional<BoardQaCommentEntity> byId = boardQaCommentRepository.findById(id);
         BoardQaCommentEntity commentQaEntity = byId.get();
-        return commentQaEntity.updateComment(commentQaRequestDto.getContent());
+        return commentQaEntity.updateComment(boardQaCommentRequestDto.getContent());
     }
 
     @Transactional

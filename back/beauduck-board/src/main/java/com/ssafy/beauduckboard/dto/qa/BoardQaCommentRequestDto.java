@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @ApiModel(value = "CommentQaRequestDto : 댓글 요청 정보", description = "질문 게시판 댓글 요청 정보를 나타낸다.")
-public class CommentQaRequestDto {
+public class BoardQaCommentRequestDto {
 
 
     @ApiParam(value = "멤버", required = true)
@@ -28,7 +28,7 @@ public class CommentQaRequestDto {
 
 
     @Builder
-    public CommentQaRequestDto(String memberId, String writer, BoardQaEntity boardQaEntity, Boolean isActive, String content) {
+    public BoardQaCommentRequestDto(String memberId, String writer, BoardQaEntity boardQaEntity, Boolean isActive, String content) {
         this.memberId = memberId;
         this.writer = writer;
         this.boardQaEntity = boardQaEntity;
