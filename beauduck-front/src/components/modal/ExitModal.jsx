@@ -2,7 +2,14 @@ import './Modal.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../button/Button';
 
-const ExitModal = ({ title, content, btnText, where, whereText }) => {
+const ExitModal = ({
+  title,
+  content,
+  btnText,
+  where,
+  whereText,
+  onClickEvent,
+}) => {
   return (
     <div className="exit-modal">
       <div className="modal-header">
@@ -16,8 +23,10 @@ const ExitModal = ({ title, content, btnText, where, whereText }) => {
           </>
         ))}
       </p>
-      {btnText && <Button text={btnText} />}
-      <a href={where}>{whereText}</a>
+      {btnText && <Button text={btnText} onClickEvent={onClickEvent} />}
+      <a className="modal-link" href={where}>
+        {whereText}
+      </a>
     </div>
   );
 };

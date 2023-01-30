@@ -102,7 +102,8 @@
           width: 80px;
           text-align: center;
           margin-right: 20px;
-          
+          font-size: 15px;
+          color: #717171;
         }
     
         .total-input {
@@ -111,7 +112,11 @@
         }
     
         .input-content { 
-          height: 100px;
+          height: 50px;
+        }
+
+        .main-img {
+            width: 280px;
         }
         
         .input-time {
@@ -135,8 +140,22 @@
         width: 400px;
         height: 280px;
         overflow-y: scroll;
-        // overflow-x: hidden;
-        // overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: rgb(180, 180, 180);
+            &:hover {
+                background-color: rgb(132, 132, 132);
+            }
+        }
+        &::-webkit-scrollbar-track {
+            background-color: #F1F1F1;
+        }
+
 
         margin-top: 20px;
         margin-bottom: 20px;
@@ -153,10 +172,24 @@
     }
 }
 
-.add-skin {
+.main-section {
     width: 380px;
     display: flex;
     justify-content: space-around;
+    position: relative;
+
+    .plus-mark {
+        display: inline-block;
+        position: absolute; 
+        left: 85px; 
+        top: 7%;
+        width: 15px;
+        height: 15px;
+        margin: auto;
+        box-sizing: content-box;
+        cursor: pointer;
+        z-index: 993;
+    }
     
 }
 
@@ -171,9 +204,6 @@
     color:#717171;
 }
 
-.add-skin-sub {
-    width: 300px;
-}
 
 .sub-div {
     display: inline-block;
@@ -181,20 +211,8 @@
     // display: flex;
     // vertical-align: top;
     position: relative;
-    width: 100%;
+    width: 300px;
     margin-bottom: 20px;
-
-    .plus-mark {
-        display: inline-block;
-        position: absolute; 
-        left: 0%; 
-        top: 7%;
-        width: 15px;
-        height: 15px;
-        margin: auto;
-        box-sizing: content-box;
-        cursor: pointer;
-    }
 
     .plus-mark-added {
         top: -4%;
@@ -209,6 +227,7 @@
     }
 
     .sub-div-first {
+        width: 270px;
         display: flex;
         justify-content: space-between;
         position: relative;
@@ -221,7 +240,7 @@
     }
 
     form {
-        margin-left: 25px;
+        margin-left: 20px;
     }
 
     select {
@@ -229,35 +248,30 @@
     }
 
     .add-sub-text {
-        width: 230px;
+        width: 250px;
         height: 40px;
         margin-top: 5px;
         margin-bottom: 5px;
     }
 
 
-    input[type=color] {
-        width: 50px;
-        border-radius: 100px;
-        background-color: white;
-    }
+}
+input[type=file] {
+    background-color: white;
+    padding-left: 0;
+    width: 250px;
+}
 
-    input[type=file] {
-        background-color: white;
-        padding-left: 0;
-    }
-
-    input[type=file]::file-selector-button {
-        width: 100px;
-        height: 25px;
-        background: #fff;
-        border: 1px solid rgb(216, 216, 216);
-        border-radius: 10px;
-        cursor: pointer;
-        &:hover {
-            background: rgb(130, 130, 130);
-            color: #fff;
-        }
+input[type=file]::file-selector-button {
+    width: 100px;
+    height: 25px;
+    background: #fff;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+        background: rgb(130, 130, 130);
+        color: #fff;
     }
 }
 
@@ -511,4 +525,12 @@
             margin: 0;
         }
     }
+}
+
+//--------- 메이크업 순서 ---------
+
+.makeup-sequence {
+    width: 300px;
+    height: 80vh;
+    background-color: #CD5E5E;
 }

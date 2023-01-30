@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../../components/button/Button';
 import colorSelector from '../../assets/color-circle.png';
 import { useState } from 'react';
-import Color from '../../components/color/Color';
+import SingleModalCreateMain from './SingleModalCreateMain';
 
 const SingleModalCreate = () => {
   // 색상 선택
@@ -14,7 +14,7 @@ const SingleModalCreate = () => {
   };
 
   // + 버튼으로 새로운 서브 항목 추가하기 (왤케 어려움..)
-  const addSub = () => {
+  const addSubs = () => {
     const newSub = document.createElement('div');
     newSub.classList.add('sub-div');
 
@@ -22,7 +22,7 @@ const SingleModalCreate = () => {
     const plus = document.createElement('i');
     plus.innerHTML = '&#x2b';
     plus.classList.add('fa-solid', 'fa-plus', 'plus-mark', 'plus-mark-added');
-    plus.addEventListener('click', addSub);
+    plus.addEventListener('click', addSubs);
 
     const newForm = document.createElement('form');
     const subDivFirst = document.createElement('div');
@@ -100,10 +100,22 @@ const SingleModalCreate = () => {
           <label htmlFor="content" className="total-label">
             내용
           </label>
-          <input
+          <textarea
             className={['input-content', 'total-input'].join(' ')}
             type="text"
             id="content"
+            maxLength={50}
+          />
+        </div>
+        <div className="makeup-element">
+          <label htmlFor="mainImg" className="total-label">
+            대표사진
+          </label>
+          <input
+            className="main-img"
+            type="file"
+            id="mainImg"
+            accept="image/*"
           />
         </div>
         <div className="makeup-element">
@@ -115,49 +127,7 @@ const SingleModalCreate = () => {
         </div>
         {/* 메이크업 과정 */}
         <div className="makeup-process">
-          <div id="add-skin" className="add-skin">
-            <span className="add-main-text">피부</span>
-            <div id="add-skin-sub" className="add-skin-sub">
-              <div className="sub-div">
-                <FontAwesomeIcon
-                  icon="fa-solid fa-plus"
-                  onClick={addSub}
-                  className="plus-mark"
-                  id="plus-icon"
-                />
-                <form>
-                  <div className="sub-div-first">
-                    <select>
-                      <option value="1">선크림</option>
-                      <option value="2">파운데이션</option>
-                      <option value="3">쿠션</option>
-                      <option value="4">파우더</option>
-                    </select>
-                    <div>
-                      <FontAwesomeIcon
-                        icon="fa-solid fa-droplet"
-                        className="selected-color"
-                        style={{ color: color }}
-                      />
-                      <img
-                        src={colorSelector}
-                        alt=""
-                        className="color-selector"
-                        onClick={() => setOnToggleColor(!onToggleColor)}
-                      />
-                    </div>
-                    {onToggleColor && <Color propFunction={colorChange} />}
-                  </div>
-                  <input
-                    type="text"
-                    className="add-sub-text"
-                    placeholder="해당 과정에 대한 설명을 적어주세요"
-                  />
-                  <input type="file" id="file" accept="image/*" />
-                </form>
-              </div>
-            </div>
-          </div>
+          <SingleModalCreateMain main={'피부'} />
         </div>
         <Button text={'완료'} />
       </div>
