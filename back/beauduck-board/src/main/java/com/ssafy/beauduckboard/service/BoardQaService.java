@@ -2,8 +2,8 @@ package com.ssafy.beauduckboard.service;
 
 import com.ssafy.beauduckboard.dto.qa.BoardQaRequestDto;
 import com.ssafy.beauduckboard.dto.qa.BoardQaResponseDto;
-import com.ssafy.beauduckboard.entity.BoardQaEntity;
-import com.ssafy.beauduckboard.repository.BoardQaRepository;
+import com.ssafy.beauduckboard.entity.qa.BoardQaEntity;
+import com.ssafy.beauduckboard.repository.qa.BoardQaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

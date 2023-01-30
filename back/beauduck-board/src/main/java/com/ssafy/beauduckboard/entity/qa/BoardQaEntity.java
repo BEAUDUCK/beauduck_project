@@ -1,6 +1,7 @@
-package com.ssafy.beauduckboard.entity;
+package com.ssafy.beauduckboard.entity.qa;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.beauduckboard.entity.TimeEntity;
 import lombok.*;
 
 import javax.persistence.*;

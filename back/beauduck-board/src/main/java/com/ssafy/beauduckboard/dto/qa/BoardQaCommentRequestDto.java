@@ -1,7 +1,7 @@
 package com.ssafy.beauduckboard.dto.qa;
 
-import com.ssafy.beauduckboard.entity.BoardQaEntity;
-import com.ssafy.beauduckboard.entity.BoardQaCommentEntity;
+import com.ssafy.beauduckboard.entity.qa.BoardQaEntity;
+import com.ssafy.beauduckboard.entity.qa.BoardQaCommentEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;

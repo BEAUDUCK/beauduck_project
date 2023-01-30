@@ -1,13 +1,11 @@
 package com.ssafy.beauduckboard.dto.qa;
 
-import com.ssafy.beauduckboard.entity.BoardQaEntity;
+import com.ssafy.beauduckboard.entity.qa.BoardQaEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.ZonedDateTime;
 
 @Getter
 @NoArgsConstructor

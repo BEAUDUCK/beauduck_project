@@ -1,6 +1,6 @@
-package com.ssafy.beauduckboard.repository;
+package com.ssafy.beauduckboard.repository.qa;
 
-import com.ssafy.beauduckboard.entity.BoardQaCommentEntity;
+import com.ssafy.beauduckboard.entity.qa.BoardQaCommentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

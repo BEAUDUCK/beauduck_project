@@ -2,7 +2,7 @@ package com.ssafy.beauduckboard.dto.qa;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ssafy.beauduckboard.entity.BoardQaEntity;
+import com.ssafy.beauduckboard.entity.qa.BoardQaEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;
