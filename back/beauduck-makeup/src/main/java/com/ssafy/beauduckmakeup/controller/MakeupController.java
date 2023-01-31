@@ -1,4 +1,5 @@
 package com.ssafy.beauduckmakeup.controller;
+import com.ssafy.beauduckmakeup.dto.MakeupExecuteRequestDto;
 import com.ssafy.beauduckmakeup.dto.MakeupRequestDto;
 import com.ssafy.beauduckmakeup.dto.MakeupResponseDto;
 import com.ssafy.beauduckmakeup.service.MakeupService;
@@ -51,7 +52,15 @@ public class MakeupController {
         return new ResponseEntity<MakeupResponseDto>(makeup, HttpStatus.NO_CONTENT);
     }
 
-
+    @ApiOperation(value = "메이크업 실행 정보 조회", notes = "메이크업 실행 시 필요한 정보를 조회한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
+    @PostMapping("/execute")
+    public ResponseEntity<MakeupResponseDto> selectExecute(@ApiParam(value = "MakeupExecuteRequestDto", required = true) @RequestBody MakeupExecuteRequestDto dto) {
+        MakeupResponseDto makeup = service.selectExecute(dto);
+        if(makeup!=null) {
+            return new ResponseEntity<MakeupResponseDto>(makeup, HttpStatus.OK);
+        }
+        return new ResponseEntity<MakeupResponseDto>(makeup, HttpStatus.NO_CONTENT);
+    }
 
 
 }

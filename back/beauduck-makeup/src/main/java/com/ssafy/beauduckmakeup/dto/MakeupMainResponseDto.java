@@ -20,7 +20,7 @@ public class MakeupMainResponseDto {
     private MakeupEntity makeupId;
     private String step;
 
-    private List<MakeupMiddleRequestDto> makeupMiddleList = new ArrayList<>();
+    private List<MakeupMiddleResponseDto> makeupMiddleList = new ArrayList<>();
 
     public MakeupMainEntity toEntity() {
         return MakeupMainEntity.builder()
@@ -31,7 +31,7 @@ public class MakeupMainResponseDto {
     }
 
     @Builder
-    public MakeupMainResponseDto(int id, MakeupEntity makeupId, String step, List<MakeupMiddleRequestDto> makeupMiddleList) {
+    public MakeupMainResponseDto(int id, MakeupEntity makeupId, String step, List<MakeupMiddleResponseDto> makeupMiddleList) {
         this.id = id;
         this.makeupId = makeupId;
         this.step = step;

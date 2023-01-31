@@ -1,8 +1,5 @@
 package com.ssafy.beauduckmakeup.service;
-import com.ssafy.beauduckmakeup.dto.MakeupMainRequestDto;
-import com.ssafy.beauduckmakeup.dto.MakeupMiddleRequestDto;
-import com.ssafy.beauduckmakeup.dto.MakeupRequestDto;
-import com.ssafy.beauduckmakeup.dto.MakeupResponseDto;
+import com.ssafy.beauduckmakeup.dto.*;
 import com.ssafy.beauduckmakeup.entity.MakeupEntity;
 import com.ssafy.beauduckmakeup.entity.MakeupMainEntity;
 import com.ssafy.beauduckmakeup.entity.MakeupMiddleEntity;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,6 +84,53 @@ public class MakeupService {
                 .build();
 
         return dto;
+    }
+
+    @Transactional
+    public List<MakeupMiddleResponseDto> selectAllMiddle(MakeupMainEntity me) {
+        List<MakeupMiddleEntity> makeupList = makeupMiddleRepository.findAllByMainId(me);
+        List<MakeupMiddleResponseDto> midList = new ArrayList<>();
+
+        for(MakeupMiddleEntity e: makeupList) {
+            MakeupMiddleResponseDto dto = MakeupMiddleResponseDto.builder()
+                    .id(e.getId())
+                    .mainId(e.getMainId())
+                    .step(e.getStep())
+                    .img(e.getImg())
+                    .colorCode(e.getColorCode())
+                    .content(e.getContent())
+                    .build();
+            midList.add(dto);
+        }
+
+        return midList;
+    }
+
+    public MakeupResponseDto selectExecute(MakeupExecuteRequestDto dto) {
+        //대분류 리스트 만들기
+        List<MakeupMainResponseDto> mainList = new ArrayList<>();
+        String[] mains = dto.getMainList();
+
+        for(String mainStep: mains) {
+            MakeupMainEntity main = makeupMainRepository.findByStep(mainStep);
+
+            //소분류 리스트 뽑기
+            List<MakeupMiddleResponseDto> midList = selectAllMiddle(main);
+
+
+            MakeupMainResponseDto md = MakeupMainResponseDto.builder()
+                    .id(main.getId())
+                    .step(main.getStep())
+                    .makeupMiddleList(midList)
+                    .build();
+
+            mainList.add(md);
+        }
+
+        MakeupResponseDto mainDto = new MakeupResponseDto();
+        mainDto.setMakeupMainList(mainList);
+
+        return mainDto;
     }
 
     

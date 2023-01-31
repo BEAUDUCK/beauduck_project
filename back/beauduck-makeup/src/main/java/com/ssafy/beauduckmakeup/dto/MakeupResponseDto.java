@@ -8,6 +8,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Data
 @NoArgsConstructor
@@ -24,6 +27,7 @@ public class MakeupResponseDto {
     private int duration;
     private float score;
     private int count;
+    private List<MakeupMainResponseDto> makeupMainList = new ArrayList<>();
 
     public MakeupEntity toEntity() {
         return MakeupEntity.builder()
@@ -38,7 +42,7 @@ public class MakeupResponseDto {
                 .build();
     }
     @Builder
-    public MakeupResponseDto(int id, String memberId, String title, String content, String img, int duration, float score, int count) {
+    public MakeupResponseDto(int id, String memberId, String title, String content, String img, int duration, float score, int count, List<MakeupMainResponseDto> makeupMainList) {
         this.id = id;
         this.memberId = memberId;
         this.title = title;
@@ -47,5 +51,6 @@ public class MakeupResponseDto {
         this.duration = duration;
         this.score = score;
         this.count = count;
+        this.makeupMainList = makeupMainList;
     }
 }
