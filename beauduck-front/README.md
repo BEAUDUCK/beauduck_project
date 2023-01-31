@@ -41,3 +41,10 @@ npm install react-webcam
 ```
 npm i swiper
 ```
+
+
+▫ gif 재생
+```
+npm install react-gif-player react react-dom
+```
+안깔림

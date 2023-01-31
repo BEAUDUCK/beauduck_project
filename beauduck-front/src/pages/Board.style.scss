@@ -43,11 +43,11 @@
   }
 }
 
-//----------------------------
+//--------------글 작성--------------
 
 .go-back {
   margin-left: 10%;
-  margin-top: 75px;
+  margin-top: 30px;
   margin-bottom: 5%;
   color: gray;
   cursor: pointer;
@@ -91,6 +91,8 @@
     padding-left: 10px;
     padding-right: 10px;
     border: 1px solid rgb(211, 211, 211);
+    background-color: white;
+    border-radius: 0px;
   }
 
   .input-title {
@@ -122,13 +124,27 @@
   }
 }
 
-.info-board{
-  width: 80%;
-  margin: auto;
-  margin-top: 100px;
+//-----------정보게시판-----------
 
-  h1 {
-    margin-bottom: 10px;
+.info-board{
+  width: 85%;
+  margin: auto;
+  margin-top: 50px;
+  position: relative;
+
+  .board-info-title {
+    margin-bottom: 20px;
+    height: 40px;
+
+    .board-info-title-input {
+    height: 40px;
+    width: calc(100% - 40px);
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 15px;
+    background-color: white;
+    border: 1px solid #D9D9D9;
+    }
   }
 
 
@@ -139,8 +155,75 @@
     padding-right: 20px;
 
     min-height: 300px;
+    border-top: 2px solid rgb(211, 211, 211);
     border-bottom: 2px solid rgb(211, 211, 211);
 
+    .board-content-input {
+      min-height: 200px;
+      width: calc(100% - 40px);
+      background-color: white;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      padding-left: 15px;
+      padding-right: 15px;    
+    }
+  }
+}
+
+
+.comment-list {
+  width: 85%;
+  margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  h2 {
+      padding: 0;
+      margin-top: 10px;
+      margin-bottom: 5px;
+  }
+}
+
+.comment-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+}
+
+.user-comment {
+  border: none;
+  padding-top: 20px;
+}
+
+.comment-create {
+  width: calc(85% - 40px);
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+
+  background-color: white;
+  border: 2px solid #D9D9D9;
+  border-radius: 5px;
+  min-height: 100px;
+  
+  .comment-input {
+    border: none;
+    width: calc(100% - 55px);
+    min-height: 50px;
+    resize : none;
+    // overflow: visible;
+  }
+  
+  .comment-submit-btn {
+    width: 20px;
+    font-size: 15px;
+    color: gray;
+    cursor: pointer;
+    margin-left: 5px;
   }
 }
 
@@ -149,7 +232,7 @@
 
 .qna-board {
   position: relative;
-  width: calc(80% - 100px);
+  width: calc(85% - 100px);
   margin: auto;
   margin-top: 80px;
   margin-bottom: 20px;
@@ -162,6 +245,41 @@
   padding-bottom: 20px;
   padding-left: 50px;
   padding-right: 50px;
+
+  .board-qa-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 50px;
+
+    h1 {
+      // margin-bottom: 10px;
+    }
+
+    .board-qa-title-input {
+      height: 50px;
+      width: calc(100% - 30px);
+      font-size: 20px;
+      font-weight: bold;
+      padding-left: 15px;
+      background-color: white;
+      border: 1px solid #D9D9D9;
+    }
+  }
+    
+  .board-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    min-height: 250px;
+    border-top: 2px solid rgb(211, 211, 211);
+
+    .board-qa-content-input {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      min-height: 200px;
+      width: calc(100% - 20px);
+    }
+  }
 
   .alpha-mark {
     font-family: 'Palanquin Dark', sans-serif;
@@ -182,28 +300,51 @@
   margin-top: 30px;
   margin-bottom: 0;
 
-  .answer-input {
-    border: none;
-    width: 100%;
-    min-height: 120px;
-    resize : none;
+  .answer-update-input {
+    width: calc(100% - 20px);
+    min-height: 40px;
+    margin-top: 10px;
+    margin-bottom: 0;
+  
+    padding-left: 10px;
+    padding-right: 10px;
   }
+}
 
-  h4 {
+.qna-answer-create {
+  width: calc(85% - 60px);
+  min-height: 200px;
+  margin-top: 30px;
+  margin-bottom: 0;
+
+  padding-left: 30px;
+  padding-right: 30px;
+
+  .answer-ninkname {
     margin-bottom: 0;
   }
 
-  h5 {
-    text-align: right;
+  .answer-submit {
+    display: inline-block;
+    text-align: center;
     margin: 0;
     font-size: medium;
+    width: 40px;
   }
+
+  .answer-input {
+    border: none;
+    width: calc(100% - 60px);
+    min-height: 120px;
+    resize : none;
+  } 
+
 }
 
 //---------공통 사용-------------
 .user-box {
   padding-bottom: 20px;
-  border-bottom: 2px solid rgb(211, 211, 211);
+  // border-bottom: 2px solid rgb(211, 211, 211);
 
   .img-replace {
     width: 60px;
@@ -213,8 +354,8 @@
 
   .user-text {
     display: inline-block;
+    width: calc(90% - 20px);
     margin-left: 20px;
-  
   
     p {
       margin: 0;
@@ -229,11 +370,30 @@
 
     .comment-username {
       font-size: smaller;
-  }
+    }
   
-  .comment-content {
-      font-size: medium;
-  }
+    .comment-content {
+        font-size: medium;
+    }
+    .comment-update-input {
+      background-color: white;
+      width: 80%;
+      box-shadow: 1px 1px #D9D9D9;
+    }
+
+    .comment-last {
+      display: flex;
+      justify-content: space-between;
+
+    }
+
+    .comment-last-sub {
+      display: inline-block;
+
+      .comment-change {
+        cursor: pointer;
+      }
+    }
   }
 }
 
@@ -269,58 +429,4 @@
   }
 }
 
-.comment-list {
-  width: 80%;
-  margin: auto;
-  padding-left: 10px;
-  padding-right: 10px;
 
-  h2 {
-      padding: 0;
-      margin-top: 10px;
-      margin-bottom: 5px;
-  }
-}
-
-.comment-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 100px;
-}
-
-.user-comment {
-  border: none;
-  padding-top: 20px;
-}
-
-.comment-create {
-  width: calc(80% - 40px);
-  margin: auto;
-  margin-top: 30px;
-  margin-bottom: 100px;
-
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 10px;
-
-  background-color: white;
-  border: 2px solid #D9D9D9;
-  border-radius: 5px;
-  min-height: 100px;
-
-}
-
-.comment-input {
-  border: none;
-  width: calc(100% - 50px);
-  min-height: 50px;
-  resize : none;
-  // overflow: visible;
-}
-
-.comment-submit-btn {
-  width: 30px;
-  color: gray;
-  cursor: pointer;
-  margin-left: 5px;
-}
