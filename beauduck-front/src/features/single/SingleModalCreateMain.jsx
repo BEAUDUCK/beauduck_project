@@ -2,6 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import SingleModalCreateSub from './SingleModalCreateSub';
+// import plusIcon from '../../assets/icon/plus.png';
+// import minusIcon from '../../assets/icon/minus.png';
 
 export const AddComponent = ({ addChild, children }) => {
   return (
@@ -12,44 +14,91 @@ export const AddComponent = ({ addChild, children }) => {
         className="plus-mark"
         id="plus-icon"
       />
+      {/* <img src={plusIcon} alt="plus" className="plus-mark" />
+        <img src={minusIcon} alt="minus" className="minus-mark" /> */}
       {children}
     </>
   );
 };
-const SingleModalCreateMain = ({ main }) => {
+
+const SingleModalCreateMain = ({ main, getSubAllData }) => {
   const sub = () => {
-    if (main === '피부') {
-      return ['', '선크림', '파운데이션', '쿠션', '파우더'];
-    } else if (main === '눈썹') {
-      return ['', '아이브로우', '섀도우', '브로우 마스카라'];
-    } else if (main === '눈') {
-      return ['', '아이섀도우', '아이라이너', '마스카라'];
-    } else if (main === '윤곽') {
-      return ['', '쉐딩', '블러셔', '하이라이터'];
-    } else if (main === '립') {
-      return ['', '립스틱', '틴트', '립글로스'];
+    if (main[0] === '피부') {
+      return [
+        '',
+        ['선크림', 'suncream'],
+        ['파운데이션', 'foundation'],
+        ['쿠션', 'cushion'],
+        ['파우더', 'powder'],
+      ];
+    } else if (main[0] === '눈썹') {
+      return [
+        '',
+        ['아이브로우', 'eyebrow'],
+        ['섀도우', 'shadow'],
+        ['브로우 마스카라', 'browmascara'],
+      ];
+    } else if (main[0] === '눈') {
+      return [
+        '',
+        ['아이섀도우', 'eyeshadow'],
+        ['아이라이너', 'eyeliner'],
+        ['마스카라', 'mascara'],
+      ];
+    } else if (main[0] === '윤곽') {
+      return [
+        '',
+        ['쉐딩', 'shading'],
+        ['블러셔', 'blusher'],
+        ['하이라이터', 'highlighter'],
+      ];
+    } else if (main[0] === '입술') {
+      return [
+        '',
+        ['립스틱', 'lipstic'],
+        ['틴트', 'tint'],
+        ['립글로스', 'lipgloss'],
+      ];
     }
   };
   const [numChild, setNumChild] = useState(1);
 
   const children = [];
-  for (let i = 0; i < numChild; i += 1) {
-    children.push(<SingleModalCreateSub sub={sub()} idx={i} key={i} />);
-  }
-  const onAddChild = () => {
-    setNumChild(numChild + 1);
+
+  const onDeleteChild = () => {
+    if (numChild > 1) {
+      setNumChild(numChild - 1);
+    }
   };
 
-  const subData = [];
+  const makeupMiddleList = [];
 
-  const getSubData = (data, idx) => {
-    console.log('안녕');
-    // subData.slice(idx - 1, 0, data);
+  const getSubData = (subData) => {
+    makeupMiddleList.push(subData);
+    getSubAllData({ makeupMiddleList, main });
+  };
+
+  for (let i = 0; i < numChild; i += 1) {
+    children.push(
+      <SingleModalCreateSub
+        sub={sub()}
+        idx={i}
+        key={i}
+        getSubData={getSubData}
+        deleteChild={onDeleteChild}
+      />,
+    );
+  }
+
+  const onAddChild = () => {
+    if (numChild < 5) {
+      setNumChild(numChild + 1);
+    }
   };
 
   return (
     <div id="main-section" className="main-section">
-      <span className="add-main-text">{main}</span>
+      <span className="add-main-text">{main[0]}</span>
       <div id="sub-replace" className="sub-replace">
         <AddComponent addChild={onAddChild} children={children} />
       </div>
