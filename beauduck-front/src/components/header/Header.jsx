@@ -32,8 +32,8 @@ const Header = () => {
           </p>
           <p onClick={isOpenModal}> 
           LOGIN
-          {isOpen && <LoginModal isOpenModal={isOpenModal} />}
           </p>
+          {isOpen && <LoginModal isOpenModal={isOpenModal} />}
           <p>/</p>
           <p onClick={isOpenModal}> 
           SIGNUP

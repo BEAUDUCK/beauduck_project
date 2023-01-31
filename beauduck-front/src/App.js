@@ -89,8 +89,8 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route 
-            element={<ProtectedRoute token={token} nickname={nickname} />}>
+          {/* <Route 
+            element={<ProtectedRoute token={token} nickname={nickname} />}> */}
           {/* 도와덕 */}
           <Route path="/help" element={<ConsultingPage />} />
           {/* 따라해덕 */}
@@ -105,7 +105,7 @@ function App() {
           <Route path="/board/info/:id" element={<BoardInfoPage />} />
           <Route path="/board/qna/:id" element={<BoardQnAPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          </Route>
+          {/* </Route> */}
           <Route path="/API/Naver" element={<Login />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<MainPage />} />
