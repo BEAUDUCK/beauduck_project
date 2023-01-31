@@ -1,5 +1,6 @@
-package com.ssafy.beauduckboard.entity;
+package com.ssafy.beauduckboard.entity.qa;
 
+import com.ssafy.beauduckboard.entity.TimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

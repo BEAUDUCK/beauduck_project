@@ -2,7 +2,7 @@ package com.ssafy.beauduckboard.service;
 
 import com.ssafy.beauduckboard.dto.qa.BoardQaCommentRequestDto;
 import com.ssafy.beauduckboard.dto.qa.BoardQaCommentResponseDto;
-import com.ssafy.beauduckboard.entity.BoardQaCommentEntity;
+import com.ssafy.beauduckboard.entity.qa.BoardQaCommentEntity;
 import com.ssafy.beauduckboard.repository.BoardQaCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,13 +38,14 @@ public class BoardQaCommentService {
             BoardQaCommentResponseDto commentDto = BoardQaCommentResponseDto.builder()
                     .id(comment.getId())
                     .boardQaEntity(comment.getBoardQaEntity())
-                    .memberId(comment.getMemberId())
+                    .memberEntity(comment.getMemberEntity())
                     .writer(comment.getWriter())
                     .isActive(comment.getIsActive())
                     .likes(comment.getLikes())
                     .content(comment.getContent())
                     .created_date(comment.getCreated_date())
                     .updated_date(comment.getUpdated_date())
+                    .memberId(comment.getMemberEntity().getMemberId())
                     .build();
             commentQaList.add(commentDto);
         }

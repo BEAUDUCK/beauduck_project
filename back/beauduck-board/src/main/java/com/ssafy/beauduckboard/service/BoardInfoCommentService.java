@@ -35,12 +35,13 @@ public class BoardInfoCommentService {
         for(BoardInfoCommentEntity e: comments) {
             BoardInfoCommentResponseDto dto = BoardInfoCommentResponseDto.builder()
                     .id(e.getId())
-                    .memberId(e.getMemberId())
+                    .memberEntity(e.getMemberEntity())
                     .writer(e.getWriter())
                     .content(e.getContent())
                     .likes(e.getLikes())
                     .createdDate(e.getCreated_date())
                     .updatedDate(e.getUpdated_date())
+                    .memberId(e.getMemberEntity().getMemberId())
                     .build();
             cmtList.add(dto);
         }

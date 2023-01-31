@@ -2,12 +2,13 @@ package com.ssafy.beauduckboard.service;
 
 import com.ssafy.beauduckboard.dto.qa.BoardQaRequestDto;
 import com.ssafy.beauduckboard.dto.qa.BoardQaResponseDto;
-import com.ssafy.beauduckboard.entity.BoardQaEntity;
+import com.ssafy.beauduckboard.entity.qa.BoardQaEntity;
 import com.ssafy.beauduckboard.repository.BoardQaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,8 +35,9 @@ public class BoardQaService {
         for(BoardQaEntity board : boardQaEntities){
             BoardQaResponseDto boardDto = BoardQaResponseDto.builder()
                     .id(board.getId())
-                    .memberId(board.getMemberId())
+//                    .memberEntity(board.getMemberEntity())
                     .writer(board.getWriter())
+                    .memberId(board.getMemberEntity().getMemberId())
                     .likes(board.getLikes())
                     .count(board.getCount())
                     .title(board.getTitle())
@@ -46,6 +48,7 @@ public class BoardQaService {
                     .build();
             boardQaList.add(boardDto);
         }
+//        System.out.println(boardQaList.get(0).getMemberId());
         return boardQaList;
     }
 
@@ -72,7 +75,7 @@ public class BoardQaService {
         board.updateCount(board.getCount() + 1);
         BoardQaResponseDto boardQaResponseDto =BoardQaResponseDto.builder()
                 .id(board.getId())
-                .memberId(board.getMemberId())
+                .memberEntity(board.getMemberEntity())
                 .writer(board.getWriter())
                 .likes(board.getLikes())
                 .count(board.getCount())

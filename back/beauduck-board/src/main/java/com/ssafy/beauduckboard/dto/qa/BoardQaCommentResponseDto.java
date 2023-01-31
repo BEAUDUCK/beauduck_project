@@ -2,7 +2,8 @@ package com.ssafy.beauduckboard.dto.qa;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ssafy.beauduckboard.entity.BoardQaEntity;
+import com.ssafy.beauduckboard.entity.MemberEntity;
+import com.ssafy.beauduckboard.entity.qa.BoardQaEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;
@@ -18,8 +19,9 @@ public class BoardQaCommentResponseDto {
 
     @ApiParam(value = "댓글 id", required = true)
     private int id;
-    @ApiParam(value = "댓글 멤버 id", required = true)
-    private String memberId;
+    @ApiParam(value = "멤버", required = true)
+    @JsonIgnore
+    private MemberEntity memberEntity;
     @ApiParam(value = "댓글 작성자", required = true)
     private String writer;
 
@@ -37,13 +39,15 @@ public class BoardQaCommentResponseDto {
     private ZonedDateTime created_date;
     @ApiParam(value = "업데이트 시간", required = true)
     private  ZonedDateTime updated_date;
+    @ApiParam(value = "댓글 멤머 id", required = true)
+    private  String  memberId;
 
     @Builder
-    public BoardQaCommentResponseDto(int id, String memberId, String writer, BoardQaEntity boardQaEntity,
+    public BoardQaCommentResponseDto(int id, MemberEntity memberEntity, String writer, BoardQaEntity boardQaEntity,
                                      Boolean isActive, String content, int likes,
-                                     ZonedDateTime created_date, ZonedDateTime updated_date) {
+                                     ZonedDateTime created_date, ZonedDateTime updated_date, String  memberId) {
         this.id = id;
-        this.memberId = memberId;
+        this.memberEntity = memberEntity;
         this.writer = writer;
         this.boardQaEntity = boardQaEntity;
         this.isActive = isActive;
@@ -51,6 +55,7 @@ public class BoardQaCommentResponseDto {
         this.likes = likes;
         this.created_date = created_date;
         this.updated_date = updated_date;
+        this.memberId = memberId;
     }
 
 

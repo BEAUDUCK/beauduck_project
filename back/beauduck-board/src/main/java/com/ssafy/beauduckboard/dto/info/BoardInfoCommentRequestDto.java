@@ -1,5 +1,7 @@
 package com.ssafy.beauduckboard.dto.info;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.beauduckboard.entity.MemberEntity;
 import com.ssafy.beauduckboard.entity.info.BoardInfoCommentEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
@@ -10,8 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel(value = "BoardInfoCommentRequestDto", description = "정보 게시판 댓글 요청 정보")
 public class BoardInfoCommentRequestDto {
-    @ApiParam(value = "정보 게시판 댓글 FK 멤버", required = true)
-    private String memberId;
+
+    @ApiParam(value = "멤버", required = true)
+    private MemberEntity memberEntity;
     @ApiParam(value = "정보 게시판 댓글 글쓴이", required = true)
     private String writer;
     @ApiParam(value = "정보 게시판 댓글 FK 게시글 id", required = true)
@@ -24,7 +27,7 @@ public class BoardInfoCommentRequestDto {
 
     public BoardInfoCommentEntity toEntity() {
         return BoardInfoCommentEntity.builder()
-                .memberId(this.memberId)
+                .memberEntity(this.memberEntity)
                 .writer(this.writer)
                 .boardId(this.boardId)
                 .isActive(this.isActive)

@@ -1,5 +1,7 @@
 package com.ssafy.beauduckboard.dto.info;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.beauduckboard.entity.MemberEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;
@@ -14,8 +16,9 @@ import java.time.ZonedDateTime;
 public class BoardInfoCommentResponseDto {
     @ApiParam(value = "정보 게시판 댓글 id", required = true)
     private int id;
-    @ApiParam(value = "정보 게시판 댓글 FK 멤버", required = true)
-    private String memberId;
+    @ApiParam(value = "멤버", required = true)
+    @JsonIgnore
+    private MemberEntity memberEntity;
     @ApiParam(value = "정보 게시판 댓글 글쓴이", required = true)
     private String writer;
     @ApiParam(value = "정보 게시판 댓글 FK 게시글 id", required = true)
@@ -30,12 +33,15 @@ public class BoardInfoCommentResponseDto {
     private ZonedDateTime createdDate;
     @ApiParam(value = "업데이트 시간", required = true)
     private  ZonedDateTime updatedDate;
+    @ApiParam(value = "질문 게시판 멤버 아이디", required = true)
+    private String memberId;
 
     @Builder
-    public BoardInfoCommentResponseDto(int id, String memberId,
+    public BoardInfoCommentResponseDto(int id, MemberEntity memberEntity, String memberId,
                                 String writer, int boardId, boolean isActive, String content, int likes,
                                 ZonedDateTime createdDate, ZonedDateTime updatedDate) {
         this.id = id;
+        this.memberEntity = memberEntity;
         this.memberId = memberId;
         this.writer = writer;
         this.boardId = boardId;

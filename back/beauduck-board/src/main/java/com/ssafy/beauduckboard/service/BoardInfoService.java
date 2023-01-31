@@ -38,7 +38,7 @@ public class BoardInfoService {
 
         BoardInfoResponseDto dto = BoardInfoResponseDto.builder()
                 .id(id)
-                .memberId(newBoard.getMemberId())
+                .memberEntity(newBoard.getMemberEntity())
                 .writer(newBoard.getWriter())
                 .isActive(newBoard.isActive())
                 .title(newBoard.getTitle())
@@ -47,6 +47,7 @@ public class BoardInfoService {
                 .likes(newBoard.getLikes())
                 .createdDate(newBoard.getCreated_date())
                 .updatedDate(newBoard.getUpdated_date())
+                .memberId(newBoard.getMemberEntity().getMemberId())
                 .build();
         return dto;
     }
@@ -59,7 +60,7 @@ public class BoardInfoService {
         for(BoardInfoEntity e: boards) {
             BoardInfoResponseDto dto = BoardInfoResponseDto.builder()
                     .id(e.getId())
-                    .memberId(e.getMemberId())
+                    .memberEntity(e.getMemberEntity())
                     .writer(e.getWriter())
                     .isActive(e.isActive())
                     .title(e.getTitle())
@@ -68,6 +69,7 @@ public class BoardInfoService {
                     .likes(e.getLikes())
                     .createdDate(e.getCreated_date())
                     .updatedDate(e.getUpdated_date())
+                    .memberId(e.getMemberEntity().getMemberId())
                     .build();
             boardList.add(dto);
         }

@@ -1,6 +1,7 @@
 package com.ssafy.beauduckboard.controller;
 
 import com.ssafy.beauduckboard.dto.qa.BoardQaRequestDto;
+import com.ssafy.beauduckboard.dto.qa.BoardQaResponseDto;
 import com.ssafy.beauduckboard.service.BoardQaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,8 +33,10 @@ public class BoardQaController {
 
     @ApiOperation(value = "질문 게시글 리스트 전체 조회", notes = "질문 게시판 정보를 리스트 보기한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
     @GetMapping("/")
-    public ResponseEntity<?> selectAll(){
-        return new ResponseEntity(boardQaService.selectAll(), HttpStatus.ACCEPTED);
+    public ResponseEntity<List<BoardQaResponseDto>> selectAll(){
+        List<BoardQaResponseDto> boardQaResponseDtoList= boardQaService.selectAll();
+//        System.out.println(boardQaResponseDtoList.get(0).getMemberId());
+        return new ResponseEntity(boardQaResponseDtoList, HttpStatus.ACCEPTED);
     }
 
     @ApiOperation(value = "질문 게시글 삭제", notes = "성공하면 success.", response = String.class)
