@@ -246,6 +246,26 @@
   padding-left: 50px;
   padding-right: 50px;
 
+  .board-qa-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 50px;
+
+    h1 {
+      // margin-bottom: 10px;
+    }
+
+    .board-qa-title-input {
+      height: 50px;
+      width: calc(100% - 30px);
+      font-size: 20px;
+      font-weight: bold;
+      padding-left: 15px;
+      background-color: white;
+      border: 1px solid #D9D9D9;
+    }
+  }
+    
   .board-content {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -253,6 +273,12 @@
     min-height: 250px;
     border-top: 2px solid rgb(211, 211, 211);
 
+    .board-qa-content-input {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      min-height: 200px;
+      width: calc(100% - 20px);
+    }
   }
 
   .alpha-mark {
@@ -273,6 +299,16 @@
   min-height: 200px;
   margin-top: 30px;
   margin-bottom: 0;
+
+  .answer-update-input {
+    width: calc(100% - 20px);
+    min-height: 40px;
+    margin-top: 10px;
+    margin-bottom: 0;
+  
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 .qna-answer-create {

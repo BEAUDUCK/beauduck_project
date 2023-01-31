@@ -50,7 +50,6 @@ const BoardInfoPage = () => {
       title,
       content,
     };
-    console.log(updatedBoard);
     dispatch(UpdateInfoBoard(updatedBoard, testBoard.id));
     setIsUpdate(!isUpdate);
   };
