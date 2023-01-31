@@ -3,7 +3,7 @@
     width: 5rem;
     height: 2rem;
     border: none;
-    background-color: antiquewhite;
+    background-color: #FFF5D1;
     border-radius: 5px;
 
     // font-weight: 600;
@@ -52,4 +52,20 @@
     height: 30px;
     border: none;
     border-radius: 20px;
+}
+
+.board-update {
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    top: 80px;
+    right: 63px;
+}
+
+.board-remove {
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    top: 80px;
+    right: 10px;
 }

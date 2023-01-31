@@ -19,14 +19,16 @@ const BoardAnswerCreate = ({ boardId }) => {
   };
 
   return (
-    <div className={['qna-board', 'qna-answer'].join(' ')}>
-      <h4>닉네임</h4>
+    <div className={['qna-board', 'qna-answer-create'].join(' ')}>
+      <h4 className="answer-ninkname">닉네임</h4>
       <textarea
         type="text"
         className="answer-input"
         onChange={(e) => setAnswer(e.target.value)}
       />
-      <h5 onClick={AnswerSubmit}>등록</h5>
+      <h5 className="answer-submit" onClick={AnswerSubmit}>
+        등록
+      </h5>
     </div>
   );
 };
