@@ -1,0 +1,514 @@
+.modeList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-gap: 10px;
+}
+
+.makeup-div {
+    width: 200px;
+    display: inline-block;
+    margin: auto;
+
+    img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border: 3px solid #F0F0F0;
+        border-radius: 10px;
+    }
+    
+    p {
+        display: inline-block;
+        width: 200px;
+        margin:0;
+        text-align: center;
+        color: #CD5E5E;
+    }
+
+    .star-info {
+        display: inline-block;
+        width: 200px;
+        text-align: center;
+
+        p {
+            display: inline;
+            margin-left: 5px;
+            font-size: 13px;
+            color: gray;
+        }
+        .star-icon {
+            color: #FFDF38;
+            font-size: 13px;
+        }
+    }
+}
+
+
+// ------ 새 메이크업 만들기 ----------
+
+.makeup-create-modal {
+    position: relative;
+    width: 500px;
+    height: 650px;
+
+    text-align: center;
+    
+    border: 2px solid rgb(220, 220, 220);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #bdbdbd;
+
+    .modal-header {
+        width: 500px;
+        height: 50px;
+        background-color: #FFF5D1;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    
+        h3 {
+          margin: 0;
+          width: 400px;
+          line-height: 50px;
+          font-family: 'Jalnan';
+        }
+    
+        .xmark {
+          margin: auto;
+          color: rgb(68, 68, 68);
+          font-size: x-large;
+        }
+
+        p {
+            width: 50px;
+          }
+    }
+
+    .makeup-form {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 50px;
+        margin-right: 50px;
+        
+        .makeup-element {
+            display: flex;
+            justify-content: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            align-items: center;
+
+        }
+        .total-label {
+          display: inline-block;
+          width: 80px;
+          text-align: center;
+          margin-right: 20px;
+          
+        }
+    
+        .total-input {
+          width: 270px;
+          height: 30px;
+        }
+    
+        .input-content { 
+          height: 100px;
+        }
+        
+        .input-time {
+            width: 240px;
+        }
+
+        p {
+            // font-size: small;
+            color: #a2a2a2;
+            margin: 0;
+            width: 20px;
+            margin-left: 10px;
+        }
+
+        .normal-btn{
+          margin: auto;
+        };
+      }
+
+    .makeup-process {
+        width: 400px;
+        height: 280px;
+        overflow-y: scroll;
+        // overflow-x: hidden;
+        // overflow: auto;
+
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        display: flex;
+        flex-direction: column;
+        // justify-content: space-around;
+        
+        border: 1px solid rgb(220, 220, 220);
+        border-radius: 5px;
+    }
+}
+
+.add-skin {
+    width: 380px;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.add-main-text {
+    display: inline-block;
+    width: 70px;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+    color:#717171;
+}
+
+.add-skin-sub {
+    width: 300px;
+}
+
+.sub-div {
+    display: inline-block;
+    text-align: left;
+    // display: flex;
+    // vertical-align: top;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+
+    .plus-mark {
+        display: inline-block;
+        position: absolute; 
+        left: 0%; 
+        top: 7%;
+        width: 15px;
+        height: 15px;
+        margin: auto;
+        box-sizing: content-box;
+        cursor: pointer;
+    }
+
+    .plus-mark-added {
+        top: -4%;
+        font-size: 24px;
+        font-style: normal; 
+    }
+
+    .color-selector {
+        width: 25px;
+        height: 25px;
+        margin-right: 5px;
+    }
+
+    .sub-div-first {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+    }
+    .selected-color {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        vertical-align: baseline;
+    }
+
+    form {
+        margin-left: 25px;
+    }
+
+    select {
+        height: 30px;
+    }
+
+    .add-sub-text {
+        width: 230px;
+        height: 40px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+
+    input[type=color] {
+        width: 50px;
+        border-radius: 100px;
+        background-color: white;
+    }
+
+    input[type=file] {
+        background-color: white;
+        padding-left: 0;
+    }
+
+    input[type=file]::file-selector-button {
+        width: 100px;
+        height: 25px;
+        background: #fff;
+        border: 1px solid rgb(216, 216, 216);
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover {
+            background: rgb(130, 130, 130);
+            color: #fff;
+        }
+    }
+}
+
+//-------- 최종 설문 모달 ---------
+
+.survey-modal {
+    position: relative;
+    width: 400px;
+    height: 200px;
+
+    text-align: center;
+    align-items: center;
+    
+    border: 2px solid rgb(220, 220, 220);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #bdbdbd;
+
+    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+
+    h2 {
+        margin: 0;
+        padding: 0;
+        width: 400px;
+        line-height: 50px;
+        font-family: 'Jalnan';
+        text-align: center;
+    }
+
+    hr {
+        margin: auto;
+        width: 300px;
+        background-color: rgb(185, 185, 185);
+    }
+
+
+    .star-icon {
+        color: #FFC107;
+        font-size: 40px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+
+//-------- 디테일 모달 ------------
+
+.makeup-detail {
+    position: absolute;
+    // top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    z-index: 998;
+
+    background-color: white;
+    width: 440px;
+    height: 330px;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    border: 2px solid rgb(220, 220, 220);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #bdbdbd;
+
+    text-align: center;
+
+    .makeup-detail-top {
+        display: flex;
+        justify-content: center;
+
+        margin-bottom: 20px;
+
+        .makeup-detail-left {
+            width: 240px;
+            height: 200px;
+            text-align: center;
+    
+            h3 {
+                font-family: 'Jalnan';
+                font-size: 1.5rem;
+                word-break: keep-all;
+        
+                margin-bottom: 10px;
+                letter-spacing: 0.1rem;
+        
+                // color: #AFB3B6;
+                color: #FFDF38;
+                text-shadow: 1px 1px 4px rgb(0, 0, 0);
+                // -webkit-text-stroke: 1px #FFDF38;
+                // -webkit-text-stroke: 1px #FFDF38;
+    
+                // text-shadow: 3px 3px #2D63A7;
+                // text-decoration:underline;
+                // text-decoration-style: wavy;
+                margin-bottom: 10px;
+            }
+    
+            p {
+                color: black;
+            }
+    
+            .makeup-content {
+                color: gray;
+                font-size: 0.8rem;
+                word-break: keep-all;
+                margin-top: 10px;
+                margin-bottom: 5px;
+            }
+        }
+    
+        .makeup-detail-right {
+            height: 200px;
+            width: 200px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    
+            img {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    }
+
+
+
+    .select-course {
+        text-align: center;
+
+        button {
+            border-radius: 20px;
+            border: none;
+            width: 70px;
+            height: 25px;
+            margin-left: 5px;
+            margin-right: 5px;
+
+            font-size: small;
+            font-weight: 600;
+
+            background-color: rgba(175, 179, 182, 0.5);
+        }
+
+        .selected {
+            // background-color: rgba(175, 179, 182, 0.5);
+            background-color: rgba(255, 223, 56, 0.5);
+
+        }
+    }
+
+    .describe-text {
+        font-size: 12px;
+        font-weight: 400;
+        color: #AFB3B6;
+        display: block;
+        text-align: center;
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
+}  
+
+// ---------- 추천 모달 -----------
+.recommend-modal {
+    position: absolute;
+    // top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    z-index: 998;
+
+    background-color: white;
+    width: 580px;
+    height: 330px;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    border: 2px solid rgb(220, 220, 220);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #bdbdbd;
+
+    text-align: center;
+
+    .recommend-xmark {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        margin: auto;
+        color: rgb(68, 68, 68);
+        font-size: x-large;
+        cursor: pointer;
+    }
+
+    h3 {
+        margin-bottom: 30px;
+    }
+
+    .swiper-wrapper {
+        width: 100%; 
+        height: 230px;
+        display: flex;
+    }
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .swiper-pagination-bullet { 
+        width: 12px; 
+        height: 12px; 
+        background: transparent; 
+        border: 1px solid pink; 
+        opacity: 1; 
+    }
+
+    .swiper-pagination-bullet-active { 
+        width: 40px; 
+        transition: width .5s; 
+        border-radius: 5px; 
+        background: pink; 
+        border: 1px solid transparent; 
+    }
+
+    .recommended-makeup-div {
+        height: 150px;
+        width: 140px;
+        text-align: center;
+        align-items: center;
+
+        img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        p {
+            font-size: 15px;
+            margin: 0;
+        }
+    }
+}
