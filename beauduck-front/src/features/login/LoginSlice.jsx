@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { fetchNaverLogin } from './authSlice';
 
 const NaverLogin = () => {
   const { code, state } = useParams();
@@ -19,7 +18,7 @@ const NaverLogin = () => {
     if (!accessToken || !refreshToken) return;
 
     axios
-      .get(`http://3.38.169.2:8080/naver/callback?code=${code}&STRING_STATE`)
+      .get(`http://3.38.169.2:8080/naver/callback?code=${code}&state=STRING_STATE`)
       .then((res) => {
         const { data } = res;
         console.log(data);
