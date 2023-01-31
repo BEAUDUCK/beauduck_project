@@ -20,8 +20,6 @@ public class MakeupEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    //        @ManyToOne(fetch = FetchType.LAZY)
-//        @JoinColumn(name = "id")
     @Column(name = "member_id")
     private String memberId;
     private String title;
@@ -30,8 +28,8 @@ public class MakeupEntity{
     private int duration;
     private float score;
     private int count;
-    @JsonIgnore
-    @OneToMany(mappedBy = "makeupId")
+//    @JsonIgnore
+    @OneToMany(mappedBy = "makeupId", cascade = CascadeType.ALL)
     private List<MakeupMainEntity> makeupMainList = new ArrayList<>();
 
     @Builder

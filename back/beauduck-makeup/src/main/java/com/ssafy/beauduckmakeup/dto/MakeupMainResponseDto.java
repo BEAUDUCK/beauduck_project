@@ -1,10 +1,7 @@
 package com.ssafy.beauduckmakeup.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ssafy.beauduckmakeup.entity.MakeupEntity;
 import com.ssafy.beauduckmakeup.entity.MakeupMainEntity;
-import com.ssafy.beauduckmakeup.entity.MakeupMiddleEntity;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Data;
@@ -17,26 +14,26 @@ import java.util.List;
 @Getter
 @Data
 @NoArgsConstructor
-@ApiModel(value = "MakeupMainRequestDto", description = "메이크업 대분류 요청 정보")
-public class MakeupMainRequestDto {
-
-
-//    @JsonBackReference
-//    @JsonIgnore
-//    private MakeupEntity makeupId;
+@ApiModel(value = "MakeupMainResponseDto", description = "메이크업 대분류 응답 정보")
+public class MakeupMainResponseDto {
+    private int id;
+    private MakeupEntity makeupId;
     private String step;
 
     private List<MakeupMiddleRequestDto> makeupMiddleList = new ArrayList<>();
 
     public MakeupMainEntity toEntity() {
         return MakeupMainEntity.builder()
-//                .makeupId(makeupId)
+                .id(id)
+                .makeupId(makeupId)
                 .step(step)
                 .build();
     }
+
     @Builder
-    public MakeupMainRequestDto(String step, List<MakeupMiddleRequestDto> makeupMiddleList) {
-//        this.makeupId = makeupId;
+    public MakeupMainResponseDto(int id, MakeupEntity makeupId, String step, List<MakeupMiddleRequestDto> makeupMiddleList) {
+        this.id = id;
+        this.makeupId = makeupId;
         this.step = step;
         this.makeupMiddleList = makeupMiddleList;
     }

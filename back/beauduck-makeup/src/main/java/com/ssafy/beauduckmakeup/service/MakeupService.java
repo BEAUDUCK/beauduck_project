@@ -30,22 +30,29 @@ public class MakeupService {
 
     @Transactional
     public boolean insert(MakeupRequestDto dto) {
+//        dto.setId(dto.getId());
 //        //Makeup 테이블에 데이터 저장
         MakeupEntity makeup = makeupRepository.save(dto.toEntity());
         if(makeup == null) return false;
 //        //대분류 리스트 저장
-//        List<MakeupMainEntity> mainEntityList = dto.getMakeupMainEntityList();
+//        List<MakeupMainRequestDto> mainEntityList = dto.getMakeupMainList();
 //        makeupMainRepository.saveAll(mainEntityList);
 //        //소분류 리스트 저장
-//        for(MakeupMainEntity m: mainEntityList) {
-//            makeupMiddleRepository.saveAll(m.getMakeupMiddleEntityList());
+//        for(MakeupMainRequestDto m: mainEntityList) {
+//            System.out.println(m.getId());
+//            makeupMiddleRepository.saveAll(m.getMakeupMiddleList());
 //        }
         List<MakeupMainRequestDto> mainRequestDtoList = dto.getMakeupMainList();
         for(MakeupMainRequestDto mainDto: mainRequestDtoList) {
+//            if(mainDto.getMakeupId()==null)
+//                mainDto.setMakeupId(dto.toEntity());
             makeupMainRepository.save(mainDto.toEntity());
+//            System.out.println(mainDto.getMakeupId().getId());
 //
             List<MakeupMiddleRequestDto> middleRequestDtoList = mainDto.getMakeupMiddleList();
             for(MakeupMiddleRequestDto middleDto: middleRequestDtoList) {
+//                if(middleDto.getMainId()==null)
+//                    middleDto.setMainId(mainDto.toEntity());
                 makeupMiddleRepository.save(middleDto.toEntity());
             }
         }
@@ -58,7 +65,19 @@ public class MakeupService {
         List<MakeupResponseDto> makeupDtoList = new ArrayList<>();
 
         for(MakeupEntity e: makeupList) {
-
+            MakeupResponseDto dto = MakeupResponseDto.builder()
+                    .id(e.getId())
+                    .memberId(e.getMemberId())
+                    .title(e.getTitle())
+                    .content(e.getContent())
+                    .img(e.getImg())
+                    .duration(e.getDuration())
+                    .score(e.getScore())
+                    .count(e.getCount())
+                    .build();
+            makeupDtoList.add(dto);
         }
+
+        return makeupDtoList;
     }
 }
