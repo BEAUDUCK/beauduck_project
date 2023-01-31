@@ -5,17 +5,14 @@ import com.ssafy.beauduckmakeup.entity.MakeupEntity;
 import com.ssafy.beauduckmakeup.entity.MakeupMainEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 @ApiModel(value = "MakeupRequestDto", description = "메이크업 요청 정보")
 public class MakeupRequestDto {

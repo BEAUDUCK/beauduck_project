@@ -5,12 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ssafy.beauduckmakeup.entity.MakeupMainEntity;
 import com.ssafy.beauduckmakeup.entity.MakeupMiddleEntity;
 import io.swagger.annotations.ApiModel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 @ApiModel(value = "MakeupMiddleRequestDto", description = "메이크업 소분류 요청 정보")
 public class MakeupMiddleRequestDto {

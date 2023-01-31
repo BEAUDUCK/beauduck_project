@@ -28,43 +28,27 @@ public class MakeupService {
     @Autowired
     private MakeupMiddleRepository makeupMiddleRepository;
 
-//    @Transactional
     public boolean insert(MakeupRequestDto dto) {
-////        dto.setId(dto.getId());
-//        //Makeup 테이블에 데이터 저장
-//        MakeupEntity makeup = makeupRepository.save(dto.toEntity());
-////        if(makeup == null) return false;
-//        //대분류 리스트 저장
-//        List<MakeupMainRequestDto> mainEntityList = dto.getMakeupMainList();
-//        List<MakeupMainEntity> mlist = new ArrayList<>();
-//        for(MakeupMainRequestDto md: mainEntityList) {
-////            md.setMakeupId(dto.toEntity());
-//            mlist.add(md.toEntity());
-//        }
-//        makeupMainRepository.saveAll(mlist);
-//        //소분류 리스트 저장
-//        for(MakeupMainRequestDto m: mainEntityList) {
-//            List<MakeupMiddleRequestDto> mdlist = m.getMakeupMiddleList();
-//            List<MakeupMiddleEntity> mmlist = new ArrayList<>();
-//            for(MakeupMiddleRequestDto me: mdlist) {
-////                me.setMainId(m.toEntity());
-//                mmlist.add(me.toEntity());
-//            }
-//            makeupMiddleRepository.saveAll(mmlist);
-//        }
-        List<MakeupMainRequestDto> mainRequestDtoList = dto.getMakeupMainList();
-        for(MakeupMainRequestDto mainDto: mainRequestDtoList) {
-//            if(mainDto.getMakeupId()==null)
-//                mainDto.setMakeupId(dto.toEntity());
-//            makeupMainRepository.save(mainDto.toEntity());
-//            System.out.println(mainDto.getMakeupId().getId());
-//
-            List<MakeupMiddleRequestDto> middleRequestDtoList = mainDto.getMakeupMiddleList();
-            for(MakeupMiddleRequestDto middleDto: middleRequestDtoList) {
-//                if(middleDto.getMainId()==null)
-//                    middleDto.setMainId(mainDto.toEntity());
-                makeupMiddleRepository.save(middleDto.toEntity());
+        //Makeup 테이블에 데이터 저장
+        MakeupEntity makeup = makeupRepository.save(dto.toEntity());
+        //대분류 리스트 저장
+        List<MakeupMainRequestDto> mainEntityList = dto.getMakeupMainList();
+        List<MakeupMainEntity> mlist = new ArrayList<>();
+        for(MakeupMainRequestDto md: mainEntityList) {
+            md.setMakeupId(makeup);
+            mlist.add(md.toEntity());
+        }
+        //소분류 리스트 저장
+        for(MakeupMainRequestDto m: mainEntityList) {
+            List<MakeupMiddleRequestDto> mdlist = m.getMakeupMiddleList();
+            List<MakeupMiddleEntity> mmlist = new ArrayList<>();
+
+            MakeupMainEntity mEntity = m.toEntity();
+            for(MakeupMiddleRequestDto me: mdlist) {
+                me.setMainId(mEntity);
+                mmlist.add(me.toEntity());
             }
+            makeupMiddleRepository.saveAll(mmlist);
         }
         return true;
     }
@@ -77,11 +61,8 @@ public class MakeupService {
         for(MakeupEntity e: makeupList) {
             MakeupResponseDto dto = MakeupResponseDto.builder()
                     .id(e.getId())
-                    .memberId(e.getMemberId())
                     .title(e.getTitle())
-                    .content(e.getContent())
                     .img(e.getImg())
-                    .duration(e.getDuration())
                     .score(e.getScore())
                     .count(e.getCount())
                     .build();
@@ -90,4 +71,22 @@ public class MakeupService {
 
         return makeupDtoList;
     }
+
+    public MakeupResponseDto selectOne(int id) {
+        Optional<MakeupEntity> makeupEntity = makeupRepository.findById(id);
+        MakeupEntity makeup = makeupEntity.get();
+
+        MakeupResponseDto dto = MakeupResponseDto.builder()
+                .title(makeup.getTitle())
+                .content(makeup.getContent())
+                .score(makeup.getScore())
+                .count(makeup.getCount())
+                .duration(makeup.getDuration())
+                .img(makeup.getImg())
+                .build();
+
+        return dto;
+    }
+
+    
 }

@@ -1,5 +1,6 @@
 package com.ssafy.beauduckmakeup.controller;
 import com.ssafy.beauduckmakeup.dto.MakeupRequestDto;
+import com.ssafy.beauduckmakeup.dto.MakeupResponseDto;
 import com.ssafy.beauduckmakeup.service.MakeupService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,4 +30,28 @@ public class MakeupController {
         }
         return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
     }
+
+    @ApiOperation(value = "메이크업 목록 조회", notes = "메이크업 목록을 조회한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
+    @GetMapping("/")
+    public ResponseEntity<List<MakeupResponseDto>> selectAll(){
+        List<MakeupResponseDto> makeupList = service.selectAll();
+        if(makeupList!=null) {
+            return new ResponseEntity<List<MakeupResponseDto>>(makeupList, HttpStatus.OK);
+        }
+        return new ResponseEntity<List<MakeupResponseDto>>(makeupList, HttpStatus.NO_CONTENT);
+    }
+
+    @ApiOperation(value = "메이크업 상세 정보 조회", notes = "메이크업 상세정보를 조회한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
+    @GetMapping("/{makeupId}")
+    public ResponseEntity<MakeupResponseDto> selectOne(@ApiParam(value = "int", required = true) @PathVariable int makeupId){
+        MakeupResponseDto makeup = service.selectOne(makeupId);
+        if(makeup!=null) {
+            return new ResponseEntity<MakeupResponseDto>(makeup, HttpStatus.OK);
+        }
+        return new ResponseEntity<MakeupResponseDto>(makeup, HttpStatus.NO_CONTENT);
+    }
+
+
+
+
 }
