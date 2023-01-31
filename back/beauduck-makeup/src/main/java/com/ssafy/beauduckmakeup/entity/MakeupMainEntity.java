@@ -2,6 +2,7 @@ package com.ssafy.beauduckmakeup.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,11 +24,11 @@ public class MakeupMainEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "makeup_id",foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT),updatable=false)
-//    @JsonIgnore
-//    @JsonBackReference
+    @JsonBackReference
     private MakeupEntity makeupId;
     private String step;
     @OneToMany(mappedBy = "mainId", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<MakeupMiddleEntity> makeupMiddleList = new ArrayList<>();
 
     @Builder

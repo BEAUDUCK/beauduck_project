@@ -11,14 +11,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@Data
 @NoArgsConstructor
 @ApiModel(value = "MakeupMiddleRequestDto", description = "메이크업 소분류 요청 정보")
 public class MakeupMiddleRequestDto {
 
-//    @JsonBackReference
-//    @JsonIgnore
-//    private MakeupMainEntity mainId;
+    @JsonIgnore
+    private MakeupMainEntity mainId;
     private String step;
     private String img;
     private String colorCode;
@@ -26,7 +24,7 @@ public class MakeupMiddleRequestDto {
 
     public MakeupMiddleEntity toEntity() {
         return MakeupMiddleEntity.builder()
-//                .mainId(mainId)
+                .mainId(mainId)
                 .step(step)
                 .img(img)
                 .colorCode(colorCode)
@@ -35,7 +33,7 @@ public class MakeupMiddleRequestDto {
     }
     @Builder
     public MakeupMiddleRequestDto(MakeupMainEntity mainId, String step, String img, String colorCode, String content) {
-//        this.mainId = mainId;
+        this.mainId = mainId;
         this.step = step;
         this.img = img;
         this.colorCode = colorCode;

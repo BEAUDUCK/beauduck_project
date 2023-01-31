@@ -19,8 +19,7 @@ public class MakeupMiddleEntity {
     private int id;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "main_id",foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT),updatable=false)
-//    @JsonIgnore
-//    @JsonBackReference
+    @JsonBackReference
     private MakeupMainEntity mainId;
     private String step;
     private String img;

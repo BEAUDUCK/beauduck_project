@@ -28,25 +28,35 @@ public class MakeupService {
     @Autowired
     private MakeupMiddleRepository makeupMiddleRepository;
 
-    @Transactional
+//    @Transactional
     public boolean insert(MakeupRequestDto dto) {
-//        dto.setId(dto.getId());
+////        dto.setId(dto.getId());
 //        //Makeup 테이블에 데이터 저장
-        MakeupEntity makeup = makeupRepository.save(dto.toEntity());
-        if(makeup == null) return false;
+//        MakeupEntity makeup = makeupRepository.save(dto.toEntity());
+////        if(makeup == null) return false;
 //        //대분류 리스트 저장
 //        List<MakeupMainRequestDto> mainEntityList = dto.getMakeupMainList();
-//        makeupMainRepository.saveAll(mainEntityList);
+//        List<MakeupMainEntity> mlist = new ArrayList<>();
+//        for(MakeupMainRequestDto md: mainEntityList) {
+////            md.setMakeupId(dto.toEntity());
+//            mlist.add(md.toEntity());
+//        }
+//        makeupMainRepository.saveAll(mlist);
 //        //소분류 리스트 저장
 //        for(MakeupMainRequestDto m: mainEntityList) {
-//            System.out.println(m.getId());
-//            makeupMiddleRepository.saveAll(m.getMakeupMiddleList());
+//            List<MakeupMiddleRequestDto> mdlist = m.getMakeupMiddleList();
+//            List<MakeupMiddleEntity> mmlist = new ArrayList<>();
+//            for(MakeupMiddleRequestDto me: mdlist) {
+////                me.setMainId(m.toEntity());
+//                mmlist.add(me.toEntity());
+//            }
+//            makeupMiddleRepository.saveAll(mmlist);
 //        }
         List<MakeupMainRequestDto> mainRequestDtoList = dto.getMakeupMainList();
         for(MakeupMainRequestDto mainDto: mainRequestDtoList) {
 //            if(mainDto.getMakeupId()==null)
 //                mainDto.setMakeupId(dto.toEntity());
-            makeupMainRepository.save(mainDto.toEntity());
+//            makeupMainRepository.save(mainDto.toEntity());
 //            System.out.println(mainDto.getMakeupId().getId());
 //
             List<MakeupMiddleRequestDto> middleRequestDtoList = mainDto.getMakeupMiddleList();

@@ -1,5 +1,6 @@
 package com.ssafy.beauduckmakeup.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -28,7 +29,7 @@ public class MakeupEntity{
     private int duration;
     private float score;
     private int count;
-//    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "makeupId", cascade = CascadeType.ALL)
     private List<MakeupMainEntity> makeupMainList = new ArrayList<>();
 

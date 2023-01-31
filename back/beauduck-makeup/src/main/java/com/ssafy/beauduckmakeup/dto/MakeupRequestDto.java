@@ -1,5 +1,6 @@
 package com.ssafy.beauduckmakeup.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ssafy.beauduckmakeup.entity.MakeupEntity;
 import com.ssafy.beauduckmakeup.entity.MakeupMainEntity;
 import io.swagger.annotations.ApiModel;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Data
 @NoArgsConstructor
 @ApiModel(value = "MakeupRequestDto", description = "메이크업 요청 정보")
 public class MakeupRequestDto {
