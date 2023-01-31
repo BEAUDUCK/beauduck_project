@@ -9,6 +9,7 @@ import { useState } from 'react';
 import SingleModalRecommend from '../features/single/SingleModalRecommend';
 import BlackOut from '../components/blackout/BlackOut';
 import SingelModalNoRecommend from '../features/single/SingleModalNoRecommend';
+import Button from '../components/button/Button';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,12 @@ const SinglePage = () => {
   useEffect(() => {
     dispatch(getMakeupList());
   }, [dispatch]);
+
+  const [isMake, setIsMake] = useState(false);
+
+  const onToggleMake = () => {
+    setIsMake(!isMake);
+  };
 
   const makeupList = [
     {
@@ -80,9 +87,10 @@ const SinglePage = () => {
 
         <h2 className="single-h2">인기 메이크업</h2>
         <hr className="single-hr" />
-        <button>만들기</button>
+        <Button text={'만들기'} onClickEvent={onToggleMake} />
         <SingleList modeList={makeupList} />
-        <SingleModalCreate />
+        {isMake && <SingleModalCreate onToggleMake={onToggleMake} />}
+        {isMake && <BlackOut onClickEvent={onToggleMake} />}
       </div>
     </>
   );
