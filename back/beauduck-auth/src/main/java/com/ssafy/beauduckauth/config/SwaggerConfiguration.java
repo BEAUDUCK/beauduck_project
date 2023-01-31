@@ -27,7 +27,7 @@ public class SwaggerConfiguration {
                 .useDefaultResponseMessages(false)
                 .select()
                 //.apis(RequestHandlerSelectors.any())
-                .apis(RequestHandlerSelectors.basePackage("com.ssafy.beauduckboard.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.ssafy.beauduckauth.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(commonInfo());
