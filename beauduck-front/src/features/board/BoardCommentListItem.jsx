@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  removeInfoComment,
-  updateInfoComment,
-  UpdateInfoComment,
-} from './BoardSlice';
+import { removeInfoComment, updateInfoComment } from './BoardSlice';
 
 const BoardCommentListItem = ({ comment }) => {
   const dispatch = useDispatch();
@@ -19,7 +15,6 @@ const BoardCommentListItem = ({ comment }) => {
     dispatch(updateInfoComment(newComment, comment.id));
   };
 
-  const [isRemove, setIsRemove] = useState(false);
   const removeComment = () => {
     dispatch(removeInfoComment(newComment, comment.id));
   };

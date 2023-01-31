@@ -109,11 +109,47 @@ export const newQaBoard = createAsyncThunk(
   },
 );
 
+// qa 게시판 글 수정
+export const updateQaBoard = createAsyncThunk(
+  'board/updateQaBoard',
+  async (newBoard, id) => {
+    const res = await axios.patch(`/board/qa/${id}`, newBoard);
+    return res.data;
+  },
+);
+
+// qa 게시판 글 수정
+export const removeQaBoard = createAsyncThunk(
+  'board/removeQaBoard',
+  async (id) => {
+    const res = await axios.delete(`/board/qa/${id}`);
+    return res.data;
+  },
+);
+
 // qa 게시판 새로운 댓글(답변) 생성
 export const newQaAnswer = createAsyncThunk(
   'board/newQaAnswer',
   async (newAnswer) => {
-    const res = await axios.poad('/board/qa/comment', newAnswer);
+    const res = await axios.post('/board/qa/comment', newAnswer);
+    return res.data;
+  },
+);
+
+// qa 게시판 댓글(답변) 수정
+export const updateQaAnswer = createAsyncThunk(
+  'board/updateQaAnswer',
+  async (newAnswer, id) => {
+    const res = await axios.patch(`/board/qa/comment/${id}`, newAnswer);
+    return res.data;
+  },
+);
+
+// qa 게시판 댓글(답변) 삭제
+export const removeQaAnswer = createAsyncThunk(
+  'board/removeQaAnswer',
+  async (id) => {
+    const res = await axios.delete(`/board/qa/comment/${id}`);
     return res.data;
   },
 );
@@ -167,6 +203,18 @@ export const boardSlice = createSlice({
         console.log(action.payload);
       })
       .addCase(removeInfoComment.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(updateQaBoard.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(removeQaBoard.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(updateQaAnswer.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(removeQaAnswer.fulfilled, (state, action) => {
         console.log(action.payload);
       });
   },
