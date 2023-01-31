@@ -1,15 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { BrowserRouter, Route, Routes, Navigate, Outlet } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/Header';
 import BoardPage from './pages/BoardPage';
 import BoardWritePage from './pages/BoardWritePage';
 import ConsultingPage from './pages/ConsultingPage';
-import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 import NotFound from './pages/NotFount';
 import ProfilePage from './pages/ProfilePage';
-import SignupPage from './pages/SignupPage';
+import Login from './pages/Login';
 import SinglePage from './pages/SinglePage';
 import TogetherPage from './pages/TogetherPage';
 
@@ -50,15 +51,46 @@ library.add(
 );
 
 function App() {
+  const dispatch = useDispatch()
+  const token = localStorage.getItem("accessToken")
+  const nickname = localStorage.getItem("nickname")
+  useEffect(() => {
+    const checkLogined = async () => {
+      if (!token) return
+      if (!nickname) {
+        // 토큰 있는데 닉네임이 없는 경우 -> 회원가입시 소셜 로그인만 완료후 닉네임을 설정하지 않은 경우.
+        // 다시 로그인하고 닉네임 설정하도록 돌려보냄.
+        return
+      }
+    }
+    checkLogined()
+  }, [])
+
+  const ProtectedRoute = ({
+    token,
+    nickname,
+    redirectPath = "/login",
+    children,
+  }) => {
+    if (!token || !nickname) {
+      return <Navigate replace to={redirectPath} />
+    }
+
+    return children ? children : <Outlet />
+  }
+  useEffect(() => {
+    window.onbeforeunload = function pushRefresh() {
+      window.scrollTo(0, 0)
+    }
+  }, [])
+
   return (
     <>
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route 
+            element={<ProtectedRoute token={token} nickname={nickname} />}>
           {/* 도와덕 */}
           <Route path="/help" element={<ConsultingPage />} />
           {/* 따라해덕 */}
@@ -73,6 +105,10 @@ function App() {
           <Route path="/board/info/:id" element={<BoardInfoPage />} />
           <Route path="/board/qna/:id" element={<BoardQnAPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          </Route>
+          <Route path="/API/Naver" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<MainPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
