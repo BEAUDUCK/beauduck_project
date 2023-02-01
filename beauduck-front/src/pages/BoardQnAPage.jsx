@@ -8,7 +8,6 @@ import BoardAnswerCreate from '../features/board/BoardAnswerCreate';
 import BoardAnswerList from '../features/board/BoardAnswerList';
 import {
   getQaBoard,
-  getQaComments,
   removeQaBoard,
   updateQaBoard,
 } from '../features/board/BoardSlice';
@@ -17,11 +16,10 @@ const BoardQnAPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { nowBoard } = useSelector((state) => state.board);
+  const { nowBoard, commentList } = useSelector((state) => state.board);
 
   useEffect(() => {
     dispatch(getQaBoard(id));
-    dispatch(getQaComments(id));
   }, [dispatch, id]);
 
   const [isUpdate, setIsUpdate] = useState(false);
@@ -132,7 +130,7 @@ const BoardQnAPage = () => {
           )}
         </div>
       </div>
-      <BoardAnswerList />
+      <BoardAnswerList commentList={commentList} />
       <BoardAnswerCreate boardId={id} />
     </div>
   );

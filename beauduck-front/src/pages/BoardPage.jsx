@@ -5,24 +5,21 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/button/Button';
 import TabButton from '../components/button/TabButton';
 import BoardList from '../features/board/BoardList';
-import { getInfoList, getQaList } from '../features/board/BoardSlice';
+import {
+  getAllList,
+  getInfoList,
+  getQaList,
+} from '../features/board/BoardSlice';
 
 const BoardPage = () => {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // 처음에 info, qa 둘 다 받아오고 선택적으로 보여주는게 나을 듯
-    // 버튼 바꿀 때마다 요청 보내기엔....
-    dispatch(getInfoList());
-    dispatch(getQaList());
+    dispatch(getAllList());
   }, [dispatch]);
 
-  const { infoList, qaList } = useSelector((state) => ({
-    infoList: state.board.infoList,
-    qaList: state.board.qaList,
-  }));
+  const { infoList, qaList } = useSelector((state) => state.board);
 
   console.log('info', infoList);
   console.log('qa', qaList);
