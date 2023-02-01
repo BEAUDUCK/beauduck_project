@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Api("질문 게시판 컨트롤러 API")
 @RequestMapping(path="/board/qa")
+@CrossOrigin(origins = "*")
 public class BoardQaController {
 
     private final BoardQaService boardQaService;
