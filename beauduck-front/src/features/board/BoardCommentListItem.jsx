@@ -17,7 +17,7 @@ const BoardCommentListItem = ({ comment }) => {
   };
 
   const removeComment = () => {
-    dispatch(removeInfoComment(newComment, comment.id));
+    dispatch(removeInfoComment(comment.id));
   };
 
   return (

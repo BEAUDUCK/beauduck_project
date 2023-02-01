@@ -10,7 +10,6 @@ import BoardCommentCreate from '../features/board/BoardCommentCreate';
 import BoardCommentList from '../features/board/BoardCommentList';
 import {
   getInfoBoard,
-  getInfoComments,
   RemoveInfoBoard,
   UpdateInfoBoard,
 } from '../features/board/BoardSlice';
@@ -23,7 +22,6 @@ const BoardInfoPage = () => {
 
   useEffect(() => {
     dispatch(getInfoBoard(id));
-    dispatch(getInfoComments(id));
   }, [dispatch, id]);
 
   const [isUpdate, setIsUpdate] = useState(false);
