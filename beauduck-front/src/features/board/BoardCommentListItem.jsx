@@ -5,8 +5,9 @@ import { removeInfoComment, updateInfoComment } from './BoardSlice';
 const BoardCommentListItem = ({ comment }) => {
   const dispatch = useDispatch();
 
-  const [newComment, setNewComment] = useState(comment.content);
+  const [newComment, setNewComment] = useState(comment?.content);
   const [isUpdate, setIsUpdate] = useState(false);
+
   const isToggleUpdate = () => {
     setIsUpdate(!isUpdate);
     setNewComment(comment.content);
@@ -23,9 +24,9 @@ const BoardCommentListItem = ({ comment }) => {
     <div className={['user-box', 'user-comment'].join(' ')}>
       <button className="comment-img" />
       <div className="user-text">
-        <p className="comment-username">{comment.member_id}</p>
+        <p className="comment-username">{comment?.writer}</p>
         {!isUpdate ? (
-          <p className="comment-content">{comment.content}</p>
+          <p className="comment-content">{comment?.content}</p>
         ) : (
           <input
             className="comment-update-input"
@@ -36,9 +37,9 @@ const BoardCommentListItem = ({ comment }) => {
         )}
         <div className="comment-last">
           <div className="comment-last-sub">
-            <span>{comment.created_at}</span>
-            <span>좋아요</span>
-            <span>{comment.like}</span>
+            <span>{comment?.createdDate}</span>
+            {/* <span>좋아요</span>
+            <span>{comment?.likes}</span> */}
           </div>
           <div className="comment-last-sub">
             {!isUpdate ? (

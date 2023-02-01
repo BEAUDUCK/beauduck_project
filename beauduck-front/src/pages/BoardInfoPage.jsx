@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BlackOut from '../components/blackout/BlackOut';
 import Button from '../components/button/Button';
 import ExitModal from '../components/modal/ExitModal';
@@ -17,31 +18,21 @@ import {
 const BoardInfoPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const { nowBoard } = useSelector((state) => state.nowBoard);
+  const navigate = useNavigate();
+  const { nowBoard, commentList } = useSelector((state) => state.board);
 
   useEffect(() => {
     dispatch(getInfoBoard(id));
     dispatch(getInfoComments(id));
-  }, [dispatch]);
-
-  const testBoard = {
-    id: 1,
-    title: '글1',
-    member_id: 4,
-    content:
-      '내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl;',
-    count: 4,
-    like: 3,
-    created_at: '2023-01-22 16:54',
-  };
+  }, [dispatch, id]);
 
   const [isUpdate, setIsUpdate] = useState(false);
-  const [title, setTitle] = useState(testBoard.title);
-  const [content, setContent] = useState(testBoard.content);
+  const [title, setTitle] = useState(nowBoard?.title);
+  const [content, setContent] = useState(nowBoard?.content);
 
   const onToggleUpdate = () => {
-    setTitle(testBoard.title);
-    setContent(testBoard.content);
+    setTitle(nowBoard.title);
+    setContent(nowBoard.content);
     setIsUpdate(!isUpdate);
   };
 
@@ -49,8 +40,13 @@ const BoardInfoPage = () => {
     const updatedBoard = {
       title,
       content,
+      memberEntity: {
+        memberId: 'admin',
+      },
+      writer: nowBoard.writer,
     };
-    dispatch(UpdateInfoBoard(updatedBoard, testBoard.id));
+    console.log('이전', updatedBoard);
+    dispatch(UpdateInfoBoard({ updatedBoard, id }));
     setIsUpdate(!isUpdate);
   };
 
@@ -60,7 +56,8 @@ const BoardInfoPage = () => {
   };
 
   const removeBoard = () => {
-    dispatch(RemoveInfoBoard(testBoard.id));
+    dispatch(RemoveInfoBoard(id));
+    navigate('/board'); // board 메인으로 라우팅
   };
 
   return (
@@ -68,7 +65,7 @@ const BoardInfoPage = () => {
       <div className="info-board">
         <div className="board-info-title">
           {!isUpdate ? (
-            <h1>{testBoard.title}</h1>
+            <h1>{nowBoard?.title}</h1>
           ) : (
             <input
               className="board-info-title-input"
@@ -117,17 +114,17 @@ const BoardInfoPage = () => {
         <div className="user-box">
           <button className="img-replace" />
           <div className="user-text">
-            <p>{testBoard.member_id}</p>
+            <p>{nowBoard?.writer}</p>
             <div>
-              <span>{testBoard.created_at}</span>
+              <span>{nowBoard?.createdDate}</span>
               <span>조회</span>
-              <span>{testBoard.count}</span>
+              <span>{nowBoard?.count}</span>
             </div>
           </div>
         </div>
         <div className="board-content">
           {!isUpdate ? (
-            <p>{testBoard.content}</p>
+            <p>{nowBoard?.content}</p>
           ) : (
             <textarea
               className="board-content-input"
@@ -137,7 +134,7 @@ const BoardInfoPage = () => {
           )}
         </div>
       </div>
-      <BoardCommentList />
+      <BoardCommentList commentList={commentList} />
       <BoardCommentCreate boardId={id} />
     </div>
   );

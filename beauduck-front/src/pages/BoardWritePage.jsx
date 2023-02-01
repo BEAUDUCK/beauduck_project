@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TabButton from '../components/button/TabButton';
 import './Board.style.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { newInfoBoard, newQaBoard } from '../features/board/BoardSlice';
+import TabButton from '../components/button/TabButton';
 import Button from '../components/button/Button';
 
 const BoardWritePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -23,23 +24,29 @@ const BoardWritePage = () => {
     setIsInfo(false);
   };
 
-  console.log(isInfo);
+  const { newBoardId } = useSelector((state) => state.board);
 
-  const BoardCreate = () => {
+  const BoardCreate = async () => {
     const newBoard = {
       title,
-      member_id: '1',
-      writer: '나중에 수정해야 함',
+      memberEntity: {
+        memberId: 'admin',
+      },
+      writer: '하하',
       content,
     };
+
     if (isInfo) {
-      dispatch(newInfoBoard(newBoard));
+      dispatch(newInfoBoard(newBoard)).then((res) => {
+        const newBoardId = res.payload;
+        navigate(`/board/info/${newBoardId}`);
+      });
     } else {
-      dispatch(newQaBoard(newBoard));
+      dispatch(newQaBoard(newBoard)).then((res) => {
+        const newBoardId = res.payload;
+        navigate(`/board/qa/${newBoardId}`);
+      });
     }
-    // 네비게이트로 새로 생성한 글로 이동하게 하기
-    setTitle('');
-    setContent('');
   };
 
   return (
@@ -48,10 +55,10 @@ const BoardWritePage = () => {
         <FontAwesomeIcon icon="fa-solid fa-circle-chevron-left" />
         <span>작성 취소</span>
       </div>
-      <form className="write-form">
+      <div className="write-form">
         <div className="form-header">
           <h3>글쓰기</h3>
-          <Button text={'등록'} onClickEvent={BoardCreate} />
+          <Button type="button" text={'등록'} onClickEvent={BoardCreate} />
         </div>
         <hr />
         <TabButton
@@ -78,7 +85,7 @@ const BoardWritePage = () => {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-      </form>
+      </div>
     </div>
   );
 };
