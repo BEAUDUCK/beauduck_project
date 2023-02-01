@@ -35,7 +35,6 @@ import Footer from './components/footer/Footer';
 import SingleResultPage from './pages/SingleResultPage';
 import SingleModePage from './pages/SingleModePage';
 import SingupPage from './pages/SignupPage'
-import Logout from './features/login/Logout'
 
 library.add(
   faXmark,
@@ -81,7 +80,6 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/signup" element={<SingupPage />} />
-          <Route path="/logout" element={<Logout />} />
         </Routes>
       </BrowserRouter>
       <Footer />
