@@ -26,6 +26,7 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { faBackward } from '@fortawesome/free-solid-svg-icons';
 import { faForward } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { faDroplet } from '@fortawesome/free-solid-svg-icons';
 import BoardInfoPage from './pages/BoardInfoPage';
 import BoardQnAPage from './pages/BoardQnAPage';
@@ -46,6 +47,7 @@ library.add(
   faBackward,
   faForward,
   faPlus,
+  faMinus,
   faDroplet,
 );
 
