@@ -45,4 +45,15 @@ public class MakeupEntity{
         this.count = count;
     }
 
+    public boolean updateScore(float score) {
+        this.score = (this.score * this.count + score) / (this.count+1);
+        this.count += 1;
+        return true;
+    }
+
+    public boolean updateCount(int count) {
+        this.count = count;
+        return true;
+    }
+
 }

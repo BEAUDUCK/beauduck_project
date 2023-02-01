@@ -133,5 +133,9 @@ public class MakeupService {
         return mainDto;
     }
 
+    public boolean updateScore(int id, float score) {
+        Optional<MakeupEntity> makeupEntity = makeupRepository.findById(id);
+        return makeupEntity.get().updateScore(score);
+    }
     
 }
