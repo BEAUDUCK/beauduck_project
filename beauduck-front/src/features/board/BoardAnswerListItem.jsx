@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { removeQaAnswer, updateQaAnswer } from './BoardSlice';
 
 const BoardAnswerListItem = ({ answer }) => {
   const dispatch = useDispatch();
@@ -11,11 +12,11 @@ const BoardAnswerListItem = ({ answer }) => {
     setNewAnswer(answer.content);
   };
   const updateAnswer = () => {
-    dispatch();
+    dispatch(updateQaAnswer(newAnswer, answer.id));
   };
 
   const removeAnswer = () => {
-    dispatch();
+    dispatch(removeQaAnswer(answer.id));
   };
   return (
     <div className={['qna-board', 'qna-answer'].join(' ')}>
