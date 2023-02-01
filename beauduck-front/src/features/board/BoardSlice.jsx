@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import client from '../../api/axios';
 
 // info 게시판 리스트 조회
 export const getInfoList = createAsyncThunk('board/getInfoList', async () => {
-  const res = await axios.get('/board/info');
+  const res = await client.get('/board/info/');
+  console.log('info 게시판 axios 계속 하는중');
   return res.data;
 });
 
@@ -11,7 +12,7 @@ export const getInfoList = createAsyncThunk('board/getInfoList', async () => {
 export const getInfoBoard = createAsyncThunk(
   'board/getInfoBoard',
   async (id) => {
-    const res = await axios.get(`/board/info/${id}`);
+    const res = await client.get(`/board/info/${id}/`);
     return res.data;
   },
 );
@@ -20,7 +21,8 @@ export const getInfoBoard = createAsyncThunk(
 export const getInfoComments = createAsyncThunk(
   'board/getInfoComments',
   async (id) => {
-    const res = await axios.get(`/board/info/comment/${id}`);
+    removeComments();
+    const res = await client.get(`/board/info/comment/${id}/`);
     return res.data;
   },
 );
@@ -29,7 +31,7 @@ export const getInfoComments = createAsyncThunk(
 export const newInfoBoard = createAsyncThunk(
   'board/newInfoBoard',
   async (newBoard) => {
-    const res = await axios.post('/board/info', newBoard);
+    const res = await client.post('/board/info/', newBoard);
     return res.data;
   },
 );
@@ -37,8 +39,9 @@ export const newInfoBoard = createAsyncThunk(
 // info 게시판 글 수정
 export const UpdateInfoBoard = createAsyncThunk(
   'board/UpdateInfoBoard',
-  async (updatedBoard, id) => {
-    const res = await axios.patch(`/board/info/${id}`, updatedBoard);
+  async ({ updatedBoard, id }) => {
+    console.log('하이', updatedBoard);
+    const res = await client.patch(`/board/info/update/${id}/`, updatedBoard);
     return res.data;
   },
 );
@@ -47,7 +50,7 @@ export const UpdateInfoBoard = createAsyncThunk(
 export const RemoveInfoBoard = createAsyncThunk(
   'board/RemoveInfoBoard',
   async (id) => {
-    const res = await axios.delete(`/board/info/${id}`);
+    const res = await client.delete(`/board/info/${id}/`);
     return res.data;
   },
 );
@@ -56,7 +59,7 @@ export const RemoveInfoBoard = createAsyncThunk(
 export const newInfoComment = createAsyncThunk(
   'board/newInfoComment',
   async (newComment) => {
-    const res = await axios.post('board/info/comment', newComment);
+    const res = await client.post('/board/info/comment/', newComment);
     return res.data;
   },
 );
@@ -65,7 +68,7 @@ export const newInfoComment = createAsyncThunk(
 export const updateInfoComment = createAsyncThunk(
   'board/updateInfoComment',
   async (newComment, id) => {
-    const res = await axios.patch(`board/info/comment/${id}`, newComment);
+    const res = await client.patch(`/board/info/comment/${id}/`, newComment);
     return res.data;
   },
 );
@@ -74,20 +77,21 @@ export const updateInfoComment = createAsyncThunk(
 export const removeInfoComment = createAsyncThunk(
   'board/removeInfoComment',
   async (id) => {
-    const res = await axios.delete(`board/info/comment/${id}`);
+    const res = await client.delete(`/board/info/comment/${id}/`);
     return res.data;
   },
 );
 
 // qa 게시판 리스트 조회
 export const getQaList = createAsyncThunk('board/getQaList', async () => {
-  const res = await axios.get('/board/qa');
+  const res = await client.get('/board/qa/');
+  console.log('불러옴');
   return res.data;
 });
 
 // qa 게시판 글 조회
 export const getQaBoard = createAsyncThunk('board/getQaBoard', async (id) => {
-  const res = await axios.get(`/board/qa/${id}`);
+  const res = await client.get(`/board/qa/${id}/`);
   return res.data;
 });
 
@@ -95,7 +99,7 @@ export const getQaBoard = createAsyncThunk('board/getQaBoard', async (id) => {
 export const getQaComments = createAsyncThunk(
   'board/getQaComments',
   async (id) => {
-    const res = await axios.get(`/board/qa/comment/${id}`);
+    const res = await client.get(`/board/qa/comment/${id}`);
     return res.data;
   },
 );
@@ -104,7 +108,8 @@ export const getQaComments = createAsyncThunk(
 export const newQaBoard = createAsyncThunk(
   'board/newQaBoard',
   async (newBoard) => {
-    const res = await axios.post('/board/qa', newBoard);
+    console.log('qa', newBoard);
+    const res = await client.post('/board/qa/', newBoard);
     return res.data;
   },
 );
@@ -113,16 +118,16 @@ export const newQaBoard = createAsyncThunk(
 export const updateQaBoard = createAsyncThunk(
   'board/updateQaBoard',
   async (newBoard, id) => {
-    const res = await axios.patch(`/board/qa/${id}`, newBoard);
+    const res = await client.patch(`/board/qa/${id}/`, newBoard);
     return res.data;
   },
 );
 
-// qa 게시판 글 수정
+// qa 게시판 글 삭제
 export const removeQaBoard = createAsyncThunk(
   'board/removeQaBoard',
   async (id) => {
-    const res = await axios.delete(`/board/qa/${id}`);
+    const res = await client.delete(`/board/qa/${id}/`);
     return res.data;
   },
 );
@@ -131,7 +136,7 @@ export const removeQaBoard = createAsyncThunk(
 export const newQaAnswer = createAsyncThunk(
   'board/newQaAnswer',
   async (newAnswer) => {
-    const res = await axios.post('/board/qa/comment', newAnswer);
+    const res = await client.post('/board/qa/comment/', newAnswer);
     return res.data;
   },
 );
@@ -140,7 +145,7 @@ export const newQaAnswer = createAsyncThunk(
 export const updateQaAnswer = createAsyncThunk(
   'board/updateQaAnswer',
   async (newAnswer, id) => {
-    const res = await axios.patch(`/board/qa/comment/${id}`, newAnswer);
+    const res = await client.patch(`/board/qa/comment/${id}/`, newAnswer);
     return res.data;
   },
 );
@@ -149,7 +154,7 @@ export const updateQaAnswer = createAsyncThunk(
 export const removeQaAnswer = createAsyncThunk(
   'board/removeQaAnswer',
   async (id) => {
-    const res = await axios.delete(`/board/qa/comment/${id}`);
+    const res = await client.delete(`/board/qa/comment/${id}/`);
     return res.data;
   },
 );
@@ -163,7 +168,11 @@ export const boardSlice = createSlice({
     commentList: [],
   },
 
-  reducers: {},
+  reducers: {
+    removeComments: (state, action) => {
+      state.commentList = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getInfoList.fulfilled, (state, action) => {
@@ -181,9 +190,6 @@ export const boardSlice = createSlice({
       .addCase(getInfoComments.fulfilled, (state, action) => {
         state.commentList = action.payload;
       })
-      .addCase(newInfoBoard.fulfilled, (state, action) => {
-        console.log(action.payload);
-      })
       .addCase(newQaBoard.fulfilled, (state, action) => {
         console.log(action.payload);
       })
@@ -193,8 +199,11 @@ export const boardSlice = createSlice({
       .addCase(newQaAnswer.fulfilled, (state, action) => {
         console.log(action.payload);
       })
+      // info 글 수정
       .addCase(UpdateInfoBoard.fulfilled, (state, action) => {
         console.log(action.payload);
+        state.nowBoard = action.payload[0];
+        state.infoList = action.payload[1];
       })
       .addCase(RemoveInfoBoard.fulfilled, (state, action) => {
         console.log(action.payload);
@@ -219,5 +228,7 @@ export const boardSlice = createSlice({
       });
   },
 });
+
+export const { removeComments } = boardSlice.actions;
 
 export default boardSlice.reducer;

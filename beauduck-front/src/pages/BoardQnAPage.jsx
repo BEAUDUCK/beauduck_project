@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BlackOut from '../components/blackout/BlackOut';
 import Button from '../components/button/Button';
 import ExitModal from '../components/modal/ExitModal';
@@ -16,30 +16,21 @@ import {
 const BoardQnAPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const { nowBoard } = useSelector((state) => state.nowBoard);
+  const navigate = useNavigate();
+  const { nowBoard } = useSelector((state) => state.board);
 
   useEffect(() => {
     dispatch(getQaBoard(id));
     dispatch(getQaComments(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
-  const testBoard = {
-    id: 1,
-    title: '글1',
-    member_id: 4,
-    content:
-      '내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl;',
-    count: 4,
-    like: 3,
-    created_at: '2023-01-22 16:54',
-  };
   const [isUpdate, setIsUpdate] = useState(false);
-  const [title, setTitle] = useState(testBoard.title);
-  const [content, setContent] = useState(testBoard.content);
+  const [title, setTitle] = useState(nowBoard.title);
+  const [content, setContent] = useState(nowBoard.content);
 
   const onToggleUpdate = () => {
-    setTitle(testBoard.title);
-    setContent(testBoard.content);
+    setTitle(nowBoard.title);
+    setContent(nowBoard.content);
     setIsUpdate(!isUpdate);
   };
 
@@ -47,8 +38,12 @@ const BoardQnAPage = () => {
     const updatedBoard = {
       title,
       content,
+      memberEntity: {
+        memberId: 'admin',
+      },
+      writer: nowBoard.writer,
     };
-    dispatch(updateQaBoard(updatedBoard, testBoard.id));
+    dispatch(updateQaBoard({ updatedBoard, id }));
     setIsUpdate(!isUpdate);
   };
 
@@ -58,15 +53,17 @@ const BoardQnAPage = () => {
   };
 
   const removeBoard = () => {
-    dispatch(removeQaBoard(testBoard.id));
+    dispatch(removeQaBoard(id));
+    navigate('/board'); // board 메인으로 라우팅
   };
+
   return (
     <div className={['container', 'container-colored'].join(' ')}>
       <div className="qna-board">
         <div className="alpha-mark">Q</div>
         <div className="board-qa-title">
           {!isUpdate ? (
-            <h1>{testBoard.title}</h1>
+            <h1>{nowBoard?.title}</h1>
           ) : (
             <input
               className="board-qa-title-input"
@@ -115,17 +112,17 @@ const BoardQnAPage = () => {
         <div className="user-box">
           <button className="img-replace" />
           <div className="user-text">
-            <p>{testBoard.member_id}</p>
+            <p>{nowBoard?.memberId}</p>
             <div>
-              <span>{testBoard.created_at}</span>
+              <span>{nowBoard?.createdDate}</span>
               <span>조회</span>
-              <span>{testBoard.count}</span>
+              <span>{nowBoard?.count}</span>
             </div>
           </div>
         </div>
         <div className="board-content">
           {!isUpdate ? (
-            <p>{testBoard.content}</p>
+            <p>{nowBoard?.content}</p>
           ) : (
             <textarea
               className="board-qa-content-input"

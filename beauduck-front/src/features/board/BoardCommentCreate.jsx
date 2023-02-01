@@ -11,9 +11,12 @@ const BoardCommentCreate = ({ boardId }) => {
 
   const CommentSubmit = () => {
     const newComment = {
-      board_id: boardId,
-      member_id: '현재 유저 아이디',
+      boardId,
+      memberEntity: {
+        memberId: '현재 유저 아이디',
+      },
       content: comment,
+      writer: '현혁',
     };
 
     dispatch(newInfoComment(newComment));

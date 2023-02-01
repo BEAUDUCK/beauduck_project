@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import './App.css';
 import Header from './components/header/Header';
 import BoardPage from './pages/BoardPage';
@@ -12,6 +13,8 @@ import ProfilePage from './pages/ProfilePage';
 import SignupPage from './pages/SignupPage';
 import SinglePage from './pages/SinglePage';
 import TogetherPage from './pages/TogetherPage';
+
+// import { getInfoList, getQaList } from './features/board/BoardSlice';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
