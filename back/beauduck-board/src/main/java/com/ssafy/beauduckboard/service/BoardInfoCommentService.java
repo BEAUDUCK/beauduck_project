@@ -21,6 +21,7 @@ public class BoardInfoCommentService {
     BoardInfoCommentRepository boardInfoCommentRepository;
 
     //댓글 작성
+    @Transactional
     public boolean insert(BoardInfoCommentRequestDto dto) {
         BoardInfoCommentEntity cmt = boardInfoCommentRepository.save(dto.toEntity());
         if(cmt == null) return false;
@@ -28,11 +29,13 @@ public class BoardInfoCommentService {
     }
 
     //댓글 목록보기
+    @Transactional
     public List<BoardInfoCommentResponseDto> selectAll(int id) {
         List<BoardInfoCommentEntity> comments = boardInfoCommentRepository.findAllByIsActive(true);
         List<BoardInfoCommentResponseDto> cmtList = new ArrayList<>();
 
         for(BoardInfoCommentEntity e: comments) {
+            if(e.getBoardId() != id) continue;
             BoardInfoCommentResponseDto dto = BoardInfoCommentResponseDto.builder()
                     .id(e.getId())
                     .memberEntity(e.getMemberEntity())

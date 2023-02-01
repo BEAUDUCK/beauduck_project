@@ -28,9 +28,9 @@ public class BoardInfoService {
 //        if(board == null) return false;
 //        return true;
 //    }
-
+    @Transactional
     public int insert(BoardInfoRequestDto dto) {
-        System.out.println(dto.getTitle());
+//        System.out.println(dto.getTitle());
         BoardInfoEntity board = boardInfoRepository.save(dto.toEntity());
         return board.getId();
     }
@@ -59,6 +59,7 @@ public class BoardInfoService {
     }
 
     //게시글 전체보기
+    @Transactional
     public List<BoardInfoResponseDto> selectAll() {
         List<BoardInfoEntity> boards = boardInfoRepository.findAllByIsActive(true);
         List<BoardInfoResponseDto> boardList = new ArrayList<>();
