@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import './App.css';
 import Header from './components/header/Header';
 import BoardPage from './pages/BoardPage';
 import BoardWritePage from './pages/BoardWritePage';
 import ConsultingPage from './pages/ConsultingPage';
-import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 import NotFound from './pages/NotFount';
 import ProfilePage from './pages/ProfilePage';
-import SignupPage from './pages/SignupPage';
+import NaverLogin from './features/login/NaverLogin';
 import SinglePage from './pages/SinglePage';
 import TogetherPage from './pages/TogetherPage';
 
@@ -36,6 +34,7 @@ import BoardQnAPage from './pages/BoardQnAPage';
 import Footer from './components/footer/Footer';
 import SingleResultPage from './pages/SingleResultPage';
 import SingleModePage from './pages/SingleModePage';
+import SingupPage from './pages/SignupPage';
 
 library.add(
   faXmark,
@@ -60,10 +59,8 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          {/* <Route 
+            element={<ProtectedRoute token={token} nickname={nickname} />}> */}
           {/* 도와덕 */}
           <Route path="/help" element={<ConsultingPage />} />
           {/* 따라해덕 */}
@@ -78,6 +75,11 @@ function App() {
           <Route path="/board/info/:id" element={<BoardInfoPage />} />
           <Route path="/board/qna/:id" element={<BoardQnAPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          {/* </Route> */}
+          <Route path="/Api/Naver" element={<NaverLogin />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/signup" element={<SingupPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
