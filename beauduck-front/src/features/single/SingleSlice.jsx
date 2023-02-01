@@ -28,13 +28,23 @@ export const createNewMakeup = createAsyncThunk(
   },
 );
 
+// 메이크업 추천 요청 + 받기
+export const recommendMakeup = createAsyncThunk(
+  'single/recommendMakeup',
+  async (id) => {
+    const res = await axios.post('makeup/recommend', id);
+    const res2 = await axios.get('makeup/recommend');
+    return res2.data;
+  },
+);
+
 export const singleSlice = createSlice({
   name: 'single',
   initialState: {
     makeupList: [],
     makeupDetail: '',
-    // 만들기..
-    completed: false,
+    completed: false, // 만들기
+    recommendList: [],
   },
   reducers: {
     submitMakeup: (state, action) => {
@@ -54,6 +64,9 @@ export const singleSlice = createSlice({
       })
       .addCase(createNewMakeup.fulfilled, (state, action) => {
         console.log(action.payload);
+      })
+      .addCase(recommendMakeup.fulfilled, (state, action) => {
+        state.recommendList = action.payload;
       });
   },
 });

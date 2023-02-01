@@ -29,6 +29,7 @@ const SingleModalCreate = ({ onToggleMake }) => {
       step: main[1],
       makeupMiddleList: makeupMiddleList,
     };
+
     makeupMainList.push(makeupMainObject);
   };
 

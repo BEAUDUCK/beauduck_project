@@ -48,3 +48,10 @@ npm i swiper
 npm install react-gif-player react react-dom
 ```
 안깔림
+
+
+▫ 애니메이션 효과
+```
+npm install animate.css --save
+```
+

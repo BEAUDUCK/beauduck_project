@@ -4,7 +4,7 @@ import SingleList from '../features/single/SingleList';
 import SingleModalCreate from '../features/single/SingleModalCreate ';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getMakeupList } from '../features/single/SingleSlice';
+import { getMakeupList, recommendMakeup } from '../features/single/SingleSlice';
 import { useState } from 'react';
 import SingleModalRecommend from '../features/single/SingleModalRecommend';
 import BlackOut from '../components/blackout/BlackOut';
@@ -13,15 +13,21 @@ import Button from '../components/button/Button';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
-  //  const {makeupList} = useSelector(state => state.makeupList);
-  const [isRecommend, setIsRecommend] = useState(false);
-  const popRecommend = () => {
-    setIsRecommend(!isRecommend);
-  };
+  //  const {makeupList, recommendList} = useSelector(state => state.single)
+  // 최초에 메이크업 리스트 불러오기
   useEffect(() => {
     dispatch(getMakeupList());
   }, [dispatch]);
 
+  // 추천 받기
+  const [isRecommend, setIsRecommend] = useState(false);
+  const user_id = 1; // 나중에 찐 아이디로 교체
+  const popRecommend = () => {
+    dispatch(recommendMakeup(user_id));
+    setIsRecommend(!isRecommend);
+  };
+
+  // 새로운 메이크업 만들기
   const [isMake, setIsMake] = useState(false);
 
   const onToggleMake = () => {
