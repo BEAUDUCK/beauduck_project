@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Api("질문 게시판 컨트롤러 API")
 @RequestMapping(path="/board/qa/comment")
-@CrossOrigin(origins = "*")
 public class BoardQaCommentController {
 
     private final BoardQaCommentService boardQaCommentService;

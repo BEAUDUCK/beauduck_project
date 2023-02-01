@@ -18,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/board/info")
 @Api("정보 게시판 컨트롤러 API V1")
-@CrossOrigin(origins = "*")
 public class BoardInfoController {
 
     @Autowired
