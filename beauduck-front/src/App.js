@@ -10,7 +10,7 @@ import ConsultingPage from './pages/ConsultingPage';
 import MainPage from './pages/MainPage';
 import NotFound from './pages/NotFount';
 import ProfilePage from './pages/ProfilePage';
-import Login from './pages/Login';
+import NaverLogin from './features/login/NaverLogin';
 import SinglePage from './pages/SinglePage';
 import TogetherPage from './pages/TogetherPage';
 
@@ -33,6 +33,8 @@ import BoardQnAPage from './pages/BoardQnAPage';
 import Footer from './components/footer/Footer';
 import SingleResultPage from './pages/SingleResultPage';
 import SingleModePage from './pages/SingleModePage';
+import SingupPage from './pages/SignupPage'
+import Logout from './features/login/Logout'
 
 library.add(
   faXmark,
@@ -51,39 +53,6 @@ library.add(
 );
 
 function App() {
-  const dispatch = useDispatch()
-  const token = localStorage.getItem("accessToken")
-  const nickname = localStorage.getItem("nickname")
-  useEffect(() => {
-    const checkLogined = async () => {
-      if (!token) return
-      if (!nickname) {
-        // 토큰 있는데 닉네임이 없는 경우 -> 회원가입시 소셜 로그인만 완료후 닉네임을 설정하지 않은 경우.
-        // 다시 로그인하고 닉네임 설정하도록 돌려보냄.
-        return
-      }
-    }
-    checkLogined()
-  }, [])
-
-  const ProtectedRoute = ({
-    token,
-    nickname,
-    redirectPath = "/login",
-    children,
-  }) => {
-    if (!token || !nickname) {
-      return <Navigate replace to={redirectPath} />
-    }
-
-    return children ? children : <Outlet />
-  }
-  useEffect(() => {
-    window.onbeforeunload = function pushRefresh() {
-      window.scrollTo(0, 0)
-    }
-  }, [])
-
   return (
     <>
       <BrowserRouter>
@@ -106,9 +75,11 @@ function App() {
           <Route path="/board/qna/:id" element={<BoardQnAPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           {/* </Route> */}
-          <Route path="/API/Naver" element={<Login />} />
+          <Route path="/Api/Naver" element={<NaverLogin />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<MainPage />} />
+          <Route path="/signup" element={<SingupPage />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </BrowserRouter>
       <Footer />
