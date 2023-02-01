@@ -19,12 +19,18 @@ public class BoardQaService {
 
     private final BoardQaRepository boardQaRepository;
 
+//    @Transactional
+//    public boolean insert(BoardQaRequestDto boardQaRequestDto){
+//        BoardQaEntity boardQaEntity = boardQaRepository.save(boardQaRequestDto.ToEntity());
+//        if (boardQaEntity == null){
+//            return false;
+//        }else return true;
+//    }
+
     @Transactional
-    public boolean insert(BoardQaRequestDto boardQaRequestDto){
+    public int insert(BoardQaRequestDto boardQaRequestDto){
         BoardQaEntity boardQaEntity = boardQaRepository.save(boardQaRequestDto.ToEntity());
-        if (boardQaEntity == null){
-            return false;
-        }else return true;
+        return boardQaEntity.getId();
     }
 
     @Transactional

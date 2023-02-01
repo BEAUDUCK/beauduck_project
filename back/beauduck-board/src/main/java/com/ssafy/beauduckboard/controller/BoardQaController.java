@@ -21,14 +21,20 @@ public class BoardQaController {
 
     private final BoardQaService boardQaService;
 
+//    @ApiOperation(value = "질문 게시글 작성", notes = "질문 게시판 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+//    @PostMapping("/")
+//    public ResponseEntity<String> insert(@RequestBody BoardQaRequestDto request) {
+//        boolean result = boardQaService.insert(request);
+//        if (result)
+//            return new ResponseEntity<String>("success", HttpStatus.ACCEPTED);
+//        else
+//            return new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+//    }
+
     @ApiOperation(value = "질문 게시글 작성", notes = "질문 게시판 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
     @PostMapping("/")
-    public ResponseEntity<String> insert(@RequestBody BoardQaRequestDto request) {
-        boolean result = boardQaService.insert(request);
-        if (result)
-            return new ResponseEntity<String>("success", HttpStatus.ACCEPTED);
-        else
-            return new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Integer> insert(@RequestBody BoardQaRequestDto request) {
+        return new ResponseEntity<Integer>(boardQaService.insert(request), HttpStatus.ACCEPTED);
     }
 
     @ApiOperation(value = "질문 게시글 리스트 전체 조회", notes = "질문 게시판 정보를 리스트 보기한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)

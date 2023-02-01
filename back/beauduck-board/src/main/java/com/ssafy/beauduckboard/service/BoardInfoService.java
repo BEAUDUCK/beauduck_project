@@ -21,12 +21,18 @@ public class BoardInfoService {
     private BoardInfoRepository boardInfoRepository;
 
     //게시글 작성
-    public boolean insert(BoardInfoRequestDto dto) {
+//    public String insert(BoardInfoRequestDto dto) {
+//        System.out.println(dto.getTitle());
+//        BoardInfoEntity board = boardInfoRepository.save(dto.toEntity());
+//        System.out.println(board.getTitle());
+//        if(board == null) return false;
+//        return true;
+//    }
+
+    public int insert(BoardInfoRequestDto dto) {
         System.out.println(dto.getTitle());
         BoardInfoEntity board = boardInfoRepository.save(dto.toEntity());
-        System.out.println(board.getTitle());
-        if(board == null) return false;
-        return true;
+        return board.getId();
     }
 
     //게시글 상세보기

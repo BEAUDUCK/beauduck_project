@@ -41,13 +41,23 @@ public class BoardInfoController {
         return new ResponseEntity<BoardInfoResponseDto>(board, HttpStatus.NO_CONTENT);
     }
 
+//    @ApiOperation(value = "게시판 글 작성", notes = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
+//    @PostMapping("/")
+//    public ResponseEntity<String> write(@ApiParam(value = "BoardInfoRequestDto", required = true) @RequestBody BoardInfoRequestDto dto) {
+//        if(service.insert(dto)) {
+//            return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+//        }
+//        return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
+//    }
+
     @ApiOperation(value = "게시판 글 작성", notes = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
     @PostMapping("/")
-    public ResponseEntity<String> write(@ApiParam(value = "BoardInfoRequestDto", required = true) @RequestBody BoardInfoRequestDto dto) {
-        if(service.insert(dto)) {
-            return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-        }
-        return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Integer> write(@ApiParam(value = "BoardInfoRequestDto", required = true) @RequestBody BoardInfoRequestDto dto) {
+        return new ResponseEntity<Integer>(service.insert(dto), HttpStatus.OK);
+//        if(service.insert(dto)) {
+//            return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+//        }
+//        return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
     }
 
     @ApiOperation(value = "게시판 글 수정", notes = "게시글 내용을 수정한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
