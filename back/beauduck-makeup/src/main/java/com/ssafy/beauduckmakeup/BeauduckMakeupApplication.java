@@ -8,6 +8,8 @@ public class BeauduckMakeupApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BeauduckMakeupApplication.class, args);
+
+
     }
 
 }
