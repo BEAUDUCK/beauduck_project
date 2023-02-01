@@ -28,7 +28,7 @@ public class MemberInfoEntity {
     private MemberEntity memberEntity;
 
     @Column(name = "name")
-    private String username;
+    private String name;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -57,9 +57,9 @@ public class MemberInfoEntity {
     private ZonedDateTime createDate;
 
     @Builder
-    public MemberInfoEntity(MemberEntity memberEntity, String username, String phoneNumber, String email, int age, String sex, String socialCode, String accessToken, String externalId){
+    public MemberInfoEntity(MemberEntity memberEntity, String name, String phoneNumber, String email, int age, String sex, String socialCode, String accessToken, String externalId){
         this.memberEntity = memberEntity;
-        this.username = username;
+        this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.age = age;

@@ -1,6 +1,7 @@
 package com.ssafy.beauduckauth.service;
 
 import com.google.common.net.HttpHeaders;
+import com.ssafy.beauduckauth.dto.auth.LoginResponseDto;
 import com.ssafy.beauduckauth.dto.auth.TokenDeleteResponseDto;
 import com.ssafy.beauduckauth.dto.auth.TokenResponseDto;
 import com.ssafy.beauduckauth.dto.common.response.ResponseSuccessDto;
@@ -88,7 +89,7 @@ public class AuthService {
         return res;
     }
 
-    public ResponseSuccessDto<String> login(String accessToken) {
+    public ResponseSuccessDto<LoginResponseDto> login(String accessToken) {
         WebClient webClient = WebClient
                 .builder()
                 .baseUrl("https://openapi.naver.com")
@@ -129,9 +130,8 @@ public class AuthService {
 
             MemberInfoEntity memberInfoEntity = MemberInfoEntity.builder()
                     .memberEntity(entity)
-                    .username(name)
+                    .name(name)
                     .email(email)
-                    .username(name)
                     .sex(sex)
                     .phoneNumber(phone)
                     .accessToken(accessToken)
@@ -151,7 +151,15 @@ public class AuthService {
             return entity;
         });
 
-        return responseUtil.successResponse("success");
+        LoginResponseDto loginResponseDto = LoginResponseDto.builder()
+                .memberId(id)
+                .name(name)
+                .email(email)
+                .sex(sex)
+                .phoneNumber(phone)
+                .build();
+
+        return responseUtil.successResponse(loginResponseDto);
     }
 
     public ResponseSuccessDto<TokenDeleteResponseDto> logout(String accessToken){

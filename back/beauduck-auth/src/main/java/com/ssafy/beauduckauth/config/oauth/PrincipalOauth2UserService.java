@@ -67,7 +67,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
             MemberInfoEntity entity = MemberInfoEntity.builder()
                     .memberEntity(memberEntity)
-                    .username(username)
+                    .name(username)
                     .phoneNumber(phoneNumber)
                     .email(email)
                     .age(age)
