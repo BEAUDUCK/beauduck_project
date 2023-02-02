@@ -24,15 +24,16 @@ const BoardWritePage = () => {
     setIsInfo(false);
   };
 
-  const { newBoardId } = useSelector((state) => state.board);
+  const { memberId, name } = useSelector((state) => state.member);
 
   const BoardCreate = async () => {
     const newBoard = {
+      isActive: true,
       title,
       memberEntity: {
-        memberId: 'admin',
+        memberId,
       },
-      writer: '하하',
+      writer: name,
       content,
     };
 
@@ -44,7 +45,7 @@ const BoardWritePage = () => {
     } else {
       dispatch(newQaBoard(newBoard)).then((res) => {
         const newBoardId = res.payload;
-        navigate(`/board/qa/${newBoardId}`);
+        navigate(`/board/qna/${newBoardId}`);
       });
     }
   };

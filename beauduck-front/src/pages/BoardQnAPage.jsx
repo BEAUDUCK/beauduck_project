@@ -8,7 +8,6 @@ import BoardAnswerCreate from '../features/board/BoardAnswerCreate';
 import BoardAnswerList from '../features/board/BoardAnswerList';
 import {
   getQaBoard,
-  getQaComments,
   removeQaBoard,
   updateQaBoard,
 } from '../features/board/BoardSlice';
@@ -17,11 +16,10 @@ const BoardQnAPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { nowBoard } = useSelector((state) => state.board);
+  const { nowBoard, commentList } = useSelector((state) => state.board);
 
   useEffect(() => {
     dispatch(getQaBoard(id));
-    dispatch(getQaComments(id));
   }, [dispatch, id]);
 
   const [isUpdate, setIsUpdate] = useState(false);
@@ -43,7 +41,13 @@ const BoardQnAPage = () => {
       },
       writer: nowBoard.writer,
     };
-    dispatch(updateQaBoard({ updatedBoard, id }));
+
+    const payload = {
+      updatedBoard,
+      boardId: id,
+    };
+
+    dispatch(updateQaBoard(payload));
     setIsUpdate(!isUpdate);
   };
 
@@ -112,9 +116,9 @@ const BoardQnAPage = () => {
         <div className="user-box">
           <button className="img-replace" />
           <div className="user-text">
-            <p>{nowBoard?.memberId}</p>
+            <p>{nowBoard?.writer}</p>
             <div>
-              <span>{nowBoard?.createdDate}</span>
+              <span>{nowBoard?.created_date}</span>
               <span>조회</span>
               <span>{nowBoard?.count}</span>
             </div>
@@ -132,7 +136,7 @@ const BoardQnAPage = () => {
           )}
         </div>
       </div>
-      <BoardAnswerList />
+      <BoardAnswerList commentList={commentList} boardId={id} />
       <BoardAnswerCreate boardId={id} />
     </div>
   );
