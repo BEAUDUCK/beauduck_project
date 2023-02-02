@@ -7,7 +7,7 @@ ENV NODE_VERSION 18.13.0
 WORKDIR /app
 
 # package.json 워킹 디렉토리에 복사
-COPY ./package* /usr/src/app/
+COPY ./package* /app
 
 # 명령어 실행 (의존성 설치)
 RUN npm install
