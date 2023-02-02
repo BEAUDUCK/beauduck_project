@@ -1,15 +1,21 @@
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TabButton from '../components/button/TabButton';
 import './Board.style.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { newInfoBoard, newQaBoard } from '../features/board/BoardSlice';
+import TabButton from '../components/button/TabButton';
 import Button from '../components/button/Button';
+import { useRef } from 'react';
+import ExitModal from '../components/modal/ExitModal';
+import BlackOut from '../components/blackout/BlackOut';
 
 const BoardWritePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const titleRef = useRef();
+  const contentRef = useRef();
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -23,23 +29,48 @@ const BoardWritePage = () => {
     setIsInfo(false);
   };
 
-  console.log(isInfo);
+  const [cantModal, setCantModal] = useState(false);
 
-  const BoardCreate = () => {
+  const { memberId, name } = useSelector((state) => state.member);
+
+  const BoardCreate = async () => {
+    if (!title) {
+      titleRef.current.focus();
+      return;
+    }
+    if (!content) {
+      contentRef.current.focus();
+      return;
+    }
     const newBoard = {
+      isActive: true,
       title,
-      member_id: '1',
-      writer: '나중에 수정해야 함',
+      memberEntity: {
+        memberId,
+      },
+      writer: name,
       content,
     };
+
     if (isInfo) {
-      dispatch(newInfoBoard(newBoard));
+      dispatch(newInfoBoard(newBoard)).then((res) => {
+        const newBoardId = res.payload;
+        if (newBoardId !== undefined) {
+          navigate(`/board/info/${newBoardId}`);
+        } else {
+          setCantModal(!cantModal);
+        }
+      });
     } else {
-      dispatch(newQaBoard(newBoard));
+      dispatch(newQaBoard(newBoard)).then((res) => {
+        const newBoardId = res.payload;
+        if (newBoardId !== undefined) {
+          navigate(`/board/qna/${newBoardId}`);
+        } else {
+          setCantModal(!cantModal);
+        }
+      });
     }
-    // 네비게이트로 새로 생성한 글로 이동하게 하기
-    setTitle('');
-    setContent('');
   };
 
   return (
@@ -48,10 +79,10 @@ const BoardWritePage = () => {
         <FontAwesomeIcon icon="fa-solid fa-circle-chevron-left" />
         <span>작성 취소</span>
       </div>
-      <form className="write-form">
+      <div className="write-form">
         <div className="form-header">
           <h3>글쓰기</h3>
-          <Button text={'등록'} onClickEvent={BoardCreate} />
+          <Button type="button" text={'등록'} onClickEvent={BoardCreate} />
         </div>
         <hr />
         <TabButton
@@ -69,16 +100,28 @@ const BoardWritePage = () => {
           className="input-title"
           type="text"
           placeholder="제목을 입력해주세요."
+          ref={titleRef}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
           className="input-content"
           placeholder="내용을 입력하세요."
+          ref={contentRef}
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-      </form>
+      </div>
+      {cantModal && (
+        <ExitModal
+          title={'실패'}
+          content={'게시글을 작성할 수 없습니다.'}
+          btnText={'확인'}
+          onClickEvent={() => setCantModal(!cantModal)}
+          xmarkClickEvent={() => setCantModal(!cantModal)}
+        />
+      )}
+      {cantModal && <BlackOut onClickEvent={() => setCantModal(!cantModal)} />}
     </div>
   );
 };
