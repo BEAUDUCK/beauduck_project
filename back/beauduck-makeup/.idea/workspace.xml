@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="326d9afb-1a53-4c00-a8cd-ad9f9615e9b0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/7.6/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/7.6/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/7.6/dependencies-accessors/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/7.6/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/7.6/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/7.6/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/7.6/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/7.6/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/7.6/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/file-system.probe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.idea/modules/beauduck-consult.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/HELP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/build/classes/java/main/com/ssafy/beauduckconsult/BeauduckConsultApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/build/classes/java/main/com/ssafy/beauduckconsult/config/SecurityConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/build/classes/java/main/com/ssafy/beauduckconsult/config/SwaggerConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/build/classes/java/test/com/ssafy/beauduckconsult/BeauduckConsultApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/build/resources/main/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-consult/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/dependencies-accessors/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/beauduck-makeup.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/BeauduckMakeupApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/config/SecurityConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/config/SwaggerConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/controller/MakeupController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/dto/MakeupMainRequestDto$MakeupMainRequestDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/dto/MakeupMainRequestDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/dto/MakeupMainResponseDto$MakeupMainResponseDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/dto/MakeupMainResponseDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/dto/MakeupMiddleRequestDto$MakeupMiddleRequestDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/dto/MakeupMiddleRequestDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/dto/MakeupRequestDto$MakeupRequestDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/dto/MakeupRequestDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/dto/MakeupResponseDto$MakeupResponseDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/dto/MakeupResponseDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/entity/MakeupEntity$MakeupEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/entity/MakeupEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/entity/MakeupMainEntity$MakeupMainEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/entity/MakeupMainEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/entity/MakeupMiddleEntity$MakeupMiddleEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/entity/MakeupMiddleEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/entity/TimeEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/repository/MakeupMainRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/repository/MakeupMiddleRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/repository/MakeupRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/beauduckmakeup/service/MakeupService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/MakeupController.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/MakeupService.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/7.6/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/7.6/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/7.6/dependencies-accessors/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/7.6/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/7.6/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/7.6/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/7.6/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/7.6/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/7.6/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/file-system.probe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.idea/modules/beauduck-together.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/HELP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/BeauduckTogetherApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/config/SecurityConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/config/SwaggerConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/controller/TogetherController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/dto/TogetherRequestDto$TogetherEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/dto/TogetherRequestDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/dto/TogetherResponseDto$TogetherResponseDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/dto/TogetherResponseDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/entity/TimeEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/entity/TogetherEntity$TogetherEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/entity/TogetherEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/repository/TogetherRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/main/com/ssafy/beauducktogether/service/TogetherService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/classes/java/test/com/ssafy/beauducktogether/BeauduckTogetherApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/resources/main/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/tmp/compileJava/compileTransaction/stash-dir/TogetherController.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/tmp/compileJava/compileTransaction/stash-dir/TogetherEntity$TogetherEntityBuilder.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/tmp/compileJava/compileTransaction/stash-dir/TogetherEntity.class.uniqueId5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/tmp/compileJava/compileTransaction/stash-dir/TogetherRepository.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/tmp/compileJava/compileTransaction/stash-dir/TogetherRequestDto$TogetherEntityBuilder.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/tmp/compileJava/compileTransaction/stash-dir/TogetherRequestDto.class.uniqueId6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/tmp/compileJava/compileTransaction/stash-dir/TogetherService.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../beauduck-together/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2L4ugjjuQVTRUhIAAMcf2TZaGK3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/SSAFY/Documents/pjt1/S08P12B306/back/beauduck-makeup",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "spring.configuration.checksum": "a182357c9648307c7820153fca88d0ba",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="BeauduckMakeupApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="beauduck-makeup.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ssafy.beauduckmakeup.BeauduckMakeupApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="326d9afb-1a53-4c00-a8cd-ad9f9615e9b0" name="Changes" comment="" />
+      <created>1675142788863</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675142788863</updated>
+      <workItem from="1675142790110" duration="7094000" />
+      <workItem from="1675310961213" duration="568000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
