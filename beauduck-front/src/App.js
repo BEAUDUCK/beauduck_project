@@ -32,6 +32,7 @@ import BoardQnAPage from './pages/BoardQnAPage';
 import Footer from './components/footer/Footer';
 import SingleResultPage from './pages/SingleResultPage';
 import SingleModePage from './pages/SingleModePage';
+import RankingPage from './pages/RankingPage';
 
 library.add(
   faXmark,
@@ -73,6 +74,8 @@ function App() {
           <Route path="/board/info/:id" element={<BoardInfoPage />} />
           <Route path="/board/qna/:id" element={<BoardQnAPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          {/* 랭킹 페이지 */}
+          <Route path="/rank" element={<RankingPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
