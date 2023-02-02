@@ -33,6 +33,7 @@ public class BoardInfoCommentService {
         List<BoardInfoCommentResponseDto> cmtList = new ArrayList<>();
 
         for(BoardInfoCommentEntity e: comments) {
+            if(e.getBoardInfoEntity().getId() != id) continue;
             BoardInfoCommentResponseDto dto = BoardInfoCommentResponseDto.builder()
                     .id(e.getId())
                     .memberEntity(e.getMemberEntity())
