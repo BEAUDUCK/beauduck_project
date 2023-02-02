@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeInfoComment, updateInfoComment } from './BoardSlice';
 
@@ -8,12 +8,19 @@ const BoardCommentListItem = ({ comment, boardId }) => {
   const [newComment, setNewComment] = useState(comment?.content);
   const [isUpdate, setIsUpdate] = useState(false);
 
+  const commentRef = useRef();
+
   const isToggleUpdate = () => {
     setIsUpdate(!isUpdate);
     setNewComment(comment.content);
   };
 
   const updateComment = () => {
+    if (!newComment) {
+      commentRef.current.focus();
+      return;
+    }
+
     const updatedComment = {
       boardInfoEntity: {
         id: boardId,
@@ -21,7 +28,7 @@ const BoardCommentListItem = ({ comment, boardId }) => {
       content: newComment,
       isActive: true,
       memberEntity: {
-        memberId,
+        memberId: comment.memberId,
       },
       writer: name,
     };
@@ -53,6 +60,7 @@ const BoardCommentListItem = ({ comment, boardId }) => {
           <input
             className="comment-update-input"
             type="text"
+            ref={commentRef}
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />
@@ -63,26 +71,28 @@ const BoardCommentListItem = ({ comment, boardId }) => {
             {/* <span>좋아요</span>
             <span>{comment?.likes}</span> */}
           </div>
-          <div className="comment-last-sub">
-            {!isUpdate ? (
-              <span className="comment-change" onClick={isToggleUpdate}>
-                수정
-              </span>
-            ) : (
-              <span className="comment-change" onClick={updateComment}>
-                완료
-              </span>
-            )}
-            {!isUpdate ? (
-              <span className="comment-change" onClick={removeComment}>
-                삭제
-              </span>
-            ) : (
-              <span className="comment-change" onClick={isToggleUpdate}>
-                취소
-              </span>
-            )}
-          </div>
+          {memberId === comment.memberId && (
+            <div className="comment-last-sub">
+              {!isUpdate ? (
+                <span className="comment-change" onClick={isToggleUpdate}>
+                  수정
+                </span>
+              ) : (
+                <span className="comment-change" onClick={updateComment}>
+                  완료
+                </span>
+              )}
+              {!isUpdate ? (
+                <span className="comment-change" onClick={removeComment}>
+                  삭제
+                </span>
+              ) : (
+                <span className="comment-change" onClick={isToggleUpdate}>
+                  취소
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

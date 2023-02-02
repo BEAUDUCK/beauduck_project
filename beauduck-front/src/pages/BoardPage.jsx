@@ -15,6 +15,8 @@ const BoardPage = () => {
     dispatch(getAllList());
   }, [dispatch]);
 
+  const { memberId } = useSelector((state) => state.member);
+
   const { infoList, qaList } = useSelector((state) => state.board);
 
   console.log('info', infoList);
@@ -58,9 +60,12 @@ const BoardPage = () => {
           />
         </span>
         <span>
-          <span>
-            <Button text={'글쓰기'} onClickEvent={goToWrite} />
-          </span>
+          {memberId !== '' ||
+            (memberId !== undefined && (
+              <span>
+                <Button text={'글쓰기'} onClickEvent={goToWrite} />
+              </span>
+            ))}
         </span>
       </div>
       <BoardList allList={isInfo ? infoList : qaList} isInfo={isInfo} />
