@@ -1,6 +1,7 @@
 package com.ssafy.beauduckboard.dto.info;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.beauduckboard.entity.MemberEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;
@@ -15,9 +16,9 @@ import java.time.ZonedDateTime;
 public class BoardInfoResponseDto {
     @ApiParam(value = "게시판 id", required = true)
     private int id;
-    @ApiParam(value = "게시판 FK 멤버", required = true)
+    @ApiParam(value = "정보 게시판 member_id", required = true)
     @JsonIgnore
-    private String memberId;
+    private MemberEntity memberEntity;
     @ApiParam(value = "게시판 제목", required = true)
     private String title;
     @ApiParam(value = "게시판 글쓴이", required = true)
@@ -34,13 +35,15 @@ public class BoardInfoResponseDto {
     private ZonedDateTime createdDate;
     @ApiParam(value = "업데이트 시간", required = true)
     private  ZonedDateTime updatedDate;
+    @ApiParam(value = "질문 게시판 멤버 아이디", required = true)
+    private String memberId;
 
     @Builder
-    public BoardInfoResponseDto(int id, String memberId, String title,
+    public BoardInfoResponseDto(int id, MemberEntity memberEntity, String title,
                             String writer, boolean isActive, String content, int count, int likes,
-                            ZonedDateTime createdDate, ZonedDateTime updatedDate) {
+                            ZonedDateTime createdDate, ZonedDateTime updatedDate, String memberId) {
         this.id = id;
-        this.memberId = memberId;
+        this.memberEntity = memberEntity;
         this.title = title;
         this.writer = writer;
         this.isActive = isActive;
@@ -49,6 +52,7 @@ public class BoardInfoResponseDto {
         this.likes = likes;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
+        this.memberId = memberId;
     }
 
 //    public BoardInfoEntity ToEntity(){

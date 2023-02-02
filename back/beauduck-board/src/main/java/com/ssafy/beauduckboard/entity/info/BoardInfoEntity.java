@@ -1,6 +1,7 @@
 package com.ssafy.beauduckboard.entity.info;
 
 import com.ssafy.beauduckboard.dto.info.BoardInfoRequestDto;
+import com.ssafy.beauduckboard.entity.MemberEntity;
 import com.ssafy.beauduckboard.entity.TimeEntity;
 import lombok.*;
 
@@ -14,22 +15,23 @@ public class BoardInfoEntity extends TimeEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
-//        @ManyToOne(fetch = FetchType.LAZY)
-//        @JoinColumn(name = "id")
-        @Column(name = "member_id")
-        private String memberId;
+
+        @ManyToOne(fetch = FetchType.LAZY) // xtoOne으로 끝나면 fetch를 해준다.
+        @JoinColumn(name = "member_id")
+        private MemberEntity memberEntity;
+
         private String writer;
         @Column(name = "is_active")
-        private boolean isActive;
+        private Boolean isActive;
         private String title;
         private String content;
         private int count;
         private int likes;
 
         @Builder
-        public BoardInfoEntity(int id, String memberId, String writer, boolean isActive, String title, String content, int count, int like) {
+        public BoardInfoEntity(int id, MemberEntity memberEntity, String writer, Boolean isActive, String title, String content, int count, int like) {
                 this.id = id;
-                this.memberId = memberId;
+                this.memberEntity = memberEntity;
                 this.writer = writer;
                 this.isActive = isActive;
                 this.title = title;

@@ -1,6 +1,7 @@
 package com.ssafy.beauduckboard.entity.info;
 
 import com.ssafy.beauduckboard.dto.info.BoardInfoCommentRequestDto;
+import com.ssafy.beauduckboard.entity.MemberEntity;
 import com.ssafy.beauduckboard.entity.TimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -18,25 +19,27 @@ public class BoardInfoCommentEntity extends TimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    //        @ManyToOne(fetch = FetchType.LAZY)
-//        @JoinColumn(name = "id")
-    @Column(name = "member_id")
-    private String memberId;
+
+    @ManyToOne(fetch = FetchType.LAZY) // xtoOne으로 끝나면 fetch를 해준다.
+    @JoinColumn(name = "member_id")
+    private MemberEntity memberEntity;
+
     private String writer;
-    @Column(name = "board_id")
-    private int boardId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private BoardInfoEntity boardInfoEntity;
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
     private String content;
     private int likes;
 
     @Builder
-    public BoardInfoCommentEntity(int id, String memberId, String writer, int boardId, boolean isActive, String content, int likes) {
+    public BoardInfoCommentEntity(int id, MemberEntity memberEntity, String writer, BoardInfoEntity boardInfoEntity, Boolean isActive, String content, int likes) {
         this.id = id;
-        this.memberId = memberId;
+        this.memberEntity = memberEntity;
         this.writer = writer;
         this.isActive = isActive;
-        this.boardId = boardId;
+        this.boardInfoEntity = boardInfoEntity;
         this.content = content;
         this.likes = likes;
     }

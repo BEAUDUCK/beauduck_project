@@ -21,12 +21,18 @@ public class BoardInfoService {
     private BoardInfoRepository boardInfoRepository;
 
     //게시글 작성
-    public boolean insert(BoardInfoRequestDto dto) {
+//    public String insert(BoardInfoRequestDto dto) {
+//        System.out.println(dto.getTitle());
+//        BoardInfoEntity board = boardInfoRepository.save(dto.toEntity());
+//        System.out.println(board.getTitle());
+//        if(board == null) return false;
+//        return true;
+//    }
+
+    public int insert(BoardInfoRequestDto dto) {
         System.out.println(dto.getTitle());
         BoardInfoEntity board = boardInfoRepository.save(dto.toEntity());
-        System.out.println(board.getTitle());
-        if(board == null) return false;
-        return true;
+        return board.getId();
     }
 
     //게시글 상세보기
@@ -38,15 +44,16 @@ public class BoardInfoService {
 
         BoardInfoResponseDto dto = BoardInfoResponseDto.builder()
                 .id(id)
-                .memberId(newBoard.getMemberId())
+                .memberEntity(newBoard.getMemberEntity())
                 .writer(newBoard.getWriter())
-                .isActive(newBoard.isActive())
+                .isActive(newBoard.getIsActive())
                 .title(newBoard.getTitle())
                 .content(newBoard.getContent())
                 .count(newBoard.getCount())
                 .likes(newBoard.getLikes())
                 .createdDate(newBoard.getCreated_date())
                 .updatedDate(newBoard.getUpdated_date())
+                .memberId(newBoard.getMemberEntity().getMemberId())
                 .build();
         return dto;
     }
@@ -59,15 +66,16 @@ public class BoardInfoService {
         for(BoardInfoEntity e: boards) {
             BoardInfoResponseDto dto = BoardInfoResponseDto.builder()
                     .id(e.getId())
-                    .memberId(e.getMemberId())
+                    .memberEntity(e.getMemberEntity())
                     .writer(e.getWriter())
-                    .isActive(e.isActive())
+                    .isActive(e.getIsActive())
                     .title(e.getTitle())
                     .content(e.getContent())
                     .count(e.getCount())
                     .likes(e.getLikes())
                     .createdDate(e.getCreated_date())
                     .updatedDate(e.getUpdated_date())
+                    .memberId(e.getMemberEntity().getMemberId())
                     .build();
             boardList.add(dto);
         }

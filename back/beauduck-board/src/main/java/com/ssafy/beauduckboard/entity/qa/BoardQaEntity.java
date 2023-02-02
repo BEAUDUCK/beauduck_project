@@ -1,6 +1,8 @@
-package com.ssafy.beauduckboard.entity;
+package com.ssafy.beauduckboard.entity.qa;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.beauduckboard.entity.MemberEntity;
+import com.ssafy.beauduckboard.entity.TimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "board_qa")
 public class BoardQaEntity extends TimeEntity {
@@ -16,8 +19,11 @@ public class BoardQaEntity extends TimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "member_id")
-    private String memberId;
+
+    @ManyToOne(fetch = FetchType.LAZY) // xtoOne으로 끝나면 fetch를 해준다.
+    @JoinColumn(name = "member_id")
+    private MemberEntity memberEntity;
+
     private String writer;
     @Column(name = "is_active")
     private Boolean isActive;
@@ -35,11 +41,11 @@ public class BoardQaEntity extends TimeEntity {
     private List<GalleryQaEntity> galleryList = new ArrayList<>();
 
     @Builder
-    public BoardQaEntity(int id, String memberId, String writer, Boolean isActive,
+    public BoardQaEntity(int id, MemberEntity memberEntity, String writer, Boolean isActive,
                          String title, String content, int count, int likes, List<BoardQaCommentEntity> commentList,
                          List<GalleryQaEntity> galleryList) {
         this.id = id;
-        this.memberId = memberId;
+        this.memberEntity = memberEntity;
         this.writer = writer;
         this.isActive = isActive;
         this.title = title;
