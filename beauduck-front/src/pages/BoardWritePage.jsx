@@ -6,10 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { newInfoBoard, newQaBoard } from '../features/board/BoardSlice';
 import TabButton from '../components/button/TabButton';
 import Button from '../components/button/Button';
+import { useRef } from 'react';
+import ExitModal from '../components/modal/ExitModal';
+import BlackOut from '../components/blackout/BlackOut';
 
 const BoardWritePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const titleRef = useRef();
+  const contentRef = useRef();
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -24,9 +29,19 @@ const BoardWritePage = () => {
     setIsInfo(false);
   };
 
+  const [cantModal, setCantModal] = useState(false);
+
   const { memberId, name } = useSelector((state) => state.member);
 
   const BoardCreate = async () => {
+    if (!title) {
+      titleRef.current.focus();
+      return;
+    }
+    if (!content) {
+      contentRef.current.focus();
+      return;
+    }
     const newBoard = {
       isActive: true,
       title,
@@ -40,12 +55,20 @@ const BoardWritePage = () => {
     if (isInfo) {
       dispatch(newInfoBoard(newBoard)).then((res) => {
         const newBoardId = res.payload;
-        navigate(`/board/info/${newBoardId}`);
+        if (newBoardId !== undefined) {
+          navigate(`/board/info/${newBoardId}`);
+        } else {
+          setCantModal(!cantModal);
+        }
       });
     } else {
       dispatch(newQaBoard(newBoard)).then((res) => {
         const newBoardId = res.payload;
-        navigate(`/board/qna/${newBoardId}`);
+        if (newBoardId !== undefined) {
+          navigate(`/board/qna/${newBoardId}`);
+        } else {
+          setCantModal(!cantModal);
+        }
       });
     }
   };
@@ -77,16 +100,28 @@ const BoardWritePage = () => {
           className="input-title"
           type="text"
           placeholder="제목을 입력해주세요."
+          ref={titleRef}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
           className="input-content"
           placeholder="내용을 입력하세요."
+          ref={contentRef}
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
       </div>
+      {cantModal && (
+        <ExitModal
+          title={'실패'}
+          content={'게시글을 작성할 수 없습니다.'}
+          btnText={'확인'}
+          onClickEvent={() => setCantModal(!cantModal)}
+          xmarkClickEvent={() => setCantModal(!cantModal)}
+        />
+      )}
+      {cantModal && <BlackOut onClickEvent={() => setCantModal(!cantModal)} />}
     </div>
   );
 };
