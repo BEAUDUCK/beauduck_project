@@ -130,7 +130,7 @@ const FacemeshFeature = () => {
           width: 640,
           hegiht: 480,
         }}
-        className="webcam"
+        className="canvas"
       />
     </div>
   );
