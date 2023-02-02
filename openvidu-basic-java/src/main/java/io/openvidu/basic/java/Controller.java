@@ -45,8 +45,17 @@ public class Controller {
 	@PostMapping("/api/sessions")
 	public ResponseEntity<String> initializeSession(@RequestBody(required = false) Map<String, Object> params)
 			throws OpenViduJavaClientException, OpenViduHttpException {
+
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println("initializeSession ");
+		System.out.println("params = " + params.toString());
+
 		SessionProperties properties = SessionProperties.fromJson(params).build();
+		System.out.println("properties = " + properties.toString());
+
 		Session session = openvidu.createSession(properties);
+		System.out.println("session = " + session.toString());
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return new ResponseEntity<>(session.getSessionId(), HttpStatus.OK);
 	}
 
@@ -59,12 +68,26 @@ public class Controller {
 	public ResponseEntity<String> createConnection(@PathVariable("sessionId") String sessionId,
 			@RequestBody(required = false) Map<String, Object> params)
 			throws OpenViduJavaClientException, OpenViduHttpException {
+
+
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		System.out.println("createConnection");
+		System.out.println("sessionId = " + sessionId);
+		System.out.println("params = " + params.toString());
 		Session session = openvidu.getActiveSession(sessionId);
+
 		if (session == null) {
+			System.out.println("session 없음");
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+		System.out.println("session = " + session.toString());
+
 		ConnectionProperties properties = ConnectionProperties.fromJson(params).build();
+		System.out.println("properties = " + properties.toString());
+
 		Connection connection = session.createConnection(properties);
+		System.out.println("connection = " + connection.toString());
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		return new ResponseEntity<>(connection.getToken(), HttpStatus.OK);
 	}
 
