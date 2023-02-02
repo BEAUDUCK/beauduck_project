@@ -4,8 +4,6 @@ import { newInfoComment } from './BoardSlice';
 
 const BoardCommentCreate = ({ boardId }) => {
   const dispatch = useDispatch();
-  // store에서 현재 유저 가져오기 (useSelector)
-  // const nickname = useSelector();
 
   const [comment, setComment] = useState('');
 
@@ -14,6 +12,8 @@ const BoardCommentCreate = ({ boardId }) => {
   const CommentSubmit = () => {
     const newComment = {
       active: true,
+      // boardEntity: {
+      // },
       boardId,
       memberEntity: {
         memberId,
@@ -21,6 +21,7 @@ const BoardCommentCreate = ({ boardId }) => {
       content: comment,
       writer: name,
     };
+    console.log(newComment);
 
     setComment('');
     dispatch(newInfoComment(newComment));
