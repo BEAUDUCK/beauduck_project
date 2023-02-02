@@ -46,7 +46,7 @@ public class BoardQaController {
 
 
     @ApiOperation(value = "질문 게시글 수정", notes = "질문 게시글의 id값을 받고 수정한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-    @PatchMapping("/{boardId}")
+    @PutMapping("/{boardId}")
     public ResponseEntity<?> update(@ApiParam(value = "board_id", required = true, example="10") @PathVariable("boardId") int  id,
                                         @ApiParam(value = "BoardQaRequestDto", required = true) @RequestBody BoardQaRequestDto request){
         boolean result = boardQaService.update(id, request);

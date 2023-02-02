@@ -36,7 +36,7 @@ public class BoardQaCommentController {
 
 
     @ApiOperation(value = "질문 게시글 댓글 수정", notes = "게시글의 id값을 받고 수정한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-    @PatchMapping("/{commentId}")
+    @PutMapping("/{commentId}")
     public ResponseEntity<?> update(@ApiParam(value = "comment_id", required = true, example="10") @PathVariable("commentId") int  id,
                                            @ApiParam(value = "CommentQaRequestDto", required = true) @RequestBody BoardQaCommentRequestDto request){
         boolean result = boardQaCommentService.update(id, request);

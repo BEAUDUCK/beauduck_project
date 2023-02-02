@@ -43,7 +43,7 @@ public class BoardInfoCommentController {
     }
 
     @ApiOperation(value = "게시판 댓글 수정", notes = "댓글 내용을 수정한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-    @PatchMapping("/{commentId}")
+    @PutMapping("/{commentId}")
     public ResponseEntity<String> update(@ApiParam(value = "int(comment_id)", required = true, example = "3") @PathVariable int commentId, @ApiParam(value = "BoardInfoRequestDto", required = true) @RequestBody BoardInfoCommentRequestDto dto) {
         if(service.update(commentId, dto.getContent())) {
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
