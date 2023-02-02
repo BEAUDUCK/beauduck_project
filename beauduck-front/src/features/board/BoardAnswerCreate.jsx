@@ -11,7 +11,9 @@ const BoardAnswerCreate = ({ boardId }) => {
 
   const AnswerSubmit = () => {
     const newAnswer = {
-      boardId,
+      boardQaEntity: {
+        id: boardId,
+      },
       memberEntity: {
         memberId,
       },

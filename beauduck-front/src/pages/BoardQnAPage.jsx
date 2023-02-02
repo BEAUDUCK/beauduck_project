@@ -130,7 +130,7 @@ const BoardQnAPage = () => {
           )}
         </div>
       </div>
-      <BoardAnswerList commentList={commentList} />
+      <BoardAnswerList commentList={commentList} boardId={id} />
       <BoardAnswerCreate boardId={id} />
     </div>
   );

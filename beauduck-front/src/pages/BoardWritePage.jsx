@@ -28,8 +28,8 @@ const BoardWritePage = () => {
 
   const BoardCreate = async () => {
     const newBoard = {
-      isActive: true,
-
+      active: true,
+      // active 와 is_active...
       title,
       memberEntity: {
         memberId,

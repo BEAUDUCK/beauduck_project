@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
 import { removeQaAnswer, updateQaAnswer } from './BoardSlice';
 
-const BoardAnswerListItem = ({ answer }) => {
+const BoardAnswerListItem = ({ answer, boardId }) => {
   const dispatch = useDispatch();
 
   const [newAnswer, setNewAnswer] = useState(answer.content);
@@ -11,13 +12,23 @@ const BoardAnswerListItem = ({ answer }) => {
     setIsUpdate(!isUpdate);
     setNewAnswer(answer.content);
   };
+
   const updateAnswer = () => {
-    dispatch(updateQaAnswer(newAnswer, answer.id));
+    const updatePayload = {
+      newAnswer,
+      answerId: answer.id,
+    };
+    dispatch(updateQaAnswer(updatePayload));
   };
 
   const removeAnswer = () => {
-    dispatch(removeQaAnswer(answer.id));
+    const removePayload = {
+      boardId,
+      answerId: answer.id,
+    };
+    dispatch(removeQaAnswer(removePayload));
   };
+
   return (
     <div className={['qna-board', 'qna-answer'].join(' ')}>
       <div className="alpha-mark">A</div>
