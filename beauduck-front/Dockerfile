@@ -1,10 +1,10 @@
 # 가져올 이미지 정의
-FROM alpine:3.16
+FROM node:alpine
 
 ENV NODE_VERSION 18.13.0
 
 # 경로 설정
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # package.json 워킹 디렉토리에 복사
 COPY ./package* /usr/src/app/
@@ -13,7 +13,7 @@ COPY ./package* /usr/src/app/
 RUN npm install
 
 # 현재 디렉토리의 모든 파일을 도커 컨테이너의 워킹 디렉토리에 복사
-COPY . .
+COPY . /usr/src/app/
 
 EXPOSE 3000
 
