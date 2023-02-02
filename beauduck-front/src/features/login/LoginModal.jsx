@@ -3,9 +3,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const LoginModal = () => {
-  const REDIRECT_URI = 'http://localhost:3000/Api/Naver';
-  const CLIENT_ID = 'V5gN96q3kFtGfUK7PUds';
-  const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=STATE_STRING&redirect_uri=${REDIRECT_URI}`;
+  const REDIRECT_URI = "http://i8b306.p.ssafy.io:3000/Api/Naver"
+  const CLIENT_ID = "V5gN96q3kFtGfUK7PUds"
+  const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=STATE_STRING&redirect_uri=${REDIRECT_URI}`
+
 
   return (
     <div className="login-container">
