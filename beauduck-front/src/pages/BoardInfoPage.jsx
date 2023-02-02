@@ -43,8 +43,11 @@ const BoardInfoPage = () => {
       },
       writer: nowBoard.writer,
     };
-    console.log('이전', updatedBoard);
-    dispatch(UpdateInfoBoard({ updatedBoard, id }));
+    const payload = {
+      updatedBoard,
+      boardId: id,
+    };
+    dispatch(UpdateInfoBoard(payload));
     setIsUpdate(!isUpdate);
   };
 
@@ -132,7 +135,7 @@ const BoardInfoPage = () => {
           )}
         </div>
       </div>
-      <BoardCommentList commentList={commentList} />
+      <BoardCommentList commentList={commentList} boardId={id} />
       <BoardCommentCreate boardId={id} />
     </div>
   );

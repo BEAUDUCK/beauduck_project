@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeQaAnswer, updateQaAnswer } from './BoardSlice';
 
 const BoardAnswerListItem = ({ answer, boardId }) => {
   const dispatch = useDispatch();
-
+  const { memberId, name } = useSelector((state) => state.member);
   const [newAnswer, setNewAnswer] = useState(answer.content);
   const [isUpdate, setIsUpdate] = useState(false);
   const isToggleUpdate = () => {
@@ -14,11 +13,23 @@ const BoardAnswerListItem = ({ answer, boardId }) => {
   };
 
   const updateAnswer = () => {
+    const updatedAnswer = {
+      boardQaEntity: {
+        id: boardId,
+      },
+      content: newAnswer,
+      isActive: true,
+      memberEntity: {
+        memberId,
+      },
+      writer: name,
+    };
     const updatePayload = {
-      newAnswer,
+      updatedAnswer,
       answerId: answer.id,
     };
     dispatch(updateQaAnswer(updatePayload));
+    setIsUpdate(!isUpdate);
   };
 
   const removeAnswer = () => {

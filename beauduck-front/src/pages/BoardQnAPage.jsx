@@ -41,7 +41,13 @@ const BoardQnAPage = () => {
       },
       writer: nowBoard.writer,
     };
-    dispatch(updateQaBoard({ updatedBoard, id }));
+
+    const payload = {
+      updatedBoard,
+      boardId: id,
+    };
+
+    dispatch(updateQaBoard(payload));
     setIsUpdate(!isUpdate);
   };
 
@@ -110,9 +116,9 @@ const BoardQnAPage = () => {
         <div className="user-box">
           <button className="img-replace" />
           <div className="user-text">
-            <p>{nowBoard?.memberId}</p>
+            <p>{nowBoard?.writer}</p>
             <div>
-              <span>{nowBoard?.createdDate}</span>
+              <span>{nowBoard?.created_date}</span>
               <span>조회</span>
               <span>{nowBoard?.count}</span>
             </div>

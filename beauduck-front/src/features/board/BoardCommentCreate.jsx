@@ -11,10 +11,10 @@ const BoardCommentCreate = ({ boardId }) => {
 
   const CommentSubmit = () => {
     const newComment = {
-      active: true,
-      // boardEntity: {
-      // },
-      boardId,
+      isActive: true,
+      boardInfoEntity: {
+        id: boardId,
+      },
       memberEntity: {
         memberId,
       },

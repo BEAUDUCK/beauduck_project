@@ -18,36 +18,26 @@ export const getInfoBoard = createAsyncThunk(
   },
 );
 
-// qa 게시판 글 + 댓글 조회
-export const getQaBoard = createAsyncThunk('board/getQaBoard', async (id) => {
-  const board = await client.get(`/board/qa/${id}/`);
-  const comment = await client.get(`/board/qa/comment/${id}/`);
-  return [board.data, comment.data];
-});
-
 // info 게시판 새로운 글 생성
 export const newInfoBoard = createAsyncThunk(
   'board/newInfoBoard',
   async (newBoard) => {
+    console.log('here');
     const res = await client.post('/board/info/', newBoard);
+    console.log('here', res.data);
     return res.data;
   },
 );
 
-// qa 게시판 새로운 글 생성
-export const newQaBoard = createAsyncThunk(
-  'board/newQaBoard',
-  async (newBoard) => {
-    const res = await client.post('/board/qa/', newBoard);
-    return res.data;
-  },
-);
-
-// info 게시판 글 수정 ⭐
+// info 게시판 글 수정
 export const UpdateInfoBoard = createAsyncThunk(
   'board/UpdateInfoBoard',
-  async ({ updatedBoard, id }) => {
-    const res = await client.patch(`/board/info/update/${id}/`, updatedBoard);
+  async (payload) => {
+    await client.put(
+      `/board/info/update/${payload.boardId}/`,
+      payload.updatedBoard,
+    );
+    const res = await client.get(`/board/info/${payload.boardId}/`);
     return res.data;
   },
 );
@@ -66,16 +56,24 @@ export const newInfoComment = createAsyncThunk(
   'board/newInfoComment',
   async (newComment) => {
     await client.post('/board/info/comment/', newComment);
-    const res = await client.get(`/board/info/comment/${newComment.boardId}/`);
+    const res = await client.get(
+      `/board/info/comment/${newComment.boardInfoEntity.id}/`,
+    );
     return res.data;
   },
 );
 
-// info 게시판 댓글 수정 ⭐
+// info 게시판 댓글 수정
 export const updateInfoComment = createAsyncThunk(
   'board/updateInfoComment',
-  async (newComment, id) => {
-    const res = await client.patch(`/board/info/comment/${id}/`, newComment);
+  async (payload) => {
+    await client.put(
+      `/board/info/comment/${payload.commentId}/`,
+      payload.updatedComment,
+    );
+    const res = await client.get(
+      `/board/info/comment/${payload.updatedComment.boardInfoEntity.id}/`,
+    );
     return res.data;
   },
 );
@@ -83,18 +81,35 @@ export const updateInfoComment = createAsyncThunk(
 // info 게시판 댓글 삭제
 export const removeInfoComment = createAsyncThunk(
   'board/removeInfoComment',
-  async (id) => {
-    await client.delete(`/board/info/comment/${id}/`);
-    const res = await client.get(`/board/info/comment/${id}/`);
+  async (payload) => {
+    await client.delete(`/board/info/comment/${payload.commentId}/`);
+    const res = await client.get(`/board/info/comment/${payload.boardId}/`);
     return res.data;
   },
 );
 
-// qa 게시판 글 수정 ⭐
+// qa 게시판 글 + 댓글 조회
+export const getQaBoard = createAsyncThunk('board/getQaBoard', async (id) => {
+  const board = await client.get(`/board/qa/${id}/`);
+  const comment = await client.get(`/board/qa/comment/${id}/`);
+  return [board.data, comment.data];
+});
+
+// qa 게시판 새로운 글 생성
+export const newQaBoard = createAsyncThunk(
+  'board/newQaBoard',
+  async (newBoard) => {
+    const res = await client.post('/board/qa/', newBoard);
+    return res.data;
+  },
+);
+
+// qa 게시판 글 수정
 export const updateQaBoard = createAsyncThunk(
   'board/updateQaBoard',
-  async (newBoard, id) => {
-    const res = await client.patch(`/board/qa/${id}/`, newBoard);
+  async (payload) => {
+    await client.put(`/board/qa/${payload.boardId}/`, payload.updatedBoard);
+    const res = await client.get(`/board/qa/${payload.boardId}/`);
     return res.data;
   },
 );
@@ -124,9 +139,12 @@ export const newQaAnswer = createAsyncThunk(
 export const updateQaAnswer = createAsyncThunk(
   'board/updateQaAnswer',
   async (payload) => {
-    const res = await client.patch(
+    await client.put(
       `/board/qa/comment/${payload.answerId}/`,
-      payload.newAnswer,
+      payload.updatedAnswer,
+    );
+    const res = await client.get(
+      `/board/qa/comment/${payload.updatedAnswer.boardQaEntity.id}/`,
     );
     return res.data;
   },
@@ -166,21 +184,16 @@ export const boardSlice = createSlice({
       // Info 상세 (댓글 포함)
       .addCase(getInfoBoard.fulfilled, (state, action) => {
         state.nowBoard = action.payload[0];
-        console.log(action.payload);
         state.commentList = action.payload[1];
       })
       // QnA 상세 (댓글 포함)
       .addCase(getQaBoard.fulfilled, (state, action) => {
         state.nowBoard = action.payload[0];
-        console.log('hello', action.payload);
         state.commentList = action.payload[1];
-        // state.nowBoard = action.payload;
       })
       // Info 글 수정
       .addCase(UpdateInfoBoard.fulfilled, (state, action) => {
-        console.log(action.payload);
-        state.nowBoard = action.payload[0];
-        state.infoList = action.payload[1];
+        state.nowBoard = action.payload;
       })
       // Info 댓글 생성 (목록 갱신)
       .addCase(newInfoComment.fulfilled, (state, action) => {
@@ -189,20 +202,20 @@ export const boardSlice = createSlice({
       // QnA 답변 생성 (목록 갱신)
       .addCase(newQaAnswer.fulfilled, (state, action) => {
         state.commentList = action.payload;
-        console.log('하이', action.payload);
       })
+      // Info 댓글 수정 (목록 갱신)
       .addCase(updateInfoComment.fulfilled, (state, action) => {
-        console.log(action.payload);
+        state.commentList = action.payload;
       })
       // Info 댓글 삭제 (목록 갱신)
       .addCase(removeInfoComment.fulfilled, (state, action) => {
         state.commentList = action.payload;
       })
       .addCase(updateQaBoard.fulfilled, (state, action) => {
-        console.log(action.payload);
+        state.nowBoard = action.payload;
       })
       .addCase(updateQaAnswer.fulfilled, (state, action) => {
-        console.log(action.payload);
+        state.commentList = action.payload;
       })
       .addCase(removeQaAnswer.fulfilled, (state, action) => {
         state.commentList = action.payload;

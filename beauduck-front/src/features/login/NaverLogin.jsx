@@ -18,7 +18,6 @@ const NaverLogin = () => {
         `http://i8b306.p.ssafy.io:8080/naver/callback?code=${code}&state=${state}`,
       )
       .then((res) => {
-        console.log(res.data.data);
         // localStorage.setItem('accessToken', response.data.accessToken);
         localStorage.setItem('refreshToken', res.data.data.refreshToken);
         const accessToken = res.data.data.accessToken;
@@ -64,6 +63,9 @@ const NaverLogin = () => {
         console.log(res.data.status);
         removeCookie('accessToken');
         localStorage.removeItem('refreshToken');
+      })
+      .catch((error) => {
+        console.log(error);
       });
     return navigate('/').catch((error) => {
       console.log(error);

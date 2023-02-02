@@ -5,11 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/button/Button';
 import TabButton from '../components/button/TabButton';
 import BoardList from '../features/board/BoardList';
-import {
-  getAllList,
-  getInfoList,
-  getQaList,
-} from '../features/board/BoardSlice';
+import { getAllList } from '../features/board/BoardSlice';
 
 const BoardPage = () => {
   const navigate = useNavigate();
@@ -36,8 +32,6 @@ const BoardPage = () => {
     setIsInfo(false);
     setNowList(qaList);
   };
-
-  // console.log('dd', nowList);
 
   const goToWrite = () => {
     navigate('/board/write');
@@ -69,9 +63,7 @@ const BoardPage = () => {
           </span>
         </span>
       </div>
-      {/* 보내주는 리스트를 다르게 함 */}
       <BoardList allList={isInfo ? infoList : qaList} isInfo={isInfo} />
-      {/* <BoardList allList={nowList} /> */}
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeInfoComment, updateInfoComment } from './BoardSlice';
 
-const BoardCommentListItem = ({ comment }) => {
+const BoardCommentListItem = ({ comment, boardId }) => {
   const dispatch = useDispatch();
-
+  const { memberId, name } = useSelector((state) => state.member);
   const [newComment, setNewComment] = useState(comment?.content);
   const [isUpdate, setIsUpdate] = useState(false);
 
@@ -12,12 +12,34 @@ const BoardCommentListItem = ({ comment }) => {
     setIsUpdate(!isUpdate);
     setNewComment(comment.content);
   };
+
   const updateComment = () => {
-    dispatch(updateInfoComment(newComment, comment.id));
+    const updatedComment = {
+      boardInfoEntity: {
+        id: boardId,
+      },
+      content: newComment,
+      isActive: true,
+      memberEntity: {
+        memberId,
+      },
+      writer: name,
+    };
+
+    const updatePayload = {
+      updatedComment,
+      commentId: comment.id,
+    };
+    dispatch(updateInfoComment(updatePayload));
+    setIsUpdate(!isUpdate);
   };
 
   const removeComment = () => {
-    dispatch(removeInfoComment(comment.id));
+    const removePayload = {
+      boardId,
+      commentId: comment.id,
+    };
+    dispatch(removeInfoComment(removePayload));
   };
 
   return (
