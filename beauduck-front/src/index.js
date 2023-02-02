@@ -5,14 +5,17 @@ import { store } from './store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import { CookiesProvider } from 'react-cookie';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-    <Provider store={store}>
+  <Provider store={store}>
+    <CookiesProvider>
       <App />
-    </Provider>
+    </CookiesProvider>
+  </Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -14,7 +14,7 @@ const BoardListItem = ({ boardItem, idx, isInfo }) => {
     <div className="board-list" onClick={goToWhere}>
       <p>{idx + 1}</p>
       <p className="board-title">{boardItem.title}</p>
-      <p>{boardItem.memberId}</p>
+      <p>{boardItem.writer}</p>
       <p>{boardItem.count}</p>
       <p>{boardItem.likes}</p>
     </div>

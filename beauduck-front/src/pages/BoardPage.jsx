@@ -5,24 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/button/Button';
 import TabButton from '../components/button/TabButton';
 import BoardList from '../features/board/BoardList';
-import { getInfoList, getQaList } from '../features/board/BoardSlice';
+import { getAllList } from '../features/board/BoardSlice';
 
 const BoardPage = () => {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // 처음에 info, qa 둘 다 받아오고 선택적으로 보여주는게 나을 듯
-    // 버튼 바꿀 때마다 요청 보내기엔....
-    dispatch(getInfoList());
-    dispatch(getQaList());
+    dispatch(getAllList());
   }, [dispatch]);
 
-  const { infoList, qaList } = useSelector((state) => ({
-    infoList: state.board.infoList,
-    qaList: state.board.qaList,
-  }));
+  const { infoList, qaList } = useSelector((state) => state.board);
 
   console.log('info', infoList);
   console.log('qa', qaList);
@@ -39,8 +32,6 @@ const BoardPage = () => {
     setIsInfo(false);
     setNowList(qaList);
   };
-
-  // console.log('dd', nowList);
 
   const goToWrite = () => {
     navigate('/board/write');
@@ -72,9 +63,7 @@ const BoardPage = () => {
           </span>
         </span>
       </div>
-      {/* 보내주는 리스트를 다르게 함 */}
       <BoardList allList={isInfo ? infoList : qaList} isInfo={isInfo} />
-      {/* <BoardList allList={nowList} /> */}
     </div>
   );
 };
