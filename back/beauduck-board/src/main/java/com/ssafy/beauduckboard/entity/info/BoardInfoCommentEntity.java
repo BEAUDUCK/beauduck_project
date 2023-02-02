@@ -25,20 +25,21 @@ public class BoardInfoCommentEntity extends TimeEntity {
     private MemberEntity memberEntity;
 
     private String writer;
-    @Column(name = "board_id")
-    private int boardId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private BoardInfoEntity boardInfoEntity;
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
     private String content;
     private int likes;
 
     @Builder
-    public BoardInfoCommentEntity(int id, MemberEntity memberEntity, String writer, int boardId, boolean isActive, String content, int likes) {
+    public BoardInfoCommentEntity(int id, MemberEntity memberEntity, String writer, BoardInfoEntity boardInfoEntity, Boolean isActive, String content, int likes) {
         this.id = id;
         this.memberEntity = memberEntity;
         this.writer = writer;
         this.isActive = isActive;
-        this.boardId = boardId;
+        this.boardInfoEntity = boardInfoEntity;
         this.content = content;
         this.likes = likes;
     }

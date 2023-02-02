@@ -22,14 +22,14 @@ public class BoardInfoEntity extends TimeEntity {
 
         private String writer;
         @Column(name = "is_active")
-        private boolean isActive;
+        private Boolean isActive;
         private String title;
         private String content;
         private int count;
         private int likes;
 
         @Builder
-        public BoardInfoEntity(int id, MemberEntity memberEntity, String writer, boolean isActive, String title, String content, int count, int like) {
+        public BoardInfoEntity(int id, MemberEntity memberEntity, String writer, Boolean isActive, String title, String content, int count, int like) {
                 this.id = id;
                 this.memberEntity = memberEntity;
                 this.writer = writer;

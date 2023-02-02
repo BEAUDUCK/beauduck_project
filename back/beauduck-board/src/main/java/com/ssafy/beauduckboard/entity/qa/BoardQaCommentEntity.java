@@ -25,7 +25,6 @@ public class BoardQaCommentEntity extends TimeEntity {
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 
-
     private String writer;
 
     @ManyToOne(fetch = FetchType.LAZY)
