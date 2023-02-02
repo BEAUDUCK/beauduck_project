@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const LoginModal = () => {
   const REDIRECT_URI = "http://i8b306.p.ssafy.io:3000/Api/Naver"
@@ -9,15 +9,14 @@ const LoginModal = () => {
 
 
   return (
-    <div className='login-container'>
-      <span>
-        LOGIN
-      </span>
+    <div className="login-container">
+      <span>LOGIN</span>
       <a href={NAVER_AUTH_URL}>
-        <img src="images/naver-circle.png"/>Naver
+        <img src="images/naver-circle.png" />
+        Naver
       </a>
     </div>
-  )
+  );
 };
 
 export default LoginModal;
