@@ -28,8 +28,7 @@ const BoardWritePage = () => {
 
   const BoardCreate = async () => {
     const newBoard = {
-      active: true,
-      // active 와 is_active...
+      isActive: true,
       title,
       memberEntity: {
         memberId,
@@ -38,7 +37,6 @@ const BoardWritePage = () => {
       content,
     };
 
-    console.log('newBoard', newBoard);
     if (isInfo) {
       dispatch(newInfoBoard(newBoard)).then((res) => {
         const newBoardId = res.payload;

@@ -5,13 +5,16 @@ import { store } from './store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import { CookiesProvider } from 'react-cookie';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <App />
+    <CookiesProvider>
+      <App />
+    </CookiesProvider>
   </Provider>,
 );
 
