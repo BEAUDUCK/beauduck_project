@@ -47,7 +47,14 @@
 // ------ 새 메이크업 만들기 ----------
 
 .makeup-create-modal {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+    z-index: 993;
+
     width: 500px;
     height: 650px;
 
@@ -156,6 +163,14 @@
             background-color: #F1F1F1;
         }
 
+        .makeup-hr {
+            background-color: rgb(220, 220, 220);
+            width: 380px;
+            margin-bottom: 30px;
+            border-width:1px 0 0 0; 
+            border-color:#fff;
+            border-style:dashed;
+        }
 
         margin-top: 20px;
         margin-bottom: 20px;
@@ -177,12 +192,14 @@
     display: flex;
     justify-content: space-around;
     position: relative;
+    // border-bottom: 1px solid rgb(220, 220, 220);
+    // margin-bottom: 20px;
 
     .plus-mark {
         display: inline-block;
         position: absolute; 
-        left: 85px; 
-        top: 7%;
+        left: 80px; 
+        top: 8px;
         width: 15px;
         height: 15px;
         margin: auto;
@@ -190,18 +207,35 @@
         cursor: pointer;
         z-index: 993;
     }
+
+    .minus-mark {
+        display: inline-block;
+        position: absolute; 
+        left: -10px; 
+        top: 8px;
+        width: 15px;
+        height: 15px;
+        margin: auto;
+        box-sizing: content-box;
+        cursor: pointer;
+        z-index: 992;
+    }
     
 }
 
 .add-main-text {
     display: inline-block;
-    width: 70px;
-    margin-left: 25px;
-    margin-right: 25px;
+    width: 90px;
+    margin-left: 5px;
+    margin-right: 5px;
     font-size: 15px;
     height: 30px;
     line-height: 30px;
     color:#717171;
+}
+
+.sub-replace {
+    width: 290px;
 }
 
 
@@ -211,7 +245,7 @@
     // display: flex;
     // vertical-align: top;
     position: relative;
-    width: 300px;
+    width: 290px;
     margin-bottom: 20px;
 
     .plus-mark-added {

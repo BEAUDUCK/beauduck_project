@@ -5,40 +5,50 @@ import SingleModalExitSurvey from '../features/single/SingleModalExitSurvey';
 const SingleResultPage = () => {
   const downloadCapture = () => {
     html2canvas(document.querySelector('#main_capture')).then((canvas) => {
-      saveAsImg(canvas.toDataURL('image/jpg'), 'lime.jpg');
-      saveInGallery(canvas);
+      const imgUri = canvas.toDataURL('image/jpg');
+      const mainCapture = document.getElementById('main_capture');
+      const capture = document.createElement('img');
+      capture.setAttribute('src', imgUri);
+      capture.setAttribute('alt', 'capture');
+      capture.setAttribute('class', 'captured-img');
+      mainCapture.appendChild(capture);
+      setTimeout(function () {
+        deleteImgElement(mainCapture, capture);
+      }, 3000);
     });
   };
 
-  // 이미지 요소로 저장 -> 갤러리에 사용하던지... 확인용으로 쓰던지
-  const saveInGallery = (canvas) => {
-    const mainCapture = document.getElementById('main_capture');
-    mainCapture.appendChild(canvas);
+  const deleteImgElement = (upper, sub) => {
+    upper.removeChild(sub);
   };
-  // 이미지 파일로 저장 -> 추천 기능에 활용
-  const saveAsImg = (uri, filename) => {
-    const link = document.createElement('a');
-    if (typeof link.download === 'string') {
-      link.href = uri;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      window.open(uri);
-    }
-  };
-
   return (
-    <div className="container">
-      <h1>따라해덕 결과</h1>
-      <div id="main_capture">
-        <Webcam audio={false} screenshotFormat="image/jpeg" />
+    <div className="full-screen">
+      <div className="capture-div">
+        <h1 className="capture-h1">최종 결과</h1>
+        <div id="main_capture" className="main-capture">
+          <Webcam
+            style={{
+              position: 'absolute',
+              marginRight: 'auto',
+              marginLeft: 'auto',
+              left: 0,
+              right: 0,
+              textAlign: 'center',
+              zIndex: 1,
+              width: 640,
+              height: 480,
+            }}
+            audio={false}
+            className="webcam-result"
+            screenshotFormat="image/jpeg"
+          />
+        </div>
+
+        <button id="pick" className="download-btn" onClick={downloadCapture}>
+          저장하기
+        </button>
       </div>
-      <button id="pick" onClick={downloadCapture}>
-        다운로드
-      </button>
-      <SingleModalExitSurvey />
+      {/* <SingleModalExitSurvey /> */}
     </div>
   );
 };
