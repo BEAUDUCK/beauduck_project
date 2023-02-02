@@ -4,23 +4,27 @@ import { newInfoComment } from './BoardSlice';
 
 const BoardCommentCreate = ({ boardId }) => {
   const dispatch = useDispatch();
-  // store에서 현재 유저 가져오기 (useSelector)
-  // const nickname = useSelector();
 
   const [comment, setComment] = useState('');
 
+  const { memberId, name } = useSelector((state) => state.member);
+
   const CommentSubmit = () => {
     const newComment = {
-      boardId,
+      isActive: true,
+      boardInfoEntity: {
+        id: boardId,
+      },
       memberEntity: {
-        memberId: '현재 유저 아이디',
+        memberId,
       },
       content: comment,
-      writer: '현혁',
+      writer: name,
     };
+    console.log(newComment);
 
-    dispatch(newInfoComment(newComment));
     setComment('');
+    dispatch(newInfoComment(newComment));
   };
 
   return (
@@ -30,6 +34,7 @@ const BoardCommentCreate = ({ boardId }) => {
         <textarea
           type="text"
           className="comment-input"
+          value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
         <span onClick={CommentSubmit} className="comment-submit-btn">
