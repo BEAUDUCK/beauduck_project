@@ -10,15 +10,14 @@ const LoginModal = () => {
 
 
   return (
-    <div className='login-container'>
-      <span>
-        LOGIN
-      </span>
+    <div className="login-container">
+      <span>LOGIN</span>
       <a href={NAVER_AUTH_URL}>
-        <img src="images/naver-circle.png"/>Naver
+        <img src="images/naver-circle.png" />
+        Naver
       </a>
     </div>
-  )
+  );
 };
 
 export default LoginModal;

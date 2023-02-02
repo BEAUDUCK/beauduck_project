@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -19,6 +19,10 @@ const BoardInfoPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { nowBoard, commentList } = useSelector((state) => state.board);
+  const { memberId } = useSelector((state) => state.member);
+
+  const titleRef = useRef();
+  const contentRef = useRef();
 
   useEffect(() => {
     dispatch(getInfoBoard(id));
@@ -35,11 +39,20 @@ const BoardInfoPage = () => {
   };
 
   const updateBoard = () => {
+    if (!title) {
+      titleRef.current.focus();
+      return;
+    }
+    if (!content) {
+      contentRef.current.focus();
+      return;
+    }
+
     const updatedBoard = {
       title,
       content,
       memberEntity: {
-        memberId: 'admin',
+        memberId: nowBoard.memberId,
       },
       writer: nowBoard.writer,
     };
@@ -60,7 +73,14 @@ const BoardInfoPage = () => {
     dispatch(RemoveInfoBoard(id));
     navigate('/board'); // board 메인으로 라우팅
   };
+  console.log('d', memberId);
+  console.log(nowBoard.memberId);
 
+  // const [isMine, setIsMine] = useState(false);
+  // if (memberId == nowBoard.memberId) {
+  //   setIsMine(true);
+  // }
+  // console.log(isMine);
   return (
     <div className={['container', 'container-colored'].join(' ')}>
       <div className="info-board">
@@ -71,47 +91,52 @@ const BoardInfoPage = () => {
             <input
               className="board-info-title-input"
               type="text"
+              ref={titleRef}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           )}
         </div>
-        {!isUpdate ? (
-          <Button
-            onClickEvent={onToggleUpdate}
-            text={'수정'}
-            btnStyle={'board-update'}
-          />
-        ) : (
-          <Button
-            onClickEvent={updateBoard}
-            text={'완료'}
-            btnStyle={'board-update'}
-          />
+        {memberId == nowBoard.memberId && (
+          <div>
+            {!isUpdate ? (
+              <Button
+                onClickEvent={onToggleUpdate}
+                text={'수정'}
+                btnStyle={'board-update'}
+              />
+            ) : (
+              <Button
+                onClickEvent={updateBoard}
+                text={'완료'}
+                btnStyle={'board-update'}
+              />
+            )}
+            {!isUpdate ? (
+              <Button
+                onClickEvent={onToggleRemove}
+                text={'삭제'}
+                btnStyle={'board-remove'}
+              />
+            ) : (
+              <Button
+                onClickEvent={onToggleUpdate}
+                text={'취소'}
+                btnStyle={'board-remove'}
+              />
+            )}
+            {isRemove && (
+              <ExitModal
+                title={'정말로 삭제하시겠습니까?'}
+                content={'삭제한 게시글은 되돌릴 수 없습니다.'}
+                btnText={'삭제'}
+                onClickEvent={removeBoard}
+                xmarkClickEvent={onToggleRemove}
+              />
+            )}
+            {isRemove && <BlackOut onClickEvent={onToggleRemove} />}
+          </div>
         )}
-        {!isUpdate ? (
-          <Button
-            onClickEvent={onToggleRemove}
-            text={'삭제'}
-            btnStyle={'board-remove'}
-          />
-        ) : (
-          <Button
-            onClickEvent={onToggleUpdate}
-            text={'취소'}
-            btnStyle={'board-remove'}
-          />
-        )}
-        {isRemove && (
-          <ExitModal
-            title={'정말로 삭제하시겠습니까?'}
-            content={'삭제한 게시글은 되돌릴 수 없습니다.'}
-            btnText={'삭제'}
-            onClickEvent={removeBoard}
-            xmarkClickEvent={onToggleRemove}
-          />
-        )}
-        {isRemove && <BlackOut onClickEvent={onToggleRemove} />}
         <div className="user-box">
           <button className="img-replace" />
           <div className="user-text">
@@ -130,6 +155,7 @@ const BoardInfoPage = () => {
             <textarea
               className="board-content-input"
               value={content}
+              ref={contentRef}
               onChange={(e) => setContent(e.target.value)}
             />
           )}
