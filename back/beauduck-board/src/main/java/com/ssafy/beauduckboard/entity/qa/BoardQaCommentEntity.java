@@ -29,7 +29,7 @@ public class BoardQaCommentEntity extends TimeEntity {
     private String writer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "boardId")
+    @JoinColumn(name = "board_id")
     private BoardQaEntity boardQaEntity;
     @Column(name = "is_active")
     private Boolean isActive;
