@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/logo_original.png';
 import { useState } from 'react';
 import  LoginModal  from '../../features/login/LoginModal'
+import  LogoutModal  from '../../features/login/LogoutModal'
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,6 +12,11 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenModal = () => {
     setIsOpen(!isOpen);
+  };
+
+  const [isOpen2, setIsOpen2] = useState(false);
+  const isOpenModal2 = () => {
+    setIsOpen2(!isOpen2);
   };
 
   return (
@@ -32,12 +38,16 @@ const Header = () => {
           </p>
           <p onClick={isOpenModal}> 
           LOGIN
+          {isOpen && <LoginModal isOpenModal={isOpenModal} />}
           </p>
-          {isOpen && <LoginModal isOpenModal={isOpenModal} />}
           <p>/</p>
-          <p onClick={isOpenModal}> 
+          <p> 
           SIGNUP
-          {isOpen && <LoginModal isOpenModal={isOpenModal} />}
+          </p>
+          <p>/</p>
+          <p onClick={isOpenModal2}> 
+          LOGOUT
+          {isOpen2 && <LogoutModal isOpenModal2={isOpenModal2} />}
           </p>
         </div>
       </div>
