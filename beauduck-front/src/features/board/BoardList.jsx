@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Paging from '../../components/pagination/Paging';
 import BoardListItem from './BoardListItem';
 
@@ -13,8 +12,6 @@ const BoardList = ({ allList, isInfo }) => {
   const [postPerPage] = useState(5);
   const indefOfLastPost = page * postPerPage;
   const indefOfFirstPost = indefOfLastPost - postPerPage;
-
-  console.log('현재', currentPosts);
 
   useEffect(() => {
     setCurrentPosts(allList.slice(indefOfFirstPost, indefOfLastPost));
