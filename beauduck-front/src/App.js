@@ -5,13 +5,14 @@ import Header from './components/header/Header';
 import BoardPage from './pages/BoardPage';
 import BoardWritePage from './pages/BoardWritePage';
 import ConsultingPage from './pages/ConsultingPage';
-import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 import NotFound from './pages/NotFount';
 import ProfilePage from './pages/ProfilePage';
-import SignupPage from './pages/SignupPage';
+import NaverLogin from './features/login/NaverLogin';
 import SinglePage from './pages/SinglePage';
 import TogetherPage from './pages/TogetherPage';
+
+// import { getInfoList, getQaList } from './features/board/BoardSlice';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -33,6 +34,8 @@ import BoardQnAPage from './pages/BoardQnAPage';
 import Footer from './components/footer/Footer';
 import SingleResultPage from './pages/SingleResultPage';
 import SingleModePage from './pages/SingleModePage';
+import RankingPage from './pages/RankingPage';
+import SingupPage from './pages/SignupPage';
 
 library.add(
   faXmark,
@@ -57,10 +60,8 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          {/* <Route 
+            element={<ProtectedRoute token={token} nickname={nickname} />}> */}
           {/* 도와덕 */}
           <Route path="/help" element={<ConsultingPage />} />
           {/* 따라해덕 */}
@@ -75,6 +76,13 @@ function App() {
           <Route path="/board/info/:id" element={<BoardInfoPage />} />
           <Route path="/board/qna/:id" element={<BoardQnAPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          {/* 랭킹 페이지 */}
+          <Route path="/rank" element={<RankingPage />} />
+          {/* </Route> */}
+          <Route path="/Api/Naver" element={<NaverLogin />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/signup" element={<SingupPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />

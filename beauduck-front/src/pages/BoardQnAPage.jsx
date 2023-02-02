@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BlackOut from '../components/blackout/BlackOut';
 import Button from '../components/button/Button';
 import ExitModal from '../components/modal/ExitModal';
@@ -8,7 +8,6 @@ import BoardAnswerCreate from '../features/board/BoardAnswerCreate';
 import BoardAnswerList from '../features/board/BoardAnswerList';
 import {
   getQaBoard,
-  getQaComments,
   removeQaBoard,
   updateQaBoard,
 } from '../features/board/BoardSlice';
@@ -16,39 +15,53 @@ import {
 const BoardQnAPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const { nowBoard } = useSelector((state) => state.nowBoard);
+  const navigate = useNavigate();
+  const { nowBoard, commentList } = useSelector((state) => state.board);
+
+  const titleRef = useRef();
+  const contentRef = useRef();
 
   useEffect(() => {
     dispatch(getQaBoard(id));
-    dispatch(getQaComments(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
-  const testBoard = {
-    id: 1,
-    title: '글1',
-    member_id: 4,
-    content:
-      '내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl내용내용-sosdadkqweofkdl;',
-    count: 4,
-    like: 3,
-    created_at: '2023-01-22 16:54',
-  };
   const [isUpdate, setIsUpdate] = useState(false);
-  const [title, setTitle] = useState(testBoard.title);
-  const [content, setContent] = useState(testBoard.content);
+  const [title, setTitle] = useState(nowBoard.title);
+  const [content, setContent] = useState(nowBoard.content);
+
+  const { memberId } = useSelector((state) => state.member);
 
   const onToggleUpdate = () => {
-    setTitle(testBoard.title);
-    setContent(testBoard.content);
+    setTitle(nowBoard.title);
+    setContent(nowBoard.content);
     setIsUpdate(!isUpdate);
   };
 
   const updateBoard = () => {
+    if (!title) {
+      titleRef.current.focus();
+      return;
+    }
+    if (!content) {
+      contentRef.current.focus();
+      return;
+    }
+
     const updatedBoard = {
       title,
       content,
+      memberEntity: {
+        memberId: nowBoard.memberId,
+      },
+      writer: nowBoard.writer,
     };
-    dispatch(updateQaBoard(updatedBoard, testBoard.id));
+
+    const payload = {
+      updatedBoard,
+      boardId: id,
+    };
+
+    dispatch(updateQaBoard(payload));
     setIsUpdate(!isUpdate);
   };
 
@@ -58,84 +71,92 @@ const BoardQnAPage = () => {
   };
 
   const removeBoard = () => {
-    dispatch(removeQaBoard(testBoard.id));
+    dispatch(removeQaBoard(id));
+    navigate('/board'); // board 메인으로 라우팅
   };
+
   return (
     <div className={['container', 'container-colored'].join(' ')}>
       <div className="qna-board">
         <div className="alpha-mark">Q</div>
         <div className="board-qa-title">
           {!isUpdate ? (
-            <h1>{testBoard.title}</h1>
+            <h1>{nowBoard?.title}</h1>
           ) : (
             <input
               className="board-qa-title-input"
               type="text"
+              ref={titleRef}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           )}
         </div>
-        {!isUpdate ? (
-          <Button
-            onClickEvent={onToggleUpdate}
-            text={'수정'}
-            btnStyle={'board-update'}
-          />
-        ) : (
-          <Button
-            onClickEvent={updateBoard}
-            text={'완료'}
-            btnStyle={'board-update'}
-          />
-        )}
-        {!isUpdate ? (
-          <Button
-            onClickEvent={onToggleRemove}
-            text={'삭제'}
-            btnStyle={'board-remove'}
-          />
-        ) : (
-          <Button
-            onClickEvent={onToggleUpdate}
-            text={'취소'}
-            btnStyle={'board-remove'}
-          />
-        )}
-        {isRemove && (
-          <ExitModal
-            title={'정말로 삭제하시겠습니까?'}
-            content={'삭제한 게시글은 되돌릴 수 없습니다.'}
-            btnText={'삭제'}
-            onClickEvent={removeBoard}
-            xmarkClickEvent={onToggleRemove}
-          />
+        {memberId === nowBoard.memberId && (
+          <div>
+            {!isUpdate ? (
+              <Button
+                onClickEvent={onToggleUpdate}
+                text={'수정'}
+                btnStyle={'board-update'}
+              />
+            ) : (
+              <Button
+                onClickEvent={updateBoard}
+                text={'완료'}
+                btnStyle={'board-update'}
+              />
+            )}
+            {!isUpdate ? (
+              <Button
+                onClickEvent={onToggleRemove}
+                text={'삭제'}
+                btnStyle={'board-remove'}
+              />
+            ) : (
+              <Button
+                onClickEvent={onToggleUpdate}
+                text={'취소'}
+                btnStyle={'board-remove'}
+              />
+            )}
+            {isRemove && (
+              <ExitModal
+                title={'정말로 삭제하시겠습니까?'}
+                content={'삭제한 게시글은 되돌릴 수 없습니다.'}
+                btnText={'삭제'}
+                onClickEvent={removeBoard}
+                xmarkClickEvent={onToggleRemove}
+              />
+            )}
+          </div>
         )}
         {isRemove && <BlackOut onClickEvent={onToggleRemove} />}
         <div className="user-box">
           <button className="img-replace" />
           <div className="user-text">
-            <p>{testBoard.member_id}</p>
+            <p>{nowBoard?.writer}</p>
             <div>
-              <span>{testBoard.created_at}</span>
+              <span>{nowBoard?.created_date}</span>
               <span>조회</span>
-              <span>{testBoard.count}</span>
+              <span>{nowBoard?.count}</span>
             </div>
           </div>
         </div>
         <div className="board-content">
           {!isUpdate ? (
-            <p>{testBoard.content}</p>
+            <p>{nowBoard?.content}</p>
           ) : (
             <textarea
               className="board-qa-content-input"
               value={content}
+              ref={contentRef}
               onChange={(e) => setContent(e.target.value)}
             />
           )}
         </div>
       </div>
-      <BoardAnswerList />
+      <BoardAnswerList commentList={commentList} boardId={id} />
       <BoardAnswerCreate boardId={id} />
     </div>
   );
