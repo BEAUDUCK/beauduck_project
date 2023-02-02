@@ -14,8 +14,9 @@ const NaverLogin = () => {
       axios
         .get(`http://i8b306.p.ssafy.io:8080/naver/callback?code=${code}&state=${state}`)
         .then((res) => {
+          console.log('시작_확인용');
           console.log(res.data.data);
-          localStorage.setItem('refreshToken', res.data.data.refreshToken);
+          localStorage.setItem('refreshToken', res.data.refreshToken);
           const accessToken = res.data.data.accessToken;
           const expireDate = new Date();
           expireDate.setMinutes(expireDate.getMinutes());
@@ -34,6 +35,7 @@ const NaverLogin = () => {
           navigate('/signup')
         )
           .catch((error) => {
+            console.log('에러_확인용')
             console.log(error);
           });  
         };
@@ -44,27 +46,30 @@ const NaverLogin = () => {
           axios
             .get(`http://i8b306.p.ssafy.io:8080/naver/login?accessToken=${accessToken}`)
             .then((res) => {
+            console.log('시작2_확인용')
             console.log(res.data.data);
             })
+            .catch((error) => {
+              console.log('에러_확인용')
+              console.log(error);
+            });
+        };
+        const Logout = async (accessToken) => {
+          axios
+            .get(`http://i8b306.p.ssafy.io:8080/naver/logout?accessToken=${accessToken}`)
+            .then((res) => {
+            console.log('시작')
+            console.log(res.data.status);
+            removeCookie('accessToken');
+            localStorage.removeItem('refreshToken');
+            })
+            return(
+              navigate('/'))
+            
             .catch((error) => {
               console.log(error);
             });
         };
-        // const Logout = async (accessToken) => {
-        //   axios
-        //     .get(`http://i8b306.p.ssafy.io:8080/naver/logout?accessToken=${accessToken}`)
-        //     .then((res) => {
-        //     console.log(res.data.status);
-        //     removeCookie('accessToken');
-        //     localStorage.removeItem('refreshToken');
-        //     })
-        //     return(
-        //       navigate('/'))
-            
-        //     .catch((error) => {
-        //       console.log(error);
-        //     });
-        // };
         
 
       useEffect(() => {
