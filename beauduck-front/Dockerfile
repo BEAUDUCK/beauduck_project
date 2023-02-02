@@ -1,5 +1,5 @@
 # 가져올 이미지 정의
-FROM alpine:3.16
+FROM node:alpine
 
 ENV NODE_VERSION 18.13.0
 
