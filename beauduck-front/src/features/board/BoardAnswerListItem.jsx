@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeQaAnswer, updateQaAnswer } from './BoardSlice';
 
@@ -12,7 +12,13 @@ const BoardAnswerListItem = ({ answer, boardId }) => {
     setNewAnswer(answer.content);
   };
 
+  const answerRef = useRef();
+
   const updateAnswer = () => {
+    if (!newAnswer) {
+      answerRef.current.focus();
+    }
+
     const updatedAnswer = {
       boardQaEntity: {
         id: boardId,
@@ -81,6 +87,7 @@ const BoardAnswerListItem = ({ answer, boardId }) => {
           <textarea
             className="answer-update-input"
             value={newAnswer}
+            ref={answerRef}
             onChange={(e) => setNewAnswer(e.target.value)}
           />
         )}
