@@ -1,0 +1,78 @@
+.RankingPage {
+
+  .ranking-container {
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+
+  .main-logo {
+    width: 500px;
+    height: 500px;
+  }
+  
+  .ranking-title {
+    margin-top: 4rem ;
+    margin-left: 0;
+  }
+
+  .ranking-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    vertical-align: center;
+    border-radius: 10px;
+    width: 100%;
+    margin: 15px 0px 15px;
+    box-shadow: 3px 3px gray;
+    height: 30px;
+
+    div {
+      width: 25%;
+    }
+
+  }
+
+  .ranking-others {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin: 15px 0px 15px;
+    border-radius: 10px;
+    box-shadow: 3px 3px gray;
+    height: 30px;
+
+    div {
+      width: 100px;
+    }
+
+  }
+
+  .my-ranking {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 3px 3px gray;
+
+    .my-ranking-item {
+      width: 50%;
+      display: flex;
+      justify-content: space-evenly;
+
+      div {
+        text-align: center;
+      }
+
+    }
+
+  }
+
+
+}
+
