@@ -15,11 +15,10 @@ const NaverLogin = () => {
         .get(`http://i8b306.p.ssafy.io:8080/naver/callback?code=${code}&state=${state}`)
         .then((res) => {
           console.log(res.data.data);
-          // localStorage.setItem('accessToken', response.data.accessToken);
-          localStorage.setItem('refreshToken', res.data.refreshToken);
+          localStorage.setItem('refreshToken', res.data.data.refreshToken);
           const accessToken = res.data.data.accessToken;
           const expireDate = new Date();
-          expireDate.setMinutes(expireDate.getMinutes() + 10);
+          expireDate.setMinutes(expireDate.getMinutes());
           setCookie(
             'accessToken',
             {accessToken},
@@ -51,21 +50,21 @@ const NaverLogin = () => {
               console.log(error);
             });
         };
-        const Logout = async (accessToken) => {
-          axios
-            .get(`http://i8b306.p.ssafy.io:8080/naver/logout?accessToken=${accessToken}`)
-            .then((res) => {
-            console.log(res.data.status);
-            removeCookie('accessToken');
-            localStorage.removeItem('refreshToken');
-            })
-            return(
-              navigate('/'))
+        // const Logout = async (accessToken) => {
+        //   axios
+        //     .get(`http://i8b306.p.ssafy.io:8080/naver/logout?accessToken=${accessToken}`)
+        //     .then((res) => {
+        //     console.log(res.data.status);
+        //     removeCookie('accessToken');
+        //     localStorage.removeItem('refreshToken');
+        //     })
+        //     return(
+        //       navigate('/'))
             
-            .catch((error) => {
-              console.log(error);
-            });
-        };
+        //     .catch((error) => {
+        //       console.log(error);
+        //     });
+        // };
         
 
       useEffect(() => {
