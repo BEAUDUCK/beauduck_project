@@ -1,16 +1,5 @@
 import axios from 'axios';
-
-const getCookie = (cookie_name) => {
-  const val = document.cookie.split(';');
-  for (let i = 0; i < val.length; i++) {
-    let x = val[i].substr(0, val[i].indexOf('='));
-    const y = val[i].substr(val[i].indexOf('=') + 1);
-    x = x.replace(/^\s+|\s+$/g, '');
-    if (x === cookie_name) {
-      return unescape(y);
-    }
-  }
-};
+import { getCookie } from './cookie';
 
 const REACT_APP_BASE_URL = 'http://3.38.169.2:8081';
 const client = axios.create({
@@ -24,8 +13,9 @@ const client = axios.create({
 client.interceptors.request.use(
   (config) => {
     // 요청을 보내기 전에 수행할 일
-    // config.headers['accessToken'] = getCookie('accessToken');
-    // config.headers['refreshToken'] = localStorage.getItem('refreshToken');
+    config.headers['Authorization'] = getCookie('accessToken');
+    config.headers['accessToken'] = getCookie('accessToken');
+    config.headers['refreshToken'] = localStorage.getItem('refreshToken');
     return config;
   },
   (error) => {

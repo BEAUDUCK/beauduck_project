@@ -1,12 +1,14 @@
 import axios from 'axios';
-import { useCookies } from 'react-cookie'
-import { useState, useEffect } from 'react'
-import { useNavigate  } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getMemberId } from './MemberSlice';
 
 const NaverLogin = () => {
-
-  const code = new URL(window.location.href).searchParams.get("code");
-  const state = new URL(window.location.href).searchParams.get("state");
+  const dispatch = useDispatch();
+  const code = new URL(window.location.href).searchParams.get('code');
+  const state = new URL(window.location.href).searchParams.get('state');
   const [cookies, setCookie, removeCookie] = useCookies(['cookie_name']);
 
   const navigate = useNavigate();
@@ -70,17 +72,13 @@ const NaverLogin = () => {
               console.log(error);
             });
         };
-        
 
-      useEffect(() => {
-        getToken();
-      }, []);
 
-      return (
-        <div>
-      
-        </div>
-        )
-      };
+  useEffect(() => {
+    getToken();
+  }, []);
+
+  return <div></div>;
+};
 
 export default NaverLogin;
