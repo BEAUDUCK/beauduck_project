@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { newQaAnswer } from './BoardSlice';
 
 const BoardAnswerCreate = ({ boardId }) => {
@@ -7,11 +7,19 @@ const BoardAnswerCreate = ({ boardId }) => {
 
   const [answer, setAnswer] = useState('');
 
+  const { memberId, name } = useSelector((state) => state.member);
+
   const AnswerSubmit = () => {
     const newAnswer = {
-      board_id: boardId,
-      member_id: '현재 유저 아이디',
+      boardQaEntity: {
+        id: boardId,
+      },
+      memberEntity: {
+        memberId,
+      },
       content: answer,
+      isActive: true,
+      writer: name,
     };
 
     dispatch(newQaAnswer(newAnswer));
@@ -24,6 +32,7 @@ const BoardAnswerCreate = ({ boardId }) => {
       <textarea
         type="text"
         className="answer-input"
+        value={answer}
         onChange={(e) => setAnswer(e.target.value)}
       />
       <h5 className="answer-submit" onClick={AnswerSubmit}>
