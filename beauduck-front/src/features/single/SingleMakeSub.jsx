@@ -9,6 +9,7 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
 
   const subRef = useRef();
   const contentRef = useRef();
+  const imgRef = useRef();
 
   const [step, setStep] = useState('');
   const [content, setContent] = useState('');
@@ -48,12 +49,26 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
       contentRef.current.focus();
       return;
     }
+
     const subData = {
       step,
       content,
       colorCode: color,
       img,
     };
+
+    imgRef.current.value = '';
+
+    // const file = document.getElementById('file');
+    // console.log(file);
+    // document.getElementById('file').select();
+    // document.selection.clear();
+    // file.reset();
+    // file.select();
+    // console.log(file.select());
+    // document.selection.clear();
+    // document.execCommand('Delete');
+    console.log('s');
 
     const idx = makeupMiddleList.push(subData) - 1;
 
@@ -101,6 +116,7 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     setContent('');
     setColor('');
     setImg('');
+    imgRef.current.value = '';
   };
 
   // 수정할 때 폼에 기존 데이터 넣어주기
@@ -109,6 +125,8 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     setIsUpdate(true);
     setIdx(idx);
 
+    // imgRef.current.value = img;
+    // console.log(img);
     setStep(subData.step);
     setContent(subData.content);
     setColor(subData.colorCode);
@@ -131,65 +149,83 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     setContent('');
     setColor('');
     setImg('');
+    imgRef.current.value = '';
   };
 
   return (
     <div className="sub-div">
       <div id="sub-sequence">
-        {main === 'skin' && <div id="sub-skin"></div>}
-        {main === 'eyebrow' && <div id="sub-eyebrow"></div>}
-        {main === 'eye' && <div id="sub-eye"></div>}
-        {main === 'conture' && <div id="sub-conture"></div>}
-        {main === 'lip' && <div id="sub-lip"></div>}
+        {main === 'skin' && <div id="sub-skin" className="sub-list"></div>}
+        {main === 'eyebrow' && (
+          <div id="sub-eyebrow" className="sub-list"></div>
+        )}
+        {main === 'eye' && <div id="sub-eye" className="sub-list"></div>}
+        {main === 'conture' && (
+          <div id="sub-conture" className="sub-list"></div>
+        )}
+        {main === 'lip' && <div id="sub-lip" className="sub-list"></div>}
       </div>
       <div className="sub-form">
-        <form>
-          <div className="sub-div-first">
-            <select
-              ref={subRef}
-              value={step}
-              onChange={(e) => setStep(e.target.value)}
-            >
-              {renderingOption()}
-            </select>
-            {color_course.includes(step) && (
-              <div>
-                <FontAwesomeIcon
-                  icon="fa-solid fa-droplet"
-                  className="selected-color"
-                  style={{ color: color }}
-                />
-                <img
-                  src={colorSelector}
-                  alt="컬러"
-                  className="color-selector"
-                  onClick={() => setOnToggleColor(!onToggleColor)}
-                />
-              </div>
-            )}
-            {onToggleColor && <Color propFunction={colorChange} />}
-          </div>
-          <textarea
-            ref={contentRef}
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="add-sub-text"
-            placeholder="해당 과정에 대한 설명을 적어주세요"
-          />
-          <input
-            type="file"
-            id="file"
-            accept="image/*"
-            onChange={(e) => setImg(e.target.files[0])}
-          />
-        </form>
+        <div className="sub-div-first">
+          <select
+            ref={subRef}
+            value={step}
+            onChange={(e) => setStep(e.target.value)}
+          >
+            {renderingOption()}
+          </select>
+          {color_course.includes(step) && (
+            <div>
+              <FontAwesomeIcon
+                icon="fa-solid fa-droplet"
+                className="selected-color"
+                style={{ color: color }}
+              />
+              <img
+                src={colorSelector}
+                alt="컬러"
+                className="color-selector"
+                onClick={() => setOnToggleColor(!onToggleColor)}
+              />
+            </div>
+          )}
+          {onToggleColor && <Color propFunction={colorChange} />}
+        </div>
+        <textarea
+          ref={contentRef}
+          type="text"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          className="add-sub-text"
+          placeholder="해당 과정에 대한 설명을 적어주세요"
+        />
+        <input
+          type="file"
+          id="file"
+          ref={imgRef}
+          accept="image/*"
+          onChange={(e) => setImg(e.target.files[0])}
+        />
         {!isUpdate ? (
-          <button onClick={submitSubMakeup}>OK</button>
+          <button type="button" className="ok-btn" onClick={submitSubMakeup}>
+            완료
+          </button>
         ) : (
           <>
-            <button onClick={updateSubMakeup}>수정</button>
-            <button onClick={removeSubMakeup}>삭제</button>
+            <button
+              type="button"
+              className="update-btn"
+              onClick={updateSubMakeup}
+            >
+              수정
+            </button>
+            <button
+              type="button"
+              className="remove-btn"
+              onClick={removeSubMakeup}
+            >
+              삭제
+            </button>
           </>
         )}
       </div>
