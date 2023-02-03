@@ -1,15 +1,18 @@
 import './Single.style.scss';
 import Banner from '../components/banner/Banner';
-import SingleList from '../features/single/SingleList';
-import SingleModalCreate from '../features/single/SingleModalCreate ';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getMakeupList, recommendMakeup } from '../features/single/SingleSlice';
-import { useState } from 'react';
-import SingleModalRecommend from '../features/single/SingleModalRecommend';
-import BlackOut from '../components/blackout/BlackOut';
-import SingelModalNoRecommend from '../features/single/SingleModalNoRecommend';
 import Button from '../components/button/Button';
+import BlackOut from '../components/blackout/BlackOut';
+import SingleList from '../features/single/SingleList';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import {
+  getMakeupList,
+  recommendMakeup,
+  rejectedMakeup,
+} from '../features/single/SingleSlice';
+import SingleModalRecommend from '../features/single/SingleModalRecommend';
+import SingelModalNoRecommend from '../features/single/SingleModalNoRecommend';
+import SingleMake from '../features/single/SingleMake';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
@@ -29,9 +32,9 @@ const SinglePage = () => {
 
   // 새로운 메이크업 만들기
   const [isMake, setIsMake] = useState(false);
-
   const onToggleMake = () => {
     setIsMake(!isMake);
+    dispatch(rejectedMakeup());
   };
 
   const makeupList = [
@@ -94,9 +97,9 @@ const SinglePage = () => {
         <h2 className="single-h2">인기 메이크업</h2>
         <hr className="single-hr" />
         <Button text={'만들기'} onClickEvent={onToggleMake} />
-        <SingleList modeList={makeupList} />
-        {isMake && <SingleModalCreate onToggleMake={onToggleMake} />}
+        {isMake && <SingleMake onToggleMake={onToggleMake} />}
         {isMake && <BlackOut onClickEvent={onToggleMake} />}
+        <SingleList modeList={makeupList} />
       </div>
     </>
   );
