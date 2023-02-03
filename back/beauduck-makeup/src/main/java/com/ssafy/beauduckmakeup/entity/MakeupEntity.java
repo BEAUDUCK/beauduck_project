@@ -15,7 +15,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "makeup")
-
 public class MakeupEntity{
 
     @Id
@@ -45,15 +44,15 @@ public class MakeupEntity{
         this.count = count;
     }
 
-    public boolean updateScore(float score) {
-        this.score = (this.score * this.count + score) / (this.count+1);
-        this.count += 1;
-        return true;
-    }
-
-    public boolean updateCount(int count) {
+    public boolean updateScore(float score, int count) {
+        this.score = score;
         this.count = count;
         return true;
     }
+
+//    public boolean updateCount(int count) {
+//        this.count += 1;
+//        return true;
+//    }
 
 }

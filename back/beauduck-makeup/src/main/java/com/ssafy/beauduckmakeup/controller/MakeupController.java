@@ -1,7 +1,5 @@
 package com.ssafy.beauduckmakeup.controller;
-import com.ssafy.beauduckmakeup.dto.MakeupExecuteRequestDto;
-import com.ssafy.beauduckmakeup.dto.MakeupRequestDto;
-import com.ssafy.beauduckmakeup.dto.MakeupResponseDto;
+import com.ssafy.beauduckmakeup.dto.*;
 import com.ssafy.beauduckmakeup.service.MakeupService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +23,7 @@ public class MakeupController {
 
     @ApiOperation(value = "메이크업 저장", notes = "새로운 메이크업 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
     @PostMapping("/")
-    public ResponseEntity<String> write(@ApiParam(value = "BoardInfoRequestDto", required = true) @RequestBody MakeupRequestDto dto){
+    public ResponseEntity<String> write(@ApiParam(value = "MakeupRequestDto", required = true) @RequestBody MakeupRequestDto dto){
         if(service.insert(dto)) {
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
         }
@@ -60,6 +58,23 @@ public class MakeupController {
             return new ResponseEntity<MakeupResponseDto>(makeup, HttpStatus.OK);
         }
         return new ResponseEntity<MakeupResponseDto>(makeup, HttpStatus.NO_CONTENT);
+    }
+
+    @ApiOperation(value = "메이크업 평가 및 나가기", notes = "메이크업을 평가하고 이를 바탕으로 메이크업 점수를 갱신한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
+    @PatchMapping("/result-score")
+    public ResponseEntity<String> updateScore(@ApiParam(value = "MakeupScoreRequestDto", required = true) @RequestBody MakeupScoreRequestDto dto) {
+        if(service.updateScore(dto.getId(), dto.getScore()))
+            return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+        return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
+    }
+
+    @ApiOperation(value = "최근 메이크업 저장", notes = "유저가 실행한 메이크업을 최근 메이크업 테이블에 저장 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
+    @PostMapping("/recent")
+    public ResponseEntity<String> addRecentMakeup(@ApiParam(value = "RecentMakeupRequestDto", required = true) @RequestBody RecentMakeupRequestDto dto){
+        if(service.addRecentMakeup(dto)) {
+            return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+        }
+        return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
     }
 
 

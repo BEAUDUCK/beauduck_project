@@ -3,9 +3,11 @@ import com.ssafy.beauduckmakeup.dto.*;
 import com.ssafy.beauduckmakeup.entity.MakeupEntity;
 import com.ssafy.beauduckmakeup.entity.MakeupMainEntity;
 import com.ssafy.beauduckmakeup.entity.MakeupMiddleEntity;
+import com.ssafy.beauduckmakeup.entity.RecentMakeupEntity;
 import com.ssafy.beauduckmakeup.repository.MakeupMainRepository;
 import com.ssafy.beauduckmakeup.repository.MakeupMiddleRepository;
 import com.ssafy.beauduckmakeup.repository.MakeupRepository;
+import com.ssafy.beauduckmakeup.repository.RecentMakeupRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class MakeupService {
     private MakeupMainRepository makeupMainRepository;
     @Autowired
     private MakeupMiddleRepository makeupMiddleRepository;
+    @Autowired
+    private RecentMakeupRepository recentMakeupRepository;
 
     public boolean insert(MakeupRequestDto dto) {
         //Makeup 테이블에 데이터 저장
@@ -132,10 +136,21 @@ public class MakeupService {
 
         return mainDto;
     }
-
+    @Transactional
     public boolean updateScore(int id, float score) {
         Optional<MakeupEntity> makeupEntity = makeupRepository.findById(id);
-        return makeupEntity.get().updateScore(score);
+        MakeupEntity makeup = makeupEntity.get();
+
+        int newCount = makeup.getCount()+1;
+        float newScore = ( makeup.getScore() * makeup.getCount() + score ) / newCount;
+        return makeup.updateScore(newScore, newCount);
     }
-    
+
+    public boolean addRecentMakeup(RecentMakeupRequestDto dto) {
+        RecentMakeupEntity makeup = recentMakeupRepository.save(dto.toEntity());
+        if(makeup==null)
+            return false;
+        return true;
+    }
+
 }
