@@ -22,7 +22,7 @@ public class MemberGalleryEntity {
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 
     @Column(name = "is_active")

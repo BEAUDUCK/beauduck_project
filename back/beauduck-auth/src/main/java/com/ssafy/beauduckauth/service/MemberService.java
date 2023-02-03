@@ -150,7 +150,7 @@ public class MemberService {
         MemberEntity memberEntity = memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("해당 회원이 존재하지 않습니다."));
 
-        List<MemberGalleryEntity> memberGalleryEntityList = memberGalleryRepository.findAllByMemberEntityIAndIsActiveTrue(memberEntity);
+        List<MemberGalleryEntity> memberGalleryEntityList = memberGalleryRepository.findAllByMemberEntityAndIsActiveTrue(memberEntity);
 
         List<GalleryResponseDto> galleryResponseDtoList = new ArrayList<>();
         for (MemberGalleryEntity memberGalleryEntity : memberGalleryEntityList) {
