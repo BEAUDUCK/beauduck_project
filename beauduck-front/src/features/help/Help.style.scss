@@ -1,26 +1,41 @@
-.consulting-div {
-  // border: 1px solid gray;
-  border-radius: 5px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-top: 10px;
-  // display: grid;
-  height: 120px;
-  background-color: #fdf8e7;
+.consulting-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
 
-  .consulting-first {
-    // grid-column-start: 1;
-    // grid-column-end: 2;
-    display: inline-block;
-    width: 30%;
+  .consulting-list-item {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+
+    .consulting-list-item-child {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid green;
+      width: 60%;
+      height: 150px;
+      margin-bottom: 50px;
+      border-radius: 50px;
+
+      .consulting-list-item-color {
+        border-bottom: 1px solid green;
+        height: 50%;
+      }
+
+      .consulting-list-item-title {
+        height: 50%;
+      }
+
+    }
+
   }
 
-  .consulting-second {
-    // grid-column-start: 2;
-    // grid-column-end: 4;
-    display: inline-block;
-    width: 70%;
-  }
 }
 
 // 컨설팅 방 생성하기 모달
