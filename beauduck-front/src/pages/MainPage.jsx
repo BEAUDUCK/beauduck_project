@@ -5,7 +5,9 @@ const MainPage = () => {
   return (
     <>
       <div className="main-ban">
-        <img className="main-logo" src={logo} alt="logo" />
+        <img className="main-logo" 
+        src={logo} 
+        alt="logo" />
       </div>
     </>
   );
