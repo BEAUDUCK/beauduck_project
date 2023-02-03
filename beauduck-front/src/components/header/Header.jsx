@@ -5,6 +5,7 @@ import logo from '../../assets/logo_original.png';
 import { useState } from 'react';
 import  LoginModal  from '../../features/login/LoginModal'
 import  LogoutModal  from '../../features/login/LogoutModal'
+import LoginModal2 from '../../features/login/LoginModal2';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -31,21 +32,20 @@ const Header = () => {
           <p onClick={() => navigate('/single')}>따라해덕</p>
           <p onClick={() => navigate('/together')}>투게덕</p>
           <p onClick={() => navigate('/board')}>쑥덕쑥덕</p>
-          <p onClick={() => navigate('/rank')}>랭킹</p>
         </div>
         <div className="header-auth">
           <p onClick={() => navigate('/profile')}>
           <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user" />
           </p>
-          <p onClick={isOpenModal}> 
+          {/* <p onClick={isOpenModal}> 
           LOGIN
           {isOpen && <LoginModal isOpenModal={isOpenModal} />}
+          </p> */}
+          <p>
+          <LoginModal2/>
           </p>
           <p>/</p>
-          <p> 
-          SIGNUP
-          </p>
-          <p>/</p>
+
           <p onClick={isOpenModal2}> 
           LOGOUT
           {isOpen2 && <LogoutModal isOpenModal2={isOpenModal2} />}

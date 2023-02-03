@@ -70,49 +70,36 @@ const RankingPage = () => {
       "badge": "오덕",
       "exp": 853
     },
-    {
-      "id": 8,
-      "nickname": "M8",
-      "badge": "오덕",
-      "exp": 654
-    },
-    {
-      "id": 9,
-      "nickname": "M9",
-      "badge": "입덕",
-      "exp": 342
-    },
-    {
-      "id": 10,
-      "nickname": "M10",
-      "badge": "입덕",
-      "exp": 128
-    },
-    {
-      "id": 11,
-      "nickname": "M11",
-      "badge": "입덕",
-      "exp": 54
-    },
+    // {
+    //   "id": 8,
+    //   "nickname": "M8",
+    //   "badge": "오덕",
+    //   "exp": 654
+    // },
+    // {
+    //   "id": 9,
+    //   "nickname": "M9",
+    //   "badge": "입덕",
+    //   "exp": 342
+    // },
+
   ]
 
   const dummyMyRankingData = {
     "id": 33,
     "nickname": "배고파",
-    "badge": "노예",
+    "badge": "아기오리",
     "exp": -33
   } 
 
   return (
-    <div className="container">
       <div className="RankingPage">
         <div className="ranking-container">
-          <img className="main-logo" src={logo} alt="logo"/>
           <RankingList dummyData={dummyData} />
         </div>
+        <br/>
         <MyRanking myRanking={dummyMyRankingData}/>
       </div>
-    </div>
   )
 };
 
