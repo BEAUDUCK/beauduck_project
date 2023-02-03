@@ -47,7 +47,7 @@ public class Controller {
 			throws OpenViduJavaClientException, OpenViduHttpException {
 
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println("initializeSession ");
+		System.out.println("세션 요청");
 		System.out.println("params = " + params.toString());
 
 		SessionProperties properties = SessionProperties.fromJson(params).build();
