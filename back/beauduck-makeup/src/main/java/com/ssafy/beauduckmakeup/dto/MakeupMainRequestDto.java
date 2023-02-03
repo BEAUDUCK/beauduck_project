@@ -17,7 +17,6 @@ import java.util.List;
 @ApiModel(value = "MakeupMainRequestDto", description = "메이크업 대분류 요청 정보")
 public class MakeupMainRequestDto {
 
-
     @JsonIgnore
     private MakeupEntity makeupId;
     private String step;
