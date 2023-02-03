@@ -22,7 +22,7 @@ public class TogetherRoomController {
     private final RoomService roomService;
 
     @ApiOperation(value = "미팅룸 목록 조회", notes = "현재 활성화된 미팅룸 목록을 조회한다.", response = String.class)
-    @GetMapping("/room") // 방 목록전체
+    @GetMapping("/") // 방 목록전체
     public ResponseEntity<List<RoomDto>> selectAll() {
         List<RoomDto> roomDtoList = roomService.selectAll();
         if(roomDtoList == null)
@@ -30,7 +30,7 @@ public class TogetherRoomController {
         return new ResponseEntity<List<RoomDto>>(roomDtoList, HttpStatus.OK);
     }
     @ApiOperation(value = "미팅룸 생성", notes = "미팅룸이 생성한다. . 생성에 성공하면 SUCCESS를, 실패하면 FAIL을 리턴한다. ", response = String.class)
-    @PostMapping("/room") // 방 생성
+    @PostMapping("/") // 방 생성
     public ResponseEntity<String> createRoom(@RequestBody RoomRequestDto dto) {
         if(roomService.createRoom(dto))
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -39,7 +39,7 @@ public class TogetherRoomController {
 
     // 방 파괴
     @ApiOperation(value = "미팅룸 삭제", notes = "미팅룸이 삭제된다. 삭제에 성공하면 SUCCESS를, 실패하면 FAIL을 리턴한다. ", response = String.class)
-    @DeleteMapping("/room/{roomId}") // 방이 삭제 되면 자동으로 유저들도 삭제 되는거 확인함
+    @DeleteMapping("/{roomId}") // 방이 삭제 되면 자동으로 유저들도 삭제 되는거 확인함
     public ResponseEntity<String> deleteRoom(@PathVariable String roomId) {
         if(roomService.deleteRoom(roomId))
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -50,7 +50,7 @@ public class TogetherRoomController {
 
     // 방 상세 조회
     @ApiOperation(value = "미팅룸 정보 상세 조회", notes = "미팅룸 상세정보를 조회한다.", response = String.class)
-    @GetMapping("/room/{roomId}")
+    @GetMapping("/{roomId}")
     public ResponseEntity<RoomDto> selectOne(@PathVariable String roomId) {
         RoomDto roomDto = roomService.selectOne(roomId);
         if(roomDto != null)
@@ -60,7 +60,7 @@ public class TogetherRoomController {
 
     // 방에 유저 입장
     @ApiOperation(value = "미팅룸 유저 입장", notes = "미팅룸에 유저가 입장한다. 성공하면 SUCCESS를, 실패하면 FAIL을 리턴한다.", response = String.class)
-    @PostMapping("/room/enter")
+    @PostMapping("/enter")
     public ResponseEntity enterRoom(@RequestBody UserInfoDto userInfoDto){
         boolean result = roomService.enterRoom(userInfoDto);
         if (result)
@@ -71,7 +71,7 @@ public class TogetherRoomController {
 
     // 방 나감
     @ApiOperation(value = "미팅룸 유저 퇴장", notes = "미팅룸에서 유저가 나간다. 성공하면 SUCCESS를, 실패하면 FAIL을 리턴한다.", response = String.class)
-    @PostMapping("/room/out")
+    @PostMapping("/out")
     public ResponseEntity outRoom(@RequestBody UserInfoDto userInfoDto){
         boolean result = roomService.outRoom(userInfoDto);
         if (result)
