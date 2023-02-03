@@ -1,3 +1,6 @@
+server:
+  port: 8181
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -7,6 +10,9 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
   jpa:
     hibernate:
