@@ -2,6 +2,7 @@ package com.ssafy.beauduckauth.service;
 
 import com.google.common.net.HttpHeaders;
 import com.ssafy.beauduckauth.dto.auth.LoginResponseDto;
+import com.ssafy.beauduckauth.dto.auth.SignupRequestDto;
 import com.ssafy.beauduckauth.dto.auth.TokenDeleteResponseDto;
 import com.ssafy.beauduckauth.dto.auth.TokenResponseDto;
 import com.ssafy.beauduckauth.dto.common.response.ResponseSuccessDto;
@@ -61,22 +62,7 @@ public class AuthService {
     }
 
     public ResponseSuccessDto<TokenResponseDto> getRefreshToken(String refreshToken){
-        WebClient webClient = WebClient
-                .builder()
-                .baseUrl("https://nid.naver.com")
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .build();
-
-        JSONObject response = webClient
-                .get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/oauth2.0/token")
-                        .queryParam("client_id", "V5gN96q3kFtGfUK7PUds")
-                        .queryParam("client_secret", "Z2RNeixHZU")
-                        .queryParam("refresh_token", refreshToken)
-                        .queryParam("grant_type", "refresh_token")
-                        .build())
-                .retrieve().bodyToMono(JSONObject.class).block();
+        JSONObject response = getJsonObject(refreshToken);
 
         TokenResponseDto tokenResponseDto = TokenResponseDto.builder()
                 .accessToken((String) response.get("access_token"))
@@ -90,20 +76,7 @@ public class AuthService {
     }
 
     public ResponseSuccessDto<LoginResponseDto> login(String accessToken) {
-        WebClient webClient = WebClient
-                .builder()
-                .baseUrl("https://openapi.naver.com")
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .build();
-
-        JSONObject response = webClient
-                .get()
-                .uri(uriBuilder -> uriBuilder.path("/v1/nid/me")
-                        .build())
-                .header("Authorization", "Bearer " + accessToken)
-                .retrieve()
-                .bodyToMono(JSONObject.class)
-                .block();
+        JSONObject response = getJsonObject(accessToken);
 
 
         Map<String, Object> res = (Map<String, Object>) response.get("response");
@@ -122,33 +95,9 @@ public class AuthService {
 
         MemberEntity memberEntity = memberRepository.findById(id).orElseGet(() -> {
             System.out.println("회원가입 시작");
-            MemberEntity entity = MemberEntity.builder()
-                    .id(id)
-                    .provider(provider)
-                    .build();
-            memberRepository.save(entity);
-
-            MemberInfoEntity memberInfoEntity = MemberInfoEntity.builder()
-                    .memberEntity(entity)
-                    .name(name)
-                    .email(email)
-                    .sex(sex)
-                    .phoneNumber(phone)
-                    .accessToken(accessToken)
-                    .socialCode(id)
-                    .externalId("")
-                    .build();
-            memberInfoRepository.save(memberInfoEntity);
-
-            MemberProfileEntity memberProfileEntity = MemberProfileEntity.builder()
-                    .memberEntity(entity)
-                    .nickName("test")
-                    .isPrivate(true)
-                    .build();
-            memberProfileRepository.save(memberProfileEntity);
 
             System.out.println("회원 등록 성공");
-            return entity;
+            return null;
         });
 
         LoginResponseDto loginResponseDto = LoginResponseDto.builder()
@@ -163,22 +112,7 @@ public class AuthService {
     }
 
     public ResponseSuccessDto<TokenDeleteResponseDto> logout(String accessToken){
-        WebClient webClient = WebClient
-                .builder()
-                .baseUrl("https://nid.naver.com")
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .build();
-
-        JSONObject response = webClient
-                .get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/oauth2.0/token")
-                        .queryParam("client_id", "V5gN96q3kFtGfUK7PUds")
-                        .queryParam("client_secret", "Z2RNeixHZU")
-                        .queryParam("grant_type", "delete")
-                        .queryParam("service_provider", "NAVER")
-                        .queryParam("access_token", accessToken).build())
-                .retrieve().bodyToMono(JSONObject.class).block();
+        JSONObject response = getJsonObject(accessToken);
 
         System.out.println("logout response = " + response.toString());
         TokenDeleteResponseDto tokenDeleteResponseDto = TokenDeleteResponseDto.builder()
@@ -188,6 +122,92 @@ public class AuthService {
 
         ResponseSuccessDto<TokenDeleteResponseDto> res = responseUtil.successResponse(tokenDeleteResponseDto);
         return res;
+    }
+
+    public ResponseSuccessDto<Boolean> checkId(String accessToken){
+        JSONObject response = getJsonObject(accessToken);
+
+        Map<String, Object> res = (Map<String, Object>) response.get("response");
+
+        System.out.println(res.toString());
+
+        String id = (String) res.get("id");
+
+        if(memberRepository.existsById(id)){
+            responseUtil.successResponse(false);
+        }
+        return responseUtil.successResponse(true);
+    }
+
+    public ResponseSuccessDto<Boolean> signup(SignupRequestDto signupRequestDto){
+        String accessToken = signupRequestDto.getAccessToken();
+        JSONObject response = getJsonObject(accessToken);
+
+
+        Map<String, Object> res = (Map<String, Object>) response.get("response");
+
+        System.out.println(res.toString());
+
+        String id = (String) res.get("id");
+        String provider = "naver";
+        String email = (String) res.get("email");
+        String name = (String) res.get("name");
+        String sex = (String) res.get("gender");
+        String phone = (String) res.get("mobile");
+        String nickName = signupRequestDto.getNickName();
+        String content = signupRequestDto.getContent();
+        String img = signupRequestDto.getImg();
+
+        System.out.println("회원가입 시작");
+        MemberEntity entity = MemberEntity.builder()
+                .id(id)
+                .provider(provider)
+                .build();
+        memberRepository.save(entity);
+
+        MemberInfoEntity memberInfoEntity = MemberInfoEntity.builder()
+                .memberEntity(entity)
+                .name(name)
+                .email(email)
+                .sex(sex)
+                .phoneNumber(phone)
+                .accessToken(accessToken)
+                .socialCode(id)
+                .externalId("")
+                .build();
+        memberInfoRepository.save(memberInfoEntity);
+
+        MemberProfileEntity memberProfileEntity = MemberProfileEntity.builder()
+                .memberEntity(entity)
+                .nickName(nickName)
+                .img(img)
+                .content(content)
+                .exp(0)
+                .badge(0)
+                .isPrivate(false)
+                .build();
+        memberProfileRepository.save(memberProfileEntity);
+
+        System.out.println("회원 등록 성공");
+        return responseUtil.successResponse(true);
+    }
+
+    private static JSONObject getJsonObject(String accessToken) {
+        WebClient webClient = WebClient
+                .builder()
+                .baseUrl("https://openapi.naver.com")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+
+        JSONObject response = webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder.path("/v1/nid/me")
+                        .build())
+                .header("Authorization", "Bearer " + accessToken)
+                .retrieve()
+                .bodyToMono(JSONObject.class)
+                .block();
+        return response;
     }
 
 }

@@ -1,18 +1,13 @@
 package com.ssafy.beauduckauth.controller;
 
-import com.ssafy.beauduckauth.dto.auth.LoginResponseDto;
-import com.ssafy.beauduckauth.dto.auth.TokenDeleteResponseDto;
-import com.ssafy.beauduckauth.dto.auth.TokenResponseDto;
+import com.ssafy.beauduckauth.dto.auth.*;
 import com.ssafy.beauduckauth.dto.common.response.ResponseSuccessDto;
 import com.ssafy.beauduckauth.service.AuthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api("회원 인증 컨트롤러 V1")
 @RestController
@@ -57,5 +52,17 @@ public class OAuthController {
     @GetMapping("/logout")
     public ResponseEntity<ResponseSuccessDto<TokenDeleteResponseDto>> logout(@RequestParam("accessToken") String accessToken){
         return ResponseEntity.ok(authService.logout(accessToken));
+    }
+
+    @ApiOperation(value = "회원 여부 확인", notes = "회원가입 여부를 확인한다.")
+    @GetMapping("/check")
+    public ResponseEntity<ResponseSuccessDto<Boolean>> checkId(@RequestParam("accessToken") String accessToken){
+        return ResponseEntity.ok(authService.checkId(accessToken));
+    }
+
+    @ApiOperation(value = "회원가입", notes = "회원가입을 진행한다.")
+    @PostMapping("/signup")
+    public ResponseEntity<ResponseSuccessDto<Boolean>> signup(@RequestBody SignupRequestDto signupRequestDto){
+        return ResponseEntity.ok(authService.signup(signupRequestDto));
     }
 }

@@ -50,9 +50,14 @@ public class MemberProfileEntity {
     private ZonedDateTime createDate;
 
     @Builder
-    public MemberProfileEntity(MemberEntity memberEntity, String nickName, boolean isPrivate){
+    public MemberProfileEntity(MemberEntity memberEntity, String nickName, String img, String content,
+                               int exp, int badge, Boolean isPrivate){
         this.memberEntity = memberEntity;
         this.nickName = nickName;
+        this.img = img;
+        this.content = content;
+        this.exp = exp;
+        this.badge = badge;
         this.isPrivate = isPrivate;
     }
 }
