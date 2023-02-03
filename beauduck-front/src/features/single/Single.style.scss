@@ -102,31 +102,33 @@
             margin-top: 5px;
             margin-bottom: 5px;
             align-items: center;
-
         }
-        .total-label {
+
+        .makeup-label {
           display: inline-block;
           width: 80px;
           text-align: center;
           margin-right: 20px;
+          
           font-size: 15px;
-          color: #717171;
+          color: black;
+          font-family: 'Jalnan';
         }
     
-        .total-input {
-          width: 270px;
-          height: 30px;
+        .makeup-input {
+          width: 350px;
+          height: 50px;
         }
     
         .input-content { 
-          height: 50px;
+          height: 100px;
         }
 
         .main-img {
             width: 280px;
         }
         
-        .input-time {
+        .makeup-time {
             width: 240px;
         }
 
@@ -236,60 +238,59 @@
 
 .sub-replace {
     width: 290px;
-}
-
-
-.sub-div {
-    display: inline-block;
-    text-align: left;
-    // display: flex;
-    // vertical-align: top;
-    position: relative;
-    width: 290px;
-    margin-bottom: 20px;
-
-    .plus-mark-added {
-        top: -4%;
-        font-size: 24px;
-        font-style: normal; 
-    }
-
-    .color-selector {
-        width: 25px;
-        height: 25px;
-        margin-right: 5px;
-    }
-
-    .sub-div-first {
-        width: 270px;
-        display: flex;
-        justify-content: space-between;
+    
+    .sub-div {
+        display: inline-block;
+        text-align: left;
         position: relative;
+        width: 290px;
+        margin-bottom: 20px;
+    
+        .plus-mark-added {
+            top: -4%;
+            font-size: 24px;
+            font-style: normal; 
+        }
+    
+        .color-selector {
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
+    
+        .sub-div-first {
+            width: 270px;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        .selected-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: baseline;
+        }
+    
+        form {
+            margin-left: 20px;
+        }
+    
+        select {
+            height: 30px;
+        }
+    
+        .add-sub-text {
+            width: 250px;
+            height: 40px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
     }
-    .selected-color {
-        width: 20px;
-        height: 20px;
-        margin-right: 5px;
-        vertical-align: baseline;
-    }
-
-    form {
-        margin-left: 20px;
-    }
-
-    select {
-        height: 30px;
-    }
-
-    .add-sub-text {
-        width: 250px;
-        height: 40px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-
 }
+
+
+
+
 input[type=file] {
     background-color: white;
     padding-left: 0;

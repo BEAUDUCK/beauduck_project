@@ -43,12 +43,19 @@ export const singleSlice = createSlice({
   initialState: {
     makeupList: [],
     makeupDetail: '',
-    completed: false, // 만들기
     recommendList: [],
+    // 만들기
+    completed: false,
+    title: '',
+    content: '',
+    duration: '',
   },
   reducers: {
     submitMakeup: (state, action) => {
       state.completed = true;
+      state.title = action.payload.title;
+      state.content = action.payload.content;
+      state.duration = action.payload.duration;
     },
     rejectedMakeup: (state, action) => {
       state.completed = false;
