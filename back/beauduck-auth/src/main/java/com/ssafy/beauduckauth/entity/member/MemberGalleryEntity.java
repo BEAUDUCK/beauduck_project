@@ -1,4 +1,4 @@
-package com.ssafy.beauduckauth.entity;
+package com.ssafy.beauduckauth.entity.member;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,5 +35,9 @@ public class MemberGalleryEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     @Column(name = "created_date")
     private ZonedDateTime createDate;
+
+    public void updateActive(Boolean isActive){
+        this.isActive = isActive;
+    }
 
 }

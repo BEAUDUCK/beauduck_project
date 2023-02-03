@@ -1,4 +1,4 @@
-package com.ssafy.beauduckauth.entity;
+package com.ssafy.beauduckauth.entity.member;
 
 import lombok.Builder;
 import lombok.Getter;

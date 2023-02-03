@@ -1,6 +1,6 @@
 package com.ssafy.beauduckauth.repository.member;
 
-import com.ssafy.beauduckauth.entity.MemberInfoEntity;
+import com.ssafy.beauduckauth.entity.member.MemberInfoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

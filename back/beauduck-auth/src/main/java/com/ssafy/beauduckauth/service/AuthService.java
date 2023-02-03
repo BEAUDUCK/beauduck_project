@@ -6,9 +6,9 @@ import com.ssafy.beauduckauth.dto.auth.SignupRequestDto;
 import com.ssafy.beauduckauth.dto.auth.TokenDeleteResponseDto;
 import com.ssafy.beauduckauth.dto.auth.TokenResponseDto;
 import com.ssafy.beauduckauth.dto.common.response.ResponseSuccessDto;
-import com.ssafy.beauduckauth.entity.MemberEntity;
-import com.ssafy.beauduckauth.entity.MemberInfoEntity;
-import com.ssafy.beauduckauth.entity.MemberProfileEntity;
+import com.ssafy.beauduckauth.entity.member.MemberEntity;
+import com.ssafy.beauduckauth.entity.member.MemberInfoEntity;
+import com.ssafy.beauduckauth.entity.member.MemberProfileEntity;
 import com.ssafy.beauduckauth.repository.member.MemberInfoRepository;
 import com.ssafy.beauduckauth.repository.member.MemberProfileRepository;
 import com.ssafy.beauduckauth.repository.member.MemberRepository;
@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AuthService {
 
     private final ResponseUtil responseUtil;

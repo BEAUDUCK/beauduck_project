@@ -1,11 +1,13 @@
-package com.ssafy.beauduckauth.entity;
+package com.ssafy.beauduckauth.entity.member;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ssafy.beauduckauth.dto.member.UpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -49,6 +51,11 @@ public class MemberProfileEntity {
     @Column(name = "created_date")
     private ZonedDateTime createDate;
 
+    @UpdateTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    @Column(name = "updated_date")
+    private ZonedDateTime updateDate;
+
     @Builder
     public MemberProfileEntity(MemberEntity memberEntity, String nickName, String img, String content,
                                int exp, int badge, Boolean isPrivate){
@@ -59,5 +66,11 @@ public class MemberProfileEntity {
         this.exp = exp;
         this.badge = badge;
         this.isPrivate = isPrivate;
+    }
+
+    public void updateMemberProfile(UpdateRequestDto updateRequestDto){
+        this.nickName = updateRequestDto.getNickName();
+        this.img = updateRequestDto.getImg();
+        this.content = updateRequestDto.getContent();
     }
 }
