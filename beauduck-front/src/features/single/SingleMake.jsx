@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './Single.test.scss';
 import SingleMakeDetail from './SingleMakeDetail';
 import SingleMakeFirst from './SingleMakeFirst';
 

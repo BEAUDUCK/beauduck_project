@@ -46,6 +46,8 @@ const SingleMakeDetail = ({ getMakeupList }) => {
           ['틴트', 'tint'],
           ['립글로스', 'lipgloss'],
         ];
+      default:
+        return [];
     }
   };
 
@@ -67,6 +69,8 @@ const SingleMakeDetail = ({ getMakeupList }) => {
         return contureSubData;
       case 'lip':
         return lipSubData;
+      default:
+        return [];
     }
   };
 
@@ -137,8 +141,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
   };
 
   return (
-    <div className="makeup-form">
-      <h3>메이크업 과정 선택</h3>
+    <div className="makeup-form-second">
       <div className="main-div">
         <img
           src="/images/makeup/main_skin.png"
@@ -193,7 +196,9 @@ const SingleMakeDetail = ({ getMakeupList }) => {
         />
       </div>
       <SingleMakeSub main={main} sub={sub()} makeupMiddleList={subList()} />
-      <button onClick={getMainData}>완료</button>
+      <button className="makeup-bottom-btn" onClick={getMainData}>
+        완성
+      </button>
     </div>
   );
 };
