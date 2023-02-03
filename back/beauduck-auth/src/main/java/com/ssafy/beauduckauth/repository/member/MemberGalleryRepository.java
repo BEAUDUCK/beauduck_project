@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberGalleryRepository extends JpaRepository<MemberGalleryEntity, Integer> {
-    List<MemberGalleryEntity> findAllByMemberEntity(MemberEntity memberEntity);
+    List<MemberGalleryEntity> findAllByMemberEntityIAndIsActiveTrue(MemberEntity memberEntity);
     Optional<MemberGalleryEntity> findOneByMemberEntity(MemberEntity memberEntity);
 }
