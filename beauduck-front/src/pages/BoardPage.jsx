@@ -60,7 +60,7 @@ const BoardPage = () => {
           />
         </span>
         <span>
-          {memberId !== '' ||
+          {memberId !== '' &&
             (memberId !== undefined && (
               <span>
                 <Button text={'글쓰기'} onClickEvent={goToWrite} />
