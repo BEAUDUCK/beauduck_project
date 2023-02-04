@@ -17,10 +17,10 @@ pipeline {
                 sh 'ls -al'       
                 sh ' npm -v'
                 sh 'node -v'
-                sh' cd /beauduck-front'
-                sh 'ls -al'
-                sh 'docker build -t beauduck-dev-front .'
-                sh 'docker images'
+                dir('beauduck-front'){
+                    sh 'ls -al'
+                    sh 'docker build -t beauduck-dev-front .'    
+                }                                                
                 echo 'Build image...'
             }
         }
