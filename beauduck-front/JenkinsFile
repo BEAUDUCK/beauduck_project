@@ -7,17 +7,17 @@ pipeline {
         DOCKER = 'sudo docker'
     } 
     stages {
-        stage(‘Clone Repository’) {
+        stage('Clone Repository') {
             steps {
                 checkout scm
-                echo ‘Checkout Scm’
+                echo 'Checkout Scm'
             }
         }
-
+        
         stage('Build image') {
             steps {
-                sh' npm -v’
-                sh' node -v’
+                sh ' npm -v'
+                sh 'node -v'
                 sh' cd beauduck-front'
                 sh 'docker build -t beauduck-dev-front .'
                 sh 'docker images'
@@ -28,16 +28,16 @@ pipeline {
         stage('Remove Previous image') {
             steps {
                 try {
-                        sh ‘docker stop beauduck-dev-front'
+                        sh 'docker stop beauduck-dev-front'
                         sh 'docker rm beauduck-dev-front'
                     } catch (e) {
-                        echo ‘얀fail to stop and remove container’
+                        echo 'fail to stop and remove container'
                     }
             }
         }
         stage('Run New image') {
             steps {
-                sh ‘docker run --name beauduck-dev-front -d -p 3000:3000 beauduck-dev-front’
+                sh 'docker run --name beauduck-dev-front -d -p 3000:3000 beauduck-dev-front'
                 echo 'Run New image'
             }
         }
