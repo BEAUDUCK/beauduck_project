@@ -36,6 +36,7 @@ import SingleResultPage from './pages/SingleResultPage';
 import SingleModePage from './pages/SingleModePage';
 import RankingPage from './pages/RankingPage';
 import SingupPage from './pages/SignupPage';
+import ScrollToTop from './components/scrolltotop/ScrollToTop';
 
 library.add(
   faXmark,
@@ -59,31 +60,32 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
-        <Routes>
-          {/* <Route 
-            element={<ProtectedRoute token={token} nickname={nickname} />}> */}
-          {/* 도와덕 */}
-          <Route path="/help" element={<ConsultingPage />} />
-          {/* 따라해덕 */}
-          <Route path="/single" element={<SinglePage />} />
-          <Route path="/single/mode" element={<SingleModePage />} />
-          <Route path="/single/result" element={<SingleResultPage />} />
-          {/* 투게덕 */}
-          <Route path="/together" element={<TogetherPage />} />
-          {/* 쑥덕쑥덕 */}
-          <Route path="/board" element={<BoardPage />} />
-          <Route path="/board/write" element={<BoardWritePage />} />
-          <Route path="/board/info/:id" element={<BoardInfoPage />} />
-          <Route path="/board/qna/:id" element={<BoardQnAPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          {/* 랭킹 페이지 */}
-          <Route path="/rank" element={<RankingPage />} />
-          {/* </Route> */}
-          <Route path="/Api/Naver" element={<NaverLogin />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/signup" element={<SingupPage />} />
-        </Routes>
+        <ScrollToTop />
+          <Routes>
+            {/* <Route 
+              element={<ProtectedRoute token={token} nickname={nickname} />}> */}
+            {/* 도와덕 */}
+            <Route path="/help" element={<ConsultingPage />} />
+            {/* 따라해덕 */}
+            <Route path="/single" element={<SinglePage />} />
+            <Route path="/single/mode" element={<SingleModePage />} />
+            <Route path="/single/result" element={<SingleResultPage />} />
+            {/* 투게덕 */}
+            <Route path="/together" element={<TogetherPage />} />
+            {/* 쑥덕쑥덕 */}
+            <Route path="/board" element={<BoardPage />} />
+            <Route path="/board/write" element={<BoardWritePage />} />
+            <Route path="/board/info/:id" element={<BoardInfoPage />} />
+            <Route path="/board/qna/:id" element={<BoardQnAPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            {/* 랭킹 페이지 */}
+            <Route path="/rank" element={<RankingPage />} />
+            {/* </Route> */}
+            <Route path="/Api/Naver" element={<NaverLogin />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<MainPage />} />
+            <Route path="/signup" element={<SingupPage />} />
+          </Routes>
       </BrowserRouter>
       <Footer />
     </>
