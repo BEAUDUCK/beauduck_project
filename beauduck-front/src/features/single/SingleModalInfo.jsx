@@ -2,13 +2,15 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMakeupDetail } from './SingleSlice';
+import { getMakeupDetail, selectMain, startMakeup } from './SingleSlice';
 import { useState } from 'react';
 import Button from '../../components/button/Button';
+import { useNavigate } from 'react-router-dom';
 
 // 메이크업 상세 조회 API
 const SingleModalInfo = ({ makeupId }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const { makeup } = useSelector((state) => state.makeupDetail);
   useEffect(() => {
     dispatch(getMakeupDetail(makeupId));
@@ -32,17 +34,23 @@ const SingleModalInfo = ({ makeupId }) => {
   const [isSelected4, setIsSelected4] = useState(false);
   const [isSelected5, setIsSelected5] = useState(false);
 
-  const nums = [1, 2, 3, 4, 5];
+  const main = ['skin', 'eyebrow', 'eye', 'conture', 'lip'];
 
   const selectSubmit = () => {
-    nums.forEach((num) => {
-      if (eval(`isSelected${num}`)) {
-        // 어떤 값으로 넣을지는 백과 논의해야 함
-        category.push(num);
+    for (let i = 1; i < 6; i++) {
+      if (eval(`isSelected${i}`)) {
+        category.push(main[i - 1]);
       }
-    });
-    console.log(category);
+    }
+    const selectedStep = {
+      makeupMainList: category,
+    };
+    console.log(selectedStep);
+    dispatch(selectMain(category));
+    dispatch(startMakeup(selectedStep));
+    navigate('/single/mode');
   };
+
   return (
     <div className="makeup-detail">
       <div className="makeup-detail-top">
@@ -63,31 +71,31 @@ const SingleModalInfo = ({ makeupId }) => {
       <div className="select-course">
         <button
           onClick={() => setIsSelected1(!isSelected1)}
-          className={isSelected1 && 'selected'}
+          className={isSelected1 ? 'selected' : ''}
         >
           피부
         </button>
         <button
           onClick={() => setIsSelected2(!isSelected2)}
-          className={isSelected2 && 'selected'}
+          className={isSelected2 ? 'selected' : ''}
         >
           눈썹
         </button>
         <button
           onClick={() => setIsSelected3(!isSelected3)}
-          className={isSelected3 && 'selected'}
+          className={isSelected3 ? 'selected' : ''}
         >
           눈
         </button>
         <button
           onClick={() => setIsSelected4(!isSelected4)}
-          className={isSelected4 && 'selected'}
+          className={isSelected4 ? 'selected' : ''}
         >
           윤곽
         </button>
         <button
           onClick={() => setIsSelected5(!isSelected5)}
-          className={isSelected5 && 'selected'}
+          className={isSelected5 ? 'selected' : ''}
         >
           립
         </button>

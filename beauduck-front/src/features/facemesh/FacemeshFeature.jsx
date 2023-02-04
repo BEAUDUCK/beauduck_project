@@ -128,7 +128,7 @@ const FacemeshFeature = () => {
           textAlign: 'center',
           zIndex: 9,
           width: 640,
-          hegiht: 480,
+          height: 480,
         }}
         className="canvas"
       />
