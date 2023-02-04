@@ -1,41 +1,158 @@
+// .consulting-list {
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+//   flex-wrap: wrap;
+//   width: 100%;
+//   perspective: 1100px;
+
+//   .consulting-list-item {
+//     display: flex;
+//     flex-direction: column;
+//     width: 20%;
+//     justify-content: center;
+//     align-items: center;
+//     position: relative;
+
+//     .consulting-list-item-child {
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: center;
+//       text-align: center;
+//       width: 60%;
+//       height: 150px;
+//       border-radius: 20px;
+//       box-shadow: 3px 3px gray;
+//       margin-bottom: 20px;
+
+//       .consulting-list-item-color {
+//         border-bottom: 1px solid green;
+//         height: 70%;
+//         background-color: green;
+//         border-top-left-radius: 20px;
+//         border-top-right-radius: 20px;
+//       }
+
+//       .consulting-list-item-title {
+//         height: 30%;
+//         border-bottom-left-radius: 20px;
+//         border-bottom-right-radius: 20px;
+//       }
+
+//     }
+
+//   }
+
+// }
+.help-h2 {
+  font-family: "Jalnan";
+  font-size: 40px;
+}
+
 .consulting-list {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   flex-wrap: wrap;
-  width: 100%;
+  text-align: center;
+  justify-content: center;
 
-  .consulting-list-item {
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-    justify-content: center;
-    align-items: center;
 
-    .consulting-list-item-child {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      border: 1px solid green;
-      width: 60%;
-      height: 150px;
-      margin-bottom: 50px;
-      border-radius: 50px;
+  .consulting-list-child {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(20%, auto));
+    grid-template-columns: repeat(5, minmax(200, auto));
+  }
 
-      .consulting-list-item-color {
-        border-bottom: 1px solid green;
-        height: 50%;
-      }
+  .flip {
+    display: inline-block;
+    width: 250px;
+    height: 200px;
+    perspective: 1100px;
+    margin: 0px 25px 30px 25px;
 
-      .consulting-list-item-title {
-        height: 50%;
+  }
+
+  .card {
+    width: 100%; 
+    height: 100%; 
+    position: relative;
+    transition: .4s;
+    transform-style: preserve-3d;
+    border-radius: 50px;
+    box-shadow: 5px 5px #D3D3D3;
+    
+    &:hover {
+      box-shadow: none;
+    }
+  }	
+
+  .front, .back {
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+  }
+
+    .front-top {
+      height: 70%;
+      border-top-left-radius: 50px;
+      border-top-right-radius: 50px;
+
+      img {
+        width: 150;
+        height: 140px;
       }
 
     }
 
-  }
+    .front-bottom {
+      height: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+  .back {
+    border-radius: 50px;
+    backface-visibility: hidden;
+    box-shadow: 0px 0px 10px gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    &:hover {
+      box-shadow: 0px 0px 10px gray;
+    }
 
+    .back-content {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 5px;
+      margin-top: 5px;
+
+      .back-content-index {
+        margin-left: 20px;
+      }
+
+      .back-content-context {
+        width: 160px;
+        background-color: white;
+        margin-left: 10px;
+        padding-left: 5px;
+        text-align: start;
+      } 
+
+    }
+
+  }
+}
+
+// 뒷면은 사전에 미리 뒤집기
+.back { 
+  transform: rotateY(180deg);
+}
+
+// 호버 시 뒤집기
+.flip:hover .card {
+  transform: rotateY(-180deg);
 }
 
 // 컨설팅 방 생성하기 모달
@@ -52,6 +169,7 @@
   border: 2px solid rgb(220, 220, 220);
   border-radius: 10px;
   box-shadow: 0px 0px 5px 0px #bdbdbd;
+  z-index: 990;
 
   .consult-create-header {
     width: 500px;
