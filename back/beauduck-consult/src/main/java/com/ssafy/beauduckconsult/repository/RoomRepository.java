@@ -1,8 +1,8 @@
 package com.ssafy.beauduckconsult.repository;
 
 
-import com.ssafy.beauduckconsult.dto.RoomDto;
-import com.ssafy.beauduckconsult.dto.UserInfoDto;
+import com.ssafy.beauduckconsult.dto.redis.RoomDto;
+import com.ssafy.beauduckconsult.dto.redis.UserInfoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
