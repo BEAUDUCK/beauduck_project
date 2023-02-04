@@ -5,9 +5,11 @@ import ConsultingListItem from '../help/ConsultingListItem';
 const ConsultingList = ({ consultingList }) => {
   return (
     <div className='consulting-list'>
-      {consultingList.map((item) => (
-        <ConsultingListItem key={item.id} consultingItem={item} />
-      ))}
+      <div className='consulting-list-child'>
+        {consultingList.map((item) => (
+          <ConsultingListItem key={item.id} consultingItem={item} />
+        ))}
+      </div>
     </div>
   );
 };
