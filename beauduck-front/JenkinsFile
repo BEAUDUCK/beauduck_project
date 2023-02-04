@@ -13,10 +13,11 @@ pipeline {
         }
         
         stage('Build image') {
-            steps {
+            steps {                
                 sh ' npm -v'
                 sh 'node -v'
                 sh' cd beauduck-front'
+                sh 'ls -al'
                 sh 'docker build -t beauduck-dev-front .'
                 sh 'docker images'
                 echo 'Build image...'
