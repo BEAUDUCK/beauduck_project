@@ -68,7 +68,7 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     // console.log(file.select());
     // document.selection.clear();
     // document.execCommand('Delete');
-    console.log('s');
+    // console.log('s');
 
     const idx = makeupMiddleList.push(subData) - 1;
 

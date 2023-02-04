@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { submitMakeup } from './SingleSlice';
-import logo from '../../assets/logo_original.png';
+// import logo from '../../assets/logo_original.png';
+import logo from '../../assets/logo.png';
 
 const SingleMakeFirst = ({ sendFinalImg }) => {
   const dispatch = useDispatch();
