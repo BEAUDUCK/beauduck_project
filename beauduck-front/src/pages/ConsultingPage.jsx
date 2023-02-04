@@ -5,6 +5,7 @@ import Banner from '../components/banner/Banner';
 import ConsultingList from '../features/help/ConsultingList';
 import ConsultingModalCreate from '../features/help/ConsultingModalCreate ';
 import { getConsultingList } from '../features/help/ConsultingSlice';
+import BlackOut from "../components/blackout/BlackOut"
 
 const ConsultingPage = () => {
   const dispatch = useDispatch();
@@ -95,10 +96,11 @@ const ConsultingPage = () => {
     <>
       <Banner bannerStyle={'help-ban'} />
       <div className="container">
-        <h2>모집 중인 컨설팅</h2>
+        <h2 className='help-h2'>도와주라덕</h2>
         <button onClick={isOpenModal}>컨설팅 받기</button>
         <ConsultingList consultingList={TestList} />
         {isOpen && <ConsultingModalCreate isOpenModal={isOpenModal} />}
+        {isOpen && <BlackOut onClickEvent={isOpenModal} />}
       </div>
     </>
   );
