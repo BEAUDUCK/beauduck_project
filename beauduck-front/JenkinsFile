@@ -3,9 +3,7 @@ pipeline {
     environment {
         DOCKER = 'sudo docker'
     }
-    tools {
-        DOCKER = 'sudo docker'
-    } 
+   
     stages {
         stage('Clone Repository') {
             steps {
@@ -25,15 +23,18 @@ pipeline {
             }
         }
 
-        stage('Remove Previous image') {
+        stage('Remove Previous image') {        
             steps {
-                try {
-                        sh 'docker stop beauduck-dev-front'
-                        sh 'docker rm beauduck-dev-front'
+                script {
+                    try {
+                            sh 'docker stop beauduck-dev-front'
+                            sh 'docker rm beauduck-dev-front'                        
                     } catch (e) {
                         echo 'fail to stop and remove container'
-                    }
+                    }    
+                }                
             }
+            
         }
         stage('Run New image') {
             steps {
