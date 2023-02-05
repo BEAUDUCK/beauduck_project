@@ -27,6 +27,7 @@ export default function SimpleFade() {
   };
 
   return (
+  // 아래부터는 mui form
     <Box sx={{ height: 180 }}>
       <FormControlLabel
         control={<Switch checked={checked} onChange={handleChange} />}
