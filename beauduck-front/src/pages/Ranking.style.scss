@@ -2,7 +2,6 @@
   width: 400px;
 
   .ranking-container {
-    padding-top: 50px;
     display: flex;
     width: 100%;
   }
@@ -25,12 +24,11 @@
     vertical-align: center;
     width: 100%;
     margin: 15px 50px 15px;
-    box-shadow: 3px 3px 3px 3px yellowgreen;
     border-radius: 10px;
     height: 30px;
 
     div {
-      width: 25%;
+      width: 100px;
     }
 
   }
@@ -43,7 +41,6 @@
     vertical-align: center;
     width: 100%;
     margin: 15px 50px 15px;
-    box-shadow: 3px 3px 3px 3px yellowgreen;
     border-radius: 10px;
     height: 30px;
 
@@ -59,7 +56,7 @@
     align-items: center;
     text-align: center;
     border-radius: 20px;
-    box-shadow: 3px 3px 3px 3px yellowgreen;
+    width: 100%;
 
     .my-ranking-item {
       width: 50%;
