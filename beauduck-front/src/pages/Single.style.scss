@@ -157,7 +157,7 @@
             width: 100%;
             height: 500px;
             position: relative;
-            padding-top: 60px;
+            padding-top: 0px;
             // text-align: center;
 
             .content-box {
@@ -170,24 +170,25 @@
                 height: 120px;
 
                 position: absolute;
-                top: 0px;
-                left: 20px;
+                top: 10px;
+                left: 125px;
 
                 // background-color: white;
                 // border-radius: 100px;
             }
             .sub-step-content {
-                width: 17vw;
+                width: 15vw;
                 min-height: 120px;
                 margin-left: 30px;
-                // padding-top: 60px;
-                padding-left: 15px;
-                padding-right: 15px;
+                padding-top: 140px;
+                padding-bottom: 50px;
+                padding-left: 20px;
+                padding-right: 20px;
                 text-align: left;
 
-                border: 3px solid gray;
-                border-style: dashed;
-                border-radius: 10px;
+                border: 10px solid rgb(231, 229, 229);
+                border-style: double;
+                border-radius: 30px;
 
                 background-color: #FFF5D1;
             }
@@ -222,11 +223,14 @@
             justify-content: center;
             margin-top: 20px;
             margin-bottom: 15px;
+            
 
             .main-ing-img {
                 width: 80px;
                 height: 80px;
                 opacity: 0.5;
+                // box-shadow: 0 0 3px #838383;
+                // border-radius: 15px;
             }
 
             .selected {
@@ -261,8 +265,27 @@
     }
 
     .right-div {
+        // position: relative;
         width: calc((100% - 700px) / 2);
         height: 100vh;
+
+        .finish-btn {
+            position: absolute;
+            top: 610px;
+            right: 150px;
+
+            width: 150px;
+            height: 45px;
+
+            font-family: 'Jalnan';
+            font-size: 18px;
+
+            border: none;
+            border-radius: 10px;
+
+            cursor: pointer;
+
+        }
     }
 
 }
