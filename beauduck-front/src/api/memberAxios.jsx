@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCookie } from './cookie';
 
 const REACT_APP_BASE_URL = 'http://3.38.169.2:8080';
-const client = axios.create({
+const member = axios.create({
   baseURL: REACT_APP_BASE_URL,
   headers: {
     'Content-type': 'application/json',
@@ -10,7 +10,7 @@ const client = axios.create({
 });
 
 // 요청 인터셉터
-client.interceptors.request.use(
+member.interceptors.request.use(
   (config) => {
     // 요청을 보내기 전에 수행할 일
     config.headers['Authorization'] = getCookie('accessToken');
@@ -25,7 +25,7 @@ client.interceptors.request.use(
 );
 
 // 응답 인터셉터
-client.interceptors.response.use(
+member.interceptors.response.use(
   (response) => {
     // 응답 데이터를 가공
     return response;
@@ -38,4 +38,4 @@ client.interceptors.response.use(
   },
 );
 
-export default client;
+export default member;
