@@ -10,9 +10,11 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { getAccessToken } from '../api/cookie';
-import { Login } from '../features/login/NaverLogin';
+import { UserLogin, getNickName } from '../features/login/MemberSlice';
+import { useDispatch } from 'react-redux';
 
 const SignupPage = () => {
+  const dispatch = useDispatch();
   const [content, setContent] = useState('');
   const [nickName, setNickName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -47,7 +49,7 @@ const SignupPage = () => {
   // 닉네임 중복 확인
   const NickNameCheck = async (nickName) => {
     axios
-      .get(`http://i8b306.p.ssafy.io:8080/members/check/${nickName}`)
+      .get(`http://3.38.169.2:8080/members/check/${nickName}`)
       .then((res) => {
         if (!res.data.data) {
           setErrorMessage('사용 가능한 닉네임입니다');
@@ -59,9 +61,9 @@ const SignupPage = () => {
 
   // 회원가입
   const Signup = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    console.log('회원가입')
+    console.log('회원가입');
     const data = {
       accessToken,
       nickName,
@@ -70,12 +72,12 @@ const SignupPage = () => {
     };
     console.log(data);
     axios
-      .post('http://i8b306.p.ssafy.io:8080/naver/signup', data)
+      .post('http://3.38.169.2:8080/naver/signup', data)
       .then((res) => {
-        console.log('하이하이하이')
-        Login(accessToken)
-        // alert('회원가입 완료');
-        // window.location.href = '/';
+        dispatch(getNickName(nickName));
+        dispatch(UserLogin(accessToken));
+        alert('회원가입 완료');
+        window.location.href = '/';
       })
       .catch((error) => {
         console.log(error);

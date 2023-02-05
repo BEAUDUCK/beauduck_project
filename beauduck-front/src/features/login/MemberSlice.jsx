@@ -1,4 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+const server = 'http://3.38.169.2:8080/';
+const global = 'http://i8b306.p.ssafy.io:8080/';
+export const UserLogin = createAsyncThunk(
+  'member/login',
+  async (accessToken) => {
+    console.log('로그인할게!', accessToken);
+    const res = await axios.get(
+      `${server}naver/login?accessToken=${accessToken}`,
+    );
+    return res.data;
+  },
+);
 
 export const memberSlice = createSlice({
   name: 'member',
@@ -13,11 +27,21 @@ export const memberSlice = createSlice({
       state.name = action.payload.name;
     },
     getNickName: (state, action) => {
-      state.nickName = action.payload.nickName;
-    }
+      state.nickName = action.payload;
+    },
+    removeMember: (state, action) => {
+      state.memberId = '';
+      state.name = '';
+      state.nickName = '';
+    },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(UserLogin.fulfilled, (state, action) => {
+      state.memberId = action.payload.data.memberId;
+      state.name = action.payload.data.name;
+    });
+  },
 });
 
-export const { getMemberId, getNickName } = memberSlice.actions;
+export const { getMemberId, getNickName, removeMember } = memberSlice.actions;
 export default memberSlice.reducer;
