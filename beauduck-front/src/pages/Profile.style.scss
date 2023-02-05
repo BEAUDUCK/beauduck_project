@@ -1,150 +1,39 @@
-.container-profile {
+/* ProfilePage.jsx */
+.ProfilePage {
+
   display: flex;
-  justify-content:space-evenly;
-  width: 800px;
-  height : 500px;
-}
-.input-box {
-  position: relative;
-  left: 100px;
-}
-.container-signup {
-  width: 900px;
-  height: 350px;
+  margin-bottom: 30px;
 
-  h4{
-    position: absolute;
-    top:300px;
-
-  }
-}
-.profile-name-signup {
-  position:absolute;
-  top: 80px;
-  left: 450px;
-  width: 800px;
-
-  .input1 {
-    margin: 1rem;
-    background-color: white;
-    border: solid;
-  }
-  .input2 {
-    width: 400px;
-    height: 130px;
-    background-color: white;
-    border: solid;
-  }
-}
-.face-capture {
-  width: 400px;
-  height: 250px;
-  left: 364px;
-  top: 533px;
-  display: inline-block;
-  cursor: pointer;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.profile-container {
-  width: 1000px;
-  height: 250px;
-  left : 220px;
-}
-  .imgbox {
-    width: 180px;
-    height: 180px;
-    position: relative;
-    left: 100px;
-    border-radius: 100%;
-  }
-    .img {
-      width: 100%;
-      height: 100%;
-      border-radius: 100%;
+  /* MyProfile.jsx */
+  .MyProfile {
+    width: 30%;
+  
+    .profile-img-div{
+  
+      .profile-img {
+        width: 200px;
+        height: 200px;
+      }
+  
     }
-  .profile-name {
-    position: absolute;
-    top: 100px;
-    left: 400px;
-    width: 800px;
-    margin: 0;
-    
-    h2 {
-      font-size: 18px;
-      font-weight: 600;
+  
+    .profile-nickname {
+  
     }
-    p {
-      font-size: 14px;
-      color: rgba(34,34,34,.5);
-    }}
-.hr {
-  top: 300px;
-  width: 1000px;
-  left: 220px !important;
-  border: solid;
-  color :rgb(170, 170, 170)
-}
-.NavButton {
-  background-color: #CECECE;
-  border-radius: 5px;
-  box-shadow: 0px 0px 3px 0px rgb(170, 170, 170);
-  display: inline-block;
-  width: 100px;
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  font-size: 20px;
-  font-weight: 700;
-  cursor: pointer;
-  box-sizing: border-box;
-  transition: all 0.1s ease-in-out;
-}
-
-.clickButton {
-  display: inline-block;
-  background-color: #FFF8BC;;
-  border-radius: 5px;
-  box-shadow: 0px 0px 3px 0px rgb(170, 170, 170);
-  width: 100px;
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  font-size: 20px;
-  font-weight: 700;
-  cursor: pointer;
-  box-sizing: border-box;
-  transition: all 0.1s ease-in-out;
-  border-radius: 10px;
-}
-.profile-tab {
-  display: inline-block;
-}
-
-.linkButton {
-  display: inline-block;
-  text-decoration: none;
-  color: black;
+  
+    .profile-content {
+      border: 1px solid gray;
+      width: 80%;
+      height: 100px;
+    }
   }
 
-  // display: inline-block;
-  // width: 5.5rem;
-  // height: 2rem;
-  // border: none;
-  // background-color: #CECECE;
-  // border-radius: 5px;
-  // box-shadow: 0px 0px 3px 0px rgb(170, 170, 170);
-  // margin-right: 5px;
-  // // font-family: "Jalnan";
-  // color:rgb(66, 66, 66);
-  // font-weight: 800;
-  // font-size: 0.9rem;
+  /* MyRanking.jsx */
+  .MyRanking {
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 
-  // cursor: pointer;
+}

@@ -1,152 +1,134 @@
-import './Profile.style.scss'
-import ProfileMakeup from '../features/profile/ProfileMakeup';
-import ProfileGallery from '../features/profile/ProfileGallery'
-import ProfileFace from '../features/profile/ProfileFace'
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import RankingPage from './RankingPage';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useState } from "react";
+import TabButton from "../components/button/TabButton";
+import MyMakeupList from "../features/profile/MyMakeupList";
+import MyProfile from "../features/profile/MyProfile";
+import MyProfileSaveFace from "../features/profile/MyProfileSaveFace";
+import MyRanking from "../features/profile/MyRanking";
+import MyGalleryList from "../features/profile/MyGalleryList";
+// 더미
+import logo from "../assets/logo_original.png"
 
-import { getMemberInfo } from '../features/profile/ProfileSlice';
+
+const dummyRecentMakeup = [
+  {
+    id: 1,
+    title: "메이크업 이름",
+    score: 4.5,
+    count: 120,
+    img: logo
+  },
+  {
+    id: 2,
+    title: "메이크업 이름",
+    score: 4.5,
+    count: 120,
+    img: logo
+  },
+  {
+    id: 3,
+    title: "메이크업 이름",
+    score: 4.5,
+    count: 120,
+    img: logo
+  },
+]
+
+const dummyMadeMakeup = [
+  {
+    id: 1,
+    title: "메이크업 이름",
+    score: 4.5,
+    count: 120,
+    img: logo
+  },
+  {
+    id: 2,
+    title: "메이크업 이름",
+    score: 4.5,
+    count: 120,
+    img: logo
+  },
+  {
+    id: 3,
+    title: "메이크업 이름",
+    score: 4.5,
+    count: 120,
+    img: logo
+  },
+]
+
+const dummyGallery = [
+  {
+    id: 1,
+    img: logo
+  },
+  {
+    id: 2,
+    img: logo
+  },
+  {
+    id: 3,
+    img: logo
+  },
+]
 
 const ProfilePage = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getMemberInfo());
-  }, [dispatch]);
-  // 닉네임 불러오기
-  const { nickName } = useSelector((state) => state.member);
 
-  const [isMakeup, setIsMakeup] = useState(true);
-  const [isGallery, setIsGallery] = useState(false);
-  const [isCapture, setIsCapture] = useState(false);
+  console.log(dummyMadeMakeup)
 
-  // 탭 이동  함수
-  const onClickMakeup = () => {
-    setIsMakeup(true);
-    setIsGallery(false);
-    setIsCapture(false);
-  };
+  const [makeupState, setMakeupState] = useState(true)
+  const [galleryState, setGalleryState] = useState(false)
+  const [faceState, setFaceState] = useState(false)
 
-  const onClickGallery = () => {
-    setIsMakeup(false);
-    setIsGallery(true);
-    setIsCapture(false);
-  };
-
-  const onClickCapture = () => {
-    setIsMakeup(false);
-    setIsGallery(false);
-    setIsCapture(true);
-  };
-
-  // 이미지 파일 업로드 함수
-  const [imgFile, setImgFile] = useState("");
-  const imgRef = useRef();
-  const saveImgFile = () => {
-    const file = imgRef.current.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgFile(reader.result);
-    };
+  const handleMakeup = () => {
+    setMakeupState(true)
+    setGalleryState(false)
+    setFaceState(false)
   }
-  // 회원 닉네임 중복 여부 확인
-  // const NickNameCheck = async (nickName) => {
-  //   axios
-  //   .get(`http://i8b306.p.ssafy.io:8080/members/check/${nickName}`)
-  //   .then((res) => {
-  //     console.log(res.data.data, '사용 가능');
-  //     if (res.data.data === false) {  
-  //       setErrorMessage("사용 가능합니다.")
-  //     }
-  //     else {
-  //       setErrorMessage("중복된 닉네임입니다.")
-  //     }
-  //   })}  
-// };
+
+  const handleGallery = () => {
+    setMakeupState(false)
+    setGalleryState(true)
+    setFaceState(false)
+  }
+
+  const handleFace = () => {
+    setMakeupState(false)
+    setGalleryState(false)
+    setFaceState(true)
+  }
+
+  const ChangeTab = () => {
+    if (makeupState) {
+      return <MyMakeupList recentMakeup={dummyRecentMakeup} madeMakeup={dummyMadeMakeup}/>
+    } else if (galleryState) {
+      return <MyGalleryList gallery={dummyGallery}/>
+    } else {
+      return <MyProfileSaveFace />
+    }
+  }
+
+  useEffect(() => {
+
+  }, [makeupState, galleryState, faceState])
 
   return (
-    <div className='container'>
-      <div className='container-profile'>
-      <div>
-          <img
-            className = "imgbox"
-            src={
-              imgFile
-                ? imgFile
-                : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`}
-              alt="사진">
-          </img>
-          <br />
-          <input
-            className='input-box'
-            type="file"
-            accept="image/*"
-            onChange={saveImgFile}
-            ref={imgRef}></input>
-
-            <br></br>
-            <br></br>
-
-
-            <Grid container sm={7} spacing={3}>
-
-              <Grid item sm={12}>
-                <TextField
-                  required
-                  id="outlined-required"
-                  defaultValue= {nickName}
-                /> 
-              </Grid>
-              <div></div>
-              <Grid item sm={12}>
-                <TextField
-                  id="outlined-multiline-static"
-                  multiline
-                  fullWidth
-                  rows={4}
-                  defaultValue="자기소개 내용"
-                />     
-              </Grid>
-            </Grid>
-            </div>
-            <RankingPage/>
+    <div className="container">
+      <div className="ProfilePage">
+        <MyProfile />
+        <MyRanking />
       </div>
-      <br/>
-      <hr className='hr'/>
-      <br/>
-        <div className="linkButton">
-          <div
-            className={isMakeup ? 'clickButton' : 'NavButton'}
-            onClick={onClickMakeup}>
-            메이크업
-          </div>
-        </div>
-        <div className="linkButton">
-          <div
-            className={isGallery ? 'clickButton' : 'NavButton'}
-            onClick={onClickGallery}>
-            갤러리
-          </div>
-          </div>
-        <div className="linkButton">
-          <div 
-            className={isCapture ? 'clickButton' : 'NavButton'}
-            onClick={onClickCapture}>
-            얼굴정보
-          </div>
-        </div>
-        {/* 탭 전환에 따른 데이터 공개 */}
-        {isMakeup && <ProfileMakeup/>}
-        {isGallery && <ProfileGallery/>}
-        {isCapture && <ProfileFace/>}
-      
+      <div>
+        <TabButton text={"메이크업 목록"} onClick={handleMakeup} addClass={"makeup-tab"}/>
+        <TabButton text={"갤러리 목록"} onClick={handleGallery} addClass={"gallery-tab"}/>
+        <TabButton text={"얼굴 저장"} onClick={handleFace} addClass={"face-tab"}/>
+      </div>
+      <div>
+        <ChangeTab />
+      </div>
     </div>
-  );
-};
+  )
+}
 
 export default ProfilePage;
