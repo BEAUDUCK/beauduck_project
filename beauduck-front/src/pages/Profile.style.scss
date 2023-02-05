@@ -1,7 +1,12 @@
+.container-profile {
+  display: flex;
+  justify-content:space-evenly;
+  width: 800px;
+  height : 500px;
+}
 .input-box {
-  top: 280px !important;
-  left: 200px;
-  position: fixed;
+  position: relative;
+  left: 100px;
 }
 .container-signup {
   width: 900px;
@@ -52,8 +57,9 @@
   .imgbox {
     width: 180px;
     height: 180px;
-    top: 40px; 
     position: relative;
+    left: 100px;
+    border-radius: 100%;
   }
     .img {
       width: 100%;
