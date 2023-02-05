@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Paging from '../../components/pagination/Paging';
 import ProfileGalleryItem from './ProfileGalleryItem';
-
+// 프로필- 갤러리 장원영 사진
 const ProfileGallery = ({ modeList }) => {
   const [currentRooms, setCurrentRooms] = useState([]); 
   const [page, setPage] = useState(1); 
