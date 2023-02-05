@@ -12,11 +12,12 @@ import ListItemButton from '@mui/material/ListItemButton';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import { getAccessToken, getCookie } from '../../api/cookie';
+import { useDispatch } from 'react-redux';
+import { removeMember } from './MemberSlice';
 
 function LogoutModal(props) {
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
-  // const [accessToken, setAccessToken] = useState(getCookie('accessToken'));
-  // const token = JSON.parse(accessToken).accessToken;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const token = getAccessToken();
@@ -24,7 +25,7 @@ function LogoutModal(props) {
 
   const Logout = async () => {
     const res = await axios.get(
-      `http://i8b306.p.ssafy.io:8080/naver/logout?accessToken=${token}`,
+      `http://3.38.169.2:8080/naver/logout?accessToken=${token}`,
     );
     console.log('로그아웃 시작');
     // console.log(res.data.status);
@@ -32,6 +33,7 @@ function LogoutModal(props) {
     console.log('accessToken 제거 완료');
     localStorage.removeItem('refreshToken');
     console.log('refreshToken 제거 완료');
+    dispatch(removeMember());
     navigate('/');
   };
   const { onClose, selectedValue, open } = props;

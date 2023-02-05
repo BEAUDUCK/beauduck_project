@@ -3,13 +3,14 @@ import './Header.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/logo_original.png';
 import { useState } from 'react';
-import  LoginModal  from '../../features/login/LoginModal'
+import LoginModal from '../../features/login/LoginModal';
+import LogoutModal from '../../features/login/LogoutModal';
 
 const Header = () => {
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('refreshToken')
-  console.log(token)
+  const token = localStorage.getItem('refreshToken');
+  console.log(token);
 
   const [isOpen, setIsOpen] = useState(false);
   const isOpenModal = () => {
@@ -33,25 +34,25 @@ const Header = () => {
           <p onClick={() => navigate('/single')}>따라해덕</p>
           <p onClick={() => navigate('/together')}>투게덕</p>
           <p onClick={() => navigate('/board')}>쑥덕쑥덕</p>
+          <p onClick={() => navigate('/rank')}>랭킹</p>
         </div>
         <div className="header-auth">
           <p onClick={() => navigate('/profile')}>
-          <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user" />
+            <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user" />
           </p>
           {/* <p onClick={isOpenModal}> 
           LOGIN
           {isOpen && <LoginModal isOpenModal={isOpenModal} />}
           </p> */}
-          {! token ?
-          
-          <p>
-          <LoginModal/>
-          </p>
-          :
-          <p>
-          {/* <LogoutModal/> */}
-          </p>
-          }
+          {!token ? (
+            <p>
+              <LoginModal />
+            </p>
+          ) : (
+            <p>
+              <LogoutModal />
+            </p>
+          )}
         </div>
       </div>
     </div>
