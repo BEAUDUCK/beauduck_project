@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FacemeshFeature from '../features/facemesh/FacemeshFeature';
-import duck from '../assets/duck1.jpg';
 import SingleModeSequence from '../features/single/SingleModeSequence';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ExitModal from '../components/modal/ExitModal';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import React from 'react';
+import Alert from '../components/modal/Alert';
 
 const SingleModePage = () => {
   const nowMakeup = [
@@ -93,10 +93,8 @@ const SingleModePage = () => {
 
   const [nowMain, setNowMain] = useState('');
   const [nowStep, setNowStep] = useState([]);
-  const [FistStep, setFirstStep] = useState([]);
 
   const [makeupList] = useState([]);
-  // let stepLength = 0; // 진행바에 사용
   const [stepLength, setStepLength] = useState(0);
 
   useEffect(() => {
@@ -145,7 +143,6 @@ const SingleModePage = () => {
     // console.log('nowMain', nowMain);
     // console.log('nowStep', nowStep);
     // console.log('makeupList', makeupList);
-    setFirstStep(nowStep);
   }, []);
 
   useEffect(() => {
@@ -157,22 +154,30 @@ const SingleModePage = () => {
   const goBefore = () => {
     if (idx > 0) {
       setIdx(idx - 1);
+    } else {
+      setIsFirst(true);
     }
   };
 
   const goNext = () => {
-    if (idx < stepLength) {
+    if (idx < stepLength - 1) {
       setIdx(idx + 1);
+    } else {
+      setIsLast(true);
     }
   };
+
+  const [isFirst, setIsFirst] = useState(false);
+  const [isLast, setIsLast] = useState(false);
 
   useEffect(() => {
     setNowMain(makeupList[idx][0]);
     setNowStep(makeupList[idx][1]);
-    console.log('next', idx);
-    console.log('next', nowMain);
-    console.log('next', nowStep);
   }, [idx]);
+
+  const finishMode = () => {
+    navigate('/single/result');
+  };
 
   return (
     <div className="full-screen">
@@ -279,8 +284,26 @@ const SingleModePage = () => {
         </div>
         <FacemeshFeature />
       </div>
-      <div className="right-div"></div>
+      <div className="right-div">
+        <img src={nowStep.img} alt={nowStep.step} />
+        <div style={{ backgroundColor: nowStep.colorCode }}></div>
+        <button onClick={finishMode} className="finish-btn">
+          종료하기
+        </button>
+      </div>
+      {isFirst && (
+        <Alert
+          text={'첫 번째 단계입니다'}
+          onClickEvent={() => setIsFirst(!isFirst)}
+        />
+      )}
+      {isLast && (
+        <Alert
+          text={'마지막 단계입니다'}
+          onClickEvent={() => setIsLast(!isLast)}
+        />
+      )}
     </div>
   );
 };
-export default SingleModePage;
+export default React.memo(SingleModePage);

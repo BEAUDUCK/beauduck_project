@@ -3,10 +3,13 @@ import colorSelector from '../../assets/color-circle.png';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeBtnState } from './SingleSlice';
+import { useEffect } from 'react';
 
 const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
   const color_course = ['eyeshadow', 'blusher', 'lipstick', 'tint', 'lipgloss'];
-
+  const dispatch = useDispatch();
   const subRef = useRef();
   const contentRef = useRef();
   const imgRef = useRef();
@@ -15,6 +18,8 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
   const [content, setContent] = useState('');
   const [color, setColor] = useState('');
   const [img, setImg] = useState('');
+
+  const { btnState } = useSelector((state) => state.single);
 
   // option 생성
   const renderingOption = () => {
@@ -36,7 +41,6 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     setColor(color);
   };
 
-  const [isUpdate, setIsUpdate] = useState(false);
   const [idx, setIdx] = useState(-1);
 
   //소분류 생성
@@ -58,17 +62,6 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     };
 
     imgRef.current.value = '';
-
-    // const file = document.getElementById('file');
-    // console.log(file);
-    // document.getElementById('file').select();
-    // document.selection.clear();
-    // file.reset();
-    // file.select();
-    // console.log(file.select());
-    // document.selection.clear();
-    // document.execCommand('Delete');
-    // console.log('s');
 
     const idx = makeupMiddleList.push(subData) - 1;
 
@@ -109,7 +102,6 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     subImg.setAttribute('src', `/images/makeup/sub/sub_${step}.png`);
     subImg.setAttribute('alt', step);
 
-    setIsUpdate(false);
     setIdx(-1);
 
     setStep('');
@@ -121,12 +113,11 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
 
   // 수정할 때 폼에 기존 데이터 넣어주기
   const getSubData = (idx) => {
+    dispatch(changeBtnState());
+
     const subData = makeupMiddleList[idx];
-    setIsUpdate(true);
     setIdx(idx);
 
-    // imgRef.current.value = img;
-    // console.log(img);
     setStep(subData.step);
     setContent(subData.content);
     setColor(subData.colorCode);
@@ -142,7 +133,6 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     const removeSubImg = document.getElementById(`subImg_${idx}`);
     subBox.removeChild(removeSubImg);
 
-    setIsUpdate(false);
     setIdx(-1);
 
     setStep('');
@@ -152,18 +142,52 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     imgRef.current.value = '';
   };
 
+  useEffect(() => {
+    if (!btnState) {
+      setStep('');
+      setContent('');
+      setColor('');
+      setImg('');
+    }
+  }, [btnState]);
+
   return (
     <div className="sub-div">
       <div id="sub-sequence">
-        {main === 'skin' && <div id="sub-skin" className="sub-list"></div>}
-        {main === 'eyebrow' && (
-          <div id="sub-eyebrow" className="sub-list"></div>
-        )}
-        {main === 'eye' && <div id="sub-eye" className="sub-list"></div>}
-        {main === 'conture' && (
-          <div id="sub-conture" className="sub-list"></div>
-        )}
-        {main === 'lip' && <div id="sub-lip" className="sub-list"></div>}
+        <div
+          id="sub-skin"
+          className={['sub-list', main === 'skin' ? 'step-selected' : ''].join(
+            ' ',
+          )}
+        ></div>
+        <div
+          id="sub-eyebrow"
+          className={[
+            'sub-list',
+            main === 'eyebrow' ? 'step-selected' : '',
+          ].join(' ')}
+        ></div>
+        <div
+          id="sub-eye"
+          className={['sub-list', main === 'eye' ? 'step-selected' : ''].join(
+            ' ',
+          )}
+        ></div>
+
+        <div
+          id="sub-conture"
+          className={[
+            'sub-list',
+            main === 'conture' ? 'step-selected' : '',
+          ].join(' ')}
+        ></div>
+
+        <div
+          id="sub-lip"
+          className={['sub-list', main === 'lip' ? 'step-selected' : ''].join(
+            ' ',
+          )}
+        ></div>
       </div>
       <div className="sub-form">
         <div className="sub-div-first">
@@ -206,7 +230,7 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
           accept="image/*"
           onChange={(e) => setImg(e.target.files[0])}
         />
-        {!isUpdate ? (
+        {!btnState ? (
           <button type="button" className="ok-btn" onClick={submitSubMakeup}>
             완료
           </button>

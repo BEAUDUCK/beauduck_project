@@ -58,6 +58,7 @@ export const singleSlice = createSlice({
     title: '',
     content: '',
     duration: '',
+    btnState: false, // false가 생성 상태 (true가 수정/삭제)
     // 진행
     mainList: [],
   },
@@ -73,6 +74,12 @@ export const singleSlice = createSlice({
     },
     selectMain: (state, action) => {
       state.mainList = action.payload;
+    },
+    changeBtnState: (state, action) => {
+      state.btnState = !state.btnState;
+    },
+    setBtnStateCreate: (state, action) => {
+      state.btnState = false;
     },
   },
   extraReducers: (builder) => {
@@ -94,6 +101,12 @@ export const singleSlice = createSlice({
       });
   },
 });
-export const { submitMakeup, rejectedMakeup, selectMain } = singleSlice.actions;
+export const {
+  submitMakeup,
+  rejectedMakeup,
+  selectMain,
+  changeBtnState,
+  setBtnStateCreate,
+} = singleSlice.actions;
 
 export default singleSlice.reducer;

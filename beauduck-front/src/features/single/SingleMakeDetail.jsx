@@ -1,13 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import SingleMakeSub from './SingleMakeSub';
+import { setBtnStateCreate } from './SingleSlice';
 
 const SingleMakeDetail = ({ getMakeupList }) => {
+  const dispatch = useDispatch();
   const [main, setMain] = useState('skin');
-
-  const selectMain = (val) => {
-    setMain(val);
-  };
 
   const sub = () => {
     switch (main) {
@@ -140,6 +139,11 @@ const SingleMakeDetail = ({ getMakeupList }) => {
     getMakeupList(makeupMainList);
   };
 
+  const changeMain = (val) => {
+    setMain(val);
+    dispatch(setBtnStateCreate());
+  };
+
   return (
     <div className="makeup-form-second">
       <div className="main-div">
@@ -147,7 +151,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
           src="/images/makeup/main_skin.png"
           alt="skin"
           id="skin"
-          onClick={() => selectMain('skin')}
+          onClick={() => changeMain('skin')}
           className={'main-img' + (main === 'skin' ? '_selected' : '')}
         />
         <FontAwesomeIcon
@@ -158,7 +162,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
           src="/images/makeup/main_eyebrow.png"
           alt="eyebrow"
           id="eyebrow"
-          onClick={() => selectMain('eyebrow')}
+          onClick={() => changeMain('eyebrow')}
           className={'main-img' + (main === 'eyebrow' ? '_selected' : '')}
         />
         <FontAwesomeIcon
@@ -169,7 +173,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
           src="/images/makeup/main_eye.png"
           alt="eye"
           id="eye"
-          onClick={() => selectMain('eye')}
+          onClick={() => changeMain('eye')}
           className={'main-img' + (main === 'eye' ? '_selected' : '')}
         />
         <FontAwesomeIcon
@@ -180,7 +184,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
           src="/images/makeup/main_conture.png"
           alt="conture"
           id="conture"
-          onClick={() => selectMain('conture')}
+          onClick={() => changeMain('conture')}
           className={'main-img' + (main === 'conture' ? '_selected' : '')}
         />
         <FontAwesomeIcon
@@ -191,7 +195,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
           src="/images/makeup/main_lip.png"
           alt="lip"
           id="lip"
-          onClick={() => selectMain('lip')}
+          onClick={() => changeMain('lip')}
           className={'main-img' + (main === 'lip' ? '_selected' : '')}
         />
       </div>
