@@ -26,6 +26,7 @@ const ProfileGallery = () => {
   return (
     <div> 
       <br />
+      {/* 아래부터는 mui form */}
       <FormControl>
       <FormLabel id="demo-controlled-radio-buttons-group">갤러리 공개 여부</FormLabel>
       <RadioGroup

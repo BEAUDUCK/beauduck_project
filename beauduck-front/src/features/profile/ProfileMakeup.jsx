@@ -66,5 +66,5 @@ const ProfileMakeup = () => {
     </div>
   );
 };
-// SingleList와 서식 동일
+// SingleList와 서식 동일하여 재사용
 export default ProfileMakeup;
