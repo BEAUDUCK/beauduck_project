@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { submitMakeup } from './SingleSlice';
 // import logo from '../../assets/logo_original.png';
-import logo from '../../assets/logo.png';
 
 const SingleMakeFirst = ({ sendFinalImg }) => {
   const dispatch = useDispatch();
@@ -48,7 +47,7 @@ const SingleMakeFirst = ({ sendFinalImg }) => {
 
   return (
     <div className="makeup-first">
-      <img src={logo} alt="logo" className="logo-img" />
+      <img src={'images/logo.png'} alt="logo" className="logo-img" />
       <div className="makeup-form-first">
         <div className="makeup-element">
           <label htmlFor="title" className="makeup-label">
