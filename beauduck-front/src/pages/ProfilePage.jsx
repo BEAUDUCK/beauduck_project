@@ -2,22 +2,29 @@ import './Profile.style.scss'
 import ProfileMakeup from '../features/profile/ProfileMakeup';
 import ProfileGallery from '../features/profile/ProfileGallery'
 import ProfileFace from '../features/profile/ProfileFace'
-import CssBaseline from '@mui/material/CssBaseline';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RankingPage from './RankingPage';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getMemberInfo } from '../features/profile/ProfileSlice';
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMemberInfo());
+  }, [dispatch]);
+  // 닉네임 불러오기
+  const { nickName } = useSelector((state) => state.member);
+
   const [isMakeup, setIsMakeup] = useState(true);
   const [isGallery, setIsGallery] = useState(false);
   const [isCapture, setIsCapture] = useState(false);
 
+  // 탭 이동  함수
   const onClickMakeup = () => {
     setIsMakeup(true);
     setIsGallery(false);
@@ -35,7 +42,8 @@ const ProfilePage = () => {
     setIsGallery(false);
     setIsCapture(true);
   };
-  const navigate = useNavigate();
+
+  // 이미지 파일 업로드 함수
   const [imgFile, setImgFile] = useState("");
   const imgRef = useRef();
   const saveImgFile = () => {
@@ -45,14 +53,21 @@ const ProfilePage = () => {
     reader.onloadend = () => {
       setImgFile(reader.result);
     };
-    
-  };
-  // useLayoutEffect(() => {
-  //   const url = 'http://localhost:3000/'
-  //   const urlSplit = url.split('/');
-  //   if (urlSplit[urlSplit.length - 1] === 'gallery') onClickGallery();
-  //   else if (urlSplit[urlSplit.length - 1] === 'capture') onClickCapture();
-  // }, []);
+  }
+  // 회원 닉네임 중복 여부 확인
+  // const NickNameCheck = async (nickName) => {
+  //   axios
+  //   .get(`http://i8b306.p.ssafy.io:8080/members/check/${nickName}`)
+  //   .then((res) => {
+  //     console.log(res.data.data, '사용 가능');
+  //     if (res.data.data === false) {  
+  //       setErrorMessage("사용 가능합니다.")
+  //     }
+  //     else {
+  //       setErrorMessage("중복된 닉네임입니다.")
+  //     }
+  //   })}  
+// };
 
   return (
     <div className='container'>
@@ -80,11 +95,11 @@ const ProfilePage = () => {
 
             <Grid container sm={7} spacing={3}>
 
-              <Grid item sm={7}>
+              <Grid item sm={12}>
                 <TextField
                   required
                   id="outlined-required"
-                  defaultValue="닉네임"
+                  defaultValue= {nickName}
                 /> 
               </Grid>
               <div></div>
@@ -125,6 +140,7 @@ const ProfilePage = () => {
             얼굴정보
           </div>
         </div>
+        {/* 탭 전환에 따른 데이터 공개 */}
         {isMakeup && <ProfileMakeup/>}
         {isGallery && <ProfileGallery/>}
         {isCapture && <ProfileFace/>}

@@ -5,6 +5,7 @@ export const setCookie = (name, value, exp) => {
     name + '=' + escape(value) + ';expires=' + date.toUTCString() + ';path=/';
 };
 
+
 export const getCookie = (name) => {
   const value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
   return value ? unescape(value[2]) : null;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import BlackOut from '../../components/blackout/BlackOut';
 import GalleryInfo from './GalleryInfo';
-
+// 모달 창 구현
 const ProfileGalleryItem = ({ modeItem }) => {
   const [isInfo, setIsInfo] = useState(false);
 
