@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 const RankingList = ({ dummyData }) => {
   const rankingData = dummyData.slice(0, 10).sort(function (a, b) {
     return b.exp - a.exp;
