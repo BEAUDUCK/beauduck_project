@@ -5,7 +5,6 @@ export const setCookie = (name, value, exp) => {
     name + '=' + escape(value) + ';expires=' + date.toUTCString() + ';path=/';
 };
 
-
 export const getCookie = (name) => {
   const value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
   return value ? unescape(value[2]) : null;
@@ -16,4 +15,10 @@ export const resetCookie = (cName) => {
   expireDate.setDate(expireDate.getDate() - 1);
   document.cookie =
     cName + '= ' + '; expires=' + expireDate.toGMTString() + '; path=/';
+};
+
+export const getAccessToken = () => {
+  const tokenObj = getCookie('accessToken');
+  const accessToken = JSON.parse(tokenObj).accessToken;
+  return accessToken;
 };
