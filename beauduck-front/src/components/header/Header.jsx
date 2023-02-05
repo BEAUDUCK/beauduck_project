@@ -52,7 +52,7 @@ const Header = () => {
           </p>
           :
           <p>
-          <LogoutModal/>
+          {/* <LogoutModal/> */}
           </p>
           }
         </div>

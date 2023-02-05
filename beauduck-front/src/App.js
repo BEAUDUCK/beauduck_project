@@ -82,9 +82,9 @@ function App() {
             <Route path="/rank" element={<RankingPage />} />
             {/* </Route> */}
             <Route path="/Api/Naver" element={<NaverLogin />} />
-            <Route path="*" element={<NotFound />} />
             <Route path="/" element={<MainPage />} />
             <Route path="/signup" element={<SingupPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
       </BrowserRouter>
       <Footer />
