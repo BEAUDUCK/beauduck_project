@@ -32,9 +32,18 @@ export const createNewMakeup = createAsyncThunk(
 export const recommendMakeup = createAsyncThunk(
   'single/recommendMakeup',
   async (id) => {
-    const res = await axios.post('makeup/recommend', id);
-    const res2 = await axios.get('makeup/recommend');
-    return res2.data;
+    await axios.post('makeup/recommend', id);
+    const res = await axios.get('makeup/recommend');
+    return res.data;
+  },
+);
+
+// 메이크업 진행
+export const startMakeup = createAsyncThunk(
+  'single/startMakeup',
+  async (selectedStep) => {
+    const res = await axios.post('makeup/execute', selectedStep);
+    return res.data;
   },
 );
 
@@ -43,15 +52,27 @@ export const singleSlice = createSlice({
   initialState: {
     makeupList: [],
     makeupDetail: '',
-    completed: false, // 만들기
     recommendList: [],
+    // 만들기
+    completed: false,
+    title: '',
+    content: '',
+    duration: '',
+    // 진행
+    mainList: [],
   },
   reducers: {
     submitMakeup: (state, action) => {
       state.completed = true;
+      state.title = action.payload.title;
+      state.content = action.payload.content;
+      state.duration = action.payload.duration;
     },
     rejectedMakeup: (state, action) => {
       state.completed = false;
+    },
+    selectMain: (state, action) => {
+      state.mainList = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -67,9 +88,12 @@ export const singleSlice = createSlice({
       })
       .addCase(recommendMakeup.fulfilled, (state, action) => {
         state.recommendList = action.payload;
+      })
+      .addCase(startMakeup.fulfilled, (state, action) => {
+        state.nowMakeup = action.payload;
       });
   },
 });
-export const { submitMakeup, rejectedMakeup } = singleSlice.actions;
+export const { submitMakeup, rejectedMakeup, selectMain } = singleSlice.actions;
 
 export default singleSlice.reducer;
