@@ -41,7 +41,7 @@ const SingleMake = ({ onToggleMake }) => {
       makeupMainList,
     };
     // 완료를... 두번 눌러야하네?^^
-    console.log(finalMakeup);
+    console.log('finalMakeup', finalMakeup);
 
     // axios 요청 보내기...^^
     // dispatch()
