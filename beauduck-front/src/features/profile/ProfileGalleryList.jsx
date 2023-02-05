@@ -9,7 +9,6 @@ const ProfileGallery = ({ modeList }) => {
     setPage(page);
   };
   const [postPerPage] = useState(12);
-
   const indefOfLastRoom = page * postPerPage;
   const indefOfFirstRoom = indefOfLastRoom - postPerPage;
 
