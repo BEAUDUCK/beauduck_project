@@ -16,7 +16,7 @@ import SingleMake from '../features/single/SingleMake';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
-  //  const {makeupList, recommendList} = useSelector(state => state.single)
+  const { makeupList } = useSelector((state) => state.single);
   // 최초에 메이크업 리스트 불러오기
   useEffect(() => {
     dispatch(getMakeupList());
@@ -37,50 +37,50 @@ const SinglePage = () => {
     dispatch(rejectedMakeup());
   };
 
-  const makeupList = [
-    {
-      id: 1,
-      title: '데일리 메이크업',
-      score: 4.5,
-      count: 120,
-      img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
-    },
-    {
-      id: 2,
-      title: '물광 메이크업',
-      score: 4.3,
-      count: 20,
-      img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
-    },
-    {
-      id: 3,
-      title: '데일리 메이크업',
-      score: 4.5,
-      count: 120,
-      img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
-    },
-    {
-      id: 4,
-      title: '물광 메이크업',
-      score: 4.3,
-      count: 20,
-      img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
-    },
-    {
-      id: 5,
-      title: '데일리 메이크업',
-      score: 4.5,
-      count: 120,
-      img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
-    },
-    {
-      id: 6,
-      title: '물광 메이크업',
-      score: 4.3,
-      count: 20,
-      img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
-    },
-  ];
+  // const makeupList = [
+  //   {
+  //     id: 1,
+  //     title: '데일리 메이크업',
+  //     score: 4.5,
+  //     count: 120,
+  //     img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
+  //   },
+  //   {
+  //     id: 2,
+  //     title: '물광 메이크업',
+  //     score: 4.3,
+  //     count: 20,
+  //     img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
+  //   },
+  //   {
+  //     id: 3,
+  //     title: '데일리 메이크업',
+  //     score: 4.5,
+  //     count: 120,
+  //     img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
+  //   },
+  //   {
+  //     id: 4,
+  //     title: '물광 메이크업',
+  //     score: 4.3,
+  //     count: 20,
+  //     img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
+  //   },
+  //   {
+  //     id: 5,
+  //     title: '데일리 메이크업',
+  //     score: 4.5,
+  //     count: 120,
+  //     img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
+  //   },
+  //   {
+  //     id: 6,
+  //     title: '물광 메이크업',
+  //     score: 4.3,
+  //     count: 20,
+  //     img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
+  //   },
+  // ];
 
   return (
     <>
