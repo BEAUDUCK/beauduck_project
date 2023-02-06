@@ -77,6 +77,15 @@ public class MakeupController {
         return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
     }
 
+    @ApiOperation(value = "메이크업 결과 사진 저장", notes = "메이크업 결과 사진을 db에 저장한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
+    @PostMapping("/gallery")
+    public ResponseEntity<String> addToGallery(@ApiParam(value = "MemberGalleryRequestDto", required = true) @RequestBody MemberGalleryRequestDto dto) {
+        if(makeupService.addToGallery(dto))
+            return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+        return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
+    }
+
+
 //    @ApiOperation(value = "최근 메이크업 저장", notes = "유저가 실행한 메이크업을 최근 메이크업 테이블에 저장 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
 //    @PostMapping("/recent")
 //    public ResponseEntity<String> addRecentMakeup(@ApiParam(value = "RecentMakeupRequestDto", required = true) @RequestBody RecentMakeupRequestDto dto){

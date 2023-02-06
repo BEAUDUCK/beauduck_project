@@ -1,13 +1,7 @@
 package com.ssafy.beauduckmakeup.service;
 import com.ssafy.beauduckmakeup.dto.*;
-import com.ssafy.beauduckmakeup.entity.MakeupEntity;
-import com.ssafy.beauduckmakeup.entity.MakeupMainEntity;
-import com.ssafy.beauduckmakeup.entity.MakeupMiddleEntity;
-import com.ssafy.beauduckmakeup.entity.RecentMakeupEntity;
-import com.ssafy.beauduckmakeup.repository.MakeupMainRepository;
-import com.ssafy.beauduckmakeup.repository.MakeupMiddleRepository;
-import com.ssafy.beauduckmakeup.repository.MakeupRepository;
-import com.ssafy.beauduckmakeup.repository.RecentMakeupRepository;
+import com.ssafy.beauduckmakeup.entity.*;
+import com.ssafy.beauduckmakeup.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +23,9 @@ public class MakeupService {
     private MakeupMiddleRepository makeupMiddleRepository;
     @Autowired
     private RecentMakeupRepository recentMakeupRepository;
+
+    @Autowired
+    private MemberGalleryRepository memberGalleryRepository;
 
     public boolean insert(MakeupRequestDto dto, String url) {
         //Makeup 테이블에 데이터 저장
@@ -152,6 +149,14 @@ public class MakeupService {
 
         RecentMakeupEntity makeup = recentMakeupRepository.save(recent.toEntity());
         if(makeup==null)
+            return false;
+        return true;
+    }
+
+    public boolean addToGallery(MemberGalleryRequestDto dto) {
+        MemberGalleryEntity gallery = memberGalleryRepository.save(dto.toEntity());
+
+        if(gallery == null)
             return false;
         return true;
     }
