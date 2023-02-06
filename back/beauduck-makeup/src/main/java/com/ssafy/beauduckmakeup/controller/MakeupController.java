@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 
 @RestController
@@ -38,8 +39,8 @@ public class MakeupController {
 
     @ApiOperation(value = "메이크업 썸네일 저장", notes = "메이크업 정보에 썸네일을 추가한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
     @PostMapping("/img/{makeupId}")
-    public ResponseEntity<String> addImg(@RequestBody MultipartFile multipartFile, @PathVariable int makeupId) throws Exception {
-        String url = awsS3Service.uploadFileV1(multipartFile);
+    public ResponseEntity<String> addImg(@RequestBody File file, @PathVariable int makeupId) throws Exception {
+        String url = awsS3Service.uploadFileV1(file);
         if (url != null) {
             makeupService.updateImg(makeupId, url);
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
