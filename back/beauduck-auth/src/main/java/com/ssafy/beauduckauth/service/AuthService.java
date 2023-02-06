@@ -1,14 +1,15 @@
 package com.ssafy.beauduckauth.service;
 
 import com.google.common.net.HttpHeaders;
-import com.ssafy.beauduckauth.dto.auth.LoginResponseDto;
-import com.ssafy.beauduckauth.dto.auth.SignupRequestDto;
-import com.ssafy.beauduckauth.dto.auth.TokenDeleteResponseDto;
-import com.ssafy.beauduckauth.dto.auth.TokenResponseDto;
+import com.ssafy.beauduckauth.dto.auth.*;
 import com.ssafy.beauduckauth.dto.common.response.ResponseSuccessDto;
 import com.ssafy.beauduckauth.entity.member.MemberEntity;
 import com.ssafy.beauduckauth.entity.member.MemberInfoEntity;
 import com.ssafy.beauduckauth.entity.member.MemberProfileEntity;
+import com.ssafy.beauduckauth.errorhandling.exception.service.DuplicateErrorException;
+import com.ssafy.beauduckauth.errorhandling.exception.service.EntityIsNullException;
+import com.ssafy.beauduckauth.errorhandling.exception.service.LoginErrorException;
+import com.ssafy.beauduckauth.errorhandling.exception.service.SignupErrorException;
 import com.ssafy.beauduckauth.repository.member.MemberInfoRepository;
 import com.ssafy.beauduckauth.repository.member.MemberProfileRepository;
 import com.ssafy.beauduckauth.repository.member.MemberRepository;
@@ -20,8 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.time.LocalDate;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -48,8 +49,6 @@ public class AuthService {
         return res;
     }
 
-
-
     public ResponseSuccessDto<TokenResponseDto> getRefreshToken(String refreshToken) {
         JSONObject response = getJsonObjectByToken(refreshToken);
 
@@ -66,35 +65,23 @@ public class AuthService {
 
     public ResponseSuccessDto<LoginResponseDto> login(String accessToken) {
         JSONObject response = getJsonObjectByToken(accessToken);
-
-
         Map<String, Object> res = (Map<String, Object>) response.get("response");
 
         System.out.println(res.toString());
-
         String id = (String) res.get("id");
         String name = (String) res.get("name");
 
-        /*
-         * 임의 데이터 값
-         */
-        String email = "test@naver.com";
-        String sex = "m";
-        String phone = "010-1234-1234";
-
-        MemberEntity memberEntity = memberRepository.findById(id).orElseGet(() -> {
-            System.out.println("회원가입 시작");
-
-            System.out.println("회원 등록 성공");
-            return null;
-        });
+        MemberEntity memberEntity = memberRepository.findById(id).orElseThrow(() -> new LoginErrorException("등록되지 않은 회원입니다."));
+        MemberProfileEntity memberProfileEntity = memberProfileRepository.findByMemberEntity(memberEntity).orElseThrow(() -> new EntityIsNullException("회원의 프로필이 존재하지 않습니다."));
+        MemberInfoEntity memberInfoEntity = memberInfoRepository.findByMemberEntity(memberEntity).orElseThrow(() -> new EntityIsNullException("회원의 정보가 존재하지 않습니다."));
 
         LoginResponseDto loginResponseDto = LoginResponseDto.builder()
                 .memberId(id)
                 .name(name)
-                .email(email)
-                .sex(sex)
-                .phoneNumber(phone)
+                .nickName(memberProfileEntity.getNickName())
+                .email(memberInfoEntity.getEmail())
+                .sex(memberInfoEntity.getSex())
+                .phoneNumber(memberInfoEntity.getPhoneNumber())
                 .build();
 
         return responseUtil.successResponse(loginResponseDto);
@@ -113,39 +100,33 @@ public class AuthService {
         return res;
     }
 
-    public ResponseSuccessDto<Boolean> checkId(String accessToken) {
-        JSONObject response = getJsonObjectByToken(accessToken);
-
-        Map<String, Object> res = (Map<String, Object>) response.get("response");
-
-        System.out.println(res.toString());
-
-        String id = (String) res.get("id");
-
-        if (memberRepository.existsById(id)) {
-            responseUtil.successResponse(false);
-        }
-        return responseUtil.successResponse(true);
-    }
-
-    public ResponseSuccessDto<Boolean> signup(SignupRequestDto signupRequestDto) {
+    public ResponseSuccessDto<SignupResponseDto> signup(SignupRequestDto signupRequestDto) {
         String accessToken = signupRequestDto.getAccessToken();
         JSONObject response = getJsonObjectByToken(accessToken);
-
-
         Map<String, Object> res = (Map<String, Object>) response.get("response");
 
         System.out.println(res.toString());
-
         String id = (String) res.get("id");
         String provider = "naver";
-        String email = (String) res.get("email");
         String name = (String) res.get("name");
-        String sex = (String) res.get("gender");
-        String phone = (String) res.get("mobile");
+        /**
+         * 임의 데이터
+         */
+        String email = "test@naver.com";
+        String sex = "m";
+        String phone = "010-1234-1234";
         String nickName = signupRequestDto.getNickName();
         String content = signupRequestDto.getContent();
         String img = signupRequestDto.getImg();
+
+        Optional<MemberEntity> findById = memberRepository.findById(id);
+        if(!findById.isEmpty()){
+            throw new SignupErrorException("이미 존재하는 회원입니다.");
+        }
+
+        if(memberProfileRepository.existsByNickName(nickName)){
+            throw new DuplicateErrorException("중복된 닉네임입니다.");
+        }
 
         System.out.println("회원가입 시작");
         MemberEntity entity = MemberEntity.builder()
@@ -178,7 +159,11 @@ public class AuthService {
         memberProfileRepository.save(memberProfileEntity);
 
         System.out.println("회원 등록 성공");
-        return responseUtil.successResponse(true);
+        SignupResponseDto signupResponseDto = SignupResponseDto.builder()
+                .message("success")
+                .build();
+
+        return responseUtil.successResponse(signupResponseDto);
     }
 
     private static JSONObject getJsonObjectByCode(String code, String state) {

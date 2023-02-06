@@ -9,7 +9,7 @@ public class DefaultException extends RuntimeException {
     }
 
     public DefaultException(String message) {
-        super(MESSAGE);
+        super(message);
     }
 
     public DefaultException(String message, Throwable cause) {

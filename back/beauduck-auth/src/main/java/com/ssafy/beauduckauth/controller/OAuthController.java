@@ -42,7 +42,7 @@ public class OAuthController {
         return ResponseEntity.ok(authService.getRefreshToken(refreshToken));
     }
 
-    @ApiOperation(value = "로그인 및 자동 회원가입", notes = "로그인 및 자동 회원가입을 진행한다.", response = String.class)
+    @ApiOperation(value = "로그인", notes = "로그인을 진행한다.", response = String.class)
     @GetMapping("/login")
     public ResponseEntity<ResponseSuccessDto<LoginResponseDto>> login(@RequestParam("accessToken") String accessToken) {
         return ResponseEntity.ok(authService.login(accessToken));
@@ -54,15 +54,9 @@ public class OAuthController {
         return ResponseEntity.ok(authService.logout(accessToken));
     }
 
-    @ApiOperation(value = "회원 여부 확인", notes = "회원가입 여부를 확인한다.")
-    @GetMapping("/check")
-    public ResponseEntity<ResponseSuccessDto<Boolean>> checkId(@RequestParam("accessToken") String accessToken){
-        return ResponseEntity.ok(authService.checkId(accessToken));
-    }
-
     @ApiOperation(value = "회원가입", notes = "회원가입을 진행한다.")
     @PostMapping("/signup")
-    public ResponseEntity<ResponseSuccessDto<Boolean>> signup(@RequestBody SignupRequestDto signupRequestDto){
+    public ResponseEntity<ResponseSuccessDto<SignupResponseDto>> signup(@RequestBody SignupRequestDto signupRequestDto){
         return ResponseEntity.ok(authService.signup(signupRequestDto));
     }
 }

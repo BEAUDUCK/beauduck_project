@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class LoginResponseDto {
     private String memberId;
     private String name;
+    private String nickName;
     private String email;
     private String sex;
     private String phoneNumber;

@@ -10,10 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class SignupResponseDto {
-    private String memberId;
-    private String name;
-    private String email;
-    private String sex;
-    private String phoneNumber;
-
+    private String message;
 }
