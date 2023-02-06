@@ -6,7 +6,7 @@ import client from '../../api/axios';
 export const getMakeupList = createAsyncThunk(
   'single/getMakeupList',
   async () => {
-    const res = await client.get('/makeup');
+    const res = await client.get('/makeup/');
     return res.data;
   },
 );
@@ -14,8 +14,8 @@ export const getMakeupList = createAsyncThunk(
 // 개별 메이크업 상세 조회
 export const getMakeupDetail = createAsyncThunk(
   'single/getMakeupDetail',
-  async (id) => {
-    const res = await client.get(`/makeup/${id}`);
+  async (makeupId) => {
+    const res = await client.get(`/makeup/${makeupId}/`);
     return res.data;
   },
 );
@@ -24,7 +24,7 @@ export const getMakeupDetail = createAsyncThunk(
 export const createNewMakeup = createAsyncThunk(
   'single/createNewMakeup',
   async (newProcess) => {
-    const res = await client.post('makeup', newProcess);
+    const res = await client.post('makeup/', newProcess);
     return res.data;
   },
 );
@@ -32,9 +32,9 @@ export const createNewMakeup = createAsyncThunk(
 // 메이크업 추천 요청 + 받기
 export const recommendMakeup = createAsyncThunk(
   'single/recommendMakeup',
-  async (id) => {
-    await client.post('makeup/recommend', id);
-    const res = await client.get('makeup/recommend');
+  async (memberId) => {
+    await client.post('makeup/recommend/', memberId);
+    const res = await client.get('makeup/recommend/');
     return res.data;
   },
 );
@@ -43,7 +43,7 @@ export const recommendMakeup = createAsyncThunk(
 export const startMakeup = createAsyncThunk(
   'single/startMakeup',
   async (selectedStep) => {
-    const res = await client.post('makeup/execute', selectedStep);
+    const res = await client.post('makeup/execute/', selectedStep);
     return res.data;
   },
 );
@@ -52,7 +52,7 @@ export const startMakeup = createAsyncThunk(
 export const saveImage = createAsyncThunk(
   'single/saveImage',
   async (payload) => {
-    await client.post('makeup/result-img', payload);
+    await client.post('makeup/result-img/', payload);
   },
 );
 

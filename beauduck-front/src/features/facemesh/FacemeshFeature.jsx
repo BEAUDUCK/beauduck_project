@@ -2,7 +2,7 @@ import { FaceMesh } from '@mediapipe/face_mesh';
 import * as Facemesh from '@mediapipe/face_mesh';
 import * as cam from '@mediapipe/camera_utils';
 import Webcam from 'react-webcam';
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 // 일단 CDN으로 쓰긴 했는데 필요한 것은 다 다운로드 받으면 아마 될거같음.
 
@@ -15,7 +15,7 @@ import { useRef, useEffect } from 'react';
 
 // 이부분 public/index.html에 넣어놨었음
 
-const FacemeshFeature = ({ nowMain, nowStep }) => {
+const FacemeshFeature = ({ nowMain, nowStep, isGuide }) => {
   console.log('페이스', nowMain, nowStep);
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -275,25 +275,28 @@ const FacemeshFeature = ({ nowMain, nowStep }) => {
           width: 640,
           hegiht: 480,
         }}
+        mirrored={true}
         className="webcam"
       />
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: 'absolute',
-          marginRight: 'auto',
-          marginLeft: 'auto',
-          left: 0,
-          right: 0,
-          textAlign: 'center',
-          zIndex: 9,
-          width: 640,
-          height: 480,
-        }}
-        className="canvas"
-      />
+      {isGuide && (
+        <canvas
+          ref={canvasRef}
+          style={{
+            position: 'absolute',
+            marginRight: 'auto',
+            marginLeft: 'auto',
+            left: 0,
+            right: 0,
+            textAlign: 'center',
+            zIndex: 9,
+            width: 640,
+            height: 480,
+          }}
+          className="canvas"
+        />
+      )}
     </div>
   );
 };
 
-export default FacemeshFeature;
+export default React.memo(FacemeshFeature);

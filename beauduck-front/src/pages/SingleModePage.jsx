@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React from 'react';
 import Alert from '../components/modal/Alert';
+import Button from '../components/button/Button';
 
 const SingleModePage = () => {
   const nowMakeup = [
@@ -187,7 +188,10 @@ const SingleModePage = () => {
     navigate('/single/result', { replace: true });
   };
 
-  console.log('makeupList', makeupList);
+  const [isGuide, setIsGuide] = useState(false);
+  const guideOnOff = () => {
+    setIsGuide(!isGuide);
+  };
   return (
     <div className="full-screen">
       <div className="left-div">
@@ -322,7 +326,16 @@ const SingleModePage = () => {
           ))}
           {/* </div> */}
         </div>
-        <FacemeshFeature nowStep={nowStep.step} nowMain={nowMain} />
+        <FacemeshFeature
+          nowStep={nowStep.step}
+          nowMain={nowMain}
+          isGuide={isGuide}
+        />
+        <Button
+          text={isGuide ? '가이드 끄기' : '가이드 켜기'}
+          onClickEvent={guideOnOff}
+          btnStyle={'guide-btn'}
+        />
       </div>
       <div className="right-div">
         <img src={nowStep.img} alt={nowStep.step} />
