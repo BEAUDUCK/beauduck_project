@@ -33,23 +33,8 @@ public class AuthService {
     private final MemberInfoRepository memberInfoRepository;
     private final MemberProfileRepository memberProfileRepository;
 
-    public ResponseSuccessDto<TokenResponseDto> getToken(String code, String state){
-        WebClient webClient = WebClient
-                .builder()
-                .baseUrl("https://nid.naver.com")
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .build();
-
-        JSONObject response = webClient
-                .get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/oauth2.0/token")
-                        .queryParam("client_id", "V5gN96q3kFtGfUK7PUds")
-                        .queryParam("client_secret", "Z2RNeixHZU")
-                        .queryParam("grant_type", "authorization_code")
-                        .queryParam("state", state)
-                        .queryParam("code", code).build())
-                .retrieve().bodyToMono(JSONObject.class).block();
+    public ResponseSuccessDto<TokenResponseDto> getToken(String code, String state) {
+        JSONObject response = getJsonObjectByCode(code, state);
 
         System.out.println("accessToken = " + (String) response.get("access_token"));
         TokenResponseDto tokenResponseDto = TokenResponseDto.builder()
@@ -63,8 +48,10 @@ public class AuthService {
         return res;
     }
 
-    public ResponseSuccessDto<TokenResponseDto> getRefreshToken(String refreshToken){
-        JSONObject response = getJsonObject(refreshToken);
+
+
+    public ResponseSuccessDto<TokenResponseDto> getRefreshToken(String refreshToken) {
+        JSONObject response = getJsonObjectByToken(refreshToken);
 
         TokenResponseDto tokenResponseDto = TokenResponseDto.builder()
                 .accessToken((String) response.get("access_token"))
@@ -78,7 +65,7 @@ public class AuthService {
     }
 
     public ResponseSuccessDto<LoginResponseDto> login(String accessToken) {
-        JSONObject response = getJsonObject(accessToken);
+        JSONObject response = getJsonObjectByToken(accessToken);
 
 
         Map<String, Object> res = (Map<String, Object>) response.get("response");
@@ -86,14 +73,14 @@ public class AuthService {
         System.out.println(res.toString());
 
         String id = (String) res.get("id");
-        String provider = "naver";
-        String email = (String) res.get("email");
         String name = (String) res.get("name");
-        String sex = (String) res.get("gender");
-        String phone = (String) res.get("mobile");
-//        int birthYear = Integer.parseInt((String) res.get("birthyear"));
-        int nowYear = LocalDate.now().getYear();
-//        int age = nowYear - birthYear;
+
+        /*
+         * 임의 데이터 값
+         */
+        String email = "test@naver.com";
+        String sex = "m";
+        String phone = "010-1234-1234";
 
         MemberEntity memberEntity = memberRepository.findById(id).orElseGet(() -> {
             System.out.println("회원가입 시작");
@@ -113,8 +100,8 @@ public class AuthService {
         return responseUtil.successResponse(loginResponseDto);
     }
 
-    public ResponseSuccessDto<TokenDeleteResponseDto> logout(String accessToken){
-        JSONObject response = getJsonObject(accessToken);
+    public ResponseSuccessDto<TokenDeleteResponseDto> logout(String accessToken) {
+        JSONObject response = getJsonObjectByToken(accessToken);
 
         System.out.println("logout response = " + response.toString());
         TokenDeleteResponseDto tokenDeleteResponseDto = TokenDeleteResponseDto.builder()
@@ -126,8 +113,8 @@ public class AuthService {
         return res;
     }
 
-    public ResponseSuccessDto<Boolean> checkId(String accessToken){
-        JSONObject response = getJsonObject(accessToken);
+    public ResponseSuccessDto<Boolean> checkId(String accessToken) {
+        JSONObject response = getJsonObjectByToken(accessToken);
 
         Map<String, Object> res = (Map<String, Object>) response.get("response");
 
@@ -135,15 +122,15 @@ public class AuthService {
 
         String id = (String) res.get("id");
 
-        if(memberRepository.existsById(id)){
+        if (memberRepository.existsById(id)) {
             responseUtil.successResponse(false);
         }
         return responseUtil.successResponse(true);
     }
 
-    public ResponseSuccessDto<Boolean> signup(SignupRequestDto signupRequestDto){
+    public ResponseSuccessDto<Boolean> signup(SignupRequestDto signupRequestDto) {
         String accessToken = signupRequestDto.getAccessToken();
-        JSONObject response = getJsonObject(accessToken);
+        JSONObject response = getJsonObjectByToken(accessToken);
 
 
         Map<String, Object> res = (Map<String, Object>) response.get("response");
@@ -194,7 +181,26 @@ public class AuthService {
         return responseUtil.successResponse(true);
     }
 
-    private static JSONObject getJsonObject(String accessToken) {
+    private static JSONObject getJsonObjectByCode(String code, String state) {
+        WebClient webClient = WebClient
+                .builder()
+                .baseUrl("https://nid.naver.com")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+
+        JSONObject response = webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/oauth2.0/token")
+                        .queryParam("client_id", "V5gN96q3kFtGfUK7PUds")
+                        .queryParam("client_secret", "Z2RNeixHZU")
+                        .queryParam("grant_type", "authorization_code")
+                        .queryParam("state", state)
+                        .queryParam("code", code).build())
+                .retrieve().bodyToMono(JSONObject.class).block();
+        return response;
+    }
+    private static JSONObject getJsonObjectByToken(String accessToken) {
         WebClient webClient = WebClient
                 .builder()
                 .baseUrl("https://openapi.naver.com")
