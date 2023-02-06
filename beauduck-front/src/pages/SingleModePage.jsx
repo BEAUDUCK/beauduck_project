@@ -95,7 +95,9 @@ const SingleModePage = () => {
   const [nowStep, setNowStep] = useState([]);
 
   const [makeupList] = useState([]);
-  const [stepLength, setStepLength] = useState(0);
+  const [stepLength, setStepLength] = useState(0); // 몇단계?
+  const [barLength, setBarLength] = useState(0); // 진행바 몇등분?
+  const [location, setLocation] = useState(0); // 현재 바 길이
 
   useEffect(() => {
     if (mainList.includes('skin')) {
@@ -143,25 +145,29 @@ const SingleModePage = () => {
     // console.log('nowMain', nowMain);
     // console.log('nowStep', nowStep);
     // console.log('makeupList', makeupList);
+
+    // const progress = document.getElementsByClassName('progress-bar')
+    // progress.setAttribute('style', ``)
   }, []);
 
   useEffect(() => {
     setStepLength(makeupList.length);
+    setBarLength(614 / (makeupList.length - 1));
   }, [makeupList]);
 
-  const [idx, setIdx] = useState(0);
+  const [nowIdx, setNowIdx] = useState(0);
 
   const goBefore = () => {
-    if (idx > 0) {
-      setIdx(idx - 1);
+    if (nowIdx > 0) {
+      setNowIdx(nowIdx - 1);
     } else {
       setIsFirst(true);
     }
   };
 
   const goNext = () => {
-    if (idx < stepLength - 1) {
-      setIdx(idx + 1);
+    if (nowIdx < stepLength - 1) {
+      setNowIdx(nowIdx + 1);
     } else {
       setIsLast(true);
     }
@@ -171,14 +177,17 @@ const SingleModePage = () => {
   const [isLast, setIsLast] = useState(false);
 
   useEffect(() => {
-    setNowMain(makeupList[idx][0]);
-    setNowStep(makeupList[idx][1]);
-  }, [idx]);
+    setNowMain(makeupList[nowIdx][0]);
+    setNowStep(makeupList[nowIdx][1]);
+    setLocation(barLength * nowIdx);
+    console.log('dsda', location);
+  }, [nowIdx]);
 
   const finishMode = () => {
-    navigate('/single/result');
+    navigate('/single/result', { replace: true });
   };
 
+  console.log('makeupList', makeupList);
   return (
     <div className="full-screen">
       <div className="left-div">
@@ -282,7 +291,38 @@ const SingleModePage = () => {
             />
           )}
         </div>
-        <FacemeshFeature />
+        {/* <div className="progress"> */}
+        {/* <p className="progress-text">Progressing</p> */}
+
+        <div className="progress-bar">
+          <hr className="progress-hr" />
+          <hr
+            className="progress-hr"
+            style={{
+              backgroundColor: '#FFE27C',
+              width: `${location}px`,
+            }}
+          />
+          {makeupList.map((item, idx) => (
+            <div
+              className={[
+                'progress-inside',
+                nowIdx >= idx ? 'already' : '',
+              ].join(' ')}
+            >
+              {/* <FontAwesomeIcon
+                className="check-icon"
+                icon="fa-solid fa-heart"
+              /> */}
+              {/* <FontAwesomeIcon
+                className="check-icon"
+                icon="fa-solid fa-check"
+              /> */}
+            </div>
+          ))}
+          {/* </div> */}
+        </div>
+        <FacemeshFeature nowStep={nowStep.step} nowMain={nowMain} />
       </div>
       <div className="right-div">
         <img src={nowStep.img} alt={nowStep.step} />

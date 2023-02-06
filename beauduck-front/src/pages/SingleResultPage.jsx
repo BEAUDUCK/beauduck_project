@@ -1,8 +1,13 @@
 import html2canvas from 'html2canvas';
+import { useDispatch, useSelector } from 'react-redux';
 import Webcam from 'react-webcam';
 import SingleModalExitSurvey from '../features/single/SingleModalExitSurvey';
+import { saveImage } from '../features/single/SingleSlice';
 
 const SingleResultPage = () => {
+  const dispatch = useDispatch();
+  const { memberId } = useSelector((state) => state.member);
+
   const downloadCapture = () => {
     html2canvas(document.querySelector('#main_capture')).then((canvas) => {
       const imgUri = canvas.toDataURL('image/jpg');
@@ -15,6 +20,14 @@ const SingleResultPage = () => {
       setTimeout(function () {
         deleteImgElement(mainCapture, capture);
       }, 3000);
+
+      const payload = {
+        member_id: memberId,
+        is_active: true,
+        img: imgUri,
+      };
+      console.log(payload);
+      dispatch(saveImage(payload));
     });
   };
 
@@ -38,6 +51,7 @@ const SingleResultPage = () => {
               width: 640,
               height: 480,
             }}
+            mirrored={true}
             audio={false}
             className="webcam-result"
             screenshotFormat="image/jpeg"
