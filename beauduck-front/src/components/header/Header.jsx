@@ -10,7 +10,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem('refreshToken');
-  console.log(token);
+  // console.log(token);
 
   const [isOpen, setIsOpen] = useState(false);
   const isOpenModal = () => {
