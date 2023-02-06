@@ -1,12 +1,12 @@
 import MyRecentMakeupListItem from "./MyRecentMakeupListItem";
 
-const MyRecentMakeupList = ({ props }) => {
+const MyRecentMakeupList = ({ recentMakeupList }) => {
 
   return (
     <div className="MyRecentMakeupList">
       <h1>최근 진행한 메이크업</h1>
       <div style={{ display: "flex" }}>
-        {props.map((it) => (
+        {recentMakeupList.map((it) => (
           <MyRecentMakeupListItem
             key={it.id}
             title={it.title}
