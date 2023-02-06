@@ -1,4 +1,5 @@
-
+server:
+  port: 8082
 
 spring:
   datasource:
@@ -33,6 +34,5 @@ cloud:
 
 logging.level:
   org.hibernate.SQL: debug
-server:
-  port: 8082
+
 # org.hibernate.type: trace
