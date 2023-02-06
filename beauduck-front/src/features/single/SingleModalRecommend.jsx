@@ -5,9 +5,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { FontAwesomeIcon } from '../../../node_modules/@fortawesome/react-fontawesome/index';
+import { useSelector } from 'react-redux';
 
 const SingleModalRecommend = ({ popRecommend }) => {
   // 닉네임 받아오기
+  const { nickName } = useSelector((state) => state.member);
   // 마이페이지에 유저 얼굴 사진 저장한거 받아오기
   // 추천 메이크업 5개
 
@@ -50,7 +52,7 @@ const SingleModalRecommend = ({ popRecommend }) => {
         icon="fa-solid fa-xmark"
         onClick={closeModal}
       />
-      <h3>님에게 어울리는 추천 메이크업</h3>
+      <h3>{nickName}님에게 어울리는 추천 메이크업</h3>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={0}
