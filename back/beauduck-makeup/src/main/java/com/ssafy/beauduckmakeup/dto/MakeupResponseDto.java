@@ -18,9 +18,6 @@ import java.util.List;
 public class MakeupResponseDto {
 
     private int id;
-    //        @ManyToOne(fetch = FetchType.LAZY)
-//        @JoinColumn(name = "id")
-    private String memberId;
     private String title;
     private String content;
     private String img;
@@ -32,7 +29,6 @@ public class MakeupResponseDto {
     public MakeupEntity toEntity() {
         return MakeupEntity.builder()
                 .id(id)
-                .memberId(memberId)
                 .title(title)
                 .content(content)
                 .img(img)
@@ -42,9 +38,8 @@ public class MakeupResponseDto {
                 .build();
     }
     @Builder
-    public MakeupResponseDto(int id, String memberId, String title, String content, String img, int duration, float score, int count, List<MakeupMainResponseDto> makeupMainList) {
+    public MakeupResponseDto(int id, String title, String content, String img, int duration, float score, int count, List<MakeupMainResponseDto> makeupMainList) {
         this.id = id;
-        this.memberId = memberId;
         this.title = title;
         this.content = content;
         this.img = img;

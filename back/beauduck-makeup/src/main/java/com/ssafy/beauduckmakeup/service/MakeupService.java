@@ -77,6 +77,7 @@ public class MakeupService {
         MakeupEntity makeup = makeupEntity.get();
 
         MakeupResponseDto dto = MakeupResponseDto.builder()
+                .id(makeup.getId())
                 .title(makeup.getTitle())
                 .content(makeup.getContent())
                 .score(makeup.getScore())
