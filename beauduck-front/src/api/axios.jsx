@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getCookie } from './cookie';
+import { useCookies } from 'react-cookie';
 
 const REACT_APP_BASE_URL = 'http://3.38.169.2:8081';
 const client = axios.create({
@@ -30,10 +31,26 @@ client.interceptors.response.use(
     // 응답 데이터를 가공
     return response;
   },
-  (error) => {
+  async (error) => {
+    console.log('axios 에러', error);
     // 오류 응답을 처리
-    console.log(REACT_APP_BASE_URL);
-    console.log(error);
+    const {
+      config,
+      response: { status },
+    } = error;
+    const originalRequest = config;
+    if (status === 401 && !originalRequest._retry) {
+      console.log('토큰 만료');
+      originalRequest._retry = true;
+
+      const server = 'http://3.38.169.2:8080/';
+      const [cookies, setCookie, removeCookie] = useCookies(['cookie_name']);
+      const refreshToken = localStorage.getItem('refreshToken');
+      const res = await axios.get(
+        `${server}refresh?refreshToken=${refreshToken}`,
+      );
+      setCookie(res.data.data.accessToken);
+    }
     return Promise.reject(error);
   },
 );
