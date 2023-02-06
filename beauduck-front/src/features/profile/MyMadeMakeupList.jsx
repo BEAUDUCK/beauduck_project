@@ -1,11 +1,11 @@
 import MyMadeMakeupListItem from "./MyMadeMakeupListItem";
 
-const MyMadeMakeupList = ({ props }) => {
+const MyMadeMakeupList = ({ myMakeupList }) => {
   return (
     <div className="MyMadeMakeupList">
       <h1>내가 만든 메이크업</h1>
       <div style={{ display: "flex" }}>
-        {props.map((it) => (
+        {myMakeupList.map((it) => (
           <MyMadeMakeupListItem 
             key={it.id}
             title={it.title}

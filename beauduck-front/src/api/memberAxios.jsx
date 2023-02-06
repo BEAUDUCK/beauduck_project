@@ -28,12 +28,10 @@ member.interceptors.request.use(
 member.interceptors.response.use(
   (response) => {
     // 응답 데이터를 가공
-    console.log("222")
     return response;
   },
   (error) => {
     // 오류 응답을 처리
-    console.log("3333")
     console.log(REACT_APP_BASE_URL);
     console.log(error);
     return Promise.reject(error);
