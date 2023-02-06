@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import client from '../../api/axios';
 
 // 전체 메이크업 리스트 조회
 export const getMakeupList = createAsyncThunk(
   'single/getMakeupList',
   async () => {
-    const res = await axios.get('/makeup');
+    const res = await client.get('/makeup');
     return res.data;
   },
 );
@@ -14,7 +15,7 @@ export const getMakeupList = createAsyncThunk(
 export const getMakeupDetail = createAsyncThunk(
   'single/getMakeupDetail',
   async (id) => {
-    const res = await axios.get(`/makeup/${id}`);
+    const res = await client.get(`/makeup/${id}`);
     return res.data;
   },
 );
@@ -23,7 +24,7 @@ export const getMakeupDetail = createAsyncThunk(
 export const createNewMakeup = createAsyncThunk(
   'single/createNewMakeup',
   async (newProcess) => {
-    const res = await axios.post('makeup', newProcess);
+    const res = await client.post('makeup', newProcess);
     return res.data;
   },
 );
@@ -32,8 +33,8 @@ export const createNewMakeup = createAsyncThunk(
 export const recommendMakeup = createAsyncThunk(
   'single/recommendMakeup',
   async (id) => {
-    await axios.post('makeup/recommend', id);
-    const res = await axios.get('makeup/recommend');
+    await client.post('makeup/recommend', id);
+    const res = await client.get('makeup/recommend');
     return res.data;
   },
 );
@@ -42,7 +43,7 @@ export const recommendMakeup = createAsyncThunk(
 export const startMakeup = createAsyncThunk(
   'single/startMakeup',
   async (selectedStep) => {
-    const res = await axios.post('makeup/execute', selectedStep);
+    const res = await client.post('makeup/execute', selectedStep);
     return res.data;
   },
 );
@@ -51,7 +52,7 @@ export const startMakeup = createAsyncThunk(
 export const saveImage = createAsyncThunk(
   'single/saveImage',
   async (payload) => {
-    await axios.post('makeup/result-img', payload);
+    await client.post('makeup/result-img', payload);
   },
 );
 
