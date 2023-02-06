@@ -1,11 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SingleMakeDetail from './SingleMakeDetail';
 import SingleMakeFirst from './SingleMakeFirst';
+import { setBtnStateCreate } from './SingleSlice';
 
 const SingleMake = ({ onToggleMake }) => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setBtnStateCreate());
+  }, []);
 
   const { memberId } = useSelector((state) => state.member);
 

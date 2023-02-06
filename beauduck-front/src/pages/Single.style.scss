@@ -157,26 +157,16 @@
             width: 100%;
             height: 500px;
             position: relative;
-            padding-top: 0px;
+            padding-top: 45px;
             // text-align: center;
 
-            .content-box {
-                width: 330px;
-                height: 400px;
-            }
+            // .content-box {
+            //     width: 330px;
+            //     height: 400px;
+            // }
 
-            .sub-ing-img{
-                width: 100px;
-                height: 120px;
-
-                position: absolute;
-                top: 10px;
-                left: 125px;
-
-                // background-color: white;
-                // border-radius: 100px;
-            }
             .sub-step-content {
+                position: relative;
                 width: 15vw;
                 min-height: 120px;
                 margin-left: 30px;
@@ -191,6 +181,14 @@
                 border-radius: 30px;
 
                 background-color: #FFF5D1;
+
+                .sub-ing-img{
+                    width: 100px;
+                    height: 120px;
+                    position: absolute;
+                    top: 10px;
+                    left: calc(50% - 50px);
+                }
             }
         }
     }
@@ -262,6 +260,30 @@
         .move-right {
             right: -80px
         }
+
+        .progress-bar {
+            width: 640px;
+            height: 20px;
+            background-color: white;
+            border: 5px solid black;
+            border-radius: 100px;
+            margin-left: 30px;
+            margin-bottom: 5px;
+            
+            padding: 5px;
+
+            .progress {
+                height: 20px;
+                background-color: black;
+                border-top-left-radius: 100px;
+                border-bottom-left-radius: 100px;
+                width: 50px;
+            }
+            .before {
+                border-top-right-radius: 100px;
+                border-bottom-right-radius: 100px;
+            }
+        }
     }
 
     .right-div {
@@ -271,7 +293,7 @@
 
         .finish-btn {
             position: absolute;
-            top: 610px;
+            top: 655px;
             right: 150px;
 
             width: 150px;
@@ -282,9 +304,13 @@
 
             border: none;
             border-radius: 10px;
+            box-shadow: 0 0 5px rgb(210, 210, 210);
 
             cursor: pointer;
-
+            
+            &:hover {
+                background-color: #FFE27C;
+            }
         }
     }
 

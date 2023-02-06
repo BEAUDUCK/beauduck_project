@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeBtnState } from './SingleSlice';
+import { setBtnStateCreate, setBtnStateUpdate } from './SingleSlice';
 import { useEffect } from 'react';
 
 const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
@@ -109,11 +109,12 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     setColor('');
     setImg('');
     imgRef.current.value = '';
+    dispatch(setBtnStateCreate());
   };
 
   // 수정할 때 폼에 기존 데이터 넣어주기
   const getSubData = (idx) => {
-    dispatch(changeBtnState());
+    dispatch(setBtnStateUpdate());
 
     const subData = makeupMiddleList[idx];
     setIdx(idx);
@@ -140,6 +141,7 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     setColor('');
     setImg('');
     imgRef.current.value = '';
+    dispatch(setBtnStateCreate());
   };
 
   useEffect(() => {

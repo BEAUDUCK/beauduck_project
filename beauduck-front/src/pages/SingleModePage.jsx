@@ -96,6 +96,9 @@ const SingleModePage = () => {
 
   const [makeupList] = useState([]);
   const [stepLength, setStepLength] = useState(0);
+  const [nowPercent, setNowPercent] = useState(0);
+
+  const [division, setDivision] = useState(0);
 
   useEffect(() => {
     if (mainList.includes('skin')) {
@@ -147,6 +150,7 @@ const SingleModePage = () => {
 
   useEffect(() => {
     setStepLength(makeupList.length);
+    setDivision(100 / makeupList.length);
   }, [makeupList]);
 
   const [idx, setIdx] = useState(0);
@@ -171,12 +175,14 @@ const SingleModePage = () => {
   const [isLast, setIsLast] = useState(false);
 
   useEffect(() => {
+    setNowPercent(division * idx); // 왜 한박자씩 늦는거 같지...
+    console.log(nowPercent);
     setNowMain(makeupList[idx][0]);
     setNowStep(makeupList[idx][1]);
   }, [idx]);
 
   const finishMode = () => {
-    navigate('/single/result');
+    navigate('/single/result', { replace: true });
   };
 
   return (
@@ -282,7 +288,14 @@ const SingleModePage = () => {
             />
           )}
         </div>
-        <FacemeshFeature />
+        <div className="progress-bar">
+          <div
+            className={['progress', nowPercent === 100 ? 'complete' : ''].join(
+              ' ',
+            )}
+          ></div>
+        </div>
+        <FacemeshFeature nowStep={nowStep.step} nowMain={nowMain} />
       </div>
       <div className="right-div">
         <img src={nowStep.img} alt={nowStep.step} />
