@@ -22,7 +22,9 @@ const SingleResultPage = () => {
       }, 3000);
 
       const payload = {
-        member_id: memberId,
+        memberEntity: {
+          id: memberId,
+        },
         is_active: true,
         img: imgUri,
       };
