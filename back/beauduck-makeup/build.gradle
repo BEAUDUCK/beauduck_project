@@ -30,11 +30,14 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
-    //추가
-    //swagger 추가
+    // 추가
+    // swagger 추가
     // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
     implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
     implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
+    // aws s3 추가
+    implementation "com.amazonaws:aws-java-sdk-s3:1.12.281"
 }
 
 tasks.named('test') {

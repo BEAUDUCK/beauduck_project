@@ -16,6 +16,19 @@ spring:
         # show_sql: true
         format_sql: true
 
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIAZ5J66THQ7NBNNTUN      # AWS IAM AccessKey 적기
+      secretKey: uHtC9qNGuAQneALOkP4h3834+PLkn2D2rgXAIpwn   # AWS IAM SecretKey 적기
+    s3:
+      dir: S3 /makeup
+      bucket: ssafybeauduck
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
 logging.level:
   org.hibernate.SQL: debug
 # org.hibernate.type: trace
