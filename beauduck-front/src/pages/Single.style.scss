@@ -260,30 +260,70 @@
         .move-right {
             right: -80px
         }
+        
+        // .progress {
+        //     display: flex;
+        //     justify-content: center;
 
-        .progress-bar {
-            width: 640px;
-            height: 20px;
-            background-color: white;
-            border: 5px solid black;
-            border-radius: 100px;
-            margin-left: 30px;
-            margin-bottom: 5px;
-            
-            padding: 5px;
-
-            .progress {
+        //     .progress-text {
+        //         display: inline-block;
+        //         margin-left: 10px;
+        //         margin-right: 10px;
+        //         font-family: 'Jalnan';
+        //         color: #FFE27C;
+        //         text-shadow: 1px 1px rgb(214, 214, 202);
+        //     }
+            .progress-bar {
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                width: 620px;
                 height: 20px;
-                background-color: black;
-                border-top-left-radius: 100px;
-                border-bottom-left-radius: 100px;
-                width: 50px;
-            }
-            .before {
-                border-top-right-radius: 100px;
-                border-bottom-right-radius: 100px;
-            }
+                // background-color: black;
+                // border: 4px solid #fff2c1;
+                // border-radius: 100px;
+                margin-left: 30px;
+                margin-bottom: 10px;
+
+                .progress-hr {
+                    position: absolute;
+                    left: 3px;
+                    height: 4px;
+                    width: 614px;
+                    background-color:rgb(210, 210, 210);
+                    border: none;
+                }
+    
+                .progress-inside {
+                    display: inline-block;
+                    position: relative;
+                    width: 18px;
+                    height: 18px;
+                    border-radius: 100px;
+                    background-color: white;
+                    // border: 2px solid rgb(210, 210, 210);
+                    color: rgb(210, 210, 210);
+                    box-shadow: 0 0 7px rgb(210, 210, 210);
+                    margin-left: 2px;
+                    margin-right: 2px;
+                    margin-top: auto;
+                    margin-bottom: auto;
+    
+                    // .check-icon {
+                    //     // position: absolute;
+                    //     // top: calc(50% - 9px);
+                    //     // left: calc(50% - 7px);
+                    //     width: 20px;
+                    //     height: 20px;
+                    // }
+    
+                }
+                .already {
+                    background-color: #FFE27C;
+                }
         }
+
+        // }
     }
 
     .right-div {

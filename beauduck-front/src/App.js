@@ -31,6 +31,8 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { faDroplet } from '@fortawesome/free-solid-svg-icons';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import BoardInfoPage from './pages/BoardInfoPage';
 import BoardQnAPage from './pages/BoardQnAPage';
 import Footer from './components/footer/Footer';
@@ -57,6 +59,8 @@ library.add(
   faDroplet,
   faAngleLeft,
   faAngleRight,
+  faCheck,
+  faHeart,
 );
 
 function App() {
@@ -65,31 +69,31 @@ function App() {
       <BrowserRouter>
         <Header />
         <ScrollToTop />
-          <Routes>
-            {/* <Route 
+        <Routes>
+          {/* <Route 
               element={<ProtectedRoute token={token} nickname={nickname} />}> */}
-            {/* 도와덕 */}
-            <Route path="/help" element={<ConsultingPage />} />
-            {/* 따라해덕 */}
-            <Route path="/single" element={<SinglePage />} />
-            <Route path="/single/mode" element={<SingleModePage />} />
-            <Route path="/single/result" element={<SingleResultPage />} />
-            {/* 투게덕 */}
-            <Route path="/together" element={<TogetherPage />} />
-            {/* 쑥덕쑥덕 */}
-            <Route path="/board" element={<BoardPage />} />
-            <Route path="/board/write" element={<BoardWritePage />} />
-            <Route path="/board/info/:id" element={<BoardInfoPage />} />
-            <Route path="/board/qna/:id" element={<BoardQnAPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            {/* 랭킹 페이지 */}
-            <Route path="/rank" element={<RankingPage />} />
-            {/* </Route> */}
-            <Route path="/Api/Naver" element={<NaverLogin />} />
-            <Route path="/" element={<MainPage />} />
-            <Route path="/signup" element={<SingupPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          {/* 도와덕 */}
+          <Route path="/help" element={<ConsultingPage />} />
+          {/* 따라해덕 */}
+          <Route path="/single" element={<SinglePage />} />
+          <Route path="/single/mode" element={<SingleModePage />} />
+          <Route path="/single/result" element={<SingleResultPage />} />
+          {/* 투게덕 */}
+          <Route path="/together" element={<TogetherPage />} />
+          {/* 쑥덕쑥덕 */}
+          <Route path="/board" element={<BoardPage />} />
+          <Route path="/board/write" element={<BoardWritePage />} />
+          <Route path="/board/info/:id" element={<BoardInfoPage />} />
+          <Route path="/board/qna/:id" element={<BoardQnAPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          {/* 랭킹 페이지 */}
+          <Route path="/rank" element={<RankingPage />} />
+          {/* </Route> */}
+          <Route path="/Api/Naver" element={<NaverLogin />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/signup" element={<SingupPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
       <Footer />
     </>
