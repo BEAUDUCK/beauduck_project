@@ -15,6 +15,7 @@ pipeline {
                 dir('back/beauduck-makeup'){
                     sh 'ls -al'
                     sh 'chmod +x ./gradlew'
+                    sh './gradlew build'
                     sh 'docker build -t feat-back-makeup .'
                 }
                 echo 'Build image...'
