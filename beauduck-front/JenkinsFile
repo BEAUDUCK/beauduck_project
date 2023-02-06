@@ -19,7 +19,7 @@ pipeline {
                 sh 'node -v'
                 dir('beauduck-front'){
                     sh 'ls -al'
-                    sh 'docker build --no-cache -t beauduck-dev-front . /bin/sh'    
+                    sh 'docker build --no-cache -t beauduck-dev-front .'    
                 }                                                
                 echo 'Build image...'
             }
