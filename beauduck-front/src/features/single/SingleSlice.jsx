@@ -47,6 +47,18 @@ export const startMakeup = createAsyncThunk(
   },
 );
 
+// 메이크업 최종결과 이미지 저장
+export const saveImage = createAsyncThunk(
+  'single/saveImage',
+  async (payload) => {
+    await axios.post('makeup/result-img', payload);
+  },
+);
+
+// 메이크업 평가 및 나가기
+
+// 최근 메이크업 저장
+
 export const singleSlice = createSlice({
   name: 'single',
   initialState: {
@@ -75,11 +87,14 @@ export const singleSlice = createSlice({
     selectMain: (state, action) => {
       state.mainList = action.payload;
     },
-    changeBtnState: (state, action) => {
-      state.btnState = !state.btnState;
-    },
+    // changeBtnState: (state, action) => {
+    //   state.btnState = !state.btnState;
+    // },
     setBtnStateCreate: (state, action) => {
       state.btnState = false;
+    },
+    setBtnStateUpdate: (state, action) => {
+      state.btnState = true;
     },
   },
   extraReducers: (builder) => {
@@ -105,8 +120,9 @@ export const {
   submitMakeup,
   rejectedMakeup,
   selectMain,
-  changeBtnState,
+  // changeBtnState,
   setBtnStateCreate,
+  setBtnStateUpdate,
 } = singleSlice.actions;
 
 export default singleSlice.reducer;

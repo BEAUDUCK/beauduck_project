@@ -48,7 +48,7 @@ const SingleModalInfo = ({ makeupId }) => {
     console.log(selectedStep);
     dispatch(selectMain(category));
     dispatch(startMakeup(selectedStep));
-    navigate('/single/mode');
+    navigate('/single/mode', { replace: true });
   };
 
   return (
