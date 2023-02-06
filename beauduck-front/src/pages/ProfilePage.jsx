@@ -75,8 +75,6 @@ const dummyGallery = [
 
 const ProfilePage = () => {
 
-  console.log(dummyMadeMakeup)
-
   const [makeupState, setMakeupState] = useState(true)
   const [galleryState, setGalleryState] = useState(false)
   const [faceState, setFaceState] = useState(false)

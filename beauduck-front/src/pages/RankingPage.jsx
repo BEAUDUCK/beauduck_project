@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import RankingList from "../features/ranking/RankingList";
 import MyRanking from "../features/ranking/MyRanking";
 import logo from "../assets/logo_original.png"
-import axios from "axios"
 
 
 const RankingPage = () => {
@@ -111,6 +110,7 @@ const RankingPage = () => {
             <img 
               className="main-logo"
               src={mainLogo}
+              alt="로고 이미지"
             />
           </div>
           <RankingList dummyData={dummyData} />
