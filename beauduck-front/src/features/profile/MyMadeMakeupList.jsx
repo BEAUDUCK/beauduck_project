@@ -7,7 +7,7 @@ const MyMadeMakeupList = ({ props }) => {
       <div style={{ display: "flex" }}>
         {props.map((it) => (
           <MyMadeMakeupListItem 
-            id={it.id}
+            key={it.id}
             title={it.title}
             score={it.score}
             count={it.count}

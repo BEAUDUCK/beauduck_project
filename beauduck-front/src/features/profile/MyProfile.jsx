@@ -1,15 +1,23 @@
 import "../../pages/Profile.style.scss"
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import logo from "../../assets/logo_original.png"
+import { useDispatch, useSelector } from "react-redux"
+import { getMemberInfo } from "./ProfileSlice"
 
 const MyProfile = () => {
+  const dispatch = useDispatch()
+  const { memberId } = useSelector(state=> state.member)
+  // const { userInfo } = useSelector(state => state.userInfo)
+  // console.log(userInfo)
 
   const profileLogoImg = logo
   const [profileImg, setProfileImg] = useState(profileLogoImg)
   useEffect(() => {
-
+    console.log('dsdsd', memberId)
+    dispatch(getMemberInfo(memberId))
   }, [])
+
+
 
   return (
     <div className="MyProfile">
