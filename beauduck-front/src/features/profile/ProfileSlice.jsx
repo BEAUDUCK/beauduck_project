@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import client from '../../api/memberAxios';
+import memberAxios from '../../api/memberAxios';
 
 
 // 회원 정보 조회 GET
 export const getMemberInfo = createAsyncThunk(
   'members/getMemberInfo',
-  async (memberid) => {
-    const res = await client.get(`/members/${memberid}`);
-    return res.data;
+  async (memberId) => {
+    const res = await memberAxios.get(`/members/${memberId}/`);
+    console.log(res.data)
+    return res.data.data;
   },
 );
 
@@ -15,7 +16,7 @@ export const getMemberInfo = createAsyncThunk(
 export const UpdateMemberInfo = createAsyncThunk(
   'members/UpdateMemberInfo',
   async () => {
-    const res = await client.put('/members/update');
+    const res = await memberAxios.put('/members/update');
     return res.data;
   },
 );
@@ -34,7 +35,7 @@ export const UpdateMemberInfo = createAsyncThunk(
 export const recentMakeupList = createAsyncThunk(
   'members/recentMakeupList',
   async (memberid) => {
-    const res = await client.get(`/members/${memberid}/recent-makeup`);
+    const res = await memberAxios.get(`/members/${memberid}/recent-makeup`);
     return res.data;
   },
 );
@@ -43,7 +44,7 @@ export const recentMakeupList = createAsyncThunk(
 export const myMakeupList = createAsyncThunk(
   'members/myMakeupList',
   async () => {
-    const res = await client.get('/members/${memberid}/my-makeup');
+    const res = await memberAxios.get('/members/${memberid}/my-makeup');
     return res.data;
   },
 );
@@ -52,7 +53,7 @@ export const myMakeupList = createAsyncThunk(
 export const gallery = createAsyncThunk(
   'member/gallery',
   async () => {
-    const res = await client.get('/members/{memberId}/gallery');
+    const res = await memberAxios.get('/members/{memberId}/gallery');
     return res.data;
   },
 );
@@ -61,49 +62,25 @@ export const gallery = createAsyncThunk(
 export const galleryopen = createAsyncThunk(
   'member/galleryopen',
   async () => {
-    const res = await client.put('/members/gallery');
+    const res = await memberAxios.put('/members/gallery');
     return res.data;
   },
 );
 // 회원 얼굴 정보 저장은 미정
 
 export const profileSlice = createSlice({
-  name: 'member',
+  name: 'profile',
   initialState: {
-    memberId: null,
-    memberNickname: null,
+    userInfo: undefined
   },
   reducers: {
-    //로그아웃
-    logout: (state, action) => {
-      localStorage.clear()
-  },
-  // 멤버 아이디 받기
-  checkMemberId: (state, action) => {
-    state.memberId = Number(action.payload)
-  },
+
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(getMemberInfo.fulfilled, (state, action) => {
-        state.getMemberInfo = action.payload;
-      })
-      .addCase(UpdateMemberInfo.fulfilled, (state, action) => {
-        state.getMemberInfo = action.payload;
-      })
-      .addCase(recentMakeupList.fulfilled, (state, action) => {
-        state.getMemberInfo = action.payload;
-      })
-      .addCase(myMakeupList.fulfilled, (state, action) => {
-        state.getMemberInfo = action.payload;
-      })
-      .addCase(gallery.fulfilled, (state, action) => {
-        state.getMemberInfo = action.payload;
-      })
-      .addCase(galleryopen.fulfilled, (state, action) => {
-        state.getMemberInfo = action.payload;
-      })
-      
+    builder.addCase(getMemberInfo.fulfilled,(state, action) => {
+      state.userInfo = action.payload
+    })
+
   },
 })
 

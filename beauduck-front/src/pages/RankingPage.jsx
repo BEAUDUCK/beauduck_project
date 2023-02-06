@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import RankingList from "../features/ranking/RankingList";
 import MyRanking from "../features/ranking/MyRanking";
 import logo from "../assets/logo_original.png"
-import axios from "axios"
 
 
 const RankingPage = () => {
@@ -26,6 +25,8 @@ const RankingPage = () => {
   //     })
         
   // }, rankingData, myRankingData)
+
+  const mainLogo = logo
 
   const dummyData = [
     {
@@ -70,36 +71,56 @@ const RankingPage = () => {
       "badge": "오덕",
       "exp": 853
     },
-    // {
-    //   "id": 8,
-    //   "nickname": "M8",
-    //   "badge": "오덕",
-    //   "exp": 654
-    // },
-    // {
-    //   "id": 9,
-    //   "nickname": "M9",
-    //   "badge": "입덕",
-    //   "exp": 342
-    // },
+    {
+      "id": 8,
+      "nickname": "M8",
+      "badge": "오덕",
+      "exp": 654
+    },
+    {
+      "id": 9,
+      "nickname": "M9",
+      "badge": "입덕",
+      "exp": 342
+    },
+    {
+      "id": 10,
+      "nickname": "M9",
+      "badge": "입덕",
+      "exp": 128
+    },
 
   ]
 
-  const dummyMyRankingData = {
-    "id": 33,
-    "nickname": "배고파",
-    "badge": "아기오리",
-    "exp": -33
-  } 
+  const dummyMyRankingData = 
+    {
+      "id": 33,
+      "nickname": "배고파",
+      "badge": "아기오리",
+      "exp": -33
+    }
+  
+  
 
   return (
+    <div className="container">
       <div className="RankingPage">
         <div className="ranking-container">
+          <div>
+            <img 
+              className="main-logo"
+              src={mainLogo}
+              alt="로고 이미지"
+            />
+          </div>
           <RankingList dummyData={dummyData} />
         </div>
         <br/>
-        <MyRanking myRanking={dummyMyRankingData}/>
+        <div>
+          <MyRanking myRanking={dummyMyRankingData}/>
+        </div>
       </div>
+    </div>
   )
 };
 

@@ -7,7 +7,7 @@ const MyGalleryList = ({ gallery }) => {
       <div style={{ display: "flex" }}>
         {gallery.map((it) => (
           <MyGalleryListItem 
-            id={it.id}
+            key={it.id}
             img={it.img}
           />
         ))}
