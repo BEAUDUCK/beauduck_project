@@ -41,6 +41,7 @@ import SingleModePage from './pages/SingleModePage';
 import RankingPage from './pages/RankingPage';
 import SingupPage from './pages/SignupPage';
 import ScrollToTop from './components/scrolltotop/ScrollToTop';
+import { useEffect } from 'react';
 
 library.add(
   faXmark,
