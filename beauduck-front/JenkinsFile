@@ -40,7 +40,7 @@ pipeline {
         }
         stage('Run New image') {
             steps {
-                sh 'su docker run --name beauduck-dev-front -d -p 3000:3000 beauduck-dev-front'
+                sh 'docker run --name beauduck-dev-front -d -p 3000:3000 /beauduck-dev-front'
                 echo 'Run New image'
             }
         }
