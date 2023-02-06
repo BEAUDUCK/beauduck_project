@@ -27,9 +27,9 @@ public class MakeupService {
     @Autowired
     private MemberGalleryRepository memberGalleryRepository;
 
-    public boolean insert(MakeupRequestDto dto, String url) {
+    public int insert(MakeupRequestDto dto) {
         //Makeup 테이블에 데이터 저장
-        MakeupEntity makeup = makeupRepository.save(dto.toEntity(url));
+        MakeupEntity makeup = makeupRepository.save(dto.toEntity());
 
         //대분류 리스트 저장
         List<MakeupMainRequestDto> mainEntityList = dto.getMakeupMainList();
@@ -50,7 +50,7 @@ public class MakeupService {
             }
             makeupMiddleRepository.saveAll(mmlist);
         }
-        return true;
+        return makeup.getId();
     }
 
     @Transactional
@@ -160,6 +160,17 @@ public class MakeupService {
         if(gallery == null)
             return false;
         return true;
+    }
+
+    @Transactional
+    public boolean updateImg(int makeupId, String url) {
+        Optional<MakeupEntity> m = makeupRepository.findById(makeupId);
+        MakeupEntity makeup = m.get();
+
+        if(makeup.updateImg(url))
+            return true;
+        return false;
+
     }
 
 }

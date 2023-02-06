@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,16 +26,27 @@ public class MakeupController {
     @Autowired
     private AwsS3Service awsS3Service;
 
-    @ApiOperation(value = "메이크업 저장", notes = "새로운 메이크업 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
+    @ApiOperation(value = "메이크업 저장", notes = "새로운 메이크업 정보를 입력한다. 그리고 DB입력에 성공하면 makeupId를, 실패하면 -1을 리턴한다. ", response = String.class)
     @PostMapping("/")
-    public ResponseEntity<String> write(@ApiParam(value = "MakeupRequestDto", required = true) @RequestBody MakeupRequestDto dto) throws Exception{
-        //s3에 이미지 저장
-        String url = awsS3Service.uploadFileV1(dto.getImg());
-        if(makeupService.insert(dto, url)) {
+    public ResponseEntity<Integer> write(@ApiParam(value = "MakeupRequestDto", required = true) @RequestBody MakeupRequestDto dto) {
+        int id = makeupService.insert(dto);
+        if(id >= 0) {
+            return new ResponseEntity<Integer>(id, HttpStatus.OK);
+        }
+        return new ResponseEntity<Integer>(-1, HttpStatus.BAD_REQUEST);
+    }
+
+    @ApiOperation(value = "메이크업 썸네일 저장", notes = "메이크업 정보에 썸네일을 추가한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
+    @PostMapping("/img/{makeupId}")
+    public ResponseEntity<String> addImg(@RequestBody MultipartFile multipartFile, @PathVariable int makeupId) throws Exception {
+        String url = awsS3Service.uploadFileV1(multipartFile);
+        if (url != null) {
+            makeupService.updateImg(makeupId, url);
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
         }
         return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
     }
+
 
     @ApiOperation(value = "메이크업 목록 조회", notes = "메이크업 목록을 조회한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
     @GetMapping("/")

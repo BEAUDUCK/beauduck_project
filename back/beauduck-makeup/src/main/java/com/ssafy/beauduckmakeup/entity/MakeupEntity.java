@@ -1,6 +1,7 @@
 package com.ssafy.beauduckmakeup.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.ssafy.beauduckmakeup.dto.MakeupResponseDto;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Entity
@@ -47,6 +49,11 @@ public class MakeupEntity{
     public boolean updateScore(float score, int count) {
         this.score = score;
         this.count = count;
+        return true;
+    }
+
+    public boolean updateImg(String url) {
+        this.img = url;
         return true;
     }
 
