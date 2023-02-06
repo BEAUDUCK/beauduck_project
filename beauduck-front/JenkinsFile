@@ -41,9 +41,7 @@ pipeline {
         stage('Run New image') {
             steps {
                 sh 'ls -al'
-                dir('beauduck-front'){
-                    sh 'docker run --name beauduck-dev-front -d -p 3000:3000 beauduck-dev-front'
-                } 
+                sh 'docker run -d -p 3000:3000 beauduck-dev-front --name beauduck-dev-front '
                 echo 'Run New image'
             }
         }
