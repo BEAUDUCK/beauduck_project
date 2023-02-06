@@ -37,6 +37,9 @@ public class AuthService {
     public ResponseSuccessDto<TokenResponseDto> getToken(String code, String state) {
         JSONObject response = getJsonObjectByCode(code, state);
 
+        System.out.println("getToken method");
+        System.out.println("code = " + code);
+        System.out.println("state = " + state);
         System.out.println("accessToken = " + (String) response.get("access_token"));
         TokenResponseDto tokenResponseDto = TokenResponseDto.builder()
                 .accessToken((String) response.get("access_token"))
@@ -105,6 +108,7 @@ public class AuthService {
         JSONObject response = getJsonObjectByToken(accessToken);
         Map<String, Object> res = (Map<String, Object>) response.get("response");
 
+        System.out.println("Signup method");
         System.out.println(res.toString());
         String id = (String) res.get("id");
         String provider = "naver";
