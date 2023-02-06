@@ -6,15 +6,15 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItem;
-import org.apache.commons.io.IOUtils;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.*;
-import java.nio.file.Files;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,26 +26,7 @@ public class AwsS3Service {
 //  @Value("${cloud.aws.s3.bucket}")
   private String S3Bucket = "ssafybeauduck"; // Bucket 이름
 
-  private MultipartFile getMultipartFile(File file) throws IOException {
-    FileItem fileItem = new DiskFileItem("originFile", Files.probeContentType(file.toPath()), false, file.getName(), (int) file.length(), file.getParentFile());
-
-    try {
-      InputStream input = new FileInputStream(file);
-      OutputStream os = fileItem.getOutputStream();
-      IOUtils.copy(input, os);
-      // Or faster..
-      // IOUtils.copy(new FileInputStream(file), fileItem.getOutputStream());
-    } catch (IOException ex) {
-      ex.printStackTrace();
-    }
-
-    //jpa.png -> multipart 변환
-    MultipartFile mFile = new CommonsMultipartFile(fileItem);
-    return mFile;
-  }
-
-  public String uploadFileV1(File file) throws Exception{
-    MultipartFile multipartFile = getMultipartFile(file);
+  public String uploadFileV1(MultipartFile multipartFile) throws Exception{
     String originalName = multipartFile.getOriginalFilename(); // 파일 이름
     long size = multipartFile.getSize(); // 파일 크기
 
