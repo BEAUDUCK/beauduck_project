@@ -4,7 +4,7 @@ import { removeInfoComment, updateInfoComment } from './BoardSlice';
 
 const BoardCommentListItem = ({ comment, boardId }) => {
   const dispatch = useDispatch();
-  const { memberId, name } = useSelector((state) => state.member);
+  const { memberId, nickName } = useSelector((state) => state.member);
   const [newComment, setNewComment] = useState(comment?.content);
   const [isUpdate, setIsUpdate] = useState(false);
 
@@ -30,7 +30,7 @@ const BoardCommentListItem = ({ comment, boardId }) => {
       memberEntity: {
         memberId: comment.memberId,
       },
-      writer: name,
+      writer: nickName,
     };
 
     const updatePayload = {
@@ -48,6 +48,8 @@ const BoardCommentListItem = ({ comment, boardId }) => {
     };
     dispatch(removeInfoComment(removePayload));
   };
+
+  const date = comment.createdDate + '';
 
   return (
     <div className={['user-box', 'user-comment'].join(' ')}>
@@ -67,9 +69,7 @@ const BoardCommentListItem = ({ comment, boardId }) => {
         )}
         <div className="comment-last">
           <div className="comment-last-sub">
-            <span>{comment?.createdDate}</span>
-            {/* <span>좋아요</span>
-            <span>{comment?.likes}</span> */}
+            <span>{date.slice(0, 10)}</span>
           </div>
           {memberId === comment.memberId && (
             <div className="comment-last-sub">
