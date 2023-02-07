@@ -71,9 +71,9 @@ public class MakeupController {
     }
 
     @ApiOperation(value = "메이크업 실행 정보 조회", notes = "메이크업 실행 시 필요한 정보를 조회한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
-    @PostMapping("/execute")
-    public ResponseEntity<MakeupResponseDto> selectExecute(@ApiParam(value = "MakeupExecuteRequestDto", required = true) @RequestBody MakeupExecuteRequestDto dto) {
-        MakeupResponseDto makeup = makeupService.selectExecute(dto);
+    @PostMapping("/execute/{makeupId}")
+    public ResponseEntity<MakeupResponseDto> selectExecute(@ApiParam(value = "MakeupExecuteRequestDto", required = true) @RequestBody MakeupExecuteRequestDto dto, @PathVariable int makeupId) {
+        MakeupResponseDto makeup = makeupService.selectExecute(makeupId, dto);
         if(makeup!=null) {
             return new ResponseEntity<MakeupResponseDto>(makeup, HttpStatus.OK);
         }

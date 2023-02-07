@@ -109,25 +109,36 @@ public class MakeupService {
         return midList;
     }
 
-    public MakeupResponseDto selectExecute(MakeupExecuteRequestDto dto) {
+    public MakeupResponseDto selectExecute(int makeupId, MakeupExecuteRequestDto dto) {
+        //원래 해당 메이크업의 대분류 스텝 리스트 뽑기
+        Optional<MakeupEntity> m = makeupRepository.findById(makeupId);
+        List<MakeupMainEntity> makeupMainList = m.get().getMakeupMainList();
+//        List<String> originList = new ArrayList<>();
+//        for(MakeupMainEntity mm: makeupMainList) {
+//            originList.add(mm.getStep());
+//        }
+
         //대분류 리스트 만들기
         List<MakeupMainResponseDto> mainList = new ArrayList<>();
         String[] mains = dto.getMainList();
 
         for(String mainStep: mains) {
-            MakeupMainEntity main = makeupMainRepository.findByStep(mainStep);
+            for(MakeupMainEntity mme: makeupMainList) {
+                if(mme.getStep().equals(mainStep)) {
+                    //소분류 리스트 뽑기
+                    List < MakeupMiddleResponseDto > midList = selectAllMiddle(mme);
 
-            //소분류 리스트 뽑기
-            List<MakeupMiddleResponseDto> midList = selectAllMiddle(main);
 
+                    MakeupMainResponseDto md = MakeupMainResponseDto.builder()
+                            .id(mme.getId())
+                            .step(mme.getStep())
+                            .makeupMiddleList(midList)
+                            .build();
 
-            MakeupMainResponseDto md = MakeupMainResponseDto.builder()
-                    .id(main.getId())
-                    .step(main.getStep())
-                    .makeupMiddleList(midList)
-                    .build();
-
-            mainList.add(md);
+                    mainList.add(md);
+                    continue;
+                }
+            }
         }
 
         MakeupResponseDto mainDto = new MakeupResponseDto();
