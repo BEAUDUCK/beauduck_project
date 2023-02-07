@@ -1,11 +1,11 @@
 import MyGalleryListItem from "./MyGalleryListItem";
 
-const MyGalleryList = ({ gallery }) => {
+const MyGalleryList = ({ myGalleryList }) => {
   return (
     <div>
       <h1>내 갤러리</h1>
       <div style={{ display: "flex" }}>
-        {gallery.map((it) => (
+        {myGalleryList.map((it) => (
           <MyGalleryListItem 
             key={it.id}
             img={it.img}

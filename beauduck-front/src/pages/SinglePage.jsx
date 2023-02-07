@@ -24,9 +24,18 @@ const SinglePage = () => {
 
   // 추천 받기
   const [isRecommend, setIsRecommend] = useState(false);
+<<<<<<< HEAD
   const { memberId } = useState((state) => state.member);
   const popRecommend = () => {
     dispatch(recommendMakeup(memberId));
+=======
+  const { memberId } = useSelector((state) => state.member);
+  const popRecommend = () => {
+    const payload = {
+      id: memberId,
+    };
+    dispatch(recommendMakeup(payload));
+>>>>>>> a8595410ee6c020ce70d4190c294be85d2ae3279
     setIsRecommend(!isRecommend);
   };
 

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { submitMakeup } from './SingleSlice';
 // import logo from '../../assets/logo_original.png';
 
-const SingleMakeFirst = ({ sendFinalImg }) => {
+const SingleMakeFirst = ({ sendFinalImg, formData }) => {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState('');
@@ -15,6 +15,15 @@ const SingleMakeFirst = ({ sendFinalImg }) => {
   const contentRef = useRef();
   const imgRef = useRef();
   const durationRef = useRef();
+
+  // const formData = new FormData();
+  // const onChangeImg = (e) => {
+  //   e.preventDefault();
+  //   console.log('이미지 변경');
+
+  //   const imgFile = e.target.files[0];
+  //   formData.append('img', imgFile);
+  // };
 
   const submitFirst = () => {
     if (!title) {
@@ -33,6 +42,9 @@ const SingleMakeFirst = ({ sendFinalImg }) => {
       durationRef.current.focus();
       return;
     }
+
+    // const formData = new FormData();
+    // formData.append('img', img);
 
     sendFinalImg(img); // 이미지는 비직렬화라서 prop으로
 

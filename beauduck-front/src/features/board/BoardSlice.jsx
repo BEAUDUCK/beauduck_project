@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import client from '../../api/axios';
+import client from '../../api/boardAxios';
 
 // 한번에 게시판 리스트 조회
 export const getAllList = createAsyncThunk('board/getAllList', async () => {

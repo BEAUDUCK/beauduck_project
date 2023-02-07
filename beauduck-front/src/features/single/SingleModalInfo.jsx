@@ -11,10 +11,15 @@ import { useNavigate } from 'react-router-dom';
 const SingleModalInfo = ({ makeupId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+<<<<<<< HEAD
   const { makeup } = useSelector((state) => state.makeupDetail);
+=======
+  const { makeupDetail } = useSelector((state) => state.single);
+
+>>>>>>> a8595410ee6c020ce70d4190c294be85d2ae3279
   useEffect(() => {
     dispatch(getMakeupDetail(makeupId));
-  }, [dispatch, makeupId]);
+  }, [dispatch]);
 
   // 지금은 테스트 데이터 넣어놓음
   // const makeup = {
@@ -43,7 +48,7 @@ const SingleModalInfo = ({ makeupId }) => {
       }
     }
     const selectedStep = {
-      makeupMainList: category,
+      mainList: category,
     };
 
     dispatch(selectMain(category));
@@ -55,17 +60,19 @@ const SingleModalInfo = ({ makeupId }) => {
     <div className="makeup-detail">
       <div className="makeup-detail-top">
         <div className="makeup-detail-left">
-          <h3>{makeup.title}</h3>
+          <h3>{makeupDetail.title}</h3>
           <div className="star-info">
             <FontAwesomeIcon className="star-icon" icon="fa-solid fa-star" />
-            <p>{makeup.score}</p>
-            <p>({makeup.count})</p>
+            <p>{makeupDetail.score}</p>
+            <p>({makeupDetail.count})</p>
           </div>
-          <p className="makeup-content">{makeup.content}</p>
-          <p className="makeup-content">소요시간 : {makeup.duration} 분</p>
+          <p className="makeup-content">{makeupDetail.content}</p>
+          <p className="makeup-content">
+            소요시간 : {makeupDetail.duration} 분
+          </p>
         </div>
         <div className="makeup-detail-right">
-          <img src={makeup.img} alt="" />
+          <img src={makeupDetail.img} alt="" />
         </div>
       </div>
       <div className="select-course">
