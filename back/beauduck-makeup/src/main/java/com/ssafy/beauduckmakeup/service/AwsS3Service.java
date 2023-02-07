@@ -29,6 +29,7 @@ public class AwsS3Service {
   public String uploadFileV1(MultipartFile multipartFile) throws Exception{
     String originalName = multipartFile.getOriginalFilename(); // 파일 이름
     long size = multipartFile.getSize(); // 파일 크기
+    System.out.println("File Name: "+originalName+" File size: "+size);
 
     ObjectMetadata objectMetaData = new ObjectMetadata();
     objectMetaData.setContentType(multipartFile.getContentType());
@@ -41,6 +42,7 @@ public class AwsS3Service {
     );
 
     String imagePath = amazonS3Client.getUrl(S3Bucket, originalName).toString(); // 접근가능한 URL 가져오기
+    System.out.println("ImagePath: "+imagePath);
     return imagePath;
   }
 }
