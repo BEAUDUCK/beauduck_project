@@ -124,7 +124,7 @@ public class AuthService {
         String img = signupRequestDto.getImg();
 
         Optional<MemberEntity> findById = memberRepository.findById(id);
-        if(!findById.isEmpty()){
+        if(!findById.isPresent()){
             throw new SignupErrorException("이미 존재하는 회원입니다.");
         }
 
