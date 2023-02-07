@@ -31,7 +31,7 @@ const BoardWritePage = () => {
 
   const [cantModal, setCantModal] = useState(false);
 
-  const { memberId, name } = useSelector((state) => state.member);
+  const { memberId, nickName } = useSelector((state) => state.member);
 
   const BoardCreate = async () => {
     if (!title) {
@@ -48,7 +48,7 @@ const BoardWritePage = () => {
       memberEntity: {
         memberId,
       },
-      writer: name,
+      writer: nickName,
       content,
     };
 
