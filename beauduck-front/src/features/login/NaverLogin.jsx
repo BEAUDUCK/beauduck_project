@@ -32,8 +32,12 @@ const NaverLogin = () => {
           },
         );
         alert('인증 완료');
-        console.log('check');
-        RegisterCheck(accessToken);
+        console.log('토큰 발급함~');
+        // navigate('/signup');
+        // RegisterCheck(accessToken);
+        dispatch(UserLogin(accessToken));
+        console.log('로그인해');
+        navigate('/');
       })
 
       .catch((error) => {
@@ -42,35 +46,20 @@ const NaverLogin = () => {
   };
 
   // 등록 여부 확인
-  const RegisterCheck = async (accessToken) => {
-    axios
-      .get(`http://3.38.169.2:8080/naver/check?accessToken=${accessToken}`)
-      .then((res) => {
-        console.log('회원 여부', res.data.data);
-
-        // false : 기존 회원, true: 신규 회원
-        if (!res.data.data) {
-          dispatch(UserLogin(accessToken));
-          console.log("기존회원입니다.")
-          navigate('/');
-        } else if (res.data.data) {
-          navigate('/signup');
-        }
-      
-      }  
-      );
-  };
-
-  // const Login = async (accessToken) => {
-  //   console.log('여기 로그인');
+  // const RegisterCheck = async (accessToken) => {
   //   axios
-  //     .get(`http://3.38.169.2:8080/naver/login?accessToken=${accessToken}`)
+  //     .get(`http://3.38.169.2:8080/naver/check?accessToken=${accessToken}`)
   //     .then((res) => {
-  //       console.log(res.data.data);
-  //       dispatch(getMemberId(res.data.data));
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
+  //       console.log('회원 여부', res.data.data);
+
+  //       // false : 기존 회원, true: 신규 회원
+  //       if (!res.data.data) {
+  //         dispatch(UserLogin(accessToken));
+  //         console.log('기존회원입니다.');
+  //         navigate('/');
+  //       } else if (res.data.data) {
+  //         navigate('/signup');
+  //       }
   //     });
   // };
 

@@ -456,7 +456,14 @@
 //-------- 최종 설문 모달 ---------
 
 .survey-modal {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 990;
+    background-color: white;
+
     width: 400px;
     height: 200px;
 
