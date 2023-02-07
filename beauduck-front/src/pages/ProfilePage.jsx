@@ -6,10 +6,12 @@ import MyProfile from "../features/profile/MyProfile";
 import MyProfileSaveFace from "../features/profile/MyProfileSaveFace";
 import MyRanking from "../features/profile/MyRanking";
 import MyGalleryList from "../features/profile/MyGalleryList";
+import { useDispatch, useSelector } from "react-redux";
+import { getMemberInfo, getMyGalleryList, getMyMakeupList, getRecentMakeupList } from "../features/profile/ProfileSlice";
 // 더미
 import logo from "../assets/logo_original.png"
 
-
+// 더미
 const dummyRecentMakeup = [
   {
     id: 1,
@@ -78,6 +80,7 @@ const ProfilePage = () => {
   const [makeupState, setMakeupState] = useState(true)
   const [galleryState, setGalleryState] = useState(false)
   const [faceState, setFaceState] = useState(false)
+  const dispatch = useDispatch()
 
   const handleMakeup = () => {
     setMakeupState(true)
@@ -99,16 +102,37 @@ const ProfilePage = () => {
 
   const ChangeTab = () => {
     if (makeupState) {
-      return <MyMakeupList recentMakeup={dummyRecentMakeup} madeMakeup={dummyMadeMakeup}/>
+      return <MyMakeupList 
+      recentMakeup={dummyRecentMakeup} 
+      madeMakeup={dummyMadeMakeup}
+      recentMakeupList={recentMakeupList}
+      myMakeupList={myMakeupList}
+      />
     } else if (galleryState) {
-      return <MyGalleryList gallery={dummyGallery}/>
+      return <MyGalleryList 
+      gallery={dummyGallery}
+      myGalleryList={myGalleryList}
+      />
     } else {
       return <MyProfileSaveFace />
     }
   }
 
-  useEffect(() => {
+  const { memberId } = useSelector(state => state.member)
+  const { recentMakeupList } = useSelector(state => state.recentMakeupList)
+  const { myMakeupList } = useSelector(state => state.myMakeupList)
+  const { myGalleryList } = useSelector(state => state.myGalleryList)
 
+  useEffect(() => {
+    dispatch(getMemberInfo(memberId))
+    if (makeupState) {
+      dispatch(getRecentMakeupList(memberId))
+      dispatch(getMyMakeupList(memberId))
+    } else if (galleryState) {
+      dispatch(getMyGalleryList(memberId))
+    } else {
+      // 얼굴 저장??
+    }
   }, [makeupState, galleryState, faceState])
 
   return (
