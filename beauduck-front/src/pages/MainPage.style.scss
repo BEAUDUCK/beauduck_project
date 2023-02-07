@@ -1,0 +1,117 @@
+html {
+  scroll-behavior: smooth;
+
+}
+
+.main-ban {
+  background-color: #F1F1F1;
+  text-align: center;
+  
+  section {
+    position: relative;
+    // top: 50px;
+    width: 100%;
+    height: 100%;
+  }
+}
+  #section01 { background: url("../assets/main.gif") center center / cover no-repeat; 
+    height: 100vh;
+  
+    a {
+    padding-top: 60px;
+  
+    span {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 24px;
+      height: 24px;
+      margin-left: -12px;
+      border-left: 1px solid #fff;
+      border-bottom: 1px solid #fff;
+      // -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      -webkit-animation: sdb04 2s infinite;
+      animation: sdb04 2s infinite;
+      box-sizing: border-box;
+        }
+      }
+    }
+.demo a {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  z-index: 2; 
+  display: inline-block;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  color: #fff;
+  letter-spacing: .1em;
+  text-decoration: none;
+  transition: opacity .3s;
+}
+.demo a:hover {
+  opacity: .5;
+}
+
+.main-line {
+  position: relative;
+  display: block;
+  height: 200px;
+}
+
+#section02 {
+  max-height: 100vh;
+}
+.txt-box{
+  width: 50%;
+  text-align: left;
+  border: 1px solid red;
+  padding: 50px 0 50px 104px;
+  margin: 10px 80px;
+}
+.img-box{
+  width: 50%;
+  border: 1px solid #000;
+  margin: 10px 40px;
+}
+
+.section02-1{
+  margin: 0 auto;
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  background-color: #FBF276;
+  padding: 30px 0;
+}
+.section02-2{
+  margin: 0 auto;
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  background-color: #ffff;
+  padding: 30px 0;
+
+}
+.section02-3{ 
+  margin: 0 auto;
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  background-color: #FBF276;
+  padding: 30px 0;
+
+}
+.img-box {
+  img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .section02-1 {
+    flex-direction: column;
+  }
+}

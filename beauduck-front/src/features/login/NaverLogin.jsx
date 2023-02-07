@@ -49,10 +49,10 @@ const NaverLogin = () => {
         console.log('회원 여부', res.data.data);
 
         // false : 기존 회원, true: 신규 회원
-        if (!res.data.data) {
+        if (res.data.data === false) {
           dispatch(UserLogin(accessToken));
           navigate('/');
-        } else if (res.data.data) {
+        } else if (res.data.data === true) {
           navigate('/signup');
         }
       });
