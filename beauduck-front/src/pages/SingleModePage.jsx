@@ -143,13 +143,6 @@ const SingleModePage = () => {
     }
     setNowMain(makeupList[0][0]);
     setNowStep(makeupList[0][1]);
-
-    // console.log('nowMain', nowMain);
-    // console.log('nowStep', nowStep);
-    // console.log('makeupList', makeupList);
-
-    // const progress = document.getElementsByClassName('progress-bar')
-    // progress.setAttribute('style', ``)
   }, []);
 
   useEffect(() => {
@@ -209,9 +202,7 @@ const SingleModePage = () => {
           <p>나가기</p>
         </div>
         <SingleModeSequence nowStep={nowStep} />
-        {/* <img src={duck} alt="예시 이미지" className="sample-img" /> */}
         <br />
-        {/* <span className="color-circle">g</span> */}
       </div>
       <div className="center-div">
         <FontAwesomeIcon
@@ -296,9 +287,6 @@ const SingleModePage = () => {
             />
           )}
         </div>
-        {/* <div className="progress"> */}
-        {/* <p className="progress-text">Progressing</p> */}
-
         <div className="progress-bar">
           <hr className="progress-hr" />
           <hr
@@ -314,18 +302,8 @@ const SingleModePage = () => {
                 'progress-inside',
                 nowIdx >= idx ? 'already' : '',
               ].join(' ')}
-            >
-              {/* <FontAwesomeIcon
-                className="check-icon"
-                icon="fa-solid fa-heart"
-              /> */}
-              {/* <FontAwesomeIcon
-                className="check-icon"
-                icon="fa-solid fa-check"
-              /> */}
-            </div>
+            ></div>
           ))}
-          {/* </div> */}
         </div>
         <FacemeshFeature
           nowStep={nowStep.step}
