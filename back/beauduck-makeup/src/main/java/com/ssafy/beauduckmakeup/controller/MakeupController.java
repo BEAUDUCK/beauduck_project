@@ -81,12 +81,12 @@ public class MakeupController {
     }
 
     @ApiOperation(value = "메이크업 평가 및 나가기", notes = "메이크업을 평가하고 이를 바탕으로 메이크업 점수를 갱신한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
-    @PatchMapping("/end")
+    @PostMapping("/end")
     public ResponseEntity<String> updateScore(@ApiParam(value = "MakeupScoreRequestDto", required = true) @RequestBody MakeupScoreRequestDto dto) {
         //최근 메이크업에 저장
         makeupService.addRecentMakeup(dto);
 
-        if(makeupService.updateScore(dto.getId(), dto.getScore()))
+        if(makeupService.updateScore(dto.getMakeupEntity().getId(), dto.getScore()))
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
         return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
     }
