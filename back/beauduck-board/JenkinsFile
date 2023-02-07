@@ -40,7 +40,7 @@ pipeline {
         }
         stage('Run New image') {
             steps {
-                sh 'docker run --name feat-back-board -d -p 8081:8181 feat-back-board'
+                sh 'docker run --name feat-back-board -d -p 8081:8081 feat-back-board'
                 echo 'Run New image'
             }
         }
