@@ -71,16 +71,11 @@ const BoardInfoPage = () => {
 
   const removeBoard = () => {
     dispatch(RemoveInfoBoard(id));
-    navigate('/board'); // board 메인으로 라우팅
+    navigate('/board', { replace: true }); // board 메인으로 라우팅
   };
-  console.log('d', memberId);
-  console.log(nowBoard.memberId);
 
-  // const [isMine, setIsMine] = useState(false);
-  // if (memberId == nowBoard.memberId) {
-  //   setIsMine(true);
-  // }
-  // console.log(isMine);
+  const date = nowBoard.createdDate + '';
+
   return (
     <div className={['container', 'container-colored'].join(' ')}>
       <div className="info-board">
@@ -142,7 +137,7 @@ const BoardInfoPage = () => {
           <div className="user-text">
             <p>{nowBoard?.writer}</p>
             <div>
-              <span>{nowBoard?.createdDate}</span>
+              <span>{date.slice(0, 10)}</span>
               <span>조회</span>
               <span>{nowBoard?.count}</span>
             </div>

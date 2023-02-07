@@ -1,15 +1,26 @@
+import { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import LoginAlert from '../../components/modal/LoginAlert';
 import { newQaAnswer } from './BoardSlice';
 
 const BoardAnswerCreate = ({ boardId }) => {
   const dispatch = useDispatch();
+  const answerRef = useRef();
 
   const [answer, setAnswer] = useState('');
 
-  const { memberId, name } = useSelector((state) => state.member);
-
+  const { memberId, nickName } = useSelector((state) => state.member);
+  const [isAlert, setIsAlert] = useState(false);
   const AnswerSubmit = () => {
+    if (!memberId || memberId === undefined) {
+      setIsAlert(!isAlert);
+      return;
+    }
+    if (answer.length < 1) {
+      answerRef.current.focus();
+      return;
+    }
     const newAnswer = {
       boardQaEntity: {
         id: boardId,
@@ -19,7 +30,7 @@ const BoardAnswerCreate = ({ boardId }) => {
       },
       content: answer,
       isActive: true,
-      writer: name,
+      writer: nickName,
     };
 
     dispatch(newQaAnswer(newAnswer));
@@ -28,8 +39,9 @@ const BoardAnswerCreate = ({ boardId }) => {
 
   return (
     <div className={['qna-board', 'qna-answer-create'].join(' ')}>
-      <h4 className="answer-ninkname">닉네임</h4>
+      <h4 className="answer-ninkname">{nickName}</h4>
       <textarea
+        ref={answerRef}
         type="text"
         className="answer-input"
         value={answer}
@@ -38,6 +50,7 @@ const BoardAnswerCreate = ({ boardId }) => {
       <h5 className="answer-submit" onClick={AnswerSubmit}>
         등록
       </h5>
+      {isAlert && <LoginAlert onClickEvent={() => setIsAlert(!isAlert)} />}
     </div>
   );
 };
