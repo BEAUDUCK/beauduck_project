@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { getCookie } from './cookie';
 
-const REACT_APP_BASE_URL = 'http://3.38.169.2:8081';
+const REACT_APP_MAKEUP_URL = 'http://3.38.169.2:8082';
 const client = axios.create({
-  baseURL: REACT_APP_BASE_URL,
+  baseURL: REACT_APP_MAKEUP_URL,
   headers: {
     'Content-type': 'application/json',
+    withCredentials: true,
   },
 });
 
@@ -32,7 +33,7 @@ client.interceptors.response.use(
   },
   (error) => {
     // 오류 응답을 처리
-    console.log(REACT_APP_BASE_URL);
+    console.log(REACT_APP_MAKEUP_URL);
     console.log(error);
     return Promise.reject(error);
   },
