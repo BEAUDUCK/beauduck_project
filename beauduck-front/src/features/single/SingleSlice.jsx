@@ -32,14 +32,11 @@ export const createNewMakeup = createAsyncThunk(
 export const saveMakeupImg = createAsyncThunk(
   'single/saveMakeupImg',
   async (payload) => {
-    console.log('찐으로 보내는거', payload.img);
-    const imgFile = payload.img;
     const res = await client
       .post(`/makeup/img/${payload.id}/`, payload.img, {
-        headers: imgFile.getHeaders(),
-        // {
-        //   'Content-Type': 'multipart/form-data',
-        // },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       })
       .then((res) => {
         console.log(res);
@@ -62,9 +59,12 @@ export const recommendMakeup = createAsyncThunk(
 // 메이크업 진행
 export const startMakeup = createAsyncThunk(
   'single/startMakeup',
-  async (selectedStep) => {
+  async (payload) => {
     console.log('들어왔나?');
-    const res = await client.post('/makeup/execute/', selectedStep);
+    const res = await client.post(
+      `/makeup/execute/${payload.makeupId}`,
+      payload.selectedStep,
+    );
     console.log('ds', res.data.makeupMainList);
     return res.data.makeupMainList;
   },
@@ -74,11 +74,27 @@ export const startMakeup = createAsyncThunk(
 export const saveImage = createAsyncThunk(
   'single/saveImage',
   async (payload) => {
-    await client.post('/makeup/gallery/', payload);
+    await client
+      .post('/makeup/gallery/', payload)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   },
 );
 
 // 메이크업 평가 및 나가기
+export const submitMakeupResult = createAsyncThunk(
+  'single/submitMakeupResult',
+  async (payload) => {
+    await client
+      .patch('/makeup/end/', payload)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  },
+);
 
 // 최근 메이크업 저장
 
@@ -97,6 +113,7 @@ export const singleSlice = createSlice({
     // 진행
     mainList: [],
     nowMakeup: undefined,
+    nowMakeupId: 0,
   },
   reducers: {
     submitMakeup: (state, action) => {
@@ -119,6 +136,9 @@ export const singleSlice = createSlice({
     },
     setBtnStateUpdate: (state, action) => {
       state.btnState = true;
+    },
+    setMakeupId: (state, action) => {
+      state.nowMakeupId = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -147,6 +167,7 @@ export const {
   // changeBtnState,
   setBtnStateCreate,
   setBtnStateUpdate,
+  setMakeupId,
 } = singleSlice.actions;
 
 export default singleSlice.reducer;

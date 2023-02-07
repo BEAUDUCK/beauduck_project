@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { submitMakeup } from './SingleSlice';
 // import logo from '../../assets/logo_original.png';
 
-const SingleMakeFirst = ({ sendFinalImg, formData }) => {
+const SingleMakeFirst = ({ sendFinalImg }) => {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState('');
@@ -15,15 +15,6 @@ const SingleMakeFirst = ({ sendFinalImg, formData }) => {
   const contentRef = useRef();
   const imgRef = useRef();
   const durationRef = useRef();
-
-  // const formData = new FormData();
-  // const onChangeImg = (e) => {
-  //   e.preventDefault();
-  //   console.log('이미지 변경');
-
-  //   const imgFile = e.target.files[0];
-  //   formData.append('img', imgFile);
-  // };
 
   const submitFirst = () => {
     if (!title) {
@@ -43,9 +34,6 @@ const SingleMakeFirst = ({ sendFinalImg, formData }) => {
       return;
     }
 
-    // const formData = new FormData();
-    // formData.append('img', img);
-
     sendFinalImg(img); // 이미지는 비직렬화라서 prop으로
 
     const payload = {
@@ -59,7 +47,7 @@ const SingleMakeFirst = ({ sendFinalImg, formData }) => {
 
   return (
     <div className="makeup-first">
-      <img src={'images/logo.png'} alt="logo" className="logo-img" />
+      <img src={'/images/logo.png'} alt="logo" className="logo-img" />
       <div className="makeup-form-first">
         <div className="makeup-element">
           <label htmlFor="title" className="makeup-label">
@@ -100,6 +88,7 @@ const SingleMakeFirst = ({ sendFinalImg, formData }) => {
             type="file"
             id="mainImg"
             accept="image/*"
+            multiple
           />
         </div>
         <div className="makeup-element">
