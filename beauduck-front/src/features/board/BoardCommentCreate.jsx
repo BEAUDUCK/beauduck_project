@@ -1,15 +1,27 @@
+import { useRef } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { newInfoComment } from './BoardSlice';
+import LoginAlert from '../../components/modal/LoginAlert';
 
 const BoardCommentCreate = ({ boardId }) => {
   const dispatch = useDispatch();
+  const commentRef = useRef();
 
   const [comment, setComment] = useState('');
 
-  const { memberId, name } = useSelector((state) => state.member);
-
+  const { memberId, nickName } = useSelector((state) => state.member);
+  const [isAlert, setIsAlert] = useState(false);
   const CommentSubmit = () => {
+    if (!memberId || memberId === undefined) {
+      setIsAlert(!isAlert);
+      return;
+    }
+    if (comment.length < 1) {
+      commentRef.current.focus();
+      return;
+    }
     const newComment = {
       isActive: true,
       boardInfoEntity: {
@@ -19,9 +31,8 @@ const BoardCommentCreate = ({ boardId }) => {
         memberId,
       },
       content: comment,
-      writer: name,
+      writer: nickName,
     };
-    console.log(newComment);
 
     setComment('');
     dispatch(newInfoComment(newComment));
@@ -29,9 +40,10 @@ const BoardCommentCreate = ({ boardId }) => {
 
   return (
     <div className="comment-create">
-      <p>닉네임</p>
+      <p>{nickName}</p>
       <div>
         <textarea
+          ref={commentRef}
           type="text"
           className="comment-input"
           value={comment}
@@ -41,6 +53,7 @@ const BoardCommentCreate = ({ boardId }) => {
           등록
         </span>
       </div>
+      {isAlert && <LoginAlert onClickEvent={() => setIsAlert(!isAlert)} />}
     </div>
   );
 };
