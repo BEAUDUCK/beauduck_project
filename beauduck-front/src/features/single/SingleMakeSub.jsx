@@ -68,7 +68,7 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     const subImg = document.createElement('img');
     subImg.setAttribute('src', `/images/makeup/sub/sub_${step}.png`);
     subImg.setAttribute('alt', step);
-    subImg.setAttribute('id', `subImg_${idx}`);
+    subImg.setAttribute('id', `subImg_${main}_${idx}`);
     subImg.setAttribute('value', idx);
     subImg.setAttribute('class', 'sub-img');
     subImg.addEventListener('click', () => getSubData(idx));
@@ -98,7 +98,7 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     makeupMiddleList[idx].colorCode = color;
     makeupMiddleList[idx].img = img;
 
-    const subImg = document.getElementById(`subImg_${idx}`);
+    const subImg = document.getElementById(`subImg_${main}_${idx}`);
     subImg.setAttribute('src', `/images/makeup/sub/sub_${step}.png`);
     subImg.setAttribute('alt', step);
 

@@ -1,10 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SingleMakeDetail from './SingleMakeDetail';
 import SingleMakeFirst from './SingleMakeFirst';
-import { setBtnStateCreate } from './SingleSlice';
+import {
+  createNewMakeup,
+  saveMakeupImg,
+  setBtnStateCreate,
+} from './SingleSlice';
 
 const SingleMake = ({ onToggleMake }) => {
   const dispatch = useDispatch();
@@ -20,7 +24,10 @@ const SingleMake = ({ onToggleMake }) => {
 
   // 이미지는 따로 처리
   const [img, setImg] = useState('');
+  const formData = new FormData();
   const getFinalImg = (img) => {
+    formData.append('img', img);
+    // console.log(formData);
     const newImg = img;
     setImg(newImg);
   };
@@ -32,25 +39,42 @@ const SingleMake = ({ onToggleMake }) => {
   // 마지막 !!!! (데이터 합산)
   const getMainList = (data) => {
     setMakeupMainList(data);
-    createMakeup();
+    // createMakeup()
   };
+
+  const didMount = useRef(false);
+
+  useEffect(() => {
+    if (didMount.current) {
+      createMakeup();
+    } else {
+      didMount.current = true;
+    }
+  }, [makeupMainList]);
 
   const createMakeup = () => {
     const finalMakeup = {
       content,
       count: 0,
       duration,
-      img,
       memberId,
       score: 0,
+      img: '',
       title,
       makeupMainList,
     };
-    // 완료를... 두번 눌러야하네?^^
     console.log('finalMakeup', finalMakeup);
 
     // axios 요청 보내기...^^
-    // dispatch()
+    dispatch(createNewMakeup(finalMakeup)).then((res) => {
+      console.log('res', res);
+      const payload = {
+        id: res.payload,
+        img: formData,
+      };
+      console.log('payload', payload);
+      dispatch(saveMakeupImg(payload));
+    });
   };
 
   return (
@@ -60,7 +84,7 @@ const SingleMake = ({ onToggleMake }) => {
       <FontAwesomeIcon onClick={onToggleMake} icon="xmark" className="xmark" />
       {!completed && (
         <>
-          <SingleMakeFirst sendFinalImg={getFinalImg} />
+          <SingleMakeFirst sendFinalImg={getFinalImg} formData={formData} />
         </>
       )}
       {completed && (
