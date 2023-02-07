@@ -51,11 +51,14 @@ const NaverLogin = () => {
         // false : 기존 회원, true: 신규 회원
         if (!res.data.data) {
           dispatch(UserLogin(accessToken));
+          console.log("기존회원입니다.")
           navigate('/');
         } else if (res.data.data) {
           navigate('/signup');
         }
-      });
+      
+      }  
+      );
   };
 
   // const Login = async (accessToken) => {

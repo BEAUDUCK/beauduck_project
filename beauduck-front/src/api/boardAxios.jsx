@@ -2,9 +2,9 @@ import axios from 'axios';
 import { getCookie } from './cookie';
 import { useCookies } from 'react-cookie';
 
-const REACT_APP_BASE_URL = 'http://3.38.169.2:8081';
+const REACT_APP_BOARD_URL = 'http://3.38.169.2:8081';
 const client = axios.create({
-  baseURL: REACT_APP_BASE_URL,
+  baseURL: REACT_APP_BOARD_URL,
   headers: {
     'Content-type': 'application/json',
   },
@@ -51,6 +51,9 @@ client.interceptors.response.use(
       );
       setCookie(res.data.data.accessToken);
     }
+    console.log(REACT_APP_BOARD_URL);
+    console.log(error);
+
     return Promise.reject(error);
   },
 );

@@ -54,12 +54,12 @@
         width: 700px;
         height: 540px;
         position: relative;
-        margin-bottom: 20px;
     }
 
     .download-btn {
         width: 200px;
         height: 50px;
+        margin-top: 20px;
         background: #FFF5D1;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 30px;
@@ -213,6 +213,22 @@
                 left: 30px;
             }
         }
+        .guide-btn {
+            position: absolute;
+            left: calc(50% - 80px);
+            top: 700px;
+            width: 160px;
+            height: 30px;
+            font-family: 'Jalnan';
+            font-size: 15px;
+
+            &:hover {
+                font-size: 17px;
+                width: 166px;
+                height: 32px;
+                left: calc(50% - 83px);
+            }
+        }
 
         .main-img-div {
             width: 100%;
@@ -261,27 +277,12 @@
             right: -80px
         }
         
-        // .progress {
-        //     display: flex;
-        //     justify-content: center;
-
-        //     .progress-text {
-        //         display: inline-block;
-        //         margin-left: 10px;
-        //         margin-right: 10px;
-        //         font-family: 'Jalnan';
-        //         color: #FFE27C;
-        //         text-shadow: 1px 1px rgb(214, 214, 202);
-        //     }
             .progress-bar {
                 position: relative;
                 display: flex;
                 justify-content: space-between;
                 width: 620px;
                 height: 20px;
-                // background-color: black;
-                // border: 4px solid #fff2c1;
-                // border-radius: 100px;
                 margin-left: 30px;
                 margin-bottom: 10px;
 
@@ -292,6 +293,7 @@
                     width: 614px;
                     background-color:rgb(210, 210, 210);
                     border: none;
+                    transition: width ease 1s 0s;
                 }
     
                 .progress-inside {
@@ -301,7 +303,6 @@
                     height: 18px;
                     border-radius: 100px;
                     background-color: white;
-                    // border: 2px solid rgb(210, 210, 210);
                     color: rgb(210, 210, 210);
                     box-shadow: 0 0 7px rgb(210, 210, 210);
                     margin-left: 2px;
@@ -309,17 +310,10 @@
                     margin-top: auto;
                     margin-bottom: auto;
     
-                    // .check-icon {
-                    //     // position: absolute;
-                    //     // top: calc(50% - 9px);
-                    //     // left: calc(50% - 7px);
-                    //     width: 20px;
-                    //     height: 20px;
-                    // }
-    
                 }
                 .already {
                     background-color: #FFE27C;
+                    transition-delay: 1s;
                 }
         }
 
