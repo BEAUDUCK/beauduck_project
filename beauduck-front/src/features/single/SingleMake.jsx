@@ -10,7 +10,7 @@ import {
   setBtnStateCreate,
 } from './SingleSlice';
 
-const SingleMake = ({ onToggleMake }) => {
+const SingleMake = ({ onToggleMake, onToggleFinish }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -69,9 +69,9 @@ const SingleMake = ({ onToggleMake }) => {
         id: res.payload,
         img: imgForm.img,
       };
-      console.log('보내기 직전 폼', imgForm.img.get('img'));
-      console.log('payload', payload);
       dispatch(saveMakeupImg(payload));
+      onToggleFinish();
+      onToggleMake();
     });
   };
 
