@@ -40,7 +40,7 @@ public class MemberService {
 
     // 회원 nickName 중복 여부 확인
     public ResponseSuccessDto<Boolean> checkNickName(String nickName) {
-        System.out.println("check NickName method");
+        System.out.println("check NickName method = " + nickName);
         Boolean isDuplicated = memberProfileRepository.existsByNickName(nickName);
         System.out.println(isDuplicated);
         ResponseSuccessDto<Boolean> res = responseUtil.successResponse(isDuplicated);
