@@ -6,7 +6,7 @@ import BoardPage from './pages/BoardPage';
 import BoardWritePage from './pages/BoardWritePage';
 import ConsultingPage from './pages/ConsultingPage';
 import MainPage from './pages/MainPage';
-import NotFound from './pages/NotFount';
+import NotFound from './pages/NotFound';
 import ProfilePage from './pages/ProfilePage';
 import NaverLogin from './features/login/NaverLogin';
 import SinglePage from './pages/SinglePage';
