@@ -23,30 +23,30 @@ const SingleMake = ({ onToggleMake }) => {
   const { completed } = useSelector((state) => state.single);
 
   // 이미지는 따로 처리
-  const [img, setImg] = useState('');
-  const formData = new FormData();
+  const [imgForm, setImgForm] = useState('');
+  let formData = new FormData();
   const getFinalImg = (img) => {
     formData.append('img', img);
-    // console.log(formData);
-    const newImg = img;
-    setImg(newImg);
+    // console.log('폼', formData.get('img'));
+    setImgForm({
+      img: formData,
+    });
   };
 
   const { title, content, duration } = useSelector((state) => state.single);
-
   const [makeupMainList, setMakeupMainList] = useState([]);
 
   // 마지막 !!!! (데이터 합산)
   const getMainList = (data) => {
     setMakeupMainList(data);
-    // createMakeup()
   };
 
   const didMount = useRef(false);
-
   useEffect(() => {
     if (didMount.current) {
+      // 최초 렌더링에는 실행되지 않도록
       createMakeup();
+      didMount.current = false;
     } else {
       didMount.current = true;
     }
@@ -63,15 +63,13 @@ const SingleMake = ({ onToggleMake }) => {
       title,
       makeupMainList,
     };
-    console.log('finalMakeup', finalMakeup);
 
-    // axios 요청 보내기...^^
     dispatch(createNewMakeup(finalMakeup)).then((res) => {
-      console.log('res', res);
       const payload = {
         id: res.payload,
-        img: formData,
+        img: imgForm.img,
       };
+      console.log('보내기 직전 폼', imgForm.img.get('img'));
       console.log('payload', payload);
       dispatch(saveMakeupImg(payload));
     });
@@ -84,7 +82,7 @@ const SingleMake = ({ onToggleMake }) => {
       <FontAwesomeIcon onClick={onToggleMake} icon="xmark" className="xmark" />
       {!completed && (
         <>
-          <SingleMakeFirst sendFinalImg={getFinalImg} formData={formData} />
+          <SingleMakeFirst sendFinalImg={getFinalImg} />
         </>
       )}
       {completed && (

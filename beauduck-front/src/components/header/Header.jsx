@@ -5,12 +5,14 @@ import logo from '../../assets/logo_original.png';
 import { useState } from 'react';
 import LoginModal from '../../features/login/LoginModal';
 import LogoutModal from '../../features/login/LogoutModal';
+import { useSelector } from 'react-redux';
+import SignupPage from '../../pages/SignupPage';
 
 const Header = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem('refreshToken');
-  // console.log(token);
+  const { memberId } = useSelector((state) => state.member);
 
   const [isOpen, setIsOpen] = useState(false);
   const isOpenModal = () => {
@@ -44,9 +46,9 @@ const Header = () => {
           LOGIN
           {isOpen && <LoginModal isOpenModal={isOpenModal} />}
           </p> */}
-          {!token ? (
+          {!memberId ? (
             <p>
-              <LoginModal />
+              <LoginModal /> / <p onClick={() => navigate('/signup')}>SIGNUP</p>
             </p>
           ) : (
             <p>

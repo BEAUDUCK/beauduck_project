@@ -20,6 +20,7 @@ client.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.log('인터셉터', error);
     // 오류 요청을 보내기 전에 수행할 일
     return Promise.reject(error);
   },
