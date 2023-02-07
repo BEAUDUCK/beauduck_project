@@ -33,9 +33,9 @@ const NaverLogin = () => {
         );
         alert('인증 완료');
         console.log('check');
-        RegisterCheck(accessToken);
+        navigate('/signup')
+        // RegisterCheck(accessToken);
       })
-
       .catch((error) => {
         console.log(error);
       });
