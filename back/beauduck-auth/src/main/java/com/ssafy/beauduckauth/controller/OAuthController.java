@@ -3,11 +3,13 @@ package com.ssafy.beauduckauth.controller;
 import com.ssafy.beauduckauth.dto.auth.*;
 import com.ssafy.beauduckauth.dto.common.response.ResponseSuccessDto;
 import com.ssafy.beauduckauth.service.AuthService;
+import com.ssafy.beauduckauth.service.AwsS3Service;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Api("회원 인증 컨트롤러 V1")
 @RestController
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class OAuthController {
 
     private final AuthService authService;
+    private final AwsS3Service awsS3Service;
 
     @GetMapping("/oauth")
     public String naverConnect() {
@@ -56,7 +59,8 @@ public class OAuthController {
 
     @ApiOperation(value = "회원가입", notes = "회원가입을 진행한다.")
     @PostMapping("/signup")
-    public ResponseEntity<ResponseSuccessDto<SignupResponseDto>> signup(@RequestBody SignupRequestDto signupRequestDto){
-        return ResponseEntity.ok(authService.signup(signupRequestDto));
+    public ResponseEntity<ResponseSuccessDto<SignupResponseDto>> signup(@RequestParam("img")MultipartFile multipartFile, @RequestBody SignupRequestDto signupRequestDto) throws Exception {
+        String img = awsS3Service.uploadFileV1(multipartFile);
+        return ResponseEntity.ok(authService.signup(signupRequestDto, img));
     }
 }

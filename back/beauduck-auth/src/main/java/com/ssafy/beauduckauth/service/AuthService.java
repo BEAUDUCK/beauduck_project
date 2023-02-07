@@ -103,7 +103,11 @@ public class AuthService {
         return res;
     }
 
-    public ResponseSuccessDto<SignupResponseDto> signup(SignupRequestDto signupRequestDto) {
+    public ResponseSuccessDto<SignupResponseDto> signup(SignupRequestDto signupRequestDto, String img) {
+        if (img == null) {
+            throw new SignupErrorException("이미지를 업로드할 수 없습니다.");
+        }
+
         String accessToken = signupRequestDto.getAccessToken();
         JSONObject response = getJsonObjectByToken(accessToken);
         Map<String, Object> res = (Map<String, Object>) response.get("response");
@@ -121,14 +125,13 @@ public class AuthService {
         String phone = "010-1234-1234";
         String nickName = signupRequestDto.getNickName();
         String content = signupRequestDto.getContent();
-        String img = signupRequestDto.getImg();
 
         Optional<MemberEntity> findById = memberRepository.findById(id);
-        if(findById.isPresent()){
+        if (findById.isPresent()) {
             throw new SignupErrorException("이미 존재하는 회원입니다.");
         }
 
-        if(memberProfileRepository.existsByNickName(nickName)){
+        if (memberProfileRepository.existsByNickName(nickName)) {
             throw new DuplicateErrorException("중복된 닉네임입니다.");
         }
 
@@ -189,6 +192,7 @@ public class AuthService {
                 .retrieve().bodyToMono(JSONObject.class).block();
         return response;
     }
+
     private static JSONObject getJsonObjectByToken(String accessToken) {
         WebClient webClient = WebClient
                 .builder()
