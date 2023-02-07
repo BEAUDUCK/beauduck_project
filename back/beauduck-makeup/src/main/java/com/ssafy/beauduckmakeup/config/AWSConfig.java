@@ -7,6 +7,8 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
 public class AWSConfig {
@@ -25,5 +27,12 @@ public class AWSConfig {
                                                              .withRegion(region)
                                                              .withCredentials(new AWSStaticCredentialsProvider(basicAWSCredentials))
                                                              .build();
+	}
+
+	@Bean
+	public MultipartResolver multipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setMaxUploadSize(2000000000);
+		return multipartResolver;
 	}
 }
