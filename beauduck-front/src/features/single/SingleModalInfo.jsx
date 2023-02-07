@@ -12,7 +12,7 @@ import { useState } from 'react';
 import Button from '../../components/button/Button';
 import { useNavigate } from 'react-router-dom';
 
-const SingleModalInfo = ({ makeupId }) => {
+const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { makeupDetail } = useSelector((state) => state.single);
@@ -45,7 +45,6 @@ const SingleModalInfo = ({ makeupId }) => {
       selectedStep,
     };
 
-    console.log(payload);
     dispatch(selectMain(category));
     dispatch(startMakeup(payload)).then((res) => {
       dispatch(setMakeupId(makeupId));
@@ -55,7 +54,7 @@ const SingleModalInfo = ({ makeupId }) => {
 
   return (
     <div className="makeup-detail">
-      <div className="makeup-detail-top">
+      <div className="makeup-detail-top" onClick={() => isToggleInfo()}>
         <div className="makeup-detail-left">
           <h3>{makeupDetail.title}</h3>
           <div className="star-info">
@@ -63,10 +62,10 @@ const SingleModalInfo = ({ makeupId }) => {
             <p>{makeupDetail.score}</p>
             <p>({makeupDetail.count})</p>
           </div>
-          <p className="makeup-content">{makeupDetail.content}</p>
-          <p className="makeup-content">
+          <p className="makeup-duration">
             소요시간 : {makeupDetail.duration} 분
           </p>
+          <p className="makeup-content">{makeupDetail.content}</p>
         </div>
         <div className="makeup-detail-right">
           <img src={makeupDetail.img} alt="" />

@@ -88,7 +88,7 @@ export const submitMakeupResult = createAsyncThunk(
   'single/submitMakeupResult',
   async (payload) => {
     await client
-      .patch('/makeup/end/', payload)
+      .post('/makeup/end/', payload)
       .then((res) => {
         console.log(res.data);
       })
