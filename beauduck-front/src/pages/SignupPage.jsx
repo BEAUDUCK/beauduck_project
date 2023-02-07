@@ -75,6 +75,7 @@ const SignupPage = () => {
     axios
       .post('http://3.38.169.2:8080/naver/signup', data)
       .then((res) => {
+        console.log('res', res);
         dispatch(getNickName(nickName));
         dispatch(UserLogin(accessToken));
         alert('회원가입 완료');

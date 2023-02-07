@@ -7,82 +7,84 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React from 'react';
 import Alert from '../components/modal/Alert';
+import Button from '../components/button/Button';
 
 const SingleModePage = () => {
-  const nowMakeup = [
-    {
-      step: 'skin',
-      makeupMiddleList: [
-        {
-          step: 'suncream',
-          content:
-            '잘 발라주세여 챱챱챱챱챱챱챱챱챱챠챠챠챠챠챠챠아아아아아나나나나나나마마마마마마마마맘마ㅏ바바ㅏ바밥ㄴㄴ안아지ㅏㅣㅏ이나이나이ㅏㅣ아니아니ㅏ이나ㅣ아니아ㅣ나이나ㅣ아니아ㅣㄴ아니아ㅣㄴ아니앙이ㅣ이ㅐ',
-          colorCode: '',
-          img: '',
-        },
-        {
-          step: 'foundation',
-          content: '적정량을 덜어서 챱챱',
-          colorCode: '',
-          img: '',
-        },
-      ],
-    },
-    {
-      step: 'eyebrow',
-      makeupMiddleList: [
-        {
-          step: 'eyebrow',
-          content: '슥샥슥샥',
-          colorCode: '',
-          img: '',
-        },
-      ],
-    },
-    {
-      step: 'eye',
-      makeupMiddleList: [
-        {
-          step: 'eyeshadow',
-          content: '파란색 아이섀도우를 눈 위에 슥샥슥샥',
-          colorCode: '#0000FF',
-          img: '',
-        },
-        {
-          step: 'eyeliner',
-          content: '아이라이너는 길고 두껍게^^',
-          colorCode: '',
-          img: '',
-        },
-      ],
-    },
-    {
-      step: 'conture',
-      makeupMiddleList: [
-        {
-          step: 'shading',
-          content: '얼굴을 반토막 내보자고',
-          colorCode: '',
-          img: '',
-        },
-      ],
-    },
-    {
-      step: 'lip',
-      makeupMiddleList: [
-        {
-          step: 'lipstick',
-          content: '한번만 샥샥',
-          colorCode: '#C2185B',
-          img: '',
-        },
-      ],
-    },
-  ];
+  // const nowMakeup = [
+  //   {
+  //     step: 'skin',
+  //     makeupMiddleList: [
+  //       {
+  //         step: 'suncream',
+  //         content:
+  //           '잘 발라주세여 챱챱챱챱챱챱챱챱챱챠챠챠챠챠챠챠아아아아아나나나나나나마마마마마마마마맘마ㅏ바바ㅏ바밥ㄴㄴ안아지ㅏㅣㅏ이나이나이ㅏㅣ아니아니ㅏ이나ㅣ아니아ㅣ나이나ㅣ아니아ㅣㄴ아니아ㅣㄴ아니앙이ㅣ이ㅐ',
+  //         colorCode: '',
+  //         img: '',
+  //       },
+  //       {
+  //         step: 'foundation',
+  //         content: '적정량을 덜어서 챱챱',
+  //         colorCode: '',
+  //         img: '',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     step: 'eyebrow',
+  //     makeupMiddleList: [
+  //       {
+  //         step: 'eyebrow',
+  //         content: '슥샥슥샥',
+  //         colorCode: '',
+  //         img: '',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     step: 'eye',
+  //     makeupMiddleList: [
+  //       {
+  //         step: 'eyeshadow',
+  //         content: '파란색 아이섀도우를 눈 위에 슥샥슥샥',
+  //         colorCode: '#0000FF',
+  //         img: '',
+  //       },
+  //       {
+  //         step: 'eyeliner',
+  //         content: '아이라이너는 길고 두껍게^^',
+  //         colorCode: '',
+  //         img: '',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     step: 'conture',
+  //     makeupMiddleList: [
+  //       {
+  //         step: 'shading',
+  //         content: '얼굴을 반토막 내보자고',
+  //         colorCode: '',
+  //         img: '',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     step: 'lip',
+  //     makeupMiddleList: [
+  //       {
+  //         step: 'lipstick',
+  //         content: '한번만 샥샥',
+  //         colorCode: '#C2185B',
+  //         img: '',
+  //       },
+  //     ],
+  //   },
+  // ];
 
   const navigate = useNavigate();
   const { mainList } = useSelector((state) => state.single);
-  // const { nowMakeup } = useSelector((state) => state.single);
+  const { nowMakeup } = useSelector((state) => state.single);
+  console.log('nowMakeup', nowMakeup);
   const [isExit, setIsExit] = useState(false);
 
   const [isSkin, setIsSkin] = useState(false);
@@ -141,13 +143,6 @@ const SingleModePage = () => {
     }
     setNowMain(makeupList[0][0]);
     setNowStep(makeupList[0][1]);
-
-    // console.log('nowMain', nowMain);
-    // console.log('nowStep', nowStep);
-    // console.log('makeupList', makeupList);
-
-    // const progress = document.getElementsByClassName('progress-bar')
-    // progress.setAttribute('style', ``)
   }, []);
 
   useEffect(() => {
@@ -187,7 +182,10 @@ const SingleModePage = () => {
     navigate('/single/result', { replace: true });
   };
 
-  console.log('makeupList', makeupList);
+  const [isGuide, setIsGuide] = useState(false);
+  const guideOnOff = () => {
+    setIsGuide(!isGuide);
+  };
   return (
     <div className="full-screen">
       <div className="left-div">
@@ -204,9 +202,7 @@ const SingleModePage = () => {
           <p>나가기</p>
         </div>
         <SingleModeSequence nowStep={nowStep} />
-        {/* <img src={duck} alt="예시 이미지" className="sample-img" /> */}
         <br />
-        {/* <span className="color-circle">g</span> */}
       </div>
       <div className="center-div">
         <FontAwesomeIcon
@@ -291,9 +287,6 @@ const SingleModePage = () => {
             />
           )}
         </div>
-        {/* <div className="progress"> */}
-        {/* <p className="progress-text">Progressing</p> */}
-
         <div className="progress-bar">
           <hr className="progress-hr" />
           <hr
@@ -309,20 +302,19 @@ const SingleModePage = () => {
                 'progress-inside',
                 nowIdx >= idx ? 'already' : '',
               ].join(' ')}
-            >
-              {/* <FontAwesomeIcon
-                className="check-icon"
-                icon="fa-solid fa-heart"
-              /> */}
-              {/* <FontAwesomeIcon
-                className="check-icon"
-                icon="fa-solid fa-check"
-              /> */}
-            </div>
+            ></div>
           ))}
-          {/* </div> */}
         </div>
-        <FacemeshFeature nowStep={nowStep.step} nowMain={nowMain} />
+        <FacemeshFeature
+          nowStep={nowStep.step}
+          nowMain={nowMain}
+          isGuide={isGuide}
+        />
+        <Button
+          text={isGuide ? '가이드 끄기' : '가이드 켜기'}
+          onClickEvent={guideOnOff}
+          btnStyle={'guide-btn'}
+        />
       </div>
       <div className="right-div">
         <img src={nowStep.img} alt={nowStep.step} />

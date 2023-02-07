@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import client from '../../api/axios';
+import client from '../../api/singleAxios';
 
 // 전체 메이크업 리스트 조회
 export const getMakeupList = createAsyncThunk(
   'single/getMakeupList',
   async () => {
-    const res = await client.get('/makeup');
+    const res = await client.get('/makeup/');
     return res.data;
   },
 );
@@ -14,8 +13,8 @@ export const getMakeupList = createAsyncThunk(
 // 개별 메이크업 상세 조회
 export const getMakeupDetail = createAsyncThunk(
   'single/getMakeupDetail',
-  async (id) => {
-    const res = await client.get(`/makeup/${id}`);
+  async (makeupId) => {
+    const res = await client.get(`/makeup/${makeupId}/`);
     return res.data;
   },
 );
@@ -24,17 +23,35 @@ export const getMakeupDetail = createAsyncThunk(
 export const createNewMakeup = createAsyncThunk(
   'single/createNewMakeup',
   async (newProcess) => {
-    const res = await client.post('makeup', newProcess);
+    const res = await client.post('/makeup/', newProcess);
     return res.data;
+  },
+);
+
+// 이미지 따로 저장
+export const saveMakeupImg = createAsyncThunk(
+  'single/saveMakeupImg',
+  async (payload) => {
+    const res = await client
+      .post(`/makeup/img/${payload.id}/`, payload.img, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   },
 );
 
 // 메이크업 추천 요청 + 받기
 export const recommendMakeup = createAsyncThunk(
   'single/recommendMakeup',
-  async (id) => {
-    await client.post('makeup/recommend', id);
-    const res = await client.get('makeup/recommend');
+
+  async (payload) => {
+    const res = await client.post('/makeup/recommend/', payload);
+    // const res = await client.get('makeup/recommend');
     return res.data;
   },
 );
@@ -42,9 +59,14 @@ export const recommendMakeup = createAsyncThunk(
 // 메이크업 진행
 export const startMakeup = createAsyncThunk(
   'single/startMakeup',
-  async (selectedStep) => {
-    const res = await client.post('makeup/execute', selectedStep);
-    return res.data;
+  async (payload) => {
+    console.log('들어왔나?');
+    const res = await client.post(
+      `/makeup/execute/${payload.makeupId}`,
+      payload.selectedStep,
+    );
+    console.log('ds', res.data.makeupMainList);
+    return res.data.makeupMainList;
   },
 );
 
@@ -52,11 +74,27 @@ export const startMakeup = createAsyncThunk(
 export const saveImage = createAsyncThunk(
   'single/saveImage',
   async (payload) => {
-    await client.post('makeup/result-img', payload);
+    await client
+      .post('/makeup/gallery/', payload)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   },
 );
 
 // 메이크업 평가 및 나가기
+export const submitMakeupResult = createAsyncThunk(
+  'single/submitMakeupResult',
+  async (payload) => {
+    await client
+      .patch('/makeup/end/', payload)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  },
+);
 
 // 최근 메이크업 저장
 
@@ -74,6 +112,8 @@ export const singleSlice = createSlice({
     btnState: false, // false가 생성 상태 (true가 수정/삭제)
     // 진행
     mainList: [],
+    nowMakeup: undefined,
+    nowMakeupId: 0,
   },
   reducers: {
     submitMakeup: (state, action) => {
@@ -96,6 +136,9 @@ export const singleSlice = createSlice({
     },
     setBtnStateUpdate: (state, action) => {
       state.btnState = true;
+    },
+    setMakeupId: (state, action) => {
+      state.nowMakeupId = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -124,6 +167,7 @@ export const {
   // changeBtnState,
   setBtnStateCreate,
   setBtnStateUpdate,
+  setMakeupId,
 } = singleSlice.actions;
 
 export default singleSlice.reducer;

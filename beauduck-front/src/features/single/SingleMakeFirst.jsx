@@ -47,7 +47,7 @@ const SingleMakeFirst = ({ sendFinalImg }) => {
 
   return (
     <div className="makeup-first">
-      <img src={'images/logo.png'} alt="logo" className="logo-img" />
+      <img src={'/images/logo.png'} alt="logo" className="logo-img" />
       <div className="makeup-form-first">
         <div className="makeup-element">
           <label htmlFor="title" className="makeup-label">
@@ -88,6 +88,7 @@ const SingleMakeFirst = ({ sendFinalImg }) => {
             type="file"
             id="mainImg"
             accept="image/*"
+            multiple
           />
         </div>
         <div className="makeup-element">

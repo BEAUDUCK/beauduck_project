@@ -17,6 +17,7 @@ export const resetCookie = (cName) => {
     cName + '= ' + '; expires=' + expireDate.toGMTString() + '; path=/';
 };
 
+// accessToken 값만 가지고 싶을 때 사용
 export const getAccessToken = () => {
   const tokenObj = getCookie('accessToken');
   const accessToken = JSON.parse(tokenObj).accessToken;

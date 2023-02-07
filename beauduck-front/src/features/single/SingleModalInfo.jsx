@@ -2,30 +2,24 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMakeupDetail, selectMain, startMakeup } from './SingleSlice';
+import {
+  getMakeupDetail,
+  selectMain,
+  setMakeupId,
+  startMakeup,
+} from './SingleSlice';
 import { useState } from 'react';
 import Button from '../../components/button/Button';
 import { useNavigate } from 'react-router-dom';
 
-// 메이크업 상세 조회 API
 const SingleModalInfo = ({ makeupId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { makeup } = useSelector((state) => state.makeupDetail);
+  const { makeupDetail } = useSelector((state) => state.single);
+
   useEffect(() => {
     dispatch(getMakeupDetail(makeupId));
-  }, [dispatch, makeupId]);
-
-  // 지금은 테스트 데이터 넣어놓음
-  const makeup = {
-    id: 1,
-    title: '데일리 메이크업',
-    content: '일상생활에서 부담없이 할 수 있는 데일리 메이크업입니다.',
-    duration: 30,
-    score: 4.5,
-    count: 120,
-    img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
-  };
+  }, [dispatch]);
 
   let category = [];
   const [isSelected1, setIsSelected1] = useState(false);
@@ -43,29 +37,39 @@ const SingleModalInfo = ({ makeupId }) => {
       }
     }
     const selectedStep = {
-      makeupMainList: category,
+      mainList: category,
     };
-    console.log(selectedStep);
+
+    const payload = {
+      makeupId,
+      selectedStep,
+    };
+
+    console.log(payload);
     dispatch(selectMain(category));
-    dispatch(startMakeup(selectedStep));
-    navigate('/single/mode', { replace: true });
+    dispatch(startMakeup(payload)).then((res) => {
+      dispatch(setMakeupId(makeupId));
+      navigate('/single/mode', { replace: true });
+    });
   };
 
   return (
     <div className="makeup-detail">
       <div className="makeup-detail-top">
         <div className="makeup-detail-left">
-          <h3>{makeup.title}</h3>
+          <h3>{makeupDetail.title}</h3>
           <div className="star-info">
             <FontAwesomeIcon className="star-icon" icon="fa-solid fa-star" />
-            <p>{makeup.score}</p>
-            <p>({makeup.count})</p>
+            <p>{makeupDetail.score}</p>
+            <p>({makeupDetail.count})</p>
           </div>
-          <p className="makeup-content">{makeup.content}</p>
-          <p className="makeup-content">소요시간 : {makeup.duration} 분</p>
+          <p className="makeup-content">{makeupDetail.content}</p>
+          <p className="makeup-content">
+            소요시간 : {makeupDetail.duration} 분
+          </p>
         </div>
         <div className="makeup-detail-right">
-          <img src={makeup.img} alt="" />
+          <img src={makeupDetail.img} alt="" />
         </div>
       </div>
       <div className="select-course">

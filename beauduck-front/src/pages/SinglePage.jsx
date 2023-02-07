@@ -24,10 +24,17 @@ const SinglePage = () => {
 
   // 추천 받기
   const [isRecommend, setIsRecommend] = useState(false);
-  const user_id = 1; // 나중에 찐 아이디로 교체
+
+  const { memberId } = useSelector((state) => state.member);
   const popRecommend = () => {
-    dispatch(recommendMakeup(user_id));
-    setIsRecommend(!isRecommend);
+    dispatch(recommendMakeup(memberId));
+    const popRecommend = () => {
+      const payload = {
+        id: memberId,
+      };
+      dispatch(recommendMakeup(payload));
+      setIsRecommend(!isRecommend);
+    };
   };
 
   // 새로운 메이크업 만들기
