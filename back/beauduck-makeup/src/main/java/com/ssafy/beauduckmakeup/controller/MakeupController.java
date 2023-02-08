@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,8 +40,6 @@ public class MakeupController {
     @ApiOperation(value = "메이크업 썸네일 저장", notes = "메이크업 정보에 썸네일을 추가한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
     @PostMapping("/img/{makeupId}")
     public ResponseEntity<String> addImg(@RequestParam("img") MultipartFile multipartFile, @PathVariable int makeupId) throws Exception {
-        System.out.println("여기 컨트롤러");
-        System.out.println("makeupId: "+makeupId);
         String url = awsS3Service.uploadFileV1(multipartFile);
         if (url != null) {
             makeupService.updateImg(makeupId, url);
@@ -50,7 +49,7 @@ public class MakeupController {
     }
 
 
-    @ApiOperation(value = "메이크업 목록 조회", notes = "메이크업 목록을 조회한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
+    @ApiOperation(value = "메이크업 목록 조회", notes = "메이크업 목록을 조회한다.", response = String.class)
     @GetMapping("/")
     public ResponseEntity<List<MakeupResponseDto>> selectAll(){
         List<MakeupResponseDto> makeupList = makeupService.selectAll();
@@ -59,6 +58,17 @@ public class MakeupController {
         }
         return new ResponseEntity<List<MakeupResponseDto>>(makeupList, HttpStatus.NO_CONTENT);
     }
+
+    @ApiOperation(value = "인기 메이크업 10개 조회", notes = "score와 count를 기반으로 인기 메이크업 10개 목록을 조회한다.", response = String.class)
+    @GetMapping("/popular")
+    public ResponseEntity<List<MakeupResponseDto>> selectTop10() {
+        List<MakeupResponseDto> makeupList = makeupService.selectTop10();
+        if(makeupList!=null) {
+            return new ResponseEntity<List<MakeupResponseDto>>(makeupList, HttpStatus.OK);
+        }
+        return new ResponseEntity<List<MakeupResponseDto>>(makeupList, HttpStatus.NO_CONTENT);
+    }
+
 
     @ApiOperation(value = "메이크업 상세 정보 조회", notes = "메이크업 상세정보를 조회한다. 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
     @GetMapping("/{makeupId}")
@@ -98,16 +108,4 @@ public class MakeupController {
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
         return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
     }
-
-
-//    @ApiOperation(value = "최근 메이크업 저장", notes = "유저가 실행한 메이크업을 최근 메이크업 테이블에 저장 그리고 DB입력 성공여부에 따라 'SUCCESS' 또는 'FAIL' 문자열을 반환한다.", response = String.class)
-//    @PostMapping("/recent")
-//    public ResponseEntity<String> addRecentMakeup(@ApiParam(value = "RecentMakeupRequestDto", required = true) @RequestBody RecentMakeupRequestDto dto){
-//        if(makeupService.addRecentMakeup(dto)) {
-//            return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-//        }
-//        return new ResponseEntity<String>("FAIL", HttpStatus.BAD_REQUEST);
-//    }
-
-
 }

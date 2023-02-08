@@ -4,11 +4,11 @@ import com.ssafy.beauduckmakeup.entity.*;
 import com.ssafy.beauduckmakeup.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,11 +23,16 @@ public class MakeupService {
     private MakeupMiddleRepository makeupMiddleRepository;
     @Autowired
     private RecentMakeupRepository recentMakeupRepository;
-
     @Autowired
     private MemberGalleryRepository memberGalleryRepository;
+    @Autowired
+    private ImgaiRepository imgaiRepository;
+    @Autowired
+    private MemberRepository memberRepository;
 
+    @Transactional
     public int insert(MakeupRequestDto dto) {
+
         //Makeup 테이블에 데이터 저장
         MakeupEntity makeup = makeupRepository.save(dto.toEntity());
 
@@ -50,6 +55,17 @@ public class MakeupService {
             }
             makeupMiddleRepository.saveAll(mmlist);
         }
+
+        //imgai 테이블에 isMakeup true로 바꿔주기
+        Optional<MemberEntity> memberEntity = memberRepository.findById(dto.getMemberId());
+        System.out.println("일단 멤버 찾기: "+memberEntity.get().getId());
+        Optional<ImgaiEntity> imgaiEntity =imgaiRepository.findByMemberEntity(memberEntity.get());
+        System.out.println("imgai에서 찾았졍: "+ imgaiEntity.get().getMemberEntity().getId());
+        ImgaiEntity imgai = imgaiEntity.get();
+        System.out.println("업데이트 전: "+imgai.getIsMakeup());
+        if(imgai != null)
+            imgai.updateIsMakeup();
+        System.out.println("업데이트 후: "+imgai.getIsMakeup());
         return makeup.getId();
     }
 
@@ -71,6 +87,35 @@ public class MakeupService {
 
         return makeupDtoList;
     }
+
+    public List<MakeupResponseDto> selectTop10() {
+        List<MakeupEntity> makeupList = makeupRepository.findAll(getSort());
+        List<MakeupResponseDto> makeupDtoList = new ArrayList<>();
+        int cnt=0;
+        for(MakeupEntity e: makeupList) {
+            if(cnt==10) break;
+
+            MakeupResponseDto dto = MakeupResponseDto.builder()
+                    .id(e.getId())
+                    .title(e.getTitle())
+                    .img(e.getImg())
+                    .score(e.getScore())
+                    .count(e.getCount())
+                    .build();
+            makeupDtoList.add(dto);
+            cnt++;
+        }
+
+        return makeupDtoList;
+    }
+
+    private Sort getSort() {
+        return Sort.by(
+                    Sort.Order.desc("count"),
+                    Sort.Order.desc("score")
+        );
+    }
+
 
     public MakeupResponseDto selectOne(int id) {
         Optional<MakeupEntity> makeupEntity = makeupRepository.findById(id);
