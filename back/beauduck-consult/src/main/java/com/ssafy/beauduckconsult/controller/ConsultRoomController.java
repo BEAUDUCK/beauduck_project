@@ -13,7 +13,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -74,11 +73,6 @@ public class ConsultRoomController {
     @PutMapping("/exp")
     public ResponseEntity<ResponseSuccessDto<RoomResponseDto>> update(@ApiParam(value = "MemberProfileDto", required = true) @RequestBody MemberProfileDto request){
         return ResponseEntity.ok(memberService.updateExp(request));
-//        boolean result = memberService.updateExp(request);
-//        if (result)
-//            return new ResponseEntity<String>("success", HttpStatus.ACCEPTED);
-//        else
-//            return new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
     }
 
 }
