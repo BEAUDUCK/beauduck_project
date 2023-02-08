@@ -6,6 +6,7 @@ class UserModel {
     nickname;
     streamManager;
     type; // 'remote' | 'local'
+    role
 
     constructor() {
         this.connectionId = '';
@@ -70,6 +71,9 @@ class UserModel {
         if (type === 'local' |  type === 'remote') {
             this.type = type;
         }
+    }
+    setRole(role) {
+        if ((role === "admin") | (role === "user")) this.role = role
     }
 }
 
