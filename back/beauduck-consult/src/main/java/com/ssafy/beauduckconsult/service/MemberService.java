@@ -28,7 +28,7 @@ public class MemberService {
         MemberEntity memberEntity = memberRepository.findById(memberProfileDto.getMemberEntity().getId()).orElseThrow(() -> new RuntimeException("해당 회원이 존재하지 않습니다."));
         MemberProfileEntity memberProfileEntity = memberProfileRepository.findByMemberEntity(memberEntity)
                 .orElseThrow(() -> new RuntimeException("해당 회원의 프로필이 존재하지 않습니다."));
-        memberProfileEntity.updateExp(memberProfileDto.getExp(), memberProfileDto.getBadge())
+        memberProfileEntity.updateExp(memberProfileDto.getExp(), memberProfileDto.getBadge());
         RoomResponseDto roomResponseDto = RoomResponseDto.builder().message("경험치 업데이트 완료!").build();
         return responseUtil.successResponse(roomResponseDto);
     }
