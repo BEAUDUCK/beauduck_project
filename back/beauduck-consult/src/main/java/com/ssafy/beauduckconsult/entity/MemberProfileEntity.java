@@ -67,17 +67,9 @@ public class MemberProfileEntity {
         this.isPrivate = isPrivate;
     }
 
-//    public void updateMemberProfile(UpdateRequestDto updateRequestDto){
-//        this.nickName = updateRequestDto.getNickName();
-//        this.img = updateRequestDto.getImg();
-//        this.content = updateRequestDto.getContent();
-//    }
-
-    public boolean updateExp(int exp, int badge){
+    public void updateExp(int exp, int badge){
         this.exp = exp;
         this.badge = badge;
-        return true;
     }
-
 
 }
