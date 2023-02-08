@@ -158,11 +158,11 @@ def ajax():
 
 
 
-if __name__ == '__main__':
-    app.run()
-
 # if __name__ == '__main__':
-#     app.run(host='i8b306.p.ssafy.io', port=5000, threaded=False)
+#     app.run()
+
+if __name__ == '__main__':
+    app.run(host='i8b306.p.ssafy.io', port=5000, threaded=False)
 
 
 # if __name__ == '__main__':
