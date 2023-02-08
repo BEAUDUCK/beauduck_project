@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useRef } from 'react';
 import './StreamComponent.css';
 
-export default class OvVideoComponent extends Component {
+export default class SmallConstultantVideo extends Component {
     constructor(props) {
         super(props);
         this.videoRef = React.createRef();
@@ -38,8 +38,11 @@ export default class OvVideoComponent extends Component {
                         id={'video-' + this.props.user.getStreamManager().stream.streamId}
                         ref={this.videoRef}
                         muted={this.props.mutedSound}
-                        style={{ width: "30vh",height: "18vh" }}
+                        style={{ width: "30vh",height: "20Vh" }}
                     />
+                    <div>
+                      {this.props.nick}
+                    </div>
                 </div>
         );
     }
