@@ -42,6 +42,7 @@ const NaverLogin = () => {
       });
   };
 
+
   useEffect(() => {
     getToken();
   }, []);
