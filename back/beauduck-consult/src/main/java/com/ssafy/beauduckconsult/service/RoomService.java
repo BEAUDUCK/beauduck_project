@@ -90,7 +90,11 @@ public class RoomService {
     }
 
     public ResponseSuccessDto<RoomDto> selectOne(String roomId) {
-        return responseUtil.successResponse(roomRepository.findRoomById(roomId));
+        RoomDto roomDto = roomRepository.findRoomById(roomId);
+        if(roomDto == null){
+            throw new EntityIsNullException("roomId에 해당하는 방이 존재하지 않습니다.");
+        }
+        return responseUtil.successResponse(roomDto);
     }
 
 
