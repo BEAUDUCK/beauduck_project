@@ -1,9 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from '../../../node_modules/react-router-dom/dist/index';
+import { enterUser, outUser } from './ConsultingSlice';
 
-const ConsultingModalLoadingGuest = ({ host }) => {
+const ConsultingModalLoadingGuest = ({ roomId, host, isOpenClick }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { memberId, nickName } = useSelector((state) => state.member);
 
   const [isReady, setIsReady] = useState(false);
 
@@ -14,7 +18,24 @@ const ConsultingModalLoadingGuest = ({ host }) => {
 
   const goBack = () => {
     // 방에 들어와있는 유저에서 제외하고, 모달을 닫는 로직 작성
+    const payload = {
+      nickname: nickName,
+      roomId,
+      userId: memberId,
+    };
+    dispatch(outUser(payload));
+    isOpenClick();
   };
+
+  useEffect(() => {
+    const payload = {
+      nickname: nickName,
+      roomId,
+      userId: memberId,
+    };
+    console.log('payload', payload);
+    dispatch(enterUser(payload));
+  }, []);
 
   return (
     <div className={['loading-modal', 'guest'].join(' ')}>
