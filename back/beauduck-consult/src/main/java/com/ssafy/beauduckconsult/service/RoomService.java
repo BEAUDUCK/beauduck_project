@@ -61,7 +61,7 @@ public class RoomService {
         if(!roomRepository.setUserEnterInfo(userInfoDto.getUserId(), userInfoDto, roomDto)){
             throw new RequestErrorException("방 입장 실패");
         }
-        return responseUtil.successResponse(RoomResponseDto.builder().message("방 입장 성공"));
+        return responseUtil.successResponse(RoomResponseDto.builder().message("방 입장 성공").build());
     }
 
     public ResponseSuccessDto<RoomResponseDto> outRoom(UserInfoDto userInfoDto) {
@@ -74,7 +74,7 @@ public class RoomService {
             if(!roomRepository.deleteRoom(roomDto.getRoomId())){
                 throw new RuntimeException("방 삭제 실패");
             }
-            return responseUtil.successResponse(RoomResponseDto.builder().message("방 삭제 완료"));
+            return responseUtil.successResponse(RoomResponseDto.builder().message("방 삭제 완료").build());
 
         }
 
@@ -86,7 +86,7 @@ public class RoomService {
         if(!roomRepository.removeUserEnterInfo(userInfoDto.getUserId(), userInfoDto, roomDto)){
             throw new RuntimeException("퇴장 실패");
         }
-        return responseUtil.successResponse(RoomResponseDto.builder().message("퇴장 완료"));
+        return responseUtil.successResponse(RoomResponseDto.builder().message("퇴장 완료").build());
     }
 
     public ResponseSuccessDto<RoomDto> selectOne(String roomId) {
