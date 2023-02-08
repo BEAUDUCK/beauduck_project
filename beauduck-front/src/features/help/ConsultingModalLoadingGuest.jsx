@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useNavigate } from '../../../node_modules/react-router-dom/dist/index';
 
-const ConsultingModalLoadingGuest = ({ host }) => {
+const ConsultingModalLoadingGuest = ({ host, isOpenClick }) => {
   const navigate = useNavigate();
 
   const [isReady, setIsReady] = useState(false);
@@ -14,6 +14,7 @@ const ConsultingModalLoadingGuest = ({ host }) => {
 
   const goBack = () => {
     // 방에 들어와있는 유저에서 제외하고, 모달을 닫는 로직 작성
+    isOpenClick();
   };
 
   return (
