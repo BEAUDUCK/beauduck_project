@@ -68,15 +68,18 @@
 
         }
         .header-auth {
+            // width: 30%;
             text-align: right;
-            top: -50px;
+            top: -57px;
+            height: 55px;
 
-            p {
-                font-weight: 200;
-                font-size: small;
+
+            .header-auth-not{
+                display: inline-block;
+                width: 100px;
+                line-height: 55px;
             }
         }
-
     }
     &:hover {
         // background-color: #E6E99D;

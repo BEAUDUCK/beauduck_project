@@ -1,0 +1,94 @@
+.signup-div {
+    display: flex;
+    justify-content: center;
+    padding-top: 70px;
+    padding-bottom: 20px;
+    background-color: rgb(255, 246, 205);
+}
+.signup-div-left {
+    display: inline-block;
+    width: 500px;
+    height: 700px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgb(221, 221, 221);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+}
+
+.signup-div-right {
+    display: inline-block;
+    width: 500px;
+    height: 700px;
+    background-color: white;
+    // margin: auto;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0px 0px 10px rgb(221, 221, 221);
+
+    h1 {
+        text-align: center;
+    }
+
+    .signup-form {
+        text-align: center;
+
+        .imgbox {
+            width: 200px;
+            height: 200px;
+            border-radius: 200px;
+        }
+    
+        textarea, input[type="text"], input[type="file"] {
+            width: 300px;
+            background-color: white;
+            border: 1px solid rgb(180, 180, 180);
+            font-size: 15px;
+            // margin-bottom: 20px;
+        }
+    
+        input[type="text"] {
+            height: 50px;
+        }
+    
+        input[type="file"] {
+            display: none;
+        }
+        .label-img {
+            display: inline-block;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid rgb(180, 180, 180);
+            padding: 10px;
+            margin-top: 5px;
+            &:hover {
+                background-color: rgb(255, 243, 197);
+            }
+        }
+        .label-common {
+            display: block;
+            text-align: left;
+            width: 320px;
+            margin: auto;
+            margin-top: 20px;
+        }
+        .errormessage {
+            font-size: 13px;
+            color: gray;
+            margin: 0;
+            display: inline-block;
+            width: 320px;
+            text-align: left;
+        }
+
+        button {
+            display: block;
+            margin: auto;
+            width: 320px;
+            height: 35px;
+            font-size: 15px;
+            border: 1px solid rgb(180, 180, 180);
+            border-radius: 5px;
+        }
+    }
+}
