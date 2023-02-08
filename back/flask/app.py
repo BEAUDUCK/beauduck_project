@@ -122,10 +122,31 @@ def getmakeup(meberId):
     db.close()
     return temp
 
+
+def getisMember(meberId):
+    ret = []
+    db = pymysql.connect(host='3.38.169.2', user='root', db='common_pjt', password='1234', charset='utf8')
+    curs = db.cursor()
+    sql = "select member_id from imgai where member_id =%s "
+    curs.execute(sql,[meberId])
+    rows = curs.fetchall()
+    for e in rows:
+        ret.append(e[0])
+    print(ret)
+    db.commit()
+    db.close()
+    return ret
+
+
+
 @app.route('/recommand', methods=['POST'])
 def ajax():
-    ans = get_nearest_face(request.get_json()["id"])
     result = []
+    if(getisMember(request.get_json()["id"]) == []):
+        return {'answer': result } 
+    
+    ans = get_nearest_face(request.get_json()["id"])
+
     for arr in ans:
         if type(arr) is str : continue 
         ret = getmakeup(arr["name"])
@@ -134,11 +155,14 @@ def ajax():
     return {'answer': result}
     
 
+
+
+
 if __name__ == '__main__':
     app.run()
 
-if __name__ == '__main__':
-    app.run(host='i8b306.p.ssafy.io', port=5000, threaded=False)
+# if __name__ == '__main__':
+#     app.run(host='i8b306.p.ssafy.io', port=5000, threaded=False)
 
 
 # if __name__ == '__main__':
