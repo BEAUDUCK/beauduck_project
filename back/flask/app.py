@@ -101,7 +101,7 @@ def getmakeup(meberId):
     sql = "select  m.member_id, m.title, content, m.img, m.duration, m.score, m.count from makeup m  "
     sql = sql + "join imgai i " 
     sql = sql + "on m.member_id = i.member_id "
-    sql = sql + "where m.member_id =%s "
+    sql = sql + "where m.member_id =%s and i.is_makeup = true "
     sql = sql + "ORDER BY m.count and m.score DESC limit 1"
     
     curs.execute(sql,[meberId])
@@ -137,8 +137,8 @@ def ajax():
 if __name__ == '__main__':
     app.run()
 
-# if __name__ == '__main__':
-#     app.run(host='i8b306.p.ssafy.io', port=5000, threaded=False)
+if __name__ == '__main__':
+    app.run(host='i8b306.p.ssafy.io', port=5000, threaded=False)
 
 
 # if __name__ == '__main__':
