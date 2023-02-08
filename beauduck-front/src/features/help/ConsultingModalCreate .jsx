@@ -1,11 +1,14 @@
 import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/button/Button';
-import { axiosPostNewConsulting, postNewConsulting } from './ConsultingSlice';
+import { postNewConsulting } from './ConsultingSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ConsultingModalLoadingHost from './ConsultingModalLoadingHost';
+import BlackOut from '../../components/blackout/BlackOut';
 
-const ConsultingModalCreate = (props) => {
+const ConsultingModalCreate = ({ isOpenModal }) => {
   const dispatch = useDispatch();
+  const { memberId, nickName } = useSelector((state) => state.member);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -13,14 +16,10 @@ const ConsultingModalCreate = (props) => {
   const titleRef = useRef();
   const contentRef = useRef();
 
-  // 상위 컴포넌트로 props 이벤트 보내 모달 닫기
-  const isClose = () => {
-    props.isOpenModal();
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
-  const ConsultingCreate = (e) => {
-    e.preventDefault();
-
+  // 새로운 컨설팅 룸 생성
+  const ConsultingCreate = () => {
     if (title.length < 1) {
       titleRef.current.focus();
       return;
@@ -32,14 +31,15 @@ const ConsultingModalCreate = (props) => {
 
     const newConsulting = {
       title,
-      text: content,
-      host: '유저네임',
-      category: 'consult',
+      content,
+      hostId: memberId,
+      hostNickname: nickName,
     };
 
-    dispatch(postNewConsulting(newConsulting));
-
-    // 모달 닫기
+    dispatch(postNewConsulting(newConsulting)).then(() => {
+      setIsLoading(!isLoading);
+    });
+    // isOpenModal(); // 모달 닫기
   };
 
   return (
@@ -47,9 +47,9 @@ const ConsultingModalCreate = (props) => {
       <div className="consult-create-header">
         <p></p>
         <h3>방 생성하기</h3>
-        <FontAwesomeIcon onClick={isClose} icon="xmark" className="xmark" />
+        <FontAwesomeIcon onClick={isOpenModal} icon="xmark" className="xmark" />
       </div>
-      <form onSubmit={ConsultingCreate}>
+      <div className="consult-form">
         <div>
           <label htmlFor="title">제목</label>
           <input
@@ -57,20 +57,24 @@ const ConsultingModalCreate = (props) => {
             id="title"
             type="text"
             value={title}
+            maxLength={15}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
         <div>
-          <label htmlFor="content">소개</label>
+          <label htmlFor="content">방 소개</label>
           <textarea
             ref={contentRef}
             id="content"
             value={content}
+            maxLength={50}
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
-        <Button text={'완료'} />
-      </form>
+        <Button text={'완료'} onClickEvent={ConsultingCreate} />
+      </div>
+      {isLoading && <ConsultingModalLoadingHost />}
+      {/* {isLoading && <BlackOut />} */}
     </div>
   );
 };
