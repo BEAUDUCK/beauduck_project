@@ -1,9 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import RatingButton from '../../components/button/RatingButton';
+import { submitMakeupResult } from './SingleSlice';
 
 const SingleModalExitSurvey = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { memberId } = useSelector((state) => state.member);
+  const { nowMakeupId } = useSelector((state) => state.single);
+
   const [score, setScore] = useState(0);
   const [star1, setStar1] = useState(false);
   const [star2, setStar2] = useState(false);
@@ -11,16 +19,7 @@ const SingleModalExitSurvey = () => {
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
 
-  // const [stars, setStars] = useState({
-  //   star1: false,
-  //   star2: false,
-  //   star3: false,
-  //   star4: false,
-  //   star5: false,
-  // });
-
-  // 아무것도 선택 안 했을 때 선택 유도
-  const starRef = useRef();
+  const starRef = useRef(); // 아무것도 선택 안 했을 때 선택 유도
 
   const changeStar1 = () => {
     setStar1(true);
@@ -73,6 +72,22 @@ const SingleModalExitSurvey = () => {
     console.log(score);
   }, [star1, star2, star3, star4, star5, score]);
 
+  const submitStarScore = () => {
+    const payload = {
+      score: parseFloat(score),
+      memberEntity: {
+        id: memberId,
+      },
+      makeupEntity: {
+        id: nowMakeupId,
+      },
+    };
+    console.log(payload);
+    dispatch(submitMakeupResult(payload)).then((res) => {
+      navigate('/single', { replace: true });
+    });
+  };
+
   return (
     <div className="survey-modal">
       <h2>평가해덕</h2>
@@ -118,7 +133,7 @@ const SingleModalExitSurvey = () => {
       <div>
         <RatingButton text={'재밌는 과정'} />
       </div>
-      <Button text={'완료'} />
+      <Button text={'완료'} onClickEvent={submitStarScore} />
     </div>
   );
 };

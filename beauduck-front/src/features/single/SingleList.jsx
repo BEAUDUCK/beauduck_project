@@ -2,36 +2,46 @@ import { useEffect, useState } from 'react';
 import Paging from '../../components/pagination/Paging';
 import './Single.style.scss';
 import SingleListItem from './SingleListItem';
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 const SingleList = ({ modeList }) => {
-  const [currentRooms, setCurrentRooms] = useState([]); // 보여줄 게시글
-  const [page, setPage] = useState(1); // 현재 페이지
-  const handlePageChange = (page) => {
-    setPage(page);
+  const responsive = {
+    0: {
+      items: 2,
+    },
+    512: {
+      items: 3,
+    },
+    860: {
+      items: 4,
+    },
+    1210: {
+      items: 5,
+    },
+    1470: {
+      items: 6,
+    },
   };
-  const [postPerPage] = useState(12);
-
-  const indefOfLastRoom = page * postPerPage;
-  const indefOfFirstRoom = indefOfLastRoom - postPerPage;
-
-  useEffect(() => {
-    setCurrentRooms(modeList.slice(indefOfFirstRoom, indefOfLastRoom));
-  }, [indefOfFirstRoom, indefOfLastRoom, page]);
 
   return (
     <>
-      <div className="modeList">
-        {currentRooms.map((item) => (
-          <SingleListItem key={item.id} modeItem={item} />
+      <AliceCarousel
+        disableDotsControls
+        disableButtonsControls
+        // mouseTracking
+        responsive={responsive}
+        autoPlay
+        infinite={100}
+        animationDuration={2000}
+        // animationEasingFunction="linear"
+        // autoPlayStrategy="action"    // 호버하면 멈춤 (default)
+        className="modeList"
+      >
+        {modeList.map((item, idx) => (
+          <SingleListItem key={item.id} modeItem={item} idx={idx + 1} />
         ))}
-      </div>
-      <Paging
-        totalCount={modeList.length}
-        page={page}
-        postPerPage={postPerPage}
-        pageRangeDisplayed={5}
-        handlePageChange={handlePageChange}
-      />
+      </AliceCarousel>
     </>
   );
 };

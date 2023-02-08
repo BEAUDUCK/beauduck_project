@@ -13,10 +13,11 @@ import {
 import SingleModalRecommend from '../features/single/SingleModalRecommend';
 import SingelModalNoRecommend from '../features/single/SingleModalNoRecommend';
 import SingleMake from '../features/single/SingleMake';
+import Alert from '../components/modal/Alert';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
-  //  const {makeupList, recommendList} = useSelector(state => state.single)
+  const { makeupList } = useSelector((state) => state.single);
   // 최초에 메이크업 리스트 불러오기
   useEffect(() => {
     dispatch(getMakeupList());
@@ -24,10 +25,17 @@ const SinglePage = () => {
 
   // 추천 받기
   const [isRecommend, setIsRecommend] = useState(false);
-  const user_id = 1; // 나중에 찐 아이디로 교체
+
+  const { memberId } = useSelector((state) => state.member);
   const popRecommend = () => {
-    dispatch(recommendMakeup(user_id));
-    setIsRecommend(!isRecommend);
+    dispatch(recommendMakeup(memberId));
+    const popRecommend = () => {
+      const payload = {
+        id: memberId,
+      };
+      dispatch(recommendMakeup(payload));
+      setIsRecommend(!isRecommend);
+    };
   };
 
   // 새로운 메이크업 만들기
@@ -37,71 +45,47 @@ const SinglePage = () => {
     dispatch(rejectedMakeup());
   };
 
-  const makeupList = [
-    {
-      id: 1,
-      title: '데일리 메이크업',
-      score: 4.5,
-      count: 120,
-      img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
-    },
-    {
-      id: 2,
-      title: '물광 메이크업',
-      score: 4.3,
-      count: 20,
-      img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
-    },
-    {
-      id: 3,
-      title: '데일리 메이크업',
-      score: 4.5,
-      count: 120,
-      img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
-    },
-    {
-      id: 4,
-      title: '물광 메이크업',
-      score: 4.3,
-      count: 20,
-      img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
-    },
-    {
-      id: 5,
-      title: '데일리 메이크업',
-      score: 4.5,
-      count: 120,
-      img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
-    },
-    {
-      id: 6,
-      title: '물광 메이크업',
-      score: 4.3,
-      count: 20,
-      img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
-    },
-  ];
+  const [isFinish, setIsFinish] = useState(false);
+  const onToggleFinish = () => {
+    setIsFinish(!isFinish);
+  };
 
   return (
-    <>
-      <Banner bannerStyle={'single-ban'} />
-      <div className="container">
-        <button className="makeup-recommend-btn" onClick={popRecommend}>
-          나에게 어울리는 메이크업 추천 받기
-        </button>
-        {/* 추천 받을 수 있는지 없는지 */}
-        {isRecommend && <SingleModalRecommend popRecommend={popRecommend} />}
-        {isRecommend && <BlackOut onClickEvent={popRecommend} />}
-        {/* <SingelModalNoRecommend /> */}
+    <div className="single-main">
+      <button className="makeup-recommend-btn" onClick={popRecommend}>
+        나에게 어울리는 메이크업 추천 받기
+      </button>
+      {/* 추천 받을 수 있는지 없는지 */}
+      {isRecommend && <SingleModalRecommend popRecommend={popRecommend} />}
+      {isRecommend && <BlackOut onClickEvent={popRecommend} />}
+      {/* <SingelModalNoRecommend /> */}
 
-        <h2 className="single-h2">인기 메이크업</h2>
-        <hr className="single-hr" />
-        <Button text={'만들기'} onClickEvent={onToggleMake} />
-        {isMake && <SingleMake onToggleMake={onToggleMake} />}
-        {isMake && <BlackOut onClickEvent={onToggleMake} />}
-        <SingleList modeList={makeupList} />
+      {/* <h2 className="single-h2">인기 메이크업</h2>
+      <hr className="single-hr" /> */}
+      <Button text={'만들기'} onClickEvent={onToggleMake} />
+      {isMake && (
+        <SingleMake
+          onToggleMake={onToggleMake}
+          onToggleFinish={onToggleFinish}
+        />
+      )}
+      {isMake && <BlackOut onClickEvent={onToggleMake} />}
+      {isFinish && (
+        <Alert text={'메이크업이 완성되었덕'} onClickEvent={onToggleFinish} />
+      )}
+      {isFinish && <BlackOut onClickEvent={onToggleFinish} />}
+      <SingleList modeList={makeupList} />
+      <div className="makeup-special">
+        <div className="makeup-special-section1">
+          <h1>
+            BEST <br /> MAKEUP
+          </h1>
+        </div>
+        <div className="makeup-special-section2">
+          <h1>RANDOM PICK</h1>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,20 +1,40 @@
-.modeList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    grid-gap: 10px;
+// 메이크업 리스트
+
+// .modeList {
+//     display: grid;
+//     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+//     grid-gap: 10px;
+// }
+
+.alice-carousel {
+    width: 100vw;
+    height: 600px;
+    background-color: rgb(255, 235, 235);
+    
+    .alice-carousel__state_item {
+        // margin-top: 100px;
+    }
 }
 
 .makeup-div {
     width: 200px;
+    height: 280px;
+    border-radius: 75px;
     display: inline-block;
     margin: auto;
+    margin-top: 100px;
+    background-color: #b1b1b1;
+    text-align: center;
 
     img {
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
         object-fit: cover;
-        border: 3px solid #F0F0F0;
-        border-radius: 10px;
+        border-radius: 100px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border: 5px double rgba(255, 255, 255, 0.5);
+        // box-shadow: 0 0 5px white;
     }
     
     p {
@@ -22,25 +42,40 @@
         width: 200px;
         margin:0;
         text-align: center;
-        color: #CD5E5E;
+        font-family: 'Jalnan';
+        font-size: 18px;
+        text-shadow: 1px 1px rgba(255, 255, 255, 0.6);
     }
 
     .star-info {
-        display: inline-block;
-        width: 200px;
-        text-align: center;
-
         p {
             display: inline;
             margin-left: 5px;
-            font-size: 13px;
-            color: gray;
-        }
-        .star-icon {
-            color: #FFDF38;
-            font-size: 13px;
+            font-size: 1rem;
+            color: white;
         }
     }
+}
+.star-info {
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+
+    p {
+        display: inline;
+        margin-left: 5px;
+        font-size: 1rem;
+        color: gray;
+        font-family: 'Jalnan';
+    }
+    .star-icon {
+        color: #FFDF38;
+        font-size: 1rem;
+    }
+}
+
+.makeup-div-odd {
+    margin-top: 230px;
 }
 
 //-------- 새 메이크업 만들기 --------
@@ -198,6 +233,7 @@
     border: none;
     border-radius: 30px;
     margin-top: 15px;
+    font-family: 'Jalnan';
 }
 
 .makeup-form-second {
@@ -276,73 +312,73 @@
 
         #sub-sequence {
             position: relative;
-          width: 450px;
-          height: 180px;
+            width: 450px;
+            height: 180px;
 
-          display: inline-block;
+            display: inline-block;
 
-          margin: auto;
+            margin: auto;
 
-        //   border: 8px solid rgb(228, 228, 228);
-        //   border: 8px solid #ffefa0;
-          border: 8px solid #fff5c6;
-          border-radius: 20px;
-          box-shadow: 0 0 5px rgb(190, 190, 190);
+            //   border: 8px solid rgb(228, 228, 228);
+            //   border: 8px solid #ffefa0;
+            border: 8px solid #fff5c6;
+            border-radius: 20px;
+            box-shadow: 0 0 5px rgb(190, 190, 190);
 
-          text-align: left;
+            text-align: left;
 
-          padding-left: 20px;
-          padding-right: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
 
-          .sub-list {
-            position: absolute;
-            top: 0;
-            left: 0;
+            .sub-list {
+                position: absolute;
+                top: 0;
+                left: 0;
 
-            width: 490px;
-            height: 188px;
-            border-radius: 30px;
-            line-height: 140px;
-            overflow-x: scroll;
-            display: flex;
-            justify-content: left;
+                width: 490px;
+                height: 188px;
+                border-radius: 30px;
+                line-height: 140px;
+                overflow-x: scroll;
+                display: flex;
+                justify-content: left;
 
-            background-color: white;
-            // z-index: 994;
+                background-color: white;
+                // z-index: 994;
 
             }
-            .sub-list::-webkit-scrollbar {
-                height: 8px;
-            }
-            
-            .sub-list::-webkit-scrollbar-thumb {
-                // background-color: rgb(145, 145, 145);
-                background-color: #FFDF38;
-                background-clip: padding-box;
-                border: 1px solid transparent;
-                border-radius: 10px;
-            }
+                .sub-list::-webkit-scrollbar {
+                    height: 8px;
+                }
+                
+                .sub-list::-webkit-scrollbar-thumb {
+                    // background-color: rgb(145, 145, 145);
+                    background-color: #FFDF38;
+                    background-clip: padding-box;
+                    border: 1px solid transparent;
+                    border-radius: 10px;
+                }
 
-            .sub-list::-webkit-scrollbar-track {
-                // background-color: rgb(228, 228, 228);
-                background-color: #fff5c6;
-                // box-shadow: inset 0px 0px 5px white;
-                border-radius: 10px;
-            }
+                .sub-list::-webkit-scrollbar-track {
+                    // background-color: rgb(228, 228, 228);
+                    background-color: #fff5c6;
+                    // box-shadow: inset 0px 0px 5px white;
+                    border-radius: 10px;
+                }
 
-            .sub-img {
-                width: 105px;
-                height: 130px;
-                margin-top: auto;
-                margin-bottom: auto;
-                vertical-align: middle;
-                margin-left: 5px;
-                margin-right: 5px;
-            }
-            }
+                .sub-img {
+                    width: 105px;
+                    height: 130px;
+                    margin-top: auto;
+                    margin-bottom: auto;
+                    vertical-align: middle;
+                    margin-left: 5px;
+                    margin-right: 5px;
+                }
+                }
 
         .step-selected {
-            z-index: 995;
+            z-index: 900;
         }
         .sub-form {
             display: inline-block;
@@ -405,49 +441,112 @@
       
           select {
             height: 35px;
-            width: 130px;
+            width: 140px;
             font-size: 14px;
             background-color: white;
           }
       
           .add-sub-text {
               width: 200px;
-              height: 46px;
+              height: 86px;
               margin-top: 5px;
               background-color: white;
               font-size: 12px;
           }
 
-          input[type=file] {
-            // background-color: #e4e4e4;
-            background-color: #fff5c6;
-            padding-left: 0;
-            width: 210px;
-            height: 35px;
-            font-size: 12px;
-            margin-bottom: 5px;
-          }
-          
-          input[type=file]::file-selector-button {
-            width: 80px;
-            height: 35px;
-            font-size: 13px;
+          .img-course {
+            height: 50px;
+          } 
+
+          .img-btn {
+            width: 220px;
+            height: 34px;
             background-color: white;
-            // border: 1px solid rgb(216, 216, 216);
-            border: none;
+            font-size: 13.5px;
             border-radius: 5px;
-            cursor: pointer;
-            &:hover {
-                // background: rgb(130, 130, 130);
-                // color: #fff;
-                background: #ffefa0;
-                color: rgb(76, 76, 76);
-            }
+            margin-top: 0;
+            margin-bottom: 2px;
+            border: none;
+            // background-color: #FFDF38;
+            box-shadow: 0 0 0px rgb(142, 142, 142);
           }
-          
+          .img-btn-selected {
+            background-color: #ffefa0;
+          }
       }
     }
 
+}
+
+.select-sub-pic-div {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 900px;
+    height: 600px;
+
+    background-color: rgba(255, 255, 255, 0.8);
+
+    border-radius: 10px;
+
+    z-index: 995;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+
+    padding-left: 50px;
+    padding-right: 50px;
+
+    .sub-pic {
+        margin: 15px;
+        display: inline-block;
+        border-radius: 20px;
+        box-shadow: 0 0 6px rgb(172, 172, 172);
+    }
+
+    .select-sub-pic-div-eyebrow {
+        width: 700px;
+        img {
+            width: 230px;
+            height: 100px;
+        }
+    }
+
+    .select-sub-pic-div-eyeshadow {
+        width: 900px;
+        img {
+            width: 200px;
+            height: 130px;
+        }
+    }
+
+    .select-sub-pic-div-eyeliner {
+        width: 600px;
+        img {
+            width: 200px;
+            height: 130px;
+        }
+    }
+
+    .select-sub-pic-div-shading {
+        width: 600px;
+        img {
+            width: 140px;
+            height: 160px;
+        }
+    }
+
+    .select-sub-pic-div-blusher {
+        width: 600px;
+        img {
+            width: 140px;
+            height: 160px;
+        }
+    }
 }
 
 
@@ -456,7 +555,14 @@
 //-------- 최종 설문 모달 ---------
 
 .survey-modal {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 990;
+    background-color: white;
+
     width: 400px;
     height: 200px;
 
@@ -502,14 +608,14 @@
 
 .makeup-detail {
     position: absolute;
-    // top: 50%;
+    top: 455px;
     left: 50%;
     transform: translate(-50%, -100%);
     z-index: 998;
 
     background-color: white;
-    width: 440px;
-    height: 330px;
+    width: 600px;
+    height: 390px;
 
     padding-top: 20px;
     padding-bottom: 20px;
@@ -517,6 +623,7 @@
     padding-right: 30px;
 
     border: 2px solid rgb(220, 220, 220);
+    border: 7px double #fdf0ae;
     border-radius: 10px;
     box-shadow: 0px 0px 5px 0px #bdbdbd;
 
@@ -524,9 +631,10 @@
 
     .makeup-detail-top {
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
 
         margin-bottom: 20px;
+        height: 250px;
 
         .makeup-detail-left {
             width: 240px;
@@ -535,7 +643,7 @@
     
             h3 {
                 font-family: 'Jalnan';
-                font-size: 1.5rem;
+                font-size: 2rem;
                 word-break: keep-all;
         
                 margin-bottom: 10px;
@@ -556,27 +664,47 @@
             p {
                 color: black;
             }
+
+            .makeup-duration {
+                color: gray;
+                margin-top: 10px;
+                font-size: 1.1rem;
+            }
     
             .makeup-content {
                 color: gray;
-                font-size: 0.8rem;
+                font-size: 0.9rem;
                 word-break: keep-all;
-                margin-top: 10px;
-                margin-bottom: 5px;
+                margin-top: 15px;
+                text-align: left;
+                display: inline-block;
+                width: 240px;
+                height: 75px;
+                background-color: rgba(251, 242, 198, 0.5);
+                // border: 3px dashed #fbf2c6;
+                border-radius: 10px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
             }
         }
     
         .makeup-detail-right {
             height: 200px;
-            width: 200px;
+            width: 220px;
+            height: 250px;
             text-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
     
             img {
-                width: 180px;
-                height: 180px;
+                width: 220px;
+                height: 220px;
+                object-fit: cover;
+                border-radius: 10px;
+                box-shadow: 3px 3px 3px rgb(220, 220, 220);
             }
         }
     }
@@ -589,13 +717,13 @@
         button {
             border-radius: 20px;
             border: none;
-            width: 70px;
-            height: 25px;
-            margin-left: 5px;
-            margin-right: 5px;
+            width: 100px;
+            height: 35px;
+            margin: 5px;
 
-            font-size: small;
-            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Jalnan';
+            box-shadow: 2px 3px 1px #b1b1b1;
 
             background-color: rgba(175, 179, 182, 0.5);
         }

@@ -15,11 +15,11 @@ pipeline {
         stage('Build image') {
             steps {         
                 sh 'ls -al'       
-                sh ' npm -v'
+                sh 'npm -v'
                 sh 'node -v'
                 dir('beauduck-front'){
                     sh 'ls -al'
-                    sh 'docker build -t beauduck-dev-front .'    
+                    sh 'docker build -t dev-front .'    
                 }                                                
                 echo 'Build image...'
             }
@@ -29,8 +29,8 @@ pipeline {
             steps {
                 script {
                     try {
-                            sh 'docker stop beauduck-dev-front'
-                            sh 'docker rm beauduck-dev-front'                        
+                            sh 'docker stop dev-front'
+                            sh 'docker rm dev-front'                        
                     } catch (e) {
                         echo 'fail to stop and remove container'
                     }    
@@ -40,8 +40,11 @@ pipeline {
         }
         stage('Run New image') {
             steps {
-                sh 'docker run --name beauduck-dev-front -d -p 3000:3000 beauduck-dev-front'
-                echo 'Run New image'
+                dir('beauduck-front'){
+                    sh 'ls -al'
+                    sh 'docker run --name dev-front -d -p 3000:3000 dev-front'
+                    echo 'Run New image'
+                }                
             }
         }
 

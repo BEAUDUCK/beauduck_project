@@ -51,6 +51,7 @@ const SignupPage = () => {
     axios
       .get(`http://3.38.169.2:8080/members/check/${nickName}`)
       .then((res) => {
+        console.log(res.data.data)
         if (!res.data.data) {
           setErrorMessage('사용 가능한 닉네임입니다');
         } else {
@@ -70,10 +71,11 @@ const SignupPage = () => {
       content,
       img: '',
     };
-    console.log(data);
+
     axios
       .post('http://3.38.169.2:8080/naver/signup', data)
       .then((res) => {
+        console.log('res', res);
         dispatch(getNickName(nickName));
         dispatch(UserLogin(accessToken));
         alert('회원가입 완료');
