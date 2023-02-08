@@ -62,7 +62,9 @@ def get_face_embedding_dict(dir_path):
         embedding = get_face_embedding(face)   # 얼굴 영역에서 얼굴 임베딩 벡터를 추출
         if len(embedding) > 0:   # 얼굴 영역이 제대로 detect되지 않았을 경우를 대비
                 embedding_dict[file["member_id"]] = embedding[0]
+    embedding_dict
     return embedding_dict
+
 
 embedding_dict = get_face_embedding_dict(dir_path)
 
@@ -98,7 +100,7 @@ def get_nearest_face(name, top= 5):
 def getmakeup(meberId):
     db = pymysql.connect(host='3.38.169.2', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
-    sql = "select  m.member_id, m.title, content, m.img, m.duration, m.score, m.count from makeup m  "
+    sql = "select  m.member_id, m.title, m.content, m.img, m.duration, m.score, m.count from makeup m  "
     sql = sql + "join imgai i " 
     sql = sql + "on m.member_id = i.member_id "
     sql = sql + "where m.member_id =%s and i.is_makeup = true "
@@ -154,9 +156,6 @@ def ajax():
             result.append(ret)
     return {'answer': result}
     
-
-
-
 
 # if __name__ == '__main__':
 #     app.run()
