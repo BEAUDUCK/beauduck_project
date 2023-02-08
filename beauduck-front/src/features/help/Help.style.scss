@@ -242,13 +242,15 @@
   transform: translate(-50%, -50%);
 
   background-color: white;
+  z-index: 991;
 
-  width: 450px;
-  height: 350px;
+  width: 500px;
+  height: 600px;
   text-align: center;
   border: 2px solid rgb(220, 220, 220);
   border-radius: 10px;
   box-shadow: 0px 0px 5px 0px #bdbdbd;
+
 
   .loading-bigbtn {
     width: 180px;
@@ -273,6 +275,45 @@
   h3 {
     display: inline-block;
     width: 400px;
+    height: 35px;
+    line-height: 35px;
+    background-color: #FFE27C;
+    margin-bottom: 0;
+  }
+
+  .loading-list {
+    width: 394px;
+    height: 300px;
+    border: 3px solid #FFE27C;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .each-user {
+      width: 350px;
+      margin: auto;
+
+      .username {
+        display: inline-block;
+        width: 200px;
+      }
+      .onoff {
+        display: inline-block;
+        line-height: 25px;
+        width: 50px;
+        height: 25px;
+        background-color: #D3D3D3;
+        border-radius: 30px;
+        box-shadow: 1px 1px rgb(187, 187, 187);
+
+        color: white;
+        font-weight: 600;
+        text-shadow: 1px 1px gray;
+      }
+      .on-btn {
+        background-color: #FFC368;
+      }
+    }
   }
 
   .back-icon {
