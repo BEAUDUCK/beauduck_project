@@ -28,7 +28,7 @@ public class RoomService {
     }
 
     //방 생성
-    public ResponseSuccessDto<RoomResponseDto> createRoom(RoomRequestDto dto) {
+    public ResponseSuccessDto<RoomCreateResponseDto> createRoom(RoomRequestDto dto) {
         if (dto.getTitle() == null || dto.getContent() == null || dto.getHostId() == null || dto.getHostNickname() == null) {
             throw new RequestErrorException("dto 데이터가 부족합니다.");
         }
@@ -36,9 +36,9 @@ public class RoomService {
         RoomDto roomDto = RoomDto.create(dto.getTitle(), dto.getContent(), dto.getHostId(), dto.getHostNickname());
         UserInfoDto user = UserInfoDto.create(roomDto.getRoomId(), dto.getHostId(), dto.getHostNickname());
 
-        if (roomRepository.createChatRoom(roomDto, user))
-            return responseUtil.successResponse(true);
-        return responseUtil.successResponse(false);
+        if (!roomRepository.createChatRoom(roomDto, user))
+            throw new RuntimeException("방 생성 실패");
+        return responseUtil.successResponse(new RoomCreateResponseDto(roomDto.getRoomId()));
     }
 
     public ResponseSuccessDto<Boolean> deleteRoom(String roomId) {

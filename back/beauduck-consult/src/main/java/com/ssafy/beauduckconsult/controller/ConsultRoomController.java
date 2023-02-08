@@ -3,10 +3,7 @@ package com.ssafy.beauduckconsult.controller;
 
 import com.ssafy.beauduckconsult.dto.common.response.ResponseSuccessDto;
 import com.ssafy.beauduckconsult.dto.member.MemberProfileDto;
-import com.ssafy.beauduckconsult.dto.redis.RoomDto;
-import com.ssafy.beauduckconsult.dto.redis.RoomRequestDto;
-import com.ssafy.beauduckconsult.dto.redis.RoomResponseDto;
-import com.ssafy.beauduckconsult.dto.redis.UserInfoDto;
+import com.ssafy.beauduckconsult.dto.redis.*;
 import com.ssafy.beauduckconsult.service.MemberService;
 import com.ssafy.beauduckconsult.service.RoomService;
 import io.swagger.annotations.Api;
@@ -37,7 +34,7 @@ public class ConsultRoomController {
 
     @ApiOperation(value = "도와덕 방 생성", notes = "DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
     @PostMapping("/") // 방 생성
-    public ResponseEntity<ResponseSuccessDto<RoomResponseDto>> createRoom(@ApiParam(value = "RoomRequestDto", required = true) @RequestBody @Valid RoomRequestDto dto) {
+    public ResponseEntity<ResponseSuccessDto<RoomCreateResponseDto>> createRoom(@ApiParam(value = "RoomRequestDto", required = true) @RequestBody @Valid RoomRequestDto dto) {
         return ResponseEntity.ok(roomService.createRoom(dto));
     }
 
