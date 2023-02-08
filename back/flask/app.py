@@ -16,6 +16,7 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
+
 ## 저장된 db에 url 가져오기
 def getEmps():
     ret = []
@@ -62,7 +63,7 @@ def get_face_embedding_dict(dir_path):
         embedding = get_face_embedding(face)   # 얼굴 영역에서 얼굴 임베딩 벡터를 추출
         if len(embedding) > 0:   # 얼굴 영역이 제대로 detect되지 않았을 경우를 대비
                 embedding_dict[file["member_id"]] = embedding[0]
-    embedding_dict
+    
     return embedding_dict
 
 
@@ -143,10 +144,16 @@ def getisMember(meberId):
 
 @app.route('/recommand', methods=['POST'])
 def ajax():
+
     result = []
     if(getisMember(request.get_json()["id"]) == []):
         return {'answer': result } 
     
+    case = request.get_json()["id"] in embedding_dict
+    if (case == False): # 만약 사진이 잘 등록이 안될 경우
+        return {'answer': "error"}
+
+
     ans = get_nearest_face(request.get_json()["id"])
 
     for arr in ans:
