@@ -199,7 +199,7 @@
     }
   }
 
-  form {
+  .consult-form {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 50px;
@@ -277,8 +277,11 @@
     width: 400px;
     height: 35px;
     line-height: 35px;
-    background-color: #FFE27C;
     margin-bottom: 0;
+  }
+
+  .loading-h3 {
+    background-color: #FFE27C;
   }
 
   .loading-list {

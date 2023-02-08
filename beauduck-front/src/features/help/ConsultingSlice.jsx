@@ -7,7 +7,7 @@ export const getConsultingList = createAsyncThunk(
   'help/getConsulting',
   async () => {
     const res = await client.get('/consult/');
-    return res.data;
+    return res.data.data;
   },
 );
 
@@ -15,8 +15,9 @@ export const getConsultingList = createAsyncThunk(
 export const postNewConsulting = createAsyncThunk(
   'help/newConsulting',
   async (newConsulting) => {
-    const res = await client.post('/consult/', newConsulting);
-    return res.data;
+    const res1 = await client.post('/consult/', newConsulting);
+    const res2 = await client.get('/consult/');
+    return [res1.data.data, res2.data.data];
   },
 );
 
@@ -24,21 +25,24 @@ export const postNewConsulting = createAsyncThunk(
 export const getConsultDetail = createAsyncThunk(
   'help/getConsultDetail',
   async (roomId) => {
-    const res = await client.patch(`/consult/${roomId}`);
-    return res.data;
+    const res = await client.get(`/consult/${roomId}`);
+    console.log(res);
+    return res.data.data;
   },
 );
 
 // 유저 방 입장 -> 방 상세 갱신
 export const enterUser = createAsyncThunk('help/enterUser', async (payload) => {
-  await client.post('/consult/enter/');
+  const check = await client.post('/consult/enter/');
+  console.log(check.data);
   const res = await client.patch(`/consult/${payload.roomId}`);
   return res.data;
 });
 
 // 유저 방 퇴장 -> 방 상세 갱신
 export const outUser = createAsyncThunk('help/outUser', async (payload) => {
-  await client.post('/consult/out/');
+  const check = await client.post('/consult/out/');
+  console.log(check.data);
   const res = await client.patch(`/consult/${payload.roomId}`);
   return res.data;
 });
@@ -48,6 +52,7 @@ export const consultSlice = createSlice({
   initialState: {
     consultingList: [],
     consultDetail: [],
+    roomId: '',
     userList: [],
   },
   reducers: {},
@@ -55,6 +60,10 @@ export const consultSlice = createSlice({
     builder
       .addCase(getConsultingList.fulfilled, (state, action) => {
         state.consultingList = action.payload;
+      })
+      .addCase(postNewConsulting.fulfilled, (state, action) => {
+        state.roomId = action.payload[0].roomId;
+        state.consultingList = action.payload[1];
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;
