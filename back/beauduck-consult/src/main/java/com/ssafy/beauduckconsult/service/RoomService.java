@@ -1,10 +1,10 @@
 package com.ssafy.beauduckconsult.service;
 
 
-import com.ssafy.beauduckconsult.dto.RoomDto;
-import com.ssafy.beauduckconsult.dto.RoomRequestDto;
-import com.ssafy.beauduckconsult.dto.UserInfoDto;
-import com.ssafy.beauduckconsult.dto.UserResponseDto;
+import com.ssafy.beauduckconsult.dto.redis.RoomDto;
+import com.ssafy.beauduckconsult.dto.redis.RoomRequestDto;
+import com.ssafy.beauduckconsult.dto.redis.UserInfoDto;
+import com.ssafy.beauduckconsult.dto.redis.UserResponseDto;
 import com.ssafy.beauduckconsult.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

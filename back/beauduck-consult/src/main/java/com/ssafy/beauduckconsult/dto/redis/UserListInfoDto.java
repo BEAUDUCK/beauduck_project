@@ -1,4 +1,4 @@
-package com.ssafy.beauduckconsult.dto;
+package com.ssafy.beauduckconsult.dto.redis;
 
 import lombok.Data;
 

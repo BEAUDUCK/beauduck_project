@@ -2,9 +2,11 @@ package com.ssafy.beauduckconsult.controller;
 
 
 
-import com.ssafy.beauduckconsult.dto.RoomDto;
-import com.ssafy.beauduckconsult.dto.RoomRequestDto;
-import com.ssafy.beauduckconsult.dto.UserInfoDto;
+import com.ssafy.beauduckconsult.dto.member.MemberProfileDto;
+import com.ssafy.beauduckconsult.dto.redis.RoomDto;
+import com.ssafy.beauduckconsult.dto.redis.RoomRequestDto;
+import com.ssafy.beauduckconsult.dto.redis.UserInfoDto;
+import com.ssafy.beauduckconsult.service.MemberService;
 import com.ssafy.beauduckconsult.service.RoomService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +26,7 @@ import java.util.List;
 public class ConsultRoomController {
 
     private final RoomService roomService;
+    private final MemberService memberService;
 
     @ApiOperation(value = "도와덕 방 전체 조회", notes = "DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = List.class)
     @GetMapping("/") // 방 목록전체
@@ -84,6 +87,19 @@ public class ConsultRoomController {
         else
             return new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
     }
+
+
+
+    @ApiOperation(value = "멤버 경험치 수정", notes = "멤버 경험치를 받고 수정한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+    @PutMapping("/exp")
+    public ResponseEntity<?> update(@ApiParam(value = "MemberProfileDto", required = true) @RequestBody MemberProfileDto request){
+        boolean result = memberService.updateExp(request);
+        if (result)
+            return new ResponseEntity<String>("success", HttpStatus.ACCEPTED);
+        else
+            return new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+    }
+
 
 
 
