@@ -3,12 +3,14 @@ package com.ssafy.beauduckauth.controller;
 import com.ssafy.beauduckauth.dto.common.response.ResponseSuccessDto;
 import com.ssafy.beauduckauth.dto.makeup.MakeupResponseDto;
 import com.ssafy.beauduckauth.dto.member.*;
+import com.ssafy.beauduckauth.service.AwsS3Service;
 import com.ssafy.beauduckauth.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
+    private final AwsS3Service awsS3Service;
 
     @ApiOperation(value = "회원 정보 조회", notes = "회원 정보를 조회한다.")
     @GetMapping("/{memberId}")
@@ -60,6 +63,15 @@ public class MemberController {
     @PutMapping("/gallery")
     public ResponseEntity<ResponseSuccessDto<String>> changeGalleryIsActive(@RequestBody GalleryActiveRequesetDto galleryActiveRequesetDto){
         return ResponseEntity.ok(memberService.changeGalleryisActive(galleryActiveRequesetDto));
+    }
+    
+    @ApiOperation(value = "회원 사진 등록", notes = "회원 사진을 등록합니다.")
+    @PostMapping("/ai/{memberId}")
+    public ResponseEntity<ResponseSuccessDto<SaveImageResponseDto>> saveImage(
+            @RequestPart("img")MultipartFile multipartFile, @PathVariable("memberId") String memberId
+            ) throws Exception {
+        String img = awsS3Service.uploadFileV1(multipartFile);
+        return ResponseEntity.ok(memberService.saveImage(memberId, img));
     }
 
 }

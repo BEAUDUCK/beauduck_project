@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface MakeupRepository extends JpaRepository<MakeupEntity, Integer> {
     List<MakeupEntity> findAllByMemberEntity(MemberEntity memberEntity);
+    Boolean existsByMemberEntity(MemberEntity memberEntity);
 }

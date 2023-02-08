@@ -3,11 +3,14 @@ package com.ssafy.beauduckauth.service;
 import com.ssafy.beauduckauth.dto.common.response.ResponseSuccessDto;
 import com.ssafy.beauduckauth.dto.makeup.MakeupResponseDto;
 import com.ssafy.beauduckauth.dto.member.*;
+import com.ssafy.beauduckauth.entity.ai.ImgaiEntity;
 import com.ssafy.beauduckauth.entity.makeup.MakeupEntity;
 import com.ssafy.beauduckauth.entity.makeup.RecentMakeupEntity;
 import com.ssafy.beauduckauth.entity.member.MemberEntity;
 import com.ssafy.beauduckauth.entity.member.MemberGalleryEntity;
 import com.ssafy.beauduckauth.entity.member.MemberProfileEntity;
+import com.ssafy.beauduckauth.errorhandling.exception.service.EntityIsNullException;
+import com.ssafy.beauduckauth.repository.makeup.ImgaiRepository;
 import com.ssafy.beauduckauth.repository.makeup.MakeupRepository;
 import com.ssafy.beauduckauth.repository.makeup.RecentMakeupRepository;
 import com.ssafy.beauduckauth.repository.member.MemberGalleryRepository;
@@ -36,6 +39,7 @@ public class MemberService {
     private final MemberGalleryRepository memberGalleryRepository;
     private final MakeupRepository makeupRepository;
     private final RecentMakeupRepository recentMakeupRepository;
+    private final ImgaiRepository imgaiRepository;
 
 
     // 회원 nickName 중복 여부 확인
@@ -148,7 +152,7 @@ public class MemberService {
     }
 
     // 갤러리
-    public ResponseSuccessDto<List<GalleryResponseDto>> getGallery(String memberId){
+    public ResponseSuccessDto<List<GalleryResponseDto>> getGallery(String memberId) {
         MemberEntity memberEntity = memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("해당 회원이 존재하지 않습니다."));
 
@@ -167,7 +171,7 @@ public class MemberService {
     }
 
     // 갤러리 공개 여부 설정
-    public ResponseSuccessDto<String> changeGalleryisActive(GalleryActiveRequesetDto galleryActiveRequesetDto){
+    public ResponseSuccessDto<String> changeGalleryisActive(GalleryActiveRequesetDto galleryActiveRequesetDto) {
         MemberEntity memberEntity = memberRepository.findById(galleryActiveRequesetDto.getMemberId())
                 .orElseThrow(() -> new RuntimeException("해당 회원이 존재하지 않습니다."));
 
@@ -179,5 +183,37 @@ public class MemberService {
         return responseUtil.successResponse("success");
     }
 
-    // 회원 얼굴 정보 저장
+    // 회원 얼굴 정보 저장 (AI)
+    public ResponseSuccessDto<SaveImageResponseDto> saveImage(String memberId, String img) {
+
+        if(img == null) {
+            throw new EntityIsNullException("이미지를 업로드할 수 없습니다.");
+        }
+
+        Boolean isExist = false;
+
+        //makeup table에 memberId 데이터 있는지 확인
+        MemberEntity memberEntity = memberRepository.findById(memberId)
+                .orElseThrow(() -> new EntityIsNullException("해당 회원이 존재하지 않습니다."));
+
+        if (makeupRepository.existsByMemberEntity(memberEntity)) {
+                isExist = true;
+        }
+
+        //Imgai table에 사진 등록 성공 여부
+        ImgaiEntity imgaiEntity = ImgaiEntity.builder()
+                .memberEntity(memberEntity)
+                .img(img)
+                .isMakeup(isExist)
+                .build();
+        imgaiRepository.save(imgaiEntity);
+
+        System.out.println("AI table에 사진 등록 성공");
+
+        SaveImageResponseDto saveImageResponseDto = SaveImageResponseDto.builder()
+                .message("사진이 정상 등록되었습니다.")
+                .build();
+
+        return responseUtil.successResponse(saveImageResponseDto);
+    }
 }
