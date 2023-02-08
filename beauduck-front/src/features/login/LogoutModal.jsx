@@ -11,7 +11,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import { getAccessToken, getCookie } from '../../api/cookie';
+import { getAccessToken } from '../../api/cookie';
 import { useDispatch } from 'react-redux';
 import { removeMember } from './MemberSlice';
 
@@ -21,18 +21,12 @@ function LogoutModal(props) {
   const navigate = useNavigate();
 
   const token = getAccessToken();
-  console.log('token', token);
 
   const Logout = async () => {
-    const res = await axios.get(
-      `http://3.38.169.2:8080/naver/logout?accessToken=${token}`,
-    );
-    console.log('로그아웃 시작');
-    // console.log(res.data.status);
+    await axios.get(`http://3.38.169.2:8080/naver/logout?accessToken=${token}`);
+    console.log('로그아웃');
     removeCookie('accessToken');
-    console.log('accessToken 제거 완료');
     localStorage.removeItem('refreshToken');
-    console.log('refreshToken 제거 완료');
     dispatch(removeMember());
     navigate('/');
   };
@@ -53,9 +47,7 @@ function LogoutModal(props) {
       <List>
         <ListItem disableGutters>
           <ListItemButton autoFocus onClick={handleListItemClick}>
-            {/* <ListItemAvatar> */}
-            {/* <a href={Logout}> */}네{/* </a> */}
-            {/* </ListItemAvatar> */}
+            네
           </ListItemButton>
         </ListItem>
       </List>

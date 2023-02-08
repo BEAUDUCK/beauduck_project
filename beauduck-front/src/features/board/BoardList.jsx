@@ -17,6 +17,10 @@ const BoardList = ({ allList, isInfo }) => {
     setCurrentPosts(allList.slice(indefOfFirstPost, indefOfLastPost));
   }, [indefOfFirstPost, indefOfLastPost, page, allList]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [allList]);
+
   return (
     <div>
       <div className={['board-list', 'board-header'].join(' ')}>

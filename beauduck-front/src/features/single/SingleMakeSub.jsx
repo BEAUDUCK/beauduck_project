@@ -4,20 +4,39 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeBtnState } from './SingleSlice';
+import { setBtnStateCreate, setBtnStateUpdate } from './SingleSlice';
 import { useEffect } from 'react';
+import SingleMakeImg from './SingleMakeImg';
 
 const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
   const color_course = ['eyeshadow', 'blusher', 'lipstick', 'tint', 'lipgloss'];
+  const img_course = ['eyebrow', 'shading', 'blusher', 'eyeliner', 'eyeshadow'];
   const dispatch = useDispatch();
   const subRef = useRef();
   const contentRef = useRef();
-  const imgRef = useRef();
+  // const imgRef = useRef();
 
   const [step, setStep] = useState('');
   const [content, setContent] = useState('');
   const [color, setColor] = useState('');
   const [img, setImg] = useState('');
+
+  const [isNeed, setIsNeed] = useState(false);
+
+  useEffect(() => {
+    setIsNeed(false);
+    setStep('');
+    setContent('');
+    setColor('');
+    setImg('');
+  }, [sub]);
+  useEffect(() => {
+    if (img_course.includes(step)) {
+      setIsNeed(true);
+    } else {
+      setIsNeed(false);
+    }
+  }, [step]);
 
   const { btnState } = useSelector((state) => state.single);
 
@@ -36,7 +55,6 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
 
   // 색상 선택
   const [onToggleColor, setOnToggleColor] = useState(false);
-
   const colorChange = (color) => {
     setColor(color);
   };
@@ -61,14 +79,14 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
       img,
     };
 
-    imgRef.current.value = '';
+    // imgRef.current.value = '';
 
     const idx = makeupMiddleList.push(subData) - 1;
 
     const subImg = document.createElement('img');
     subImg.setAttribute('src', `/images/makeup/sub/sub_${step}.png`);
     subImg.setAttribute('alt', step);
-    subImg.setAttribute('id', `subImg_${idx}`);
+    subImg.setAttribute('id', `subImg_${main}_${idx}`);
     subImg.setAttribute('value', idx);
     subImg.setAttribute('class', 'sub-img');
     subImg.addEventListener('click', () => getSubData(idx));
@@ -98,7 +116,7 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     makeupMiddleList[idx].colorCode = color;
     makeupMiddleList[idx].img = img;
 
-    const subImg = document.getElementById(`subImg_${idx}`);
+    const subImg = document.getElementById(`subImg_${main}_${idx}`);
     subImg.setAttribute('src', `/images/makeup/sub/sub_${step}.png`);
     subImg.setAttribute('alt', step);
 
@@ -108,12 +126,13 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     setContent('');
     setColor('');
     setImg('');
-    imgRef.current.value = '';
+    // imgRef.current.value = '';
+    dispatch(setBtnStateCreate());
   };
 
   // 수정할 때 폼에 기존 데이터 넣어주기
   const getSubData = (idx) => {
-    dispatch(changeBtnState());
+    dispatch(setBtnStateUpdate());
 
     const subData = makeupMiddleList[idx];
     setIdx(idx);
@@ -139,7 +158,8 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     setContent('');
     setColor('');
     setImg('');
-    imgRef.current.value = '';
+    // imgRef.current.value = '';
+    dispatch(setBtnStateCreate());
   };
 
   useEffect(() => {
@@ -150,6 +170,16 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
       setImg('');
     }
   }, [btnState]);
+
+  const [isToggle, setIsToggle] = useState(false);
+  const toggleImg = () => {
+    setIsToggle(!isToggle);
+  };
+
+  const getImg = (selectedImg) => {
+    setImg(selectedImg);
+    console.log(img);
+  };
 
   return (
     <div className="sub-div">
@@ -220,16 +250,21 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
           type="text"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="add-sub-text"
+          className={['add-sub-text', isNeed ? 'img-course' : ''].join(' ')}
           placeholder="해당 과정에 대한 설명을 적어주세요"
         />
-        <input
-          type="file"
-          id="file"
-          ref={imgRef}
-          accept="image/*"
-          onChange={(e) => setImg(e.target.files[0])}
-        />
+        {isNeed && (
+          <button
+            onClick={toggleImg}
+            className={['img-btn', img ? 'img-btn-selected' : ''].join(' ')}
+          >
+            {img ? '이미지 선택됨' : '이미지 선택'}
+          </button>
+        )}
+
+        {isToggle && (
+          <SingleMakeImg step={step} getImg={getImg} toggleImg={toggleImg} />
+        )}
         {!btnState ? (
           <button type="button" className="ok-btn" onClick={submitSubMakeup}>
             완료

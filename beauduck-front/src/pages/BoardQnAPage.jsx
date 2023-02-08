@@ -31,6 +31,8 @@ const BoardQnAPage = () => {
 
   const { memberId } = useSelector((state) => state.member);
 
+  const date = nowBoard.created_date + '';
+
   const onToggleUpdate = () => {
     setTitle(nowBoard.title);
     setContent(nowBoard.content);
@@ -72,7 +74,7 @@ const BoardQnAPage = () => {
 
   const removeBoard = () => {
     dispatch(removeQaBoard(id));
-    navigate('/board'); // board 메인으로 라우팅
+    navigate('/board', { replace: true }); // board 메인으로 라우팅
   };
 
   return (
@@ -137,7 +139,7 @@ const BoardQnAPage = () => {
           <div className="user-text">
             <p>{nowBoard?.writer}</p>
             <div>
-              <span>{nowBoard?.created_date}</span>
+              <span>{date.slice(0, 10)}</span>
               <span>조회</span>
               <span>{nowBoard?.count}</span>
             </div>

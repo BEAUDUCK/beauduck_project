@@ -23,15 +23,15 @@ const SingleModeSequence = ({ nowStep }) => {
   return (
     <div className="makeup-sequence">
       {/* <img src={frame} alt="frame" className="content-box" /> */}
-      <img
-        src={`/images/makeup/sub/sub_${step}.png`}
-        alt="step"
-        className="sub-ing-img"
-      />
       <div
         className="sub-step-content"
         style={{ backgroundColor: colors[step] }}
       >
+        <img
+          src={`/images/makeup/sub/sub_${step}.png`}
+          alt="step"
+          className="sub-ing-img"
+        />
         {nowStep.content}
       </div>
     </div>

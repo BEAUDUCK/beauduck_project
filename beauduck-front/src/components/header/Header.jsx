@@ -5,12 +5,14 @@ import logo from '../../assets/logo_original.png';
 import { useState } from 'react';
 import LoginModal from '../../features/login/LoginModal';
 import LogoutModal from '../../features/login/LogoutModal';
+import { useSelector } from 'react-redux';
+import SignupPage from '../../pages/SignupPage';
 
 const Header = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem('refreshToken');
-  // console.log(token);
+  const { memberId } = useSelector((state) => state.member);
 
   const [isOpen, setIsOpen] = useState(false);
   const isOpenModal = () => {
@@ -30,11 +32,16 @@ const Header = () => {
           <h3 className="logo-name">뷰덕</h3>
         </div>
         <div className="header-nav">
-          <p onClick={() => navigate('/help')}>도와덕</p>
+          {/* <p onClick={() => navigate('/help')}>도와덕</p>
           <p onClick={() => navigate('/single')}>따라해덕</p>
           <p onClick={() => navigate('/together')}>투게덕</p>
           <p onClick={() => navigate('/board')}>쑥덕쑥덕</p>
-          <p onClick={() => navigate('/rank')}>랭킹</p>
+          <p onClick={() => navigate('/rank')}>랭킹</p> */}
+          <p onClick={() => navigate('/no')}>도와덕</p>
+          <p onClick={() => navigate('/no')}>따라해덕</p>
+          <p onClick={() => navigate('/no')}>투게덕</p>
+          <p onClick={() => navigate('/no')}>쑥덕쑥덕</p>
+          <p onClick={() => navigate('/no')}>랭킹</p>
         </div>
         <div className="header-auth">
           <p onClick={() => navigate('/profile')}>
@@ -44,9 +51,9 @@ const Header = () => {
           LOGIN
           {isOpen && <LoginModal isOpenModal={isOpenModal} />}
           </p> */}
-          {!token ? (
+          {!memberId ? (
             <p>
-              <LoginModal />
+              <LoginModal /> / <p onClick={() => navigate('/signup')}>SIGNUP</p>
             </p>
           ) : (
             <p>

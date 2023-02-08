@@ -13,7 +13,7 @@ const NaverLogin = () => {
 
   const navigate = useNavigate();
   const nickName = useSelector((state) => state.member);
-
+  console.log(code, state);
   // 토큰 발급
   const getToken = async () => {
     axios
@@ -32,44 +32,16 @@ const NaverLogin = () => {
           },
         );
         alert('인증 완료');
-        console.log('check');
-        RegisterCheck(accessToken);
+        console.log('토큰 발급함~');
+        dispatch(UserLogin(accessToken));
+        console.log('로그인해');
+        navigate('/');
       })
-
       .catch((error) => {
         console.log(error);
       });
   };
 
-  // 등록 여부 확인
-  const RegisterCheck = async (accessToken) => {
-    axios
-      .get(`http://3.38.169.2:8080/naver/check?accessToken=${accessToken}`)
-      .then((res) => {
-        console.log('회원 여부', res.data.data);
-
-        // false : 기존 회원, true: 신규 회원
-        if (res.data.data === false) {
-          dispatch(UserLogin(accessToken));
-          navigate('/');
-        } else if (res.data.data === true) {
-          navigate('/signup');
-        }
-      });
-  };
-
-  // const Login = async (accessToken) => {
-  //   console.log('여기 로그인');
-  //   axios
-  //     .get(`http://3.38.169.2:8080/naver/login?accessToken=${accessToken}`)
-  //     .then((res) => {
-  //       console.log(res.data.data);
-  //       dispatch(getMemberId(res.data.data));
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
   useEffect(() => {
     getToken();

@@ -4,7 +4,7 @@ import { removeQaAnswer, updateQaAnswer } from './BoardSlice';
 
 const BoardAnswerListItem = ({ answer, boardId }) => {
   const dispatch = useDispatch();
-  const { memberId, name } = useSelector((state) => state.member);
+  const { memberId, nickName } = useSelector((state) => state.member);
   const [newAnswer, setNewAnswer] = useState(answer.content);
   const [isUpdate, setIsUpdate] = useState(false);
   const isToggleUpdate = () => {
@@ -28,7 +28,7 @@ const BoardAnswerListItem = ({ answer, boardId }) => {
       memberEntity: {
         memberId,
       },
-      writer: name,
+      writer: nickName,
     };
     const updatePayload = {
       updatedAnswer,
@@ -45,6 +45,7 @@ const BoardAnswerListItem = ({ answer, boardId }) => {
     };
     dispatch(removeQaAnswer(removePayload));
   };
+  const date = answer.created_date + '';
 
   return (
     <div className={['qna-board', 'qna-answer'].join(' ')}>
@@ -52,12 +53,12 @@ const BoardAnswerListItem = ({ answer, boardId }) => {
       <div className={['user-box', 'user-comment'].join(' ')}>
         <button className="comment-img" />
         <div className="user-text">
-          <p className="comment-username">{answer.member_id}</p>
+          <p className="comment-username">{answer.writer}</p>
           <div className="comment-last">
             <div className="comment-last-sub">
-              <span>{answer.created_at}</span>
+              <span>{date.slice(0, 10)}</span>
               <span>좋아요</span>
-              <span>{answer.like}</span>
+              <span>{answer.likes}</span>
             </div>
             <div className="comment-last-sub">
               {!isUpdate ? (
