@@ -22,33 +22,33 @@ const MainPage = () => {
 
         <section id='section02'>
           <div className='section02-1'>
-            <div className="txt-box">
-              <strong>제목제목</strong>
-              <p>가치있는 일상을 만들어갑니다.</p>
-              <span>자세히 보기</span>
-            </div>
             <div className="img-box">
               <img src="/images/logo.png" alt="" />
+            </div>
+            <div className="txt-box">
+              <h1>도와덕</h1>
+              <p>가치있는 일상을 만들어갑니다.</p>
+              <a href="/help">자세히 보기</a>
             </div>
           </div>
           <div className='section02-2'>
             <div className="txt-box">
-              <strong>제목제목</strong>
+              <h1>따라해덕</h1>
               <p>가치있는 일상을 만들어갑니다.</p>
-              <span>자세히 보기</span>
+              <a href="/single">자세히 보기</a>
             </div>
             <div className="img-box">
               <img src="/images/logo.png" alt="" />
             </div>
           </div>
           <div className='section02-3'>
-            <div className="txt-box">
-              <strong>제목제목</strong>
-              <p>가치있는 일상을 만들어갑니다.</p>
-              <span>자세히 보기</span>
-            </div>
             <div className="img-box">
               <img src="/images/logo.png" alt="" />
+            </div>
+            <div className="txt-box">
+              <h1>투게덕</h1>
+              <p>가치있는 일상을 만들어갑니다.</p>
+              <a href="/together">자세히 보기</a>
             </div>
           </div>
 
