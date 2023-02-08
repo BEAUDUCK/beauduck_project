@@ -1,25 +1,31 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import React, { Component } from 'react';
-import ChatComponent from './chat/ChatComponent';
-import DialogExtensionComponent from './dialog-extension/DialogExtension';
+// import ChatComponent from './chat/ChatComponent';
+// import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import StreamComponent from './stream/StreamComponent';
-import './VideoRoomComponent.css';
+// import './VideoRoomComponent.css';
 
 import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
+import HostComponent from './stream/HostComponent';
 import ToolbarComponent from './toolbar/ToolbarComponent';
+import RestTime from './RestTime';
+import Message from './Message';
+import AnswerComponent from './AnswerComponent';
+import SmallConsultantStream from './stream/SmallConsultantStream';
+// import ToolbarComponent from './toolbar/ToolbarComponent';
 
 
 var localUser = new UserModel();
 // const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'localhost:5000/';
-const OPENVIDU_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'http://i8b306.p.ssafy.io:9000/'
+const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'http://i8b306.p.ssafy.io:9000/'
 
-class VideoRoomComponent extends Component {
+class CustomRoomComponent extends Component {
     constructor(props) {
         super(props);
         this.hasBeenUpdated = false;
-        // this.layout = new OpenViduLayout();
+        this.layout = new OpenViduLayout();
         let sessionName = this.props.sessionName ? this.props.sessionName : 'SessionA';
         let userName = this.props.user ? this.props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
         this.remotes = [];
@@ -32,7 +38,6 @@ class VideoRoomComponent extends Component {
             subscribers: [],
             chatDisplay: 'none',
             currentVideoDevice: undefined,
-            isRoomAdmin: false,
         };
         // 메서드 바인딩 과정
         // joinSession : 세션 접속
@@ -173,7 +178,7 @@ class VideoRoomComponent extends Component {
             videoSource: videoDevices[0].deviceId,
             publishAudio: localUser.isAudioActive(),
             publishVideo: localUser.isVideoActive(),
-            resolution: '640x480',
+            resolution: '1280x720',
             frameRate: 30,
             insertMode: 'APPEND',
         });
@@ -503,7 +508,7 @@ class VideoRoomComponent extends Component {
         // return true if at least one passes the test
         isScreenShared = this.state.subscribers.some((user) => user.isScreenShareActive()) || localUser.isScreenShareActive();
         const openviduLayoutOptions = {
-            maxRatio: 9 / 16,
+            maxRatio: 3 / 2,
             minRatio: 9 / 16,
             fixedRatio: isScreenShared,
             bigClass: 'OV_big',
@@ -548,64 +553,103 @@ class VideoRoomComponent extends Component {
             this.hasBeenUpdated = true;
         }
         if (document.getElementById('layout').offsetWidth > 700 && this.hasBeenUpdated) {
-            this.hasBeenUpdated = false;
+          this.hasBeenUpdated = false;
         }
     }
-
+    
     render() {
         const mySessionId = this.state.mySessionId;
         const localUser = this.state.localUser;
         const chatDisplay = { display: this.state.chatDisplay };
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@", this.state.subscribers)
+        const host = this.props.host
+        const userCount = this.state.subscribers.length + 1
+        // const userList = this.props.userList
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",localUser)
         return (
-
-            <div className="container" id="container">
-                <ToolbarComponent
-                    sessionId={mySessionId}
-                    user={localUser}
-                    showNotification={this.state.messageReceived}
-                    camStatusChanged={this.camStatusChanged}
-                    micStatusChanged={this.micStatusChanged}
-                    // screenShare={this.screenShare}
-                    // stopScreenShare={this.stopScreenShare}
-                    // toggleFullscreen={this.toggleFullscreen}
-                    // switchCamera={this.switchCamera}
-                    leaveSession={this.leaveSession}
-                    // toggleChat={this.toggleChat}
-                />
-
-                <DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} />
-
-                <div id="layout" className="bounds">
-                    {/* 나 자신 화면*/}
-                    {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                        <div className="OT_root OT_publisher custom-class" id="localUser">
-                            <StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
-
-                        </div>
-                    )}
-                    {/* 구독자들 화면*/}
-                    {this.state.subscribers.map((sub, i) => (
-                        <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
+          <>
+            {host === localUser ? (
+              // 내가 호스트 일때 
+              <div className="container" id="container" style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
+                  <div className="left-div" style={{ width: "20%", height: "100%" }} >
+                      {this.state.subscribers.slice(0, 5).map((sub, i) => (
+                          <div key={i} className="consultant-1" style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center" }}>
                             <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-                        </div>
-                    ))}
-
-                    {/* 채팅 화면 */}
+                          </div>
+                      ))}
+                  </div>
+                  <div className='host-div' style={{ width: "50%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }} >
+                    {/* {host === this.state.myUserName && 
+                      <div>
+                        <HostComponent user={sub} streamId={sub.streamManager.stream.streamId}/>
+                      </div>
+                    } */}
+                    <div className='room-title' style={{ height: "5vh" }}>
+                      {`${host}의 방`}
+                    </div>
                     {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                        <div className="OT_root OT_publisher custom-class" style={chatDisplay}>
-                            <ChatComponent
-                                user={localUser}
-                                chatDisplay={this.state.chatDisplay}
-                                close={this.toggleChat}
-                                messageReceived={this.checkNotification}
-                            />
-                        </div>
-                    )}
+                      <div className="host" style={{ height: "70vh" }}>
+                        <HostComponent user={localUser} handleNickname={this.nicknameChanged}/>
+                      </div>
+                      )}
+                    <div className='sub' style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "15vh" }}>
+                      <RestTime />
+                      <ToolbarComponent
+                        sessionId={mySessionId}
+                        user={localUser}
+                        showNotification={this.state.messageReceived}
+                        camStatusChanged={this.camStatusChanged}
+                        micStatusChanged={this.micStatusChanged}
+                      />
+                      <Message />
+                    </div>
+                  </div>
+                  <div className='right-div' style={{ width: "20%", height: "100%" }}>
+                    {this.state.subscribers.slice(5, 10).map((sub, i) => (
+                      <div key={i} className="consultant-2" style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center" }}>
+                        <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                      </div>
+                    ))}
+                  </div>
+              </div>
+            ) : (
+              // 내가 컨설턴트 일 때
+              <div className="container" id="container" style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
+              <div className="left-div" style={{ width: "20%", height: "100%" }} >
+                <RestTime />
+              </div>
+              <div className='host-div' style={{ width: "50%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }} >
+
+                <div className='room-title' style={{ height: "5vh" }}>
+                  {`${host}의 방`}
                 </div>
-            </div>
-        );
-    }
+                {/* 일단 퍼블리셔를 호스트로 */}
+                {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                  <div className="host" style={{ height: "70vh" }}>
+                    <HostComponent user={localUser} handleNickname={this.nicknameChanged}/>
+                  </div>
+                  )}
+                <div className='sub' style={{ display: "flex", justifyContent: "space-evenly", alignItems: "center", width: "100%", height: "25vh" }}>
+                {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                  <div className="consultant-small" style={{ width: "50%", height: "100%" }} >
+                    <SmallConsultantStream user={localUser} handleNickname={this.nicknameChanged}/>
+                  </div>
+                  )}
+                  <AnswerComponent
+                    user={localUser}
+                    userCount={userCount}
+                    // userList={userList}
+                  />
+                </div>
+              </div>
+              <div className='right-div' style={{ width: "20%", height: "100%" }}>
+                  <Message />
+              </div>
+          </div>
+          )
+            }
+          </>
+      )
+      }
 
     /**
      * --------------------------------------------
@@ -628,22 +672,11 @@ class VideoRoomComponent extends Component {
     }
 
     async createSession(sessionId) {
-        // const response = await axios.post(APPLICATION_SERVER_URL + 'api/sessions', { customSessionId: sessionId }, {
-        //     headers: { 'Content-Type': 'application/json', },
-        // });
-        // return response.data; // The sessionId
-        return new Promise((resolve, reject) => {
-            const data = JSON.stringify({ customSessionId: sessionId })
-            axios
-                .post(OPENVIDU_SERVER_URL + 'api/sessions', data, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                .then((response) => {
-                    
-                })
-        })
+        const response = await axios.post(APPLICATION_SERVER_URL + 'api/sessions', { customSessionId: sessionId }, {
+            headers: { 'Content-Type': 'application/json', },
+        });
+        this.state.host = this.state.myUserName
+        return response.data; // The sessionId
     }
 
     async createToken(sessionId) {
@@ -653,4 +686,4 @@ class VideoRoomComponent extends Component {
         return response.data; // The token
     }
 }
-export default VideoRoomComponent;
+export default CustomRoomComponent;
