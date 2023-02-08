@@ -115,7 +115,9 @@ const ConsultingListItem = ({ consultingItem }) => {
           <div className="back" style={{ backgroundColor: nowColor }}>
             <div className="back-content">
               <div className="back-content-index">방장</div>
-              <div className="back-content-context">{consultingItem.host}</div>
+              <div className="back-content-context">
+                {consultingItem.hostNickname}
+              </div>
             </div>
             {/* <div className="back-content">
             <div className="back-content-index">제목</div>
@@ -123,17 +125,27 @@ const ConsultingListItem = ({ consultingItem }) => {
           </div> */}
             <div className="back-content">
               <div className="back-content-index">내용</div>
-              <div className="back-content-context">{consultingItem.text}</div>
+              <div className="back-content-context">
+                {consultingItem.content}
+              </div>
             </div>
             <div className="back-content">
               <div className="back-content-index">인원</div>
               {/* <div>{consultingItem.people}</div> 사람 수 들어가야 함  */}
-              <div className="back-content-context">4/5</div>
+              <div className="back-content-context">
+                {consultingItem.userCount}
+              </div>
             </div>
           </div>
         </div>
       </div>
-      {isOpen && <ConsultingModalLoadingGuest isOpenClick={isOpenClick} />}
+      {isOpen && (
+        <ConsultingModalLoadingGuest
+          roomId={consultingItem.roomId}
+          host={consultingItem.hostNickname}
+          isOpenClick={isOpenClick}
+        />
+      )}
       {isOpen && <BlackOut onClickEvent={isOpenClick} />}
     </>
   );
