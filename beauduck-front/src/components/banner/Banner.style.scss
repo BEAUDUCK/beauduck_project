@@ -1,18 +1,36 @@
 .banner {
   width: 100%;
   height: 300px;
-
 }
 
-
 .help-ban {
+  background: #FFF6E6;
+  position: relative;
+}
+
+.help-ban:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  top: 0px;
+  left: 450px;
   background-color: #FFF6E6;
+  background-image: url(../../assets/help_banner.gif);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .single-ban {
   background-color: #D07C5F;
 }
 
+
 .together-ban {
   background-color: pink;
+  background-image: url(../../assets/single_banner.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
