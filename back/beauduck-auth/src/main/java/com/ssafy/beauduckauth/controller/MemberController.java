@@ -68,7 +68,7 @@ public class MemberController {
     @ApiOperation(value = "회원 사진 등록", notes = "회원 사진을 등록합니다.")
     @PostMapping("/ai/{memberId}")
     public ResponseEntity<ResponseSuccessDto<SaveImageResponseDto>> saveImage(
-            @RequestPart("img")MultipartFile multipartFile, @PathVariable("memberId") String memberId
+            @RequestParam("img")MultipartFile multipartFile, @PathVariable("memberId") String memberId
             ) throws Exception {
         String img = awsS3Service.uploadFileV1(multipartFile);
         return ResponseEntity.ok(memberService.saveImage(memberId, img));
