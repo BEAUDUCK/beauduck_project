@@ -15,6 +15,7 @@ import SingelModalNoRecommend from '../features/single/SingleModalNoRecommend';
 import SingleMake from '../features/single/SingleMake';
 import Alert from '../components/modal/Alert';
 import SinglePopular from '../features/single/SinglePopular';
+import SingleRandom from '../features/single/SingleRandom';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
@@ -79,11 +80,17 @@ const SinglePage = () => {
       <div className="makeup-special">
         <div className="makeup-special-section1">
           <h1>
-            BEST <br /> MAKEUP
+            나에게 맞는 <br /> 메이크업 추천 받기
           </h1>
+          <p>나와 닮은 사람들은 어떤 메이크업을 할까?</p>
+          <p>
+            인공지능으로 얼굴을 분석하여 나와 가장 닮은 사람들의 메이크업을
+            추천한다
+          </p>
         </div>
         <div className="makeup-special-section2">
           <h1>RANDOM PICK</h1>
+          <SingleRandom />
         </div>
       </div>
       <SingleList modeList={makeupList} />

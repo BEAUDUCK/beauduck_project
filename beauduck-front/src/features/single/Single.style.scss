@@ -75,23 +75,44 @@
 
 //--------- 전체 메이크업 리스트 -------
 
+@media screen and (min-width: 600px) {
+    .modeList {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .modeList {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .modeList {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
 .modeList {
+    padding-top: 50px;
+    width: 70%;
+    margin: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    // grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     grid-gap: 10px;
 }
 
 .makeup-list {
     display: inline-block;
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     text-align: center;
     position: relative;
     background: #000;
     cursor: pointer;
     overflow: hidden;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-    line-height: 250px;
+    line-height: 200px;
 
     &:before {
         content: '';
@@ -117,8 +138,8 @@
 
     img {
         display: inline-block;
-        width: 230px;
-        height: 230px;
+        width: 180px;
+        height: 180px;
         object-fit: cover;
         transition: all 0.3s ease-in-out;
         vertical-align: middle;
@@ -944,4 +965,12 @@
             margin: 0;
         }
     }
+}
+
+.random-one {
+    width: calc(45vw - 10%);
+    min-width: 500px;
+    height: calc(500px - 10%);
+    padding: 10%
+
 }

@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { async } from 'q';
 import client from '../../api/singleAxios';
 
 // 전체 메이크업 리스트 조회
