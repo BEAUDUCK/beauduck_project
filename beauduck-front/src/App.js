@@ -11,6 +11,14 @@ import ProfilePage from './pages/ProfilePage';
 import NaverLogin from './features/login/NaverLogin';
 import SinglePage from './pages/SinglePage';
 import TogetherPage from './pages/TogetherPage';
+import BoardInfoPage from './pages/BoardInfoPage';
+import BoardQnAPage from './pages/BoardQnAPage';
+import Footer from './components/footer/Footer';
+import SingleResultPage from './pages/SingleResultPage';
+import SingleModePage from './pages/SingleModePage';
+import SingupPage from './pages/SignupPage';
+import ScrollToTop from './components/scrolltotop/ScrollToTop';
+import ConsultingRoomHostPage from './pages/ConsultingRoomHostPage';
 
 // import { getInfoList, getQaList } from './features/board/BoardSlice';
 
@@ -34,16 +42,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import BoardInfoPage from './pages/BoardInfoPage';
-import BoardQnAPage from './pages/BoardQnAPage';
-import Footer from './components/footer/Footer';
-import SingleResultPage from './pages/SingleResultPage';
-import SingleModePage from './pages/SingleModePage';
-import RankingPage from './pages/RankingPage';
-import SingupPage from './pages/SignupPage';
-import ScrollToTop from './components/scrolltotop/ScrollToTop';
 import { useEffect } from 'react';
-import ConsultingRoomHostPage from './pages/ConsultingRoomHostPage';
 import { useDispatch } from 'react-redux';
 import { accessLogin } from './features/login/MemberSlice';
 
@@ -98,8 +97,6 @@ function App() {
           <Route path="/board/info/:id" element={<BoardInfoPage />} />
           <Route path="/board/qna/:id" element={<BoardQnAPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          {/* 랭킹 페이지 */}
-          <Route path="/rank" element={<RankingPage />} />
           {/* </Route> */}
           <Route path="/Api/Naver" element={<NaverLogin />} />
           <Route path="/" element={<MainPage />} />

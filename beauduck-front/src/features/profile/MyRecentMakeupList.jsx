@@ -1,12 +1,11 @@
-import MyRecentMakeupListItem from "./MyRecentMakeupListItem";
+import MyRecentMakeupListItem from './MyRecentMakeupListItem';
 
 const MyRecentMakeupList = ({ recentMakeupList }) => {
-
   return (
     <div className="MyRecentMakeupList">
       <h1>최근 진행한 메이크업</h1>
-      <div style={{ display: "flex" }}>
-        {recentMakeupList.map((it) => (
+      <div style={{ display: 'flex' }}>
+        {recentMakeupList?.map((it) => (
           <MyRecentMakeupListItem
             key={it.id}
             title={it.title}
@@ -17,7 +16,7 @@ const MyRecentMakeupList = ({ recentMakeupList }) => {
         ))}
       </div>
     </div>
-  )
+  );
 };
 
 export default MyRecentMakeupList;

@@ -8,83 +8,13 @@ import { useSelector } from 'react-redux';
 import React from 'react';
 import Alert from '../components/modal/Alert';
 import Button from '../components/button/Button';
+import textBack from '../assets/textBack.png';
 
 const SingleModePage = () => {
-  // const nowMakeup = [
-  //   {
-  //     step: 'skin',
-  //     makeupMiddleList: [
-  //       {
-  //         step: 'suncream',
-  //         content:
-  //           '잘 발라주세여 챱챱챱챱챱챱챱챱챱챠챠챠챠챠챠챠아아아아아나나나나나나마마마마마마마마맘마ㅏ바바ㅏ바밥ㄴㄴ안아지ㅏㅣㅏ이나이나이ㅏㅣ아니아니ㅏ이나ㅣ아니아ㅣ나이나ㅣ아니아ㅣㄴ아니아ㅣㄴ아니앙이ㅣ이ㅐ',
-  //         colorCode: '',
-  //         img: '',
-  //       },
-  //       {
-  //         step: 'foundation',
-  //         content: '적정량을 덜어서 챱챱',
-  //         colorCode: '',
-  //         img: '',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     step: 'eyebrow',
-  //     makeupMiddleList: [
-  //       {
-  //         step: 'eyebrow',
-  //         content: '슥샥슥샥',
-  //         colorCode: '',
-  //         img: '',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     step: 'eye',
-  //     makeupMiddleList: [
-  //       {
-  //         step: 'eyeshadow',
-  //         content: '파란색 아이섀도우를 눈 위에 슥샥슥샥',
-  //         colorCode: '#0000FF',
-  //         img: '',
-  //       },
-  //       {
-  //         step: 'eyeliner',
-  //         content: '아이라이너는 길고 두껍게^^',
-  //         colorCode: '',
-  //         img: '',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     step: 'conture',
-  //     makeupMiddleList: [
-  //       {
-  //         step: 'shading',
-  //         content: '얼굴을 반토막 내보자고',
-  //         colorCode: '',
-  //         img: '',
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     step: 'lip',
-  //     makeupMiddleList: [
-  //       {
-  //         step: 'lipstick',
-  //         content: '한번만 샥샥',
-  //         colorCode: '#C2185B',
-  //         img: '',
-  //       },
-  //     ],
-  //   },
-  // ];
-
   const navigate = useNavigate();
   const { mainList } = useSelector((state) => state.single);
-  const { nowMakeup } = useSelector((state) => state.single);
-  console.log('nowMakeup', nowMakeup);
+  const { nowMakeup, makeupDetail } = useSelector((state) => state.single);
+
   const [isExit, setIsExit] = useState(false);
 
   const [isSkin, setIsSkin] = useState(false);
@@ -202,19 +132,19 @@ const SingleModePage = () => {
           <p>나가기</p>
         </div>
         <SingleModeSequence nowStep={nowStep} />
-        <br />
+        {nowStep.colorCode ? (
+          <div className="color-code-div">
+            <p>사용 색상</p>
+            <div
+              className="color-rectangle"
+              style={{ backgroundColor: `${nowStep?.colorCode}` }}
+            ></div>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
       <div className="center-div">
-        <FontAwesomeIcon
-          icon="fa-solid fa-angle-left"
-          className={['move', 'move-left'].join(' ')}
-          onClick={goBefore}
-        />
-        <FontAwesomeIcon
-          icon="fa-solid fa-angle-right"
-          className={['move', 'move-right'].join(' ')}
-          onClick={goNext}
-        />
         <div className="main-img-div">
           {isSkin && (
             <img
@@ -305,11 +235,23 @@ const SingleModePage = () => {
             ></div>
           ))}
         </div>
-        <FacemeshFeature
-          nowStep={nowStep.step}
-          nowMain={nowMain}
-          isGuide={isGuide}
-        />
+        <div className="center-cam">
+          <FontAwesomeIcon
+            icon="fa-solid fa-angle-left"
+            className={['move', 'move-left'].join(' ')}
+            onClick={goBefore}
+          />
+          <FontAwesomeIcon
+            icon="fa-solid fa-angle-right"
+            className={['move', 'move-right'].join(' ')}
+            onClick={goNext}
+          />
+          <FacemeshFeature
+            nowStep={nowStep.step}
+            nowMain={nowMain}
+            isGuide={isGuide}
+          />
+        </div>
         <Button
           text={isGuide ? '가이드 끄기' : '가이드 켜기'}
           onClickEvent={guideOnOff}
@@ -317,8 +259,26 @@ const SingleModePage = () => {
         />
       </div>
       <div className="right-div">
-        <img src={nowStep.img} alt={nowStep.step} />
-        <div style={{ backgroundColor: nowStep.colorCode }}></div>
+        <div className="right-detail">
+          <img className="textBack" src={textBack} alt="" />
+          <p>완성본</p>
+          <img className="thumbnail" src={makeupDetail.img} alt="" />
+        </div>
+        <div className="right-detail">
+          {nowStep.img ? (
+            <>
+              <img className="textBack" src={textBack} alt="" />
+              <p>가이드</p>
+              <img
+                className="guide-img"
+                src={nowStep?.img}
+                alt={nowStep?.step}
+              />
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
         <button onClick={finishMode} className="finish-btn">
           종료하기
         </button>
