@@ -59,7 +59,7 @@ public class OAuthController {
 
     @ApiOperation(value = "회원가입", notes = "회원가입을 진행한다.")
     @PostMapping("/signup")
-    public ResponseEntity<ResponseSuccessDto<SignupResponseDto>> signup(@RequestPart("signupRequestDto") SignupRequestDto signupRequestDto) throws Exception {
+    public ResponseEntity<ResponseSuccessDto<SignupResponseDto>> signup(@RequestBody SignupRequestDto signupRequestDto) throws Exception {
         return ResponseEntity.ok(authService.signup(signupRequestDto));
     }
 }
