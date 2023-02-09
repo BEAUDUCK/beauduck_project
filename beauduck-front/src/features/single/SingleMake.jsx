@@ -69,6 +69,7 @@ const SingleMake = ({ onToggleMake, onToggleFinish }) => {
         id: res.payload,
         img: imgForm.img,
       };
+      console.log(payload);
       dispatch(saveMakeupImg(payload));
       onToggleFinish();
       onToggleMake();

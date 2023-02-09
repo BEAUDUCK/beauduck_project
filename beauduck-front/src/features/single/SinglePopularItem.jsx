@@ -4,7 +4,7 @@ import { useState } from 'react';
 import BlackOut from '../../components/blackout/BlackOut';
 import SingleModalInfo from './SingleModalInfo';
 
-const SingleListItem = ({ modeItem, idx }) => {
+const SinglePopularItem = ({ modeItem, idx }) => {
   const [isInfo, setIsInfo] = useState(false);
   const isToggleInfo = () => {
     setIsInfo(!isInfo);
@@ -21,30 +21,25 @@ const SingleListItem = ({ modeItem, idx }) => {
   return (
     <>
       <div
-        className="makeup-list"
+        className={['makeup-div', idx % 2 ? 'makeup-div-odd' : ''].join(' ')}
         style={{ backgroundColor: `${bgColor[color][0]}` }}
-        onClick={isToggleInfo}
       >
-        <div>
+        <div onClick={isToggleInfo}>
           <img src={modeItem.img} alt="img" />
-        </div>
-        <div className="makeup-back">
-          <p className="makeup-title" style={{ color: `${bgColor[color][1]}` }}>
-            {modeItem.title}
-          </p>
+          <p style={{ color: `${bgColor[color][1]}` }}>{modeItem.title}</p>
           <div className="star-info">
             <FontAwesomeIcon className="star-icon" icon="fa-solid fa-star" />
-            <span>{Math.round(modeItem.score * 10) / 10}</span>
-            <span>({modeItem.count})</span>
+            <p>{Math.round(modeItem.score * 10) / 10}</p>
+            <p>({modeItem.count})</p>
           </div>
         </div>
       </div>
       {isInfo && (
         <SingleModalInfo makeupId={modeItem.id} isToggleInfo={isToggleInfo} />
       )}
-      {isInfo && <BlackOut onClickEvent={isToggleInfo} />}
+      {/* {isInfo && <BlackOut onClickEvent={isToggleInfo} />} */}
     </>
   );
 };
 
-export default SingleListItem;
+export default SinglePopularItem;

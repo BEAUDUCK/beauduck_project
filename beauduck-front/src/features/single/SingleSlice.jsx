@@ -1,12 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { async } from 'q';
 import client from '../../api/singleAxios';
 
 // 전체 메이크업 리스트 조회
 export const getMakeupList = createAsyncThunk(
   'single/getMakeupList',
   async () => {
-    const res = await client.get('/makeup/');
-    return res.data;
+    const res1 = await client.get('/makeup/');
+    const res2 = await client.get('/makeup/popular/');
+    return [res1.data, res2.data];
   },
 );
 
@@ -102,6 +104,7 @@ export const singleSlice = createSlice({
   name: 'single',
   initialState: {
     makeupList: [],
+    popularList: [],
     makeupDetail: '',
     recommendList: [],
     // 만들기
@@ -144,7 +147,8 @@ export const singleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getMakeupList.fulfilled, (state, action) => {
-        state.makeupList = action.payload;
+        state.makeupList = action.payload[0];
+        state.popularList = action.payload[1];
       })
       .addCase(getMakeupDetail.fulfilled, (state, action) => {
         state.makeupDetail = action.payload;

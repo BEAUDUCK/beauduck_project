@@ -32,6 +32,7 @@ import { faDroplet } from '@fortawesome/free-solid-svg-icons';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import BoardInfoPage from './pages/BoardInfoPage';
 import BoardQnAPage from './pages/BoardQnAPage';
@@ -42,6 +43,9 @@ import RankingPage from './pages/RankingPage';
 import SingupPage from './pages/SignupPage';
 import ScrollToTop from './components/scrolltotop/ScrollToTop';
 import { useEffect } from 'react';
+import ConsultingRoomHostPage from './pages/ConsultingRoomHostPage';
+import { useDispatch } from 'react-redux';
+import { accessLogin } from './features/login/MemberSlice';
 
 library.add(
   faXmark,
@@ -61,10 +65,16 @@ library.add(
   faAngleLeft,
   faAngleRight,
   faCheck,
+  faCircleCheck,
   faHeart,
 );
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(accessLogin());
+  }, []);
   return (
     <>
       <BrowserRouter>
@@ -75,6 +85,7 @@ function App() {
               element={<ProtectedRoute token={token} nickname={nickname} />}> */}
           {/* 도와덕 */}
           <Route path="/help" element={<ConsultingPage />} />
+          <Route path="/help/consult" element={<ConsultingRoomHostPage />} />
           {/* 따라해덕 */}
           <Route path="/single" element={<SinglePage />} />
           <Route path="/single/mode" element={<SingleModePage />} />
