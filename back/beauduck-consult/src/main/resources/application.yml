@@ -3,7 +3,7 @@ server:
 
 spring:
   redis:
-    host: 127.0.0.1
+    host: i8b306.p.ssafy.io
     port: 6379
 
   datasource:

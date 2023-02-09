@@ -28,7 +28,7 @@ public class RoomService {
     }
 
     //방 생성
-    public ResponseSuccessDto<RoomResponseDto> createRoom(RoomRequestDto dto) {
+    public ResponseSuccessDto<RoomCreateResponseDto> createRoom(RoomRequestDto dto) {
         if (dto.getTitle() == null || dto.getContent() == null || dto.getHostId() == null || dto.getHostNickname() == null) {
             throw new RequestErrorException("dto 데이터가 부족합니다.");
         }
@@ -36,9 +36,9 @@ public class RoomService {
         RoomDto roomDto = RoomDto.create(dto.getTitle(), dto.getContent(), dto.getHostId(), dto.getHostNickname());
         UserInfoDto user = UserInfoDto.create(roomDto.getRoomId(), dto.getHostId(), dto.getHostNickname());
 
-        if (roomRepository.createChatRoom(roomDto, user))
-            return responseUtil.successResponse(true);
-        return responseUtil.successResponse(false);
+        if (!roomRepository.createChatRoom(roomDto, user))
+            throw new RuntimeException("방 생성 실패");
+        return responseUtil.successResponse(new RoomCreateResponseDto(roomDto.getRoomId()));
     }
 
     public ResponseSuccessDto<Boolean> deleteRoom(String roomId) {
@@ -61,7 +61,7 @@ public class RoomService {
         if(!roomRepository.setUserEnterInfo(userInfoDto.getUserId(), userInfoDto, roomDto)){
             throw new RequestErrorException("방 입장 실패");
         }
-        return responseUtil.successResponse(RoomResponseDto.builder().message("방 입장 성공"));
+        return responseUtil.successResponse(RoomResponseDto.builder().message("방 입장 성공").build());
     }
 
     public ResponseSuccessDto<RoomResponseDto> outRoom(UserInfoDto userInfoDto) {
@@ -74,7 +74,7 @@ public class RoomService {
             if(!roomRepository.deleteRoom(roomDto.getRoomId())){
                 throw new EntityIsNullException("방 삭제 실패");
             }
-            return responseUtil.successResponse(RoomResponseDto.builder().message("방 삭제 완료"));
+            return responseUtil.successResponse(RoomResponseDto.builder().message("방 삭제 완료").build());
 
         }
 
@@ -86,11 +86,15 @@ public class RoomService {
         if(!roomRepository.removeUserEnterInfo(userInfoDto.getUserId(), userInfoDto, roomDto)){
             throw new RuntimeException("퇴장 실패");
         }
-        return responseUtil.successResponse(RoomResponseDto.builder().message("퇴장 완료"));
+        return responseUtil.successResponse(RoomResponseDto.builder().message("퇴장 완료").build());
     }
 
     public ResponseSuccessDto<RoomDto> selectOne(String roomId) {
-        return responseUtil.successResponse(roomRepository.findRoomById(roomId));
+        RoomDto roomDto = roomRepository.findRoomById(roomId);
+        if(roomDto == null){
+            throw new EntityIsNullException("roomId에 해당하는 방이 존재하지 않습니다.");
+        }
+        return responseUtil.successResponse(roomDto);
     }
 
 

@@ -3,17 +3,13 @@ package com.ssafy.beauduckconsult.controller;
 
 import com.ssafy.beauduckconsult.dto.common.response.ResponseSuccessDto;
 import com.ssafy.beauduckconsult.dto.member.MemberProfileDto;
-import com.ssafy.beauduckconsult.dto.redis.RoomDto;
-import com.ssafy.beauduckconsult.dto.redis.RoomRequestDto;
-import com.ssafy.beauduckconsult.dto.redis.RoomResponseDto;
-import com.ssafy.beauduckconsult.dto.redis.UserInfoDto;
+import com.ssafy.beauduckconsult.dto.redis.*;
 import com.ssafy.beauduckconsult.service.MemberService;
 import com.ssafy.beauduckconsult.service.RoomService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +34,7 @@ public class ConsultRoomController {
 
     @ApiOperation(value = "도와덕 방 생성", notes = "DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
     @PostMapping("/") // 방 생성
-    public ResponseEntity<ResponseSuccessDto<RoomResponseDto>> createRoom(@ApiParam(value = "RoomRequestDto", required = true) @RequestBody @Valid RoomRequestDto dto) {
+    public ResponseEntity<ResponseSuccessDto<RoomCreateResponseDto>> createRoom(@ApiParam(value = "RoomRequestDto", required = true) @RequestBody @Valid RoomRequestDto dto) {
         return ResponseEntity.ok(roomService.createRoom(dto));
     }
 
@@ -74,11 +70,6 @@ public class ConsultRoomController {
     @PutMapping("/exp")
     public ResponseEntity<ResponseSuccessDto<RoomResponseDto>> update(@ApiParam(value = "MemberProfileDto", required = true) @RequestBody MemberProfileDto request){
         return ResponseEntity.ok(memberService.updateExp(request));
-//        boolean result = memberService.updateExp(request);
-//        if (result)
-//            return new ResponseEntity<String>("success", HttpStatus.ACCEPTED);
-//        else
-//            return new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
     }
 
 }

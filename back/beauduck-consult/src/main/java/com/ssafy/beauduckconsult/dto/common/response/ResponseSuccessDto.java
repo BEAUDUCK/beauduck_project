@@ -1,9 +1,15 @@
 package com.ssafy.beauduckconsult.dto.common.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResponseSuccessDto<T> extends ResponseCommonDto{
     private T data;
 
