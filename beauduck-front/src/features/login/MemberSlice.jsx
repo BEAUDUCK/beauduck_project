@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { async } from 'q';
 import { useCookies } from 'react-cookie';
 
 const server = 'http://3.38.169.2:8080/';
@@ -10,9 +9,12 @@ export const UserLogin = createAsyncThunk(
   'member/login',
   async (accessToken) => {
     console.log('로그인');
-    const res = await axios.get(
-      `${server}naver/login?accessToken=${accessToken}`,
-    );
+    const res = await axios
+      .get(`${server}naver/login?accessToken=${accessToken}`)
+      .then((res) => {
+        console.log('로그인 res', res);
+      })
+      .catch((err) => console.log('로그인 err', err));
     return res.data;
   },
 );
@@ -20,11 +22,16 @@ export const UserLogin = createAsyncThunk(
 export const signUp = createAsyncThunk('member/signup', async (payload) => {
   console.log('회원가입');
   const res = await axios
-    .post(`${server}naver/signup`, payload)
-    .then((res) => {
-      console.log(res);
+    .post(`${server}naver/signup`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     })
-    .catch((err) => console.log(err));
+    .then((res) => {
+      console.log('회원가입 res', res);
+    })
+    .catch((err) => console.log('회원가입 err', err));
+  await axios.get(`${server}naver/login?accessToken=${payload.accessToken}`);
   return res.data;
 });
 
@@ -42,9 +49,10 @@ export const memberSlice = createSlice({
     memberId: '',
     name: '',
     nickName: '',
+    loginRejected: false,
     // 회원가입
     isSignup: false,
-    memberInfo: [],
+    // memberInfo: [],
   },
   reducers: {
     getMemberId: (state, action) => {
@@ -60,19 +68,27 @@ export const memberSlice = createSlice({
       state.nickName = '';
     },
     goToLogin: (state, action) => {
-      state.isSignup = !state.isSignup;
-      state.memberInfo = action.payload;
+      state.isSignup = false;
+    },
+    goToSignup: (state, action) => {
+      state.isSignup = true;
+      // state.memberInfo = action.payload;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(UserLogin.fulfilled, (state, action) => {
-      state.memberId = action.payload.data.memberId;
-      state.name = action.payload.data.name;
-      state.nickName = action.payload.data.nickName;
-    });
+    builder
+      .addCase(UserLogin.fulfilled, (state, action) => {
+        state.memberId = action.payload.data.memberId;
+        state.name = action.payload.data.name;
+        state.nickName = action.payload.data.nickName;
+        state.loginRejected = false;
+      })
+      .addCase(UserLogin.rejected, (state, action) => {
+        state.loginRejected = true;
+      });
   },
 });
 
-export const { getMemberId, getNickName, removeMember, goToLogin } =
+export const { getMemberId, getNickName, removeMember, goToLogin, goToSignup } =
   memberSlice.actions;
 export default memberSlice.reducer;

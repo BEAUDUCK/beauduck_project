@@ -3,18 +3,16 @@ import { useState, useRef } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import './Signup.style.scss';
-import { goToLogin, signUp } from '../features/login/MemberSlice';
+import { goToLogin, signUp, UserLogin } from '../features/login/MemberSlice';
+import { getAccessToken } from '../api/cookie';
 
 const SignupPage = () => {
   const dispatch = useDispatch();
+  const accessToken = getAccessToken();
 
   const [content, setContent] = useState('');
   const [nickName, setNickName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-
-  const REDIRECT_URI = 'http://localhost:3000/Api/Naver';
-  const CLIENT_ID = 'V5gN96q3kFtGfUK7PUds';
-  const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=STATE_STRING&redirect_uri=${REDIRECT_URI}`;
 
   const [imgFile, setImgFile] = useState('');
   const imgRef = useRef();
@@ -65,10 +63,21 @@ const SignupPage = () => {
       return;
     }
 
-    const payload = [nickName, content, imgFile];
-    console.log(payload);
-    dispatch(goToLogin(payload));
-    window.location.replace(NAVER_AUTH_URL);
+    const formData = new FormData();
+    formData.append('img', imgRef.current.files[0]);
+    const signupRequestDto = {
+      accessToken,
+      nickName,
+      content,
+    };
+    // const payload = {
+    //   signupRequestDto,
+    //   img: formData,
+    // };
+    formData.append('data', JSON.stringify(signupRequestDto));
+    console.log(formData.get('img'));
+    console.log(formData);
+    dispatch(signUp(formData));
   };
 
   return (
@@ -97,6 +106,7 @@ const SignupPage = () => {
             accept="image/*"
             onChange={saveImgFile}
             ref={imgRef}
+            multiple="multiple"
           ></input>
           <label htmlFor="nickname" className="label-common">
             닉네임*
