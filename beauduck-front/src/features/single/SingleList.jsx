@@ -1,47 +1,42 @@
-import { useEffect, useState } from 'react';
-import Paging from '../../components/pagination/Paging';
 import './Single.style.scss';
 import SingleListItem from './SingleListItem';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
+import Paging from '../../components/pagination/Paging';
+import { useEffect, useState } from 'react';
 
 const SingleList = ({ modeList }) => {
-  const responsive = {
-    0: {
-      items: 2,
-    },
-    512: {
-      items: 3,
-    },
-    860: {
-      items: 4,
-    },
-    1210: {
-      items: 5,
-    },
-    1470: {
-      items: 6,
-    },
+  const [currentPosts, setCurrentPosts] = useState(); // 보여줄 게시글
+  const [page, setPage] = useState(1); // 현재 페이지
+  const handlePageChange = (page) => {
+    setPage(page);
   };
+  const [postPerPage] = useState(12);
+  const indefOfLastPost = page * postPerPage;
+  const indefOfFirstPost = indefOfLastPost - postPerPage;
+
+  useEffect(() => {
+    setCurrentPosts(modeList.slice(indefOfFirstPost, indefOfLastPost));
+  }, [indefOfFirstPost, indefOfLastPost, page, modeList]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [modeList]);
 
   return (
     <>
-      <AliceCarousel
-        disableDotsControls
-        disableButtonsControls
-        // mouseTracking
-        responsive={responsive}
-        autoPlay
-        infinite={100}
-        animationDuration={2000}
-        // animationEasingFunction="linear"
-        // autoPlayStrategy="action"    // 호버하면 멈춤 (default)
-        className="modeList"
-      >
-        {modeList.map((item, idx) => (
+      <div className="modeList">
+        {currentPosts?.map((item, idx) => (
           <SingleListItem key={item.id} modeItem={item} idx={idx + 1} />
         ))}
-      </AliceCarousel>
+      </div>
+      <Paging
+        totalCount={modeList.length}
+        page={page}
+        postPerPage={postPerPage}
+        pageRangeDisplayed={5}
+        handlePageChange={handlePageChange}
+      />
     </>
   );
 };
