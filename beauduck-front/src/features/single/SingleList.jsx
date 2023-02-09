@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import Paging from '../../components/pagination/Paging';
 import './Single.style.scss';
 import SingleListItem from './SingleListItem';
-// import AliceCarousel from 'react-alice-carousel';
-// import 'react-alice-carousel/lib/alice-carousel.css';
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 const SingleList = ({ modeList }) => {
   const responsive = {
@@ -26,7 +26,7 @@ const SingleList = ({ modeList }) => {
 
   return (
     <>
-      {/* <AliceCarousel
+      <AliceCarousel
         disableDotsControls
         disableButtonsControls
         // mouseTracking
@@ -41,7 +41,7 @@ const SingleList = ({ modeList }) => {
         {modeList.map((item, idx) => (
           <SingleListItem key={item.id} modeItem={item} idx={idx + 1} />
         ))}
-      </AliceCarousel> */}
+      </AliceCarousel>
     </>
   );
 };
