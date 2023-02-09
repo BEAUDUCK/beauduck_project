@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux';
 import './Signup.style.scss';
 import { goToLogin, signUp, UserLogin } from '../features/login/MemberSlice';
 import { getAccessToken } from '../api/cookie';
-
+import logo from '../assets/logo_original.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const SignupPage = () => {
   const dispatch = useDispatch();
   const accessToken = getAccessToken();
@@ -14,21 +15,21 @@ const SignupPage = () => {
   const [nickName, setNickName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const [imgFile, setImgFile] = useState('');
-  const imgRef = useRef();
+  // const [imgFile, setImgFile] = useState('');
+  // const imgRef = useRef();
   const nicknameRef = useRef();
   const contentRef = useRef();
 
   const [isUsable, setIsUsable] = useState(false);
 
-  const saveImgFile = () => {
-    const file = imgRef.current.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgFile(reader.result);
-    };
-  };
+  // const saveImgFile = () => {
+  //   const file = imgRef.current.files[0];
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     setImgFile(reader.result);
+  //   };
+  // };
 
   // 닉네임 중복 확인
   const NickNameCheck = async (nickName) => {
@@ -63,43 +64,39 @@ const SignupPage = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append('img', imgRef.current.files[0]);
-    const signupRequestDto = {
+    // const formData = new FormData();
+    // formData.append('img', imgRef.current.files[0]);
+    const payload = {
       accessToken,
       nickName,
       content,
     };
+    console.log(payload);
     // const payload = {
     //   signupRequestDto,
     //   img: formData,
     // };
-    formData.append('data', JSON.stringify(signupRequestDto));
-    console.log(formData.get('img'));
-    console.log(formData);
-    dispatch(signUp(formData));
+    // formData.append('data', JSON.stringify(signupRequestDto));
+    // console.log(formData.get('img'));
+    // console.log(formData);
+    dispatch(signUp(payload));
   };
 
   return (
-    <div className="signup-div">
-      <div className="signup-div-left">
-        {/* <img
-          src="https://i.pinimg.com/564x/db/78/9b/db789bc183a83a2791ce05cccffb332d.jpg"
-          alt=""
-        /> */}
-      </div>
-      <div className="signup-div-right">
+    <div className="container">
+      <div className="signup-div">
+        <img className="logo" src={logo} alt="" />
         <h1>회원가입</h1>
         <form onSubmit={submitSignup} className="signup-form">
-          <img
+          {/* <img
             className="imgbox"
             src={imgFile ? imgFile : '/images/default.png'}
             alt="사진"
-          ></img>
-          <label htmlFor="imgFile" className="label-img">
+            ></img>
+            <label htmlFor="imgFile" className="label-img">
             프로필 사진 업로드
-          </label>
-          <input
+            </label>
+            <input
             className="input-box"
             id="imgFile"
             type="file"
@@ -107,11 +104,10 @@ const SignupPage = () => {
             onChange={saveImgFile}
             ref={imgRef}
             multiple="multiple"
-          ></input>
+          ></input> */}
           <label htmlFor="nickname" className="label-common">
             닉네임*
           </label>
-          <span onClick={checkNickname}>중복 확인</span>
           <input
             ref={nicknameRef}
             id="nickname"
@@ -120,6 +116,12 @@ const SignupPage = () => {
             value={nickName}
             onChange={(e) => setNickName(e.target.value)}
           />
+          <span
+            onClick={checkNickname}
+            className={['check', isUsable && 'checked'].join(' ')}
+          >
+            <FontAwesomeIcon icon="fa-regular fa-circle-check" />
+          </span>
           {errorMessage ? (
             <p className="errormessage">{errorMessage}</p>
           ) : (

@@ -34,7 +34,7 @@ const NaverLogin = () => {
         if (!isSignup) {
           console.log('로그인만 할거야야야ㅑ');
           dispatch(UserLogin(accessToken)).then(() => {
-            navigate(-1);
+            navigate('/');
           });
         } else {
           console.log('회원가입부터 할거야야야야ㅑ');
