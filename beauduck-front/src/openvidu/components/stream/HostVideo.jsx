@@ -4,7 +4,7 @@ import { SelfieSegmentation } from '@mediapipe/selfie_segmentation';
 import { Camera } from '@mediapipe/camera_utils';
 
 const HostVideoComponent = ( props ) => {
-	const { user, mutedSound } = props
+	const { user, mutedSound, nowColor } = props
 	const videoRef = useRef()
 	useEffect(() => {
 		if (props && user.streamManager && !!videoRef) {
@@ -27,45 +27,45 @@ const HostVideoComponent = ( props ) => {
 		}
 	}, [user, mutedSound, props])
 
-	useEffect(() => {
-		const videoElement = document.getElementsByClassName('input_video')[0];
-    const canvasElement = document.getElementsByClassName('output_canvas')[0];
-    const canvasCtx = canvasElement.getContext('2d');
+	// useEffect(() => {
+	// 	const videoElement = document.getElementsByClassName('input_video')[0];
+  //   const canvasElement = document.getElementsByClassName('output_canvas')[0];
+  //   const canvasCtx = canvasElement.getContext('2d');
 
-    function onResults(results) {
-      canvasCtx.save();
-      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-      canvasCtx.drawImage(results.segmentationMask, 0, 0, canvasElement.width, canvasElement.height);
+  //   function onResults(results) {
+  //     canvasCtx.save();
+  //     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+  //     canvasCtx.drawImage(results.segmentationMask, 0, 0, canvasElement.width, canvasElement.height);
 
-      // Only overwrite existing pixels.
-      canvasCtx.globalCompositeOperation = 'source-out';
-      canvasCtx.fillStyle = '#0067A3';
-      // fillRect(시작점 x, y좌표, width, height)
-      canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
+  //     // Only overwrite existing pixels.
+  //     canvasCtx.globalCompositeOperation = 'source-out';
+  //     canvasCtx.fillStyle = nowColor;
+  //     // fillRect(시작점 x, y좌표, width, height)
+  //     canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
 
-      // Only overwrite missing pixels.
-      canvasCtx.globalCompositeOperation = 'destination-atop';
-      canvasCtx.drawImage(
-          results.image, 0, 0, canvasElement.width, canvasElement.height);
+  //     // Only overwrite missing pixels.
+  //     canvasCtx.globalCompositeOperation = 'destination-atop';
+  //     canvasCtx.drawImage(
+  //         results.image, 0, 0, canvasElement.width, canvasElement.height);
 
-      canvasCtx.restore();
-    }
+  //     canvasCtx.restore();
+  //   }
 
-    const selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
-        }});
-    selfieSegmentation.setOptions({
-        modelSelection: 1,
-    });
-    selfieSegmentation.onResults(onResults);
+  //   const selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
+  //       return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
+  //       }});
+  //   selfieSegmentation.setOptions({
+  //       modelSelection: 1,
+  //   });
+  //   selfieSegmentation.onResults(onResults);
 
-    const camera = new Camera(videoElement, {
-      onFrame: async () => {
-        await selfieSegmentation.send({image: videoElement});
-      },
-    });
-    camera.start();
-	}, [])
+  //   const camera = new Camera(videoElement, {
+  //     onFrame: async () => {
+  //       await selfieSegmentation.send({image: videoElement});
+  //     },
+  //   });
+  //   camera.start();
+	// })
 
 
 	return (

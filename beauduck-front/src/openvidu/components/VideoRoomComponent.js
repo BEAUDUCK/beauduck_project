@@ -32,7 +32,6 @@ class VideoRoomComponent extends Component {
             subscribers: [],
             chatDisplay: 'none',
             currentVideoDevice: undefined,
-            isRoomAdmin: false,
         };
         // 메서드 바인딩 과정
         // joinSession : 세션 접속
@@ -298,7 +297,7 @@ class VideoRoomComponent extends Component {
                 subscriber.videos[0].video.parentElement.classList.remove('custom-class');
             });
 
-            // 새로운 유저 껍데기를 만들어서 거기에 이벤트를 받은 stream 정보를 넣ㅇ느 후에 내 remotes 에 등록
+            // 새로운 유저 껍데기를 만들어서 거기에 이벤트를 받은 stream 정보를 넣 후에 내 remotes 에 등록
             const newUser = new UserModel();
             newUser.setStreamManager(subscriber);
             newUser.setConnectionId(event.stream.connection.connectionId);

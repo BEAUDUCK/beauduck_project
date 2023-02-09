@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 // import './StreamComponent.css';
 import OvVideoComponent from './OvVideo';
 
@@ -14,53 +14,77 @@ import HighlightOff from '@material-ui/icons/HighlightOff';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import SmallConstultantVideo from './SmallConsultantVideo';
 
-export default class SmallConsultantStream extends Component {
-	constructor(props) {
-			super(props);
-			this.state = { nickname: this.props.user.getNickname(), showForm: false, mutedSound: false, isFormValid: true };
-			this.handleChange = this.handleChange.bind(this);
-			this.handlePressKey = this.handlePressKey.bind(this);
-			this.toggleNicknameForm = this.toggleNicknameForm.bind(this);
-			this.toggleSound = this.toggleSound.bind(this);
+const SmallConsultantStream = (props) => {
+	const nickname = props.user.nickname
+	const [showForm, setShowForm] = useState(false)
+	const [mutedSound, setMutedSound] = useState(false)
+	const [isFormValid, setIsFormValid] = useState(true)
+
+	const toggleSound = () => {
+		setMutedSound(!mutedSound)
 	}
 
-	handleChange(event) {
-			this.setState({ nickname: event.target.value });
-			event.preventDefault();
-	}
 
-	toggleNicknameForm() {
-			if (this.props.user.isLocal()) {
-					this.setState({ showForm: !this.state.showForm });
-			}
-	}
+	return (
+		<div className="consultant-list">
+		{props.user !== undefined && props.user.getStreamManager() !== undefined ? (
+				<div className="streamComponent" style={{ height: "100%" }}>
+						<SmallConstultantVideo nick={nickname} user={props.user} mutedSound={mutedSound} />
+				</div>
+			) : null}
+		</div>
+	);
+};
 
-	toggleSound() {
-			this.setState({ mutedSound: !this.state.mutedSound });
-	}
+export default SmallConsultantStream
 
-	handlePressKey(event) {
-			if (event.key === 'Enter') {
-					console.log(this.state.nickname);
-					if (this.state.nickname.length >= 3 && this.state.nickname.length <= 20) {
-							this.props.handleNickname(this.state.nickname);
-							this.toggleNicknameForm();
-							this.setState({ isFormValid: true });
-					} else {
-							this.setState({ isFormValid: false });
-					}
-			}
-	}
+// export default class SmallConsultantStream extends Component {
+// 	constructor(props) {
+// 			super(props);
+// 			this.state = { nickname: this.props.user.getNickname(), showForm: false, mutedSound: false, isFormValid: true };
+// 			this.handleChange = this.handleChange.bind(this);
+// 			this.handlePressKey = this.handlePressKey.bind(this);
+// 			this.toggleNicknameForm = this.toggleNicknameForm.bind(this);
+// 			this.toggleSound = this.toggleSound.bind(this);
+// 	}
 
-	render() {
-			return (
-					<div className="consultant-list">
-          {this.props.user !== undefined && this.props.user.getStreamManager() !== undefined ? (
-              <div className="streamComponent" style={{ height: "100%" }}>
-                  <SmallConstultantVideo nick={this.state.nickname} user={this.props.user} mutedSound={this.state.mutedSound} />
-              </div>
-            ) : null}
-          </div>
-		);
-	}
-}
+// 	handleChange(event) {
+// 			this.setState({ nickname: event.target.value });
+// 			event.preventDefault();
+// 	}
+
+// 	toggleNicknameForm() {
+// 			if (this.props.user.isLocal()) {
+// 					this.setState({ showForm: !this.state.showForm });
+// 			}
+// 	}
+
+// 	toggleSound() {
+// 			this.setState({ mutedSound: !this.state.mutedSound });
+// 	}
+
+// 	handlePressKey(event) {
+// 			if (event.key === 'Enter') {
+// 					console.log(this.state.nickname);
+// 					if (this.state.nickname.length >= 3 && this.state.nickname.length <= 20) {
+// 							this.props.handleNickname(this.state.nickname);
+// 							this.toggleNicknameForm();
+// 							this.setState({ isFormValid: true });
+// 					} else {
+// 							this.setState({ isFormValid: false });
+// 					}
+// 			}
+// 	}
+
+// 	render() {
+// 			return (
+// 					<div className="consultant-list">
+//           {this.props.user !== undefined && this.props.user.getStreamManager() !== undefined ? (
+//               <div className="streamComponent" style={{ height: "100%" }}>
+//                   <SmallConstultantVideo nick={this.state.nickname} user={this.props.user} mutedSound={this.state.mutedSound} />
+//               </div>
+//             ) : null}
+//           </div>
+// 		);
+// 	}
+// }
