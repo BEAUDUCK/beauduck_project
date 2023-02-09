@@ -14,10 +14,11 @@ import SingleModalRecommend from '../features/single/SingleModalRecommend';
 import SingelModalNoRecommend from '../features/single/SingleModalNoRecommend';
 import SingleMake from '../features/single/SingleMake';
 import Alert from '../components/modal/Alert';
+import SinglePopular from '../features/single/SinglePopular';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
-  const { makeupList } = useSelector((state) => state.single);
+  const { makeupList, popularList } = useSelector((state) => state.single);
   // 최초에 메이크업 리스트 불러오기
   useEffect(() => {
     dispatch(getMakeupList());
@@ -74,7 +75,7 @@ const SinglePage = () => {
         <Alert text={'메이크업이 완성되었덕'} onClickEvent={onToggleFinish} />
       )}
       {isFinish && <BlackOut onClickEvent={onToggleFinish} />}
-      <SingleList modeList={makeupList} />
+      <SinglePopular modeList={popularList} />
       <div className="makeup-special">
         <div className="makeup-special-section1">
           <h1>
@@ -85,6 +86,7 @@ const SinglePage = () => {
           <h1>RANDOM PICK</h1>
         </div>
       </div>
+      <SingleList modeList={makeupList} />
     </div>
   );
 };

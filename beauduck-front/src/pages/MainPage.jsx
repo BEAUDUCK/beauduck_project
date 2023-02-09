@@ -1,59 +1,47 @@
-import logo from '../assets/main.gif';
 import './MainPage.style.scss'
 // 스타일 App.css 에 넣음
 const MainPage = () => {
   return (
     <>
       <div className="main-ban">
-        {/* <img className="main-logo" 
-        src={logo} 
-        alt="logo" /> */}
-        <section id="section01" class="demo">
-        <a href="#section02">
-            <span>
-            </span>Scroll
-          </a>
-          
+        <section id="section1" >
         </section>
-
-        <s className='main-line'>
-        
-        </s>
-
-        <section id='section02'>
-          <div className='section02-1'>
-            <div className="img-box">
-              <img src="/images/logo.png" alt="" />
+        <div id='main-line' className="demo">
+        <a href="#section2">
+            <span></span>scroll</a>
+        </div>
+        <section id='section2'>
+          <div className='section2-1'>
+            <div>
+              <img className="img-box2-1" src={require("../assets/test.gif")}/>
             </div>
-            <div className="txt-box">
+            <div className="txt-box2-1">
               <h1>도와덕</h1>
-              <p>가치있는 일상을 만들어갑니다.</p>
-              <a href="/help">자세히 보기</a>
+              <p>다수의 사용자에게 퍼스널 컬러 진단을 무료로 받을 수 있는 서비스입니다. </p>
+              <a href="/no">자세히 보기</a>
             </div>
           </div>
-          <div className='section02-2'>
-            <div className="txt-box">
+          <div className='section2-2'>
+            <div className="txt-box2-2">
               <h1>따라해덕</h1>
-              <p>가치있는 일상을 만들어갑니다.</p>
-              <a href="/single">자세히 보기</a>
+              <p>최신 AI 기술로 뷰덕 유저들의 다양한 화장법을 따라해 볼 수 있는 서비스입니다.</p>
+              <a href="/no">자세히 보기</a>
             </div>
-            <div className="img-box">
-              <img src="/images/logo.png" alt="" />
+            <div>
+              <img className="img-box2-2" src={require("../assets/test.gif")}/>
             </div>
           </div>
-          <div className='section02-3'>
-            <div className="img-box">
-              <img src="/images/logo.png" alt="" />
+          <div className='section2-3'>
+            <div className>
+              <img className="img-box2-1" src={require("../assets/test.gif")}/>
             </div>
-            <div className="txt-box">
+            <div className="txt-box2-1">
               <h1>투게덕</h1>
-              <p>가치있는 일상을 만들어갑니다.</p>
-              <a href="/together">자세히 보기</a>
+              <p>화상 채팅을 통해 뷰덕들이 모여 함께 화장 할 수 있는 서비스입니다.</p>
+              <a href="/no">자세히 보기</a>
             </div>
           </div>
-
         </section>
-        
       </div>
     </>
   );

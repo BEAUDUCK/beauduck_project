@@ -1,51 +1,78 @@
 html {
   scroll-behavior: smooth;
-
 }
-
 .main-ban {
-  background-color: #F1F1F1;
+  background-color: #ffff;
   text-align: center;
-  
   section {
     position: relative;
-    // top: 50px;
     width: 100%;
     height: 100%;
   }
 }
-  #section01 { background: url("../assets/main.gif") center center / cover no-repeat; 
-    height: 100vh;
-  
-    a {
-    padding-top: 60px;
+#section1 { background: url(../assets/mainpage.gif) center center / cover no-repeat; 
+    height: 90vh;
+    }
+
+#main-line {
+  position: relative;
+  display: flex;
+  height: 100px;
+  a {
+    padding-top: 40px;
+    color: black;
   
     span {
       position: absolute;
       top: 0;
       left: 50%;
-      width: 24px;
-      height: 24px;
+      width: 15px;
+      height: 15px;
       margin-left: -12px;
-      border-left: 1px solid #fff;
-      border-bottom: 1px solid #fff;
-      // -webkit-transform: rotate(-45deg);
+      border-left: 1px solid black;
+      border-bottom: 1px solid black;
+      -webkit-transform: rotate(-45deg);
       transform: rotate(-45deg);
-      -webkit-animation: sdb04 2s infinite;
-      animation: sdb04 2s infinite;
+      -webkit-animation: sdb04 1.5s infinite;
+      animation: sdb04 1.5s infinite;
       box-sizing: border-box;
         }
       }
-    }
+      @-webkit-keyframes sdb04 {
+        0% {
+          -webkit-transform: rotate(-45deg) translate(0, 0);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          -webkit-transform: rotate(-45deg) translate(-20px, 20px);
+          opacity: 0;
+        }
+      }
+      @keyframes sdb04 {
+        0% {
+          transform: rotate(-45deg) translate(0, 0);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: rotate(-45deg) translate(-20px, 20px);
+          opacity: 0;
+        }
+      }
+}
 .demo a {
   position: absolute;
-  bottom: 20px;
+  bottom: 5px;
   left: 50%;
   z-index: 2; 
   display: inline-block;
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
-  color: #fff;
   letter-spacing: .1em;
   text-decoration: none;
   transition: opacity .3s;
@@ -53,21 +80,78 @@ html {
 .demo a:hover {
   opacity: .5;
 }
-
-.main-line {
-  position: relative;
-  display: block;
-  height: 200px;
-}
-
-#section02 {
+#section2 {
   max-height: 100vh;
 }
-.txt-box{
-  width: 70%;
-  text-align: center;
+.section2-1{
+  margin: 0 auto;
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  background-color: #ffff;
+  padding: 80px 0;
+}
+.txt-box2-1{
+  width: 80%;
+  text-align: left;
   // border: 1px solid red;
-  padding: 50px 0 50px 120px;
+  padding: 50px 100px 50px 0px;
+  margin: 10px 100px;
+  h1 {
+    font-size: 30px
+  }
+  p {
+    width: 300px
+  }
+  a {
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 30px 0px 0px;
+    border: 0px none;
+    outline: none;
+    background-color: transparent;
+    text-decoration: none;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+  a::before {
+    width: 40px;
+    height: 16px;
+    margin: 0 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(https://t1.kakaocdn.net/kakaomobility/company_website/icons/ic_16_more.svg), none;
+    margin-top: -0.1em;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 14px;
+    transition: margin-left 0.2s ease-out 0s;
+    transform: scaleX(-1)
+  }
+}
+.img-box2-1{
+  width: 90%;
+  // border: 1px solid #000;
+  margin: 10px 80px;
+}
+.section2-2{
+  margin: 0 auto;
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  background-color: #ffff;
+  padding: 30px 0;
+}
+.txt-box2-2{
+  width: 80%;
+  text-align: left;
+  // border: 1px solid red;
+  padding: 50px 0 50px 100px;
   margin: 10px 100px;
   a {
     display: inline-block;
@@ -84,50 +168,40 @@ html {
     font-weight: 700;
     line-height: 30px;
   }
+  a::after {
+    content: "";
+    width: 40px;
+    height: 16px;
+    margin: 0 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(https://t1.kakaocdn.net/kakaomobility/company_website/icons/ic_16_more.svg), none;
+    margin-top: -0.1em;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 14px;
+    transition: margin-left 0.2s ease-out 0s;
+  }
   h1 {
     font-size: 30px
   }
+  p {
+    width: 300px
+  }
 }
-.img-box{
-  width: 70%;
+.img-box2-2{
+  width: 90%;
   // border: 1px solid #000;
-  margin: 10px 100px;
+  margin: 10px 0px;
 }
-
-.section02-1{
-  margin: 0 auto;
-  display: flex;
-  // align-items: center;
-  justify-content: center;
-  background-color: #FBF276;
-  padding: 30px 0;
-}
-.section02-2{
+.section2-3{ 
   margin: 0 auto;
   display: flex;
   // align-items: center;
   justify-content: center;
   background-color: #ffff;
   padding: 30px 0;
-
 }
-.section02-3{ 
-  margin: 0 auto;
-  display: flex;
-  // align-items: center;
-  justify-content: center;
-  background-color: #FBF276;
-  padding: 30px 0;
-
-}
-.img-box {
-  img {
-    width: 200px;
-    height: 200px;
-  }
-}
-
-
 @media screen and (max-width: 480px) {
   .section02-1 {
     flex-direction: column;
