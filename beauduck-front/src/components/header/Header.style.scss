@@ -90,3 +90,14 @@
 .user-icon {
     margin-right: 10px;
 }
+@media screen and (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header-content{
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+}
