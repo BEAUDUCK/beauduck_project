@@ -59,8 +59,7 @@ public class OAuthController {
 
     @ApiOperation(value = "회원가입", notes = "회원가입을 진행한다.")
     @PostMapping("/signup")
-    public ResponseEntity<ResponseSuccessDto<SignupResponseDto>> signup(@RequestPart("img")MultipartFile multipartFile, @RequestPart("signupRequestDto") SignupRequestDto signupRequestDto) throws Exception {
-        String img = awsS3Service.uploadFileV1(multipartFile);
-        return ResponseEntity.ok(authService.signup(signupRequestDto, img));
+    public ResponseEntity<ResponseSuccessDto<SignupResponseDto>> signup(@RequestBody SignupRequestDto signupRequestDto) throws Exception {
+        return ResponseEntity.ok(authService.signup(signupRequestDto));
     }
 }
