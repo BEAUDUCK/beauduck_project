@@ -33,9 +33,9 @@ export const getConsultDetail = createAsyncThunk(
 
 // 유저 방 입장 -> 방 상세 갱신
 export const enterUser = createAsyncThunk('help/enterUser', async (payload) => {
-  const check = await client.post('/consult/enter/');
+  const check = await client.post('/consult/enter/', payload);
   console.log(check.data);
-  const res = await client.patch(`/consult/${payload.roomId}`);
+  const res = await client.get(`/consult/${payload.roomId}`);
   return res.data;
 });
 

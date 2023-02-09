@@ -47,19 +47,9 @@ const Header = () => {
           <p onClick={() => navigate('/profile')}>
             <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user" />
           </p>
-          {/* <p onClick={isOpenModal}> 
-          LOGIN
-          {isOpen && <LoginModal isOpenModal={isOpenModal} />}
-          </p> */}
-          {!memberId ? (
-            <p>
-              <LoginModal /> / <p onClick={() => navigate('/signup')}>SIGNUP</p>
-            </p>
-          ) : (
-            <p>
-              <LogoutModal />
-            </p>
-          )}
+          <div className="header-auth-not">
+            {!memberId ? <LoginModal /> : <LogoutModal />}
+          </div>
         </div>
       </div>
     </div>
