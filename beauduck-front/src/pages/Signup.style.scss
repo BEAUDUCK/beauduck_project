@@ -1,0 +1,102 @@
+.signup-div {
+    display: inline-block;
+    position: relative;
+    margin: auto;
+    margin-top: 70px;
+    padding-top: 70px;
+    width: 500px;
+    height: 530px;
+    background-color: white;
+    // border-top-right-radius: 30px;
+    // border-bottom-right-radius: 30px;
+    box-shadow: 0px 0px 10px rgb(221, 221, 221);
+
+    .logo {
+        position: absolute;
+        top: -60px;
+        left: 190px;
+        width: 120px;
+        height: 120px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .signup-form {
+        text-align: center;
+
+        .imgbox {
+            width: 200px;
+            height: 200px;
+            border-radius: 200px;
+        }
+    
+        textarea, input[type="text"], input[type="file"] {
+            width: 300px;
+            background-color: white;
+            border: 1px solid rgb(180, 180, 180);
+            font-size: 15px;
+            // border-radius: 0;
+            // border-bottom: 1px solid gray;
+        }
+    
+        input[type="text"] {
+            height: 50px;
+        }
+
+        .check {
+            position: absolute;
+            top: 175px;
+            right: 60px;
+            font-size: 25px;
+            color: gray;
+            cursor: pointer;
+        }
+        .checked {
+            color: rgb(70, 170, 70);
+        }
+    
+        // input[type="file"] {
+        //     display: none;
+        // }
+        // .label-img {
+        //     display: inline-block;
+        //     width: 300px;
+        //     border-radius: 5px;
+        //     border: 1px solid rgb(180, 180, 180);
+        //     padding: 10px;
+        //     margin-top: 5px;
+        //     &:hover {
+        //         background-color: rgb(255, 243, 197);
+        //     }
+        // }
+        .label-common {
+            display: block;
+            text-align: left;
+            width: 320px;
+            margin: auto;
+            margin-top: 20px;
+        }
+        .errormessage {
+            font-size: 13px;
+            color: gray;
+            margin: 0;
+            display: inline-block;
+            width: 320px;
+            text-align: left;
+        }
+
+        button {
+            display: block;
+            margin: auto;
+            width: 320px;
+            height: 35px;
+            font-size: 15px;
+            margin-top: 20px;
+            border: 1px solid rgb(180, 180, 180);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+}
