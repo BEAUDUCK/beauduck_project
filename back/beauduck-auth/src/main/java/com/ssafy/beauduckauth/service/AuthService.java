@@ -116,11 +116,11 @@ public class AuthService {
         return res;
     }
 
-    public ResponseSuccessDto<SignupResponseDto> signup(SignupRequestDto signupRequestDto, String img) {
+    public ResponseSuccessDto<SignupResponseDto> signup(SignupRequestDto signupRequestDto) {
         System.out.println("회원가입 시작");
-        if (img == null) {
-            throw new SignupErrorException("이미지를 업로드할 수 없습니다.");
-        }
+//        if (img == null) {
+//            throw new SignupErrorException("이미지를 업로드할 수 없습니다.");
+//        }
 
         String accessToken = signupRequestDto.getAccessToken();
         JSONObject response = getJsonObjectByToken(accessToken);
@@ -170,7 +170,7 @@ public class AuthService {
         MemberProfileEntity memberProfileEntity = MemberProfileEntity.builder()
                 .memberEntity(entity)
                 .nickName(nickName)
-                .img(img)
+                .img(null)
                 .content(content)
                 .exp(0)
                 .badge(0)
