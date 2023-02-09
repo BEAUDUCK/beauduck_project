@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useRef } from 'react';
 import './StreamComponent.css';
 
 export default class OvVideoComponent extends Component {
@@ -28,20 +28,19 @@ export default class OvVideoComponent extends Component {
             this.props.user.getStreamManager().addVideoElement(this.videoRef.current);
         }
     }
-
+    
     render() {
-
         return (
-            <div className='container'>
-                <video
-                    className='input_video'
-                    autoPlay={true}
-                    id={'video-' + this.props.user.getStreamManager().stream.streamId}
-                    ref={this.videoRef}
-                    muted={this.props.mutedSound}
-                />
-            </div>
-            
+                <div className='OvVideo' style={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }}>
+                    <video
+                        className='input_video'
+                        autoPlay={true}
+                        id={'video-' + this.props.user.getStreamManager().stream.streamId}
+                        ref={this.videoRef}
+                        muted={this.props.mutedSound}
+                        style={{ width: "30vh",height: "18vh" }}
+                    />
+                </div>
         );
     }
 }

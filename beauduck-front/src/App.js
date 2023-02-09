@@ -42,6 +42,7 @@ import RankingPage from './pages/RankingPage';
 import SingupPage from './pages/SignupPage';
 import ScrollToTop from './components/scrolltotop/ScrollToTop';
 import { useEffect } from 'react';
+import ConsultingRoomHostPage from './pages/ConsultingRoomHostPage';
 
 library.add(
   faXmark,
@@ -75,6 +76,7 @@ function App() {
               element={<ProtectedRoute token={token} nickname={nickname} />}> */}
           {/* 도와덕 */}
           <Route path="/help" element={<ConsultingPage />} />
+          <Route path="/help/consult" element={<ConsultingRoomHostPage />} />
           {/* 따라해덕 */}
           <Route path="/single" element={<SinglePage />} />
           <Route path="/single/mode" element={<SingleModePage />} />

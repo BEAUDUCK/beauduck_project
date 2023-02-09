@@ -1,10 +1,4 @@
-// 메이크업 리스트
-
-// .modeList {
-//     display: grid;
-//     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-//     grid-gap: 10px;
-// }
+// 인기 메이크업 리스트
 
 .alice-carousel {
     width: 100vw;
@@ -16,37 +10,37 @@
     }
 }
 
-.makeup-div {
-    width: 200px;
-    height: 280px;
-    border-radius: 75px;
-    display: inline-block;
-    margin: auto;
-    margin-top: 100px;
-    background-color: #b1b1b1;
-    text-align: center;
-
-    img {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 100px;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        border: 5px double rgba(255, 255, 255, 0.5);
-        // box-shadow: 0 0 5px white;
-    }
-    
-    p {
-        display: inline-block;
+    .makeup-div {
         width: 200px;
-        margin:0;
+        height: 280px;
+        border-radius: 75px;
+        display: inline-block;
+        margin: auto;
+        margin-top: 100px;
+        background-color: #b1b1b1;
         text-align: center;
-        font-family: 'Jalnan';
-        font-size: 18px;
+        
+        img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 100px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border: 5px double rgba(255, 255, 255, 0.5);
+            // box-shadow: 0 0 5px white;
+        }
+        
+        p {
+            display: inline-block;
+            width: 200px;
+            margin:0;
+            text-align: center;
+            font-family: 'Jalnan';
+            font-size: 18px;
         text-shadow: 1px 1px rgba(255, 255, 255, 0.6);
     }
-
+    
     .star-info {
         p {
             display: inline;
@@ -60,7 +54,7 @@
     display: inline-block;
     width: 200px;
     text-align: center;
-
+    
     p {
         display: inline;
         margin-left: 5px;
@@ -77,6 +71,126 @@
 .makeup-div-odd {
     margin-top: 230px;
 }
+
+
+//--------- 전체 메이크업 리스트 -------
+
+.modeList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-gap: 10px;
+}
+
+.makeup-list {
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+    text-align: center;
+    position: relative;
+    background: #000;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    line-height: 250px;
+
+    &:before {
+        content: '';
+        background: #fff;
+        width: 0px; 
+        height: 1px;
+        position: absolute; 
+        right: 20px; 
+        top: 20px;
+        transition: all 0.35s ease;
+    }
+
+    &:after {
+        content: '';
+        background: #fff;
+        width: 1px; 
+        height: 0px;
+        position: absolute; 
+        right: 20px; 
+        top: 20px;
+        transition: all 0.35s ease;
+    }
+
+    img {
+        display: inline-block;
+        width: 230px;
+        height: 230px;
+        object-fit: cover;
+        transition: all 0.3s ease-in-out;
+        vertical-align: middle;
+    }
+
+    .makeup-back {
+        position: absolute; 
+        display: inline-block;
+        width: 250px;
+        height: 250px;
+        left: 0; 
+        bottom: 0;
+        color: #fff;
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .makeup-title {
+            font-size: 24px;
+            line-height: 40px;
+            overflow: hidden; 
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding-top: 20px;
+            padding-bottom: 3px;
+            margin-bottom: 0;
+            font-family: 'Jalnan';
+            text-shadow: 1px 1px rgba(255, 255, 255, 0.6);
+        }
+
+        .star-info {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            .star-icon {
+                height: 20px;
+                line-height: 20px;
+                margin-right: 5px;
+            }
+            span {
+                display: inline-block;
+                height: 20px;
+                line-height: 20px;
+            }
+        }
+    }
+
+    &:hover {
+        .makeup-back {
+            opacity: 1;
+        }
+        img {
+            opacity: 0.2;
+        }
+        &:before {
+            width: 60px;
+        }
+        &:after {
+            height: 60px;
+        }
+    }
+}
+
 
 //-------- 새 메이크업 만들기 --------
 
@@ -608,15 +722,14 @@
 
 .makeup-detail {
     position: absolute;
-    top: 455px;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -100%);
+    transform: translate(-50%, -50%);
     z-index: 998;
 
     background-color: white;
     width: 600px;
     height: 390px;
-
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 30px;
