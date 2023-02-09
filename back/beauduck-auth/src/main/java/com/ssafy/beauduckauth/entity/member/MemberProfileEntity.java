@@ -70,7 +70,6 @@ public class MemberProfileEntity {
 
     public void updateMemberProfile(UpdateRequestDto updateRequestDto){
         this.nickName = updateRequestDto.getNickName();
-        this.img = updateRequestDto.getImg();
         this.content = updateRequestDto.getContent();
     }
 }
