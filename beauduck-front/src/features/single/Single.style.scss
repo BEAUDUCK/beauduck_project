@@ -75,6 +75,16 @@
 
 //--------- 전체 메이크업 리스트 -------
 
+.basic-makeup-list{
+    width: 100vw;
+    background-color: #f4f3f8d6;
+    
+    .pagination {
+        padding-bottom: 50px;
+        margin-bottom: 0;
+    }
+}
+
 @media screen and (min-width: 600px) {
     .modeList {
         grid-template-columns: 1fr 1fr;
@@ -161,6 +171,8 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        // line-height: 250px;
+        // vertical-align: middle;
 
         .makeup-title {
             font-size: 24px;
@@ -968,9 +980,23 @@
 }
 
 .random-one {
-    width: calc(45vw - 10%);
-    min-width: 500px;
-    height: calc(500px - 10%);
-    padding: 10%
+    width: calc(45vw - 20%);
+    min-width: calc(500px - 20%);
+    height: 400px;
+    padding-left: 5%;
+    padding-right: 15%;
+    text-align: center;
 
+    img {
+        width: 210px;
+        height: 260px;
+        margin-top: 30px;
+        object-fit: cover;
+        border-top-left-radius: 100px;
+        border-top-right-radius: 100px;
+    }
+
+    p {
+        font-family: 'Jalnan';
+    }
 }

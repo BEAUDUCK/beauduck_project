@@ -8,13 +8,12 @@ const SingleRandom = () => {
 
   useEffect(() => {
     setRandom(_.sample(makeupList));
-    console.log(makeupList);
-    console.log(random);
   }, []);
+
   return (
     <div className="random-one">
-      <div>{random.title}</div>
       <img src={random.img} alt="" />
+      <p>{random.title}</p>
     </div>
   );
 };
