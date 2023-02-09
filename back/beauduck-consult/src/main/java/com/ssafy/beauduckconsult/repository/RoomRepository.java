@@ -81,37 +81,4 @@ public class RoomRepository {
         return true;
     }
 
-    ///////////////////////////////////////////////////
-
-
-
-
-//    public List<UserInfo> findAllUser() {
-//        return hashOpsEnterInfo.values(ENTER_INFO);
-//    }
-
-
-    // 유저 세션으로 입장해 있는 미팅방 ID 조회
-//    public UserInfo getUserEnterRoomId(String sessionId) {
-//        return hashOpsEnterInfo.get(ENTER_INFO, sessionId);
-//    }
-
-    ////////////////////
-//    public long plusUserCount(String roomId, Room room) {
-//        long count = room.getUserCount() + 1;
-//        room.setUserCount(count);
-//        hashOpsChatRoom.put(TO_ROOMS, roomId, room );
-//
-//        return count;
-//    }
-//
-//    public long minusUserCount(String roomId, Room room) {
-//        long count = room.getUserCount() - 1;
-//        room.setUserCount(count);
-//        hashOpsChatRoom.put(TO_ROOMS, roomId, room );
-//
-//        return count;
-//    }
-
-
 }
