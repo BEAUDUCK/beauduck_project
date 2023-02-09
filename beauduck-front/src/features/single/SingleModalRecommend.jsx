@@ -61,36 +61,36 @@ const SingleModalRecommend = ({ popRecommend }) => {
       >
         <SwiperSlide>
           <div className="recommended-makeup-div">
-            <img src={recommendList[0].img} alt="img" />
-            <p>{recommendList[0].title}</p>
+            <img src={recommendList[0]?.img} alt="img" />
+            <p>{recommendList[0]?.title}</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           {' '}
           <div className="recommended-makeup-div">
-            <img src={recommendList[1].img} alt="img" />
-            <p>{recommendList[1].title}</p>
+            <img src={recommendList[1]?.img} alt="img" />
+            <p>{recommendList[1]?.title}</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           {' '}
           <div className="recommended-makeup-div">
-            <img src={recommendList[2].img} alt="img" />
-            <p>{recommendList[2].title}</p>
+            <img src={recommendList[2]?.img} alt="img" />
+            <p>{recommendList[2]?.title}</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           {' '}
           <div className="recommended-makeup-div">
-            <img src={recommendList[3].img} alt="img" />
-            <p>{recommendList[3].title}</p>
+            <img src={recommendList[3]?.img} alt="img" />
+            <p>{recommendList[3]?.title}</p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           {' '}
           <div className="recommended-makeup-div">
-            <img src={recommendList[4].img} alt="img" />
-            <p>{recommendList[4].title}</p>
+            <img src={recommendList[4]?.img} alt="img" />
+            <p>{recommendList[4]?.title}</p>
           </div>
         </SwiperSlide>
       </Swiper>
