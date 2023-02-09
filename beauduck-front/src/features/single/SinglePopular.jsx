@@ -2,6 +2,7 @@ import './Single.style.scss';
 import SingleListItem from './SingleListItem';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
+import SinglePopularItem from './SinglePopularItem';
 
 const SinglePopular = ({ modeList }) => {
   const responsive = {
@@ -34,10 +35,10 @@ const SinglePopular = ({ modeList }) => {
         animationDuration={2000}
         // animationEasingFunction="linear"
         // autoPlayStrategy="action"    // 호버하면 멈춤 (default)
-        className="modeList"
+        className="popular"
       >
         {modeList?.map((item, idx) => (
-          <SingleListItem key={item.id} modeItem={item} idx={idx + 1} />
+          <SinglePopularItem key={item.id} modeItem={item} idx={idx + 1} />
         ))}
       </AliceCarousel>
     </>
