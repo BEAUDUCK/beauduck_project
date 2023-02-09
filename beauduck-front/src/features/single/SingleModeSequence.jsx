@@ -1,5 +1,7 @@
 // import frame from '../../assets/content3.png';
 
+import { useSelector } from 'react-redux';
+
 const SingleModeSequence = ({ nowStep }) => {
   const colors = {
     suncream: '#BFD3E3',

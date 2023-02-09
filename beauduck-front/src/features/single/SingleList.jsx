@@ -25,6 +25,7 @@ const SingleList = ({ modeList }) => {
 
   return (
     <>
+      <h1>MAKEUP LIST</h1>
       <div className="modeList">
         {currentPosts?.map((item, idx) => (
           <SingleListItem key={item.id} modeItem={item} idx={idx + 1} />

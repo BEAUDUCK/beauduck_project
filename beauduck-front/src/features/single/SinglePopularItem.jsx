@@ -34,10 +34,10 @@ const SinglePopularItem = ({ modeItem, idx }) => {
           </div>
         </div>
       </div>
-      {isInfo && (
+      {/* {isInfo && (
         <SingleModalInfo makeupId={modeItem.id} isToggleInfo={isToggleInfo} />
       )}
-      {/* {isInfo && <BlackOut onClickEvent={isToggleInfo} />} */}
+      {isInfo && <BlackOut onClickEvent={isToggleInfo} />} */}
     </>
   );
 };
