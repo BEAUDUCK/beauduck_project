@@ -15,7 +15,7 @@ export const UserLogin = createAsyncThunk(
         console.log('로그인 res', res.data.data);
       })
       .catch((err) => console.log('로그인 err', err));
-    return res.data.data;
+    return res.data;
   },
 );
 
