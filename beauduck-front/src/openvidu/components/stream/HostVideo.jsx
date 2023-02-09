@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useRef, useState } from 'react';
 import './StreamComponent.css';
-import { SelfieSegmentation } from '@mediapipe/selfie_segmentation';
-import { Camera } from '@mediapipe/camera_utils';
+// import { SelfieSegmentation } from '@mediapipe/selfie_segmentation';
+// import { Camera } from '@mediapipe/camera_utils';
 
 const HostVideoComponent = ( props ) => {
 	const { user, mutedSound, nowColor } = props
