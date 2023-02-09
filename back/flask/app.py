@@ -18,12 +18,12 @@ CORS(app)
 
 
 ## 저장된 db에 url 가져오기
-def getEmps():
+def getEmps(meberId):
     ret = []
     db = pymysql.connect(host='3.38.169.2', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
-    sql = "select member_id, img from imgai"
-    curs.execute(sql)
+    sql = "select member_id, img from imgai where is_makeup=true or member_id =%s"
+    curs.execute(sql,[meberId])
     rows = curs.fetchall()
     for e in rows:
         ret.append({"member_id" : e[0], "img" : e[1]})
@@ -43,15 +43,15 @@ def get_cropped_face(image_file):
     cropped_face = image[a:c,d:b,:]    # 얼굴 영역 박스 좌표를 이용해 얼굴 잘라내기 
     return cropped_face # 이미지 파일
 
-dir_path = './img/'
+
 
 def get_face_embedding(face):
     return face_recognition.face_encodings(face)
 
-def get_face_embedding_dict(dir_path):
+def get_face_embedding_dict(member):
 
     # DB에서 가져온 코드
-    file_list = getEmps()
+    file_list = getEmps(member)
     
     embedding_dict = {}
     
@@ -67,7 +67,7 @@ def get_face_embedding_dict(dir_path):
     return embedding_dict
 
 
-embedding_dict = get_face_embedding_dict(dir_path)
+embedding_dict = {}
 
 # 거리순 비교하는 것
 def get_distance(name1, name2):
@@ -149,7 +149,10 @@ def ajax():
     if(getisMember(request.get_json()["id"]) == []):
         return {'answer': result } 
     
+    global embedding_dict
+    embedding_dict = get_face_embedding_dict(request.get_json()["id"]) # 메이크업이 있는 애들만 있다.
     case = request.get_json()["id"] in embedding_dict
+
     if (case == False): # 만약 사진이 잘 등록이 안될 경우
         return {'answer': "error"}
 
