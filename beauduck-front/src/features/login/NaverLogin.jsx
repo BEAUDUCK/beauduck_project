@@ -11,7 +11,7 @@ const NaverLogin = () => {
   const state = new URL(window.location.href).searchParams.get('state');
   const [cookies, setCookie, removeCookie] = useCookies(['cookie_name']);
   const navigate = useNavigate();
-  const { isSignup, memberInfo } = useSelector((state) => state.member);
+  const { isSignup } = useSelector((state) => state.member);
 
   // 토큰 발급
   const getToken = async () => {
@@ -38,31 +38,21 @@ const NaverLogin = () => {
           });
         } else {
           console.log('회원가입부터 할거야야야야ㅑ');
-          const data = {
-            accessToken,
-            nickName: memberInfo[0],
-            content: memberInfo[1],
-            img: memberInfo[2],
-          };
-          console.log(data);
-          dispatch(goToLogin([]));
-          dispatch(signUp(data))
-            .then((response) => {
-              console.log('히얼', response);
-              dispatch(UserLogin(accessToken)).then(() => {
-                navigate('/');
-              });
-            })
-            .catch((err) => {
-              console.log('여기', err);
-            });
-          // navigate('/signup');
+          navigate('/signup');
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.log('토큰 에러', error);
       });
   };
+
+  // 로그인 실패 시 회원가입 창으로 이동
+  const { loginRejected } = useSelector((state) => state.member);
+  useEffect(() => {
+    if (loginRejected) {
+      navigate('/signup');
+    }
+  }, [loginRejected]);
 
   useEffect(() => {
     getToken();
