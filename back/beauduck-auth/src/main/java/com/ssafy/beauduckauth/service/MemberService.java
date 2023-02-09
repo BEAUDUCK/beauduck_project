@@ -184,16 +184,12 @@ public class MemberService {
     }
 
     // 회원 얼굴 정보 저장 (AI)
-    public ResponseSuccessDto<SaveImageResponseDto> saveImage(String memberId, String img) {
-
-        if(img == null) {
-            throw new EntityIsNullException("이미지를 업로드할 수 없습니다.");
-        }
+    public ResponseSuccessDto<SaveImageResponseDto> saveImage(AiRequestDto aiRequestDto) {
 
         Boolean isExist = false;
 
         //makeup table에 memberId 데이터 있는지 확인
-        MemberEntity memberEntity = memberRepository.findById(memberId)
+        MemberEntity memberEntity = memberRepository.findById(aiRequestDto.getMemberId())
                 .orElseThrow(() -> new EntityIsNullException("해당 회원이 존재하지 않습니다."));
 
         if (makeupRepository.existsByMemberEntity(memberEntity)) {
@@ -203,7 +199,7 @@ public class MemberService {
         //Imgai table에 사진 등록 성공 여부
         ImgaiEntity imgaiEntity = ImgaiEntity.builder()
                 .memberEntity(memberEntity)
-                .img(img)
+                .img(aiRequestDto.getImg())
                 .isMakeup(isExist)
                 .build();
         imgaiRepository.save(imgaiEntity);
