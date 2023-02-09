@@ -17,34 +17,6 @@ const SingleModalRecommend = ({ popRecommend }) => {
     popRecommend();
   };
 
-  // const makeupList = [
-  //   {
-  //     id: 1,
-  //     title: '데일리 메이크업',
-  //     img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: '물광 메이크업',
-  //     img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
-  //   },
-  //   {
-  //     id: 3,
-  //     title: '데일리 메이크업',
-  //     img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
-  //   },
-  //   {
-  //     id: 4,
-  //     title: '물광 메이크업',
-  //     img: 'https://i.pinimg.com/236x/86/2f/31/862f310c3e879aefcbf50748758e32cc.jpg',
-  //   },
-  //   {
-  //     id: 5,
-  //     title: '데일리 메이크업',
-  //     img: 'https://i.pinimg.com/236x/00/23/13/0023139711735d03774be660adcad98c.jpg',
-  //   },
-  // ];
-
   return (
     <div className="recommend-modal">
       <FontAwesomeIcon
@@ -59,40 +31,20 @@ const SingleModalRecommend = ({ popRecommend }) => {
         slidesPerView={3}
         pagination={{ clickable: true }}
       >
-        <SwiperSlide>
-          <div className="recommended-makeup-div">
-            <img src={recommendList[0]?.img} alt="img" />
-            <p>{recommendList[0]?.title}</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          {' '}
-          <div className="recommended-makeup-div">
-            <img src={recommendList[1]?.img} alt="img" />
-            <p>{recommendList[1]?.title}</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          {' '}
-          <div className="recommended-makeup-div">
-            <img src={recommendList[2]?.img} alt="img" />
-            <p>{recommendList[2]?.title}</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          {' '}
-          <div className="recommended-makeup-div">
-            <img src={recommendList[3]?.img} alt="img" />
-            <p>{recommendList[3]?.title}</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          {' '}
-          <div className="recommended-makeup-div">
-            <img src={recommendList[4]?.img} alt="img" />
-            <p>{recommendList[4]?.title}</p>
-          </div>
-        </SwiperSlide>
+        {recommendList.length != 0 ? (
+          <>
+            {recommendList.map((item) => (
+              <SwiperSlide>
+                <div className="recommended-makeup-div">
+                  <img src={item?.img} alt="img" />
+                  <p>{item?.title}</p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </>
+        ) : (
+          <></>
+        )}
       </Swiper>
     </div>
   );

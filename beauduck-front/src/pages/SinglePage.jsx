@@ -1,5 +1,4 @@
 import './Single.style.scss';
-import Banner from '../components/banner/Banner';
 import Button from '../components/button/Button';
 import BlackOut from '../components/blackout/BlackOut';
 import SingleList from '../features/single/SingleList';
@@ -16,6 +15,8 @@ import SingleMake from '../features/single/SingleMake';
 import Alert from '../components/modal/Alert';
 import SinglePopular from '../features/single/SinglePopular';
 import SingleRandom from '../features/single/SingleRandom';
+import backShape1 from '../assets/backShape1.png';
+import backShape2 from '../assets/backShape2.png';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
@@ -54,13 +55,25 @@ const SinglePage = () => {
       <SinglePopular modeList={popularList} />
       <div className="makeup-special">
         <div className="makeup-special-section1">
-          <h1>
-            나에게 맞는 <br /> 메이크업은?
-          </h1>
-          <p>인공지능으로 얼굴을 분석하여 나와 닮은 사람들의 메이크업을 추천</p>
-          <button className="makeup-recommend-btn" onClick={popRecommend}>
-            메이크업 추천 받기
-          </button>
+          <div>
+            <h1>
+              나에게 맞는 <br /> 메이크업은?
+            </h1>
+            <p>나만의 메이크업 공유하기</p>
+            <Button text={'만들기'} onClickEvent={onToggleMake} />
+          </div>
+
+          <img src={backShape1} alt="" id="backShape1" />
+          <img src={backShape2} alt="" id="backShape2" />
+
+          <div className="section1-ai">
+            <p>
+              인공지능으로 얼굴을 분석하여 나와 닮은 사람들의 메이크업을 추천
+            </p>
+            <button className="makeup-recommend-btn" onClick={popRecommend}>
+              메이크업 추천 받기
+            </button>
+          </div>
           {/* 추천 받을 수 있는지 없는지 */}
           {isRecommend && <SingleModalRecommend popRecommend={popRecommend} />}
           {isRecommend && <BlackOut onClickEvent={popRecommend} />}
@@ -68,8 +81,6 @@ const SinglePage = () => {
 
           {/* <h2 className="single-h2">인기 메이크업</h2>
       <hr className="single-hr" /> */}
-          <p>나만의 메이크업 공유하기</p>
-          <Button text={'만들기'} onClickEvent={onToggleMake} />
           {isMake && (
             <SingleMake
               onToggleMake={onToggleMake}

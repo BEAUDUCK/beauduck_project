@@ -65,8 +65,9 @@ const SingleMake = ({ onToggleMake, onToggleFinish }) => {
     };
 
     dispatch(createNewMakeup(finalMakeup)).then((res) => {
+      console.log(res.payload);
       const payload = {
-        id: memberId,
+        id: res.payload,
         img: imgForm.img,
       };
       console.log(payload);

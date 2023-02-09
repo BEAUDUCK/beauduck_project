@@ -10,22 +10,28 @@
     }
 }
 
+.popular{
+    
+}
+
     .makeup-div {
-        width: 200px;
-        height: 280px;
-        border-radius: 75px;
+        width: 290px;
+        height: 400px;
+        border-bottom-right-radius: 75px;
+        border-bottom-left-radius: 75px;
         display: inline-block;
         margin: auto;
-        margin-top: 100px;
+
+        // margin-top:20px;
         background-color: #b1b1b1;
         text-align: center;
         
         img {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             object-fit: cover;
             border-radius: 100px;
-            margin-top: 20px;
+            margin-top: 30px;
             margin-bottom: 10px;
             border: 5px double rgba(255, 255, 255, 0.5);
             // box-shadow: 0 0 5px white;
@@ -37,15 +43,18 @@
             margin:0;
             text-align: center;
             font-family: 'Jalnan';
-            font-size: 18px;
-        text-shadow: 1px 1px rgba(255, 255, 255, 0.6);
+            margin-top: 5px;
+            margin-bottom: 10px;
+            font-size: 25px;
+            word-break: keep-all;
+            text-shadow: 1px 1px rgba(255, 255, 255, 0.6);
     }
     
     .star-info {
         p {
             display: inline;
             margin-left: 5px;
-            font-size: 1rem;
+            font-size: 18px;
             color: white;
         }
     }
@@ -69,7 +78,12 @@
 }
 
 .makeup-div-odd {
-    margin-top: 230px;
+    margin-top: 200px;
+    
+    border-top-right-radius: 75px;
+    border-top-left-radius: 75px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 
@@ -78,6 +92,13 @@
 .basic-makeup-list{
     width: 100vw;
     background-color: #f4f3f8d6;
+    text-align: center;
+
+    h1 {
+        margin: 0px;
+        padding-top: 30px;
+        font-size: 50px;
+    }
     
     .pagination {
         padding-bottom: 50px;
