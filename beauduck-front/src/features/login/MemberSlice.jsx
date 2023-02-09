@@ -9,12 +9,14 @@ export const UserLogin = createAsyncThunk(
   'member/UserLogin',
   async (accessToken) => {
     console.log('로그인');
-    const res = await axios
-      .get(`${server}naver/login?accessToken=${accessToken}`)
-      .then((res) => {
-        console.log('로그인 res', res.data.data);
-      })
-      .catch((err) => console.log('로그인 err', err));
+    const res = await axios.get(
+      `${server}naver/login?accessToken=${accessToken}`,
+    );
+    // .then((res) => {
+    //   console.log('로그인 res', res.data.data);
+    // });
+    console.log('dsdasdsd', res);
+    // .catch((err) => console.log('로그인 err', err));
     return res.data;
   },
 );
@@ -79,7 +81,7 @@ export const memberSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(UserLogin.fulfilled, (state, action) => {
-        console.log('dsds', action.payload.data);
+        console.log('dsds', action);
         state.loginRejected = false;
         state.memberId = action.payload.data.memberId;
         state.name = action.payload.data.name;
@@ -87,6 +89,7 @@ export const memberSlice = createSlice({
       })
       .addCase(UserLogin.rejected, (state, action) => {
         console.log('dldl');
+        console.log(action);
         state.loginRejected = true;
       })
       .addCase(signUp.fulfilled, (state, action) => {

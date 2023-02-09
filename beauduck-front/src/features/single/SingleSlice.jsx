@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { async } from 'q';
+import axios from 'axios';
 import client from '../../api/singleAxios';
 
 // 전체 메이크업 리스트 조회
@@ -50,10 +50,13 @@ export const saveMakeupImg = createAsyncThunk(
 // 메이크업 추천 요청 + 받기
 export const recommendMakeup = createAsyncThunk(
   'single/recommendMakeup',
-
   async (payload) => {
-    const res = await client.post('/makeup/recommend/', payload);
-    // const res = await client.get('makeup/recommend');
+    console.log(payload);
+    const res = await axios.post(
+      'http://i8b306.p.ssafy.io:5000/recommand',
+      payload,
+    );
+    console.log('추천', res.data);
     return res.data;
   },
 );

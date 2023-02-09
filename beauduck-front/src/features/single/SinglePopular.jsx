@@ -3,24 +3,32 @@ import SingleListItem from './SingleListItem';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import SinglePopularItem from './SinglePopularItem';
+import BlackOut from '../../components/blackout/BlackOut';
+import SingleModalInfo from './SingleModalInfo';
+import { useState } from 'react';
 
 const SinglePopular = ({ modeList }) => {
   const responsive = {
     0: {
-      items: 2,
+      items: 1,
     },
     512: {
+      items: 2,
+    },
+    920: {
       items: 3,
     },
-    860: {
+    1280: {
       items: 4,
     },
-    1210: {
+    1536: {
       items: 5,
     },
-    1470: {
-      items: 6,
-    },
+  };
+
+  const [isInfo, setIsInfo] = useState(false);
+  const isToggleInfo = () => {
+    setIsInfo(!isInfo);
   };
 
   return (
@@ -38,7 +46,13 @@ const SinglePopular = ({ modeList }) => {
         className="popular"
       >
         {modeList?.map((item, idx) => (
-          <SinglePopularItem key={item.id} modeItem={item} idx={idx + 1} />
+          <>
+            <SinglePopularItem key={item.id} modeItem={item} idx={idx + 1} />
+            {isInfo && (
+              <SingleModalInfo makeupId={item.id} isToggleInfo={isToggleInfo} />
+            )}
+            {isInfo && <BlackOut onClickEvent={isToggleInfo} />}
+          </>
         ))}
       </AliceCarousel>
     </>
