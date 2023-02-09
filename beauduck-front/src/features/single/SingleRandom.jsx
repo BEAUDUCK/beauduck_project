@@ -12,8 +12,8 @@ const SingleRandom = () => {
 
   return (
     <div className="random-one">
-      <img src={random.img} alt="" />
-      <p>{random.title}</p>
+      <img src={random?.img} alt="" />
+      <p>{random?.title}</p>
     </div>
   );
 };
