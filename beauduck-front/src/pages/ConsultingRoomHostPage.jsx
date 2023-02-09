@@ -1,9 +1,11 @@
-const ConsultingRoomHostPage = () => {
+import CustomRoomComponent from "../openvidu/components/CustomRoomComponent";
+
+const ConsultingRoomPage = () => {
   return (
     <div>
-      <h1>컨설팅룸 호스트</h1>
+      <CustomRoomComponent />
     </div>
   );
 };
 
-export default ConsultingRoomHostPage;
+export default ConsultingRoomPage;
