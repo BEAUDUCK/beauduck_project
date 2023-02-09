@@ -37,6 +37,7 @@ public class AuthService {
     public ResponseSuccessDto<TokenResponseDto> getToken(String code, String state) {
         JSONObject response = getJsonObjectByCode(code, state);
 
+        System.out.println("토큰 발급");
         System.out.println("getToken method");
         System.out.println("code = " + code);
         System.out.println("state = " + state);
@@ -53,6 +54,7 @@ public class AuthService {
     }
 
     public ResponseSuccessDto<TokenResponseDto> getRefreshToken(String refreshToken) {
+        System.out.println("리프레쉬 토큰 발급");
         JSONObject response = getJsonObjectByToken(refreshToken);
 
         TokenResponseDto tokenResponseDto = TokenResponseDto.builder()
@@ -67,16 +69,26 @@ public class AuthService {
     }
 
     public ResponseSuccessDto<LoginResponseDto> login(String accessToken) {
+        System.out.println("로그인 시작");
         JSONObject response = getJsonObjectByToken(accessToken);
         Map<String, Object> res = (Map<String, Object>) response.get("response");
 
+        System.out.println("회원정보");
         System.out.println(res.toString());
         String id = (String) res.get("id");
         String name = (String) res.get("name");
 
+        System.out.println("find MemberEntity");
         MemberEntity memberEntity = memberRepository.findById(id).orElseThrow(() -> new LoginErrorException("등록되지 않은 회원입니다."));
+        System.out.println("MemberEntity = " + memberEntity.toString());
+
+        System.out.println("find MemberProfileEntity");
         MemberProfileEntity memberProfileEntity = memberProfileRepository.findByMemberEntity(memberEntity).orElseThrow(() -> new EntityIsNullException("회원의 프로필이 존재하지 않습니다."));
+        System.out.println("MemberProfileEntity = " + memberProfileEntity.toString());
+
+        System.out.println("find MemberInfoEntity");
         MemberInfoEntity memberInfoEntity = memberInfoRepository.findByMemberEntity(memberEntity).orElseThrow(() -> new EntityIsNullException("회원의 정보가 존재하지 않습니다."));
+        System.out.println("MemberInfoEntity = " + memberInfoEntity.toString());
 
         LoginResponseDto loginResponseDto = LoginResponseDto.builder()
                 .memberId(id)
@@ -91,6 +103,7 @@ public class AuthService {
     }
 
     public ResponseSuccessDto<TokenDeleteResponseDto> logout(String accessToken) {
+        System.out.println("로그아웃");
         JSONObject response = getJsonObjectByToken(accessToken);
 
         System.out.println("logout response = " + response.toString());
@@ -104,6 +117,7 @@ public class AuthService {
     }
 
     public ResponseSuccessDto<SignupResponseDto> signup(SignupRequestDto signupRequestDto, String img) {
+        System.out.println("회원가입 시작");
         if (img == null) {
             throw new SignupErrorException("이미지를 업로드할 수 없습니다.");
         }
@@ -135,7 +149,6 @@ public class AuthService {
             throw new DuplicateErrorException("중복된 닉네임입니다.");
         }
 
-        System.out.println("회원가입 시작");
         MemberEntity entity = MemberEntity.builder()
                 .id(id)
                 .provider(provider)
