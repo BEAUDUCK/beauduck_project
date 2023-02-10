@@ -27,6 +27,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faBattery } from '@fortawesome/free-solid-svg-icons';
 import { faBatteryQuarter } from '@fortawesome/free-solid-svg-icons';
 import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCircleChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
@@ -51,6 +52,7 @@ library.add(
   faBattery,
   faBatteryQuarter,
   faCircleChevronLeft,
+  faCircleChevronRight,
   fasStar,
   farStar,
   faUser,

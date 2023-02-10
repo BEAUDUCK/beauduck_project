@@ -51,7 +51,7 @@ export const saveMakeupImg = createAsyncThunk(
 export const recommendMakeup = createAsyncThunk(
   'single/recommendMakeup',
   async (payload) => {
-    console.log(payload);
+    console.log('추천요청', payload);
     const res = await axios.post(
       'http://i8b306.p.ssafy.io:5000/recommand',
       payload,
