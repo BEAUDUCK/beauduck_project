@@ -17,7 +17,7 @@ const NaverLogin = () => {
   const getToken = async () => {
     console.log('토큰 발급');
     axios
-      .get(`http://3.38.169.2:8080/naver/callback?code=${code}&state=${state}`)
+      .get(`http://i8b306.p.ssafy.io:8080/naver/callback?code=${code}&state=${state}`)
       .then((res) => {
         localStorage.setItem('refreshToken', res.data.data.refreshToken);
         const accessToken = res.data.data.accessToken;

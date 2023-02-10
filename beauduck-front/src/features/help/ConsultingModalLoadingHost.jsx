@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import face1 from '../../assets/faces/face1.png';
 import face2 from '../../assets/faces/face2.png';
 import face3 from '../../assets/faces/face3.png';
@@ -12,9 +14,18 @@ import { getConsultDetail } from './ConsultingSlice';
 
 const ConsultingModalLoadingHost = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { roomId, consultDetail, userList } = useSelector(
     (state) => state.consulting,
   );
+  
+  const [isRoomAdmin, setIsRoomAdmin] = useState(false)
+  const hostNickname = useSelector(state => state.member.nickName)
+
+  const hostData = [
+    { hostNickname,  }
+  ]
+
   console.log('roomId', roomId);
 
   useEffect(() => {
@@ -23,9 +34,20 @@ const ConsultingModalLoadingHost = () => {
 
   console.log('유저리스트!', userList);
 
+  const handleStart = (roomId, consultDetail, userList) => {
+    setIsRoomAdmin(true)
+    navigate("/help/room", { state: { roomId, consultDetail, userList, isRoomAdmin } })
+  }
+
   return (
     <div className="loading-modal">
-      <button className="loading-bigbtn">START</button>
+      <button 
+        type="button"
+        className="loading-bigbtn"
+        onClick={() => {handleStart(roomId, consultDetail, userList)}}
+      >
+        START
+      </button>
       <h3 className="loading-h3">대기 리스트</h3>
       <div className="loading-list">
         {userList?.map((user) => (
