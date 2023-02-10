@@ -19,7 +19,7 @@ const ConsultingModalLoadingHost = () => {
 
   useEffect(() => {
     dispatch(getConsultDetail(roomId));
-  }, [dispatch, userList]);
+  }, [userList]);
 
   console.log('유저리스트!', userList);
 
