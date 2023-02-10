@@ -39,11 +39,11 @@ class CustomRoomComponent extends Component {
             subscribers: [],
             chatDisplay: 'none',
             currentVideoDevice: undefined,
-						nowColor: undefined,
-						result: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-						btnState: null,
-						isActive: false,
-						hostNickname: this.props.hostNickname
+            nowColor: undefined,
+            result: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            btnState: null,
+            hostNickname: this.props.hostNickname,
+						isRoomAdmin: this.props.isRoomAdmin
         };
         // 메서드 바인딩 과정
         // joinSession : 세션 접속
@@ -110,6 +110,7 @@ class CustomRoomComponent extends Component {
 
          // 세션에 조인하기
         this.joinSession();
+				window.localStorage.setItem("host", this.state.hostNickname)
 				console.log(this.state.subscribers)
     }
     // componentWillUnmount: 컴포넌트가 언마운트 됐을 때 작동하는 리액트 컴포넌트 생명주기함수
@@ -264,6 +265,7 @@ class CustomRoomComponent extends Component {
             myUserName: 'OpenVidu_User' + Math.floor(Math.random() * 100),
             localUser: undefined,
         });
+				window.localStorage.removeItem("host")
         if (this.props.leaveSession) {
             this.props.leaveSession();
         }
@@ -287,7 +289,7 @@ class CustomRoomComponent extends Component {
 
     nicknameChanged(nickname) {
         let localUser = this.state.localUser;
-        localUser.setNickname(nickname);
+        localUser.setNickname(this.state.myUserName);
         this.setState({ localUser: localUser });
         this.sendSignalUserChanged({ nickname: this.state.localUser.getNickname() });
     }
@@ -581,10 +583,6 @@ class CustomRoomComponent extends Component {
 			console.log("현재 버튼 상태", this.state.btnState)
 		}
 
-		handleActive() {
-			this.state.isActive = true
-		}
-
 		handleStart() {
 			this.handleActive()
 			console.log("시작@@@@@@@@@@@@@@@@@@@@@@@@@")
@@ -639,14 +637,20 @@ class CustomRoomComponent extends Component {
         const localUser = this.state.localUser;
         const chatDisplay = { display: this.state.chatDisplay };
         const host = this.props.host
-				const isActive = this.state.isActive
+				const hostUser = this.state.isRoomAdmin ? localUser : this.state.subscribers
         // const userCount = this.state.subscribers.length + 1
         // const userList = this.props.userList
-				console.log(this.remotes)
-
+				console.log(this.props)
+				console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", localUser)
+				console.log(this.props.user)
+				console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+				console.log(hostUser)
+				if (localUser === this.state.hostNickname) {
+					console.log("#################################", "내가 호스트다")
+				}
         return (
 					<>
-            {host === localUser ? (
+            {host === this.state.myUserName && this.state.isRoomAdmin ? (
               // 내가 호스트 일때 
               <div className="container" id="container" style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
                   <div className="left-div" style={{ width: "20%", height: "100%" }} >
@@ -709,7 +713,7 @@ class CustomRoomComponent extends Component {
                   {`${host}의 방`}
                 </div>
 								{/* 일단 퍼블리셔 호스트로 */}
-                {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                {/* {localUser !== undefined && localUser.getStreamManager() !== undefined && (
                   <div className="host" style={{ height: "70vh" }}>
                     <HostComponent 
 											user={localUser} 
@@ -717,21 +721,31 @@ class CustomRoomComponent extends Component {
 											nowColor={this.state.nowColor}
 										/>
                   </div>
-                  )}
+                  )} */}
+									{hostUser && (
+										<div className='host' style={{ height: "70vh" }}>
+											<HostComponent 
+												user={hostUser}
+												streamId={hostUser.streamManager.stream.streamId}
+												handleNickname={this.nicknameChanged}
+												nowColor={this.state.nowColor}
+											/>
+										</div>
+									)}
                 <div className='sub' style={{ display: "flex", justifyContent: "space-evenly", alignItems: "center", width: "100%", height: "25vh" }}>
                 {localUser !== undefined && localUser.getStreamManager() !== undefined && (
                   <div className="consultant-small" style={{ width: "50%", height: "100%" }} >
                     <SmallConsultantStream user={localUser} handleNickname={this.nicknameChanged}/>
                   </div>
                   )}
-                  <AnswerComponent
+                  {/* <AnswerComponent
                     user={localUser}
                     // userCount={userCount}
 										handleStart={this.handleStart}
 										handleBtnIncreased={this.handleBtnIncreased}
 										handleChangeResult={this.props.handleChangeResult}
 										handleBtnDecreased={this.handleBtnDecreased}
-                  />
+                  /> */}
                 </div>
               </div>
 									{/* <HostMainComponent 
@@ -787,6 +801,5 @@ class CustomRoomComponent extends Component {
         return response.data; // The token
     }
 }
-
 
 export default CustomRoomComponent;

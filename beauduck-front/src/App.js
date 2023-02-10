@@ -18,7 +18,7 @@ import SingleResultPage from './pages/SingleResultPage';
 import SingleModePage from './pages/SingleModePage';
 import SingupPage from './pages/SignupPage';
 import ScrollToTop from './components/scrolltotop/ScrollToTop';
-import ConsultingRoomPage from './pages/ConsultingRoomHostPage';
+import ConsultingRoomPage from './pages/ConsultingRoomPage';
 
 // import { getInfoList, getQaList } from './features/board/BoardSlice';
 
@@ -84,7 +84,7 @@ function App() {
               element={<ProtectedRoute token={token} nickname={nickname} />}> */}
           {/* 도와덕 */}
           <Route path="/help" element={<ConsultingPage />} />
-          <Route path="/help/consult" element={<ConsultingRoomPage />} />
+          <Route path="/help/room" element={<ConsultingRoomPage />} />
           {/* 따라해덕 */}
           <Route path="/single" element={<SinglePage />} />
           <Route path="/single/mode" element={<SingleModePage />} />
