@@ -23,10 +23,16 @@ const HostComponent = (props) => {
 	// const [showForm, setShowForm] = useState(false)
 	const [mutedSound, setMutedSound] = useState(false)
 	// const [isFormValid, setIsFormValid] = useState(true)
-	const color = ["#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10"]
+	const image = ["#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10"]
 	const [nowColor, setNowColor] = useState(null)
 	const [isActive, setIsActive] = useState(false)
-  const [score, setScore] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  const [score, setScore] = useState([
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	])
 	const [nowCnt, setNowCnt] = useState(0)
 	const [btnState, setBtnState] = useState(0)
 	const dispatch = useDispatch()
@@ -59,7 +65,7 @@ const HostComponent = (props) => {
 		const changeImg = () => {
 
 			const colors = [
-				"#E8B0B0","#F03838","#EBEBEB","#FE9B7F","#F7F4EF","#C23445","#811F4C","#B28DB7","#3D2F2B","#BF1B36",
+				"", "#E8B0B0","#F03838","#EBEBEB","#FE9B7F","#F7F4EF","#C23445","#811F4C","#B28DB7","#3D2F2B","#BF1B36",
 				"#FF8384","#81CCAB","#B9DDFF","#7EBC42","#8A97C3","#4A478C","#292830","#A18E40","#006359","#006E47",
 				"#D1EEFB","#FDF650","#FEDCF5","#8884BE","#CEA9CB","#99A401","#422944","#818C75","#70491B","#FFFD36",
 				"#FEBC60","#B2B099","#DBBAC7","#C189CA","#96B09D","#DD3737","#BCA548","#B8616D","#2F124E","#D73A6F",
@@ -68,14 +74,15 @@ const HostComponent = (props) => {
 
 			setNowColor(colors[cnt])
 			if (btnState === 1) {
-				setScore(score[nowCnt % 10] += 1)
+				setScore(score[nowCnt] += 1)
 			}
 
 			setBtnState(0)
 			cnt++
+			nowCnt++
 
-			if (cnt === 50) {
-				const nickname = {}
+			if (cnt === 51) {
+				
 
 				stopAct(interval)
 				setIsActive(false)
