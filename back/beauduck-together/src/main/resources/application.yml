@@ -5,7 +5,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://i8b306.p.ssafy.io:3306/common_pjt?serverTimezone=Asia/Seoul
-    username: admin
+    username: root
     password: 1234
   mvc:
     pathmatch:
