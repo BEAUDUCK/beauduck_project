@@ -6,30 +6,65 @@
 
   /* MyProfile.jsx */
   .MyProfile {
-    width: 30%;
+    width: 50%;
+    border-right: 2px dotted gray;
+    text-align: center;
+
+    .profile-nickname { 
+      display: inline-block;
+      width: 100%;
+      margin-top: 50px;
+      text-align: center;
+      h2 {
+        margin: 0;
+      }
+    }
   
     .profile-img-div{
-      margin-top: 50px;
+      margin-top: 10px;
+      text-align: center;
   
-      .profile-img {
+      img {
         width: 200px;
         height: 200px;
       }
-  
     }
-  
   
     .profile-content {
-      border: 1px solid gray;
       width: 80%;
-      height: 100px;
+      margin: auto;
+      height: 80px;
+      p {
+        margin: 0;
+      }
+    }
+    
+    .nickname-update {
+      margin-top: 50px;
+      width: 100%;
+        input {
+          width: 60%;
+          height: 33px;
+        }
+    }
+    textarea {
+      width: calc(80% - 20px);
+      height: 60px;
+      margin: auto;
     }
 
+    .profile-btn {
+      display: inline-block;
+      width: 80%;
+      height: 30px;
+      margin: auto;
+    }
   }
+
 
   /* MyRanking.jsx */
   .MyRanking {
-    width: 70%;
+    width: 50%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
