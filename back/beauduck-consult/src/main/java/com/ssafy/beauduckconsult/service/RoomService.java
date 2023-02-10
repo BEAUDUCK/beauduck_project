@@ -72,7 +72,7 @@ public class RoomService {
 
         if (userInfoDto.getUserId().equals(roomDto.getHostId())) {
             if(!roomRepository.deleteRoom(roomDto.getRoomId())){
-                throw new RuntimeException("방 삭제 실패");
+                throw new EntityIsNullException("방 삭제 실패");
             }
             return responseUtil.successResponse(RoomResponseDto.builder().message("방 삭제 완료").build());
 
