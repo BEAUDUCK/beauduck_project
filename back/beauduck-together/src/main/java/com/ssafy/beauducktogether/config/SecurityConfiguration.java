@@ -26,7 +26,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .build();
     }
     @Bean
-    public CorsConfigurationSource corsConfigurationSource(){
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("*");
         configuration.addAllowedHeader("*");

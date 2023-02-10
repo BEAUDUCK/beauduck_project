@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 @Service
@@ -18,6 +19,9 @@ public class RoomService {
     private final RedisTemplate redisTemplate;
     private final RoomRepository roomRepository;
 
+//    public RoomService(RedisTemplate<String, Object> redisTemplate) {
+//        this.redisTemplate = redisTemplate;
+//    }
     //전체 방 목록 조회
     public List<RoomDto> selectAll() {
         List<RoomDto> roomDtoList = roomRepository.findAllRoom();
@@ -35,6 +39,7 @@ public class RoomService {
 
         if(roomRepository.createRoom(roomDto, user))
             return true;
+
         return false;
     }
 
@@ -70,7 +75,6 @@ public class RoomService {
     public RoomDto selectOne(String roomId){
         return roomRepository.findRoomById(roomId);
     }
-
 
 
 }

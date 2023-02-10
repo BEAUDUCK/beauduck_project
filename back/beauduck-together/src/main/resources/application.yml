@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/common_pjt?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://i8b306.p.ssafy.io:3306/common_pjt?serverTimezone=Asia/Seoul
     username: ssafy
     password: ssafy
   mvc:
@@ -13,7 +13,6 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-
   jpa:
     hibernate:
       ddl-auto: none

@@ -2,6 +2,7 @@ package com.ssafy.beauducktogether.dto;
 
 
 import lombok.Data;
+import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.UUID;
  * key: roomID
  */
 @Data
+//@RedisHash(value = "RoomDto", timeToLive = 5)
 public class RoomDto implements Serializable {
 
     private static final long serialVersionUID = 6494678977089006639L;
