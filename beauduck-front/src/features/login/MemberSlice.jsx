@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
-const server = 'http://i8b306.p.ssafy.io/';
-const global = 'http://i8b306.p.ssafy.io:8080/';
+const server = 'https://i8b306.p.ssafy.io/';
+const global = 'https://i8b306.p.ssafy.io:8080/';
 
 export const UserLogin = createAsyncThunk(
   'member/UserLogin',
