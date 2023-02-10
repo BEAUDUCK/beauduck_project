@@ -55,19 +55,85 @@
 
     .profile-btn {
       display: inline-block;
-      width: 80%;
+      width: 150px;
       height: 30px;
       margin: auto;
+      border: none;
+      border-radius: 5px;
+      background-color: #7EC384;
+      box-shadow: 3px 3px #3F7856;
+      font-weight: 800;
+      color: white;
+      cursor: pointer;
     }
   }
 
 
   /* MyRanking.jsx */
   .MyRanking {
+    position: relative;
     width: 50%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    text-align: center;
+    // display: flex;
+    // justify-content: space-evenly;
+    // align-items: center;
+
+    h1 {
+      margin-top: 50px;
+      margin-bottom: 30px;
+    }
+
+    .rank-img {
+      position: absolute;
+      bottom: 5%;
+      right: 10%;
+      width: 30%;
+      min-width: 100px;
+    }
+
+    .exp-box {
+      position: relative;
+
+      .exp-bar {
+        width: 80%;
+        height: 40px;
+        margin: auto;
+        border-radius: 10px;
+        background-color: rgb(222, 222, 222);
+      }
+      .my-exp {
+        position: absolute;
+        top: 0;
+        left: 10%;
+        height: 40px;
+        margin: auto;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        background-color: rgb(255, 230, 104);
+      }
+      p {
+        margin: 0;
+        font-family: 'Jalnan';
+      }
+      .exp-text {
+        position: absolute;
+        top: 13px;
+        left: 50%;
+        transform: translate(-50%);
+      }
+      .badge-div {
+        width: 80%;
+        margin: auto;
+        display: flex;
+        // flex-direction: column;
+        // justify-content: start;
+        margin-top: 100px;
+
+        img {
+          height: 100px;
+        }
+      }
+    }
   }
 }
 
