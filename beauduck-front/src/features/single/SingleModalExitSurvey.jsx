@@ -130,10 +130,11 @@ const SingleModalExitSurvey = () => {
         </span>
       </div>
       <br />
-      <div>
-        <RatingButton text={'재밌는 과정'} />
-      </div>
-      <Button text={'완료'} onClickEvent={submitStarScore} />
+      <Button
+        text={'완료'}
+        onClickEvent={submitStarScore}
+        btnStyle={'finish-btn'}
+      />
     </div>
   );
 };

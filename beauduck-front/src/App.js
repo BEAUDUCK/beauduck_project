@@ -11,6 +11,14 @@ import ProfilePage from './pages/ProfilePage';
 import NaverLogin from './features/login/NaverLogin';
 import SinglePage from './pages/SinglePage';
 import TogetherPage from './pages/TogetherPage';
+import BoardInfoPage from './pages/BoardInfoPage';
+import BoardQnAPage from './pages/BoardQnAPage';
+import Footer from './components/footer/Footer';
+import SingleResultPage from './pages/SingleResultPage';
+import SingleModePage from './pages/SingleModePage';
+import SingupPage from './pages/SignupPage';
+import ScrollToTop from './components/scrolltotop/ScrollToTop';
+import ConsultingRoomPage from './pages/ConsultingRoomHostPage';
 
 // import { getInfoList, getQaList } from './features/board/BoardSlice';
 
@@ -19,6 +27,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faBattery } from '@fortawesome/free-solid-svg-icons';
 import { faBatteryQuarter } from '@fortawesome/free-solid-svg-icons';
 import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCircleChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
@@ -32,22 +41,18 @@ import { faDroplet } from '@fortawesome/free-solid-svg-icons';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import BoardInfoPage from './pages/BoardInfoPage';
-import BoardQnAPage from './pages/BoardQnAPage';
-import Footer from './components/footer/Footer';
-import SingleResultPage from './pages/SingleResultPage';
-import SingleModePage from './pages/SingleModePage';
-import RankingPage from './pages/RankingPage';
-import SingupPage from './pages/SignupPage';
-import ScrollToTop from './components/scrolltotop/ScrollToTop';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { accessLogin } from './features/login/MemberSlice';
 
 library.add(
   faXmark,
   faBattery,
   faBatteryQuarter,
   faCircleChevronLeft,
+  faCircleChevronRight,
   fasStar,
   farStar,
   faUser,
@@ -61,10 +66,16 @@ library.add(
   faAngleLeft,
   faAngleRight,
   faCheck,
+  faCircleCheck,
   faHeart,
 );
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(accessLogin());
+  }, []);
   return (
     <>
       <BrowserRouter>
@@ -75,6 +86,7 @@ function App() {
               element={<ProtectedRoute token={token} nickname={nickname} />}> */}
           {/* 도와덕 */}
           <Route path="/help" element={<ConsultingPage />} />
+          <Route path="/help/consult" element={<ConsultingRoomPage />} />
           {/* 따라해덕 */}
           <Route path="/single" element={<SinglePage />} />
           <Route path="/single/mode" element={<SingleModePage />} />
@@ -87,8 +99,6 @@ function App() {
           <Route path="/board/info/:id" element={<BoardInfoPage />} />
           <Route path="/board/qna/:id" element={<BoardQnAPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          {/* 랭킹 페이지 */}
-          <Route path="/rank" element={<RankingPage />} />
           {/* </Route> */}
           <Route path="/Api/Naver" element={<NaverLogin />} />
           <Route path="/" element={<MainPage />} />

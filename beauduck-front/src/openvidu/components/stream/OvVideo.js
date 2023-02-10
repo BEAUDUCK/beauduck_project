@@ -1,47 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect, useRef } from 'react';
 import './StreamComponent.css';
 
-export default class OvVideoComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.videoRef = React.createRef();
-    }
+const OvVideoComponent = (props) => {
+	console.log("#############", props.streamManager)
+	const [streamManager, setStreamManager] = useState(props.streamManager);
+	const videoRef = useRef()
 
-    componentDidMount() {
-        if (this.props && this.props.user.streamManager && !!this.videoRef) {
-            console.log('PROPS: ', this.props);
-            this.props.user.getStreamManager().addVideoElement(this.videoRef.current);
-        }
+	useEffect(() => {
+		if (props.streamManager) {
+			setStreamManager(props.streamManager.addVideoElement(videoRef.current))
+		}
+	}, [props.streamManager])
 
-        if (this.props && this.props.user.streamManager.session && this.props.user && !!this.videoRef) {
-            this.props.user.streamManager.session.on('signal:userChanged', (event) => {
-                const data = JSON.parse(event.data);
-                if (data.isScreenShareActive !== undefined) {
-                    this.props.user.getStreamManager().addVideoElement(this.videoRef.current);
-                }
-            });
-        }
-    }
-
-    componentDidUpdate(props) {
-        if (props && !!this.videoRef) {
-            this.props.user.getStreamManager().addVideoElement(this.videoRef.current);
-        }
-    }
-
-    render() {
-
-        return (
-            <div className='container'>
-                <video
-                    className='input_video'
-                    autoPlay={true}
-                    id={'video-' + this.props.user.getStreamManager().stream.streamId}
-                    ref={this.videoRef}
-                    muted={this.props.mutedSound}
-                />
-            </div>
-            
-        );
-    }
+	return (
+		<div className='OvVideo' style={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }}>
+			<video
+				className='input_video'
+				autoPlay={true}
+				id={'video-' + this.props.user.getStreamManager().stream.streamId}
+				ref={this.videoRef}
+				muted={this.props.mutedSound}
+				style={{ width: "30vh",height: "18vh" }}
+			/>
+	</div>
+	)
 }
+
+export default OvVideoComponent;

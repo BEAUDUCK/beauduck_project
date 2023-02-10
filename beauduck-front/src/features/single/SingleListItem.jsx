@@ -21,23 +21,28 @@ const SingleListItem = ({ modeItem, idx }) => {
   return (
     <>
       <div
-        className={['makeup-div', idx % 2 ? 'makeup-div-odd' : ''].join(' ')}
+        className="makeup-list"
         style={{ backgroundColor: `${bgColor[color][0]}` }}
+        onClick={isToggleInfo}
       >
-        <div onClick={isToggleInfo}>
+        <div>
           <img src={modeItem.img} alt="img" />
-          <p style={{ color: `${bgColor[color][1]}` }}>{modeItem.title}</p>
+        </div>
+        <div className="makeup-back">
+          <p className="makeup-title" style={{ color: `${bgColor[color][1]}` }}>
+            {modeItem.title}
+          </p>
           <div className="star-info">
             <FontAwesomeIcon className="star-icon" icon="fa-solid fa-star" />
-            <p>{Math.round(modeItem.score * 10) / 10}</p>
-            <p>({modeItem.count})</p>
+            <span>{Math.round(modeItem.score * 10) / 10}</span>
+            <span>({modeItem.count})</span>
           </div>
         </div>
       </div>
       {isInfo && (
         <SingleModalInfo makeupId={modeItem.id} isToggleInfo={isToggleInfo} />
       )}
-      {/* {isInfo && <BlackOut onClickEvent={isToggleInfo} />} */}
+      {isInfo && <BlackOut onClickEvent={isToggleInfo} />}
     </>
   );
 };
