@@ -1,5 +1,5 @@
 server:
-  port: 8181
+  port: 8081
   ssl:
     enabled: true
     #    key-store: keystore.p12
