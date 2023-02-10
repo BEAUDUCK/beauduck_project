@@ -20,7 +20,7 @@ public class BoardInfoRequestDto {
     @ApiParam(value = "정보 게시판 글쓴이", required = true)
     private String writer;
     @ApiParam(value = "정보 게시판 삭제여부", required = true)
-    private boolean isActive;
+    private Boolean isActive;
     @ApiParam(value = "정보 게시판 글", required = true)
     private String content;
 //    @Builder

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface BoardInfoRepository extends JpaRepository<BoardInfoEntity, Integer> {
 
-    List<BoardInfoEntity> findAllByIsActive(boolean result);
+    List<BoardInfoEntity> findAllByIsActive(Boolean result);
 
 }

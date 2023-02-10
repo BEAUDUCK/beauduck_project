@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface BoardInfoCommentRepository extends JpaRepository<BoardInfoCommentEntity, Integer> {
 
-    List<BoardInfoCommentEntity> findAllByIsActive(boolean result);
+    List<BoardInfoCommentEntity> findAllByIsActive(Boolean result);
 
 }
