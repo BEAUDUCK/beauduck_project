@@ -1,6 +1,28 @@
 .single-main {
+    background-color: rgb(255, 235, 235);
     margin-top: 50px;
     
+
+    .best-text{
+        position: absolute;
+        display: inline-block;
+        width: 100%;
+        z-index: 9;
+        font-size: 400px;
+        margin: 0;
+        color: white;
+        font-family: 'Abril Fatface', cursive;
+    }
+
+    .hide-div {
+        position: absolute;
+        top: 600px;
+        width: 100%;
+        height: 50px;
+        z-index: 9;
+        background-color: rgb(255, 235, 235);
+    }
+
     .single-h2 {
         padding-left: 4%;
         display: inline-block;
@@ -19,30 +41,9 @@
     }
 }
 
-
-.makeup-recommend-btn {
-    display: block;
-    width: 450px;
-    height: 50px;
-
-    border: none;
-    border-radius: 10px;
-    // background-color: #FFEAC6;
-    // background-color: rgb(255,210,0);
-    // background-color: #F8DC69;
-    // background-color: #F7F008;
-    background-color: #FFE27C;
-
-    margin: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
-
-    font-family: 'Jalnan';
-    font-size: 20px;
-    color: #444444;
-    // color: rgb(0, 156,69);
+.alice-carousel {
+    z-index: 10;
 }
-
 
 .capture-div {
     text-align: center;
@@ -416,8 +417,8 @@
 // 메인 하단
 .makeup-special {
     position: relative;
-    width: 100vw;
-    height: 1000px;
+    width: 100%;
+    height: 900px;
     background-color: #FFF5D1;
 
     .makeup-special-section1 {
@@ -435,49 +436,142 @@
             letter-spacing: 0.2rem;
         }
 
+        .section1-create{
+            margin-left: 10%;
+            display: flex;
+            flex-direction: column;
+
+            
+            h2 {
+                display: inline-block;
+                max-width: 400px;
+                font-size: 30px;
+            }
+            p {
+                display: inline-block;
+                max-width: 400px;
+                font-size: 18px;
+                margin: 0;
+            }
+
+            div {
+                position: relative;
+                width: 200px;
+                height: 75px;
+                svg {
+                    position: absolute;
+                    right: 10px;
+                    bottom: 20px;
+                    color: #23C4B1;
+                    cursor: pointer;
+                }
+            }
+        }
+
         .section1-ai {
             position: absolute;
             top: 170px;
-            right: 170px;
+            right: 80px;
             z-index: 100;
             width: 500px;
-            height: 500px;
+            height: 550px;
             background-color: white;
-            border-radius: 20px;
+            border-radius: 100px;
+            box-shadow: 8px 8px 5px rgba(210, 210, 210, 0.8);
+            padding-left: 50px;
+            padding-right: 30px;
+
+            h1 {
+                width: 430px;
+                word-break: keep-all;
+                text-align: left;
+                margin-top: 80px;
+                margin-bottom: 30px;
+            }
+            p {
+                margin: 0;
+            }
+            
+            .section1-bottom {
+                display: flex;
+                margin-top: 40px;
+
+                div {
+                    position: relative;
+                    width: 200px;
+                    height: 35px;
+                    svg {
+                        position: absolute;
+                        right: 15px;
+                        bottom: 10px;
+                        color: #4D8AF0;
+                        cursor: pointer;
+                    }
+                }
+                img { 
+                    width: 300px;
+                }
+            }
         }
 
         #backShape1 {
             position: absolute;
-            top: 50px;
-            left: 600px;
-            width: 500px;
+            top: -50px;
+            left: 40%;
+            width: 600px;
             z-index: 1;
         }
         
         #backShape2 {
             position: absolute;
             top: 200px;
-            left: 600px;
-            width: 600px;
+            left: 38%;
+            width:700px;
             z-index: 0;
         }
     }
 
     .makeup-special-section2 {
         position: absolute;
-        top: 500px;
-        width: 45vw;
+        top: 450px;
+        width: 40vw;
         min-width: 500px;
-        height: 500px;
+        height: 450px;
 
         background-color: #fbe9a7;
         border-top-right-radius: 100px;
 
-        h1 {
+        .random-header {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            padding-left:20px;
+        }
+
+        .random-h1 {
             display: inline-block;
-            width: 90%;
-            text-align: center;
-            margin-top: 30px;
+            width: 350px;
+            height: 100px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            h1 {
+                display: inline-block;
+                text-align: center;
+                margin: 0;
+                line-height: 50px;
+                color:rgb(52, 52, 52);
+                // text-shadow: 3px 3px #fcd750;
+            }
+            .random-h1-one {
+                font-size: 37px;
+            }
+            .random-h1-two {
+                margin-left: 50px;
+            }
+        }
+        .miniDuck {
+            width: 150px;
+            display: inline-block;
         }
     }
 }   
