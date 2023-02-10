@@ -6,10 +6,13 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -26,6 +29,7 @@ public class AwsS3Service {
   public String uploadFileV1(MultipartFile multipartFile) throws Exception{
     String originalName = multipartFile.getOriginalFilename(); // 파일 이름
     long size = multipartFile.getSize(); // 파일 크기
+    System.out.println("File Name: "+originalName+" File size: "+size);
 
     ObjectMetadata objectMetaData = new ObjectMetadata();
     objectMetaData.setContentType(multipartFile.getContentType());
@@ -38,6 +42,7 @@ public class AwsS3Service {
     );
 
     String imagePath = amazonS3Client.getUrl(S3Bucket, originalName).toString(); // 접근가능한 URL 가져오기
+    System.out.println("ImagePath: "+imagePath);
     return imagePath;
   }
 }
