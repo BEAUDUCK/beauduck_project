@@ -17,6 +17,9 @@ import SinglePopular from '../features/single/SinglePopular';
 import SingleRandom from '../features/single/SingleRandom';
 import backShape1 from '../assets/backShape1.png';
 import backShape2 from '../assets/backShape2.png';
+import miniDuck from '../assets/logo_no_back.png';
+import aiPic from '../assets/ai.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
@@ -52,27 +55,43 @@ const SinglePage = () => {
 
   return (
     <div className="single-main">
+      <h1 className="best-text">BEST 10</h1>
       <SinglePopular modeList={popularList} />
+      <div className="hide-div"></div>
       <div className="makeup-special">
         <div className="makeup-special-section1">
-          <div>
-            <h1>
-              나에게 맞는 <br /> 메이크업은?
-            </h1>
-            <p>나만의 메이크업 공유하기</p>
-            <Button text={'만들기'} onClickEvent={onToggleMake} />
+          <div className="section1-create">
+            <h2>마음에 드는 메이크업이 없나요?</h2>
+            <p>모든 메이크업 단계와 </p>
+            <p>색감까지 내 마음대로 커스터마이징</p>
+            <div>
+              <Button
+                text={'메이크업 만들어보기'}
+                onClickEvent={onToggleMake}
+                btnStyle={'single-create-btn'}
+              />
+              <FontAwesomeIcon icon="fa-solid fa-circle-chevron-right" />
+            </div>
           </div>
 
           <img src={backShape1} alt="" id="backShape1" />
           <img src={backShape2} alt="" id="backShape2" />
 
           <div className="section1-ai">
-            <p>
-              인공지능으로 얼굴을 분석하여 나와 닮은 사람들의 메이크업을 추천
-            </p>
-            <button className="makeup-recommend-btn" onClick={popRecommend}>
-              메이크업 추천 받기
-            </button>
+            <h1>나한테 찰떡인 메이크업 어디 없나?</h1>
+            <p>AI가 내 얼굴을 분석하고</p>
+            <p>직접 어울리는 메이크업을 추천해줘요!</p>
+            <div className="section1-bottom">
+              <div>
+                <Button
+                  btnStyle={'recommend-btn'}
+                  onClickEvent={popRecommend}
+                  text={'추천 받으러 가기'}
+                />
+                <FontAwesomeIcon icon="fa-solid fa-circle-chevron-right" />
+              </div>
+              <img src={aiPic} alt="" />
+            </div>
           </div>
           {/* 추천 받을 수 있는지 없는지 */}
           {isRecommend && <SingleModalRecommend popRecommend={popRecommend} />}
@@ -97,7 +116,13 @@ const SinglePage = () => {
           {isFinish && <BlackOut onClickEvent={onToggleFinish} />}
         </div>
         <div className="makeup-special-section2">
-          <h1>RANDOM PICK</h1>
+          <div className="random-header">
+            <img src={miniDuck} alt="miniDuck" className="miniDuck" />
+            <div className="random-h1">
+              <h1 className="random-h1-one">뷰덕 PICK !</h1>
+              <h1 className="random-h1-two">TODAY'S MAKEUP</h1>
+            </div>
+          </div>
           <SingleRandom />
         </div>
       </div>

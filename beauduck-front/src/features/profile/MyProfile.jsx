@@ -16,7 +16,7 @@ const MyProfile = () => {
   const [userContent, setUserContent] = useState(userInfo?.content);
 
   const [edited, setEdited] = useState(false);
-  const fileInput = useRef(null);
+  // const fileInput = useRef(null);
 
   const handleEdited = () => {
     setEdited(!edited);
@@ -66,20 +66,24 @@ const MyProfile = () => {
     <div className="MyProfile">
       {!edited ? (
         <div>
-          <div className="profile-img-div">
-            <img className="profile-img" src={profileImg} alt="프로필사진" />
-          </div>
           <div className="profile-nickname">
             {/* <p>{props.nickname}</p> */}
-            <p>{userNickname}</p>
+            {/* <p>{userNickname}</p> */}
+            <h2>장멋쟁이똥</h2>
+          </div>
+          <div className="profile-img-div">
+            <img src={profileImg} alt="프로필사진" />
           </div>
           <div className="profile-content">
-            <div>{userContent}</div>
+            {/* <p>{userContent}</p> */}
+            <p>나는 개똥벌레</p>
           </div>
-          <button onClick={handleEdited}>수정</button>
+          <button className="profile-btn" onClick={handleEdited}>
+            수정
+          </button>
         </div>
       ) : (
-        <div className="MyProfile">
+        <>
           {/* <div className="profile-img-div">
             <input
               type="file"
@@ -89,23 +93,25 @@ const MyProfile = () => {
               ref={fileInput}
             />
           </div> */}
-          <div>
+          <div className="nickname-update">
             <input
               ref={nicknameRef}
               value={userNickname}
               onChange={(e) => setUserNickname(e.target.value)}
             />
+            <button onClick={checkOver}>중복 확인</button>
           </div>
-          <button onClick={checkOver}>중복 확인</button>
-          <div>
-            <input
-              type="textarea"
-              value={userContent}
-              onChange={(e) => setUserContent(e.target.value)}
-            />
+          <div className="profile-img-div">
+            <img src={profileImg} alt="프로필사진" />
           </div>
-          <button onClick={handleChangeProfile}>완료</button>
-        </div>
+          <textarea
+            value={userContent}
+            onChange={(e) => setUserContent(e.target.value)}
+          />
+          <button className="profile-btn" onClick={handleChangeProfile}>
+            완료
+          </button>
+        </>
       )}
     </div>
     // <div className="MyProfile">

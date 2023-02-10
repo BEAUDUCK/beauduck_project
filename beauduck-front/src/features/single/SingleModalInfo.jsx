@@ -104,7 +104,11 @@ const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
         </button>
       </div>
       <p className="describe-text">*진행하려는 과정을 선택하세요.</p>
-      <Button text={'시작하기'} onClickEvent={selectSubmit} />
+      <Button
+        text={'시작하기'}
+        onClickEvent={selectSubmit}
+        btnStyle={'start-btn'}
+      />
     </div>
   );
 };
