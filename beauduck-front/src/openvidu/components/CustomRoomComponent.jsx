@@ -644,15 +644,17 @@ class CustomRoomComponent extends Component {
 
 		
     render() {
+				// 원래 있던 코드
         const mySessionId = this.state.mySessionId;
         const localUser = this.state.localUser;
+				var chatDisplay = { display: this.state.chatDisplay };
 				// 호스트 닉네임
         const host = this.props.host
 				const hostUser = this.state.subscribers.filter(it => it.getNickname() === host)
 				console.log(this.props)
         return (
 					<>
-            {host === this.state.myUserName && this.state.isRoomAdmin ? (
+            {host === this.state.myUserName ? (
               // 내가 호스트 일때 
               <div className="container" id="container" style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
                   <div className="left-div" style={{ width: "20%", height: "100%" }} >
