@@ -322,7 +322,7 @@ class CustomRoomComponent extends Component {
             newUser.setStreamManager(subscriber);
             newUser.setConnectionId(event.stream.connection.connectionId);
             newUser.setType('remote');
-            const nickname = this.props.userList.filter(it => it.nickname === myUserName).nickname
+            const nickname = this.props.userList.filter(it => it.nickname === this.state.myUserName).nickname
             newUser.setNickname(JSON.parse(nickname).clientData);
             this.remotes.push(newUser);
             if(this.localUserAccessAllowed) {
