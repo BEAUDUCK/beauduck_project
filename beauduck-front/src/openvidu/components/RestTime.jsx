@@ -1,8 +1,8 @@
 import React from "react"
-import ToolbarComponent from "./toolbar/ToolbarComponent";
+import Moment from "react-moment"
 
 const RestTime = () => {
-  
+  const nowTime = Date.now()
 
   return (
     <div className="sub-component" >
