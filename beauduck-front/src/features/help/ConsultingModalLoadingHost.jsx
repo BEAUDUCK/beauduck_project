@@ -26,7 +26,7 @@ const ConsultingModalLoadingHost = () => {
       <button className="loading-bigbtn">START</button>
       <h3 className="loading-h3">대기 리스트</h3>
       <div className="loading-list">
-        {userList.map((user) => (
+        {userList?.map((user) => (
           <div className="each-user">
             <span className="username">{user.nickname}</span>
             <span className={['onoff', 'on-btn'].join(' ')}>ON</span>

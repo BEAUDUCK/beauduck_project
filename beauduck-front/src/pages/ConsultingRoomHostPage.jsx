@@ -2,7 +2,7 @@ import CustomRoomComponent from "../openvidu/components/CustomRoomComponent";
 
 const ConsultingRoomPage = () => {
   return (
-    <div>
+    <div className="full-screen">
       <CustomRoomComponent />
     </div>
   );
