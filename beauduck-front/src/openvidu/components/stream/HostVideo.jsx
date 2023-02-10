@@ -25,6 +25,7 @@ const HostVideoComponent = ( props ) => {
 		if (props && !!videoRef) {
 			user.getStreamManager().addVideoElement(videoRef.current)
 		}
+		console.log("@@@@@@@@@@@", props)
 	}, [user, mutedSound, props])
 
 	// useEffect(() => {
@@ -73,7 +74,7 @@ const HostVideoComponent = ( props ) => {
 			<video
 				className='input_video'
 				autoPlay={true}
-				id={'video-' + props.user.getStreamManager().stream.streamId}
+				id={props.user}
 				ref={videoRef}
 				muted={mutedSound}
 				style={{ position: "absolute", left: "0" }}
