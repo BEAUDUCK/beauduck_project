@@ -41,7 +41,7 @@ public class MemberProfileEntity {
     private int exp;
 
     @Column(name = "badge")
-    private int badge;
+    private String badge;
 
     @Column(name = "is_private")
     private Boolean isPrivate;
@@ -58,7 +58,7 @@ public class MemberProfileEntity {
 
     @Builder
     public MemberProfileEntity(MemberEntity memberEntity, String nickName, String img, String content,
-                               int exp, int badge, Boolean isPrivate){
+                               int exp, String badge, Boolean isPrivate){
         this.memberEntity = memberEntity;
         this.nickName = nickName;
         this.img = img;

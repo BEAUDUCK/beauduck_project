@@ -16,7 +16,7 @@ public class ProfileResponseDto {
     private String img;
     private String content;
     private int exp;
-    private int badge;
+    private String badge;
     private ZonedDateTime created_date;
     private ZonedDateTime updated_date;
 

@@ -161,9 +161,6 @@ public class AuthService {
                 .email(email)
                 .sex(sex)
                 .phoneNumber(phone)
-                .accessToken(accessToken)
-                .socialCode(id)
-                .externalId("")
                 .build();
         memberInfoRepository.save(memberInfoEntity);
 
@@ -173,7 +170,7 @@ public class AuthService {
                 .img(null)
                 .content(content)
                 .exp(0)
-                .badge(0)
+                .badge("입덕")
                 .isPrivate(false)
                 .build();
         memberProfileRepository.save(memberProfileEntity);
