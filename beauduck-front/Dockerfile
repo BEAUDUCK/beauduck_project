@@ -16,7 +16,7 @@ COPY . .
 # 소스 코드가 조금 달라질때도 항상 npm install을 수행해서 리소스가 낭비된다.
 
 # 3000번 포트 노출
-# EXPOSE 3000
+EXPOSE 3000
 
 # npm start 스크립트 실행
 CMD ["npm", "start"]
