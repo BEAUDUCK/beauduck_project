@@ -19,7 +19,7 @@ const ConsultingRoomPage = () => {
     <div className="full-screen">
       <CustomRoomComponent
         sessionName={consultDetail.roomId}
-        host={consultDetail.hostNickname}
+        host={consultDetail}
         user={myNickname}
         isRoomAdmin={isRoomAdmin}
         userList={consultDetail.userList}

@@ -72,7 +72,7 @@ export const getMyGalleryList = createAsyncThunk(
 export const postSaveFace = createAsyncThunk(
   'member/postSaveFace',
   async (payload) => {
-    console.log('ㅠㅔ이로드', payload.img);
+    console.log('페이로드', payload.img);
     const res = await memberAxios.post(
       `/members/ai/${payload.memberId}`,
       payload,

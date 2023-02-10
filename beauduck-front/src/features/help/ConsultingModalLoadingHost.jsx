@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,24 +20,26 @@ const ConsultingModalLoadingHost = () => {
     (state) => state.consulting,
   );
   
-  const [isRoomAdmin, setIsRoomAdmin] = useState(false)
   const hostNickname = useSelector(state => state.member.nickName)
 
   const hostData = [
-    { hostNickname,  }
+    { hostNickname }
   ]
 
   console.log('roomId', roomId);
 
   useEffect(() => {
-    dispatch(getConsultDetail(roomId));
+
   }, [userList]);
+
+  useEffect(() => {
+    dispatch(getConsultDetail(roomId));
+  }, [])
 
   console.log('유저리스트!', userList);
 
   const handleStart = (roomId, consultDetail, userList) => {
-    setIsRoomAdmin(true)
-    navigate("/help/room", { state: { roomId, consultDetail, userList, isRoomAdmin } })
+    navigate("/help/room", { state: { roomId, consultDetail, userList } })
   }
 
   return (

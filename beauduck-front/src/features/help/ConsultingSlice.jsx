@@ -43,7 +43,7 @@ export const enterUser = createAsyncThunk('help/enterUser', async (payload) => {
 export const outUser = createAsyncThunk('help/outUser', async (payload) => {
   const check = await client.post('/consult/out/');
   console.log(check.data);
-  const res = await client.patch(`/consult/${payload.roomId}`);
+  const res = await client.get(`/consult/${payload.roomId}`);
   return res.data;
 });
 

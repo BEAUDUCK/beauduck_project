@@ -2,6 +2,7 @@ import axios from 'axios';
 import { getCookie } from './cookie';
 
 const REACT_APP_BASE_URL = 'http://i8b306.p.ssafy.io:8080';
+
 const member = axios.create({
   baseURL: REACT_APP_BASE_URL,
   headers: {

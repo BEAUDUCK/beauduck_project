@@ -19,7 +19,7 @@ import SmallConsultantStream from './stream/SmallConsultantStream';
 
 var localUser = new UserModel();
 // const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'localhost:5000/';
-const OPENVIDU_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'http://i8b306.p.ssafy.io:9000/'
+const OPENVIDU_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'http://i8b306.p.ssafy.io/'
 const OPENVIDU_SERVER_SECRET = "MY_SECRET"
 
 class CustomRoomComponent extends Component {
@@ -79,14 +79,15 @@ class CustomRoomComponent extends Component {
         this.checkNotification = this.checkNotification.bind(this);
         // this.checkSize = this.checkSize.bind(this);
 
-				this.handleStart = this.handleStart.bind(this)
+				// this.handleStart = this.handleStart.bind(this)
 
-				this.handleBtnIncreased = this.handleBtnIncreased.bind(this)
-				this.handleBtnDecreased = this.handleBtnDecreased.bind(this)
-				this.handleActive = this.handleActive.bind(this)
+				// this.handleBtnIncreased = this.handleBtnIncreased.bind(this)
+				// this.handleBtnDecreased = this.handleBtnDecreased.bind(this)
+
     }
     // componentDidMount: 컴포넌트가 마운트 되었을 때 작동하는 리액트 컴포넌트 생명주기함수
     componentDidMount() {
+			console.log("componentDidmount")
         // openViduLayoutOptions: 화면 레이아웃 설정
         const openViduLayoutOptions = {
             maxRatio: 9 / 16, // The narrowest ratio that will be used (default 2x3)
@@ -110,11 +111,11 @@ class CustomRoomComponent extends Component {
 
          // 세션에 조인하기
         this.joinSession();
-				window.localStorage.setItem("host", this.state.hostNickname)
 				console.log(this.state.subscribers)
     }
     // componentWillUnmount: 컴포넌트가 언마운트 됐을 때 작동하는 리액트 컴포넌트 생명주기함수
     componentWillUnmount() {
+			console.log("componentWillUnmount")
         window.removeEventListener('beforeunload', this.onbeforeunload);
         window.removeEventListener('resize', this.updateLayout);
         window.removeEventListener('resize', this.checkSize);
@@ -123,14 +124,16 @@ class CustomRoomComponent extends Component {
 
     // onbeforeunload : 페이지를 떠나기 직전에 작동하는 함수
     onbeforeunload(event) {
+			console.log("onbeforeunload")
         this.leaveSession();
     }
 
     // joinSession : 세션에 접속할 때 작동하는 함수
     joinSession() {
+			console.log("joinSession")
         this.OV = new OpenVidu();
 				this.OV.enableProdMode()
-
+			
         // setState : 1st 매개변수 - 상태값 설정, 2nd 매개변수 - 콜백함수
         this.setState({ session: this.OV.initSession(), }, async () => {
                 this.subscribeToStreamCreated();
@@ -139,9 +142,9 @@ class CustomRoomComponent extends Component {
         );
     }
 
-
     // connectToSession: 세션 연결을 위한 토큰을 받아서 연결을 처리하는 함수
     async connectToSession() {
+			console.log("connectToSession")
         if (this.props.token !== undefined) {
             // console.log('token received: ', this.props.token);
             this.connect(this.props.token);
@@ -162,6 +165,7 @@ class CustomRoomComponent extends Component {
 
     // connect : 토큰을 매개변수로 받아서 실제 세션에 접속하게 해주는 함수
     connect(token) {
+			console.log("connect")
         console.log(token)
         this.state.session
             .connect(
@@ -182,6 +186,7 @@ class CustomRoomComponent extends Component {
 
     // connectWebCam : 웹캠을 연결하는 함수 (실제 WebRTC와 연관된 내부 메서드들과 유사)
     async connectWebCam() {
+			console.log("connectWebcam")
         await this.OV.getUserMedia({ audioSource: undefined, videoSource: undefined });
         var devices = await this.OV.getDevices();
         var videoDevices = devices.filter(device => device.kind === 'videoinput');
@@ -199,6 +204,7 @@ class CustomRoomComponent extends Component {
 
         // 접근이 허용되었을 때 설정 변경
         if (this.state.session.capabilities.publish) {
+					console.log("설정 변경")
             publisher.on('accessAllowed' , () => {
                 this.state.session.publish(publisher).then(() => {
                     this.updateSubscribers();
@@ -229,6 +235,7 @@ class CustomRoomComponent extends Component {
 
     // updateSubscribers : 자신의 정보를 구독하고 있는(받고 있는) 유저들의 정보를 업데이트
     updateSubscribers() {
+			console.log("updateSubscribers")
         var subscribers = this.remotes;
         this.setState(
             {
@@ -249,6 +256,7 @@ class CustomRoomComponent extends Component {
     }
 
     leaveSession() {
+			console.log("leaveSession")
         const mySession = this.state.session;
 
         if (mySession) {
@@ -273,6 +281,7 @@ class CustomRoomComponent extends Component {
 
     // camStatusChanged : 캠 설정 변경
     camStatusChanged() {
+			console.log("camStatusChanged")
         localUser.setVideoActive(!localUser.isVideoActive());
         localUser.getStreamManager().publishVideo(localUser.isVideoActive());
         this.sendSignalUserChanged({ isVideoActive: localUser.isVideoActive() });
@@ -281,6 +290,7 @@ class CustomRoomComponent extends Component {
 
     // micStatusChanged : 마이크 설정 변경
     micStatusChanged() {
+			console.log("micStatusChanged")
         localUser.setAudioActive(!localUser.isAudioActive());
         localUser.getStreamManager().publishAudio(localUser.isAudioActive());
         this.sendSignalUserChanged({ isAudioActive: localUser.isAudioActive() });
@@ -309,6 +319,7 @@ class CustomRoomComponent extends Component {
 
     // subscribeToStreamCreated : 새롭게 접속한 사람의 스트림을 구독하는 함수
     subscribeToStreamCreated() {
+
         this.state.session.on('streamCreated', (event) => {
             const subscriber = this.state.session.subscribe(event.stream, undefined);
             // var subscribers = this.state.subscribers;
@@ -571,65 +582,65 @@ class CustomRoomComponent extends Component {
     //     }
     // }
 		
-		handleBtnIncreased() {
-			console.log("증가 눌렸어요")
-			this.state.btnState = 1
-			console.log("현재 버튼 상태", this.state.btnState)
-		}
+		// handleBtnIncreased() {
+		// 	console.log("증가 눌렸어요")
+		// 	this.state.btnState = 1
+		// 	console.log("현재 버튼 상태", this.state.btnState)
+		// }
 
-		handleBtnDecreased() {
-			console.log("감소 눌렸어요")
-			this.state.btnState = 2
-			console.log("현재 버튼 상태", this.state.btnState)
-		}
+		// handleBtnDecreased() {
+		// 	console.log("감소 눌렸어요")
+		// 	this.state.btnState = 2
+		// 	console.log("현재 버튼 상태", this.state.btnState)
+		// }
 
-		handleStart() {
-			this.handleActive()
-			console.log("시작@@@@@@@@@@@@@@@@@@@@@@@@@")
-			let interval;
-			var cnt = 0
+		// handleStart() {
+		// 	this.handleActive()
+		// 	console.log("시작@@@@@@@@@@@@@@@@@@@@@@@@@")
+		// 	let interval;
+		// 	var cnt = 0
 			
-			setTimeout(100)
+		// 	setTimeout(100)
 
-			const changeImg = () => {
+		// 	const changeImg = () => {
 
-				const colors = [
-					"#E8B0B0","#F03838","#EBEBEB","#FE9B7F","#F7F4EF","#C23445","#811F4C","#B28DB7","#3D2F2B","#BF1B36",
-					"#FF8384","#81CCAB","#B9DDFF","#7EBC42","#8A97C3","#4A478C","#292830","#A18E40","#006359","#006E47",
-					"#D1EEFB","#FDF650","#FEDCF5","#8884BE","#CEA9CB","#99A401","#422944","#818C75","#70491B","#FFFD36",
-					"#FEBC60","#B2B099","#DBBAC7","#C189CA","#96B09D","#DD3737","#BCA548","#B8616D","#2F124E","#D73A6F",
-					"#90E5D8","#5AC9E5","#F4CFFB","#F15D57","#B4BAD2","#006A8A","#535617","#546E6C","#5B2D41","#0000FE"
-				]
+		// 		const colors = [
+		// 			"#E8B0B0","#F03838","#EBEBEB","#FE9B7F","#F7F4EF","#C23445","#811F4C","#B28DB7","#3D2F2B","#BF1B36",
+		// 			"#FF8384","#81CCAB","#B9DDFF","#7EBC42","#8A97C3","#4A478C","#292830","#A18E40","#006359","#006E47",
+		// 			"#D1EEFB","#FDF650","#FEDCF5","#8884BE","#CEA9CB","#99A401","#422944","#818C75","#70491B","#FFFD36",
+		// 			"#FEBC60","#B2B099","#DBBAC7","#C189CA","#96B09D","#DD3737","#BCA548","#B8616D","#2F124E","#D73A6F",
+		// 			"#90E5D8","#5AC9E5","#F4CFFB","#F15D57","#B4BAD2","#006A8A","#535617","#546E6C","#5B2D41","#0000FE"
+		// 		]
 				
-				let bgColor = colors[cnt]
-				console.log(`${cnt + 1}번째 색`)
-				console.log(bgColor)
-				this.setState({ nowColor: bgColor })
-				if (this.state.btnState === 1) {
-					this.props.handleChangeCnt(cnt, 1)
-					this.state.result[cnt % 10] += 1
-					console.log("증가!!!")
-				} else if (this.state.btnState === 2) {
-					this.props.handleChangeCnt(cnt, 2)
-					console.log("그대로")
-				} else {
-					this.props.handleChangeCnt(cnt, 0)
-					console.log("안누름")
-				}
-				console.log(this.state.result)
-				cnt++
-				this.setState({ btnState: 0 })
+		// 		let bgColor = colors[cnt]
+		// 		console.log(`${cnt + 1}번째 색`)
+		// 		console.log(bgColor)
+		// 		this.setState({ nowColor: bgColor })
+		// 		if (this.state.btnState === 1) {
+		// 			this.props.handleChangeCnt(cnt, 1)
+		// 			this.state.result[cnt % 10] += 1
+		// 			console.log("증가!!!")
+		// 		} else if (this.state.btnState === 2) {
+		// 			this.props.handleChangeCnt(cnt, 2)
+		// 			console.log("그대로")
+		// 		} else {
+		// 			this.props.handleChangeCnt(cnt, 0)
+		// 			console.log("안누름")
+		// 		}
+		// 		console.log(this.state.result)
+		// 		cnt++
+		// 		this.setState({ btnState: 0 })
 
-				if (cnt === 50) {
-					stopAct(interval)
-				}
-			}
-			interval = setInterval(changeImg, 3000)
+		// 		if (cnt === 50) {
+		// 			stopAct(interval)
+		// 		}
+		// 	}
+		// 	interval = setInterval(changeImg, 3000)
 			
-			function stopAct(interval) {
-				clearInterval(interval)
-			}
-		}
+		// 	function stopAct(interval) {
+		// 		clearInterval(interval)
+		// 	}
+		// }
 
 		
     render() {
@@ -638,16 +649,7 @@ class CustomRoomComponent extends Component {
 				// 호스트 닉네임
         const host = this.props.host
 				const hostUser = this.state.subscribers.filter(it => it.getNickname() === host)
-        // const userCount = this.state.subscribers.length + 1
-        // const userList = this.props.userList
 				console.log(this.props)
-				console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", localUser)
-				console.log(this.props.user)
-				console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-				console.log(hostUser)
-				if (localUser === this.state.hostNickname) {
-					console.log("#################################", "내가 호스트다")
-				}
         return (
 					<>
             {host === this.state.myUserName && this.state.isRoomAdmin ? (
@@ -726,7 +728,7 @@ class CustomRoomComponent extends Component {
 										<div className='host' style={{ height: "70vh" }}>
 											<HostComponent 
 												user={hostUser}
-												streamId={hostUser.streamManager.stream.streamId}
+												// streamId={hostUser.streamManager.stream.streamId}
 												handleNickname={this.nicknameChanged}
 												nowColor={this.state.nowColor}
 											/>
@@ -795,9 +797,11 @@ class CustomRoomComponent extends Component {
     }
 
     async createToken(sessionId) {
+			console.log("여기까진 오잖아")
         const response = await axios.post(OPENVIDU_SERVER_URL + 'api/sessions/' + sessionId + '/connections', {}, {
             headers: { 'Content-Type': 'application/json', },
         });
+				console.log("안되나?")
         return response.data; // The token
     }
 }
