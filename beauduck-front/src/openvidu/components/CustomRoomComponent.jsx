@@ -322,7 +322,7 @@ class CustomRoomComponent extends Component {
             newUser.setStreamManager(subscriber);
             newUser.setConnectionId(event.stream.connection.connectionId);
             newUser.setType('remote');
-            const nickname = event.stream.connection.data.split('%')[0];
+            const nickname = this.props.userList.filter(it => it.nickname === myUserName).nickname
             newUser.setNickname(JSON.parse(nickname).clientData);
             this.remotes.push(newUser);
             if(this.localUserAccessAllowed) {
@@ -635,9 +635,9 @@ class CustomRoomComponent extends Component {
     render() {
         const mySessionId = this.state.mySessionId;
         const localUser = this.state.localUser;
-        const chatDisplay = { display: this.state.chatDisplay };
+				// 호스트 닉네임
         const host = this.props.host
-				const hostUser = this.state.isRoomAdmin ? localUser : this.state.subscribers
+				const hostUser = this.state.subscribers.filter(it => it.getNickname() === host)
         // const userCount = this.state.subscribers.length + 1
         // const userList = this.props.userList
 				console.log(this.props)

@@ -22,6 +22,7 @@ const ConsultingRoomPage = () => {
         host={consultDetail.hostNickname}
         user={myNickname}
         isRoomAdmin={isRoomAdmin}
+        userList={consultDetail.userList}
       />
     </div>
   );
