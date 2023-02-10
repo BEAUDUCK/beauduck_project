@@ -6,10 +6,12 @@ import rank2 from '../../assets/rank/rank2.png';
 import rank3 from '../../assets/rank/rank3.png';
 import rank4 from '../../assets/rank/rank4.png';
 import rank5 from '../../assets/rank/rank5.png';
+import speechBubble from '../../assets/speechBubble.png';
 
 const MyRanking = () => {
-  const [myBadge, setMyBadge] = useState('초보덕');
-  const [myExp, setMyExp] = useState(250);
+  const [myBadge, setMyBadge] = useState('프로덕');
+  const [myExp, setMyExp] = useState(2100);
+  const [ment, setMent] = useState('');
   const expRatio = 5000 / myExp;
   const getMyRank = () => {
     // axios 요청
@@ -20,14 +22,24 @@ const MyRanking = () => {
     switch (myBadge) {
       case '입덕':
         setBadgeImg(rank1);
+        setMent('이제 시작이덕');
+        break;
       case '초보덕':
         setBadgeImg(rank2);
+        setMent('아직 서툴덕');
+        break;
       case '아마추덕':
         setBadgeImg(rank3);
+        setMent('아직 멀었덕');
+        break;
       case '프로덕':
         setBadgeImg(rank4);
+        setMent('제법 프로덕');
+        break;
       case '슈퍼덕':
         setBadgeImg(rank5);
+        setMent('내가 최고덕');
+        break;
     }
   }, []);
 
@@ -44,11 +56,17 @@ const MyRanking = () => {
         ></div>
         <p className="exp-text">{myExp}</p>
         <div className="badge-div">
-          <img src={badgeImg} alt="" />
-          <p>{myBadge}</p>
+          <div>
+            <img src={badgeImg} alt="" />
+            <p>{myBadge}</p>
+          </div>
+          <div>
+            <img src={speechBubble} alt="" className="speechBubble" />
+            <p className="ment">{ment}</p>
+          </div>
         </div>
       </div>
-      <img src={rank} alt="" className="rank-img" />
+      {/* <img src={rank} alt="" className="rank-img" /> */}
     </div>
   );
 };
