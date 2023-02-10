@@ -42,7 +42,8 @@ class CustomRoomComponent extends Component {
 						nowColor: undefined,
 						result: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 						btnState: null,
-						isActive: false
+						isActive: false,
+						hostNickname: this.props.hostNickname
         };
         // 메서드 바인딩 과정
         // joinSession : 세션 접속
@@ -83,7 +84,6 @@ class CustomRoomComponent extends Component {
 				this.handleBtnIncreased = this.handleBtnIncreased.bind(this)
 				this.handleBtnDecreased = this.handleBtnDecreased.bind(this)
 				this.handleActive = this.handleActive.bind(this)
-
     }
     // componentDidMount: 컴포넌트가 마운트 되었을 때 작동하는 리액트 컴포넌트 생명주기함수
     componentDidMount() {
@@ -110,6 +110,7 @@ class CustomRoomComponent extends Component {
 
          // 세션에 조인하기
         this.joinSession();
+				console.log(this.state.subscribers)
     }
     // componentWillUnmount: 컴포넌트가 언마운트 됐을 때 작동하는 리액트 컴포넌트 생명주기함수
     componentWillUnmount() {
@@ -641,6 +642,7 @@ class CustomRoomComponent extends Component {
 				const isActive = this.state.isActive
         // const userCount = this.state.subscribers.length + 1
         // const userList = this.props.userList
+				console.log(this.remotes)
 
         return (
 					<>
@@ -655,7 +657,7 @@ class CustomRoomComponent extends Component {
                       ))}
                   </div>
                   <div className='host-div' style={{ width: "50%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }} >
-                    {host === this.state.myUserName && 
+                    {this.state.hostNickname === this.state.myUserName && 
                       <div>
                         <HostComponent user={localUser} streamId={localUser.streamManager.stream.streamId}/>
                       </div>
@@ -663,11 +665,11 @@ class CustomRoomComponent extends Component {
                     <div className='room-title' style={{ height: "5vh" }}>
                       {`${host}의 방`}
                     </div>
-                    {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                    {/* {localUser !== undefined && localUser.getStreamManager() !== undefined && (
                       <div className="host" style={{ height: "70vh" }}>
                         <HostComponent user={localUser} handleNickname={this.nicknameChanged}/>
                       </div>
-                      )}
+                      )} */}
                     <div className='sub' style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "15vh" }}>
                       <RestTime />
                       <ToolbarComponent
@@ -774,7 +776,7 @@ class CustomRoomComponent extends Component {
     async createSession(sessionId) {
         const response = await axios.post(OPENVIDU_SERVER_URL + 'api/sessions', { customSessionId: sessionId }, {
             headers: { 'Content-Type': 'application/json', },
-        });
+        })
         return response.data; // The sessionId
     }
 
