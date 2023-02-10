@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie } from './cookie';
 
-const REACT_APP_MAKEUP_URL = 'http://3.38.169.2:8083';
+const REACT_APP_MAKEUP_URL = 'https://i8b306.p.ssafy.io:8083';
 const client = axios.create({
   baseURL: REACT_APP_MAKEUP_URL,
   headers: {

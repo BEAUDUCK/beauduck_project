@@ -23,7 +23,7 @@ function LogoutModal(props) {
   const token = getAccessToken();
 
   const Logout = async () => {
-    await axios.get(`http://3.38.169.2:8080/naver/logout?accessToken=${token}`);
+    await axios.get(`http://i8b306.p.ssafy.io:8080/naver/logout?accessToken=${token}`);
     console.log('로그아웃');
     removeCookie('accessToken');
     localStorage.removeItem('refreshToken');
