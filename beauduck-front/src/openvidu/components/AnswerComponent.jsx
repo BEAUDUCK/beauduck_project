@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 
 const AnswerComponent = ({ handleDecrease, handleIncrease }) => {
-  
-  const dispatch = useDispatch()
-  const myNickname = useSelector(state => state.member.nickName)
-
-
-  // dispatch 로 보낼 때 풀어서 보내보자
-  // const data = {}
-  // data[myNickname] = score
-
 
   return (
     <div className="answercomponent">
