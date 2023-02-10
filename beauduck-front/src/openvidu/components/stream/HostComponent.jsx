@@ -13,16 +13,82 @@ import OvVideoComponent from './OvVideo';
 // import HighlightOff from '@material-ui/icons/HighlightOff';
 // import FormHelperText from '@material-ui/core/FormHelperText';
 import HostVideoComponent from './HostVideo';
+import AnswerComponent from '../AnswerComponent';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const HostComponent = (props) => {
 	const nickname = props.user.nickname
-	const [showForm, setShowForm] = useState(false)
+	// const [showForm, setShowForm] = useState(false)
 	const [mutedSound, setMutedSound] = useState(false)
-	const [isFormValid, setIsFormValid] = useState(true)
-	const nowColor = props.nowColor
+	// const [isFormValid, setIsFormValid] = useState(true)
+	const color = ["#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10"]
+	const [nowColor, setNowColor] = useState(null)
+	const [isActive, setIsActive] = useState(false)
+  const [score, setScore] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+	const [nowCnt, setNowCnt] = useState(0)
+	const [btnState, setBtnState] = useState(0)
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	
+	useEffect(() => {
+	
+	}, [nowColor, score, nowCnt])
 
 	const toggleSound = () => {
 		setMutedSound(!mutedSound)
+	}
+
+  const handleIncrease = () => {
+    console.log("증가 버튼 눌림")
+		setBtnState(1)
+  }
+
+  const handleDecrease =  () => {
+    console.log("감소 버튼 눌림")
+  }
+
+	const handleStart = () => {
+		setIsActive(true)
+		let interval;
+		var cnt = 0
+		
+		setTimeout(3000)
+
+		const changeImg = () => {
+
+			const colors = [
+				"#E8B0B0","#F03838","#EBEBEB","#FE9B7F","#F7F4EF","#C23445","#811F4C","#B28DB7","#3D2F2B","#BF1B36",
+				"#FF8384","#81CCAB","#B9DDFF","#7EBC42","#8A97C3","#4A478C","#292830","#A18E40","#006359","#006E47",
+				"#D1EEFB","#FDF650","#FEDCF5","#8884BE","#CEA9CB","#99A401","#422944","#818C75","#70491B","#FFFD36",
+				"#FEBC60","#B2B099","#DBBAC7","#C189CA","#96B09D","#DD3737","#BCA548","#B8616D","#2F124E","#D73A6F",
+				"#90E5D8","#5AC9E5","#F4CFFB","#F15D57","#B4BAD2","#006A8A","#535617","#546E6C","#5B2D41","#0000FE"
+			]
+
+			setNowColor(colors[cnt])
+			if (btnState === 1) {
+				setScore(score[nowCnt % 10] += 1)
+			}
+
+			setBtnState(0)
+			cnt++
+
+			if (cnt === 50) {
+				const nickname = {}
+
+				stopAct(interval)
+				setIsActive(false)
+				navigate("/help/result")
+			}
+		}
+		interval = setInterval(changeImg, 3000)
+		
+		function stopAct(interval) {
+			clearInterval(interval)
+		}
+
+		// 끝나면 버튼 다시 생기게
 	}
 
 	return (
@@ -31,7 +97,20 @@ const HostComponent = (props) => {
 				user={props.user} 
 				mutedSound={mutedSound}
 				nowColor={nowColor}
+				// nowColor={nowColor}
 			/>
+			{!isActive ? (
+				<button onClick={handleStart}>
+					시작
+				</button>
+			) : (
+				<>
+					<AnswerComponent
+						handleIncrease={handleIncrease}
+						handleDecrease={handleDecrease}
+					/>
+				</>
+			)}
 		</div>
 	);
 
