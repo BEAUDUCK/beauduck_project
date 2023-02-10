@@ -20,7 +20,7 @@ CORS(app)
 ## 저장된 db에 url 가져오기
 def getEmps(meberId):
     ret = []
-    db = pymysql.connect(host='3.38.169.2', user='root', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select member_id, img from imgai where is_makeup=true or member_id =%s"
     curs.execute(sql,[meberId])
@@ -99,7 +99,7 @@ def get_nearest_face(name, top= 5):
 
 
 def getmakeup(meberId):
-    db = pymysql.connect(host='3.38.169.2', user='root', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select  m.member_id, m.title, m.content, m.img, m.duration, m.score, m.count from makeup m  "
     sql = sql + "join imgai i " 
@@ -128,7 +128,7 @@ def getmakeup(meberId):
 
 def getisMember(meberId):
     ret = []
-    db = pymysql.connect(host='3.38.169.2', user='root', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select member_id from imgai where member_id =%s "
     curs.execute(sql,[meberId])
