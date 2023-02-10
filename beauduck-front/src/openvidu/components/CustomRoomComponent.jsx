@@ -649,6 +649,7 @@ class CustomRoomComponent extends Component {
         const localUser = this.state.localUser;
         var chatDisplay = { display: this.state.chatDisplay };
 
+        // 호스트 닉네임
         const host = this.props.host
 				const hostUser = this.state.subscribers.filter(it => it.getNickname() === host)
 				console.log(this.props)
