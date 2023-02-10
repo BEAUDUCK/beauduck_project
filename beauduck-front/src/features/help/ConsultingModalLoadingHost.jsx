@@ -19,7 +19,7 @@ const ConsultingModalLoadingHost = () => {
 
   useEffect(() => {
     dispatch(getConsultDetail(roomId));
-  }, [dispatch]);
+  }, [dispatch, userList]);
 
   return (
     <div className="loading-modal">
