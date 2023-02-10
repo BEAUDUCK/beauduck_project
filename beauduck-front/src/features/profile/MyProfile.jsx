@@ -1,72 +1,73 @@
-import "../../pages/Profile.style.scss"
-import { useEffect, useState, useRef } from "react"
-import logo from "../../assets/logo_original.png"
-import { useDispatch, useSelector } from "react-redux"
-import { getMemberInfo } from "./ProfileSlice"
+import '../../pages/Profile.style.scss';
+import { useEffect, useState, useRef } from 'react';
+import logo from '../../assets/logo_original.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkNickname, getMemberInfo, updateMemberInfo } from './ProfileSlice';
 
 const MyProfile = () => {
-  const dispatch = useDispatch()
-  const profileLogoImg = logo
-  const [profileImg, setProfileImg] = useState(profileLogoImg)
-  const { memberId } = useSelector(state => state.member)
-  const [userNickname, setUserNickname] = useState("닉네임")
-  const [userContent, setUserContent] = useState("자기소개")
+  const dispatch = useDispatch();
+  const profileLogoImg = logo;
+  const [profileImg, setProfileImg] = useState(profileLogoImg);
+
+  const { memberId } = useSelector((state) => state.member);
+  const { userInfo } = useSelector((state) => state.profile);
+
+  const [userNickname, setUserNickname] = useState(userInfo?.nickName);
+  const [userContent, setUserContent] = useState(userInfo?.content);
+
   const [edited, setEdited] = useState(false);
-  const fileInput = useRef(null)
-  // const [newContent, SetNewContent] = useState(usercontent)
-  useEffect(() => {
-    console.log('memberId :', memberId)
-    dispatch(getMemberInfo(memberId))
-  }, [])
+  const fileInput = useRef(null);
 
   const handleEdited = () => {
-    setEdited(!edited)
-  }
+    setEdited(!edited);
+  };
 
-  const handleChangeImage = (e) => {
-    if (e.target.files[0]) {
-      setProfileImg(e.target.files[0])
-    } else {
-      setProfileImg(profileImg)
-      return
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setProfileImg(reader.result)
-      }
-    }
-    reader.readAsDataURL(e.target.files[0])
-  }
+  // const handleChangeImage = (e) => {
+  //   if (e.target.files[0]) {
+  //     setProfileImg(e.target.files[0]);
+  //   } else {
+  //     setProfileImg(profileImg);
+  //     return;
+  //   }
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     if (reader.readyState === 2) {
+  //       setProfileImg(reader.result);
+  //     }
+  //   };
+  //   reader.readAsDataURL(e.target.files[0]);
+  // };
 
-  const handleChangeNickname = (e) => {
-    setUserNickname(e.target.value)
-    console.log(e.target.value)
-  }
-
-  const handleChangeContent = (e) => {
-    setUserContent(e.target.value)
-    console.log(e.target.value)
-  }
-
+  const nicknameRef = useRef();
   const handleChangeProfile = () => {
+    if (usable) {
+      nicknameRef.current.focus();
+      return;
+    }
     const updatedInfo = {
       memberId: memberId,
-      nickname: userNickname,
+      nickName: userNickname,
+      content: userContent,
+    };
 
-    }
-  }
+    dispatch(updateMemberInfo(updatedInfo));
+    setEdited(!edited);
+  };
+
+  const [usable, setUsable] = useState(false);
+
+  const checkOver = () => {
+    dispatch(checkNickname(userNickname)).then((res) => {
+      setUsable(res.payload.data);
+    });
+  };
 
   return (
     <div className="MyProfile">
       {!edited ? (
         <div>
           <div className="profile-img-div">
-            <img
-              className="profile-img"
-              src={profileImg}
-              alt="프로필사진" 
-            />
+            <img className="profile-img" src={profileImg} alt="프로필사진" />
           </div>
           <div className="profile-nickname">
             {/* <p>{props.nickname}</p> */}
@@ -75,13 +76,11 @@ const MyProfile = () => {
           <div className="profile-content">
             <div>{userContent}</div>
           </div>
-          <button onClick={handleEdited} >
-            수정
-          </button>
+          <button onClick={handleEdited}>수정</button>
         </div>
       ) : (
         <div className="MyProfile">
-          <div className="profile-img-div">
+          {/* <div className="profile-img-div">
             <input
               type="file"
               className="profile-img"
@@ -89,18 +88,20 @@ const MyProfile = () => {
               onChange={handleChangeImage}
               ref={fileInput}
             />
-          </div>
+          </div> */}
           <div>
             <input
+              ref={nicknameRef}
               value={userNickname}
-              onChange={handleChangeNickname}
+              onChange={(e) => setUserNickname(e.target.value)}
             />
           </div>
+          <button onClick={checkOver}>중복 확인</button>
           <div>
             <input
               type="textarea"
               value={userContent}
-              onChange={handleChangeContent}
+              onChange={(e) => setUserContent(e.target.value)}
             />
           </div>
           <button onClick={handleChangeProfile}>완료</button>
@@ -111,8 +112,8 @@ const MyProfile = () => {
     //   <div className="profile-img-div">
     //     <img
     //       className="profile-img"
-    //       src=   
-    //       alt="프로필사진" 
+    //       src=
+    //       alt="프로필사진"
     //     />
     //   </div>
     //   <div className="profile-nickname">
@@ -123,7 +124,7 @@ const MyProfile = () => {
     //     <div>자기소개 입니다.</div>
     //   </div>
     // </div>
-  )
-}
+  );
+};
 
 export default MyProfile;

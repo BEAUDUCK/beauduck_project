@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import './Header.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/logo_original.png';
-import toggle from '../../assets/hamburger.png'
 import { useState } from 'react';
 import LoginModal from '../../features/login/LoginModal';
 import LogoutModal from '../../features/login/LogoutModal';
@@ -14,11 +13,6 @@ const Header = () => {
 
   const token = localStorage.getItem('refreshToken');
   const { memberId } = useSelector((state) => state.member);
-  
-  const [menuToggle, setMenuToggle] = useState(false);
-  const menuOnOff = () => {
-    setMenuToggle(menuToggle => !menuToggle);
-  };
 
   return (
     <nav className="header">
@@ -31,25 +25,18 @@ const Header = () => {
         {/* <p onClick={() => navigate('/help')}>도와덕</p>
         <p onClick={() => navigate('/single')}>따라해덕</p>
         <p onClick={() => navigate('/together')}>투게덕</p>
-        <p onClick={() => navigate('/board')}>쑥덕쑥덕</p>
-        <p onClick={() => navigate('/rank')}>랭킹</p> */}
+        <p onClick={() => navigate('/board')}>쑥덕쑥덕</p>*/}
         <li onClick={() => navigate('/no')}>도와덕</li>
         <li onClick={() => navigate('/no')}>따라해덕</li>
         <li onClick={() => navigate('/no')}>투게덕</li>
         <li onClick={() => navigate('/no')}>쑥덕쑥덕</li>
-      
-
       </ul>
       <ul className="header-auth">
         <li onClick={() => navigate('/profile')}>
           <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user"/>
         </li>
-        <li>
-        {!memberId ? (
-            <LoginModal /> / <p onClick={() => navigate('/signup')}>SIGNUP</p>
-        ) : (
-            <LogoutModal />
-          )}
+        <li className="header-not-auto">
+            {!memberId ? <LoginModal /> : <LogoutModal />}
         </li>
       </ul>
     </nav>
