@@ -44,6 +44,7 @@
     "react-scripts": "5.0.1",
     "react-webcam": "^7.0.1",
     "redux-persist": "^6.0.0",
+    "socket.io": "^4.6.0",
     "socket.io-client": "^4.6.0",
     "swiper": "^8.4.6",
     "web-vitals": "^2.1.4"
