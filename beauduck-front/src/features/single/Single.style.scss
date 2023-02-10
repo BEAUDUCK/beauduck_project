@@ -3,18 +3,15 @@
 .alice-carousel {
     width: 100vw;
     height: 600px;
-    background-color: rgb(255, 235, 235);
     
-    .alice-carousel__state_item {
-        // margin-top: 100px;
-    }
 }
 
 .popular{
-    
+
 }
 
     .makeup-div {
+        position: relative;
         width: 290px;
         height: 400px;
         border-bottom-right-radius: 75px;
@@ -90,7 +87,7 @@
 //--------- 전체 메이크업 리스트 -------
 
 .basic-makeup-list{
-    width: 100vw;
+    width: 100%;
     background-color: #f4f3f8d6;
     text-align: center;
 
@@ -764,6 +761,7 @@
 
 
     .star-icon {
+        // transition: all 3s ease-in-out;
         color: #FFC107;
         font-size: 40px;
         margin-top: 20px;
@@ -1003,15 +1001,14 @@
 .random-one {
     width: calc(45vw - 20%);
     min-width: calc(500px - 20%);
-    height: 400px;
+    height: 300px;
     padding-left: 5%;
     padding-right: 15%;
     text-align: center;
 
     img {
-        width: 210px;
-        height: 260px;
-        margin-top: 30px;
+        width: 200px;
+        height: 230px;
         object-fit: cover;
         border-top-left-radius: 100px;
         border-top-right-radius: 100px;
