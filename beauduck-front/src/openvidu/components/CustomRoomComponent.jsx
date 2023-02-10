@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component } from 'react';
 // import ChatComponent from './chat/ChatComponent';
 // import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import StreamComponent from './stream/StreamComponent';
@@ -14,10 +14,6 @@ import RestTime from './RestTime';
 import Message from './Message';
 import AnswerComponent from './AnswerComponent';
 import SmallConsultantStream from './stream/SmallConsultantStream';
-import HostMainComponent from './HostMainComponent';
-import { connect } from 'react-redux';
-import { totalResultIncrement } from './openviduSlice';
-
 // import ToolbarComponent from './toolbar/ToolbarComponent';
 
 
@@ -661,7 +657,7 @@ class CustomRoomComponent extends Component {
                   <div className='host-div' style={{ width: "50%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }} >
                     {host === this.state.myUserName && 
                       <div>
-                        <HostComponent user={sub} streamId={sub.streamManager.stream.streamId}/>
+                        <HostComponent user={localUser} streamId={localUser.streamManager.stream.streamId}/>
                       </div>
                     } 
                     <div className='room-title' style={{ height: "5vh" }}>
