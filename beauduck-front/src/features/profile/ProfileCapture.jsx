@@ -22,12 +22,26 @@ const ProfileCapture = () => {
       // capture.setAttribute('class', 'captured-img');
       // mainCapture.appendChild(capture);
 
+      saveAsImg(imgUri, 'yong.jpg');
       const payload = {
         memberId,
         img: imgUri,
       };
       dispatch(postSaveFace(payload));
     });
+  };
+
+  const saveAsImg = (uri, filename) => {
+    const link = document.createElement('a');
+    if (typeof link.download === 'string') {
+      link.href = uri;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      window.open(uri);
+    }
   };
 
   return (
@@ -37,6 +51,8 @@ const ProfileCapture = () => {
           audio={false}
           screenshotFormat="image/jpeg"
           className="webcam"
+          width={640}
+          height={480}
         />
         <img id="faceCircle" src={faceCircle} alt="" />
       </div>

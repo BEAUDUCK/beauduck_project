@@ -30,7 +30,9 @@ const ConsultingModalLoadingHost = () => {
 
   useEffect(() => {
     dispatch(getConsultDetail(roomId));
-  }, [dispatch]);
+  }, [userList]);
+
+  console.log('유저리스트!', userList);
 
   const handleStart = (roomId, consultDetail, userList) => {
     setIsRoomAdmin(true)
