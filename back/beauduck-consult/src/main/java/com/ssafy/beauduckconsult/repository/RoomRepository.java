@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 @Repository
@@ -39,6 +40,7 @@ public class RoomRepository {
     public boolean createChatRoom(RoomDto roomDto, UserInfoDto userInfoDto) {
         hashOpsChatRoom.put(TO_ROOMS, roomDto.getRoomId(), roomDto);
         hashOpsEnterInfo.put(ENTER_INFO, roomDto.getHostId(), userInfoDto);
+        redisTemplate.expire(TO_ROOMS, 12, TimeUnit.HOURS);
         return true;
     }
 
