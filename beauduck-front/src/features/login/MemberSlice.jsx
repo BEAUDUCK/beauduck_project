@@ -10,7 +10,7 @@ export const UserLogin = createAsyncThunk(
   async (accessToken) => {
     console.log('로그인');
     const res = await axios.get(
-      `${server}naver/login?accessToken=${accessToken}`,
+      `${global}naver/login?accessToken=${accessToken}`,
     );
     // .then((res) => {
     //   console.log('로그인 res', res.data.data);
@@ -24,13 +24,13 @@ export const UserLogin = createAsyncThunk(
 export const signUp = createAsyncThunk('member/signUp', async (payload) => {
   console.log('회원가입');
   await axios
-    .post(`${server}naver/signup`, payload)
+    .post(`${global}naver/signup`, payload)
     .then((res) => {
       console.log('회원가입 res', res);
     })
     .catch((err) => console.log('회원가입 err', err));
   const res = await axios
-    .get(`${server}naver/login?accessToken=${payload.accessToken}`)
+    .get(`${global}naver/login?accessToken=${payload.accessToken}`)
     .then((res) => console.log(res));
   return res.data.data;
 });
