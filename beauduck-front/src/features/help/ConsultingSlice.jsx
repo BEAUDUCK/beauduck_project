@@ -63,9 +63,8 @@ export const consultSlice = createSlice({
         state.consultingList = action.payload;
       })
       .addCase(postNewConsulting.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.roomId = action.payload[0].roomId;
-        state.consultingList = action.payload[1];
+        state.consultingList = [...state.consultingList, action.payload[1]];
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;
