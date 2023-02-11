@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/Header';
 import BoardPage from './pages/BoardPage';
@@ -44,7 +44,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { accessLogin } from './features/login/MemberSlice';
 import InfoPage from './pages/InfoPage';
 
@@ -77,6 +77,7 @@ function App() {
   useEffect(() => {
     dispatch(accessLogin());
   }, []);
+
   return (
     <>
       <BrowserRouter>
