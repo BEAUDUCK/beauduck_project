@@ -1,6 +1,5 @@
-from flask import Flask, request
+from flask import Flask, request, redirect
 from flask_cors import CORS
-from flask_sslify import SSLify
 
 import numpy as np
 import face_recognition
@@ -17,7 +16,7 @@ import requests
 
 app = Flask(__name__)
 CORS(app)
-sslify = SSLify(app)
+# sslify = SSLify(app)
 
 
 ## 저장된 db에 url 가져오기
@@ -185,6 +184,6 @@ def ajax():
 
 
 if __name__ == '__main__':
-    ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-    ssl_context.load_cert_chain(certfile='cert.pem', keyfile='privkey.pem')
-    app.run(host='0.0.0.0', port=5000, ssl_context = ssl_context)
+    # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    # ssl_context.load_cert_chain(certfile='cert.pem', keyfile='privkey.pem')
+    app.run(host='0.0.0.0', port=5000, ssl_context =('../../archive/i8b306.p.ssafy.io/cert1.pem', '../../archive/i8b306.p.ssafy.io/privkey1.pem'))
