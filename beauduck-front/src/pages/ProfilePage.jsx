@@ -130,12 +130,12 @@ const ProfilePage = () => {
     if (makeupState) {
       return (
         <MyMakeupList
-          recentMakeup={dummyRecentMakeup}
-          madeMakeup={dummyMadeMakeup}
+          recentMakeup={recentMakeupList}
+          madeMakeup={myMakeupList}
         />
       );
     } else if (galleryState) {
-      return <MyGalleryList myGalleryList={dummyGallery} />;
+      return <MyGalleryList myGalleryList={myGalleryList} />;
     } else {
       return <MyProfileSaveFace />;
     }

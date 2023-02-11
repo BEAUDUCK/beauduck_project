@@ -27,7 +27,7 @@ const SinglePage = () => {
   // 최초에 메이크업 리스트 불러오기
   useEffect(() => {
     dispatch(getMakeupList());
-  }, [dispatch]);
+  }, []);
 
   // 추천 받기
   const [isRecommend, setIsRecommend] = useState(false);

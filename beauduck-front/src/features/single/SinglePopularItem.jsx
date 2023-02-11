@@ -17,7 +17,6 @@ const SinglePopularItem = ({ modeItem, idx }) => {
     ['#F4C3A5', '#E66E32'],
   ];
   const color = parseInt(idx % 4);
-
   return (
     <>
       <div
@@ -34,10 +33,13 @@ const SinglePopularItem = ({ modeItem, idx }) => {
           </div>
         </div>
       </div>
-      {/* {isInfo && (
-        <SingleModalInfo makeupId={modeItem.id} isToggleInfo={isToggleInfo} />
+      {isInfo && (
+        <div className="detail-test">
+          <img src={modeItem.img} alt="" />
+        </div>
+        // <SingleModalInfo makeupId={modeItem.id} isToggleInfo={isToggleInfo} />
       )}
-      {isInfo && <BlackOut onClickEvent={isToggleInfo} />} */}
+      {isInfo && <BlackOut onClickEvent={isToggleInfo} />}
     </>
   );
 };

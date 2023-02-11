@@ -6,11 +6,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { FontAwesomeIcon } from '../../../node_modules/@fortawesome/react-fontawesome/index';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const SingleModalRecommend = ({ popRecommend }) => {
-  // 닉네임 받아오기
+  const navigate = useNavigate();
   const { nickName } = useSelector((state) => state.member);
-  // 추천 메이크업 5개
   const { recommendList } = useSelector((state) => state.single);
 
   const closeModal = () => {
@@ -25,13 +25,13 @@ const SingleModalRecommend = ({ popRecommend }) => {
         onClick={closeModal}
       />
       <h3>{nickName}님에게 어울리는 추천 메이크업</h3>
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={0}
-        slidesPerView={3}
-        pagination={{ clickable: true }}
-      >
-        {recommendList.length != 0 ? (
+      {recommendList.length != 0 ? (
+        <Swiper
+          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          spaceBetween={0}
+          slidesPerView={3}
+          pagination={{ clickable: true }}
+        >
           <>
             {recommendList.map((item) => (
               <SwiperSlide>
@@ -42,10 +42,22 @@ const SingleModalRecommend = ({ popRecommend }) => {
               </SwiperSlide>
             ))}
           </>
-        ) : (
-          <></>
-        )}
-      </Swiper>
+        </Swiper>
+      ) : (
+        <>
+          <p>메이크업 추천에 사용될 사진이 없습니다.</p>
+          <button onClick={() => navigate('/profile')}>찍으러 가기</button>
+        </>
+      )}
+      {recommendList === 'error' ? (
+        <>
+          <p>얼굴 사진이 정확하지 않아 인식할 수 없습니다</p>
+          <p>가이드를 준수하여 재촬영하십시오.</p>
+          <button onClick={() => navigate('/profile')}>찍으러 가기</button>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
