@@ -11,14 +11,14 @@ import speechBubble from '../../assets/speechBubble.png';
 
 const MyRanking = () => {
   const { userInfo } = useSelector((state) => state.profile);
-  const [myBadge, setMyBadge] = useState(userInfo.badge);
-  const [myExp, setMyExp] = useState(userInfo.exp);
+  // const [myBadge, setMyBadge] = useState(userInfo?.badge);
+  // const [myExp, setMyExp] = useState(userInfo?.exp);
   const [ment, setMent] = useState('');
-  const expRatio = 5000 / myExp;
+  const expRatio = 5000 / userInfo?.exp;
 
   const [badgeImg, setBadgeImg] = useState('');
   useEffect(() => {
-    switch (myBadge) {
+    switch (userInfo?.badge) {
       case '입덕':
         setBadgeImg(rank1);
         setMent('이제 시작이덕');
@@ -40,7 +40,7 @@ const MyRanking = () => {
         setMent('내가 최고덕');
         break;
     }
-  }, []);
+  }, [userInfo]);
 
   return (
     <div className="MyRanking">
@@ -51,11 +51,11 @@ const MyRanking = () => {
           className="my-exp"
           style={{ width: `calc(80% / ${expRatio})` }}
         ></div>
-        <p className="exp-text">{myExp}</p>
+        <p className="exp-text">{userInfo?.exp}</p>
         <div className="badge-div">
           <div>
             <img src={badgeImg} alt="" />
-            <p>{myBadge}</p>
+            <p>{userInfo?.badge}</p>
           </div>
           <div>
             <img src={speechBubble} alt="" className="speechBubble" />

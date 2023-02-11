@@ -13,8 +13,13 @@ const MyProfile = () => {
   const { memberId } = useSelector((state) => state.member);
   const { userInfo } = useSelector((state) => state.profile);
 
-  const [userNickname, setUserNickname] = useState(userInfo.nickName);
-  const [userContent, setUserContent] = useState(userInfo.content);
+  const [userNickname, setUserNickname] = useState('');
+  const [userContent, setUserContent] = useState('');
+
+  useEffect(() => {
+    setUserNickname(userInfo?.nickName);
+    setUserContent(userInfo?.content);
+  }, [userInfo]);
 
   const [edited, setEdited] = useState(false);
   // const fileInput = useRef(null);
@@ -68,13 +73,13 @@ const MyProfile = () => {
         <div>
           <div className="profile-nickname">
             <div className="circle"></div>
-            <h2>{userInfo.nickName}</h2>
+            <h2>{userInfo?.nickName}</h2>
           </div>
           <div className="background-div"></div>
           <div className="profile-div">
             <img className="profile-img" src={profileImg} alt="프로필사진" />
             <div className="profile-content">
-              <p>{userInfo.content}</p>
+              <p>{userInfo?.content}</p>
             </div>
           </div>
           <button className="profile-btn" onClick={handleEdited}>
