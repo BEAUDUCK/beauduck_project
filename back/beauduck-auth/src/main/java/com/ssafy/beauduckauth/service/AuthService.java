@@ -55,7 +55,22 @@ public class AuthService {
 
     public ResponseSuccessDto<TokenResponseDto> getRefreshToken(String refreshToken) {
         System.out.println("리프레쉬 토큰 발급");
-        JSONObject response = getJsonObjectByToken(refreshToken);
+        WebClient webClient = WebClient
+                .builder()
+                .baseUrl("https://nid.naver.com")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+
+        JSONObject response = webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/oauth2.0/token")
+                        .queryParam("client_id", "V5gN96q3kFtGfUK7PUds")
+                        .queryParam("client_secret", "Z2RNeixHZU")
+                        .queryParam("refresh_token", refreshToken)
+                        .queryParam("grant_type", "refresh_token")
+                        .build())
+                .retrieve().bodyToMono(JSONObject.class).block();
 
         TokenResponseDto tokenResponseDto = TokenResponseDto.builder()
                 .accessToken((String) response.get("access_token"))
@@ -104,7 +119,23 @@ public class AuthService {
 
     public ResponseSuccessDto<TokenDeleteResponseDto> logout(String accessToken) {
         System.out.println("로그아웃");
-        JSONObject response = getJsonObjectByToken(accessToken);
+        WebClient webClient = WebClient
+                .builder()
+                .baseUrl("https://nid.naver.com")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+
+        JSONObject response = webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/oauth2.0/token")
+                        .queryParam("client_id", "V5gN96q3kFtGfUK7PUds")
+                        .queryParam("client_secret", "Z2RNeixHZU")
+                        .queryParam("grant_type", "delete")
+                        .queryParam("service_provider", "NAVER")
+                        .queryParam("access_token", accessToken).build())
+                .retrieve().bodyToMono(JSONObject.class).block();
+
 
         System.out.println("logout response = " + response.toString());
         TokenDeleteResponseDto tokenDeleteResponseDto = TokenDeleteResponseDto.builder()
