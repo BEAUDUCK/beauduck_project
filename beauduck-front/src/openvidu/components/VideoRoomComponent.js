@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import ChatComponent from './chat/ChatComponent';
 import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import StreamComponent from './stream/StreamComponent';
-import './VideoRoomComponent.css';
+// import './VideoRoomComponent.css';
 
 import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
@@ -556,6 +556,7 @@ class VideoRoomComponent extends Component {
         const localUser = this.state.localUser;
         const chatDisplay = { display: this.state.chatDisplay };
         console.log("내 세션 아이디 :", mySessionId)
+        console.log("내 구독자", this.state.subscribers)
 
         return (
             <div id="container">
@@ -578,14 +579,14 @@ class VideoRoomComponent extends Component {
                 <div id="layout" className="bounds">
                     {/* 나 자신 화면*/}
                     {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                        <div className="OT_root OT_publisher custom-class" id="localUser">
+                        <div className="OT_root OT_publisher custom-class" id="localUser" style={{ width: "50vw", height: "50vh" }}>
                             <StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
 
                         </div>
                     )}
                     {/* 구독자들 화면*/}
                     {this.state.subscribers.map((sub, i) => (
-                        <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
+                        <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers" style={{ width: "50vw", height: "50vh" }} >
                             <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
                         </div>
                     ))}

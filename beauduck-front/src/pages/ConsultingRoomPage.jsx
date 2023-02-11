@@ -15,7 +15,8 @@ const ConsultingRoomPage = () => {
   const { state } = location
   const myNickname = useSelector(state => state.member.nickName)
 
-  console.log("내려주는 값", state)
+  console.log("내려주는 값")
+  console.log(state)
   return (
     <div className="full-screen">
       <VideoRoomComponent 
