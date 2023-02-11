@@ -14,7 +14,7 @@ const ConsultingModalLoadingGuest = ({ roomId, host, isOpenClick }) => {
   const ChangeStatus = () => {
     // setIsReady(!isReady);
     // 이벤트에 준비상태 host 한테 보내는 기능 추가
-    navigate("/help/room", { state: consultDetail })
+    // navigate("/help/room", { state: consultDetail })
 
   };
 
