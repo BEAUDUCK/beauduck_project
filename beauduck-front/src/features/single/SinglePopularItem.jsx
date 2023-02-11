@@ -17,9 +17,6 @@ const SinglePopularItem = ({ modeItem, idx }) => {
     ['#F4C3A5', '#E66E32'],
   ];
   const color = parseInt(idx % 4);
-
-  console.log('dsda', isInfo);
-
   return (
     <>
       <div
