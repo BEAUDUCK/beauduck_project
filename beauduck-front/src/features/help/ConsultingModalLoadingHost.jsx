@@ -17,29 +17,20 @@ const ConsultingModalLoadingHost = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const { roomId, consultDetail, userList } = useSelector(
-    (state) => state.consulting,
+    (state) => state.consulting
   );
-  
-  const hostNickname = useSelector(state => state.member.nickName)
 
-  const hostData = [
-    { hostNickname }
-  ]
+  const { consultingList } = useSelector(state => state.consulting)
+  dispatch(getConsultDetail(roomId));
 
   console.log('roomId', roomId);
-
   useEffect(() => {
-
-  }, [userList]);
-
-  useEffect(() => {
-    dispatch(getConsultDetail(roomId));
   }, [])
 
-  console.log('유저리스트!', userList);
 
-  const handleStart = (roomId, consultDetail, userList) => {
-    navigate("/help/room", { state: { roomId, consultDetail, userList } })
+  const handleStart = () => {
+    navigate("/help/room", { state: consultDetail })
+    console.log(consultDetail)
   }
 
   return (
@@ -47,7 +38,7 @@ const ConsultingModalLoadingHost = () => {
       <button 
         type="button"
         className="loading-bigbtn"
-        onClick={() => {handleStart(roomId, consultDetail, userList)}}
+        onClick={() => {handleStart()}}
       >
         START
       </button>

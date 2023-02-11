@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useState } from 'react';
 import { useEffect } from 'react';
 import face1 from "../../assets/faces/face1.png"
@@ -10,37 +11,19 @@ import face6 from "../../assets/faces/face6.png"
 import face7 from "../../assets/faces/face7.png"
 import face8 from "../../assets/faces/face8.png"
 
+
 const TogetherListItem = ({ room }) => {
-  // const randomImg = useCallback(() => {
-  //   const ducks = [duck1, duck2, duck3, duck4, duck5];
-  //   return _.sample(ducks);
-  // }, []);
-
-  // const [selectedImg, setSelectedImg] = useState('');
-
-  // useEffect(() => {
-  //   setSelectedImg(randomImg());
-  // }, []);
-
-  // return (
-  //   <div className="room-div">
-  //     <div className={['room-div-sub', 'img-div'].join(' ')}>
-  //       <img src={selectedImg} alt="duck" className="random-img" />
-  //       <p>{room.host}</p>
-  //     </div>
-  //     <div className={['room-div-sub', 'text-div'].join(' ')}>
-  //       <div className="text-first">
-  //         <span className="id-num">{room.id}</span>
-  //         <span>{room.title}</span>
-  //       </div>
-  //       <p className="p-content">{room.text}</p>
-  //       <h3>FULL</h3>
-  //     </div>
-  //   </div>
-  // );
+  
+  const dispatch = useDispatch()
   const [nowColor, setNowColor] = useState("")
   const [nowFace, setNowFace] = useState("")
   const [nowNum, setNowNum] = useState(_.random(0, 7))
+<<<<<<< HEAD
+  const navigate = useNavigate
+=======
+
+  
+>>>>>>> 60aa0036b5482679139d2924793a5c6d7acec44b
   
   useEffect(() => {
     randomFace()
@@ -62,9 +45,13 @@ const TogetherListItem = ({ room }) => {
     setNowColor(colors[nowNum])
   }
 
+  const isOpenClick = () => {
+
+  }
+
   return (
     <div className="flip">  
-      <div className="card">
+      <div className="card" onClick={isOpenClick} >
         <div className="front">
           <div 
             className="front-top"
