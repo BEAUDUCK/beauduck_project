@@ -63,9 +63,7 @@ export const consultSlice = createSlice({
       })
       .addCase(postNewConsulting.fulfilled, (state, action) => {
         state.roomId = action.payload[0].roomId;
-        // 고침
-        state.consultingList = [...state.consultingList, action.payload[1]];
-
+        state.consultingList = action.payload[1];
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;
