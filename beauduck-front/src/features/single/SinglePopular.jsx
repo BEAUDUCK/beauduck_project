@@ -26,11 +26,6 @@ const SinglePopular = ({ modeList }) => {
     },
   };
 
-  const [isInfo, setIsInfo] = useState(false);
-  const isToggleInfo = () => {
-    setIsInfo(!isInfo);
-  };
-
   return (
     <>
       <AliceCarousel
@@ -48,10 +43,6 @@ const SinglePopular = ({ modeList }) => {
         {modeList?.map((item, idx) => (
           <>
             <SinglePopularItem key={item.id} modeItem={item} idx={idx + 1} />
-            {isInfo && (
-              <SingleModalInfo makeupId={item.id} isToggleInfo={isToggleInfo} />
-            )}
-            {isInfo && <BlackOut onClickEvent={isToggleInfo} />}
           </>
         ))}
       </AliceCarousel>

@@ -17,7 +17,9 @@ const NaverLogin = () => {
   const getToken = async () => {
     console.log('토큰 발급');
     axios
-      .get(`http://i8b306.p.ssafy.io:8080/naver/callback?code=${code}&state=${state}`)
+      .get(
+        `http://i8b306.p.ssafy.io:8080/naver/callback?code=${code}&state=${state}`,
+      )
       .then((res) => {
         localStorage.setItem('refreshToken', res.data.data.refreshToken);
         const accessToken = res.data.data.accessToken;
@@ -31,7 +33,9 @@ const NaverLogin = () => {
             expires: expireDate,
           },
         );
-        dispatch(UserLogin(accessToken));
+        dispatch(UserLogin(accessToken)).then(() => {
+          navigate('/');
+        });
 
         // if (!isSignup) {
         //   console.log('로그인만 할거야야야ㅑ');
