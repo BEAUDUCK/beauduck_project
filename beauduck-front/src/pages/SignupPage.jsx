@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router';
 const SignupPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const accessToken = getAccessToken();
+  const accessToken = getAccessToken('accessToken');
 
   const [content, setContent] = useState('');
   const [nickName, setNickName] = useState('');

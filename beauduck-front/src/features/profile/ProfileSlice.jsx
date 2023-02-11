@@ -1,12 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { async } from 'q';
 import memberAxios from '../../api/memberAxios';
 
 // 회원 정보 조회 GET
 export const getMemberInfo = createAsyncThunk(
   'members/getMemberInfo',
   async (memberId) => {
-    console.log('get');
     const res = await memberAxios.get(`/members/${memberId}`);
     return res.data.data;
   },

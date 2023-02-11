@@ -45,8 +45,11 @@ import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { accessLogin } from './features/login/MemberSlice';
+import { accessLogin, getMemberId } from './features/login/MemberSlice';
 import InfoPage from './pages/InfoPage';
+import { getAccessToken } from './api/cookie';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 library.add(
   faXmark,
@@ -77,6 +80,30 @@ function App() {
   useEffect(() => {
     dispatch(accessLogin());
   }, []);
+
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
+  const refreshToken = localStorage.getItem('refreshToken');
+  // const accessToken = getAccessToken();
+  const server = 'https://i8b306.p.ssafy.io:8080/';
+  const { memberId } = useSelector((state) => state.member);
+
+  // useEffect(async () => {
+  //   if (memberId) {
+  //     console.log('아이디있졍');
+  //     const accessToken = getAccessToken();
+  //     console.log(accessToken);
+  //   } else {
+  //     console.log('없졍');
+  //   }
+  //   console.log('토큰 재발급');
+  //   const res = await axios.get(
+  //     `${server}refresh?refreshToken=${refreshToken}`,
+  //   );
+
+  //   console.log('토큰 재발급 성공?');
+  //   console.log(res.data.data.accessToken);
+  //   setCookie(res.data.data.accessToken);
+  // });
 
   return (
     <>
