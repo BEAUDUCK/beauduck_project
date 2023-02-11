@@ -61,10 +61,10 @@ public class MakeupService {
         System.out.println("일단 멤버 찾기: "+memberEntity.get().getId());
         Optional<ImgaiEntity> imgaiEntity =imgaiRepository.findByMemberEntity(memberEntity.get());
 //        System.out.println("imgai에서 찾았졍: "+ imgaiEntity.get().getMemberEntity().getId());
-        ImgaiEntity imgai = imgaiEntity.get();
+//        ImgaiEntity imgai = imgaiEntity.get();
 //        System.out.println("업데이트 전: "+imgai.getIsMakeup());
-        if(imgai != null)
-            imgai.updateIsMakeup();
+        if(imgaiEntity.isPresent())
+            imgaiEntity.get().updateIsMakeup();
 //        System.out.println("업데이트 후: "+imgai.getIsMakeup());
         return makeup.getId();
     }
