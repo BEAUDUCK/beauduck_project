@@ -34,7 +34,12 @@ const NaverLogin = () => {
           },
         );
         dispatch(UserLogin(accessToken)).then(() => {
-          navigate('/');
+          console.log('간다');
+          if (loginRejected) {
+            navigate('/signup');
+          } else {
+            navigate('/');
+          }
         });
       })
       .catch((error) => {
@@ -45,6 +50,7 @@ const NaverLogin = () => {
   // 로그인 실패 시 회원가입 창으로 이동
   const { loginRejected } = useSelector((state) => state.member);
   useEffect(() => {
+    console.log(loginRejected);
     if (loginRejected) {
       navigate('/signup');
     }
