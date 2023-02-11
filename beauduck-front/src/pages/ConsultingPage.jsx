@@ -16,10 +16,10 @@ const ConsultingPage = () => {
     setIsOpen(!isOpen);
   };
 
-  dispatch(getConsultingList());
   useEffect(() => {
+    dispatch(getConsultingList());
 
-  }, [consultingList]);
+  }, []);
 
   return (
     <>
