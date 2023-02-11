@@ -19,8 +19,6 @@ const ConsultingModalLoadingHost = () => {
   const { roomId, consultDetail, userList } = useSelector(
     (state) => state.consulting
   );
-  
-  const hostNickname = useSelector(state => state.member.nickName)
 
   console.log('roomId', roomId);
   useEffect(() => {
