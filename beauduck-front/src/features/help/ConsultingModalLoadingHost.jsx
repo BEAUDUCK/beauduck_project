@@ -19,7 +19,7 @@ const ConsultingModalLoadingHost = () => {
   const { roomId, consultDetail, userList } = useSelector(
     (state) => state.consulting
   );
-  
+
   const { consultingList } = useSelector(state => state.consulting)
   dispatch(getConsultDetail(roomId));
 

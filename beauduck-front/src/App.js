@@ -46,6 +46,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { accessLogin } from './features/login/MemberSlice';
+import InfoPage from './pages/InfoPage';
 
 library.add(
   faXmark,
@@ -103,6 +104,8 @@ function App() {
           <Route path="/Api/Naver" element={<NaverLogin />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/signup" element={<SingupPage />} />
+          {/* 정보성페이지 */}
+          <Route path="/color" element={<InfoPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
