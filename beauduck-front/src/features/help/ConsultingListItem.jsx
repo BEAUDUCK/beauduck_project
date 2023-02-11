@@ -12,7 +12,8 @@ import face8 from '../../assets/faces/face8.png';
 import ConsultingModalLoadingGuest from './ConsultingModalLoadingGuest';
 import BlackOut from '../../components/blackout/BlackOut';
 import ConsultingModalLoadingHost from './ConsultingModalLoadingHost';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getConsultDetail } from './ConsultingSlice';
 
 const ConsultingListItem = ({ consultingItem }) => {
   // return (
@@ -46,6 +47,7 @@ const ConsultingListItem = ({ consultingItem }) => {
   const [nowFace, setNowFace] = useState('');
   const [nowNum, setNowNum] = useState(_.random(0, 7));
   const myNickname = useSelector(state => state.member.nickName)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     randomFace();
@@ -100,9 +102,23 @@ const ConsultingListItem = ({ consultingItem }) => {
   //   }
   // }
   const [isOpen, setIsOpen] = useState();
+  const { roomId } = useSelector(state => state.consulting)
 
   const isOpenClick = () => {
     // setIsOpen(!isOpen);
+    if (consultingItem.hostNickname === myNickname) {
+      return (
+        <ConsultingModalLoadingHost />
+      )
+    } else {
+      return (
+        <ConsultingModalLoadingGuest 
+          roomId={consultingItem.roomId}
+          host={consultingItem.hostNickname}
+        />
+      )
+    }
+    
   };
 
   return (
