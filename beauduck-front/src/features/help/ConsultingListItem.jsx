@@ -12,6 +12,7 @@ import face8 from '../../assets/faces/face8.png';
 import ConsultingModalLoadingGuest from './ConsultingModalLoadingGuest';
 import BlackOut from '../../components/blackout/BlackOut';
 import ConsultingModalLoadingHost from './ConsultingModalLoadingHost';
+import { useSelector } from 'react-redux';
 
 const ConsultingListItem = ({ consultingItem }) => {
   // return (
