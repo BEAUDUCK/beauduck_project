@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 // import './StreamComponent.css';
-import OvVideoComponent from './OvVideo';
+// import OvVideoComponent from './OvVideo';
 
 // import MicOff from '@material-ui/icons/MicOff';
 // import VideocamOff from '@material-ui/icons/VideocamOff';
@@ -19,7 +19,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const HostComponent = (props) => {
-	const nickname = props.user.nickname
+	console.log(props)
+
 	// const [showForm, setShowForm] = useState(false)
 	const [mutedSound, setMutedSound] = useState(false)
 	// const [isFormValid, setIsFormValid] = useState(true)
@@ -98,12 +99,12 @@ const HostComponent = (props) => {
 		// 끝나면 버튼 다시 생기게
 	}
 
+
 	return (
 		<div className="host" style={{ height: "100%" }}>
 			<HostVideoComponent 
 				user={props.user} 
 				mutedSound={mutedSound}
-				nowColor={nowColor}
 				// nowColor={nowColor}
 			/>
 			{!isActive ? (
