@@ -192,7 +192,7 @@ class VideoRoomComponent extends Component {
         }
 
         // 로컬 유저(자신)의 정보 및 환경설정
-        localUser.setNickname(this.state.myUserName);
+        localUser.setNickname(this.props.myUserName);
         localUser.setConnectionId(this.state.session.connection.connectionId);
         localUser.setScreenShareActive(false);
         localUser.setStreamManager(publisher);
@@ -555,9 +555,10 @@ class VideoRoomComponent extends Component {
         const mySessionId = this.state.mySessionId;
         const localUser = this.state.localUser;
         const chatDisplay = { display: this.state.chatDisplay };
+        console.log("내 세션 아이디 :", mySessionId)
 
         return (
-            <div className="container" id="container">
+            <div id="container">
                 <ToolbarComponent
                     sessionId={mySessionId}
                     user={localUser}

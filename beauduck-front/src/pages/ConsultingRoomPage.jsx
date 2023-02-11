@@ -15,18 +15,13 @@ const ConsultingRoomPage = () => {
   const { state } = location
   const myNickname = useSelector(state => state.member.nickName)
 
+  console.log("내려주는 값", state)
   return (
     <div className="full-screen">
-      {/* <CustomRoomComponent
-        sessionName={state.roomId}
-        host={state.hostNickname}
-        user={myNickname}
-        userList={state.userList}
-      /> */}
       <VideoRoomComponent 
         sessionName={state.roomId}
         host={state.hostNickname}
-        user={myNickname}
+        myUserName={myNickname}
         userList={state.userList}
       />
     </div>
