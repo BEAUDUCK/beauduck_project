@@ -20,19 +20,13 @@ const ConsultingModalLoadingHost = () => {
     (state) => state.consulting
   );
   
-  const hostNickname = useSelector(state => state.member.nickName)
+  const { consultingList } = useSelector(state => state.consulting)
+  dispatch(getConsultDetail(roomId));
 
   console.log('roomId', roomId);
   useEffect(() => {
-    dispatch(getConsultDetail(roomId));
   }, [])
 
-  useEffect(() => {
-    console.log(consultDetail)
-  }, [userList]);
-
-
-  console.log('유저리스트!', userList);
 
   const handleStart = () => {
     navigate("/help/room", { state: consultDetail })

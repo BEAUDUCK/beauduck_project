@@ -13,8 +13,6 @@ const ConsultingRoomPage = () => {
   const location = useLocation()
   const { state } = location
   const myNickname = useSelector(state => state.member.nickName)
-  console.log(state)
-  console.log(myNickname)
 
   return (
     <div className="full-screen">
