@@ -6,6 +6,7 @@ import ConsultingList from '../features/help/ConsultingList';
 import ConsultingModalCreate from '../features/help/ConsultingModalCreate ';
 import { getConsultingList } from '../features/help/ConsultingSlice';
 import BlackOut from '../components/blackout/BlackOut';
+import ConsultingModalLoadingGuest from '../features/help/ConsultingModalLoadingGuest';
 
 const ConsultingPage = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ const ConsultingPage = () => {
   const isOpenModal = () => {
     setIsOpen(!isOpen);
   };
+
+  const { isActive } = useSelector(state => state.consulting)
 
   useEffect(() => {
     dispatch(getConsultingList());

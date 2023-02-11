@@ -48,6 +48,7 @@ const ConsultingListItem = ({ consultingItem }) => {
   const [nowNum, setNowNum] = useState(_.random(0, 7));
   const myNickname = useSelector(state => state.member.nickName)
   const dispatch = useDispatch()
+  const { isActive } = useSelector(state => state.consulting)
 
   useEffect(() => {
     randomFace();
@@ -105,27 +106,15 @@ const ConsultingListItem = ({ consultingItem }) => {
   const { roomId } = useSelector(state => state.consulting)
 
   const isOpenClick = () => {
-    console.log("눌렸어요")
-    // setIsOpen(!isOpen);
-    if (consultingItem.hostNickname === myNickname) {
-      return (
-        <ConsultingModalLoadingHost />
-      )
-    } else {
-      return (
-        <ConsultingModalLoadingGuest 
-          roomId={consultingItem.roomId}
-          host={consultingItem.hostNickname}
-        />
-      )
+    if (isActive) {
+      return <ConsultingModalLoadingGuest />
     }
-    
   };
 
   return (
     <>
       <div className="flip">
-        <div className="card" onClick={isOpenClick}>
+        <div className="card" onClick={isOpenClick} >
           <div className="front">
             <div className="front-top" style={{ backgroundColor: nowColor }}>
               <img src={nowFace} />
@@ -159,14 +148,14 @@ const ConsultingListItem = ({ consultingItem }) => {
           </div>
         </div>
       </div>
-      {/* {isOpen && (
+      {/* {isActive && (
           <ConsultingModalLoadingGuest
             roomId={consultingItem.roomId}
             host={consultingItem.hostNickname}
-            isOpenClick={isOpenClick}
+            // isOpenClick={isOpenClick}
           />
-        )}
-      {isOpen && <BlackOut onClickEvent={isOpenClick} />} */}
+        )} */}
+      {/* {isOpen && <BlackOut onClickEvent={isOpenClick} />} */}
     </>
   );
 };
