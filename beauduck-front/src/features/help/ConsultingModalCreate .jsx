@@ -44,7 +44,7 @@ const ConsultingModalCreate = ({ isOpenModal }) => {
 
   return (
     <>
-      {isLoading ? (
+      {!isLoading ? (
       <div className="consult-create-modal">
         <div className="consult-create-header">
           <p></p>
@@ -79,7 +79,7 @@ const ConsultingModalCreate = ({ isOpenModal }) => {
         {/* {isLoading && <BlackOut />} */}
       </div>
       ) : (
-        <ConsultingModalLoadingHost/>
+        <ConsultingModalLoadingHost />
       )}
     </>
   );
