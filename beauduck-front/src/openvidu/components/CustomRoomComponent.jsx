@@ -508,7 +508,7 @@ render() {
 
 		return (
 			<div className="container" id="container">
-					{/* <ToolbarComponent
+					<ToolbarComponent
 							sessionId={mySessionId}
 							user={localUser}
 							showNotification={this.state.messageReceived}
@@ -520,11 +520,11 @@ render() {
 							switchCamera={this.switchCamera}
 							leaveSession={this.leaveSession}
 							toggleChat={this.toggleChat}
-					/> */}
+					/>
 
 					{/* <DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} /> */}
 
-					<div id="layout" className="bounds">
+					<div id="layout" className="bounds" style={{ height: "30vh" }} >
 							{localUser !== undefined && localUser.getStreamManager() !== undefined && (
 									<div className="OT_root OT_publisher custom-class" id="localUser">
 											<StreamComponent user={localUser} handleNickname={this.nicknameChanged} />
