@@ -17,12 +17,14 @@ const NaverLogin = () => {
   const getToken = async () => {
     console.log('토큰 발급');
     axios
-      .get(`https://i8b306.p.ssafy.io:8080/naver/callback?code=${code}&state=${state}`)
+      .get(
+        `https://i8b306.p.ssafy.io:8080/naver/callback?code=${code}&state=${state}`,
+      )
       .then((res) => {
         localStorage.setItem('refreshToken', res.data.data.refreshToken);
         const accessToken = res.data.data.accessToken;
         const expireDate = new Date();
-        expireDate.setMinutes(expireDate.getMinutes() + 2);
+        expireDate.setMinutes(expireDate.getMinutes() + 1);
         setCookie(
           'accessToken',
           { accessToken },

@@ -14,17 +14,21 @@ import Dialog from '@mui/material/Dialog';
 import { getAccessToken } from '../../api/cookie';
 import { useDispatch } from 'react-redux';
 import { removeMember } from './MemberSlice';
+import { useEffect } from 'react';
+import { getCookie } from '../../api/cookie';
 
 function LogoutModal(props) {
   const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const token = getAccessToken();
-
   const Logout = async () => {
-    await axios.get(`http://i8b306.p.ssafy.io:8080/naver/logout?accessToken=${token}`);
+    const token = getAccessToken('accessToken');
+    await axios.get(
+      `https://i8b306.p.ssafy.io:8080/naver/logout?accessToken=${token}`,
+    );
     console.log('로그아웃');
+    console.log(token);
     removeCookie('accessToken');
     localStorage.removeItem('refreshToken');
     dispatch(removeMember());
