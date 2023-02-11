@@ -10,6 +10,7 @@ import face6 from "../../assets/faces/face6.png"
 import face7 from "../../assets/faces/face7.png"
 import face8 from "../../assets/faces/face8.png"
 
+
 const TogetherListItem = ({ room }) => {
   // const randomImg = useCallback(() => {
   //   const ducks = [duck1, duck2, duck3, duck4, duck5];
@@ -41,6 +42,7 @@ const TogetherListItem = ({ room }) => {
   const [nowColor, setNowColor] = useState("")
   const [nowFace, setNowFace] = useState("")
   const [nowNum, setNowNum] = useState(_.random(0, 7))
+  const navigate = useNavigate
   
   useEffect(() => {
     randomFace()
@@ -62,9 +64,13 @@ const TogetherListItem = ({ room }) => {
     setNowColor(colors[nowNum])
   }
 
+  const isOpenClick = () => {
+
+  }
+
   return (
     <div className="flip">  
-      <div className="card">
+      <div className="card" onClick={isOpenClick} >
         <div className="front">
           <div 
             className="front-top"

@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const openviduSlice = createSlice({
   name: "openvidu",
   initialState: {
-    stageResult: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    totalResult: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    stageResult: [],
+    totalResult: [],
     openviduHost: "",
   },
   reducers: {
