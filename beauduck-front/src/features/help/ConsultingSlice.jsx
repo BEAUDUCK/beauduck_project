@@ -40,8 +40,7 @@ export const enterUser = createAsyncThunk('help/enterUser', async (payload) => {
 
 // 유저 방 퇴장 -> 방 상세 갱신
 export const outUser = createAsyncThunk('help/outUser', async (payload) => {
-  const check = await client.post('/consult/out/');
-  console.log(check.data);
+  const check = await client.post('/consult/out/', payload);
   const res = await client.get(`/consult/${payload.roomId}`);
   return res.data;
 });

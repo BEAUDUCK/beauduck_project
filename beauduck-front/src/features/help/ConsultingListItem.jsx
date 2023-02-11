@@ -102,7 +102,7 @@ const ConsultingListItem = ({ consultingItem }) => {
   const [isOpen, setIsOpen] = useState();
 
   const isOpenClick = () => {
-    setIsOpen(!isOpen);
+    // setIsOpen(!isOpen);
   };
 
   return (
@@ -142,16 +142,14 @@ const ConsultingListItem = ({ consultingItem }) => {
           </div>
         </div>
       </div>
-      {isOpen && myNickname === consultingItem.hostNickname ? (
-          <ConsultingModalLoadingHost />
-        ) : (
+      {/* {isOpen && (
           <ConsultingModalLoadingGuest
             roomId={consultingItem.roomId}
             host={consultingItem.hostNickname}
             isOpenClick={isOpenClick}
           />
         )}
-      {isOpen && <BlackOut onClickEvent={isOpenClick} />}
+      {isOpen && <BlackOut onClickEvent={isOpenClick} />} */}
     </>
   );
 };
