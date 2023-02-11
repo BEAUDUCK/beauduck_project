@@ -18,6 +18,8 @@ const SinglePopularItem = ({ modeItem, idx }) => {
   ];
   const color = parseInt(idx % 4);
 
+  console.log('dsda', isInfo);
+
   return (
     <>
       <div
@@ -34,10 +36,10 @@ const SinglePopularItem = ({ modeItem, idx }) => {
           </div>
         </div>
       </div>
-      {/* {isInfo && (
+      {isInfo && (
         <SingleModalInfo makeupId={modeItem.id} isToggleInfo={isToggleInfo} />
       )}
-      {isInfo && <BlackOut onClickEvent={isToggleInfo} />} */}
+      {isInfo && <BlackOut onClickEvent={isToggleInfo} />}
     </>
   );
 };

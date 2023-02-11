@@ -7,8 +7,11 @@ import { goToLogin, signUp, UserLogin } from '../features/login/MemberSlice';
 import { getAccessToken } from '../api/cookie';
 import logo from '../assets/logo_original.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router';
+
 const SignupPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const accessToken = getAccessToken();
 
   const [content, setContent] = useState('');
@@ -34,7 +37,7 @@ const SignupPage = () => {
   // 닉네임 중복 확인
   const NickNameCheck = async (nickName) => {
     axios
-      .get(`https://i8b306.p.ssafy.io/members/check/${nickName}`)
+      .get(`https://i8b306.p.ssafy.io:8080/members/check/${nickName}`)
       .then((res) => {
         if (!res.data.data) {
           setErrorMessage('사용 가능한 닉네임입니다');
@@ -79,7 +82,7 @@ const SignupPage = () => {
     // formData.append('data', JSON.stringify(signupRequestDto));
     // console.log(formData.get('img'));
     // console.log(formData);
-    dispatch(signUp(payload));
+    dispatch(signUp(payload)).then(() => navigate('/'));
   };
 
   return (
