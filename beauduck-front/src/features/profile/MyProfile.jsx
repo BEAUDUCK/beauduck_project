@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import logo from '../../assets/logo_original.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkNickname, getMemberInfo, updateMemberInfo } from './ProfileSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const MyProfile = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const MyProfile = () => {
       return;
     }
     const updatedInfo = {
-      memberId: memberId,
+      memberId,
       nickName: userNickname,
       content: userContent,
     };
@@ -69,14 +70,16 @@ const MyProfile = () => {
           <div className="profile-nickname">
             {/* <p>{props.nickname}</p> */}
             {/* <p>{userNickname}</p> */}
+            <div className="circle"></div>
             <h2>장멋쟁이똥</h2>
           </div>
-          <div className="profile-img-div">
-            <img src={profileImg} alt="프로필사진" />
-          </div>
-          <div className="profile-content">
-            {/* <p>{userContent}</p> */}
-            <p>나는 개똥벌레</p>
+          <div className="background-div"></div>
+          <div className="profile-div">
+            <img className="profile-img" src={profileImg} alt="프로필사진" />
+            <div className="profile-content">
+              {/* <p>{userContent}</p> */}
+              <p>나는 개똥벌레</p>
+            </div>
           </div>
           <button className="profile-btn" onClick={handleEdited}>
             수정
@@ -99,15 +102,20 @@ const MyProfile = () => {
               value={userNickname}
               onChange={(e) => setUserNickname(e.target.value)}
             />
-            <button onClick={checkOver}>중복 확인</button>
+            {/* <button onClick={checkOver}>중복 확인</button> */}
+            <FontAwesomeIcon
+              icon="fa-regular fa-circle-check"
+              onClick={checkOver}
+              className={usable ? 'checked' : ''}
+            />
           </div>
-          <div className="profile-img-div">
-            <img src={profileImg} alt="프로필사진" />
+          <div className="profile-div">
+            <img className="profile-img" src={profileImg} alt="프로필사진" />
+            <textarea
+              value={userContent}
+              onChange={(e) => setUserContent(e.target.value)}
+            />
           </div>
-          <textarea
-            value={userContent}
-            onChange={(e) => setUserContent(e.target.value)}
-          />
           <button className="profile-btn" onClick={handleChangeProfile}>
             완료
           </button>

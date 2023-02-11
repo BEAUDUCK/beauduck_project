@@ -12,6 +12,10 @@ import {
   getMyMakeupList,
   getRecentMakeupList,
 } from '../features/profile/ProfileSlice';
+import tab2 from '../assets/pallete1.png';
+import tab1 from '../assets/pallete2.png';
+import tab3 from '../assets/pallete3.png';
+
 // 더미
 import logo from '../assets/logo_original.png';
 
@@ -22,21 +26,28 @@ const dummyRecentMakeup = [
     title: '메이크업 이름',
     score: 4.5,
     count: 120,
-    img: logo,
+    img: 'https://i.pinimg.com/564x/81/35/fe/8135fe795a55fca3aa6bef751e635a83.jpg',
   },
   {
     id: 2,
     title: '메이크업 이름',
     score: 4.5,
     count: 120,
-    img: logo,
+    img: 'https://i.pinimg.com/564x/9d/64/48/9d64485d6e974dc543bec98020e1e4c2.jpg',
   },
   {
     id: 3,
     title: '메이크업 이름',
     score: 4.5,
     count: 120,
-    img: logo,
+    img: 'https://i.pinimg.com/564x/fb/c6/ac/fbc6ac067e01d6a15e8c44bdf871054c.jpg',
+  },
+  {
+    id: 4,
+    title: '제니 메이크업 완전 똑같음',
+    score: 4.5,
+    count: 120,
+    img: 'https://i.pinimg.com/564x/6e/23/60/6e2360e9fe0dd6b7853c4914136863d6.jpg',
   },
 ];
 
@@ -67,15 +78,27 @@ const dummyMadeMakeup = [
 const dummyGallery = [
   {
     id: 1,
-    img: logo,
+    img: 'https://i.pinimg.com/564x/f6/01/1f/f6011f2e8af8d464ce6053d9f905d461.jpg',
   },
   {
     id: 2,
-    img: logo,
+    img: 'https://i.pinimg.com/564x/cd/2f/74/cd2f7423fef3f89a986856be87bf2a7e.jpg',
   },
   {
     id: 3,
-    img: logo,
+    img: 'https://i.pinimg.com/564x/47/93/cd/4793cd24bc568fdb44d8769010344336.jpg',
+  },
+  {
+    id: 4,
+    img: 'https://i.pinimg.com/564x/88/2f/48/882f4862315b62c2646a2db0d2073028.jpg',
+  },
+  {
+    id: 5,
+    img: 'https://i.pinimg.com/736x/f2/12/43/f212432b2821a654404ca15fb90846d1.jpg',
+  },
+  {
+    id: 6,
+    img: 'https://i.pinimg.com/564x/6b/2f/f5/6b2ff5153b8d2a9c269974d91eb9b98b.jpg',
   },
 ];
 
@@ -109,14 +132,10 @@ const ProfilePage = () => {
         <MyMakeupList
           recentMakeup={dummyRecentMakeup}
           madeMakeup={dummyMadeMakeup}
-          recentMakeupList={recentMakeupList}
-          myMakeupList={myMakeupList}
         />
       );
     } else if (galleryState) {
-      return (
-        <MyGalleryList gallery={dummyGallery} myGalleryList={myGalleryList} />
-      );
+      return <MyGalleryList myGalleryList={dummyGallery} />;
     } else {
       return <MyProfileSaveFace />;
     }
@@ -135,38 +154,35 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div>
       <div className="ProfilePage">
         <MyProfile />
         <MyRanking />
       </div>
-      <div>
-        <button
-          onClick={handleMakeup}
-          className={['profile-tab', makeupState ? 'tab-selected' : ''].join(
-            ' ',
-          )}
-        >
-          메이크업 목록
-        </button>
-        <button
-          onClick={handleGallery}
-          className={['profile-tab', galleryState ? 'tab-selected' : ''].join(
-            ' ',
-          )}
-        >
-          갤러리
-        </button>
-        <button
-          onClick={handleFace}
-          className={['profile-tab', faceState ? 'tab-selected' : ''].join(' ')}
-        >
-          사진찍기
-        </button>
+      <hr />
+      <div className="btn-div">
+        <div onClick={handleMakeup}>
+          <p className="btn-ma">메이크업</p>
+          <img
+            src={tab1}
+            alt=""
+            className={makeupState ? 'tab-selected' : ''}
+          />
+        </div>
+        <div onClick={handleGallery}>
+          <p className="btn-ga">갤러리</p>
+          <img
+            src={tab2}
+            alt=""
+            className={galleryState ? 'tab-selected' : ''}
+          />
+        </div>
+        <div onClick={handleFace}>
+          <p className="btn-pi">사진찍기</p>
+          <img src={tab3} alt="" className={faceState ? 'tab-selected' : ''} />
+        </div>
       </div>
-      <div>
-        <ChangeTab />
-      </div>
+      <ChangeTab />
     </div>
   );
 };
