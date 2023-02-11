@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import rank from '../../assets/rank.png';
 import rank1 from '../../assets/rank/rank1.png';
 import rank2 from '../../assets/rank/rank2.png';
@@ -9,13 +10,11 @@ import rank5 from '../../assets/rank/rank5.png';
 import speechBubble from '../../assets/speechBubble.png';
 
 const MyRanking = () => {
-  const [myBadge, setMyBadge] = useState('프로덕');
-  const [myExp, setMyExp] = useState(2100);
+  const { userInfo } = useSelector((state) => state.profile);
+  const [myBadge, setMyBadge] = useState(userInfo.badge);
+  const [myExp, setMyExp] = useState(userInfo.exp);
   const [ment, setMent] = useState('');
   const expRatio = 5000 / myExp;
-  const getMyRank = () => {
-    // axios 요청
-  };
 
   const [badgeImg, setBadgeImg] = useState('');
   useEffect(() => {
@@ -42,8 +41,6 @@ const MyRanking = () => {
         break;
     }
   }, []);
-
-  useEffect(() => {}, []);
 
   return (
     <div className="MyRanking">

@@ -6,7 +6,6 @@ import memberAxios from '../../api/memberAxios';
 export const getMemberInfo = createAsyncThunk(
   'members/getMemberInfo',
   async (memberId) => {
-    console.log('getMemberInfo 요청 중');
     const res = await memberAxios.get(`/members/${memberId}`);
     return res.data.data;
   },
@@ -27,8 +26,8 @@ export const updateMemberInfo = createAsyncThunk(
   'members/UpdateMemberInfo',
   async (payload) => {
     const res = await memberAxios.put('/members/update', payload);
-    console.log(res);
-    return res.data;
+    console.log('수정', res.data);
+    return res.data.data;
   },
 );
 
@@ -72,7 +71,7 @@ export const getMyGalleryList = createAsyncThunk(
 export const postSaveFace = createAsyncThunk(
   'member/postSaveFace',
   async (payload) => {
-    console.log('페이로드', payload.img);
+    console.log('페이로드', payload);
     const res = await memberAxios.post(
       `/members/ai/${payload.memberId}`,
       payload,
@@ -105,9 +104,9 @@ export const profileSlice = createSlice({
       state.userInfo = action.payload;
     });
     // 회원 정보 수정
-    // builder.addCase(updateMemberInfo.fulfilled, (state, action) => {
-    //   state.userInfo = action.payload
-    // })
+    builder.addCase(updateMemberInfo.fulfilled, (state, action) => {
+      state.userInfo = action.payload;
+    });
     // 최근 진행 메이크업 조회
     builder.addCase(getRecentMakeupList.fulfilled, (state, action) => {
       state.recentMakeupList = action.payload.data;

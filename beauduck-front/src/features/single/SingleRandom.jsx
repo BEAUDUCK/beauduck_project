@@ -8,7 +8,7 @@ const SingleRandom = () => {
 
   useEffect(() => {
     setRandom(_.sample(makeupList));
-  }, []);
+  }, [random]);
 
   return (
     <div className="random-one">

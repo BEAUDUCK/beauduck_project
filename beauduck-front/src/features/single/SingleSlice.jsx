@@ -34,16 +34,13 @@ export const createNewMakeup = createAsyncThunk(
 export const saveMakeupImg = createAsyncThunk(
   'single/saveMakeupImg',
   async (payload) => {
-    const res = await client
-      .post(`/makeup/img/${payload.id}/`, payload.img, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+    await client.post(`/makeup/img/${payload.id}/`, payload.img, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    const res = await client.get('/makeup/');
+    return res.data;
   },
 );
 
@@ -53,7 +50,7 @@ export const recommendMakeup = createAsyncThunk(
   async (payload) => {
     console.log('추천요청', payload);
     const res = await axios.post(
-      'http://i8b306.p.ssafy.io:5000/recommand',
+      'https://i8b306.p.ssafy.io:5000/recommand',
       payload,
     );
     console.log('추천', res.data);
@@ -156,8 +153,8 @@ export const singleSlice = createSlice({
       .addCase(getMakeupDetail.fulfilled, (state, action) => {
         state.makeupDetail = action.payload;
       })
-      .addCase(createNewMakeup.fulfilled, (state, action) => {
-        console.log(action.payload);
+      .addCase(saveMakeupImg.fulfilled, (state, action) => {
+        state.makeupList = action.payload;
       })
       .addCase(recommendMakeup.fulfilled, (state, action) => {
         state.recommendList = action.payload;

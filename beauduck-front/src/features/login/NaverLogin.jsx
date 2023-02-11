@@ -24,7 +24,7 @@ const NaverLogin = () => {
         localStorage.setItem('refreshToken', res.data.data.refreshToken);
         const accessToken = res.data.data.accessToken;
         const expireDate = new Date();
-        expireDate.setMinutes(expireDate.getMinutes() + 20);
+        expireDate.setMinutes(expireDate.getMinutes() + 100);
         setCookie(
           'accessToken',
           { accessToken },
@@ -36,16 +36,6 @@ const NaverLogin = () => {
         dispatch(UserLogin(accessToken)).then(() => {
           navigate('/');
         });
-
-        // if (!isSignup) {
-        //   console.log('로그인만 할거야야야ㅑ');
-        //   dispatch(UserLogin(accessToken)).then(() => {
-        //     navigate('/');
-        //   });
-        // } else {
-        //   console.log('회원가입부터 할거야야야야ㅑ');
-        //   navigate('/signup');
-        // }
       })
       .catch((error) => {
         console.log('토큰 에러', error);
