@@ -19,7 +19,7 @@ class VideoRoomComponent extends Component {
     constructor(props) {
         super(props);
         this.hasBeenUpdated = false;
-        // this.layout = new OpenViduLayout();
+        this.layout = new OpenViduLayout();
         let sessionName = this.props.sessionName ? this.props.sessionName : 'SessionA';
         let userName = this.props.user ? this.props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
         this.remotes = [];
@@ -84,7 +84,7 @@ class VideoRoomComponent extends Component {
             animate: true, // Whether you want to animate the transitions
         };
          // 초기 화면 설정
-        this.layout.initLayoutContainer(document.getElementById('layout'), openViduLayoutOptions);
+        // this.layout.initLayoutContainer(document.getElementById('layout'), openViduLayoutOptions);
 
         // 화면 크기 변경 및 종료시 발생하는 이벤트핸들러 달아두기
         window.addEventListener('beforeunload', this.onbeforeunload);

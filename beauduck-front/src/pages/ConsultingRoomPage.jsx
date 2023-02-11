@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import CustomRoomComponent from "../openvidu/components/CustomRoomComponent";
+// import CustomRoomComponent from "../openvidu/components/CustomRoomComponent";
 import VideoRoomComponent from "../openvidu/components/VideoRoomComponent";
 
 // 컨설팅 받는 페이지
