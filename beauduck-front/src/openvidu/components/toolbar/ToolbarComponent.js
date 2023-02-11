@@ -15,7 +15,7 @@ import VideocamOff from '@mui/icons-material/VideocamOff';
 // import ScreenShare from '@material-ui/icons/ScreenShare';
 // import StopScreenShare from '@material-ui/icons/StopScreenShare';
 // import Tooltip from '@material-ui/core/Tooltip';
-// import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
+import PowerSettingsNew from '@mui/icons-material/PowerSettingsNew';
 // import QuestionAnswer from '@material-ui/icons/QuestionAnswer';
 
 import IconButton from '@mui/material/IconButton';
@@ -128,9 +128,9 @@ export default class ToolbarComponent extends Component {
                         </IconButton> */}
 
                         {/* 나가기 아이콘 */}
-                        {/* <IconButton color="secondary" className="navButton" onClick={this.leaveSession} id="navLeaveButton">
+                        <IconButton color="secondary" className="navButton" onClick={this.leaveSession} id="navLeaveButton">
                             <PowerSettingsNew />
-                        </IconButton> */}
+                        </IconButton>
 
                         {/* 채팅 아이콘 */}
                         {/* <IconButton color="inherit" onClick={this.toggleChat} id="navChatButton">
