@@ -34,7 +34,10 @@ const SinglePopularItem = ({ modeItem, idx }) => {
         </div>
       </div>
       {isInfo && (
-        <SingleModalInfo makeupId={modeItem.id} isToggleInfo={isToggleInfo} />
+        <div className="detail-test">
+          <img src={modeItem.img} alt="" />
+        </div>
+        // <SingleModalInfo makeupId={modeItem.id} isToggleInfo={isToggleInfo} />
       )}
       {isInfo && <BlackOut onClickEvent={isToggleInfo} />}
     </>

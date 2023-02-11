@@ -6,6 +6,7 @@ import memberAxios from '../../api/memberAxios';
 export const getMemberInfo = createAsyncThunk(
   'members/getMemberInfo',
   async (memberId) => {
+    console.log('get');
     const res = await memberAxios.get(`/members/${memberId}`);
     return res.data.data;
   },
