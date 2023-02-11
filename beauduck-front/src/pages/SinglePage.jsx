@@ -77,7 +77,7 @@ const SinglePage = () => {
           <img src={backShape1} alt="" id="backShape1" />
           <img src={backShape2} alt="" id="backShape2" />
 
-          <div className="section1-ai">
+          <div className="section1-ai" id="section1-ai">
             <h1>나한테 찰떡인 메이크업 어디 없나?</h1>
             <p>AI가 내 얼굴을 분석하고</p>
             <p>직접 어울리는 메이크업을 추천해줘요!</p>
