@@ -52,6 +52,7 @@ export const consultSlice = createSlice({
     consultDetail: [],
     roomId: '',
     userList: [],
+    isActive: false,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -62,6 +63,7 @@ export const consultSlice = createSlice({
       .addCase(postNewConsulting.fulfilled, (state, action) => {
         state.roomId = action.payload[0].roomId;
         state.consultingList = action.payload[1];
+        state.isActive = true
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;
