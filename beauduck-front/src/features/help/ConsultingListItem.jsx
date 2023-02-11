@@ -11,6 +11,7 @@ import face7 from '../../assets/faces/face7.png';
 import face8 from '../../assets/faces/face8.png';
 import ConsultingModalLoadingGuest from './ConsultingModalLoadingGuest';
 import BlackOut from '../../components/blackout/BlackOut';
+import ConsultingModalLoadingHost from './ConsultingModalLoadingHost';
 
 const ConsultingListItem = ({ consultingItem }) => {
   // return (
@@ -43,6 +44,7 @@ const ConsultingListItem = ({ consultingItem }) => {
   const [nowColor, setNowColor] = useState('');
   const [nowFace, setNowFace] = useState('');
   const [nowNum, setNowNum] = useState(_.random(0, 7));
+  const myNickname = useSelector(state => state.member.nickName)
 
   useEffect(() => {
     randomFace();
@@ -139,13 +141,15 @@ const ConsultingListItem = ({ consultingItem }) => {
           </div>
         </div>
       </div>
-      {isOpen && (
-        <ConsultingModalLoadingGuest
-          roomId={consultingItem.roomId}
-          host={consultingItem.hostNickname}
-          isOpenClick={isOpenClick}
-        />
-      )}
+      {isOpen && myNickname === consultingItem.hostNickname ? (
+          <ConsultingModalLoadingHost />
+        ) : (
+          <ConsultingModalLoadingGuest
+            roomId={consultingItem.roomId}
+            host={consultingItem.hostNickname}
+            isOpenClick={isOpenClick}
+          />
+        )}
       {isOpen && <BlackOut onClickEvent={isOpenClick} />}
     </>
   );
