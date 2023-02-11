@@ -72,6 +72,8 @@ public class AuthService {
                         .build())
                 .retrieve().bodyToMono(JSONObject.class).block();
 
+        System.out.println(response.toString());
+
         TokenResponseDto tokenResponseDto = TokenResponseDto.builder()
                 .accessToken((String) response.get("access_token"))
                 .refreshToken((String) response.get("refresh_token"))
