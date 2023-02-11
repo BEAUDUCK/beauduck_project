@@ -21,10 +21,11 @@ const ConsultingModalLoadingHost = () => {
   );
 
   const { consultingList } = useSelector(state => state.consulting)
-  dispatch(getConsultDetail(roomId));
-
+  
   console.log('roomId', roomId);
   useEffect(() => {
+    dispatch(getConsultDetail(roomId));
+
   }, [])
 
 

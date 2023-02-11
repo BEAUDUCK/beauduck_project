@@ -43,39 +43,45 @@ const ConsultingModalCreate = ({ isOpenModal }) => {
   };
 
   return (
-    <div className="consult-create-modal">
-      <div className="consult-create-header">
-        <p></p>
-        <h3>방 생성하기</h3>
-        <FontAwesomeIcon onClick={isOpenModal} icon="xmark" className="xmark" />
-      </div>
-      <div className="consult-form">
-        <div>
-          <label htmlFor="title">제목</label>
-          <input
-            ref={titleRef}
-            id="title"
-            type="text"
-            value={title}
-            maxLength={15}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+    <>
+      {isLoading ? (
+      <div className="consult-create-modal">
+        <div className="consult-create-header">
+          <p></p>
+          <h3>방 생성하기</h3>
+          <FontAwesomeIcon onClick={isOpenModal} icon="xmark" className="xmark" />
         </div>
-        <div>
-          <label htmlFor="content">방 소개</label>
-          <textarea
-            ref={contentRef}
-            id="content"
-            value={content}
-            maxLength={50}
-            onChange={(e) => setContent(e.target.value)}
-          />
+        <div className="consult-form">
+          <div>
+            <label htmlFor="title">제목</label>
+            <input
+              ref={titleRef}
+              id="title"
+              type="text"
+              value={title}
+              maxLength={15}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="content">방 소개</label>
+            <textarea
+              ref={contentRef}
+              id="content"
+              value={content}
+              maxLength={50}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </div>
+          <Button text={'완료'} onClickEvent={ConsultingCreate} />
         </div>
-        <Button text={'완료'} onClickEvent={ConsultingCreate} />
+        {/* {isLoading && <ConsultingModalLoadingHost />} */}
+        {/* {isLoading && <BlackOut />} */}
       </div>
-      {isLoading && <ConsultingModalLoadingHost />}
-      {/* {isLoading && <BlackOut />} */}
-    </div>
+      ) : (
+        <ConsultingModalLoadingHost/>
+      )}
+    </>
   );
 };
 

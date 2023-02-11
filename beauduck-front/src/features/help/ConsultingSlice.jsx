@@ -26,7 +26,6 @@ export const getConsultDetail = createAsyncThunk(
   'help/getConsultDetail',
   async (roomId) => {
     const res = await client.get(`/consult/${roomId}`);
-    console.log(res);
     return res.data.data;
   },
 );
