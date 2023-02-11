@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 // import ChatComponent from './chat/ChatComponent';
 // import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import StreamComponent from './stream/StreamComponent';
@@ -14,253 +14,655 @@ import RestTime from './RestTime';
 import Message from './Message';
 import AnswerComponent from './AnswerComponent';
 import SmallConsultantStream from './stream/SmallConsultantStream';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import ToolbarComponent from './toolbar/ToolbarComponent';
 
-const OPENVIDU_SERVER_URL = "https://i8b306.p.ssafy.io:9000/"
 
-const CustomRoomComponent = () => {
-	const navigate = useNavigate();
-	// 유저 정보, 이메일, role 불러와야함
-	const { nickname, email, role } = useRecoilValue(userAtom);
-	const [session, setSession] = useState(undefined);
-	const [user, setUser] = useState(undefined);
-	const [hostSessionName, setHostSessionName] = useState('호스트이름');
-	const [mySessionId, setMySessionId] = useState(
-		role === 'HOST' ? tmp : hostSessionName,
-	);
-	const [myUserName, setMyUserName] = useState(nickname);
-	const [publisher, setPublisher] = useState(undefined);
-	const [host, setHost] = useState(undefined);
-	const [OV, setOV] = useState(null);
-	
-	useEffect(() => {
-		window.addEventListener('beforeunload', onbeforeunload);
-		return () => {
-			window.removeEventListener('beforeunload', onbeforeunload);
+var localUser = new UserModel();
+// const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'localhost:5000/';
+const OPENVIDU_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'https://i8b306.p.ssafy.io:9000/'
+// const OPENVIDU_SERVER_SECRET = "MY_SECRET"
+
+class CustomRoomComponent extends Component {
+	constructor(props) {
+		super(props);
+		this.hasBeenUpdated = false;
+		this.layout = new OpenViduLayout();
+		let sessionName = this.props.sessionName ? this.props.sessionName : 'SessionA';
+		let userName = this.props.user ? this.props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
+		this.remotes = [];
+		this.localUserAccessAllowed = false;
+		this.state = {
+				mySessionId: sessionName,
+				myUserName: userName,
+				session: undefined,
+				localUser: undefined,
+				subscribers: [],
+				chatDisplay: 'none',
+				currentVideoDevice: undefined,
+				hostUser: undefined,
 		};
-	}, []);
 
-	useEffect(() => {
-		if (role === 'user') {
-			if (!hostSessionName) {
-				alert('요청된 세션이 없습니다. 종료 후 정상접근 해주세요.');
-			} else {
-				console.log(hostSessionName);
-			}
-		}
-	}, [hostSessionName]);
+		this.joinSession = this.joinSession.bind(this);
+		this.leaveSession = this.leaveSession.bind(this);
+		this.onbeforeunload = this.onbeforeunload.bind(this);
+		this.updateLayout = this.updateLayout.bind(this);
+		this.camStatusChanged = this.camStatusChanged.bind(this);
+		this.micStatusChanged = this.micStatusChanged.bind(this);
+		this.nicknameChanged = this.nicknameChanged.bind(this);
+		this.toggleFullscreen = this.toggleFullscreen.bind(this);
+		this.switchCamera = this.switchCamera.bind(this);
+		this.screenShare = this.screenShare.bind(this);
+		this.stopScreenShare = this.stopScreenShare.bind(this);
+		this.closeDialogExtension = this.closeDialogExtension.bind(this);
+		this.toggleChat = this.toggleChat.bind(this);
+		this.checkNotification = this.checkNotification.bind(this);
+		this.checkSize = this.checkSize.bind(this);
+}
 
-	useEffect(() => {
-		if (session) {
-			session.on('streamCreated', streamCreated);
-			session.on('streamDestroyed', streamDestroyed);
-			session.on('exception', exception);
-			getToken().then(sessionConnect);
-		}
-	}, [session]);
+componentDidMount() {
+		const openViduLayoutOptions = {
+				maxRatio: 3 / 2, // The narrowest ratio that will be used (default 2x3)
+				minRatio: 9 / 16, // The widest ratio that will be used (default 16x9)
+				fixedRatio: false, // If this is true then the aspect ratio of the video is maintained and minRatio and maxRatio are ignored (default false)
+				bigClass: 'OV_big', // The class to add to elements that should be sized bigger
+				bigPercentage: 0.8, // The maximum percentage of space the big ones should take up
+				bigFixedRatio: false, // fixedRatio for the big ones
+				bigMaxRatio: 3 / 2, // The narrowest ratio to use for the big elements (default 2x3)
+				bigMinRatio: 9 / 16, // The widest ratio to use for the big elements (default 16x9)
+				bigFirst: true, // Whether to place the big one in the top left (true) or bottom right
+				animate: true, // Whether you want to animate the transitions
+		};
 
-	const sessionConnect = token => {
-		session
-			.connect(token, { clientData: myUserName, clientRole: role })
-			.then(() => {
-				let publisher = OV.initPublisher(undefined, {
-					audioSource: undefined,
-					videoSource: undefined,
-					publishAudio: true,
-					publishVideo: true,
-					resolution: '1280x960',
-					frameRate: 30,
-					insertMode: 'APPEND',
-					mirror: false,
-				});
-				publisher.subscribeToRemote();
-				session.publish(publisher);
-				setPublisher(publisher);
-				if (role === 'USER') {
-					setUser(publisher);
-				}
-				if (role === 'HOST') {
-					setHost(publisher);
-				}
-			})
-			.catch(error => {});
-	};
+		this.layout.initLayoutContainer(document.getElementById('layout'), openViduLayoutOptions);
+		window.addEventListener('beforeunload', this.onbeforeunload);
+		window.addEventListener('resize', this.updateLayout);
+		window.addEventListener('resize', this.checkSize);
+		this.joinSession();
+}
 
-	const switchCamera = () => {
-		OV.getDevices().then(devices => {
-			var videoDevices = devices.filter(device => device.kind === 'videoinput');
-			console.log(videoDevices);
-			if (videoDevices && videoDevices.length > 1) {
-				var newPublisher = OV.initPublisher(undefined, {
-					videoSource: isFrontCamera
-						? videoDevices[1].deviceId
-						: videoDevices[0].deviceId,
-					publishAudio: true,
-					publishVideo: true,
-					mirror: isFrontCamera,
-				});
+componentWillUnmount() {
+		window.removeEventListener('beforeunload', this.onbeforeunload);
+		window.removeEventListener('resize', this.updateLayout);
+		window.removeEventListener('resize', this.checkSize);
+		this.leaveSession();
+}
 
-				setIsFrontCamera(!isFrontCamera);
+onbeforeunload(event) {
+		this.leaveSession();
+}
 
-				session.unpublish(publisher).then(() => {
-					console.log('Old publisher unpublished!');
+joinSession() {
+		this.OV = new OpenVidu();
+		this.OV.enableProdMode()
 
-					setPublisher(newPublisher);
-					session.publish(publisher).then(() => {
-						console.log('New publisher published!');
-					});
-				});
-			}
-		});
-	};
-
-	const onbeforeunload = () => {
-		leaveSession();
-	};
-
-	const deleteSubscriber = streamManager => {};
-
-	const joinSession = () => {
-		const getOV = new OpenVidu();
-
-		setSession(getOV.initSession());
-
-		setOV(getOV);
-
-		// console.log(OV);
-	};
-
-	const streamCreated = event => {
-		const subscriber = session.subscribe(event.stream, undefined);
-		const subRole = JSON.parse(event.stream.connection.data).clientRole;
-		if (role === 'HOST' && subRole === 'USER') {
-			setUser(subscriber);
-		} else if (role === 'USER' && subRole === 'HOST') {
-			setHost(subscriber);
-		}
-	};
-
-	const streamDestroyed = event => {
-		deleteSubscriber(event.stream.streamManager);
-	};
-
-	const exception = exception => {
-		console.warn(exception);
-	};
-
-	const handleChangeUserName = e => {
-		setMyUserName(e.target.value);
-	};
-
-	const handleChangeSessionId = e => {
-		setMySessionId(e.target.value);
-	};
-
-	const leaveSession = () => {
-		if (role === 'HOST') {
-			if (session) {
-				session.disconnect();
-				navigate('/');
-			}
-		}
-		if (role === 'USER' && session) {
-			session.disconnect();
-		}
-		setOV(null);
-		setMySessionId(role === 'HOST' ? tmp : hostSessionName);
-		setSession(undefined);
-		setUser(undefined);
-		setMyUserName(nickname);
-		setHost(undefined);
-	};
-
-	const getToken = () => {
-		return createSession(mySessionId).then(sessionId => createToken(sessionId));
-	};
-
-	const createSession = sessionId => {
-		return new Promise((resolve, reject) => {
-			const data = JSON.stringify({ customSessionId: sessionId });
-			axios
-				.post(APPLICATION_SERVER_URL + '/sessions', data, {
-					headers: {
-						// Authorization:
-						// 'Basic ' + btoa('OPENVIDUAPP:' + APPLICATION_SERVER_URL),
-						'Content-Type': 'application/json',
-						// 'Access-Control-Allow-Origin': '*',
-						// 'Access-Control-Allow-Methods': 'GET,POST',
-					},
-				})
-				.then(response => {
-					resolve(response.data);
-				})
-				.catch(response => {
-					var error = Object.assign({}, response);
-					if (error?.response?.status === 409) {
-						resolve(sessionId);
-					} else {
-						console.warn(
-							'No connection to OpenVidu Server. This may be a certificate error at ' +
-								APPLICATION_SERVER_URL,
-						);
-						if (
-							window.confirm(
-								'No connection to OpenVidu Server. This may be a certificate error at "' +
-									APPLICATION_SERVER_URL +
-									'"\n\nClick OK to navigate and accept it. ' +
-									'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' +
-									APPLICATION_SERVER_URL +
-									'"',
-							)
-						) {
-							window.location.assign(
-								APPLICATION_SERVER_URL + '/accept-certificate',
-							);
-						}
-					}
-				});
-		});
-	};
-
-	const createToken = sessionId => {
-		return new Promise((resolve, reject) => {
-			const data = {
-				type: 'WEBRTC',
-				role: 'PUBLISHER',
-				kurentoOptions: {
-					videoMaxRecvBandwidth: 1000,
-					videoMinRecvBandwidth: 300,
-					videoMaxSendBandwidth: 1000,
-					videoMinSendBandwidth: 300,
-					allowedFilters: [
-						'GStreamerFilter',
-						'FaceOverlayFilter',
-						'ChromaFilter',
-					],
+		this.setState(
+				{
+						session: this.OV.initSession(),
 				},
-			};
-			axios
-				.post(
-					APPLICATION_SERVER_URL + '/sessions/' + sessionId + '/connections',
-					data,
-					{
-						headers: { 'Content-Type': 'application/json' },
-					},
-				)
-				.then(response => {
-					console.log(response.data);
-					resolve(response.data);
-				})
-				.catch(error => reject(error));
-		});
-	};
+				async () => {
+						this.subscribeToStreamCreated();
+						await this.connectToSession();
+				},
+		);
+}
 
-	return (
-		<>
-		</>
-	)
-};
+async connectToSession() {
+		if (this.props.token !== undefined) {
+				console.log('token received: ', this.props.token);
+				this.connect(this.props.token);
+		} else {
+				try {
+						var token = await this.getToken();
+						console.log(token);
+						this.connect(token);
+				} catch (error) {
+						console.error('There was an error getting the token:', error.code, error.message);
+						if(this.props.error){
+								this.props.error({ error: error.error, messgae: error.message, code: error.code, status: error.status });
+						}
+						alert('There was an error getting the token:', error.message);
+				}
+		}
+}
+
+connect(token) {
+		this.state.session
+				.connect(
+						token,
+						{ clientData: this.state.myUserName },
+				)
+				.then(() => {
+						this.connectWebCam();
+				})
+				.catch((error) => {
+						if(this.props.error){
+								this.props.error({ error: error.error, messgae: error.message, code: error.code, status: error.status });
+						}
+						alert('There was an error connecting to the session:', error.message);
+						console.log('There was an error connecting to the session:', error.code, error.message);
+				});
+}
+
+async connectWebCam() {
+		await this.OV.getUserMedia({ audioSource: undefined, videoSource: undefined });
+		var devices = await this.OV.getDevices();
+		var videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+		let publisher = this.OV.initPublisher(undefined, {
+				audioSource: undefined,
+				videoSource: videoDevices[0].deviceId,
+				publishAudio: localUser.isAudioActive(),
+				publishVideo: localUser.isVideoActive(),
+				resolution: '640x480',
+				frameRate: 30,
+				insertMode: 'APPEND',
+		});
+
+		if (this.state.session.capabilities.publish) {
+				publisher.on('accessAllowed' , () => {
+						this.state.session.publish(publisher).then(() => {
+								this.updateSubscribers();
+								this.localUserAccessAllowed = true;
+								if (this.props.joinSession) {
+										this.props.joinSession();
+								}
+						});
+				});
+
+		}
+		localUser.setNickname(this.state.myUserName);
+		localUser.setConnectionId(this.state.session.connection.connectionId);
+		localUser.setScreenShareActive(false);
+		localUser.setStreamManager(publisher);
+		this.subscribeToUserChanged();
+		this.subscribeToStreamDestroyed();
+		this.sendSignalUserChanged({ isScreenShareActive: localUser.isScreenShareActive() });
+
+		this.setState({ currentVideoDevice: videoDevices[0], localUser: localUser }, () => {
+				this.state.localUser.getStreamManager().on('streamPlaying', (e) => {
+						this.updateLayout();
+						publisher.videos[0].video.parentElement.classList.remove('custom-class');
+				});
+		});
+}
+
+updateSubscribers() {
+		var subscribers = this.remotes;
+		this.setState(
+				{
+						subscribers: subscribers,
+				},
+				() => {
+						if (this.state.localUser) {
+								this.sendSignalUserChanged({
+										isAudioActive: this.state.localUser.isAudioActive(),
+										isVideoActive: this.state.localUser.isVideoActive(),
+										nickname: this.state.localUser.getNickname(),
+										isScreenShareActive: this.state.localUser.isScreenShareActive(),
+								});
+						}
+						this.updateLayout();
+				},
+		);
+}
+
+leaveSession() {
+		const mySession = this.state.session;
+
+		if (mySession) {
+				mySession.disconnect();
+		}
+
+		// Empty all properties...
+		this.OV = null;
+		this.setState({
+				session: undefined,
+				subscribers: [],
+				mySessionId: 'SessionA',
+				myUserName: 'OpenVidu_User' + Math.floor(Math.random() * 100),
+				localUser: undefined,
+		});
+		if (this.props.leaveSession) {
+				this.props.leaveSession();
+		}
+}
+camStatusChanged() {
+		localUser.setVideoActive(!localUser.isVideoActive());
+		localUser.getStreamManager().publishVideo(localUser.isVideoActive());
+		this.sendSignalUserChanged({ isVideoActive: localUser.isVideoActive() });
+		this.setState({ localUser: localUser });
+}
+
+micStatusChanged() {
+		localUser.setAudioActive(!localUser.isAudioActive());
+		localUser.getStreamManager().publishAudio(localUser.isAudioActive());
+		this.sendSignalUserChanged({ isAudioActive: localUser.isAudioActive() });
+		this.setState({ localUser: localUser });
+}
+
+nicknameChanged(nickname) {
+		let localUser = this.state.localUser;
+		localUser.setNickname(nickname);
+		this.setState({ localUser: localUser });
+		this.sendSignalUserChanged({ nickname: this.state.localUser.getNickname() });
+}
+
+deleteSubscriber(stream) {
+		const remoteUsers = this.state.subscribers;
+		const userStream = remoteUsers.filter((user) => user.getStreamManager().stream === stream)[0];
+		let index = remoteUsers.indexOf(userStream, 0);
+		if (index > -1) {
+				remoteUsers.splice(index, 1);
+				this.setState({
+						subscribers: remoteUsers,
+				});
+		}
+}
+
+subscribeToStreamCreated() {
+		this.state.session.on('streamCreated', (event) => {
+				const subscriber = this.state.session.subscribe(event.stream, undefined);
+				// var subscribers = this.state.subscribers;
+				subscriber.on('streamPlaying', (e) => {
+						this.checkSomeoneShareScreen();
+						subscriber.videos[0].video.parentElement.classList.remove('custom-class');
+				});
+				const newUser = new UserModel();
+				newUser.setStreamManager(subscriber);
+				newUser.setConnectionId(event.stream.connection.connectionId);
+				newUser.setType('remote');
+				const nickname = event.stream.connection.data.split('%')[0];
+				newUser.setNickname(JSON.parse(nickname).clientData);
+				this.remotes.push(newUser);
+				if(this.localUserAccessAllowed) {
+						this.updateSubscribers();
+				}
+		});
+}
+
+subscribeToStreamDestroyed() {
+		// On every Stream destroyed...
+		this.state.session.on('streamDestroyed', (event) => {
+				// Remove the stream from 'subscribers' array
+				this.deleteSubscriber(event.stream);
+				setTimeout(() => {
+						this.checkSomeoneShareScreen();
+				}, 20);
+				event.preventDefault();
+				this.updateLayout();
+		});
+}
+
+subscribeToUserChanged() {
+		this.state.session.on('signal:userChanged', (event) => {
+				let remoteUsers = this.state.subscribers;
+				remoteUsers.forEach((user) => {
+						if (user.getConnectionId() === event.from.connectionId) {
+								const data = JSON.parse(event.data);
+								console.log('EVENTO REMOTE: ', event.data);
+								if (data.isAudioActive !== undefined) {
+										user.setAudioActive(data.isAudioActive);
+								}
+								if (data.isVideoActive !== undefined) {
+										user.setVideoActive(data.isVideoActive);
+								}
+								if (data.nickname !== undefined) {
+										user.setNickname(data.nickname);
+								}
+								if (data.isScreenShareActive !== undefined) {
+										user.setScreenShareActive(data.isScreenShareActive);
+								}
+						}
+				});
+				this.setState(
+						{
+								subscribers: remoteUsers,
+						},
+						() => this.checkSomeoneShareScreen(),
+				);
+		});
+}
+
+updateLayout() {
+		setTimeout(() => {
+				this.layout.updateLayout();
+		}, 20);
+}
+
+sendSignalUserChanged(data) {
+		const signalOptions = {
+				data: JSON.stringify(data),
+				type: 'userChanged',
+		};
+		this.state.session.signal(signalOptions);
+}
+
+toggleFullscreen() {
+		const document = window.document;
+		const fs = document.getElementById('container');
+		if (
+				!document.fullscreenElement &&
+				!document.mozFullScreenElement &&
+				!document.webkitFullscreenElement &&
+				!document.msFullscreenElement
+		) {
+				if (fs.requestFullscreen) {
+						fs.requestFullscreen();
+				} else if (fs.msRequestFullscreen) {
+						fs.msRequestFullscreen();
+				} else if (fs.mozRequestFullScreen) {
+						fs.mozRequestFullScreen();
+				} else if (fs.webkitRequestFullscreen) {
+						fs.webkitRequestFullscreen();
+				}
+		} else {
+				if (document.exitFullscreen) {
+						document.exitFullscreen();
+				} else if (document.msExitFullscreen) {
+						document.msExitFullscreen();
+				} else if (document.mozCancelFullScreen) {
+						document.mozCancelFullScreen();
+				} else if (document.webkitExitFullscreen) {
+						document.webkitExitFullscreen();
+				}
+		}
+}
+
+async switchCamera() {
+		try{
+				const devices = await this.OV.getDevices()
+				var videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+				if(videoDevices && videoDevices.length > 1) {
+
+						var newVideoDevice = videoDevices.filter(device => device.deviceId !== this.state.currentVideoDevice.deviceId)
+
+						if (newVideoDevice.length > 0) {
+								// Creating a new publisher with specific videoSource
+								// In mobile devices the default and first camera is the front one
+								var newPublisher = this.OV.initPublisher(undefined, {
+										audioSource: undefined,
+										videoSource: newVideoDevice[0].deviceId,
+										publishAudio: localUser.isAudioActive(),
+										publishVideo: localUser.isVideoActive(),
+										mirror: true
+								});
+
+								//newPublisher.once("accessAllowed", () => {
+								await this.state.session.unpublish(this.state.localUser.getStreamManager());
+								await this.state.session.publish(newPublisher)
+								this.state.localUser.setStreamManager(newPublisher);
+								this.setState({
+										currentVideoDevice: newVideoDevice,
+										localUser: localUser,
+								});
+						}
+				}
+		} catch (e) {
+				console.error(e);
+		}
+}
+
+screenShare() {
+		const videoSource = navigator.userAgent.indexOf('Firefox') !== -1 ? 'window' : 'screen';
+		const publisher = this.OV.initPublisher(
+				undefined,
+				{
+						videoSource: videoSource,
+						publishAudio: localUser.isAudioActive(),
+						publishVideo: localUser.isVideoActive(),
+						mirror: false,
+				},
+				(error) => {
+						if (error && error.name === 'SCREEN_EXTENSION_NOT_INSTALLED') {
+								this.setState({ showExtensionDialog: true });
+						} else if (error && error.name === 'SCREEN_SHARING_NOT_SUPPORTED') {
+								alert('Your browser does not support screen sharing');
+						} else if (error && error.name === 'SCREEN_EXTENSION_DISABLED') {
+								alert('You need to enable screen sharing extension');
+						} else if (error && error.name === 'SCREEN_CAPTURE_DENIED') {
+								alert('You need to choose a window or application to share');
+						}
+				},
+		);
+
+		publisher.once('accessAllowed', () => {
+				this.state.session.unpublish(localUser.getStreamManager());
+				localUser.setStreamManager(publisher);
+				this.state.session.publish(localUser.getStreamManager()).then(() => {
+						localUser.setScreenShareActive(true);
+						this.setState({ localUser: localUser }, () => {
+								this.sendSignalUserChanged({ isScreenShareActive: localUser.isScreenShareActive() });
+						});
+				});
+		});
+		publisher.on('streamPlaying', () => {
+				this.updateLayout();
+				publisher.videos[0].video.parentElement.classList.remove('custom-class');
+		});
+}
+
+closeDialogExtension() {
+		this.setState({ showExtensionDialog: false });
+}
+
+stopScreenShare() {
+		this.state.session.unpublish(localUser.getStreamManager());
+		this.connectWebCam();
+}
+
+checkSomeoneShareScreen() {
+		let isScreenShared;
+		// return true if at least one passes the test
+		isScreenShared = this.state.subscribers.some((user) => user.isScreenShareActive()) || localUser.isScreenShareActive();
+		const openviduLayoutOptions = {
+				maxRatio: 3 / 2,
+				minRatio: 9 / 16,
+				fixedRatio: isScreenShared,
+				bigClass: 'OV_big',
+				bigPercentage: 0.8,
+				bigFixedRatio: false,
+				bigMaxRatio: 3 / 2,
+				bigMinRatio: 9 / 16,
+				bigFirst: true,
+				animate: true,
+		};
+		this.layout.setLayoutOptions(openviduLayoutOptions);
+		this.updateLayout();
+}
+
+toggleChat(property) {
+		let display = property;
+
+		if (display === undefined) {
+				display = this.state.chatDisplay === 'none' ? 'block' : 'none';
+		}
+		if (display === 'block') {
+				this.setState({ chatDisplay: display, messageReceived: false });
+		} else {
+				console.log('chat', display);
+				this.setState({ chatDisplay: display });
+		}
+		this.updateLayout();
+}
+
+checkNotification(event) {
+		this.setState({
+				messageReceived: this.state.chatDisplay === 'none',
+		});
+}
+checkSize() {
+		if (document.getElementById('layout').offsetWidth <= 700 && !this.hasBeenUpdated) {
+				this.toggleChat('none');
+				this.hasBeenUpdated = true;
+		}
+		if (document.getElementById('layout').offsetWidth > 700 && this.hasBeenUpdated) {
+				this.hasBeenUpdated = false;
+		}
+}
+
+render() {
+		const mySessionId = this.state.mySessionId;
+		const localUser = this.state.localUser;
+		var chatDisplay = { display: this.state.chatDisplay };
+
+		const host = this.props.host
+		console.log(host)
+
+        return (
+					<>
+            {host === this.state.myUserName ? (
+              // 내가 호스트 일때 
+              <div className="container" id="container" style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
+                  <div className="left-div" style={{ width: "20%", height: "100%" }} >
+                      {this.state.subscribers.slice(0, 5).map((sub, i) => (
+                          <div key={i} className="consultant-1" style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center" }}>
+                            <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                          </div>
+                      ))}
+                  </div>
+                  <div className='host-div' style={{ width: "50%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }} >
+                      <div>
+                        <HostComponent user={localUser}/>
+                      </div>
+                    <div className='room-title' style={{ height: "5vh" }}>
+                      {`${host}의 방`}
+                    </div>
+                    {/* {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                      <div className="host" style={{ height: "70vh" }}>
+                        <HostComponent user={localUser} handleNickname={this.nicknameChanged}/>
+                      </div>
+                      )} */}
+                    <div className='sub' style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "15vh" }}>
+                      <RestTime />
+                      <ToolbarComponent
+                        sessionId={mySessionId}
+                        user={localUser}
+                        showNotification={this.handleChangeResult}
+                        camStatusChanged={this.camStatusChanged}
+                        micStatusChanged={this.micStatusChanged}
+                      />
+                      <Message />
+                    </div>
+                  </div>
+									{/* <HostMainComponent 
+										host={host}
+										localUser={localUser}
+										sessionId={mySessionId}
+										showNotification={this.state.messageReceived}
+										camStatusChanged={this.camStatusChanged}
+										micStatusChanged={this.micStatusChanged}
+									/> */}
+                  <div className='right-div' style={{ width: "20%", height: "100%" }}>
+                    {this.state.subscribers.slice(5, 10).map((sub, i) => (
+                      <div key={i} className="consultant-2" style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center" }}>
+                        <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                      </div>
+                    ))}
+                  </div>
+              </div>
+            ) : (
+              // 내가 컨설턴트 일 때
+              <div className="container" id="container" style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
+								<div className="left-div" style={{ width: "20%", height: "100%" }} >
+									<RestTime />
+								</div>
+              <div className='host-div' style={{ width: "50%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }} >
+                <div className='room-title' style={{ height: "5vh" }}>
+                  {`${host}의 방`}
+                </div>
+								{/* 일단 퍼블리셔 호스트로 */}
+                {/* {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                  <div className="host" style={{ height: "70vh" }}>
+                    <HostComponent 
+											user={localUser} 
+											handleNickname={this.nicknameChanged}
+											nowColor={this.state.nowColor}
+										/>
+                  </div>
+                  )} */}
+									{host && (
+										<div className='host' style={{ height: "70vh" }}>
+											<HostComponent 
+												user={localUser}
+												// streamId={hostUser.streamManager.stream.streamId}
+												handleNickname={this.nicknameChanged}
+											/>
+										</div>
+									)}
+                <div className='sub' style={{ display: "flex", justifyContent: "space-evenly", alignItems: "center", width: "100%", height: "25vh" }}>
+                {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                  <div className="consultant-small" style={{ width: "50%", height: "100%" }} >
+                    <SmallConsultantStream user={localUser} handleNickname={this.nicknameChanged}/>
+                  </div>
+                  )}
+                  {/* <AnswerComponent
+                    user={localUser}
+                    // userCount={userCount}
+										handleStart={this.handleStart}
+										handleBtnIncreased={this.handleBtnIncreased}
+										handleChangeResult={this.props.handleChangeResult}
+										handleBtnDecreased={this.handleBtnDecreased}
+                  /> */}
+                </div>
+              </div>
+									{/* <HostMainComponent 
+										host={host}
+										localUser={localUser}
+										sessionId={mySessionId}
+										showNotification={this.state.messageReceived}
+										camStatusChanged={this.camStatusChanged}
+										micStatusChanged={this.micStatusChanged}
+									/> */}
+              <div className='right-div' style={{ width: "20%", height: "100%" }}>
+                  <Message />
+              </div>
+          </div>
+          )
+            }
+          </>
+      )
+	}
+
+
+
+/**
+ * --------------------------------------------
+ * GETTING A TOKEN FROM YOUR APPLICATION SERVER
+ * --------------------------------------------
+ * The methods below request the creation of a Session and a Token to
+ * your application server. This keeps your OpenVidu deployment secure.
+ *
+ * In this sample code, there is no user control at all. Anybody could
+ * access your application server endpoints! In a real production
+ * environment, your application server must identify the user to allow
+ * access to the endpoints.
+ *
+ * Visit https://docs.openvidu.io/en/stable/application-server to learn
+ * more about the integration of OpenVidu in your application server.
+ */
+	async getToken() {
+			console.log("getToken")
+			const sessionId = await this.createSession(this.state.mySessionId);
+			return await this.createToken(sessionId);
+	}
+
+	async createSession(sessionId) {
+			console.log("createSession")
+			const response = await axios.post(OPENVIDU_SERVER_URL + 'api/sessions', { customSessionId: sessionId }, {
+					headers: { 'Content-Type': 'application/json', },
+			});
+			return response.data; // The sessionId
+	}
+
+	async createToken(sessionId) {
+			console.log("createToken")
+			const response = await axios.post(OPENVIDU_SERVER_URL + 'api/sessions/' + sessionId + '/connections', {}, {
+					headers: { 'Content-Type': 'application/json', },
+			});
+			return response.data; // The token
+	}
+}
 
 
 export default CustomRoomComponent;

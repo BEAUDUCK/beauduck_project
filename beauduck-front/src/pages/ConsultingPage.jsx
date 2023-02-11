@@ -16,9 +16,12 @@ const ConsultingPage = () => {
     setIsOpen(!isOpen);
   };
 
+  dispatch(getConsultingList());
   useEffect(() => {
+
     dispatch(getConsultingList());
-  }, [dispatch]);
+
+  }, [consultingList]);
 
   return (
     <>
