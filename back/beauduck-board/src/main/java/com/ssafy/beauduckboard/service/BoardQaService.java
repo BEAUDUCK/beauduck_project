@@ -41,7 +41,7 @@ public class BoardQaService {
         for(BoardQaEntity board : boardQaEntities){
             BoardQaResponseDto boardDto = BoardQaResponseDto.builder()
                     .id(board.getId())
-//                    .memberEntity(board.getMemberEntity())
+                    .memberEntity(board.getMemberEntity())
                     .writer(board.getWriter())
                     .memberId(board.getMemberEntity().getMemberId())
                     .likes(board.getLikes())
@@ -90,6 +90,7 @@ public class BoardQaService {
                 .isActive(board.getIsActive())
                 .created_date(board.getCreated_date())
                 .updated_date(board.getUpdated_date())
+                .memberId(board.getMemberEntity().getMemberId())
                 .build();
 
         return boardQaResponseDto;
