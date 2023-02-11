@@ -18,12 +18,8 @@ const TogetherListItem = ({ room }) => {
   const [nowColor, setNowColor] = useState("")
   const [nowFace, setNowFace] = useState("")
   const [nowNum, setNowNum] = useState(_.random(0, 7))
-<<<<<<< HEAD
-  const navigate = useNavigate
-=======
 
-  
->>>>>>> 60aa0036b5482679139d2924793a5c6d7acec44b
+
   
   useEffect(() => {
     randomFace()
