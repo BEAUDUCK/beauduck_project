@@ -12,19 +12,6 @@ pipeline {
             }
         }
 
-        stage('Build image') {
-            steps {
-                sh 'ls -al'
-                dir('back/beauduck-consult'){
-                    sh 'ls -al'
-                    sh 'chmod +x ./gradlew'
-                    sh './gradlew build'
-                    sh 'docker build -t feat-back-consult .'
-                }
-                echo 'Build image...'
-            }
-        }
-
         stage('Remove Previous image') {
             steps {
                 script {
@@ -36,8 +23,24 @@ pipeline {
                     }
                 }
             }
-
         }
+
+        stage('Build image') {
+            steps {
+                sh 'ls -al'
+                dir('back/beauduck-consult'){
+                    sh 'ls -al'
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew build'
+                    sh 'docker-compose -f "docker-compose.yml" up -d --build'
+                    sh 'docker build -t feat-back-consult .'
+                }
+                echo 'Build image...'
+            }
+        }
+
+ 
+
         stage('Run New image') {
             steps {
                 sh 'docker run --name feat-back-consult -d -p 8083:8083 feat-back-consult'
