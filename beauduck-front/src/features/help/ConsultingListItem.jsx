@@ -105,6 +105,7 @@ const ConsultingListItem = ({ consultingItem }) => {
   const { roomId } = useSelector(state => state.consulting)
 
   const isOpenClick = () => {
+    console.log("눌렸어요")
     // setIsOpen(!isOpen);
     if (consultingItem.hostNickname === myNickname) {
       return (
