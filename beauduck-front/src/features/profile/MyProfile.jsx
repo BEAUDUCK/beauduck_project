@@ -13,8 +13,13 @@ const MyProfile = () => {
   const { memberId } = useSelector((state) => state.member);
   const { userInfo } = useSelector((state) => state.profile);
 
-  const [userNickname, setUserNickname] = useState(userInfo?.nickName);
-  const [userContent, setUserContent] = useState(userInfo?.content);
+  const [userNickname, setUserNickname] = useState('');
+  const [userContent, setUserContent] = useState('');
+
+  useEffect(() => {
+    setUserNickname(userInfo?.nickName);
+    setUserContent(userInfo?.content);
+  }, [userInfo]);
 
   const [edited, setEdited] = useState(false);
   // const fileInput = useRef(null);
@@ -22,7 +27,6 @@ const MyProfile = () => {
   const handleEdited = () => {
     setEdited(!edited);
   };
-
   // const handleChangeImage = (e) => {
   //   if (e.target.files[0]) {
   //     setProfileImg(e.target.files[0]);
@@ -68,17 +72,14 @@ const MyProfile = () => {
       {!edited ? (
         <div>
           <div className="profile-nickname">
-            {/* <p>{props.nickname}</p> */}
-            {/* <p>{userNickname}</p> */}
             <div className="circle"></div>
-            <h2>장멋쟁이똥</h2>
+            <h2>{userInfo?.nickName}</h2>
           </div>
           <div className="background-div"></div>
           <div className="profile-div">
             <img className="profile-img" src={profileImg} alt="프로필사진" />
             <div className="profile-content">
-              {/* <p>{userContent}</p> */}
-              <p>나는 개똥벌레</p>
+              <p>{userInfo?.content}</p>
             </div>
           </div>
           <button className="profile-btn" onClick={handleEdited}>
@@ -106,7 +107,7 @@ const MyProfile = () => {
             <FontAwesomeIcon
               icon="fa-regular fa-circle-check"
               onClick={checkOver}
-              className={usable ? 'checked' : ''}
+              className={!usable ? 'checked' : ''}
             />
           </div>
           <div className="profile-div">

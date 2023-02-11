@@ -282,7 +282,7 @@ hr {
   
   .user-face {
     position: relative;
-    max-width: 1020px;
+    max-width: 900px;
     margin: auto;
   
     background-color: white;
@@ -304,9 +304,9 @@ hr {
   
     #main_capture {
       position: relative;
-      width: 100%;
+      width: 480px;
+      height: 360px;
       max-width: 700px;
-      height: 100%;
       .webcam {
         width: 100%;
       }
@@ -330,7 +330,7 @@ hr {
       .camera-img {
         width: 80px;
         height: 80px;
-        margin: 30px;
+        margin: 10px;
       }
 
       a {
@@ -423,6 +423,7 @@ hr {
     border-top-left-radius: 100px;
     padding-top: 30px;
     padding-bottom: 30px;
+    min-height: 300px;
 
     h2 {
       width: 260px;
@@ -454,6 +455,7 @@ hr {
         }
         p {
           display: inline-block;
+          width: 80%;
           height: 50px;
           margin: 0;
           padding-left: 15px;

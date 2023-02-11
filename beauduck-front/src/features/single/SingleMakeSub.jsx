@@ -149,7 +149,7 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
     console.log(makeupMiddleList);
 
     const subBox = document.getElementById(`sub-${main}`);
-    const removeSubImg = document.getElementById(`subImg_${idx}`);
+    const removeSubImg = document.getElementById(`subImg_${main}_${idx}`);
     subBox.removeChild(removeSubImg);
 
     setIdx(-1);

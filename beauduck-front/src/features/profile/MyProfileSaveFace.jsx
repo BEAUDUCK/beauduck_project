@@ -64,8 +64,8 @@ const MyProfileSaveFace = () => {
             audio={false}
             screenshotFormat="image/jpeg"
             className="webcam"
-            width={640}
-            height={480}
+            width={480}
+            height={360}
           />
           <img id="faceCircle" src={faceCircle} alt="" />
         </div>
