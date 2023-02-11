@@ -11,9 +11,6 @@ import face7 from '../../assets/faces/face7.png';
 import face8 from '../../assets/faces/face8.png';
 import ConsultingModalLoadingGuest from './ConsultingModalLoadingGuest';
 import BlackOut from '../../components/blackout/BlackOut';
-import ConsultingModalLoadingHost from './ConsultingModalLoadingHost';
-import { useDispatch, useSelector } from 'react-redux';
-import { getConsultDetail } from './ConsultingSlice';
 
 const ConsultingListItem = ({ consultingItem }) => {
   // return (
@@ -46,9 +43,6 @@ const ConsultingListItem = ({ consultingItem }) => {
   const [nowColor, setNowColor] = useState('');
   const [nowFace, setNowFace] = useState('');
   const [nowNum, setNowNum] = useState(_.random(0, 7));
-  const myNickname = useSelector(state => state.member.nickName)
-  const dispatch = useDispatch()
-  const { isActive } = useSelector(state => state.consulting)
 
   useEffect(() => {
     randomFace();
@@ -103,18 +97,15 @@ const ConsultingListItem = ({ consultingItem }) => {
   //   }
   // }
   const [isOpen, setIsOpen] = useState();
-  const { roomId } = useSelector(state => state.consulting)
 
   const isOpenClick = () => {
-    if (isActive) {
-      return <ConsultingModalLoadingGuest />
-    }
+    setIsOpen(!isOpen);
   };
 
   return (
     <>
       <div className="flip">
-        <div className="card" onClick={isOpenClick} >
+        <div className="card" onClick={isOpenClick}>
           <div className="front">
             <div className="front-top" style={{ backgroundColor: nowColor }}>
               <img src={nowFace} />
@@ -148,14 +139,14 @@ const ConsultingListItem = ({ consultingItem }) => {
           </div>
         </div>
       </div>
-      {/* {isActive && (
-          <ConsultingModalLoadingGuest
-            roomId={consultingItem.roomId}
-            host={consultingItem.hostNickname}
-            // isOpenClick={isOpenClick}
-          />
-        )} */}
-      {/* {isOpen && <BlackOut onClickEvent={isOpenClick} />} */}
+      {isOpen && (
+        <ConsultingModalLoadingGuest
+          roomId={consultingItem.roomId}
+          host={consultingItem.hostNickname}
+          isOpenClick={isOpenClick}
+        />
+      )}
+      {isOpen && <BlackOut onClickEvent={isOpenClick} />}
     </>
   );
 };
