@@ -74,7 +74,7 @@ class VideoRoomComponent extends Component {
         const openViduLayoutOptions = {
             maxRatio: 9 / 16, // The narrowest ratio that will be used (default 2x3)
             minRatio: 9 / 16, // The widest ratio that will be used (default 16x9)
-            fixedRatio: true, // If this is true then the aspect ratio of the video is maintained and minRatio and maxRatio are ignored (default false)
+            fixedRatio: false, // If this is true then the aspect ratio of the video is maintained and minRatio and maxRatio are ignored (default false)
             bigClass: 'OV_big', // The class to add to elements that should be sized bigger
             bigPercentage: 0.8, // The maximum percentage of space the big ones should take up
             bigFixedRatio: false, // fixedRatio for the big ones
@@ -555,9 +555,8 @@ class VideoRoomComponent extends Component {
         const mySessionId = this.state.mySessionId;
         const localUser = this.state.localUser;
         const chatDisplay = { display: this.state.chatDisplay };
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@", this.state.subscribers)
-        return (
 
+        return (
             <div className="container" id="container">
                 <ToolbarComponent
                     sessionId={mySessionId}
@@ -627,26 +626,14 @@ class VideoRoomComponent extends Component {
     }
 
     async createSession(sessionId) {
-        // const response = await axios.post(APPLICATION_SERVER_URL + 'api/sessions', { customSessionId: sessionId }, {
-        //     headers: { 'Content-Type': 'application/json', },
-        // });
-        // return response.data; // The sessionId
-        return new Promise((resolve, reject) => {
-            const data = JSON.stringify({ customSessionId: sessionId })
-            axios
-                .post(OPENVIDU_SERVER_URL + 'api/sessions', data, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                .then((response) => {
-                    
-                })
-        })
+        const response = await axios.post(OPENVIDU_SERVER_URL + 'api/sessions', { customSessionId: sessionId }, {
+            headers: { 'Content-Type': 'application/json', },
+        });
+        return response.data; // The sessionId
     }
 
     async createToken(sessionId) {
-        const response = await axios.post(APPLICATION_SERVER_URL + 'api/sessions/' + sessionId + '/connections', {}, {
+        const response = await axios.post(OPENVIDU_SERVER_URL + 'api/sessions/' + sessionId + '/connections', {}, {
             headers: { 'Content-Type': 'application/json', },
         });
         return response.data; // The token

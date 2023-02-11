@@ -30,7 +30,6 @@ const ConsultingModalLoadingHost = () => {
 
   const handleStart = () => {
     navigate("/help/room", { state: consultDetail })
-    console.log(consultDetail)
   }
 
   return (

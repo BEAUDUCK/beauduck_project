@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import CustomRoomComponent from "../openvidu/components/CustomRoomComponent";
+import VideoRoomComponent from "../openvidu/components/VideoRoomComponent";
 
 // 컨설팅 받는 페이지
 // roomId로 data dispatch
@@ -16,7 +17,13 @@ const ConsultingRoomPage = () => {
 
   return (
     <div className="full-screen">
-      <CustomRoomComponent
+      {/* <CustomRoomComponent
+        sessionName={state.roomId}
+        host={state.hostNickname}
+        user={myNickname}
+        userList={state.userList}
+      /> */}
+      <VideoRoomComponent 
         sessionName={state.roomId}
         host={state.hostNickname}
         user={myNickname}
