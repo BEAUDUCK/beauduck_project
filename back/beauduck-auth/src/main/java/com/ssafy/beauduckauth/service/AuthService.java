@@ -87,6 +87,7 @@ public class AuthService {
 
     public ResponseSuccessDto<LoginResponseDto> login(String accessToken) {
         System.out.println("로그인 시작");
+        System.out.println("accessToken = " + accessToken);
         JSONObject response = getJsonObjectByToken(accessToken);
         Map<String, Object> res = (Map<String, Object>) response.get("response");
 
