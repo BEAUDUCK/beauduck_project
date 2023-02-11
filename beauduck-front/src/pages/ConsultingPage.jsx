@@ -19,8 +19,6 @@ const ConsultingPage = () => {
   dispatch(getConsultingList());
   useEffect(() => {
 
-    dispatch(getConsultingList());
-
   }, [consultingList]);
 
   return (
