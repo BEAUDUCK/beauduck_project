@@ -15,6 +15,7 @@ export const getConsultingList = createAsyncThunk(
 export const postNewConsulting = createAsyncThunk(
   'help/newConsulting',
   async (newConsulting) => {
+    // 이부분 post 요청 axios 에러
     const res1 = await client.post('/consult/', newConsulting);
     const res2 = await client.get('/consult/');
     return [res1.data.data, res2.data.data];
@@ -62,6 +63,7 @@ export const consultSlice = createSlice({
         state.consultingList = action.payload;
       })
       .addCase(postNewConsulting.fulfilled, (state, action) => {
+        console.log(action.payload)
         state.roomId = action.payload[0].roomId;
         state.consultingList = action.payload[1];
       })

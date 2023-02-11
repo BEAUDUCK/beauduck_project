@@ -34,7 +34,7 @@ const SignupPage = () => {
   // 닉네임 중복 확인
   const NickNameCheck = async (nickName) => {
     axios
-      .get(`https://i8b306.p.ssafy.io/members/check/${nickName}`)
+      .get(`https://i8b306.p.ssafy.io:8080/members/check/${nickName}`)
       .then((res) => {
         if (!res.data.data) {
           setErrorMessage('사용 가능한 닉네임입니다');
