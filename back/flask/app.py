@@ -5,6 +5,7 @@ from flask_sslify import SSLify
 import numpy as np
 import face_recognition
 import os
+import ssl
 
 
 # DB
@@ -184,4 +185,6 @@ def ajax():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, threaded=False)
+    ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    ssl_context.load_cert_chain(certfile='cert.pem', keyfile='privkey.pem')
+    app.run(host='0.0.0.0', port=5000, ssl_context = ssl_context)
