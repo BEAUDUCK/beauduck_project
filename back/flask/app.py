@@ -1,5 +1,6 @@
-from flask import Flask, request, redirect
+from flask import Flask, request
 from flask_cors import CORS
+from flask_sslify import SSLify
 
 import numpy as np
 import face_recognition
@@ -15,6 +16,7 @@ import requests
 
 app = Flask(__name__)
 CORS(app)
+sslify = SSLify(app)
 
 
 ## 저장된 db에 url 가져오기
@@ -140,13 +142,13 @@ def getisMember(meberId):
     db.close()
     return ret
 
-@app.before_request
-def before_request():
-    scheme = request.headers.get('X-Forwarded-Proto')
-    if scheme and scheme == 'http' and request.url.startswith('http://'):
-        url = request.url.replace('http://', 'https://', 1)
-        code = 301
-        return redirect(url, code=code)
+# @app.before_request
+# def before_request():
+#     scheme = request.headers.get('X-Forwarded-Proto')
+#     if scheme and scheme == 'http' and request.url.startswith('http://'):
+#         url = request.url.replace('http://', 'https://', 1)
+#         code = 301
+#         return redirect(url, code=code)
 
 
 @app.route('/recommand', methods=['POST'])
