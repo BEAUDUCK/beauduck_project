@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCookie } from './cookie';
 import { useCookies } from 'react-cookie';
 
-const REACT_APP_BOARD_URL = 'https://i8b306.p.ssafy.io:8081/';
+const REACT_APP_BOARD_URL = 'https://i8b306.p.ssafy.io:8081';
 const client = axios.create({
   baseURL: REACT_APP_BOARD_URL,
   headers: {

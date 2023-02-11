@@ -8,12 +8,14 @@ const ConsultingModalLoadingGuest = ({ roomId, host, isOpenClick }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { memberId, nickName } = useSelector((state) => state.member);
-
+  const { consultDetail } = useSelector(state => state.consulting)
   const [isReady, setIsReady] = useState(false);
 
   const ChangeStatus = () => {
-    setIsReady(!isReady);
+    // setIsReady(!isReady);
     // 이벤트에 준비상태 host 한테 보내는 기능 추가
+    navigate("/help/room", { state: consultDetail })
+
   };
 
   const goBack = () => {

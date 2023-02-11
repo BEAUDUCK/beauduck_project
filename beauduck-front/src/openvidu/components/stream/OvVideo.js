@@ -2,9 +2,9 @@ import React, { Component, useState, useEffect, useRef } from 'react';
 import './StreamComponent.css';
 
 const OvVideoComponent = (props) => {
-	console.log("#############", props.streamManager)
 	const [streamManager, setStreamManager] = useState(props.streamManager);
 	const videoRef = useRef()
+	console.log(props.user.streamManager)
 
 	useEffect(() => {
 		if (props.streamManager) {
@@ -17,9 +17,9 @@ const OvVideoComponent = (props) => {
 			<video
 				className='input_video'
 				autoPlay={true}
-				id={'video-' + this.props.user.getStreamManager().stream.streamId}
-				ref={this.videoRef}
-				muted={this.props.mutedSound}
+				id={'video-' + props.user.getStreamManager().stream.streamId}
+				ref={videoRef}
+				muted={props.mutedSound}
 				style={{ width: "30vh",height: "18vh" }}
 			/>
 	</div>
