@@ -8,31 +8,21 @@ const global = 'https://i8b306.p.ssafy.io:8080/';
 export const UserLogin = createAsyncThunk(
   'member/UserLogin',
   async (accessToken) => {
-    console.log('로그인');
     const res = await axios.get(
       `${global}naver/login?accessToken=${accessToken}`,
     );
-    // .then((res) => {
-    //   console.log('로그인 res', res.data.data);
-    // });
-    console.log('dsdasdsd', res);
-    // .catch((err) => console.log('로그인 err', err));
+    console.log('로그인', res);
     return res.data;
   },
 );
 
 export const signUp = createAsyncThunk('member/signUp', async (payload) => {
-  console.log('회원가입');
-  await axios
-    .post(`${global}naver/signup`, payload)
-    .then((res) => {
-      console.log('회원가입 res', res);
-    })
-    .catch((err) => console.log('회원가입 err', err));
-  const res = await axios
-    .get(`${global}naver/login?accessToken=${payload.accessToken}`)
-    .then((res) => console.log(res));
-  return res.data.data;
+  await axios.post(`${global}naver/signup`, payload);
+  const res = await axios.get(
+    `${global}naver/login?accessToken=${payload.accessToken}`,
+  );
+  console.log('회원가입 후 로그인', res);
+  return res.data;
 });
 
 export const checkToken = createAsyncThunk('member/checkToken', async () => {
@@ -99,6 +89,7 @@ export const memberSlice = createSlice({
         state.loginRejected = false;
       })
       .addCase(signUp.rejected, (state, action) => {
+        console.log('dsds');
         state.loginRejected = true;
       });
   },

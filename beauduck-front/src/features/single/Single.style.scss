@@ -12,12 +12,14 @@
 
     .makeup-div {
         position: relative;
+        display: inline-block;
         width: 290px;
         height: 400px;
         border-bottom-right-radius: 75px;
         border-bottom-left-radius: 75px;
         display: inline-block;
         margin: auto;
+        cursor: pointer;
 
         // margin-top:20px;
         background-color: #b1b1b1;
@@ -773,10 +775,16 @@
 //-------- 디테일 모달 ------------
 
 .makeup-detail {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
     z-index: 998;
 
     background-color: white;
@@ -915,10 +923,10 @@
 
 // ---------- 추천 모달 -----------
 .recommend-modal {
-    position: absolute;
-    // top: 50%;
+    position: fixed;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -70%);
+    transform: translate(-50%, -50%);
     z-index: 998;
 
     background-color: white;
