@@ -35,7 +35,7 @@ const Header = () => {
         <li onClick={() => navigate('/profile')}>
           <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user"/>
         </li>
-        <li className="header-not-auto">
+        <li className="header-not-auth">
             {!memberId ? <LoginModal /> : <LogoutModal />}
         </li>
       </ul>
