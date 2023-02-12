@@ -24,7 +24,7 @@ const NaverLogin = () => {
         localStorage.setItem('refreshToken', res.data.data.refreshToken);
         const accessToken = res.data.data.accessToken;
         const expireDate = new Date();
-        expireDate.setMinutes(expireDate.getMinutes() + 1);
+        expireDate.setMinutes(expireDate.getMinutes() + 30);
         setCookie(
           'accessToken',
           { accessToken },
