@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import './DialogExtension.css';
 
+// DialogExtensionComponent : 익스텐션 설치 알림 컴포넌트
 export default class DialogExtensionComponent extends Component {
     constructor(props) {
         super(props);
@@ -21,10 +22,13 @@ export default class DialogExtensionComponent extends Component {
         this.refreshBrowser = this.refreshBrowser.bind(this);
     }
 
+		// Props 이후에 동작하는 리액트 컴포넌트 생명주기함수
     componentWillReceiveProps(props) {}
 
+		// comopnentDidmount : 컴포넌트가 마운트 된 이후에 동작하는 리액트 생명주기함수
     componentDidMount() {}
 
+		// onNoClick : 클릭 취소 함수
     onNoClick() {
         // this.cancel.emit();
         this.props.cancelClicked();

@@ -8,6 +8,7 @@ export default class OvVideoComponent extends Component {
 			this.videoRef = React.createRef();
 	}
 
+
 	componentDidMount() {
 			if (this.props && this.props.user.streamManager && !!this.videoRef) {
 					console.log('PROPS: ', this.props);
