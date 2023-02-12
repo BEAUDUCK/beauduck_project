@@ -36,20 +36,21 @@ const ConsultingModalCreate = ({ isOpenModal }) => {
       hostNickname: nickName,
     };
 
-    dispatch(postNewConsulting(newConsulting)).then(() => {
-      setIsLoading(!isLoading);
-    });
-    // isOpenModal(); // 모달 닫기
+    dispatch(postNewConsulting(newConsulting));
+    isOpenModal();
   };
 
   return (
     <>
-      {!isLoading ? (
       <div className="consult-create-modal">
         <div className="consult-create-header">
           <p></p>
           <h3>방 생성하기</h3>
-          <FontAwesomeIcon onClick={isOpenModal} icon="xmark" className="xmark" />
+          <FontAwesomeIcon
+            onClick={isOpenModal}
+            icon="xmark"
+            className="xmark"
+          />
         </div>
         <div className="consult-form">
           <div>
@@ -75,12 +76,7 @@ const ConsultingModalCreate = ({ isOpenModal }) => {
           </div>
           <Button text={'완료'} onClickEvent={ConsultingCreate} />
         </div>
-        {isLoading && <ConsultingModalLoadingHost />}
-        {/* {isLoading && <BlackOut />} */}
       </div>
-      ) : (
-        <ConsultingModalLoadingHost />
-      )}
     </>
   );
 };
