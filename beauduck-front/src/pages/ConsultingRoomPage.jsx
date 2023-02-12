@@ -15,8 +15,6 @@ const ConsultingRoomPage = () => {
   const { state } = location
   const myNickname = useSelector(state => state.member.nickName)
 
-  console.log("내려주는 값")
-  console.log(state)
   return (
     <div style={{ position: "fixed", zIndex: "999" ,width: "100vw", height: "100vh", backgroundColor: "white" }}>
       <VideoRoomComponent 
