@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import HighlightOff from '@mui/icons-material/HighlightOff';
 import FormHelperText from '@mui/material/FormHelperText';
 
+// 스트림된 요소들을 컨트롤하는 요소들을 담은 컴포넌트
 export default class StreamComponent extends Component {
     constructor(props) {
         super(props);
@@ -23,10 +24,12 @@ export default class StreamComponent extends Component {
         this.toggleSound = this.toggleSound.bind(this);
     }
 
+
     handleChange(event) {
         this.setState({ nickname: event.target.value });
         event.preventDefault();
     }
+
 
     toggleNicknameForm() {
         if (this.props.user.isLocal()) {
@@ -34,10 +37,12 @@ export default class StreamComponent extends Component {
         }
     }
 
+    // 사운드 ON/OFF 버튼 함수
     toggleSound() {
         this.setState({ mutedSound: !this.state.mutedSound });
     }
 
+    // 키를 눌렀을 때 동작하는 이벤트핸들러
     handlePressKey(event) {
         if (event.key === 'Enter') {
             console.log(this.state.nickname);
@@ -54,6 +59,7 @@ export default class StreamComponent extends Component {
     render() {
         return (
             <div className="OT_widget-container" style={{ marginTop: "20px" }}>
+                {/* 닉네임 보여주는 div */}
                 <div className="pointer nickname">
                     {this.state.showForm ? (
                         <FormControl id="nicknameForm">
@@ -79,13 +85,14 @@ export default class StreamComponent extends Component {
                             )}
                         </FormControl>
                     ) : (
+                        // 이부분이 표시 -> Publisher(나 자신) edit 표시
                         <div onClick={this.toggleNicknameForm}>
                             <span id="nickname">{this.props.user.getNickname()}</span>
                             {this.props.user.isLocal() && <span id=""> (edit)</span>}
                         </div>
                     )}
                 </div>
-
+                {/* 실제 영상 출력 부분 */}
                 {this.props.user !== undefined && this.props.user.getStreamManager() !== undefined ? (
                     <div className="streamComponent">
                         <OvVideoComponent 

@@ -15,9 +15,8 @@ export const getConsultingList = createAsyncThunk(
 export const postNewConsulting = createAsyncThunk(
   'help/newConsulting',
   async (newConsulting) => {
-    const res1 = await client.post('/consult/', newConsulting);
-    const res2 = await client.get('/consult/');
-    return [res1.data.data, res2.data.data];
+    const res = await client.post('/consult/', newConsulting);
+    return res.data.data
   },
 );
 
@@ -97,7 +96,7 @@ export const consultSlice = createSlice({
       .addCase(postNewConsulting.fulfilled, (state, action) => {
         state.roomId = action.payload[0].roomId;
         state.consultingList = action.payload[1];
-        state.isActive = true
+        // state.isActive = true
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;

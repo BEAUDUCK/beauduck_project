@@ -101,7 +101,7 @@ class VideoRoomComponent extends Component {
         window.addEventListener('resize', this.updateLayout);
         window.addEventListener('resize', this.checkSize);
 
-				// 세션에 조인하기
+         // 세션에 조인하기
         this.joinSession();
     }
     // componentWillUnmount: 컴포넌트가 언마운트 됐을 때 작동하는 리액트 컴포넌트 생명주기함수
@@ -140,6 +140,7 @@ class VideoRoomComponent extends Component {
                 var token = await this.getToken();
                 this.connect(token);
             } catch (error) {
+                console.log("@@@@@@@@@@@에러 남")
                 console.error('There was an error getting the token:', error.code, error.message);
                 if(this.props.error){
                     this.props.error({ error: error.error, messgae: error.message, code: error.code, status: error.status });
@@ -237,7 +238,7 @@ class VideoRoomComponent extends Component {
             },
         );
     }
-		// 세션 나가기
+
     leaveSession() {
         const mySession = this.state.session;
 
@@ -278,7 +279,6 @@ class VideoRoomComponent extends Component {
         this.setState({ localUser: localUser });
     }
 
-		// 닉네임 변경된 것을 인지 하는 함수
     nicknameChanged(nickname) {
         let localUser = this.state.localUser;
         localUser.setNickname(nickname);
@@ -416,7 +416,6 @@ class VideoRoomComponent extends Component {
         }
     }
 
-		// 카메라 바꾸는 함수
     async switchCamera() {
         try{
             const devices = await this.OV.getDevices()
@@ -554,23 +553,21 @@ class VideoRoomComponent extends Component {
     }
 
     // checkSize: 반응형 채팅창을 위한 사이즈체크
-    checkSize() {
-        if (document.getElementById('layout').offsetWidth <= 700 && !this.hasBeenUpdated) {
-            this.toggleChat('none');
-            this.hasBeenUpdated = true;
-        }
-        if (document.getElementById('layout').offsetWidth > 700 && this.hasBeenUpdated) {
-            this.hasBeenUpdated = false;
-        }
-    }
+    // checkSize() {
+    //     if (document.getElementById('layout').offsetWidth <= 700 && !this.hasBeenUpdated) {
+    //         this.toggleChat('none');
+    //         this.hasBeenUpdated = true;
+    //     }
+    //     if (document.getElementById('layout').offsetWidth > 700 && this.hasBeenUpdated) {
+    //         this.hasBeenUpdated = false;
+    //     }
+    // }
     // 여기서부터 custom
 
     render() {
         const mySessionId = this.state.mySessionId;
         const localUser = this.state.localUser;
         const chatDisplay = { display: this.state.chatDisplay };
-
-				// 여기서부터 커스텀
         const subscribers = this.state.subscribers
         console.log("내 세션 아이디 :", mySessionId)
         console.log("내 구독자", this.state.subscribers)
@@ -579,6 +576,7 @@ class VideoRoomComponent extends Component {
 
         return (
 					<>
+						{this.props.host === this.props.myUserName ? (
             <div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }} >
 							<div className="left-div" style={{ width: "20%", height: "100%" }} >
 								{this.state.subscribers.slice(0, 5).map((sub, i) => (
@@ -611,6 +609,23 @@ class VideoRoomComponent extends Component {
 								))}
 							</div>
             </div>
+						) : (
+							<div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
+								<div>
+									<Timer />
+								</div>
+								<div>
+									{this.state.subscribers !== undefined && (
+										<StreamComponent user={this.state.subscribers[0]} streamId={this.state.subscribers[0].streamManager.stream.streamId} />
+									)}
+									{localUser !== undefined && localUser.getStreamManager() !== undefined && (
+										<StreamComponent user={localUser} />
+									)}
+									<Photos />
+									<GetScore />
+								</div>
+							</div>
+						)}
 					{/* {this.props.user === this.props.host ? (
 					) : (
 						<div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>

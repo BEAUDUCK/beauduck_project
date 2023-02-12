@@ -23,7 +23,6 @@ const GetScore = ({ isActive }) => {
       // if (idx < 50) {
       if (idx < 49) {
         setIdx(idx + 1)
-        console.log("idx :", idx)
       }
     }, 5000)
 
