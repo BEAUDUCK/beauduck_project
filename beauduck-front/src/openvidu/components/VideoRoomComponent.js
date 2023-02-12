@@ -10,11 +10,14 @@ import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
 import ToolbarComponent from './toolbar/ToolbarComponent';
 import { textAlign } from '@mui/system';
+import Timer from '../../components/timer/Timer';
+import Photos from './photos/Photos';
+import GetScore from './getscore/GetScore';
 
 
 var localUser = new UserModel();
 // const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'localhost:5000/';
-const OPENVIDU_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'https://i8b306.p.ssafy.io:9000/'
+const OPENVIDU_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'https://beauduck.store:9000/'
 
 class VideoRoomComponent extends Component {
     constructor(props) {
@@ -31,6 +34,7 @@ class VideoRoomComponent extends Component {
             session: undefined,
             localUser: undefined,
             subscribers: [],
+            userList: this.props.userList,
             chatDisplay: 'none',
             currentVideoDevice: undefined,
             hostNickname: this.props.host,
@@ -79,7 +83,7 @@ class VideoRoomComponent extends Component {
         this.toggleChat = this.toggleChat.bind(this);
         // checkNotification: 알림 확인 함수
         this.checkNotification = this.checkNotification.bind(this);
-        this.checkSize = this.checkSize.bind(this);
+        // this.checkSize = this.checkSize.bind(this);
         // 여기부터
         // 시작버튼
         this.handleClickBtn = this.handleClickBtn.bind(this)
@@ -87,6 +91,8 @@ class VideoRoomComponent extends Component {
         this.handleIncreaseBtn = this.handleIncreaseBtn.bind(this)
         // 감소버튼
         this.handleDecreaseBtn = this.handleDecreaseBtn.bind(this)
+				//
+				// this.handleChangeResult = this.handleChangeResult.bind(this)
     }
     // componentDidMount: 컴포넌트가 마운트 되었을 때 작동하는 리액트 컴포넌트 생명주기함수
     componentDidMount() {
@@ -269,6 +275,8 @@ class VideoRoomComponent extends Component {
         if (this.props.leaveSession) {
             this.props.leaveSession();
         }
+				// window.location.replace("/help/result")
+				this.setState({ isActive: true})
     }
 
     // camStatusChanged : 캠 설정 변경
@@ -561,20 +569,20 @@ class VideoRoomComponent extends Component {
     }
 
     // checkSize: 반응형 채팅창을 위한 사이즈체크
-    checkSize() {
-        if (document.getElementById('layout').offsetWidth <= 700 && !this.hasBeenUpdated) {
-            this.toggleChat('none');
-            this.hasBeenUpdated = true;
-        }
-        if (document.getElementById('layout').offsetWidth > 700 && this.hasBeenUpdated) {
-            this.hasBeenUpdated = false;
-        }
-    }
+    // checkSize() {
+    //     if (document.getElementById('layout').offsetWidth <= 700 && !this.hasBeenUpdated) {
+    //         this.toggleChat('none');
+    //         this.hasBeenUpdated = true;
+    //     }
+    //     if (document.getElementById('layout').offsetWidth > 700 && this.hasBeenUpdated) {
+    //         this.hasBeenUpdated = false;
+    //     }
+    // }
     // 여기서부터 custom
     // 시작 버튼 눌렀을 때
     handleClickBtn() {  
         console.log("클릭되었어요!!")
-        this.setState({ isActive: true })
+        // this.setState({ isActive: true })
 
         let interval;
         
@@ -624,14 +632,19 @@ class VideoRoomComponent extends Component {
         console.log("감소")
     }
 
+		// handleChangeResult() {
+		// 	console.log("handleChangeResult 작동")
+		// }
+
     render() {
         const mySessionId = this.state.mySessionId;
         const localUser = this.state.localUser;
         const chatDisplay = { display: this.state.chatDisplay };
-				const subscribers = this.state.subscribers
+        const subscribers = this.state.subscribers
         console.log("내 세션 아이디 :", mySessionId)
         console.log("내 구독자", this.state.subscribers)
         console.log("호스트", this.state.hostNickname)
+				console.log("isActive :", this.state.isActive)
         return (
 					<>
             <div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }} >
@@ -653,16 +666,9 @@ class VideoRoomComponent extends Component {
 											micStatusChanged={this.micStatusChanged}
 											leaveSession={this.leaveSession}
 										/>
-                                        {this.state.isActive ? (
-                                            (<>
-                                            <button onClick={this.handleIncreaseBtn(this.state.nowCnt)}>증가</button>
-                                            <button onClick={this.handleDecreaseBtn(this.state.nowCnt)}>감소</button>
-                                            </>
-                                            )
-                                        ) : (
-                                            <button onClick={this.handleClickBtn}>시작</button>
-
-                                        )}
+										<Timer />
+										<Photos />
+										<GetScore isActive={this.state.isActive}/>
 								</div>
 							)}
 							<div className='right-div' style={{ width: "20%", height: "100%" }}>
