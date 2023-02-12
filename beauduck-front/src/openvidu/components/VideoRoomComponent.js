@@ -34,7 +34,17 @@ class VideoRoomComponent extends Component {
             chatDisplay: 'none',
             currentVideoDevice: undefined,
             hostNickname: this.props.host,
-            nowPhoto: ""
+            nowPhoto: "",
+            isActive: false,
+            myResult: [
+                0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            ],
+            nowCnt: 0,
         };
         // 메서드 바인딩 과정
         // joinSession : 세션 접속
@@ -71,7 +81,12 @@ class VideoRoomComponent extends Component {
         this.checkNotification = this.checkNotification.bind(this);
         this.checkSize = this.checkSize.bind(this);
         // 여기부터
+        // 시작버튼
         this.handleClickBtn = this.handleClickBtn.bind(this)
+        // 증가버튼
+        this.handleIncreaseBtn = this.handleIncreaseBtn.bind(this)
+        // 감소버튼
+        this.handleDecreaseBtn = this.handleDecreaseBtn.bind(this)
     }
     // componentDidMount: 컴포넌트가 마운트 되었을 때 작동하는 리액트 컴포넌트 생명주기함수
     componentDidMount() {
@@ -556,36 +571,57 @@ class VideoRoomComponent extends Component {
         }
     }
     // 여기서부터 custom
+    // 시작 버튼 눌렀을 때
     handleClickBtn() {  
         console.log("클릭되었어요!!")
+        this.setState({ isActive: true })
 
         let interval;
         
         var cnt = 0
         const changeColor = () => {
-            const colors = [
-                "", "#E8B0B0","#F03838","#EBEBEB","#FE9B7F","#F7F4EF","#C23445","#811F4C","#B28DB7","#3D2F2B","#BF1B36",
-                "#FF8384","#81CCAB","#B9DDFF","#7EBC42","#8A97C3","#4A478C","#292830","#A18E40","#006359","#006E47",
-                "#D1EEFB","#FDF650","#FEDCF5","#8884BE","#CEA9CB","#99A401","#422944","#818C75","#70491B","#FFFD36",
-                "#FEBC60","#B2B099","#DBBAC7","#C189CA","#96B09D","#DD3737","#BCA548","#B8616D","#2F124E","#D73A6F",
-                "#90E5D8","#5AC9E5","#F4CFFB","#F15D57","#B4BAD2","#006A8A","#535617","#546E6C","#5B2D41","#0000FE"
-            ]
+            // const colors = [
+            //     "", "#E8B0B0","#F03838","#EBEBEB","#FE9B7F","#F7F4EF","#C23445","#811F4C","#B28DB7","#3D2F2B","#BF1B36",
+            //     "#FF8384","#81CCAB","#B9DDFF","#7EBC42","#8A97C3","#4A478C","#292830","#A18E40","#006359","#006E47",
+            //     "#D1EEFB","#FDF650","#FEDCF5","#8884BE","#CEA9CB","#99A401","#422944","#818C75","#70491B","#FFFD36",
+            //     "#FEBC60","#B2B099","#DBBAC7","#C189CA","#96B09D","#DD3737","#BCA548","#B8616D","#2F124E","#D73A6F",
+            //     "#90E5D8","#5AC9E5","#F4CFFB","#F15D57","#B4BAD2","#006A8A","#535617","#546E6C","#5B2D41","#0000FE"
+            // ]
 
-            this.setState({ nowPhoto: colors[cnt] })
-            console.log(this.state.nowPhoto)
-            cnt++
+            // this.setState({ nowPhoto: colors[cnt] })
+            // console.log(this.state.nowPhoto)
+            // this.state.nowCnt++
+            // cnt++
+            axios
+                .get("https://i8b306.p.ssafy.io:8083/color")
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
         }
 
         interval = setInterval(changeColor, 3000)
 
         if (cnt === 50) {
             stopAct(interval)
+            this.setState({ isActive: false })
         }
 
         function stopAct(interval) {
             clearInterval(interval)
         }
 
+    }
+
+    handleIncreaseBtn(nowCnt) {
+        console.log("증가")
+        this.state.myResult[nowCnt] = 1
+    }
+
+    handleDecreaseBtn(nowCnt) {
+        console.log("감소")
     }
 
     render() {
@@ -617,7 +653,16 @@ class VideoRoomComponent extends Component {
 											micStatusChanged={this.micStatusChanged}
 											leaveSession={this.leaveSession}
 										/>
-										<button onClick={this.handleClickBtn}>시작</button>
+                                        {this.state.isActive ? (
+                                            (<>
+                                            <button onClick={this.handleIncreaseBtn(this.state.nowCnt)}>증가</button>
+                                            <button onClick={this.handleDecreaseBtn(this.state.nowCnt)}>감소</button>
+                                            </>
+                                            )
+                                        ) : (
+                                            <button onClick={this.handleClickBtn}>시작</button>
+
+                                        )}
 								</div>
 							)}
 							<div className='right-div' style={{ width: "20%", height: "100%" }}>

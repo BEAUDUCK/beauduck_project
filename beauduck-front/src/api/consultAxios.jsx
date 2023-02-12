@@ -2,9 +2,9 @@ import axios from 'axios';
 import { getCookie } from './cookie';
 import { useCookies } from 'react-cookie';
 
-const REACT_APP_MAKEUP_URL = 'https://i8b306.p.ssafy.io:8083';
+const REACT_APP_CONSULT_URL = 'https://i8b306.p.ssafy.io:8083';
 const client = axios.create({
-  baseURL: REACT_APP_MAKEUP_URL,
+  baseURL: REACT_APP_CONSULT_URL,
   headers: {
     'Content-type': 'application/json',
     withCredentials: true,
@@ -53,7 +53,7 @@ client.interceptors.response.use(
       );
       setCookie(res.data.data.accessToken);
     }
-    console.log(REACT_APP_MAKEUP_URL);
+    console.log(REACT_APP_CONSULT_URL);
     console.log(error);
     return Promise.reject(error);
   },

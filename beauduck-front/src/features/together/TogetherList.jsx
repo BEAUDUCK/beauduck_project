@@ -1,11 +1,11 @@
 import TogetherListItem from './TogetherListItem';
 
-const TogetherList = ({ roomList }) => {
+const TogetherList = ({ togetherList }) => {
   return (
     <div className="together-list">
       <div className='together-list-child'>
-        {roomList.map((room) => (
-          <TogetherListItem key={room.id} room={room} />
+        {togetherList.map((item) => (
+          <TogetherListItem key={item.id} consultingItem={item} />
         ))}
       </div>
     </div>

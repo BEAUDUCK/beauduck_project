@@ -34,7 +34,8 @@ export const TogetherSlice = createSlice({
   initialState: {
     togetherlist: [],
     togetherDetail: [],
-    userList: []
+    roomId: "",
+    userList: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -47,7 +48,8 @@ export const TogetherSlice = createSlice({
         state.userList = action.payload.userList
       })
       .addCase(postNewTogether.fulfilled, (state, action) => {
-        
+        state.roomId = action.payload[0].roomId;
+        state.togetherlist = action.payload[1]
       })
   }
 });

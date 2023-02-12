@@ -41,7 +41,6 @@ export default class OvVideoComponent extends Component {
 							muted={this.props.mutedSound}
 					/>
 					<div style={{ backgroundColor: `${this.props.nowPhoto}`, width: "100px", height: "100px" }}>
-
 					</div>
 				</div>
 			);
