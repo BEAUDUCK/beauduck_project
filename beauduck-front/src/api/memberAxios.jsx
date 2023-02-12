@@ -14,6 +14,7 @@ const member = axios.create({
 // 요청 인터셉터
 member.interceptors.request.use(
   (config) => {
+    console.log('하아');
     // 요청을 보내기 전에 수행할 일
     config.headers['Authorization'] = getCookie('accessToken');
     config.headers['accessToken'] = getCookie('accessToken');
@@ -22,14 +23,16 @@ member.interceptors.request.use(
   },
   (error) => {
     // 오류 요청을 보내기 전에 수행할 일
-    console.log('axios 에러', error);
+    console.log('axios 에러 하하하', error);
     return Promise.reject(error);
   },
 );
 
+const server = 'https://i8b306.p.ssafy.io:8080/';
+
 // 응답 인터셉터
 member.interceptors.response.use(
-  (response) => {
+  async (response) => {
     // 응답 데이터를 가공
     return response;
   },
@@ -49,7 +52,7 @@ member.interceptors.response.use(
       const [cookies, setCookie, removeCookie] = useCookies(['cookie_name']);
       const refreshToken = localStorage.getItem('refreshToken');
       const res = await axios.get(
-        `${server}refresh?refreshToken=${refreshToken}`,
+        `${server}naver/refresh?refreshToken=${refreshToken}`,
       );
       setCookie(res.data.data.accessToken);
     }
