@@ -1,9 +1,76 @@
 .personal-color {
+    margin-top: 50px;
+
+    .color-info {
+        position: absolute;
+        top: 400px;
+        left: calc(50% - 300px);
+        z-index: 10;
+        width: 500px;
+        height: 240px;
+        background-color: white;
+        border-radius: 100px;
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        text-align: center;
+
+        p {
+            margin: 0;
+            margin-bottom: 5px;
+        }
+    }
     img {
         width: 200px;
         height: 200px;
         border-radius: 100px;
         padding: 4px;
         border: 2px dashed rgb(224, 183, 183);
+        vertical-align: middle;
+        margin-left: 10px;
+        margin-right: 10px;
+    } 
+
+    div {
+        div {
+            display: inline-block;
+            width: 50%;
+            height: 500px;
+            text-align: center;
+            line-height: 500px;
+        }
+        .spring-div {
+            background-color: rgb(215, 235, 184);
+
+            img {
+                margin-bottom: 80px;
+            }
+        }
+    
+        .summer-div {
+            background-color: rgb(221,240,255);
+            
+            img {
+                margin-bottom: 80px;
+            }
+        }
+    
+        .autumn-div {
+            background-color:  rgb(255, 230, 185);
+            
+            img {
+                margin-top: 80px;
+            }
+        }
+    
+        .winter-div {
+            background-color: rgb(200, 214, 227);
+
+            img {
+                margin-top: 80px;
+            }
+        }
     }
+
 }

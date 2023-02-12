@@ -8,8 +8,10 @@ const global = 'https://i8b306.p.ssafy.io:8080/';
 export const UserLogin = createAsyncThunk(
   'member/UserLogin',
   async (accessToken) => {
+    const newAccessToken = encodeURIComponent(accessToken);
+    console.log('로그인 직전!', newAccessToken);
     const res = await axios.get(
-      `${global}naver/login?accessToken=${accessToken}`,
+      `${global}naver/login?accessToken=${newAccessToken}`,
     );
     console.log('로그인', res);
     return res.data;
@@ -18,8 +20,9 @@ export const UserLogin = createAsyncThunk(
 
 export const signUp = createAsyncThunk('member/signUp', async (payload) => {
   await axios.post(`${global}naver/signup`, payload);
+  const newAccessToken = encodeURIComponent(payload.accessToken);
   const res = await axios.get(
-    `${global}naver/login?accessToken=${payload.accessToken}`,
+    `${global}naver/login?accessToken=${newAccessToken}`,
   );
   console.log('회원가입 후 로그인', res);
   return res.data;
