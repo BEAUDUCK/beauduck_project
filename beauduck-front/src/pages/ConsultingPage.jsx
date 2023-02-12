@@ -6,7 +6,7 @@ import ConsultingList from '../features/help/ConsultingList';
 import ConsultingModalCreate from '../features/help/ConsultingModalCreate ';
 import { getConsultingList } from '../features/help/ConsultingSlice';
 import BlackOut from '../components/blackout/BlackOut';
-import ConsultingModalLoadingGuest from '../features/help/ConsultingModalLoadingGuest';
+import ConsultingModalLoadingHost from '../features/help/ConsultingModalLoadingHost';
 
 const ConsultingPage = () => {
   const dispatch = useDispatch();
@@ -17,11 +17,10 @@ const ConsultingPage = () => {
     setIsOpen(!isOpen);
   };
 
-  const { isActive } = useSelector(state => state.consulting)
+  const { isActive } = useSelector((state) => state.consulting);
 
   useEffect(() => {
     dispatch(getConsultingList());
-
   }, []);
 
   return (
@@ -33,6 +32,8 @@ const ConsultingPage = () => {
         <ConsultingList consultingList={consultingList} />
         {isOpen && <ConsultingModalCreate isOpenModal={isOpenModal} />}
         {isOpen && <BlackOut onClickEvent={isOpenModal} />}
+        {isActive && <ConsultingModalLoadingHost />}
+        {isActive && <BlackOut />}
       </div>
     </>
   );
