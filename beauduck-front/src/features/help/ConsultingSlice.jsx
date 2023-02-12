@@ -53,8 +53,42 @@ export const consultSlice = createSlice({
     roomId: '',
     userList: [],
     isActive: false,
+
+    // 검사
+    userCount: 0,
+    resultList: [],
+    secondResult: [],
+    nowIdx: 0,
+    nowCount: 0,
   },
-  reducers: {},
+  reducers: {
+    checkIsHost: (state, action) => {
+      state.isHost = true;
+      state.userCount = state.userList.length;
+    },
+    // 과반체크
+    setScoreFirst: (state, action) => {
+      const idx = action.payload;
+      const stageIdx = idx % 10
+      console.log("idx :", idx)
+      if (idx === state.nowIdx) {
+        state.nowCount += 1;
+        console.log("state의 nowCount :", state.nowCount)
+        if (state.nowCount >= state.userCount) {
+          console.log("state.resultList[idx % 10] :", state.resultList[stageIdx])
+          state.resultList[stageIdx] += 1;
+        }
+      } else {
+        state.nowCount = 1;
+        state.nowIdx = idx;
+      }
+      console.log('첫번째 결과 리스트', state.resultList);
+    },
+    // 카운트 전부 체크
+    setScoreSecond: (state, action) => {
+      state.secondResult.concat(action.payload)
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getConsultingList.fulfilled, (state, action) => {
@@ -79,3 +113,4 @@ export const consultSlice = createSlice({
 });
 
 export default consultSlice.reducer;
+export const { checkIsHost, setScoreFirst, setScoreSecond } = consultSlice.actions;

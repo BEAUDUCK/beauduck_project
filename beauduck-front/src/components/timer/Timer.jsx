@@ -9,6 +9,7 @@ const Timer = () => {
         setSecond(parseInt(second) - 1);
       } else if (parseInt(second) === 0) {
         clearInterval(countdown);
+        setSecond(4) 
       }
     }, 1000);
     return () => clearInterval(countdown);

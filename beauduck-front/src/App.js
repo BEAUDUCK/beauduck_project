@@ -19,6 +19,7 @@ import SingleModePage from './pages/SingleModePage';
 import SingupPage from './pages/SignupPage';
 import ScrollToTop from './components/scrolltotop/ScrollToTop';
 import ConsultingRoomPage from './pages/ConsultingRoomPage';
+import ConsultingResultHostPage from "./pages/ConsultingResultHostPage"
 
 // import { getInfoList, getQaList } from './features/board/BoardSlice';
 
@@ -89,6 +90,7 @@ function App() {
           {/* 도와덕 */}
           <Route path="/help" element={<ConsultingPage />} />
           <Route path="/help/room" element={<ConsultingRoomPage />} />
+          <Route path='/help/result' element={<ConsultingResultHostPage />} />
           {/* 따라해덕 */}
           <Route path="/single" element={<SinglePage />} />
           <Route path="/single/mode" element={<SingleModePage />} />
