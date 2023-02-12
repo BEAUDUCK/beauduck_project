@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect
+from flask import Flask, request
 from flask_cors import CORS
 
 import numpy as np
@@ -32,9 +32,6 @@ def getEmps(meberId):
     db.commit()
     db.close()
     return ret
-
-##### 여기가 이미지 불러오고 하는 곳
-dir_path = './img/'
 
 # v2 => 이미지  불러오고 변환하기
 def get_cropped_face(image_file):
@@ -141,14 +138,6 @@ def getisMember(meberId):
     db.commit()
     db.close()
     return ret
-
-# @app.before_request
-# def before_request():
-#     scheme = request.headers.get('X-Forwarded-Proto')
-#     if scheme and scheme == 'http' and request.url.startswith('http://'):
-#         url = request.url.replace('http://', 'https://', 1)
-#         code = 301
-#         return redirect(url, code=code)
 
 
 @app.route('/recommand', methods=['POST'])
