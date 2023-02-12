@@ -8,11 +8,12 @@ import { getAccessToken } from '../api/cookie';
 import logo from '../assets/logo_original.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router';
+import loginImg from '../assets/login.png';
 
 const SignupPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const accessToken = getAccessToken();
+  const accessToken = getAccessToken('accessToken');
 
   const [content, setContent] = useState('');
   const [nickName, setNickName] = useState('');
@@ -86,8 +87,11 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="container">
-      <div className="signup-div">
+    <div className="signup-div">
+      <div className="signup-left">
+        <img src={loginImg} alt="" />
+      </div>
+      <div className="signup-right">
         <img className="logo" src={logo} alt="" />
         <h1>회원가입</h1>
         <form onSubmit={submitSignup} className="signup-form">
