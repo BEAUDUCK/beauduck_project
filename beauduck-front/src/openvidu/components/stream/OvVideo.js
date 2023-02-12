@@ -31,14 +31,19 @@ export default class OvVideoComponent extends Component {
 	}
 
 	render() {
+
 			return (
+				<div>
 					<video
 							autoPlay={true}
 							id={'video-' + this.props.user.getStreamManager().stream.streamId}
 							ref={this.videoRef}
 							muted={this.props.mutedSound}
-							style={{ width: "50vw", height: "50vh" }}
 					/>
+					<div style={{ backgroundColor: `${this.props.nowPhoto}`, width: "100px", height: "100px" }}>
+
+					</div>
+				</div>
 			);
 	}
 }

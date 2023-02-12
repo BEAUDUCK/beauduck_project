@@ -14,7 +14,7 @@ import HighlightOff from '@mui/icons-material/HighlightOff';
 // import FormHelperText from '@material-ui/core/FormHelperText';
 
 const StreamComponent = (props) => {
-	console.log(props)
+	console.log("", props)
 	const [showForm, setShowForm] = useState(false)
 	const [mutedSound, setMutedSound] = useState(false)
 	const [isFormValid, setIsFormValid] = useState(true)
