@@ -18,7 +18,7 @@ const ConsultingRoomPage = () => {
   console.log("내려주는 값")
   console.log(state)
   return (
-    <div className="full-screen">
+    <div style={{ position: "fixed", zIndex: "999" ,width: "100vw", height: "100vh", backgroundColor: "white" }}>
       <VideoRoomComponent 
         sessionName={state.roomId}
         host={state.hostNickname}

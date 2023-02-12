@@ -53,7 +53,7 @@ export default class StreamComponent extends Component {
 
     render() {
         return (
-            <div className="OT_widget-container">
+            <div className="OT_widget-container" style={{ marginTop: "20px" }}>
                 <div className="pointer nickname">
                     {this.state.showForm ? (
                         <FormControl id="nicknameForm">
@@ -88,7 +88,11 @@ export default class StreamComponent extends Component {
 
                 {this.props.user !== undefined && this.props.user.getStreamManager() !== undefined ? (
                     <div className="streamComponent">
-                        <OvVideoComponent user={this.props.user} mutedSound={this.state.mutedSound} />
+                        <OvVideoComponent 
+                            user={this.props.user} 
+                            mutedSound={this.state.mutedSound} 
+                            nowPhoto={this.props.nowPhoto} 
+                        />
                         <div id="statusIcons">
                             {!this.props.user.isVideoActive() ? (
                                 <div id="camIcon">

@@ -90,7 +90,7 @@ export default class ToolbarComponent extends Component {
                         </div>} */}
                     </div>
 
-                    <div className="buttonsContent">
+                    <div className="buttonsContent" style={{ display: "flex", justifyContent: "space-between" }}>
                         {/* 마이크 ON/OFF 아이콘 */}
                         <IconButton color="inherit" className="navButton" id="navMicButton" onClick={this.micStatusChanged}>
                             {localUser !== undefined && localUser.isAudioActive() ? <Mic /> : <MicOff color="secondary" />}

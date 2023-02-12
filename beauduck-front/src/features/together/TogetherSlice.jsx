@@ -47,7 +47,7 @@ export const TogetherSlice = createSlice({
         state.userList = action.payload.userList
       })
       .addCase(postNewTogether.fulfilled, (state, action) => {
-
+        
       })
   }
 });

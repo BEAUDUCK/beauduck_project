@@ -9,6 +9,7 @@ import StreamComponent from './stream/StreamComponent';
 import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
 import ToolbarComponent from './toolbar/ToolbarComponent';
+import { textAlign } from '@mui/system';
 
 
 var localUser = new UserModel();
@@ -32,6 +33,8 @@ class VideoRoomComponent extends Component {
             subscribers: [],
             chatDisplay: 'none',
             currentVideoDevice: undefined,
+            hostNickname: this.props.host,
+            nowPhoto: ""
         };
         // 메서드 바인딩 과정
         // joinSession : 세션 접속
@@ -67,6 +70,8 @@ class VideoRoomComponent extends Component {
         // checkNotification: 알림 확인 함수
         this.checkNotification = this.checkNotification.bind(this);
         this.checkSize = this.checkSize.bind(this);
+        // 여기부터
+        this.handleClickBtn = this.handleClickBtn.bind(this)
     }
     // componentDidMount: 컴포넌트가 마운트 되었을 때 작동하는 리액트 컴포넌트 생명주기함수
     componentDidMount() {
@@ -550,60 +555,150 @@ class VideoRoomComponent extends Component {
             this.hasBeenUpdated = false;
         }
     }
+    // 여기서부터 custom
+    handleClickBtn() {  
+        console.log("클릭되었어요!!")
+
+        let interval;
+        
+        var cnt = 0
+        const changeColor = () => {
+            const colors = [
+                "", "#E8B0B0","#F03838","#EBEBEB","#FE9B7F","#F7F4EF","#C23445","#811F4C","#B28DB7","#3D2F2B","#BF1B36",
+                "#FF8384","#81CCAB","#B9DDFF","#7EBC42","#8A97C3","#4A478C","#292830","#A18E40","#006359","#006E47",
+                "#D1EEFB","#FDF650","#FEDCF5","#8884BE","#CEA9CB","#99A401","#422944","#818C75","#70491B","#FFFD36",
+                "#FEBC60","#B2B099","#DBBAC7","#C189CA","#96B09D","#DD3737","#BCA548","#B8616D","#2F124E","#D73A6F",
+                "#90E5D8","#5AC9E5","#F4CFFB","#F15D57","#B4BAD2","#006A8A","#535617","#546E6C","#5B2D41","#0000FE"
+            ]
+
+            this.setState({ nowPhoto: colors[cnt] })
+            console.log(this.state.nowPhoto)
+            cnt++
+        }
+
+        interval = setInterval(changeColor, 3000)
+
+        if (cnt === 50) {
+            stopAct(interval)
+        }
+
+        function stopAct(interval) {
+            clearInterval(interval)
+        }
+
+    }
 
     render() {
         const mySessionId = this.state.mySessionId;
         const localUser = this.state.localUser;
         const chatDisplay = { display: this.state.chatDisplay };
+				const subscribers = this.state.subscribers
         console.log("내 세션 아이디 :", mySessionId)
         console.log("내 구독자", this.state.subscribers)
-
+        console.log("호스트", this.state.hostNickname)
         return (
-            <div id="container">
-                <ToolbarComponent
-                    sessionId={mySessionId}
-                    user={localUser}
-                    showNotification={this.state.messageReceived}
-                    camStatusChanged={this.camStatusChanged}
-                    micStatusChanged={this.micStatusChanged}
-                    // screenShare={this.screenShare}
-                    // stopScreenShare={this.stopScreenShare}
-                    // toggleFullscreen={this.toggleFullscreen}
-                    // switchCamera={this.switchCamera}
-                    leaveSession={this.leaveSession}
-                    // toggleChat={this.toggleChat}
-                />
-
-                <DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} />
-
-                <div id="layout" className="bounds">
-                    {/* 나 자신 화면*/}
-                    {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                        <div className="OT_root OT_publisher custom-class" id="localUser" style={{ width: "50vw", height: "50vh" }}>
-                            <StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
-
-                        </div>
-                    )}
-                    {/* 구독자들 화면*/}
-                    {this.state.subscribers.map((sub, i) => (
-                        <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers" style={{ width: "50vw", height: "50vh" }} >
-                            <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-                        </div>
-                    ))}
-
-                    {/* 채팅 화면 */}
-                    {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                        <div className="OT_root OT_publisher custom-class" style={chatDisplay}>
-                            <ChatComponent
-                                user={localUser}
-                                chatDisplay={this.state.chatDisplay}
-                                close={this.toggleChat}
-                                messageReceived={this.checkNotification}
-                            />
-                        </div>
-                    )}
-                </div>
+					<>
+            <div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }} >
+							<div className="left-div" style={{ width: "20%", height: "100%" }} >
+								{this.state.subscribers.slice(0, 5).map((sub, i) => (
+									<div key={i} style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center", marginTop: "5px", marginBottom: "5px" }}>
+										<StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+									</div>
+								))}
+							</div>
+							{localUser !== undefined && localUser.getStreamManager() !== undefined && (
+								<div className="host" style={{ width: "30vw", height: "50vh", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }}>
+										<StreamComponent user={localUser} handleNickname={this.nicknameChanged} nowPhoto={this.state.nowPhoto}/>
+										<ToolbarComponent
+											sessionId={mySessionId}
+											user={localUser}
+											showNotification={this.handleChangeResult}
+											camStatusChanged={this.camStatusChanged}
+											micStatusChanged={this.micStatusChanged}
+											leaveSession={this.leaveSession}
+										/>
+										<button onClick={this.handleClickBtn}>시작</button>
+								</div>
+							)}
+							<div className='right-div' style={{ width: "20%", height: "100%" }}>
+								{this.state.subscribers.slice(5, 10).map((sub, i) => (
+									<div key={i} style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center" }}>
+										<StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+									</div>
+								))}
+							</div>
             </div>
+					{/* {this.props.user === this.props.host ? (
+					) : (
+						<div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
+							<div className="left-div" style={{ width: "20%", height: "100%" }} >
+								타이머
+							</div>
+							{localUser !== undefined && localUser.getStreamManager() !== undefined && (
+								<div className="host" style={{ width: "30vw", height: "50vh", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }}>
+									{subscribers !== undefined && subscribers[0].getStreamManager !== undefined && (
+										<StreamComponent user={subscribers[0]} streamId={subscribers[0].streamManager.stream.streamId} />
+									)}
+										<div>
+											<StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
+										</div>
+										버튼
+								</div>
+							)}
+							<div className='right-div' style={{ width: "20%", height: "100%" }}>
+								{this.state.subscribers.slice(5, 10).map((sub, i) => (
+									<div key={i} style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center" }}>
+										<StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+									</div>
+								))}
+							</div>
+						</div>
+					)} */}
+					</>
+            // <div id="container">
+            //     <ToolbarComponent
+            //         sessionId={mySessionId}
+            //         user={localUser}
+            //         showNotification={this.state.messageReceived}
+            //         camStatusChanged={this.camStatusChanged}
+            //         micStatusChanged={this.micStatusChanged}
+            //         // screenShare={this.screenShare}
+            //         // stopScreenShare={this.stopScreenShare}
+            //         // toggleFullscreen={this.toggleFullscreen}
+            //         // switchCamera={this.switchCamera}
+            //         leaveSession={this.leaveSession}
+            //         // toggleChat={this.toggleChat}
+            //     />
+
+            //     {/* <DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} /> */}
+
+            //     <div id="layout" className="bounds" style={{ display: "flex" }}>
+            //         {/* 나 자신 화면*/}
+            //         {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+            //             <div className="host" style={{ width: "30vw", height: "50vh", textAlign: "center" }}>
+            //                 <StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
+            //             </div>
+            //         )}
+            //         {/* 구독자들 화면*/}
+            //         {this.state.subscribers.map((sub, i) => (
+            //             <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers" style={{ width: "50vw", height: "50vh" }} >
+            //                 <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+            //             </div>
+            //         ))}
+
+            //         {/* 채팅 화면 */}
+            //         {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+            //             <div className="OT_root OT_publisher custom-class" style={chatDisplay}>
+            //                 <ChatComponent
+            //                     user={localUser}
+            //                     chatDisplay={this.state.chatDisplay}
+            //                     close={this.toggleChat}
+            //                     messageReceived={this.checkNotification}
+            //                 />
+            //             </div>
+            //         )}
+            //     </div>
+            // </div>
         );
     }
 
