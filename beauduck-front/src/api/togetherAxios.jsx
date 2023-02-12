@@ -53,7 +53,7 @@ client.interceptors.response.use(
       );
       setCookie(res.data.data.accessToken);
     }
-    console.log(REACT_APP_MAKEUP_URL);
+    console.log(REACT_APP_TOGETHER_URL);
     console.log(error);
     return Promise.reject(error);
   },
