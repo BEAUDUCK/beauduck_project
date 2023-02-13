@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Banner from '../components/banner/Banner';
 import ConsultingList from '../features/help/ConsultingList';
 import ConsultingModalCreate from '../features/help/ConsultingModalCreate ';
-import { getConsultingList } from '../features/help/ConsultingSlice';
+import {
+  getConsultingList,
+  loadingOut,
+} from '../features/help/ConsultingSlice';
 import BlackOut from '../components/blackout/BlackOut';
 import ConsultingModalLoadingHost from '../features/help/ConsultingModalLoadingHost';
 
@@ -19,6 +22,9 @@ const ConsultingPage = () => {
 
   const { isActive } = useSelector((state) => state.consulting);
 
+  const loadingOff = () => {
+    dispatch(loadingOut());
+  };
   useEffect(() => {
     dispatch(getConsultingList());
   }, []);
@@ -33,7 +39,7 @@ const ConsultingPage = () => {
         {isOpen && <ConsultingModalCreate isOpenModal={isOpenModal} />}
         {isOpen && <BlackOut onClickEvent={isOpenModal} />}
         {isActive && <ConsultingModalLoadingHost />}
-        {isActive && <BlackOut />}
+        {isActive && <BlackOut onClickEvent={loadingOff} />}
       </div>
     </>
   );
