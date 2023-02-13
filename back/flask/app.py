@@ -199,9 +199,7 @@ def recommand():
     memberId = request.get_json()["id"]
 
     #imgai 테이블에서 memberid랑 img url 긁어와야 함 - makeup있는 애들만
-    file_list = getEmps(memberId)
-
-    
+    file_list = getEmps(memberId)  
     #file_list에 있는 값들 embedding_dict에 디코딩해서 넣어야 함
     global embedding_dict
     for file in file_list: 
