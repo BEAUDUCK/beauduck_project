@@ -35,7 +35,7 @@ const ConsultingModalCreate = ({ isOpenModal }) => {
       hostId: memberId,
       hostNickname: nickName,
     };
-
+    console.log(newConsulting);
     dispatch(postNewConsulting(newConsulting));
     isOpenModal();
   };
