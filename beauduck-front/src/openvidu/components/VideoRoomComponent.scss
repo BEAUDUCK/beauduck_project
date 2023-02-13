@@ -893,6 +893,7 @@
   position: absolute;
 }
 
+// 호스트 화면
 .host-stream {
   position: absolute;
   top: 20px;
@@ -938,40 +939,81 @@
     font-size: 20px;
     background-color: #f8fac0;
   }
-  .color-div {
-    position: absolute;
-    top: 20px;
-    left: calc(50% - 350px);
-    width: 700px;
-    height: 525px;
+}
 
-    img {
-      width: 640px;
-      height: 480px;
+// 다른 게스트들 화면
+.subscriber-div {
+  margin-top: 210px;
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+
+  .guest-stream {
+    position: relative;
+    width: 50vw;
+    height: 300px;
+    overflow: hidden;
+    border: 3px solid yellow;
+    text-align: left;
+    
+    #volumeButton {
+      bottom: 60px;
+      right: calc(50vw - 290px);
+
     }
-  }
-  .timer {
-    position: absolute;
-    top: 550px;
-    left: 10px;
-    width: 70px;
-    height: 70px;
-    border: 5px solid rgb(255, 224, 224);
-    border-radius: 100px;
-    line-height: 70px;
-    h1 {
-      margin: 0;
+  
+    video {
+      width: 300px;
+      object-fit: cover;
+    }
+    .select-button {
+      position: absolute;
+      top: 200px;
+      display: inline-block;
+      width: 100px;
+      height: 35px;
+      border-radius: 10px;
+      border: none;
+      font-family: 'Jalnan';
+      font-size: 15px;
+      background-color: #f8fac0;
     }
   }
 }
 
+// 게스트인 내 화면
 .guest-stream {
-  width: 300px;
-  overflow: hidden;
-  border: 3px solid yellow;
+  position: absolute;
+  bottom: 300px;
+  left: 50px;
+  width: 400px;
+  height: 300px;
+}
 
-  video {
-    width: 100%;
-    object-fit: cover;
+
+.color-div {
+  position: absolute;
+  top: 70px;
+  left: calc(50% - 310px);
+  width: 700px;
+  height: 525px;
+
+  img {
+    width: 640px;
+    height: 480px;
+  }
+}
+.timer {
+  position: absolute;
+  top: 550px;
+  left: 250px;
+  width: 70px;
+  height: 70px;
+  border: 5px solid rgb(255, 224, 224);
+  border-radius: 100px;
+  line-height: 70px;
+  text-align: center;
+  h1 {
+    margin: 0;
   }
 }

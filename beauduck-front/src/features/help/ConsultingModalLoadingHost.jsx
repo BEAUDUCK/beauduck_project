@@ -8,20 +8,30 @@ import { getConsultDetail, loadingOut } from './ConsultingSlice';
 const ConsultingModalLoadingHost = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { roomId, consultDetail, userList } = useSelector(
-    (state) => state.consulting,
-  );
-
-  const { consultingList } = useSelector((state) => state.consulting);
-
+  const { roomId, consultDetail } = useSelector((state) => state.consulting);
+  const { userList } = useSelector((state) => state.consulting);
   console.log('roomIdㅐㅐ', roomId);
+  console.log('유저리스트', userList);
+
+  const [users, setUsers] = useState([]);
+
   useEffect(() => {
     dispatch(getConsultDetail(roomId));
   }, []);
 
+  useEffect(() => {
+    setUsers(userList);
+  }, [userList]);
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     console.log('업데이트!');
+  //   }, 5000);
+  // });
+
   const handleStart = () => {
     dispatch(loadingOut());
-    navigate('/help/room', { state: consultDetail });
+    navigate('/help/room');
   };
 
   return (
@@ -36,8 +46,9 @@ const ConsultingModalLoadingHost = () => {
         START
       </button>
       <h3 className="loading-h3">대기 리스트</h3>
+      <p>{users.length}</p>
       <div className="loading-list">
-        {userList?.map((user) => (
+        {users?.map((user) => (
           <div className="each-user">
             <span className="username">{user.nickname}</span>
             <span className={['onoff', 'on-btn'].join(' ')}>ON</span>
