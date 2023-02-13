@@ -94,7 +94,7 @@ def get_nearest_face(name, top= 5): #거리 비슷한 5개 추출
 
 
 
-def getmakeup(meberId): # 메이크업 테이블에서 멤버 아이디로 해당 멤버의 메이크업 뽑아오기
+def getmakeup(memberId): # 메이크업 테이블에서 멤버 아이디로 해당 멤버의 메이크업 뽑아오기
     db = pymysql.connect(host='beauduck.store', user='admin', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select  m.member_id, m.title, m.content, m.img, m.duration, m.score, m.count from makeup m  "
@@ -103,7 +103,7 @@ def getmakeup(meberId): # 메이크업 테이블에서 멤버 아이디로 해�
     sql = sql + "where m.member_id =%s and i.is_makeup = true "
     sql = sql + "ORDER BY m.count and m.score DESC limit 1"
     
-    curs.execute(sql,[meberId])
+    curs.execute(sql,[memberId])
     
     rows = curs.fetchall()
     temp = {}
@@ -122,12 +122,12 @@ def getmakeup(meberId): # 메이크업 테이블에서 멤버 아이디로 해�
     return temp
 
 # DB 쿼리문들
-def getisMember(meberId): #imgai에서 멤버 아이디 뽑아오기 -> 얼굴 등록되어 있는지 확인
+def getisMember(memberId): #imgai에서 멤버 아이디 뽑아오기 -> 얼굴 등록되어 있는지 확인
     ret = []
     db = pymysql.connect(host='beauduck.store', user='admin', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select member_id from imgai where member_id =%s "
-    curs.execute(sql,[meberId])
+    curs.execute(sql,[memberId])
     rows = curs.fetchall()
     for e in rows:
         ret.append(e[0])
@@ -135,15 +135,12 @@ def getisMember(meberId): #imgai에서 멤버 아이디 뽑아오기 -> 얼굴 �
     db.close()
     return ret
 
-def insertgetmakeup(meberId):
+def insertgetmakeup(memberId):
     db = pymysql.connect(host='beauduck.store', user='admin', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
-    sql = "select  m.member_id from makeup m  "
-    sql = sql + "join imgai i " 
-    sql = sql + "on m.member_id = i.member_id "
-    sql = sql + "where m.member_id =%s"
+    sql = "select member_id from makeup where member_id =%s "
     
-    curs.execute(sql,[meberId])
+    curs.execute(sql,[memberId])
     
     rows = curs.fetchall()
     temp = {}
@@ -178,6 +175,8 @@ def save():
     #d얼굴 사진으로 임베딩 벡터 추출하기
     embedding = get_face_embedding_dict(memberId,url)
 
+    if (type(embedding) is dict) or (embedding == "Cannot recognize image"):
+        return {"answer": "Try Again"}
     #임베딩 벡터 인코딩하기 + 문자열로 변환
     random_vector = np.float32(embedding)
     vector = random_vector.tobytes() 
@@ -186,12 +185,12 @@ def save():
     # 만약 이미 등록이 된 테이블이면 바꾸기
     if (getisMember(memberId) == []): # 회원이 없을 경우
         #문자열로 바꾼 벡터값 imgai 테이블에 저장
-        if (insertgetmakeup(id) == {}): # 화장법 등록 여부 판단
+        if (insertgetmakeup(memberId) == {}): # 화장법 등록 여부 판단
             set_embedding_to_DB(memberId, vector_tostring, False) # 만약 화장법 등록 안했으면 false로
         else:
             set_embedding_to_DB(memberId, vector_tostring, True) # 만약 화장법 등록 했으면 false로
     else: # 회원이 있을 경우
-        update_embedding_to_DB(memberId, vector_tostring, True)
+        update_embedding_to_DB(memberId, vector_tostring)
 
     return {'answer': "DB success"}
 
