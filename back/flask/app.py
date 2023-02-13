@@ -23,7 +23,7 @@ CORS(app)
 
 def getEmps(memberId): #imgai 테이블에서 메이크업이 있는 멤버만 뽑아오기(얘네로 거리 돌리기)
     ret = []
-    db = pymysql.connect(host='beauduck.store', user='admin', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select member_id, img from imgai where is_makeup=true or member_id =%s"
     curs.execute(sql,[memberId])
@@ -95,7 +95,7 @@ def get_nearest_face(name, top= 5): #거리 비슷한 5개 추출
 
 
 def getmakeup(memberId): # 메이크업 테이블에서 멤버 아이디로 해당 멤버의 메이크업 뽑아오기
-    db = pymysql.connect(host='beauduck.store', user='admin', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select  m.member_id, m.title, m.content, m.img, m.duration, m.score, m.count from makeup m  "
     sql = sql + "join imgai i " 
@@ -124,7 +124,7 @@ def getmakeup(memberId): # 메이크업 테이블에서 멤버 아이디로 해�
 # DB 쿼리문들
 def getisMember(memberId): #imgai에서 멤버 아이디 뽑아오기 -> 얼굴 등록되어 있는지 확인
     ret = []
-    db = pymysql.connect(host='beauduck.store', user='admin', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select member_id from imgai where member_id =%s "
     curs.execute(sql,[memberId])
@@ -136,7 +136,7 @@ def getisMember(memberId): #imgai에서 멤버 아이디 뽑아오기 -> 얼굴 
     return ret
 
 def insertgetmakeup(memberId):
-    db = pymysql.connect(host='beauduck.store', user='admin', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select member_id from makeup where member_id =%s "
     
@@ -151,7 +151,7 @@ def insertgetmakeup(memberId):
     return temp
 
 def set_embedding_to_DB(memberId, embedding, is_makeup):
-    db = pymysql.connect(host='beauduck.store', user='admin', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "insert into imgai (member_id, img, is_makeup) values(%s, %s, %s)"
     curs.execute(sql,(memberId, embedding, is_makeup))
@@ -159,7 +159,7 @@ def set_embedding_to_DB(memberId, embedding, is_makeup):
     db.close()
 
 def update_embedding_to_DB(memberId, embedding):
-    db = pymysql.connect(host='beauduck.store', user='admin', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "UPDATE imgai SET img = %s WHERE member_id = %s;"
     curs.execute(sql,(embedding, memberId))
