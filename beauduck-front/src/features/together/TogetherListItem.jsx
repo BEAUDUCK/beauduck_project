@@ -13,11 +13,14 @@ import face8 from "../../assets/faces/face8.png"
 import TogetherModalHost from './TogetherModalHost';
 import TogetherModalGuest from './TogetherModalGuest';
 import BlackOut from '../../components/blackout/BlackOut';
+import TogetherRoomPage from '../../pages/TogetherRoomPage';
+import { useNavigate } from 'react-router-dom';
 
 
 const TogetherListItem = ({ togetherItem }) => {
   
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [nowColor, setNowColor] = useState("")
   const [nowFace, setNowFace] = useState("")
   const [nowNum, setNowNum] = useState(_.random(0, 7))
@@ -49,6 +52,11 @@ const TogetherListItem = ({ togetherItem }) => {
     console.log("클릭되었어요")
     setIsOpen(!isOpen)
   }
+
+  const goTogether = () => {
+    navigate("/together/room", { state: togetherItem })
+  }
+
 
   return (
     <>
@@ -89,20 +97,14 @@ const TogetherListItem = ({ togetherItem }) => {
           </div>
         </div>
       </div>
-      {isOpen && myNickname !== togetherItem.hostNickname && (
-        <TogetherModalGuest 
-          roomId={togetherItem.roomId}
-          host={togetherItem.hostNickname}
-          isOpenClick={isOpenClick}
-        />
-      )}
-      {isOpen && myNickname === togetherItem.hostNickname && (
+      {isOpen && goTogether()}
+      {/* {isOpen && myNickname === togetherItem.hostNickname && (
         <TogetherModalHost 
           roomId={togetherItem.roomId}
           host={togetherItem.hostNickname}
           isOpenClick={isOpenClick}
         />
-      )}
+      )} */}
       {isOpen && <BlackOut onClickEvent={isOpenClick}/>}
     </>
   )
