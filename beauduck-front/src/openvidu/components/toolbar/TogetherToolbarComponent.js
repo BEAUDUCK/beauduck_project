@@ -132,12 +132,12 @@ export default class TogetherToolbarComponent extends Component {
                         </IconButton>
 
                         {/* 채팅 아이콘 */}
-                        <IconButton color="inherit" onClick={this.toggleChat} id="navChatButton">
+                        {/* <IconButton color="inherit" onClick={this.toggleChat} id="navChatButton">
                             {this.props.showNotification && <div id="point" className="" />}
                             <Tooltip title="Chat">
                                 <QuestionAnswer />
                             </Tooltip>
-                        </IconButton>
+                        </IconButton> */}
                     </div>
 
             </div>
