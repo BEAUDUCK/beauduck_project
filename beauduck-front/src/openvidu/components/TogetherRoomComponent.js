@@ -19,7 +19,7 @@ var localUser = new UserModel();
 // const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'localhost:5000/';
 const OPENVIDU_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'https://beauduck.store:9000/'
 
-class VideoRoomComponent extends Component {
+class TogetherRoomComponent extends Component {
     constructor(props) {
         super(props);
         this.hasBeenUpdated = false;
@@ -553,15 +553,15 @@ class VideoRoomComponent extends Component {
     }
 
     // checkSize: 반응형 채팅창을 위한 사이즈체크
-    // checkSize() {
-    //     if (document.getElementById('layout').offsetWidth <= 700 && !this.hasBeenUpdated) {
-    //         this.toggleChat('none');
-    //         this.hasBeenUpdated = true;
-    //     }
-    //     if (document.getElementById('layout').offsetWidth > 700 && this.hasBeenUpdated) {
-    //         this.hasBeenUpdated = false;
-    //     }
-    // }
+    checkSize() {
+        if (document.getElementById('layout').offsetWidth <= 700 && !this.hasBeenUpdated) {
+            this.toggleChat('none');
+            this.hasBeenUpdated = true;
+        }
+        if (document.getElementById('layout').offsetWidth > 700 && this.hasBeenUpdated) {
+            this.hasBeenUpdated = false;
+        }
+    }
     // 여기서부터 custom
 
     render() {
@@ -572,131 +572,53 @@ class VideoRoomComponent extends Component {
         console.log("내 세션 아이디 :", mySessionId)
         console.log("내 구독자", this.state.subscribers)
         console.log("호스트", this.state.hostNickname)
-				console.log("isActive :", this.state.isActive)
+        console.log("isActive :", this.state.isActive)
 
         return (
-					<>
-						{this.props.host === this.props.myUserName ? (
-            <div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }} >
-							<div className="left-div" style={{ width: "20%", height: "100%" }} >
-								{this.state.subscribers.slice(0, 5).map((sub, i) => (
-									<div key={i} style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center", marginTop: "5px", marginBottom: "5px" }}>
-										<StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-									</div>
-								))}
-							</div>
-							{localUser !== undefined && localUser.getStreamManager() !== undefined && (
-								<div className="host" style={{ width: "30vw", height: "50vh", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }}>
-										<StreamComponent user={localUser} handleNickname={this.nicknameChanged} nowPhoto={this.state.nowPhoto}/>
-										<ToolbarComponent
-											sessionId={mySessionId}
-											user={localUser}
-											showNotification={this.handleChangeResult}
-											camStatusChanged={this.camStatusChanged}
-											micStatusChanged={this.micStatusChanged}
-											leaveSession={this.leaveSession}
-										/>
-										<Timer />
-										<Photos />
-										<GetScore isActive={this.state.isActive}/>
-								</div>
-							)}
-							<div className='right-div' style={{ width: "20%", height: "100%" }}>
-								{this.state.subscribers.slice(5, 10).map((sub, i) => (
-									<div key={i} style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center" }}>
-										<StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-									</div>
-								))}
-							</div>
+            <div id="container">
+                <ToolbarComponent
+                    sessionId={mySessionId}
+                    user={localUser}
+                    showNotification={this.state.messageReceived}
+                    camStatusChanged={this.camStatusChanged}
+                    micStatusChanged={this.micStatusChanged}
+                    // screenShare={this.screenShare}
+                    // stopScreenShare={this.stopScreenShare}
+                    // toggleFullscreen={this.toggleFullscreen}
+                    // switchCamera={this.switchCamera}
+                    leaveSession={this.leaveSession}
+                    // toggleChat={this.toggleChat}
+                />
+
+                {/* <DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} /> */}
+
+                <div id="layout" className="bounds" style={{ display: "flex" }}>
+                    {/* 나 자신 화면*/}
+                    {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                        <div className="host" style={{ width: "30vw", height: "50vh", textAlign: "center" }}>
+                            <StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
+                        </div>
+                    )}
+                    {/* 구독자들 화면*/}
+                    {this.state.subscribers.map((sub, i) => (
+                        <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers" style={{ width: "50vw", height: "50vh" }} >
+                            <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                        </div>
+                    ))}
+
+                    {/* 채팅 화면 */}
+                    {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                        <div className="OT_root OT_publisher custom-class" style={chatDisplay}>
+                            <ChatComponent
+                                user={localUser}
+                                chatDisplay={this.state.chatDisplay}
+                                close={this.toggleChat}
+                                messageReceived={this.checkNotification}
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
-						) : (
-							<div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
-								<div>
-									<Timer />
-								</div>
-								<div>
-									{this.state.subscribers !== undefined && (
-										<StreamComponent user={this.state.subscribers[0]} streamId={this.state.subscribers[0].streamManager.stream.streamId} />
-									)}
-									{localUser !== undefined && localUser.getStreamManager() !== undefined && (
-										<StreamComponent user={localUser} />
-									)}
-									<Photos />
-									<GetScore />
-								</div>
-							</div>
-						)}
-					{/* {this.props.user === this.props.host ? (
-					) : (
-						<div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
-							<div className="left-div" style={{ width: "20%", height: "100%" }} >
-								타이머
-							</div>
-							{localUser !== undefined && localUser.getStreamManager() !== undefined && (
-								<div className="host" style={{ width: "30vw", height: "50vh", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }}>
-									{subscribers !== undefined && subscribers[0].getStreamManager !== undefined && (
-										<StreamComponent user={subscribers[0]} streamId={subscribers[0].streamManager.stream.streamId} />
-									)}
-										<div>
-											<StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
-										</div>
-										버튼
-								</div>
-							)}
-							<div className='right-div' style={{ width: "20%", height: "100%" }}>
-								{this.state.subscribers.slice(5, 10).map((sub, i) => (
-									<div key={i} style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center" }}>
-										<StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-									</div>
-								))}
-							</div>
-						</div>
-					)} */}
-					</>
-            // <div id="container">
-            //     <ToolbarComponent
-            //         sessionId={mySessionId}
-            //         user={localUser}
-            //         showNotification={this.state.messageReceived}
-            //         camStatusChanged={this.camStatusChanged}
-            //         micStatusChanged={this.micStatusChanged}
-            //         // screenShare={this.screenShare}
-            //         // stopScreenShare={this.stopScreenShare}
-            //         // toggleFullscreen={this.toggleFullscreen}
-            //         // switchCamera={this.switchCamera}
-            //         leaveSession={this.leaveSession}
-            //         // toggleChat={this.toggleChat}
-            //     />
-
-            //     {/* <DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} /> */}
-
-            //     <div id="layout" className="bounds" style={{ display: "flex" }}>
-            //         {/* 나 자신 화면*/}
-            //         {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-            //             <div className="host" style={{ width: "30vw", height: "50vh", textAlign: "center" }}>
-            //                 <StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
-            //             </div>
-            //         )}
-            //         {/* 구독자들 화면*/}
-            //         {this.state.subscribers.map((sub, i) => (
-            //             <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers" style={{ width: "50vw", height: "50vh" }} >
-            //                 <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-            //             </div>
-            //         ))}
-
-            //         {/* 채팅 화면 */}
-            //         {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-            //             <div className="OT_root OT_publisher custom-class" style={chatDisplay}>
-            //                 <ChatComponent
-            //                     user={localUser}
-            //                     chatDisplay={this.state.chatDisplay}
-            //                     close={this.toggleChat}
-            //                     messageReceived={this.checkNotification}
-            //                 />
-            //             </div>
-            //         )}
-            //     </div>
-            // </div>
         );
     }
 
@@ -734,4 +656,4 @@ class VideoRoomComponent extends Component {
         return response.data; // The token
     }
 }
-export default VideoRoomComponent;
+export default TogetherRoomComponent;
