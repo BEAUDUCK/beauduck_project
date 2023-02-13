@@ -19,7 +19,7 @@ import boardReducer from './features/board/BoardSlice';
 import singleReducer from './features/single/SingleSlice';
 import memberReducer from './features/login/MemberSlice';
 import profileReducer from './features/profile/ProfileSlice';
-
+import togetherReducer from "./features/together/TogetherSlice"
 
 // 새로운  persist 선언
 const persistConfig = {
@@ -34,6 +34,7 @@ const rootReducer = combineReducers({
   single: singleReducer,
   member: memberReducer,
   profile: profileReducer,
+  together: togetherReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

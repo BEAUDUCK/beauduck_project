@@ -82,9 +82,9 @@ const BoardWritePage = () => {
       <div className="write-form">
         <div className="form-header">
           <h3>글쓰기</h3>
-          <Button type="button" text={'등록'} onClickEvent={BoardCreate} />
+          <Button type="button" text={'등록'} onClickEvent={BoardCreate} btnStyle={"board-btn"} />
         </div>
-        <hr />
+        {/* <hr /> */}
         <TabButton
           text={'정보게시판'}
           onClick={setInfo}
