@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import ChatComponent from './chat/ChatComponent';
 import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import StreamComponent from './stream/StreamComponent';
-// import './VideoRoomComponent.scss';
+import './VideoRoomComponent.scss';
 
 import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
@@ -48,6 +48,7 @@ class VideoRoomComponent extends Component {
       hostNickname: this.props.host,
       nowPhoto: '',
       isHost: this.props.isHost,
+      isActive: false,
     };
     console.log('this.state', this.state);
     // 메서드 바인딩 과정
@@ -85,6 +86,7 @@ class VideoRoomComponent extends Component {
     this.checkNotification = this.checkNotification.bind(this);
     // this.checkSize = this.checkSize.bind(this);
     // 여기부터
+    this.onActive = this.onActive.bind(this);
   }
   // componentDidMount: 컴포넌트가 마운트 되었을 때 작동하는 리액트 컴포넌트 생명주기함수
   componentDidMount() {
@@ -128,6 +130,7 @@ class VideoRoomComponent extends Component {
   // joinSession : 세션에 접속할 때 작동하는 함수
   joinSession() {
     this.OV = new OpenVidu();
+    this.OV.enableProdMode();
 
     // setState : 1st 매개변수 - 상태값 설정, 2nd 매개변수 - 콜백함수
     this.setState({ session: this.OV.initSession() }, async () => {
@@ -617,6 +620,10 @@ class VideoRoomComponent extends Component {
     }
   }
 
+  onActive() {
+    this.setState({ isActive: true });
+  }
+
   // 여기서부터 custom
   render() {
     const mySessionId = this.state.mySessionId;
@@ -629,6 +636,7 @@ class VideoRoomComponent extends Component {
     console.log('내 구독자', this.state.subscribers);
     console.log('호스트', this.state.hostNickname);
     console.log('isHost :', this.state.isHost);
+    // console.log('isActive :', this.state.isActive);
 
     // const hostVideoStream = this.isHost ? (
     //   <StreamComponent
@@ -644,16 +652,30 @@ class VideoRoomComponent extends Component {
 
     return (
       <>
-        <UserVideoComponent
-          isHost={this.state.isHost}
-          user={localUser}
-          sessionId={mySessionId}
-          showNotification={this.handleChangeResult}
-          camStatusChanged={this.camStatusChanged}
-          micStatusChanged={this.micStatusChanged}
-          leaveSession={this.leaveSession}
-          //   streamId={localUser.streamManager.stream.streamId}
-        />
+        {this.state.localUser !== undefined && (
+          <>
+            {this.state.myUserName === this.state.hostNickname ? (
+              <UserVideoComponent
+                hostNickname={this.state.hostNickname}
+                user={localUser}
+                sessionId={mySessionId}
+                showNotification={this.handleChangeResult}
+                camStatusChanged={this.camStatusChanged}
+                micStatusChanged={this.micStatusChanged}
+                leaveSession={this.leaveSession}
+                // isActive={this.state.isActive}
+                // streamId={localUser.streamManager.stream.streamId}
+              />
+            ) : (
+              <UserVideoComponent
+                hostNickname={this.state.hostNickname}
+                user={localUser}
+                // isActive={this.state.isActive}
+                // streamId={localUser.streamManager.stream.streamId}
+              />
+            )}
+          </>
+        )}
         <div
           style={{
             width: '100%',
@@ -662,105 +684,114 @@ class VideoRoomComponent extends Component {
             justifyContent: 'space-evenly',
           }}
         >
-          <div className="left-div" style={{ width: '20%', height: '100%' }}>
-            {this.state.subscribers.map((sub, i) =>
-              sub.nickname !== this.state.hostNickname ? (
-                <div
-                  key={i}
-                  style={{
-                    height: '20%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: '5px',
-                    marginBottom: '5px',
-                  }}
-                >
+          {this.state.localUser !== undefined && (
+            <div className="subscriber-div">
+              {this.state.subscribers.map((sub, i) =>
+                sub.nickname !== this.state.hostNickname ? (
+                  <div
+                    key={i}
+                    style={{
+                      height: '20%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: '5px',
+                      marginBottom: '5px',
+                    }}
+                  >
+                    <UserVideoComponent
+                      hostNickname={this.state.hostNickname}
+                      user={sub}
+                      // isActive={this.state.isActive}
+                      // streamId={localUser.streamManager.stream.streamId}
+                    />
+                  </div>
+                ) : (
                   <UserVideoComponent
-                    isHost={this.state.isHost}
+                    hostNickname={this.state.hostNickname}
                     user={sub}
-                    //   streamId={localUser.streamManager.stream.streamId}
+                    sessionId={mySessionId}
+                    // isActive={this.state.isActive}
+                    // streamId={localUser.streamManager.stream.streamId}
                   />
-                </div>
-              ) : (
-                <></>
-              ),
-            )}
-          </div>
+                ),
+              )}
+            </div>
+          )}
 
           {/* {localUser !== undefined &&
             localUser.getStreamManager() !== undefined && (
               <div
-                className="host"
-                style={{
-                  width: '30vw',
-                  height: '50vh',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-evenly',
-                  alignItems: 'center',
-                }}
+              className="host"
+              style={{
+                width: '30vw',
+                height: '50vh',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+              }}
               >
-                <StreamComponent
-                  user={localUser}
-                  handleNickname={this.nicknameChanged}
-                  nowPhoto={this.state.nowPhoto}
-                />
-                <ToolbarComponent
-                  sessionId={mySessionId}
-                  user={localUser}
-                  showNotification={this.handleChangeResult}
+              <StreamComponent
+              user={localUser}
+              handleNickname={this.nicknameChanged}
+              nowPhoto={this.state.nowPhoto}
+              />
+              <ToolbarComponent
+              sessionId={mySessionId}
+              user={localUser}
+              showNotification={this.handleChangeResult}
                   camStatusChanged={this.camStatusChanged}
                   micStatusChanged={this.micStatusChanged}
                   leaveSession={this.leaveSession}
-                />{' '}
-              </div>
-            )} */}
+                  />{' '}
+                  </div>
+                )} */}
           {/* <div className="right-div" style={{ width: '20%', height: '100%' }}>
             {this.state.subscribers.slice(5, 10).map((sub, i) => (
               <div
-                key={i}
-                style={{
-                  height: '20%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
+              key={i}
+              style={{
+                height: '20%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
               >
-                <StreamComponent
-                  user={sub}
-                  streamId={sub.streamManager.stream.streamId}
-                />
+              <StreamComponent
+              user={sub}
+              streamId={sub.streamManager.stream.streamId}
+              />
               </div>
-            ))}
-          </div> */}
+              ))}
+            </div> */}
         </div>
         {/* {this.props.user === this.props.host ? (
-					) : (
-						<div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
-							<div className="left-div" style={{ width: "20%", height: "100%" }} >
-								타이머
-							</div>
-							{localUser !== undefined && localUser.getStreamManager() !== undefined && (
+          ) : (
+            <div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
+            <div className="left-div" style={{ width: "20%", height: "100%" }} >
+            타이머
+            </div>
+            {localUser !== undefined && localUser.getStreamManager() !== undefined && (
 								<div className="host" style={{ width: "30vw", height: "50vh", display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "center" }}>
 									{subscribers !== undefined && subscribers[0].getStreamManager !== undefined && (
 										<StreamComponent user={subscribers[0]} streamId={subscribers[0].streamManager.stream.streamId} />
-									)}
+                    )}
 										<div>
-											<StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
+                    <StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
 										</div>
 										버튼
-								</div>
-							)}
-							<div className='right-div' style={{ width: "20%", height: "100%" }}>
-								{this.state.subscribers.slice(5, 10).map((sub, i) => (
-									<div key={i} style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center" }}>
-										<StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-									</div>
-								))}
-							</div>
-						</div>
-					)} */}
+                    </div>
+                    )}
+                    <div className='right-div' style={{ width: "20%", height: "100%" }}>
+                    {this.state.subscribers.slice(5, 10).map((sub, i) => (
+                      <div key={i} style={{ height: "20%", display: "flex",justifyContent: "center", alignItems: "center" }}>
+                      <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                      </div>
+                      ))}
+                      </div>
+                      </div>
+                    )} */}
       </>
       // <div id="container">
       //     <ToolbarComponent
