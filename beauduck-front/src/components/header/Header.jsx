@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './Header.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../assets/logo_original.png';
 import { useState } from 'react';
 import LoginModal from '../../features/login/LoginModal';
@@ -13,6 +14,10 @@ const Header = () => {
 
   const token = localStorage.getItem('refreshToken');
   const { memberId } = useSelector((state) => state.member);
+  const [isOpen, setMenu] = useState(false);
+  const toggleMenu = () => {
+    setMenu(isOpen => !isOpen);
+  }
 
   return (
     <nav className="header">
@@ -21,7 +26,7 @@ const Header = () => {
         <img className="header-logo" src={logo} alt="logo" />
         <h3>뷰덕</h3>
       </div>
-      <ul className="header-menu">
+      <ul className={isOpen ? "header-menu" : "header-menu2"}>
         {/* <p onClick={() => navigate('/help')}>도와덕</p>
         <p onClick={() => navigate('/single')}>따라해덕</p>
         <p onClick={() => navigate('/together')}>투게덕</p>
@@ -39,6 +44,10 @@ const Header = () => {
             {!memberId ? <LoginModal /> : <LogoutModal />}
         </li>
       </ul>
+      <>
+        <FontAwesomeIcon onClick={()=>toggleMenu()}
+        className="user-toggle" icon={faBars}/>
+      </>
     </nav>
   );
 };
