@@ -4,6 +4,7 @@ from flask_cors import CORS
 import numpy as np
 import face_recognition
 import os
+import ssl
 
 
 # DB
@@ -16,12 +17,13 @@ import ssl
 
 app = Flask(__name__)
 CORS(app)
+# sslify = SSLify(app)
 
 
 ## 저장된 db에 url 가져오기
 def getEmps(meberId):
     ret = []
-    db = pymysql.connect(host='3.38.169.2', user='root', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select member_id, img from imgai where is_makeup=true or member_id =%s"
     curs.execute(sql,[meberId])
@@ -31,9 +33,6 @@ def getEmps(meberId):
     db.commit()
     db.close()
     return ret
-
-##### 여기가 이미지 불러오고 하는 곳
-dir_path = './img/'
 
 # v2 => 이미지  불러오고 변환하기
 def get_cropped_face(image_file):
@@ -100,7 +99,7 @@ def get_nearest_face(name, top= 5):
 
 
 def getmakeup(meberId):
-    db = pymysql.connect(host='3.38.169.2', user='root', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select  m.member_id, m.title, m.content, m.img, m.duration, m.score, m.count from makeup m  "
     sql = sql + "join imgai i " 
@@ -129,7 +128,7 @@ def getmakeup(meberId):
 
 def getisMember(meberId):
     ret = []
-    db = pymysql.connect(host='3.38.169.2', user='root', db='common_pjt', password='1234', charset='utf8')
+    db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select member_id from imgai where member_id =%s "
     curs.execute(sql,[meberId])
@@ -140,7 +139,6 @@ def getisMember(meberId):
     db.commit()
     db.close()
     return ret
-
 
 
 @app.route('/recommand', methods=['POST'])
@@ -176,5 +174,10 @@ def ajax():
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     # app.run(host='0.0.0.0', port=5000, threaded=False)
+=======
+    # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    # ssl_context.load_cert_chain(certfile='cert.pem', keyfile='privkey.pem')
+>>>>>>> d73a1d1f403c489e2f345e703378f3b10c429b8b
     app.run(host='0.0.0.0', port=5000, ssl_context =("cert.pem", "privkey.pem"))
