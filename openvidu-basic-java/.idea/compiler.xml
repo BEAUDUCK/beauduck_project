@@ -9,6 +9,9 @@
         <module name="openvidu-basic-java" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="openvidu-basic-java" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
