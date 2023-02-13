@@ -22,7 +22,7 @@ public class TogetherRoomController {
     private final RoomService roomService;
 
     @ApiOperation(value = "미팅룸 목록 조회", notes = "현재 활성화된 미팅룸 목록을 조회한다.", response = String.class)
-    @GetMapping("/") // 방 목록전체
+    @GetMapping("") // 방 목록전체
     public ResponseEntity<List<RoomDto>> selectAll() {
         List<RoomDto> roomDtoList = roomService.selectAll();
         if(roomDtoList == null)
@@ -30,7 +30,7 @@ public class TogetherRoomController {
         return new ResponseEntity<List<RoomDto>>(roomDtoList, HttpStatus.OK);
     }
     @ApiOperation(value = "미팅룸 생성", notes = "미팅룸이 생성한다. . 생성에 성공하면 SUCCESS를, 실패하면 FAIL을 리턴한다. ", response = String.class)
-    @PostMapping("/") // 방 생성
+    @PostMapping("") // 방 생성
     public ResponseEntity<String> createRoom(@RequestBody RoomRequestDto dto) {
         if(roomService.createRoom(dto))
             return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
