@@ -16,7 +16,7 @@ export const postNewConsulting = createAsyncThunk(
   'help/newConsulting',
   async (newConsulting) => {
     const res = await client.post('/consult/', newConsulting);
-    return res.data.data
+    return res.data.data;
   },
 );
 
@@ -24,7 +24,7 @@ export const postNewConsulting = createAsyncThunk(
 export const getConsultDetail = createAsyncThunk(
   'help/getConsultDetail',
   async (roomId) => {
-    const res = await client.get(`/consult/${roomId}`);
+    const res = await client.get(`/consult/${roomId}/`);
     return res.data.data;
   },
 );
@@ -32,7 +32,7 @@ export const getConsultDetail = createAsyncThunk(
 // 유저 방 입장 -> 방 상세 갱신
 export const enterUser = createAsyncThunk('help/enterUser', async (payload) => {
   const check = await client.post('/consult/enter/', payload);
-  console.log(check.data);
+  console.log('check', check.data);
   const res = await client.get(`/consult/${payload.roomId}`);
   return res.data;
 });
@@ -52,7 +52,7 @@ export const consultSlice = createSlice({
     roomId: '',
     userList: [],
     isActive: false,
-
+    isHost: false,
     // 검사
     userCount: 0,
     resultList: [],
@@ -65,16 +65,22 @@ export const consultSlice = createSlice({
       state.isHost = true;
       state.userCount = state.userList.length;
     },
+    loadingOut: (state, action) => {
+      state.isActive = false;
+    },
     // 과반체크
     setScoreFirst: (state, action) => {
       const idx = action.payload;
-      const stageIdx = idx % 10
-      console.log("idx :", idx)
+      const stageIdx = idx % 10;
+      console.log('idx :', idx);
       if (idx === state.nowIdx) {
         state.nowCount += 1;
-        console.log("state의 nowCount :", state.nowCount)
+        console.log('state의 nowCount :', state.nowCount);
         if (state.nowCount >= state.userCount) {
-          console.log("state.resultList[idx % 10] :", state.resultList[stageIdx])
+          console.log(
+            'state.resultList[idx % 10] :',
+            state.resultList[stageIdx],
+          );
           state.resultList[stageIdx] += 1;
         }
       } else {
@@ -85,7 +91,7 @@ export const consultSlice = createSlice({
     },
     // 카운트 전부 체크
     setScoreSecond: (state, action) => {
-      state.secondResult.concat(action.payload)
+      state.secondResult.concat(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -94,16 +100,19 @@ export const consultSlice = createSlice({
         state.consultingList = action.payload;
       })
       .addCase(postNewConsulting.fulfilled, (state, action) => {
-        state.roomId = action.payload[0].roomId;
-        state.consultingList = action.payload[1];
-        // state.isActive = true
+        state.roomId = action.payload.roomId;
+        state.isActive = true;
+        state.isHost = true;
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;
         state.userList = action.payload.userList;
       })
       .addCase(enterUser.fulfilled, (state, action) => {
-        state.userList = action.payload.userList;
+        state.consultDetail = action.payload.data;
+        state.userList = action.payload.data.userList;
+        console.log('페이로드', action.payload.data);
+        state.isHost = false;
       })
       .addCase(outUser.fulfilled, (state, action) => {
         state.userList = action.payload.userList;
@@ -112,4 +121,5 @@ export const consultSlice = createSlice({
 });
 
 export default consultSlice.reducer;
-export const { checkIsHost, setScoreFirst, setScoreSecond } = consultSlice.actions;
+export const { checkIsHost, loadingOut, setScoreFirst, setScoreSecond } =
+  consultSlice.actions;
