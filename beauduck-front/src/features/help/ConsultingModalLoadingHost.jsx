@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getConsultDetail } from './ConsultingSlice';
+import { getConsultDetail, loadingOut } from './ConsultingSlice';
 
 const ConsultingModalLoadingHost = () => {
   const dispatch = useDispatch();
@@ -14,12 +14,13 @@ const ConsultingModalLoadingHost = () => {
 
   const { consultingList } = useSelector((state) => state.consulting);
 
-  console.log('roomId', roomId);
+  console.log('roomIdㅐㅐ', roomId);
   useEffect(() => {
     dispatch(getConsultDetail(roomId));
   }, []);
 
   const handleStart = () => {
+    dispatch(loadingOut());
     navigate('/help/room', { state: consultDetail });
   };
 

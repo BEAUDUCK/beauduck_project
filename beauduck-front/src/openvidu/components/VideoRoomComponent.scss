@@ -26,9 +26,9 @@
 
 .buttonsContent{
 	height: 40px !important;
-	text-align: center;
+	// text-align: center;
 	margin: auto;
-    min-width: 400px;
+  min-width: 400px;
 }
 .navButton{
 	height: 40px !important;
@@ -891,4 +891,87 @@
   
 #localuser {
   position: absolute;
+}
+
+.host-stream {
+  position: absolute;
+  top: 20px;
+  left: calc(50% - 370px);
+  width: 700px;
+  height: 650px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 30px;
+  border: 30px solid rgb(224, 224, 224);
+
+  .nickname {
+    width: 100px;
+    background-color: rgba(206, 206, 0, 0.5);
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+
+  .streamComponent {
+    height: 480px;
+  }
+  .toolbar {
+    position: absolute;
+    top: 520px;
+  }
+  video {
+    width: 100%;
+    object-fit: cover;
+  }
+  .start-button {
+    position: absolute;
+    top: 580px;
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Jalnan';
+    font-size: 20px;
+    background-color: #f8fac0;
+  }
+  .color-div {
+    position: absolute;
+    top: 20px;
+    left: calc(50% - 350px);
+    width: 700px;
+    height: 525px;
+
+    img {
+      width: 640px;
+      height: 480px;
+    }
+  }
+  .timer {
+    position: absolute;
+    top: 550px;
+    left: 10px;
+    width: 70px;
+    height: 70px;
+    border: 5px solid rgb(255, 224, 224);
+    border-radius: 100px;
+    line-height: 70px;
+    h1 {
+      margin: 0;
+    }
+  }
+}
+
+.guest-stream {
+  width: 300px;
+  overflow: hidden;
+  border: 3px solid yellow;
+
+  video {
+    width: 100%;
+    object-fit: cover;
+  }
 }
