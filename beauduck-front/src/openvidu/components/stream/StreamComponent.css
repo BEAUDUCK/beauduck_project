@@ -82,10 +82,11 @@ video {
 }
 /* Contains the video element, used to fix video letter-boxing */
 .OT_widget-container {
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    height: 480px;
     /* position: absolute; */
-    overflow: hidden;
+    /* overflow: hidden; */
+    /* margin: 0; */
 }
 
 #input,
