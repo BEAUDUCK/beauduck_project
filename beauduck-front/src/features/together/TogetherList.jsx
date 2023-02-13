@@ -4,8 +4,8 @@ const TogetherList = ({ togetherList }) => {
   return (
     <div className="together-list">
       <div className='together-list-child'>
-        {togetherList.map((item) => (
-          <TogetherListItem key={item.id} consultingItem={item} />
+        {togetherList !== undefined && togetherList.map((item) => (
+          <TogetherListItem key={item.id} togetherItem={item} />
         ))}
       </div>
     </div>
