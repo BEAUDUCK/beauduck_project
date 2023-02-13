@@ -139,9 +139,7 @@ def insertgetmakeup(memberId):
     db = pymysql.connect(host='i8b306.p.ssafy.io', user='root', db='common_pjt', password='1234', charset='utf8')
     curs = db.cursor()
     sql = "select member_id from makeup where member_id =%s "
-    
     curs.execute(sql,[memberId])
-    
     rows = curs.fetchall()
     temp = {}
     for e in rows:
