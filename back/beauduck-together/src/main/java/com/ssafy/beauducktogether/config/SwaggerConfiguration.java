@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration {
     private ApiInfo commonInfo() {
         return new ApiInfoBuilder()
-                .title("Together API")
+                .title("투게덕 API")
                 //.description("")
                 //.license("leeys")
                 //.licenseUrl("http://leeys.tistory.com")
