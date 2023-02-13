@@ -59,6 +59,12 @@ export const consultSlice = createSlice({
     secondResult: [],
     nowIdx: 0,
     nowCount: 0,
+    // 집중s
+    isExercising: false,
+    result: {
+      myResult: undefined,
+      allResult: undefined,
+    },
   },
   reducers: {
     checkIsHost: (state, action) => {
@@ -93,6 +99,17 @@ export const consultSlice = createSlice({
     setScoreSecond: (state, action) => {
       state.secondResult.concat(action.payload);
     },
+    // 집중 참고
+    setExerciseStatus: (state, action) => {
+      state.isExercising = action.payload;
+    },
+    setMyExerciseResult: (state, action) => {
+      console.log('여기는 액션입니다.', action.payload);
+      state.result.myResult = action.payload;
+    },
+    setAllExerciseResult: (state, action) => {
+      state.result.allResult = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -111,8 +128,8 @@ export const consultSlice = createSlice({
       .addCase(enterUser.fulfilled, (state, action) => {
         state.consultDetail = action.payload.data;
         state.userList = action.payload.data.userList;
-        console.log('페이로드', action.payload.data);
         state.isHost = false;
+        console.log('durl', state.userList);
       })
       .addCase(outUser.fulfilled, (state, action) => {
         state.userList = action.payload.userList;
@@ -121,5 +138,12 @@ export const consultSlice = createSlice({
 });
 
 export default consultSlice.reducer;
-export const { checkIsHost, loadingOut, setScoreFirst, setScoreSecond } =
-  consultSlice.actions;
+export const {
+  checkIsHost,
+  loadingOut,
+  setScoreFirst,
+  setScoreSecond,
+  setExerciseStatus,
+  setMyExerciseResult,
+  setAllExerciseResult,
+} = consultSlice.actions;
