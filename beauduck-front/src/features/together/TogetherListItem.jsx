@@ -10,6 +10,8 @@ import face5 from "../../assets/faces/face5.png"
 import face6 from "../../assets/faces/face6.png"
 import face7 from "../../assets/faces/face7.png"
 import face8 from "../../assets/faces/face8.png"
+import TogetherModalHost from './TogetherModalHost';
+import TogetherModalGuest from './TogetherModalGuest';
 
 
 const TogetherListItem = ({ togetherItem }) => {
@@ -38,12 +40,28 @@ const TogetherListItem = ({ togetherItem }) => {
     setNowFace(faces[nowNum])
     setNowColor(colors[nowNum])
   }
+  const myNickname = useSelector(state => state.member.nickName)
 
   const [isOpen, setIsOpen] = useState()
 
   const isOpenClick = () => {
-
+    console.log("클릭되었어요")
+    setIsOpen(!isOpen)
+    // if (myNickname === togetherItem.hostNickname) {
+    //   return (
+    //       <TogetherModalHost />
+    //     )
+    // } else {
+    //   return (
+    //     <TogetherModalGuest 
+    //       roomId={togetherItem.roomId}
+    //       host={togetherItem.hostNickname}
+    //       isOpenClick={isOpenClick}
+    //     />
+    //   )
+    // }
   }
+
 
   return (
     <>
@@ -84,8 +102,14 @@ const TogetherListItem = ({ togetherItem }) => {
           </div>
         </div>
       </div>
+      {isOpen && (
+        <TogetherModalGuest 
+          roomId={togetherItem.roomId}
+          host={togetherItem.hostNickname}
+          isOpenClick={isOpenClick}
+        />
+      )}
     </>
-
   )
 };
 

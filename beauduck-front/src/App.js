@@ -20,6 +20,7 @@ import SingupPage from './pages/SignupPage';
 import ScrollToTop from './components/scrolltotop/ScrollToTop';
 import ConsultingRoomPage from './pages/ConsultingRoomPage';
 import ConsultingResultHostPage from "./pages/ConsultingResultHostPage"
+import TogetherRoomPage from "./pages/TogetherRoomPage"
 
 // import { getInfoList, getQaList } from './features/board/BoardSlice';
 
@@ -124,6 +125,7 @@ function App() {
           <Route path="/single/result" element={<SingleResultPage />} />
           {/* 투게덕 */}
           <Route path="/together" element={<TogetherPage />} />
+          <Route path="/together/room" element={<TogetherRoomPage />} />
           {/* 쑥덕쑥덕 */}
           <Route path="/board" element={<BoardPage />} />
           <Route path="/board/write" element={<BoardWritePage />} />

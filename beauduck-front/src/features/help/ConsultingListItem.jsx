@@ -13,33 +13,6 @@ import ConsultingModalLoadingGuest from './ConsultingModalLoadingGuest';
 import BlackOut from '../../components/blackout/BlackOut';
 
 const ConsultingListItem = ({ consultingItem }) => {
-  // return (
-  //   <div className='consulting-list-item'>
-  //     <div className="consulting-list-item-child">
-  //       <div className='consulting-list-item-color'>
-  //         color
-  //       </div>
-  //       <div className='consulting-list-item-title'>
-  //         { consultingItem.title }
-  //       </div>
-  //     </div>
-  //     <div className="consulting-list-item-child back">
-  //       <div className='consulting-list-item-color'>
-  //         color
-  //       </div>
-  //       <div className='consulting-list-item-title'>
-  //         { consultingItem.title }
-  //       </div>
-  //     </div>
-  //   </div>
-  // )
-  // const colors = [
-  //   "#5B9F57", "#06ADB4", "#ECCE1D", "#F08323", "#F05052"
-  // ]
-
-  // const randomColor = () => {
-  //   setNowColor(_.sample(colors))
-  // }
   const [nowColor, setNowColor] = useState('');
   const [nowFace, setNowFace] = useState('');
   const [nowNum, setNowNum] = useState(_.random(0, 7));
