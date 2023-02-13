@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import './StreamComponent.css';
-import TogetherOvVideoComponent from './TogetherOvVideo';
+import TogetherLocalOvVideoComponent from './TogetherLocalOvVideo';
 
 import MicOff from '@mui/icons-material/MicOff';
 import VideocamOff from '@mui/icons-material/VideocamOff';
@@ -13,23 +13,26 @@ import VolumeOff from '@mui/icons-material/VolumeOff';
 import HighlightOff from '@mui/icons-material/HighlightOff';
 // import FormHelperText from '@material-ui/core/FormHelperText';
 
-const TogetherStreamComponent = (props) => {
-	console.log("", props)
+const TogetherLocalStreamComponent = (props) => {
+	const [nickname, setNickname] = useState(props.user.getNickname())
 	const [showForm, setShowForm] = useState(false)
 	const [mutedSound, setMutedSound] = useState(false)
 	const [isFormValid, setIsFormValid] = useState(true)
 
+	console.log(props)
 	const toggleSound = () => {
 		setMutedSound(!mutedSound)
 	}
 
+	console.log(nickname)
 	return (
-		<div className="OT_widget-container">
-				<div className="streamComponent">
-						<TogetherOvVideoComponent user={props.user} mutedSound={mutedSound} />
-				</div>
-		</div>
+		<>
+			<div style={{ position: "absolute", fontFamily: "Jalnan", fontSize: "20px", top: "15%" }}>{nickname}</div>
+			<div className="streamComponent" style={{ display: "flex", justifyContent: "", alignItems: "center" }} >
+					<TogetherLocalOvVideoComponent user={props.user} mutedSound={mutedSound} />
+			</div>
+		</>
 );
 };
 
-export default TogetherStreamComponent;
+export default TogetherLocalStreamComponent;

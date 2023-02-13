@@ -26,7 +26,7 @@ const TogetherPage = () => {
     <>
       <Banner bannerStyle={'together-ban'} />
       <div className="container">
-        <h2 className='together-h2' >투게덕</h2>
+        <h2 className='together-h2'>투게덕</h2>
         {/* <button onClick={isOpenModal}>방 만들기</button> */}
         <Button onClickEvent={isOpenModal} text={"방만들기"} btnStyle={"together-btn"} />
         <TogetherList togetherList={togetherList} />

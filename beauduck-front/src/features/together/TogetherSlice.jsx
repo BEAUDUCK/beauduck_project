@@ -25,7 +25,7 @@ export const postNewTogether = createAsyncThunk(
   async (newTogether) => {
     const res1 = await client.post("/together", newTogether);
     const res2 = await client.get("/together")
-    return [res1.data, res2.data]
+    return res2.data
   }
 )
 
@@ -77,8 +77,7 @@ export const TogetherSlice = createSlice({
         state.userList = action.payload.userList
       })
       .addCase(postNewTogether.fulfilled, (state, action) => {
-        state.roomId = action.payload[0].roomId;
-        state.togetherlist = action.payload[1]
+        state.togetherlist = action.payload
       })
 
   }
