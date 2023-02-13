@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration {
     private ApiInfo commonInfo() {
         return new ApiInfoBuilder()
-                .title("Auth API")
+                .title("회원 API")
                 .version("1.0")
                 .build();
     }
