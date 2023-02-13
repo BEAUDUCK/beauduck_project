@@ -12,6 +12,7 @@ import face8 from '../../assets/faces/face8.png';
 import ConsultingModalLoadingGuest from './ConsultingModalLoadingGuest';
 import BlackOut from '../../components/blackout/BlackOut';
 
+
 const ConsultingListItem = ({ consultingItem }) => {
   const [nowColor, setNowColor] = useState('');
   const [nowFace, setNowFace] = useState('');
@@ -114,10 +115,10 @@ const ConsultingListItem = ({ consultingItem }) => {
       </div>
       {isOpen && (
         <ConsultingModalLoadingGuest
-          roomId={consultingItem.roomId}
-          host={consultingItem.hostNickname}
-          isOpenClick={isOpenClick}
-        />
+        roomId={consultingItem.roomId}
+        host={consultingItem.hostNickname}
+        isOpenClick={isOpenClick}
+      />
       )}
       {isOpen && <BlackOut onClickEvent={isOpenClick} />}
     </>
