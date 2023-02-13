@@ -7,6 +7,7 @@ import BlackOut from '../components/blackout/BlackOut';
 import { useEffect } from 'react';
 import { getTogetherList } from "../features/together/TogetherSlice"
 import { useDispatch, useSelector } from 'react-redux';
+import Button from '../components/button/Button';
 
 const TogetherPage = () => {
   const dispatch = useDispatch()
@@ -26,7 +27,8 @@ const TogetherPage = () => {
       <Banner bannerStyle={'together-ban'} />
       <div className="container">
         <h2 className='together-h2' >투게덕</h2>
-        <button onClick={isOpenModal}>방 만들기</button>
+        {/* <button onClick={isOpenModal}>방 만들기</button> */}
+        <Button onClickEvent={isOpenModal} text={"방만들기"} btnStyle={"together-btn"} />
         <TogetherList togetherList={togetherList} />
         {isOpen && <TogetherModalCreate isOpenModal={isOpenModal} />}
         {isOpen && <BlackOut onClickEvent={isOpenModal} />}

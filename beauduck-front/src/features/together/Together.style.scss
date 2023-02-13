@@ -4,6 +4,9 @@
   font-size: 40px;
 }
 
+.together-btn {
+  margin-bottom: 20px;
+}
 /* TogetherList, TogetherListItem */
 
 .together-list {
@@ -14,8 +17,8 @@
 
   .together-list-child {
     display: grid;
-    grid-template-columns: repeat(5, minmax(20%, auto));
-    grid-template-columns: repeat(5, minmax(200, auto));
+    grid-template-columns: repeat(4, minmax(20%, auto));
+    grid-template-columns: repeat(4, minmax(200, auto));
   }
 
   .flip {
@@ -113,13 +116,13 @@
 
 // 투게덕 방 생성하기 모달
 .together-create-modal {
-    position: absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 450px;
-  height: 300px;
+  width: 500px;
+  height: 350px;
   
   background-color: white;
   border: 2px solid rgb(220, 220, 220);
@@ -127,8 +130,8 @@
   box-shadow: 0px 0px 5px 0px #bdbdbd;
   z-index: 990;
 
-  .consult-create-header {
-    width: 450px;
+  .together-create-header {
+    width: 500px;
     height: 50px;
     border-radius: 5px;
     background-color: #FFF5D1;
@@ -155,7 +158,7 @@
     }
   }
 
-  form {
+  .together-form {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 30px;
@@ -184,7 +187,7 @@
 
     textarea { 
       width: 300px;
-      min-height: 80px;
+      min-height: 120px;
     }
   }
 }

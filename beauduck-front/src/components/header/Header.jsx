@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <nav className="header">
-      <div class="header-name"
+      <div className="header-name"
       onClick={() => navigate('/')}>
         <img className="header-logo" src={logo} alt="logo" />
         <h3>뷰덕</h3>

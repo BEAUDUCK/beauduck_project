@@ -58,8 +58,8 @@
 
   .consulting-list-child {
     display: grid;
-    grid-template-columns: repeat(5, minmax(20%, auto));
-    grid-template-columns: repeat(5, minmax(200, auto));
+    grid-template-columns: repeat(4, minmax(20%, auto));
+    grid-template-columns: repeat(4, minmax(200, auto));
   }
 
   .flip {
