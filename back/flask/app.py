@@ -174,10 +174,7 @@ def ajax():
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     # app.run(host='0.0.0.0', port=5000, threaded=False)
-=======
     # ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
     # ssl_context.load_cert_chain(certfile='cert.pem', keyfile='privkey.pem')
->>>>>>> d73a1d1f403c489e2f345e703378f3b10c429b8b
     app.run(host='0.0.0.0', port=5000, ssl_context =("cert.pem", "privkey.pem"))
