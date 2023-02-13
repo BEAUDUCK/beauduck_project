@@ -10,18 +10,16 @@ const TogetherRoomPage = () => {
 
   const { state } = location
   const myNickname = useSelector(state => state.member.nickName)
-  useEffect(() => {
-    
-  }, [])
+
   console.log(state, myNickname)
 
   return (
     <div style={{ position: "fixed", zIndex: "999" ,width: "100vw", height: "100vh", backgroundColor: "white" }}>
-      {/* <TogetherRoomComponent 
-        sessionName={roomId}
-        hostNickname={togetherDetail.hostNickname}
+      <TogetherRoomComponent 
+        sessionName={state.roomId}
+        hostNickname={state.hostNickname}
         user={myNickname}
-      /> */}
+      />
     </div>
   );
 };

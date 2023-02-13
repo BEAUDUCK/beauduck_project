@@ -14,8 +14,8 @@ export const getTogetherList = createAsyncThunk(
 export const getTogetherDetail = createAsyncThunk(
   "together/getTogetherDetail",
   async (roomId) => {
-    const res = await client.post(`/together/${roomId}`)
-    return res.data.data
+    const res = await client.get(`/together/${roomId}`)
+    return res.data
   }
 )
 

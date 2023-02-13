@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getTogetherDetail } from "./TogetherSlice";
 
-const TogetherModalHost = () => {
+const TogetherModalHost = ({ roomId, host, isOpenClick }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { roomId, togetherDetail, userList } = useSelector(state => state.together)
-
+  const { togetherDetail } = useSelector(state => state.together)
+  
   const { togetherList } = useSelector(state => state.together)
-
+  
   useEffect(() => {
     dispatch(getTogetherDetail(roomId))
-  })
+  }, [])
 
   const handleStart = () => {
     navigate("/together/room", { state: togetherDetail })
@@ -31,7 +31,7 @@ const TogetherModalHost = () => {
       </button>
       <h3 className="loading-h3">대기 리스트</h3>
       <div className="loading-list">
-        {userList?.map((user) => (
+        {togetherDetail.userList?.map((user) => (
           <div className="each-user">
             <span className="username">{user.nickname}</span>
             <span className={['onoff', 'on-btn'].join(' ')}>ON</span>

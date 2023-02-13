@@ -13,6 +13,8 @@ import { textAlign } from '@mui/system';
 import Timer from '../../components/timer/Timer';
 import Photos from './photos/Photos';
 import GetScore from './getscore/GetScore';
+import TogetherToolbarComponent from './toolbar/TogetherToolbarComponent';
+import TogetherStreamComponent from './stream/TogetherStreamComponent';
 
 
 var localUser = new UserModel();
@@ -574,7 +576,7 @@ class TogetherRoomComponent extends Component {
 
         return (
             <div id="container">
-                <ToolbarComponent
+                <TogetherToolbarComponent
                     sessionId={mySessionId}
                     user={localUser}
                     showNotification={this.state.messageReceived}
@@ -585,27 +587,60 @@ class TogetherRoomComponent extends Component {
                     // toggleFullscreen={this.toggleFullscreen}
                     // switchCamera={this.switchCamera}
                     leaveSession={this.leaveSession}
-                    // toggleChat={this.toggleChat}
+                    toggleChat={this.toggleChat}
                 />
 
                 {/* <DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} /> */}
 
-                <div id="layout" className="bounds" style={{ display: "flex" }}>
+                <div id="layout" className="bounds" style={{ width: "100vw", height: "90vh", display: "flex", justifyContent: "space-evenly" }}>
+                    <div className='left-div' style={{ width: "15vw" }}>
+                        {this.state.subscribers.slice(0, 3).map((sub, i) => (
+                            <div key={i}>
+                                <TogetherStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                            </div>
+                        ))}
+                    </div>
+                    <div className='mid-div' style={{ width: "50vw", display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
+                        <div className='mid-top-div' style={{ height: "15vh" }}>
+                            {this.state.subscribers.slice(6, 8).map((sub, i) => (
+															<div key={i}>
+																<TogetherStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+															</div>
+                            ))}
+                        </div>
+                        <div className='mid-mid-div' style={{ height: "50vh" }} >
+														{localUser !== undefined && localUser.getStreamManager() !== undefined && (
+															<TogetherStreamComponent user={localUser}/>
+														)}
+                        </div>
+                        <div className='mid-bot-div' style={{ height: "15vh" }}>
+                            {this.state.subscribers.slice(8, 10).map((sub, i) => (
+															<TogetherStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+														))}
+                        </div>
+                    </div>
+                    <div className='right-div' style={{ width: "15vw" }}>
+                        {this.state.subscribers.slice(3, 6).map((sub, i) => (
+													<div key={i}>
+															<TogetherStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+													</div>
+                        ))}
+                    </div>
                     {/* 나 자신 화면*/}
-                    {localUser !== undefined && localUser.getStreamManager() !== undefined && (
-                        <div className="host" style={{ width: "30vw", height: "50vh", textAlign: "center" }}>
-                            <StreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
+                    {/* {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                        <div className="host" style={{ position: "absolute", left: "28vw", top: "20vh", }}>
+                            <TogetherStreamComponent user={localUser} handleNickname={this.nicknameChanged}/>
                         </div>
-                    )}
+                    )} */}
                     {/* 구독자들 화면*/}
-                    {this.state.subscribers.map((sub, i) => (
-                        <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers" style={{ width: "50vw", height: "50vh" }} >
-                            <StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                    {/* {this.state.subscribers.map((sub, i) => (
+                        <div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers" style={{ width: "20vw" }} >
+                            <TogetherStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
                         </div>
-                    ))}
+                    ))} */}
 
                     {/* 채팅 화면 */}
-                    {localUser !== undefined && localUser.getStreamManager() !== undefined && (
+                    {/* {localUser !== undefined && localUser.getStreamManager() !== undefined && (
                         <div className="OT_root OT_publisher custom-class" style={chatDisplay}>
                             <ChatComponent
                                 user={localUser}
@@ -614,7 +649,7 @@ class TogetherRoomComponent extends Component {
                                 messageReceived={this.checkNotification}
                             />
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         );

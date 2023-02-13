@@ -12,6 +12,7 @@ import face7 from "../../assets/faces/face7.png"
 import face8 from "../../assets/faces/face8.png"
 import TogetherModalHost from './TogetherModalHost';
 import TogetherModalGuest from './TogetherModalGuest';
+import BlackOut from '../../components/blackout/BlackOut';
 
 
 const TogetherListItem = ({ togetherItem }) => {
@@ -47,21 +48,7 @@ const TogetherListItem = ({ togetherItem }) => {
   const isOpenClick = () => {
     console.log("클릭되었어요")
     setIsOpen(!isOpen)
-    // if (myNickname === togetherItem.hostNickname) {
-    //   return (
-    //       <TogetherModalHost />
-    //     )
-    // } else {
-    //   return (
-    //     <TogetherModalGuest 
-    //       roomId={togetherItem.roomId}
-    //       host={togetherItem.hostNickname}
-    //       isOpenClick={isOpenClick}
-    //     />
-    //   )
-    // }
   }
-
 
   return (
     <>
@@ -102,13 +89,21 @@ const TogetherListItem = ({ togetherItem }) => {
           </div>
         </div>
       </div>
-      {isOpen && (
+      {isOpen && myNickname !== togetherItem.hostNickname && (
         <TogetherModalGuest 
           roomId={togetherItem.roomId}
           host={togetherItem.hostNickname}
           isOpenClick={isOpenClick}
         />
       )}
+      {isOpen && myNickname === togetherItem.hostNickname && (
+        <TogetherModalHost 
+          roomId={togetherItem.roomId}
+          host={togetherItem.hostNickname}
+          isOpenClick={isOpenClick}
+        />
+      )}
+      {isOpen && <BlackOut onClickEvent={isOpenClick}/>}
     </>
   )
 };
