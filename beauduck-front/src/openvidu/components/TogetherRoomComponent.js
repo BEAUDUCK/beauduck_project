@@ -122,6 +122,8 @@ class TogetherRoomComponent extends Component {
     // joinSession : 세션에 접속할 때 작동하는 함수
     joinSession() {
         this.OV = new OpenVidu();
+				// 로그 줄여주는 코드
+				this.OV.enableProdMode()
 
         // setState : 1st 매개변수 - 상태값 설정, 2nd 매개변수 - 콜백함수
         this.setState({ session: this.OV.initSession(), }, async () => {
