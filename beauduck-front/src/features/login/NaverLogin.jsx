@@ -36,6 +36,7 @@ const NaverLogin = () => {
         );
         dispatch(UserLogin(accessToken)).then(() => {
           console.log('간다');
+          console.log(loginRejected)
           if (loginRejected) {
             navigate('/signup');
           } else {
@@ -49,12 +50,12 @@ const NaverLogin = () => {
   };
 
   // 로그인 실패 시 회원가입 창으로 이동
-  useEffect(() => {
-    console.log(loginRejected);
-    if (loginRejected) {
-      navigate('/signup');
-    }
-  }, [loginRejected]);
+  // useEffect(() => {
+  //   console.log(loginRejected);
+  //   if (loginRejected) {
+  //     navigate('/signup');
+  //   }
+  // }, [loginRejected]);
 
   useEffect(() => {
     getToken();
