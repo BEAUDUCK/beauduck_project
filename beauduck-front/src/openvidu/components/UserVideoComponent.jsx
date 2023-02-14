@@ -24,56 +24,32 @@ const UserVideoComponent = ({
   camStatusChanged,
   micStatusChanged,
   leaveSession,
-  // isActive,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isExercising, userList } = useSelector((state) => state.consulting);
-  const [isActive, setIsActive] = useState(false);
+  const { isExercising } = useSelector((state) => state.consulting);
+  const admin = useSelector((state) => state.consulting.consultDetail.hostId);
   const [isFinished, setFinished] = useState(false);
-  const startConsulting = () => {
-    setIsActive(!isActive);
-  };
 
+  // 진행 시작
+  const setExercising = (value) => {
+    dispatch(setExerciseStatus(value));
+  };
+  console.log('isExercising', isExercising);
+
+  // 인덱스 바꾸기
   const [nowIdx, setNowIdx] = useState(0);
   const changeIdx = () => {
     console.log('인덱스 바뀐다~', nowIdx + 1);
     setNowIdx(nowIdx + 1);
   };
 
-  //-----------------------
-  const { memberId } = useSelector((state) => state.member);
-  const admin = useSelector((state) => state.consulting.consultDetail.hostId);
-  console.log('admin', admin);
-
-  const [beforeIdx, setBeforeIdx] = useState(0);
-
-  const [isClick, setIsClick] = useState(false);
-
-  const selectGood = () => {
-    // dispatch(setScoreFirst(idx));
-    // dispatch(setScoreSecond(idx));
-    if (!isClick) {
-      resultUsers.current.personalResults[nowIdx % 10] += 1;
-      console.log(
-        'resultUsers.current.personalResults',
-        resultUsers.current.personalResults,
-      );
-      setIsClick(true);
-    }
-    if (beforeIdx !== nowIdx) {
-      setBeforeIdx(nowIdx);
-      setIsClick(false);
-    }
-    // true (이미 눌렀으면 눌렀다고 말해주기)
-    // 아니면 처음 누를때 잘 눌렸다고 말해주기
-  };
-
+  // 끝내기 -> 데이터 보내기
   const finishExercise = (result) => {
     // setExercising(false)
     const res = {
-      memberId,
-      personalResultDetails: resultUsers.current.personalResults,
+      user: user.myUserName,
+      personalResultDetails: resultUsers,
     };
 
     console.log('진단 끝! 내 어쩌구저쩌구 :  ', res);
@@ -87,11 +63,8 @@ const UserVideoComponent = ({
     });
   };
 
-  //-----------------------
-
   useEffect(() => {
     if (nowIdx === 5) {
-      setIsActive(!isActive);
       // 진단 후 실행할 거 여기 넣자
       finishExercise();
       setExercising(false);
@@ -99,21 +72,20 @@ const UserVideoComponent = ({
     }
   }, [nowIdx]);
 
-  const setExercising = (value) => {
-    dispatch(setExerciseStatus(value));
-  };
-  console.log('isExercising', isExercising);
-
   let participantCount = undefined;
   let recivedCount = 0;
 
   const resultUsers = useRef({
-    personalResults: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    personalResults: [],
   });
 
+  // const resultUsers = [
+  //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  // ];
+  // const resultUsers = [];
+
   useEffect(() => {
-    // console.log('스트림매니저!!!!!!!11', user.streamManager);
-    console.log('유저!!!!!!!!!!!1', user);
     const session = user.getStreamManager().stream.session;
     console.log('session', session);
     user.getStreamManager().stream.session.on('signal:start', (event) => {
@@ -156,9 +128,6 @@ const UserVideoComponent = ({
       // setExercising(true)
 
       dispatch(setAllExerciseResult(res.data));
-      // if (isRoomAdmin) {
-      //   http.delete(`room/${teamId}`)
-      // }
       leaveSession();
       navigate('/result');
     });
@@ -167,9 +136,18 @@ const UserVideoComponent = ({
       console.log('비정상종료 ', event.data);
       setExercising(false);
       leaveSession();
-      // setAlert('error');
     });
   }, []);
+
+  useEffect(() => {
+    if (isFinished) {
+      user.getStreamManager().stream.session.signal({
+        data: JSON.stringify(resultUsers.current),
+        type: 'result',
+      });
+      console.log('전송 끝 ');
+    }
+  }, [isFinished]);
 
   return (
     <div>
@@ -177,13 +155,7 @@ const UserVideoComponent = ({
         <>
           {user.nickname === hostNickname && (
             <div className="host-stream">
-              <StreamComponent
-                user={user}
-                streamId={streamId}
-                // isActive={isActive}
-                // changeIdx={changeIdx}
-                // nowIdx={nowIdx}
-              />
+              <StreamComponent user={user} streamId={streamId} />
               <ToolbarComponent
                 sessionId={sessionId}
                 user={user}
@@ -194,11 +166,6 @@ const UserVideoComponent = ({
               />
               <h1>호스트</h1>
               <StartBtn user={user} />
-              {/* <button className="start-button" onClick={startConsulting}>
-                시작하기
-              </button> */}
-              {/* {/* {isActive && <Timer changeIdx={changeIdx} />} */}
-              {/* {isActive && <Photos nowIdx={nowIdx} />} */}
             </div>
           )}
           {user.nickname !== hostNickname && (
@@ -207,15 +174,11 @@ const UserVideoComponent = ({
                 <h1>게스트</h1>
                 <StreamComponent user={user} streamId={streamId} />
                 {isExercising && (
-                  // <GetScore
-                  //   nowIdx={nowIdx}
-                  //   user={user}
-                  //   resultUser={resultUsers}
-                  // />
-
-                  <button onClick={selectGood} className="select-button">
-                    good
-                  </button>
+                  <GetScore
+                    nowIdx={nowIdx}
+                    user={user}
+                    resultUsers={resultUsers}
+                  />
                 )}
               </div>
             </>
@@ -224,8 +187,6 @@ const UserVideoComponent = ({
       ) : null}
       {isExercising && <Timer changeIdx={changeIdx} />}
       {isExercising && <Photos nowIdx={nowIdx} />}
-      {/* <Timer changeIdx={changeIdx} /> */}
-      {/* <Photos nowIdx={nowIdx} /> */}
     </div>
   );
 };
