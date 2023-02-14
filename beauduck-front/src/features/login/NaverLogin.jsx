@@ -12,8 +12,7 @@ const NaverLogin = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['cookie_name']);
   const navigate = useNavigate();
   const { isSignup } = useSelector((state) => state.member);
-  const { loginRejected } = useSelector((state) => state.member);
-  
+
   // 토큰 발급
   const getToken = async () => {
     console.log('토큰 발급');
@@ -36,7 +35,6 @@ const NaverLogin = () => {
         );
         dispatch(UserLogin(accessToken)).then(() => {
           console.log('간다');
-          console.log(loginRejected)
           if (loginRejected) {
             navigate('/signup');
           } else {
@@ -50,12 +48,13 @@ const NaverLogin = () => {
   };
 
   // 로그인 실패 시 회원가입 창으로 이동
-  // useEffect(() => {
-  //   console.log(loginRejected);
-  //   if (loginRejected) {
-  //     navigate('/signup');
-  //   }
-  // }, [loginRejected]);
+  const { loginRejected } = useSelector((state) => state.member);
+  useEffect(() => {
+    console.log(loginRejected);
+    if (loginRejected) {
+      navigate('/signup');
+    }
+  }, [loginRejected]);
 
   useEffect(() => {
     getToken();
