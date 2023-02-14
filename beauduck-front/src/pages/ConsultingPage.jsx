@@ -10,6 +10,8 @@ import {
 } from '../features/help/ConsultingSlice';
 import BlackOut from '../components/blackout/BlackOut';
 import ConsultingModalLoadingHost from '../features/help/ConsultingModalLoadingHost';
+import banner from '../assets/help_banner.gif';
+import '../features/help/Help.style.scss';
 
 const ConsultingPage = () => {
   const dispatch = useDispatch();
@@ -31,16 +33,17 @@ const ConsultingPage = () => {
 
   return (
     <>
-      <Banner bannerStyle={'help-ban'} />
-      <div className="container">
-        <h2 className="help-h2">도와주라덕</h2>
+      {/* <Banner bannerStyle={'help-ban'} /> */}
+      <div className="banner-div">
         <button onClick={isOpenModal}>컨설팅 받기</button>
-        <ConsultingList consultingList={consultingList} />
-        {isOpen && <ConsultingModalCreate isOpenModal={isOpenModal} />}
-        {isOpen && <BlackOut onClickEvent={isOpenModal} />}
-        {isActive && <ConsultingModalLoadingHost />}
-        {isActive && <BlackOut onClickEvent={loadingOff} />}
+        <img src={banner} alt="" id="help-banner" />
       </div>
+      {/* <h2 className="help-h2">도와주라덕</h2> */}
+      <ConsultingList consultingList={consultingList} />
+      {isOpen && <ConsultingModalCreate isOpenModal={isOpenModal} />}
+      {isOpen && <BlackOut onClickEvent={isOpenModal} />}
+      {isActive && <ConsultingModalLoadingHost />}
+      {isActive && <BlackOut onClickEvent={loadingOff} />}
     </>
   );
 };
