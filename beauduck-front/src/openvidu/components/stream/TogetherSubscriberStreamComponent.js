@@ -25,7 +25,7 @@ const TogetherSubscriberStreamComponent = (props) => {
 
 	return (
 		<>
-			<div style={{ position: "absolute", fontFamily: "Jalnan", fontSize: "20px" }}>{nickname}</div>
+			<div style={{ position: "absolute", fontFamily: "Jalnan", fontSize: "20px", backgroundColor: "white" }}>{nickname}</div>
 			<div className="streamComponent" style={{ width: "18vw", display: "flex", alignItems: "center" }} >
 					<TogetherSubscriberOvVideoComponent user={props.user} mutedSound={mutedSound} />
 			</div>

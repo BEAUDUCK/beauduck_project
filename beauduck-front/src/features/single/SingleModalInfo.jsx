@@ -11,6 +11,7 @@ import {
 import { useState } from 'react';
 import Button from '../../components/button/Button';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
   const dispatch = useDispatch();
@@ -31,6 +32,16 @@ const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
   const main = ['skin', 'eyebrow', 'eye', 'conture', 'lip'];
 
   const selectSubmit = () => {
+
+    if (!isSelected1 && !isSelected2 && !isSelected3 && !isSelected4 && !isSelected5) {
+      Swal.fire(
+        "모든 과정이 선택되지 않았습니다.",
+        "최소 하나의 과정을 선택해야 합니다.",
+        "error"
+      )
+      return
+    }
+
     for (let i = 1; i < 6; i++) {
       if (eval(`isSelected${i}`)) {
         category.push(main[i - 1]);
