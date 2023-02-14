@@ -1,83 +1,34 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  setMyExerciseResult,
-  setScoreFirst,
-  setScoreSecond,
-} from '../../../features/help/ConsultingSlice';
 
-const GetScore = ({ nowIdx, user, resultUsers }) => {
-  const dispatch = useDispatch();
-  const [idx, setIdx] = useState(-1);
-  const navigate = useNavigate();
-  const { userList } = useSelector((state) => state.consulting);
-  const { memberId } = useSelector((state) => state.member);
-  const admin = useSelector((state) => state.consulting.consultDetail.hostId);
-  console.log('admin', admin);
-
-  // let participantCount = undefined;
-  // let recivedCount = 0;
-
+const GetScore = ({ nowIdx, resultUsers }) => {
   const [beforeIdx, setBeforeIdx] = useState(0);
+  const didMount = useRef(false);
 
   const [isClick, setIsClick] = useState(false);
-  // console.log('isClick', isClick);
+  console.log('isClick', isClick);
   console.log('beforeIdx', beforeIdx);
   console.log('nowIdx', nowIdx);
 
-  const selectGood = () => {
-    // dispatch(setScoreFirst(idx));
-    // dispatch(setScoreSecond(idx));
-    if (!isClick) {
-      resultUsers.current.personalResults[nowIdx % 10] += 1;
-      console.log(
-        'resultUsers.current.personalResults',
-        resultUsers.current.personalResults,
-      );
-      setIsClick(true);
-    }
-    if (beforeIdx !== nowIdx) {
-      setBeforeIdx(nowIdx);
+  // 🦴 인덱스가 바뀌면 isClick을 false로 초기화
+  useEffect(() => {
+    if (didMount.current) {
+      if (isClick) {
+        resultUsers.current.personalResults.push(parseInt(1)); // 눌렀으면 1 추가
+      } else {
+        resultUsers.current.personalResults.push(parseInt(0)); // 안 눌렀으면 0 추가
+      }
+      console.log('resultUsers', resultUsers.current.personalResults);
       setIsClick(false);
+    } else {
+      didMount.current = true;
     }
-    // true (이미 눌렀으면 눌렀다고 말해주기)
-    // 아니면 처음 누를때 잘 눌렸다고 말해주기
+  }, [nowIdx]);
 
-    if (nowIdx === 4) {
-      finishExercise();
-
-      user.getStreamManager().stream.session.on('signal:finish', (event) => {
-        const session = user.getStreamManager().stream.session;
-        console.log('event.data', event.data);
-      });
-      //   // resultUsers.current.personalResults.push(JSON.parse(event.data));
-
-      //   if (!userList) {
-      //     userList = session.streamManagers.length;
-      //     console.log('운동한 인원수 : ', userList);
-      //   }
-      //   recivedCount++;
-      // });
-    }
-  };
-
-  const finishExercise = (result) => {
-    // setExercising(false)
-    const res = {
-      memberId,
-      personalResultDetails: resultUsers.current.personalResults,
-    };
-
-    console.log('진단 끝! 내 어쩌구저쩌구 :  ', res);
-    dispatch(setMyExerciseResult(res));
-    // setAlert('alert');
-
-    user.getStreamManager().stream.session.signal({
-      data: JSON.stringify(res),
-      type: 'finish',
-      to: [admin],
-    });
+  // 버튼 클릭 이벤트
+  const selectGood = () => {
+    setIsClick(true);
   };
 
   return (
@@ -89,4 +40,4 @@ const GetScore = ({ nowIdx, user, resultUsers }) => {
   );
 };
 
-export default GetScore;
+export default React.memo(GetScore);

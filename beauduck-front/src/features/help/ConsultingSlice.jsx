@@ -109,6 +109,8 @@ export const consultSlice = createSlice({
     },
     setAllExerciseResult: (state, action) => {
       state.result.allResult = action.payload;
+
+      //콘솔 찍어보고 반복문 고민
     },
   },
   extraReducers: (builder) => {
