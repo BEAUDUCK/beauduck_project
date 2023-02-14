@@ -53,7 +53,6 @@ export default class StreamComponent extends Component {
   // 키를 눌렀을 때 동작하는 이벤트핸들러
   handlePressKey(event) {
     if (event.key === 'Enter') {
-      console.log(this.state.nickname);
       if (this.state.nickname.length >= 3 && this.state.nickname.length <= 20) {
         this.props.handleNickname(this.state.nickname);
         this.toggleNicknameForm();
