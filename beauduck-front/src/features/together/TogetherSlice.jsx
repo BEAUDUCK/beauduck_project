@@ -82,6 +82,9 @@ export const TogetherSlice = createSlice({
       .addCase(enterUser.fulfilled, (state, action) => {
         state.userList = action.payload.userList
       })
+      .addCase(outUser.fulfilled, (state, action) => {
+        state.userList = action.payload.userList
+      })
 
   }
 });
