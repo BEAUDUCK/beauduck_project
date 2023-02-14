@@ -13,10 +13,12 @@ const ConsultingList = ({ consultingList }) => {
 
   return (
     <div className="consulting-div">
-      <img src={backShape3} alt="" className="back-shape3" />
-      <img src={backShape4} alt="" className="back-shape4" />
-      <div className="random-consulting">
-        {/* <p>{randomOne.hostNickname}</p> */}
+      <div>
+        <img src={backShape3} alt="" className="back-shape3" />
+        <img src={backShape4} alt="" className="back-shape4" />
+        <div className="random-consulting">
+          {/* <p>{randomOne.hostNickname}</p> */}
+        </div>
       </div>
       <div className="consulting-list">
         <div className="consulting-list-child">
