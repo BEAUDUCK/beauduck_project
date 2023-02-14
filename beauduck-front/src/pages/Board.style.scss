@@ -409,7 +409,8 @@
   border-bottom : 1px solid #D9D9D9;
   p {
       display: inline-block;
-      width: 15%;
+      // width: 15%;
+      width: 10%;
       text-align: center;
       color: rgb(77, 77, 77);
       line-height: 45px;
@@ -417,7 +418,8 @@
   }
 
   .board-title {
-      width: 40%;
+      width: 50%;
+      // width: 40%;
   }
 }
 
