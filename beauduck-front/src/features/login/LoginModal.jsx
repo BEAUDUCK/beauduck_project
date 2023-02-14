@@ -21,9 +21,9 @@ function SimpleDialog(props) {
   const handleListItemClick = (value) => {
     onClose(value);
   };
-  const REDIRECT_URI = 'https://i8b306.p.ssafy.io/Api/Naver';
+  // const REDIRECT_URI = 'https://i8b306.p.ssafy.io/Api/Naver';
   // const REDIRECT_URI = 'https://beauduck.store/Api/Naver';
-  // const REDIRECT_URI = 'http://localhost:3000/Api/Naver';
+  const REDIRECT_URI = 'http://localhost:3000/Api/Naver';
   const CLIENT_ID = 'V5gN96q3kFtGfUK7PUds';
   const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=STATE_STRING&redirect_uri=${REDIRECT_URI}`;
 

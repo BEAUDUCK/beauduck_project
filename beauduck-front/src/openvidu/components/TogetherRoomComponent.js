@@ -14,7 +14,8 @@ import Timer from '../../components/timer/Timer';
 import Photos from './photos/Photos';
 import GetScore from './getscore/GetScore';
 import TogetherToolbarComponent from './toolbar/TogetherToolbarComponent';
-import TogetherStreamComponent from './stream/TogetherStreamComponent';
+import TogetherLocalStreamComponent from './stream/TogetherLocalStreamComponent';
+import TogetherSubscriberStreamComponent from './stream/TogetherSubscriberStreamComponent';
 
 
 var localUser = new UserModel();
@@ -39,7 +40,8 @@ class TogetherRoomComponent extends Component {
             userList: this.props.userList,
             chatDisplay: 'none',
             currentVideoDevice: undefined,
-            hostNickname: this.props.host,
+            hostNickname: this.props.hostNickname,
+						isHost: this.props.isHost
         };
         // 메서드 바인딩 과정
         // joinSession : 세션 접속
@@ -120,6 +122,8 @@ class TogetherRoomComponent extends Component {
     // joinSession : 세션에 접속할 때 작동하는 함수
     joinSession() {
         this.OV = new OpenVidu();
+				// 로그 줄여주는 코드
+				this.OV.enableProdMode()
 
         // setState : 1st 매개변수 - 상태값 설정, 2nd 매개변수 - 콜백함수
         this.setState({ session: this.OV.initSession(), }, async () => {
@@ -202,7 +206,7 @@ class TogetherRoomComponent extends Component {
         }
 
         // 로컬 유저(자신)의 정보 및 환경설정
-        localUser.setNickname(this.props.myUserName);
+        localUser.setNickname(this.props.user);
         localUser.setConnectionId(this.state.session.connection.connectionId);
         localUser.setScreenShareActive(false);
         localUser.setStreamManager(publisher);
@@ -259,8 +263,14 @@ class TogetherRoomComponent extends Component {
         if (this.props.leaveSession) {
             this.props.leaveSession();
         }
-				window.location.replace("/together")
-				this.setState({ isActive: true})
+				if (this.props.isHost) {
+					axios
+						.delete(`https://i8b306.p.ssafy.io:8084/together/${this.props.sessionName}`)
+						.then((response) => {
+							console.log(response)
+						})
+				}
+				this.props.navigate("/together")
     }
 
     // camStatusChanged : 캠 설정 변경
@@ -571,8 +581,9 @@ class TogetherRoomComponent extends Component {
         const subscribers = this.state.subscribers
         console.log("내 세션 아이디 :", mySessionId)
         console.log("내 구독자", this.state.subscribers)
-        console.log("호스트", this.state.hostNickname)
-        console.log("isActive :", this.state.isActive)
+        console.log(localUser)
+        console.log(this.props.user)
+				console.log("isHost: ", this.state.isHost)
 
         return (
             <div id="container">
@@ -587,45 +598,31 @@ class TogetherRoomComponent extends Component {
                     // toggleFullscreen={this.toggleFullscreen}
                     // switchCamera={this.switchCamera}
                     leaveSession={this.leaveSession}
-                    toggleChat={this.toggleChat}
+                    // toggleChat={this.toggleChat}
                 />
 
                 {/* <DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} /> */}
 
-                <div id="layout" className="bounds" style={{ width: "100vw", height: "90vh", display: "flex", justifyContent: "space-evenly" }}>
-                    <div className='left-div' style={{ width: "15vw" }}>
+                <div id="layout" className="bounds" style={{ width: "100vw", height: "90vh", display: "flex", justifyContent: "space-between", backgroundColor: "white" }}>
+                    <div className='left-div1' style={{ width: "25vw", display: "flex", flexDirection: "column" , justifyContent: "space-evenly", alignItems: "center" }}>
                         {this.state.subscribers.slice(0, 3).map((sub, i) => (
-                            <div key={i}>
-                                <TogetherStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                            <div key={i} style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                                <TogetherSubscriberStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
                             </div>
                         ))}
                     </div>
-                    <div className='mid-div' style={{ width: "50vw", display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
-                        <div className='mid-top-div' style={{ height: "15vh" }}>
-                            {this.state.subscribers.slice(6, 8).map((sub, i) => (
-															<div key={i}>
-																<TogetherStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-															</div>
-                            ))}
-                        </div>
-                        <div className='mid-mid-div' style={{ height: "50vh" }} >
-														{localUser !== undefined && localUser.getStreamManager() !== undefined && (
-															<TogetherStreamComponent user={localUser}/>
-														)}
-                        </div>
-                        <div className='mid-bot-div' style={{ height: "15vh" }}>
-                            {this.state.subscribers.slice(8, 10).map((sub, i) => (
-															<TogetherStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-														))}
-                        </div>
-                    </div>
-                    <div className='right-div' style={{ width: "15vw" }}>
+                    <div className='left-div2' style={{ width: "25vw" }}>
                         {this.state.subscribers.slice(3, 6).map((sub, i) => (
-													<div key={i}>
-															<TogetherStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-													</div>
+                            <div key={i} style={{ width: "100%", display: "flex", justifyContent: "center", position: "relative" }}>
+                                <TogetherSubscriberStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                            </div>
                         ))}
                     </div>
+										<div className='right-div' style={{ width: "50vw", display: "flex", justifyContent: "center", alignItems: "center"}} >
+														{localUser !== undefined && localUser.getStreamManager() !== undefined && (
+															<TogetherLocalStreamComponent user={localUser}/>
+														)}
+                        </div>
                     {/* 나 자신 화면*/}
                     {/* {localUser !== undefined && localUser.getStreamManager() !== undefined && (
                         <div className="host" style={{ position: "absolute", left: "28vw", top: "20vh", }}>
