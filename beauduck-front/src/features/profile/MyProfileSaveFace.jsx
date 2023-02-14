@@ -20,14 +20,13 @@ const MyProfileSaveFace = () => {
     const transform = imgDiv.style.transform;
     imgDiv.style.setProperty('transform', 'none');
     html2canvas(imgDiv).then((canvas) => {
-      const imgUri = canvas.toDataURL('image/jpg');
+      const imgUri = canvas.toDataURL('image/jpeg');
       // const mainCapture = document.getElementById('main_capture');
       // const capture = document.createElement('img');
       // capture.setAttribute('src', imgUri);
       // capture.setAttribute('alt', 'capture');
       // capture.setAttribute('class', 'captured-img');
       // mainCapture.appendChild(capture);
-
       // saveAsImg(imgUri, 'yong.jpg');
       const payload = {
         memberId,
