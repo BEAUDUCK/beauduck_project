@@ -105,7 +105,7 @@ const TogetherListItem = ({ togetherItem }) => {
             <div className="back-content"> 
               <div className="back-content-index">인원</div>
               {/* <div>{consultingItem.people}</div> 사람 수 들어가야 함  */}
-              <div className="back-content-context">{togetherItem.userCount} / 7</div>
+              <div className="back-content-context">{togetherItem.userList.length} / 7</div>
             </div>
           </div>
         </div>
