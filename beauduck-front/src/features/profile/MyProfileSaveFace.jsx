@@ -60,13 +60,13 @@ const MyProfileSaveFace = () => {
           ''
         )}
         <div id="main_capture">
+          {/* <div id="main_capture"> */}
           <Webcam
             audio={false}
             screenshotFormat="image/jpeg"
             className="webcam"
-            width={480}
-            height={360}
           />
+          {/* </div> */}
           <img id="faceCircle" src={faceCircle} alt="" />
         </div>
         <div className="guide-div">

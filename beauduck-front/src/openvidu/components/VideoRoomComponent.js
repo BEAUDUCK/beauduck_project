@@ -663,6 +663,7 @@ class VideoRoomComponent extends Component {
                 camStatusChanged={this.camStatusChanged}
                 micStatusChanged={this.micStatusChanged}
                 leaveSession={this.leaveSession}
+                isHost={this.isHost}
                 // isActive={this.state.isActive}
                 // streamId={localUser.streamManager.stream.streamId}
               />
@@ -670,6 +671,7 @@ class VideoRoomComponent extends Component {
               <UserVideoComponent
                 hostNickname={this.state.hostNickname}
                 user={localUser}
+                isHost={this.isHost}
                 // isActive={this.state.isActive}
                 // streamId={localUser.streamManager.stream.streamId}
               />
@@ -702,6 +704,7 @@ class VideoRoomComponent extends Component {
                     <UserVideoComponent
                       hostNickname={this.state.hostNickname}
                       user={sub}
+                      isHost={this.isHost}
                       // isActive={this.state.isActive}
                       // streamId={localUser.streamManager.stream.streamId}
                     />
@@ -711,6 +714,7 @@ class VideoRoomComponent extends Component {
                     hostNickname={this.state.hostNickname}
                     user={sub}
                     sessionId={mySessionId}
+                    isHost={this.isHost}
                     // isActive={this.state.isActive}
                     // streamId={localUser.streamManager.stream.streamId}
                   />
