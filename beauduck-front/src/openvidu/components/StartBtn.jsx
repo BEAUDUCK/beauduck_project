@@ -1,3 +1,5 @@
+import React from 'react';
+
 const StartBtn = ({ user }) => {
   const startExercise = () => {
     user.getStreamManager().stream.session.signal({
@@ -6,7 +8,11 @@ const StartBtn = ({ user }) => {
     });
   };
 
-  return <button onClick={startExercise}>START</button>;
+  return (
+    <button className="start-btn" onClick={startExercise}>
+      START
+    </button>
+  );
 };
 
-export default StartBtn;
+export default React.memo(StartBtn);

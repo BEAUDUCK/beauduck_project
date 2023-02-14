@@ -26,6 +26,8 @@
   position: relative;
   width: 100%;
   height: 100vh;
+  display: flex;
+  justify-content: end;
 
   .back-shape3 {
     position: absolute;
@@ -37,15 +39,15 @@
   .back-shape4 {
     position: absolute;
     top: 350px;
-    left: 200px;
-    width: 25%;
+    left: 230px;
+    width: 27%;
     z-index: 6;
   }
   .random-consulting {
     position: absolute;
     top: 100px;
-    left: 80px;
-    width: 400px;
+    left: 100px;
+    width: 410px;
     height: 500px;
     z-index: 7;
     background-color: white;
@@ -55,24 +57,27 @@
 }
 
 .consulting-list {
+  width: 60%;
   display: flex;
   flex-wrap: wrap;
-  text-align: center;
-  justify-content: center;
+  // text-align: center;
+  justify-content: start;
 
 
   .consulting-list-child {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(20%, auto));
-    grid-template-columns: repeat(4, minmax(200, auto));
+    // display: grid;
+    // grid-template-columns: repeat(3, minmax(15vw, 15vw));
+    // grid-template-columns: repeat(3, minmax(200, 200));
+    margin-top: 30px;
   }
 
   .flip {
     display: inline-block;
-    width: 250px;
+    width: 210px;
     height: 200px;
     perspective: 1100px;
-    margin: 0px 25px 30px 25px;
+    margin: 5px;
+    text-align: center;
 
   }
 
@@ -105,6 +110,7 @@
       img {
         width: 150;
         height: 140px;
+        border-radius: 30px;
       }
 
     }
@@ -139,7 +145,7 @@
       }
 
       .back-content-context {
-        width: 160px;
+        width: 115px;
         background-color: white;
         margin-left: 10px;
         padding-left: 5px;
