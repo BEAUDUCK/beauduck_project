@@ -304,22 +304,31 @@ hr {
   
     #main_capture {
       position: relative;
-      width: 480px;
-      height: 360px;
+      width: 360px;
+      height: 270px;
       max-width: 700px;
       .webcam {
         width: 100%;
       }
+      // #main_capture {
+      //   position: absolute;
+      //   top: 0px;
+      //   left: 90px;
+      //   width: 300px;
+      //   height: 360px;
+      //   // background-color: pink;
+      // }
     }
   
     #faceCircle {
       position: absolute;
-      top: 47%;
+      top: 10%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, 0%);
   
       z-index: 991;
-      width: 60%;
+      width: 50%;
+      height: 80%;
       max-width: 420px;
     }
 
