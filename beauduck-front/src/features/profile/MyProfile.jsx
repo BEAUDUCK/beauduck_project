@@ -4,6 +4,7 @@ import logo from '../../assets/logo_original.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkNickname, getMemberInfo, updateMemberInfo } from './ProfileSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Swal from 'sweetalert2';
 
 const MyProfile = () => {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const MyProfile = () => {
       nickName: userNickname,
       content: userContent,
     };
-
+    
     dispatch(updateMemberInfo(updatedInfo));
     setEdited(!edited);
   };
@@ -62,9 +63,15 @@ const MyProfile = () => {
   const [usable, setUsable] = useState(false);
 
   const checkOver = () => {
-    dispatch(checkNickname(userNickname)).then((res) => {
-      setUsable(res.payload.data);
-    });
+    if (userInfo.nickName === userNickname) {
+      console.log("같은 닉네임입니다.")
+      setUserNickname(userNickname)
+      setUsable(false)
+    } else {
+      dispatch(checkNickname(userNickname)).then((res) => {
+        setUsable(res.payload.data);
+      });
+    }
   };
 
   return (
