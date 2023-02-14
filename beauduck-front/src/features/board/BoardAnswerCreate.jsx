@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginAlert from '../../components/modal/LoginAlert';
 import { newQaAnswer } from './BoardSlice';
+import Swal from 'sweetalert2';
 
 const BoardAnswerCreate = ({ boardId }) => {
   const dispatch = useDispatch();
@@ -32,9 +33,13 @@ const BoardAnswerCreate = ({ boardId }) => {
       isActive: true,
       writer: nickName,
     };
-
     dispatch(newQaAnswer(newAnswer));
     setAnswer('');
+    // Swal.fire(
+    //   "글이 등록되었습니다.",
+    //   "",
+    //   "success",
+    // )
   };
 
   return (
