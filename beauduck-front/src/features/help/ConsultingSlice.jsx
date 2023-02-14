@@ -49,8 +49,8 @@ export const getMakeupInfo = createAsyncThunk(
   'help/getNews',
   async (payload) => {
     const res1 = await client.get('/naver/news', payload);
-    const res2 = await client.get('/naver/shop', payload);
-    const res3 = await client.get('/naver/blog', payload);
+    const res2 = await client.get('/naver/blog', payload);
+    const res3 = await client.get('/naver/shop', payload);
     console.log(res1.data);
     console.log(res2.data);
     console.log(res3.data);

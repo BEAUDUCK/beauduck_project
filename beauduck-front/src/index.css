@@ -2,9 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Palanquin+Dark:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://webfontworld.github.io/score/SCoreDream.css');
+@import url('https://webfontworld.github.io/cookierun/CookieRun.css');
 body {
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;;
+  font-family: 'SCoreDream';
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
