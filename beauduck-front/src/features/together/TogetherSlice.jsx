@@ -79,6 +79,9 @@ export const TogetherSlice = createSlice({
       .addCase(postNewTogether.fulfilled, (state, action) => {
         state.togetherlist = action.payload
       })
+      .addCase(enterUser.fulfilled, (state, action) => {
+        state.userList = action.payload.userList
+      })
 
   }
 });
