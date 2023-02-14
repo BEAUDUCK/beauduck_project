@@ -71,10 +71,7 @@ export const postSaveFace = createAsyncThunk(
   'member/postSaveFace',
   async (payload) => {
     console.log('페이로드', payload);
-    const res = await memberAxios.post(
-      `/members/ai/${payload.memberId}`,
-      payload,
-    );
+    const res = await memberAxios.post('/save/', payload);
     console.log('얼굴', res.data);
     return res.data;
   },
