@@ -24,13 +24,13 @@ const UserVideoComponent = ({
   camStatusChanged,
   micStatusChanged,
   leaveSession,
+  // isHost,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isExercising } = useSelector((state) => state.consulting);
+  const { isExercising, isHost } = useSelector((state) => state.consulting);
   const admin = useSelector((state) => state.consulting.consultDetail.hostId);
   const [isFinished, setFinished] = useState(false);
-  const didMount = useRef(false);
 
   // 진행 시작
   const setExercising = (value) => {
@@ -45,20 +45,22 @@ const UserVideoComponent = ({
     setNowIdx(nowIdx + 1);
   };
 
+  const resultUsers = useRef({
+    personalResults: [],
+  });
+
+  const [once, setOnce] = useState(false);
+
   // 끝내기 -> 데이터 보내기
-  const finishExercise = (result) => {
-    // setExercising(false)
-    const res = {
-      user: user.myUserName,
-      personalResultDetails: resultUsers,
-    };
-
-    console.log('진단 끝! 내 어쩌구저쩌구 :  ', res);
-    dispatch(setMyExerciseResult(res));
-    // setAlert('alert');
-
+  const finishExercise = () => {
+    console.log('진단 끝! 내 어쩌구저쩌구 :  ', resultUsers);
+    if (!once) {
+      dispatch(setMyExerciseResult(resultUsers));
+      setOnce(true);
+    }
+    console.log('JSON.stringify(resultUsers)', JSON.stringify(resultUsers));
     user.getStreamManager().stream.session.signal({
-      data: JSON.stringify(res),
+      data: JSON.stringify(resultUsers),
       type: 'finish',
       to: [admin],
     });
@@ -66,41 +68,33 @@ const UserVideoComponent = ({
 
   useEffect(() => {
     if (nowIdx === 5) {
-      // 진단 후 실행할 거 여기 넣자
-      finishExercise();
-      setExercising(false);
-      // alert('종료되었슴다');
+      if (!isHost) {
+        // 🦴 게스트만 선택 결과 저장
+        console.log('나는 호스트인가?', isHost);
+        finishExercise();
+        setExercising(false);
+      }
     }
   }, [nowIdx]);
 
   let participantCount = undefined;
   let recivedCount = 0;
 
-  const resultUsers = useRef({
-    personalResults: [],
-  });
-
-  // const resultUsers = [
-  //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  //   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  // ];
-  // const resultUsers = [];
-
   useEffect(() => {
-    const session = user.getStreamManager().stream.session;
-    console.log('session', session);
+    // ⭐ 버튼 클릭시 signal : start
     user.getStreamManager().stream.session.on('signal:start', (event) => {
-      console.log('시작함');
       setExercising(true);
     });
 
-    if (didMount.current) {
-      user.getStreamManager().stream.session.on('signal:finish', (event) => {
+    // ⭐ 인덱스 종료 시 signal : finish
+    user.getStreamManager().stream.session.on('signal:finish', (event) => {
+      if (isHost) {
         const session = user.getStreamManager().stream.session;
+        console.log('event.data', event.data);
         resultUsers.current.personalResults.push(JSON.parse(event.data));
 
         if (!participantCount) {
-          participantCount = session.streamManagers.length;
+          participantCount = session.streamManagers.length - 1;
           console.log('운동한 인원수 : ', participantCount);
         }
         recivedCount++;
@@ -122,26 +116,27 @@ const UserVideoComponent = ({
           console.log(resultUsers);
           setFinished(true);
         }, 10000);
-      });
+      }
+    });
 
-      user.getStreamManager().stream.session.on('signal:result', (event) => {
+    // ⭐ signal : result
+    user.getStreamManager().stream.session.on('signal:result', (event) => {
+      if (isHost) {
         const res = JSON.parse(event.data);
         console.log('운동 결과 데이터 수신', res);
-        // setExercising(true)
 
-        dispatch(setAllExerciseResult(res.data));
-        leaveSession();
-        navigate('/result');
-      });
+        dispatch(setAllExerciseResult(res.personalResults));
+        console.log('res.personalResults', res.personalResults);
+        // leaveSession();
+        // navigate('/result');
+      }
+    });
 
-      user.getStreamManager().stream.session.on('signal:exit', (event) => {
-        console.log('비정상종료 ', event.data);
-        setExercising(false);
-        leaveSession();
-      });
-    } else {
-      didMount.current = true;
-    }
+    user.getStreamManager().stream.session.on('signal:exit', (event) => {
+      console.log('비정상종료 ', event.data);
+      setExercising(false);
+      leaveSession();
+    });
   }, []);
 
   useEffect(() => {
