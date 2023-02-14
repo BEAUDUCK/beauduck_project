@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Timer from '../../components/timer/Timer';
@@ -40,41 +40,45 @@ const UserVideoComponent = ({
 
   // 인덱스 바꾸기
   const [nowIdx, setNowIdx] = useState(0);
-  const changeIdx = () => {
+  const changeIdx = useCallback(() => {
     console.log('인덱스 바뀐다~', nowIdx + 1);
     setNowIdx(nowIdx + 1);
-  };
+  }, [nowIdx]);
 
   const resultUsers = useRef({
     personalResults: [],
   });
 
-  const [once, setOnce] = useState(false);
-
   // 끝내기 -> 데이터 보내기
-  const finishExercise = () => {
+  const finishExercise = useCallback(() => {
     console.log('진단 끝! 내 어쩌구저쩌구 :  ', resultUsers);
-    if (!once) {
-      dispatch(setMyExerciseResult(resultUsers));
-      setOnce(true);
-    }
-    console.log('JSON.stringify(resultUsers)', JSON.stringify(resultUsers));
+    dispatch(setMyExerciseResult(resultUsers.current.personalResults));
+    // setMyResult(resultUsers.current.personalResults);
+    // console.log(myResult);
+
+    console.log(
+      'JSON.stringify(resultUsers.current)',
+      JSON.stringify(resultUsers.current),
+    );
+
     user.getStreamManager().stream.session.signal({
-      data: JSON.stringify(resultUsers),
+      data: JSON.stringify(resultUsers.current),
       type: 'finish',
       to: [admin],
     });
-  };
+  });
 
   useEffect(() => {
+    console.log(nowIdx);
     if (nowIdx === 5) {
+      setExercising(false);
       if (!isHost) {
         // 🦴 게스트만 선택 결과 저장
         console.log('나는 호스트인가?', isHost);
         finishExercise();
-        setExercising(false);
       }
     }
+    return;
   }, [nowIdx]);
 
   let participantCount = undefined;
@@ -87,15 +91,18 @@ const UserVideoComponent = ({
     });
 
     // ⭐ 인덱스 종료 시 signal : finish
+  }, []);
+
+  useEffect(() => {
     user.getStreamManager().stream.session.on('signal:finish', (event) => {
       if (isHost) {
         const session = user.getStreamManager().stream.session;
-        console.log('event.data', event.data);
-        resultUsers.current.personalResults.push(JSON.parse(event.data));
+        console.log('finish : event.data', event.data);
+        // resultUsers.current.personalResults.push(JSON.parse(event.data));
 
         if (!participantCount) {
           participantCount = session.streamManagers.length - 1;
-          console.log('운동한 인원수 : ', participantCount);
+          console.log('인원수 : ', participantCount);
         }
         recivedCount++;
 
@@ -109,19 +116,20 @@ const UserVideoComponent = ({
           }, 4000);
         }
 
-        setExercising(false);
-        setTimeout(() => {
-          // 결과 데이터를 참여자의 수 만큼 받지 못하는 상황일 경우 최초 결과 데이터 수신된 시점으로 5초후 결과창 이동
-          console.log('10초끝!');
-          console.log(resultUsers);
-          setFinished(true);
-        }, 10000);
+        // setExercising(false);
+        // setTimeout(() => {
+        //   // 결과 데이터를 참여자의 수 만큼 받지 못하는 상황일 경우 최초 결과 데이터 수신된 시점으로 5초후 결과창 이동
+        //   console.log('10초끝!');
+        //   console.log(resultUsers);
+        //   setFinished(true);
+        // }, 10000);
       }
     });
 
     // ⭐ signal : result
     user.getStreamManager().stream.session.on('signal:result', (event) => {
       if (isHost) {
+        console.log('signal: result', event.data);
         const res = JSON.parse(event.data);
         console.log('운동 결과 데이터 수신', res);
 
@@ -164,14 +172,12 @@ const UserVideoComponent = ({
                 micStatusChanged={micStatusChanged}
                 leaveSession={leaveSession}
               />
-              <h1>호스트</h1>
               <StartBtn user={user} />
             </div>
           )}
           {user.nickname !== hostNickname && (
             <>
               <div className="guest-stream">
-                <h1>게스트</h1>
                 <StreamComponent user={user} streamId={streamId} />
                 {isExercising && (
                   <GetScore

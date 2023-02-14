@@ -19,7 +19,10 @@ const GetScore = ({ nowIdx, resultUsers }) => {
       } else {
         resultUsers.current.personalResults.push(parseInt(0)); // 안 눌렀으면 0 추가
       }
-      console.log('resultUsers', resultUsers.current.personalResults);
+      console.log(
+        'resultUsers.current.personalResults',
+        resultUsers.current.personalResults,
+      );
       setIsClick(false);
     } else {
       didMount.current = true;

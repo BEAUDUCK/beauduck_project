@@ -943,7 +943,7 @@
 
 // 다른 게스트들 화면
 .subscriber-div {
-  margin-top: 210px;
+  margin-top: 450px;
   display: flex;
   width: 100vw;
   justify-content: space-between;
@@ -953,22 +953,23 @@
     width: 50vw;
     height: 300px;
     overflow: hidden;
-    border: 3px solid yellow;
+    // border: 3px solid yellow;
     text-align: left;
-    
+
     #volumeButton {
       bottom: 60px;
       right: calc(50vw - 290px);
-
     }
   
     video {
       width: 300px;
       object-fit: cover;
     }
+
     .select-button {
       position: absolute;
-      top: 200px;
+      top: 250px;
+      left: 100px;
       display: inline-block;
       width: 100px;
       height: 35px;
@@ -977,6 +978,11 @@
       font-family: 'Jalnan';
       font-size: 15px;
       background-color: #f8fac0;
+    }
+    #volumeButton {
+      color: white;
+      background-color: white;
+      z-index: 999;
     }
   }
 }
@@ -1015,5 +1021,33 @@
   text-align: center;
   h1 {
     margin: 0;
+  }
+}
+
+.start-btn {
+  width: 200px;
+  height: 50px;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 25px;
+  font-family: 'Jalnan';
+  margin-top: 40px;
+
+  &:active {
+    background-color: #FFDF38;
+    color: white;
+  }
+}
+
+.guest-stream {
+  position: absolute;
+  top: 450px;
+  left: 50px;
+  width: 300px;
+  height: 300px;
+
+  .OT_widget-container {
+    width: 300px;
+    height: 300px;
   }
 }
