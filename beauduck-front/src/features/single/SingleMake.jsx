@@ -10,6 +10,7 @@ import {
   setBtnStateCreate,
 } from './SingleSlice';
 
+
 const SingleMake = ({ onToggleMake, onToggleFinish }) => {
   const dispatch = useDispatch();
 
@@ -53,6 +54,7 @@ const SingleMake = ({ onToggleMake, onToggleFinish }) => {
   }, [makeupMainList]);
 
   const createMakeup = () => {
+
     const finalMakeup = {
       content,
       count: 0,
