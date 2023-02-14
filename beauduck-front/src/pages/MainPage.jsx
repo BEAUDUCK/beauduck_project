@@ -7,7 +7,7 @@ const MainPage = () => {
         <section id="section1" >
         </section>
         <div id='main-line' className="demo">
-        <a href="#section2">
+        <a href="#section2">+
             <span></span>scroll</a>
         </div>
         <section id='section2'>

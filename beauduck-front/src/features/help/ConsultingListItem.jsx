@@ -11,11 +11,14 @@ import face7 from '../../assets/faces/face7.png';
 import face8 from '../../assets/faces/face8.png';
 import ConsultingModalLoadingGuest from './ConsultingModalLoadingGuest';
 import BlackOut from '../../components/blackout/BlackOut';
+import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
 const ConsultingListItem = ({ consultingItem }) => {
   const [nowColor, setNowColor] = useState('');
   const [nowFace, setNowFace] = useState('');
   const [nowNum, setNowNum] = useState(_.random(0, 7));
+  const myNickname = useSelector(state => state.member.nickName)
 
   useEffect(() => {
     randomFace();
@@ -72,6 +75,19 @@ const ConsultingListItem = ({ consultingItem }) => {
   const [isOpen, setIsOpen] = useState();
 
   const isOpenClick = () => {
+    if (!myNickname) {
+
+      Swal.fire(
+        "로그인이 필요한 서비스 입니다.",
+        "로그인 페이지로 이동합니다.",
+        "warning"
+      )
+      return (
+        <>
+          {/* 로그인 모달창 이동 */}
+        </>
+      )
+    }
     setIsOpen(!isOpen);
   };
 
