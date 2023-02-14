@@ -15,8 +15,10 @@ const BoardListItem = ({ boardItem, idx, isInfo }) => {
       <p>{idx + 1}</p>
       <p className="board-title">{boardItem.title}</p>
       <p>{boardItem.writer}</p>
+      {/* <p>{boardItem.count}</p>
+      <p>{boardItem.likes}</p> 좋아요 삭제*/}
+      <p></p>
       <p>{boardItem.count}</p>
-      <p>{boardItem.likes}</p>
     </div>
   );
 };

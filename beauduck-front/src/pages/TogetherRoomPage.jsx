@@ -18,21 +18,23 @@ const TogetherRoomPage = ({ roomId, host }) => {
   const dispatch = useDispatch()
   const location = useLocation()
   const myNickname = useSelector(state => state.member.nickName)
+  const myId = useSelector(state => state.member.memberId)
   const { state } = location
   const [isHost, setIsHost] = useState(myNickname === state.hostNickname)
   const navigate = useNavigate()
-
+  console.log(state)
 
   console.log(isHost)
   return (
     <div style={{ position: "fixed", zIndex: "999" ,width: "100vw", height: "100vh", backgroundColor: "#FFF8BC" }}>
-      <TogetherRoomComponent 
+      {/* <TogetherRoomComponent 
         sessionName={state.roomId}
         hostNickname={state.hostNickname}
         user={myNickname}
         isHost={isHost}
         navigate={navigate}
-      />
+        myId={myId}
+      /> */}
     </div>
   );
 };

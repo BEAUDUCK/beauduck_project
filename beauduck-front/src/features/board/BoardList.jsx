@@ -27,8 +27,10 @@ const BoardList = ({ allList, isInfo }) => {
         <p>번호</p>
         <p className="board-title">제목</p>
         <p>작성자</p>
+        <p></p>
+        {/* <p>조회</p> */}
+        {/* <p>좋아요</p> */}
         <p>조회</p>
-        <p>좋아요</p>
       </div>
       <div className='board-item'>
       {currentPosts.map((item) => (

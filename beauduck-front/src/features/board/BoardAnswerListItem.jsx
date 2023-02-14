@@ -57,8 +57,8 @@ const BoardAnswerListItem = ({ answer, boardId }) => {
           <div className="comment-last">
             <div className="comment-last-sub">
               <span>{date.slice(0, 10)}</span>
-              <span>좋아요</span>
-              <span>{answer.likes}</span>
+              {/* <span>좋아요</span>
+              <span>{answer.likes}</span> */}
             </div>
             <div className="comment-last-sub">
               {!isUpdate ? (

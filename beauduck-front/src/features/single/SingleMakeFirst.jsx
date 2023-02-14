@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { submitMakeup } from './SingleSlice';
+import Swal from 'sweetalert2';
 // import logo from '../../assets/logo_original.png';
 
 const SingleMakeFirst = ({ sendFinalImg }) => {
@@ -26,11 +27,24 @@ const SingleMakeFirst = ({ sendFinalImg }) => {
       return;
     }
     if (!img) {
-      imgRef.current.focus();
+      // imgRef.current.focus();
+      // 23-02-14 현혁
+      Swal.fire(
+        "다음 단게로 넘어갈 수 없습니다.",
+        "이미지를 추가해주세요",
+        "error"
+      )
       return;
     }
-    if (!duration || duration < 1 || duration > 100) {
-      durationRef.current.focus();
+    // if (!duration || duration < 1 || duration > 100) {
+    //   durationRef.current.focus();
+    // 23-02-14 현혁
+    if (!duration || duration < 1 || duration > 120 ) {
+      Swal.fire(
+        "다음 단계로 넘어갈 수 없습니다.",
+        "소요시간은 1 ~ 120 분 사이로 설정해주세요",
+        "error"
+      )
       return;
     }
 
