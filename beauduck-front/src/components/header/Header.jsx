@@ -32,9 +32,11 @@ const Header = () => {
         <li onClick={() => navigate('/no')}>쑥덕쑥덕</li>
       </ul>
       <ul className="header-auth">
+        {memberId ? (
         <li onClick={() => navigate('/profile')}>
           <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user"/>
         </li>
+        ) : null}
         <li className="header-not-auth">
             {!memberId ? <LoginModal /> : <LogoutModal />}
         </li>

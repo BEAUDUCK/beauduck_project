@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { goToLogin, goToSignup } from './MemberSlice';
 
-function SimpleDialog(props) {
+export function SimpleDialog(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { onClose, selectedValue, open } = props;

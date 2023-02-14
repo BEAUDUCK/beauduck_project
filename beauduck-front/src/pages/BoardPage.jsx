@@ -6,6 +6,7 @@ import Button from '../components/button/Button';
 import TabButton from '../components/button/TabButton';
 import BoardList from '../features/board/BoardList';
 import { getAllList } from '../features/board/BoardSlice';
+import Swal from 'sweetalert2';
 
 const BoardPage = () => {
   const navigate = useNavigate();
@@ -36,6 +37,18 @@ const BoardPage = () => {
   };
 
   const goToWrite = () => {
+    if (!memberId) {
+      Swal.fire(
+        "로그인이 필요한 서비스 입니다.",
+        "로그인 페이지로 이동합니다.",
+        "warning"
+      )
+      return (
+        <>
+          {/* 로그인 모달창 이동 */}
+        </>
+      )
+    }
     navigate('/board/write');
   };
 
