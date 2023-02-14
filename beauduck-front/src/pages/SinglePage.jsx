@@ -20,6 +20,7 @@ import backShape2 from '../assets/backShape2.png';
 import miniDuck from '../assets/logo_no_back.png';
 import aiPic from '../assets/ai.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Swal from 'sweetalert2';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,19 @@ const SinglePage = () => {
 
   const { memberId } = useSelector((state) => state.member);
   const popRecommend = () => {
+    if (!memberId) {
+      Swal.fire(
+        "로그인이 필요한 서비스 입니다.",
+        "로그인 페이지로 이동합니다.",
+        "warning"
+      )
+      return (
+        <>
+          {/* 로그인 모달창 이동 */}
+        </>
+      )
+    }
+
     const payload = {
       id: memberId,
     };
@@ -44,6 +58,18 @@ const SinglePage = () => {
   // 새로운 메이크업 만들기
   const [isMake, setIsMake] = useState(false);
   const onToggleMake = () => {
+    if (!memberId) {
+      Swal.fire(
+        "로그인이 필요한 서비스 입니다.",
+        "로그인 페이지로 이동합니다.",
+        "warning"
+      )
+      return (
+        <>
+          {/* 로그인 모달창 이동 */}
+        </>
+      )
+    }
     setIsMake(!isMake);
     dispatch(rejectedMakeup());
   };

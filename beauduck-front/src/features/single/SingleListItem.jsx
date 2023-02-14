@@ -3,10 +3,26 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import BlackOut from '../../components/blackout/BlackOut';
 import SingleModalInfo from './SingleModalInfo';
+import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 const SingleListItem = ({ modeItem, idx }) => {
   const [isInfo, setIsInfo] = useState(false);
+  const myNickname = useSelector(state => state.member.nickName)
   const isToggleInfo = () => {
+    if (!myNickname) {
+
+      Swal.fire(
+        "로그인이 필요한 서비스 입니다.",
+        "로그인 페이지로 이동합니다.",
+        "warning"
+      )
+      return (
+        <>
+          {/* 로그인 모달창 이동 */}
+        </>
+      )
+    }
     setIsInfo(!isInfo);
   };
 

@@ -19,6 +19,8 @@ import tab3 from '../assets/pallete3.png';
 // 더미
 import logo from '../assets/logo_original.png';
 
+import Swal from 'sweetalert2';
+
 // 더미
 const dummyRecentMakeup = [
   {
@@ -145,6 +147,21 @@ const ProfilePage = () => {
   const { recentMakeupList, myMakeupList, myGalleryList } = useSelector(
     (state) => state.profile,
   );
+  useEffect(() => {
+    if (!memberId) {
+
+      Swal.fire(
+        "로그인이 필요한 서비스 입니다.",
+        "로그인 페이지로 이동합니다.",
+        "warning"
+      )
+      return (
+        <>
+          {/* 로그인 모달창 이동 */}
+        </>
+      )
+    }
+  }, [])
 
   useEffect(() => {
     dispatch(getMemberInfo(memberId));

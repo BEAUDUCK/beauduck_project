@@ -48,6 +48,8 @@
     "redux-persist": "^6.0.0",
     "socket.io": "^4.6.0",
     "socket.io-client": "^4.6.0",
+    "sweetalert2": "^11.7.1",
+    "sweetalert2-react-content": "^5.0.7",
     "swiper": "^8.4.6",
     "web-vitals": "^2.1.4"
   },
