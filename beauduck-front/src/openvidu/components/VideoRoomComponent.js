@@ -15,6 +15,7 @@ import Photos from './photos/Photos';
 import GetScore from './getscore/GetScore';
 import { div } from '@tensorflow/tfjs';
 import UserVideoComponent from './UserVideoComponent';
+import HostVideoComponent from './HostVideoComponent';
 
 var localUser = new UserModel();
 // const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'localhost:5000/';
@@ -632,10 +633,10 @@ class VideoRoomComponent extends Component {
 
     // 여기서부터 커스텀
     const subscribers = this.state.subscribers;
-    console.log('내 세션 아이디 :', mySessionId);
-    console.log('내 구독자', this.state.subscribers);
-    console.log('호스트', this.state.hostNickname);
-    console.log('isHost :', this.state.isHost);
+    // console.log('내 세션 아이디 :', mySessionId);
+    // console.log('내 구독자', this.state.subscribers);
+    // console.log('호스트', this.state.hostNickname);
+    // console.log('isHost :', this.state.isHost);
     // console.log('isActive :', this.state.isActive);
 
     // const hostVideoStream = this.isHost ? (
@@ -663,7 +664,7 @@ class VideoRoomComponent extends Component {
                 camStatusChanged={this.camStatusChanged}
                 micStatusChanged={this.micStatusChanged}
                 leaveSession={this.leaveSession}
-                isHost={this.isHost}
+                isHost={this.state.isHost}
                 // isActive={this.state.isActive}
                 // streamId={localUser.streamManager.stream.streamId}
               />
@@ -671,7 +672,7 @@ class VideoRoomComponent extends Component {
               <UserVideoComponent
                 hostNickname={this.state.hostNickname}
                 user={localUser}
-                isHost={this.isHost}
+                isHost={this.state.isHost}
                 // isActive={this.state.isActive}
                 // streamId={localUser.streamManager.stream.streamId}
               />
@@ -704,7 +705,7 @@ class VideoRoomComponent extends Component {
                     <UserVideoComponent
                       hostNickname={this.state.hostNickname}
                       user={sub}
-                      isHost={this.isHost}
+                      isHost={this.state.isHost}
                       // isActive={this.state.isActive}
                       // streamId={localUser.streamManager.stream.streamId}
                     />
@@ -714,7 +715,7 @@ class VideoRoomComponent extends Component {
                     hostNickname={this.state.hostNickname}
                     user={sub}
                     sessionId={mySessionId}
-                    isHost={this.isHost}
+                    isHost={this.state.isHost}
                     // isActive={this.state.isActive}
                     // streamId={localUser.streamManager.stream.streamId}
                   />

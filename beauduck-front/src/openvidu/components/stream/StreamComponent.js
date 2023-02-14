@@ -64,7 +64,6 @@ export default class StreamComponent extends Component {
   }
 
   render() {
-    console.log('vmfhq', this.state.isActive);
     return (
       <div className="OT_widget-container" style={{ marginTop: '20px' }}>
         {/* 닉네임 보여주는 div */}
