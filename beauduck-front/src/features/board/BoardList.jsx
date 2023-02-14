@@ -30,6 +30,7 @@ const BoardList = ({ allList, isInfo }) => {
         <p>조회</p>
         <p>좋아요</p>
       </div>
+      <div className='board-item'>
       {currentPosts.map((item) => (
         <BoardListItem
           idx={(page - 1) * postPerPage + currentPosts.indexOf(item)}
@@ -38,6 +39,7 @@ const BoardList = ({ allList, isInfo }) => {
           isInfo={isInfo}
         />
       ))}
+      </div>
       <Paging
         totalCount={allList.length}
         page={page}
