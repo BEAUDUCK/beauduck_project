@@ -193,7 +193,7 @@ def save():
     return {'answer': "DB success"}
 
 
-@app.route('/recommand', methods=['GET'])
+@app.route('/recommand', methods=['POST'])
 def recommand():
 
     memberId = request.get_json()["id"]
