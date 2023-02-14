@@ -21,14 +21,13 @@ public class NaverController {
 
     // 네이버랑 통신하는 코드
     @GetMapping("/blog")
-    public String blog(@RequestBody NaverDto naverDto) { // 메인 안쪽
+    public String blog() { // 메인 안쪽
         String clientId = "VWNZOvu3gslKfyEfwwJz"; //애플리케이션 클라이언트 아이디
         String clientSecret = "tenyS6xFcR"; //애플리케이션 클라이언트 시크릿
 
-
-        String text = naverDto.getKeyword();
+        String text = "퍼스널컬러";
         try {
-            text = URLEncoder.encode(naverDto.getKeyword(), "UTF-8");
+            text = URLEncoder.encode(text, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
@@ -49,14 +48,13 @@ public class NaverController {
     }
 
     @GetMapping("/shop")
-    public String shop(@RequestBody NaverDto naverDto) { // 메인 안쪽
+    public String shop() { // 메인 안쪽
         String clientId = "VWNZOvu3gslKfyEfwwJz"; //애플리케이션 클라이언트 아이디
         String clientSecret = "tenyS6xFcR"; //애플리케이션 클라이언트 시크릿
 
-
-        String text = naverDto.getKeyword();
+        String text = "퍼스널컬러";
         try {
-            text = URLEncoder.encode(naverDto.getKeyword(), "UTF-8");
+            text = URLEncoder.encode(text, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
@@ -77,13 +75,13 @@ public class NaverController {
     }
 
     @GetMapping("/news")
-    public String news(@RequestBody NaverDto naverDto) { // 메인 안쪽
+    public String news() { // 메인 안쪽
         String clientId = "VWNZOvu3gslKfyEfwwJz"; //애플리케이션 클라이언트 아이디
         String clientSecret = "tenyS6xFcR"; //애플리케이션 클라이언트 시크릿
 
-        String text = naverDto.getKeyword();
+        String text = "퍼스널컬러";
         try {
-            text = URLEncoder.encode(naverDto.getKeyword(),  "UTF-8");
+            text = URLEncoder.encode(text,  "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
