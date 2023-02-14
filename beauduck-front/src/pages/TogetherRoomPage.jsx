@@ -18,10 +18,10 @@ const TogetherRoomPage = ({ roomId, host }) => {
   const dispatch = useDispatch()
   const location = useLocation()
   const myNickname = useSelector(state => state.member.nickName)
+  const myId = useSelector(state => state.member.memberId)
   const { state } = location
   const [isHost, setIsHost] = useState(myNickname === state.hostNickname)
   const navigate = useNavigate()
-
 
   console.log(isHost)
   return (
@@ -32,6 +32,7 @@ const TogetherRoomPage = ({ roomId, host }) => {
         user={myNickname}
         isHost={isHost}
         navigate={navigate}
+        myId={myId}
       />
     </div>
   );

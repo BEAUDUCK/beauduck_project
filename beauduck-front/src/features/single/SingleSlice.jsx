@@ -25,6 +25,7 @@ export const getMakeupDetail = createAsyncThunk(
 export const createNewMakeup = createAsyncThunk(
   'single/createNewMakeup',
   async (newProcess) => {
+    console.log(newProcess)
     const res = await client.post('/makeup/', newProcess);
     return res.data;
   },
