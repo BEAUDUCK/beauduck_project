@@ -27,7 +27,7 @@ const SingleMake = ({ onToggleMake, onToggleFinish }) => {
   let formData = new FormData();
   const getFinalImg = (img) => {
     formData.append('img', img);
-    // console.log('폼', formData.get('img'));
+
     setImgForm({
       img: formData,
     });
