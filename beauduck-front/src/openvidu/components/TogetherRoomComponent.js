@@ -263,13 +263,23 @@ class TogetherRoomComponent extends Component {
         if (this.props.leaveSession) {
             this.props.leaveSession();
         }
-				if (this.props.isHost) {
-					axios
-						.delete(`https://i8b306.p.ssafy.io:8084/together/${this.props.sessionName}`)
-						.then((response) => {
-							console.log(response)
-						})
-				}
+				// if (this.props.isHost) {
+				// 	axios
+				// 		.delete(`https://i8b306.p.ssafy.io:8084/together/${this.props.sessionName}`)
+				// 		.then((response) => {
+				// 			console.log(response)
+				// 		})
+				// }
+				// const userData = {
+				// 	"nickname": this.props.user,
+				// 	"roomId": this.props.sessionName,
+				// 	"userId": this.props.myId
+				// }
+				// axios
+				// 	.post("https://i8b306.p.ssafy.io:8084/together/out", userData)
+				// 	.then((res) => {
+				// 		console.log(res)
+				// 	})
 				this.props.navigate("/together")
     }
 

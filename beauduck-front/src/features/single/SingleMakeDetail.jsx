@@ -77,6 +77,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
     skinSubData.filter((data) => {
       return data !== null && data !== undefined && data !== '';
     });
+    console.log(skinSubData)
     if (skinSubData.length === 0) {
       setMain('skin');
       return;
@@ -86,6 +87,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
       return data !== null && data !== undefined && data !== '';
     });
     if (eyebrowSubData.length === 0) {
+      console.log(eyebrowSubData)
       setMain('eyebrow');
       return;
     }
@@ -93,6 +95,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
     eyeSubData.filter((data) => {
       return data !== null && data !== undefined && data !== '';
     });
+    console.log(eyeSubData)
     if (eyeSubData.length === 0) {
       setMain('eye');
       return;
@@ -101,6 +104,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
     contureSubData.filter((data) => {
       return data !== null && data !== undefined && data !== '';
     });
+    console.log(contureSubData)
     if (contureSubData.length === 0) {
       setMain('conture');
       return;
@@ -109,6 +113,7 @@ const SingleMakeDetail = ({ getMakeupList }) => {
     lipSubData.filter((data) => {
       return data !== null && data !== undefined && data !== '';
     });
+    console.log(lipSubData)
     if (lipSubData.length === 0) {
       setMain('lip');
       return;
