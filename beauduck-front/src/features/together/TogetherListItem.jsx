@@ -15,6 +15,7 @@ import TogetherModalGuest from './TogetherModalGuest';
 import BlackOut from '../../components/blackout/BlackOut';
 import TogetherRoomPage from '../../pages/TogetherRoomPage';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 const TogetherListItem = ({ togetherItem }) => {
@@ -49,7 +50,19 @@ const TogetherListItem = ({ togetherItem }) => {
   const [isOpen, setIsOpen] = useState()
 
   const isOpenClick = () => {
-    console.log("클릭되었어요")
+    if (!myNickname) {
+
+      Swal.fire(
+        "로그인이 필요한 서비스 입니다.",
+        "로그인 페이지로 이동합니다.",
+        "warning"
+      )
+      return (
+        <>
+          {/* 로그인 모달창 이동 */}
+        </>
+      )
+    }
     setIsOpen(!isOpen)
   }
 
