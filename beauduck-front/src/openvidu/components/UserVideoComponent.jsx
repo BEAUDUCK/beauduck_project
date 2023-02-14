@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Timer from '../../components/timer/Timer';
@@ -30,6 +30,7 @@ const UserVideoComponent = ({
   const { isExercising } = useSelector((state) => state.consulting);
   const admin = useSelector((state) => state.consulting.consultDetail.hostId);
   const [isFinished, setFinished] = useState(false);
+  const didMount = useRef(false);
 
   // 진행 시작
   const setExercising = (value) => {
@@ -93,50 +94,54 @@ const UserVideoComponent = ({
       setExercising(true);
     });
 
-    user.getStreamManager().stream.session.on('signal:finish', (event) => {
-      const session = user.getStreamManager().stream.session;
-      resultUsers.current.personalResults.push(JSON.parse(event.data));
+    if (didMount.current) {
+      user.getStreamManager().stream.session.on('signal:finish', (event) => {
+        const session = user.getStreamManager().stream.session;
+        resultUsers.current.personalResults.push(JSON.parse(event.data));
 
-      if (!participantCount) {
-        participantCount = session.streamManagers.length;
-        console.log('운동한 인원수 : ', participantCount);
-      }
-      recivedCount++;
+        if (!participantCount) {
+          participantCount = session.streamManagers.length;
+          console.log('운동한 인원수 : ', participantCount);
+        }
+        recivedCount++;
 
-      if (recivedCount === participantCount) {
-        // 모든 참여자의 정보를 수신하면 4초후 결과창 이동
-        console.log('모든 참여자들의 결과 기록 수신 완료 ');
-        console.log(resultUsers.current);
+        if (recivedCount === participantCount) {
+          // 모든 참여자의 정보를 수신하면 4초후 결과창 이동
+          console.log('모든 참여자들의 결과 기록 수신 완료 ');
+          console.log(resultUsers.current);
+          setTimeout(() => {
+            console.log('결과 전송 끝 !');
+            setFinished(true);
+          }, 4000);
+        }
+
+        setExercising(false);
         setTimeout(() => {
-          console.log('결과 전송 끝 !');
+          // 결과 데이터를 참여자의 수 만큼 받지 못하는 상황일 경우 최초 결과 데이터 수신된 시점으로 5초후 결과창 이동
+          console.log('10초끝!');
+          console.log(resultUsers);
           setFinished(true);
-        }, 4000);
-      }
+        }, 10000);
+      });
 
-      setExercising(false);
-      setTimeout(() => {
-        // 결과 데이터를 참여자의 수 만큼 받지 못하는 상황일 경우 최초 결과 데이터 수신된 시점으로 5초후 결과창 이동
-        console.log('10초끝!');
-        console.log(resultUsers);
-        setFinished(true);
-      }, 10000);
-    });
+      user.getStreamManager().stream.session.on('signal:result', (event) => {
+        const res = JSON.parse(event.data);
+        console.log('운동 결과 데이터 수신', res);
+        // setExercising(true)
 
-    user.getStreamManager().stream.session.on('signal:result', (event) => {
-      const res = JSON.parse(event.data);
-      console.log('운동 결과 데이터 수신', res);
-      // setExercising(true)
+        dispatch(setAllExerciseResult(res.data));
+        leaveSession();
+        navigate('/result');
+      });
 
-      dispatch(setAllExerciseResult(res.data));
-      leaveSession();
-      navigate('/result');
-    });
-
-    user.getStreamManager().stream.session.on('signal:exit', (event) => {
-      console.log('비정상종료 ', event.data);
-      setExercising(false);
-      leaveSession();
-    });
+      user.getStreamManager().stream.session.on('signal:exit', (event) => {
+        console.log('비정상종료 ', event.data);
+        setExercising(false);
+        leaveSession();
+      });
+    } else {
+      didMount.current = true;
+    }
   }, []);
 
   useEffect(() => {
@@ -191,4 +196,4 @@ const UserVideoComponent = ({
   );
 };
 
-export default UserVideoComponent;
+export default React.memo(UserVideoComponent);
