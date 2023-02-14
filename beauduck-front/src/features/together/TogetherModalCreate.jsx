@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import { getTogetherList, postNewTogether } from './TogetherSlice';
-import TogetherModalHost from "./TogetherModalHost"
 
 const TogetherModalCreate = ({ isOpenModal }) => {
   const dispatch = useDispatch()
@@ -17,9 +16,9 @@ const TogetherModalCreate = ({ isOpenModal }) => {
   const titleRef = useRef();
   const contentRef = useRef();
 
-  const isClose = () => {
-    isOpenModal();
-  };
+  // const isClose = () => {
+  //   isOpenModal();
+  // };
 
   const togetherCreate = () => {
     if (title.length < 1) {
@@ -40,8 +39,10 @@ const TogetherModalCreate = ({ isOpenModal }) => {
 
     dispatch(postNewTogether(newTogether))
     dispatch(getTogetherList())
-    setIsActive(!isActive)
+    isOpenModal()
   };
+
+  
 
   return (
     <>
@@ -75,7 +76,7 @@ const TogetherModalCreate = ({ isOpenModal }) => {
           <Button text={'완료'} onClickEvent={togetherCreate} />
         </div>
       </div>
-      {isActive && <TogetherModalHost />}
+      {/* {isActive && <TogetherRoomPage />} */}
     </>
   );
 };
