@@ -14,7 +14,6 @@ const member = axios.create({
 // 요청 인터셉터
 member.interceptors.request.use(
   (config) => {
-    console.log('하아');
     // 요청을 보내기 전에 수행할 일
     config.headers['Authorization'] = getCookie('accessToken');
     config.headers['accessToken'] = getCookie('accessToken');
