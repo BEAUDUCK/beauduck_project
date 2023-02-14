@@ -25,7 +25,7 @@ const SingleModalRecommend = ({ popRecommend }) => {
         onClick={closeModal}
       />
       <h3>{nickName}님에게 어울리는 추천 메이크업</h3>
-      {recommendList.length != 0 ? (
+      {recommendList?.length !== 0 ? (
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           spaceBetween={0}
@@ -33,7 +33,7 @@ const SingleModalRecommend = ({ popRecommend }) => {
           pagination={{ clickable: true }}
         >
           <>
-            {recommendList.map((item) => (
+            {recommendList?.map((item) => (
               <SwiperSlide>
                 <div className="recommended-makeup-div">
                   <img src={item?.img} alt="img" />
