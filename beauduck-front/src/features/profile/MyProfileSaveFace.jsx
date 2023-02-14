@@ -27,7 +27,6 @@ const MyProfileSaveFace = () => {
       // capture.setAttribute('alt', 'capture');
       // capture.setAttribute('class', 'captured-img');
       // mainCapture.appendChild(capture);
-
       // saveAsImg(imgUri, 'yong.jpg');
       const payload = {
         memberId,
