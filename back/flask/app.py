@@ -209,7 +209,7 @@ def save():
     return {'answer': "DB success"}
 
 
-@app.route('/recommand', methods=['GET'])
+@app.route('/recommand', methods=['POST'])
 def recommand():
 
     memberId = request.get_json()["id"]
@@ -238,7 +238,6 @@ def recommand():
             result.append(ret)
         
     return {'answer': result}
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, ssl_context =("cert.pem", "privkey.pem"))
