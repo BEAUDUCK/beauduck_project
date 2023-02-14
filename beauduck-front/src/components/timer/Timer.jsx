@@ -6,23 +6,23 @@ const Timer = ({ changeIdx }) => {
   const [second, setSecond] = useState(4);
 
   useEffect(() => {
-    if (didMount.current) {
-      const countdown = setInterval(() => {
-        if (parseInt(second) > 0) {
-          setSecond(parseInt(second) - 1);
-        } else if (parseInt(second) === 0) {
-          changeIdx();
-          clearInterval(countdown);
-          setSecond(4);
-        }
-      }, 1000);
-      return () => clearInterval(countdown);
-    } else {
-      didMount.current = true;
-      setTimeout(() => {
-        setSecond(3);
-      }, 10000);
-    }
+    // if (didMount.current) {
+    const countdown = setInterval(() => {
+      if (parseInt(second) > 0) {
+        setSecond(parseInt(second) - 1);
+      } else if (parseInt(second) === 0) {
+        changeIdx();
+        clearInterval(countdown);
+        setSecond(4);
+      }
+    }, 1000);
+    return () => clearInterval(countdown);
+    // } else {
+    //   didMount.current = true;
+    //   setTimeout(() => {
+    //     setSecond(3);
+    //   }, 10000);
+    // }
   }, [second]);
 
   return (

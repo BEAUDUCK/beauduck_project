@@ -44,6 +44,20 @@ export const outUser = createAsyncThunk('help/outUser', async (payload) => {
   return res.data;
 });
 
+// 뉴스 크롤링
+export const getMakeupInfo = createAsyncThunk(
+  'help/getNews',
+  async (payload) => {
+    const res1 = await client.get('/naver/news', payload);
+    const res2 = await client.get('/naver/shop', payload);
+    const res3 = await client.get('/naver/blog', payload);
+    console.log(res1.data);
+    console.log(res2.data);
+    console.log(res3.data);
+    return [res1.data, res2.data, res3.data];
+  },
+);
+
 export const consultSlice = createSlice({
   name: 'consulting',
   initialState: {
@@ -65,6 +79,10 @@ export const consultSlice = createSlice({
       myResult: undefined,
       allResult: undefined,
     },
+    // 뉴스 크롤링
+    infoNews: [],
+    infoBlog: [],
+    infoShop: [],
   },
   reducers: {
     checkIsHost: (state, action) => {
@@ -134,7 +152,13 @@ export const consultSlice = createSlice({
         console.log('durl', state.userList);
       })
       .addCase(outUser.fulfilled, (state, action) => {
-        state.userList = action.payload.userList;
+        state.consultDetail = action.payload.data;
+        state.userList = action.payload.data.userList;
+      })
+      .addCase(getMakeupInfo.fulfilled, (state, action) => {
+        state.infoNews = action.payload[0];
+        state.infoBlog = action.payload[1];
+        state.infoShop = action.payload[2];
       });
   },
 });

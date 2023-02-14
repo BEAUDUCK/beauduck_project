@@ -6,6 +6,7 @@ import ConsultingList from '../features/help/ConsultingList';
 import ConsultingModalCreate from '../features/help/ConsultingModalCreate ';
 import {
   getConsultingList,
+  getMakeupInfo,
   loadingOut,
 } from '../features/help/ConsultingSlice';
 import BlackOut from '../components/blackout/BlackOut';
@@ -40,7 +41,12 @@ const ConsultingPage = () => {
     dispatch(loadingOut());
   };
   useEffect(() => {
+    const payload = {
+      keyword: 'personal color',
+    };
+
     dispatch(getConsultingList());
+    dispatch(getMakeupInfo(payload));
   }, []);
 
   return (
@@ -56,6 +62,7 @@ const ConsultingPage = () => {
       {isOpen && <BlackOut onClickEvent={isOpenModal} />}
       {isActive && <ConsultingModalLoadingHost />}
       {isActive && <BlackOut onClickEvent={loadingOff} />}
+      <div className="consulting-bottom"></div>
     </>
   );
 };
