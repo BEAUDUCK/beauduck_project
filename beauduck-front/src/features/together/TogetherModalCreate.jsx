@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import { getTogetherList, postNewTogether } from './TogetherSlice';
+import Swal from 'sweetalert2';
 
 const TogetherModalCreate = ({ isOpenModal }) => {
   const dispatch = useDispatch()
@@ -39,6 +40,11 @@ const TogetherModalCreate = ({ isOpenModal }) => {
 
     dispatch(postNewTogether(newTogether))
     dispatch(getTogetherList())
+    Swal.fire(
+      "방이 생성되었습니다.",
+      "",
+      "success"
+    )
     isOpenModal()
   };
 
