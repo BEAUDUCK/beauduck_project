@@ -71,7 +71,10 @@ export const postSaveFace = createAsyncThunk(
   'member/postSaveFace',
   async (payload) => {
     console.log('페이로드', payload);
-    const res = awaitaxios.post('https://i8b306.p.ssafy.io:5000/save', payload);
+    const res = await axios.post(
+      'https://i8b306.p.ssafy.io:5000/save',
+      payload,
+    );
     console.log('얼굴', res.data);
     return res.data;
   },
