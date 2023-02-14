@@ -1,10 +1,12 @@
 from flask import Flask, request
 from flask_cors import CORS
+from PIL import Image
 
 import numpy as np
 import face_recognition
 import os
 import ssl
+import io
 
 
 # DB
@@ -36,11 +38,24 @@ def getEmps(memberId): #imgai 테이블에서 메이크업이 있는 멤버만 �
 
 # v2 => 이미지  불러오고 변환하기
 def get_cropped_face(image_file):
-    image_nparray = np.asarray(bytearray(requests.get(image_file).content), dtype=np.uint8)
-    image = cv2.imdecode(image_nparray, cv2.IMREAD_COLOR) 
-    face_locations = face_recognition.face_locations(image)   # 얼굴 영역 박스 
+    image_file = image_file[23:] #data:image/jpeg;base64, 잘라내기
+    
+    imgdata  = base64.b64decode(image_file)
+    dataBytesIO  = io.BytesIO(imgdata)
+    image = Image.open(dataBytesIO)
+    # image_nparray = np.asarray(bytearray(image), dtype=np.unit8)
+    image_nparray = np.array(image)
+    # print("nparray: ",image_nparray)
+    
+    # image = cv2.imdecode(image_nparray, cv2.IMREAD_COLOR) 
+    face_locations = face_recognition.face_locations(image_nparray)   # 얼굴 영역 박스 
+    
+    # print(face_locations) 
+    
     a, b, c, d = face_locations[0]     # 얼굴 영역 박스 좌표
-    cropped_face = image[a:c,d:b,:]    # 얼굴 영역 박스 좌표를 이용해 얼굴 잘라내기 
+    cropped_face = image_nparray[a:c,d:b,:]    # 얼굴 영역 박스 좌표를 이용해 얼굴 잘라내기 
+
+    # cropped_face.show()
     return cropped_face # 이미지 파일
 
 
@@ -48,7 +63,7 @@ def get_cropped_face(image_file):
 def get_face_embedding(face):
     return face_recognition.face_encodings(face)
 
-def get_face_embedding_dict(memberId, url):      
+def get_face_embedding_dict(memberId, url):
     try: 
         face = get_cropped_face(url)    # 얼굴 영역만 자른 이미지
     except:                    
@@ -169,6 +184,7 @@ def save():
 
     memberId = request.get_json()["memberId"]
     url = request.get_json()["img"]
+
 
     #d얼굴 사진으로 임베딩 벡터 추출하기
     embedding = get_face_embedding_dict(memberId,url)
