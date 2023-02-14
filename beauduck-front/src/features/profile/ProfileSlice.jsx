@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 import memberAxios from '../../api/memberAxios';
 
 // 회원 정보 조회 GET
