@@ -8,13 +8,13 @@ const ConsultingModalLoadingGuest = ({ roomId, host, isOpenClick }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { memberId, nickName } = useSelector((state) => state.member);
-  const { consultDetail } = useSelector(state => state.consulting)
+  const { consultDetail } = useSelector((state) => state.consulting);
   const [isReady, setIsReady] = useState(false);
 
   const ChangeStatus = () => {
     // setIsReady(!isReady);
     // 이벤트에 준비상태 host 한테 보내는 기능 추가
-    navigate("/help/room", { state: consultDetail })
+    navigate('/help/room', { state: consultDetail });
   };
 
   const goBack = () => {
@@ -52,7 +52,7 @@ const ConsultingModalLoadingGuest = ({ roomId, host, isOpenClick }) => {
       >
         READY
       </button>
-      {isReady ? (
+      {/* {isReady ? (
         <FontAwesomeIcon
           className={['battery', 'full'].join(' ')}
           icon="fa-solid fa-battery-full"
@@ -62,7 +62,7 @@ const ConsultingModalLoadingGuest = ({ roomId, host, isOpenClick }) => {
           className={['battery', 'less'].join(' ')}
           icon="fa-solid fa-battery-quarter"
         />
-      )}
+      )} */}
       <p>중도 퇴장 시에는 패널티가 부과됩니다.</p>
     </div>
   );

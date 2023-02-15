@@ -75,8 +75,8 @@ const ConsultingPage = () => {
       <ConsultingList consultingList={consultingList} />
       {isOpen && <ConsultingModalCreate isOpenModal={isOpenModal} />}
       {isOpen && <BlackOut onClickEvent={isOpenModal} />}
-      {isActive && <ConsultingModalLoadingHost />}
-      {isActive && <BlackOut onClickEvent={loadingOff} />}
+      {isActive && <ConsultingModalLoadingHost loadingOff={loadingOff} />}
+      {isActive && <BlackOut />}
       <Crawling />
     </>
   );

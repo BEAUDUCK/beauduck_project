@@ -18,7 +18,7 @@ const ConsultingListItem = ({ consultingItem }) => {
   const [nowColor, setNowColor] = useState('');
   const [nowFace, setNowFace] = useState('');
   const [nowNum, setNowNum] = useState(_.random(0, 7));
-  const myNickname = useSelector(state => state.member.nickName)
+  const myNickname = useSelector((state) => state.member.nickName);
 
   useEffect(() => {
     randomFace();
@@ -42,51 +42,16 @@ const ConsultingListItem = ({ consultingItem }) => {
     setNowColor(colors[nowNum]);
   };
 
-  // const findColor = () => {
-  //   switch (nowFace) {
-  //     case face1:
-  //       setNowColor("#EE5F5B")
-  //       break
-  //     case face2:
-  //       setNowColor("#F6A95B")
-  //       break
-  //     case face3:
-  //       setNowColor("#F5DE5E")
-  //       break
-  //     case face4:
-  //       setNowColor("#3264C3")
-  //       break
-  //     case face5:
-  //       setNowColor("#7E9CC2")
-  //       break
-  //     case face6:
-  //       setNowColor("#B8DE6F")
-  //       break
-  //     case face7:
-  //       setNowColor("#DAB801")
-  //       break
-  //     case face8:
-  //       setNowColor("#018699")
-  //       break
-  //     default:
-  //       break
-  //   }
-  // }
   const [isOpen, setIsOpen] = useState();
 
   const isOpenClick = () => {
     if (!myNickname) {
-
       Swal.fire(
-        "로그인이 필요한 서비스 입니다.",
-        "로그인 페이지로 이동합니다.",
-        "warning"
-      )
-      return (
-        <>
-          {/* 로그인 모달창 이동 */}
-        </>
-      )
+        '로그인이 필요한 서비스 입니다.',
+        '로그인 페이지로 이동합니다.',
+        'warning',
+      );
+      return <>{/* 로그인 모달창 이동 */}</>;
     }
     setIsOpen(!isOpen);
   };
@@ -108,10 +73,6 @@ const ConsultingListItem = ({ consultingItem }) => {
                 {consultingItem.hostNickname}
               </div>
             </div>
-            {/* <div className="back-content">
-            <div className="back-content-index">제목</div>
-            <div className="back-content-context">{consultingItem.title}</div>
-          </div> */}
             <div className="back-content">
               <div className="back-content-index">내용</div>
               <div className="back-content-context">

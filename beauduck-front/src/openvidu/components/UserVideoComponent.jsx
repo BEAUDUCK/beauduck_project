@@ -47,19 +47,13 @@ const UserVideoComponent = ({
 
   const resultUsers = useRef({
     personalResults: [],
+    allResults: [],
   });
 
   // 끝내기 -> 데이터 보내기
   const finishExercise = useCallback(() => {
     console.log('진단 끝! 내 어쩌구저쩌구 :  ', resultUsers);
     dispatch(setMyExerciseResult(resultUsers.current.personalResults));
-    // setMyResult(resultUsers.current.personalResults);
-    // console.log(myResult);
-
-    console.log(
-      'JSON.stringify(resultUsers.current)',
-      JSON.stringify(resultUsers.current),
-    );
 
     user.getStreamManager().stream.session.signal({
       data: JSON.stringify(resultUsers.current),
@@ -69,7 +63,6 @@ const UserVideoComponent = ({
   });
 
   useEffect(() => {
-    console.log(nowIdx);
     if (nowIdx === 5) {
       setExercising(false);
       if (!isHost) {
@@ -98,10 +91,10 @@ const UserVideoComponent = ({
       if (isHost) {
         const session = user.getStreamManager().stream.session;
         console.log('finish : event.data', event.data);
-        // resultUsers.current.personalResults.push(JSON.parse(event.data));
+        resultUsers.current.allResults.push(JSON.parse(event.data));
 
         if (!participantCount) {
-          participantCount = session.streamManagers.length - 1;
+          participantCount = session.streamManagers.length;
           console.log('인원수 : ', participantCount);
         }
         recivedCount++;
@@ -111,7 +104,7 @@ const UserVideoComponent = ({
           console.log('모든 참여자들의 결과 기록 수신 완료 ');
           console.log(resultUsers.current);
           setTimeout(() => {
-            console.log('결과 전송 끝 !');
+            console.log('결과 전송 끝 !', isFinished);
             setFinished(true);
           }, 4000);
         }
@@ -133,8 +126,8 @@ const UserVideoComponent = ({
         const res = JSON.parse(event.data);
         console.log('운동 결과 데이터 수신', res);
 
-        dispatch(setAllExerciseResult(res.personalResults));
-        console.log('res.personalResults', res.personalResults);
+        dispatch(setAllExerciseResult(res.allResults));
+        console.log('res.allResults', res.allResults);
         // leaveSession();
         // navigate('/result');
       }
@@ -177,7 +170,10 @@ const UserVideoComponent = ({
           )}
           {user.nickname !== hostNickname && (
             <>
-              <div className="guest-stream">
+              <div
+                className="guest-stream"
+                style={{ position: 'absolute', top: '0' }}
+              >
                 <StreamComponent user={user} streamId={streamId} />
                 {isExercising && (
                   <GetScore
