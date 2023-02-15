@@ -69,7 +69,7 @@ export const consultSlice = createSlice({
     nowIdx: 0,
     nowCount: 0,
     // 집중s
-    isExercising: undefined,
+    isExercising: 'start',
     isFinished: undefined,
     myResult: [],
     allResult: [],
@@ -120,7 +120,7 @@ export const consultSlice = createSlice({
         state.isHost = true;
         state.myResult = [];
         state.allResult = [];
-        state.isExercising = undefined;
+        state.isExercising = 'start';
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;
@@ -132,7 +132,7 @@ export const consultSlice = createSlice({
         state.isHost = false;
         state.myResult = [];
         state.allResult = [];
-        state.isExercising = undefined;
+        state.isExercising = 'start';
       })
       .addCase(outUser.fulfilled, (state, action) => {
         state.consultDetail = action.payload.data;

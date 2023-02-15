@@ -948,56 +948,60 @@
   width: 100vw;
   justify-content: space-between;
 
-  .guest-stream {
-    position: absolute;
-    top: 0;
-    width: 50vw;
+  
+}
+
+
+.guest-stream {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 300px;
+  height: 300px;
+  // overflow: hidden;
+  // border: 3px solid yellow;
+  text-align: left;
+
+  .OT_widget-container {
+    width: 300px;
     height: 300px;
-    // overflow: hidden;
-    // border: 3px solid yellow;
-    text-align: left;
-  
+  }
 
-    #volumeButton {
-      bottom: 60px;
-      right: calc(50vw - 290px);
-    }
-  
-    video {
-      width: 300px;
-      object-fit: cover;
-    }
+  .select-button {
+    width: 200px;
+    height: 40px;
+  }
 
-    .select-button {
-      position: absolute;
-      top: 250px;
-      left: 100px;
-      display: inline-block;
-      width: 100px;
-      height: 35px;
-      border-radius: 10px;
-      border: none;
-      font-family: 'Jalnan';
-      font-size: 15px;
-      background-color: #f8fac0;
-    }
-    #volumeButton {
-      color: white;
-      background-color: white;
-      z-index: 999;
-    }
+
+  #volumeButton {
+    bottom: 60px;
+    right: calc(50vw - 290px);
+  }
+
+  video {
+    width: 300px;
+    object-fit: cover;
+  }
+
+  .select-button {
+    position: absolute;
+    top: 250px;
+    left: 100px;
+    display: inline-block;
+    width: 100px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Jalnan';
+    font-size: 15px;
+    background-color: #f8fac0;
+  }
+  #volumeButton {
+    color: white;
+    background-color: white;
+    z-index: 999;
   }
 }
-
-// 게스트인 내 화면
-.guest-stream {
-  position: fixed;
-  top: 100px;
-  left: 50px;
-  width: 400px;
-  height: 300px;
-}
-
 
 .color-div {
   position: absolute;
@@ -1038,18 +1042,5 @@
   &:active {
     background-color: #FFDF38;
     color: white;
-  }
-}
-
-.guest-stream {
-  position: absolute;
-  top: 450px;
-  left: 50px;
-  width: 300px;
-  height: 300px;
-
-  .OT_widget-container {
-    width: 300px;
-    height: 300px;
   }
 }

@@ -14,26 +14,27 @@ const GuestVideoComponent = ({
   isHost,
   nowIdx,
 }) => {
-  console.log('나는 게스트다!', user);
   const dispatch = useDispatch();
   const { isExercising, isFinished } = useSelector((state) => state.consulting);
   const admin = useSelector((state) => state.consulting.consultDetail.hostId);
 
-  const personalResults = useRef([]);
+  const resultUsers = useRef({
+    personalResults: [],
+  });
 
   const finishExercise = useCallback(() => {
-    console.log('진단 끝! 내 어쩌구저쩌구 :  ', personalResults);
-    dispatch(setMyExerciseResult(personalResults));
+    console.log('진단 끝! 내 어쩌구저쩌구 :  ', resultUsers);
+    dispatch(setMyExerciseResult(resultUsers.current.personalResults));
 
     user.getStreamManager().stream.session.signal({
-      data: JSON.stringify(personalResults),
+      data: JSON.stringify(resultUsers.current),
       type: 'finish',
       to: [admin],
     });
   });
 
   useEffect(() => {
-    if (isExercising === false) {
+    if (isExercising === 'done') {
       console.log('끝났엉 isExercising', isExercising);
       finishExercise();
     }
@@ -42,12 +43,8 @@ const GuestVideoComponent = ({
   return (
     <div className="guest-stream">
       <StreamComponent user={user} />
-      {isExercising && (
-        <GetScore
-          nowIdx={nowIdx}
-          user={user}
-          personalResults={personalResults}
-        />
+      {isExercising === 'consult' && (
+        <GetScore nowIdx={nowIdx} user={user} resultUsers={resultUsers} />
       )}
     </div>
   );
