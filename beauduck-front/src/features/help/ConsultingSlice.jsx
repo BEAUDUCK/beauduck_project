@@ -62,17 +62,14 @@ export const consultSlice = createSlice({
     userList: [],
     isActive: false,
     isHost: false,
-    // 검사
-    userCount: 0,
-    resultList: [],
-    secondResult: [],
-    nowIdx: 0,
-    nowCount: 0,
     // 집중s
     isExercising: 'start',
     isFinished: undefined,
     myResult: [],
     allResult: [],
+    // 결과
+    maxIdx: -1,
+
     // 뉴스 크롤링
     infoNews: [],
     infoBlog: [],
@@ -102,7 +99,6 @@ export const consultSlice = createSlice({
     setAllExerciseResult: (state, action) => {
       const results = action.payload;
       console.log('저장하러 왔어 results', results);
-      const newResult = [];
       for (let i = 0; i < results.length; i++) {
         console.log(
           i,
@@ -113,7 +109,45 @@ export const consultSlice = createSlice({
       }
       console.log('잘들어왔슴니다', state.allResult);
 
-      //콘솔 찍어보고 반복문 고민
+      // 여기서부터 결과 내는 알고리즘
+      const finalResult = state.allResult;
+      const userCount = finalResult.length;
+      const finalCount = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0,
+      ];
+      for (let i = 0; i < userCount; i++) {
+        for (let j = 0; j < finalResult[i].length; j++) {
+          finalCount[finalResult[i][j] - 1]++;
+        }
+      }
+      console.log(finalCount); // 50개 배열
+
+      const resultHalf = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      const resultCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+      finalCount.map((cnt, idx) => {
+        if (cnt >= Math.round(userCount / 2)) {
+          resultHalf[idx % 10]++;
+        }
+      });
+      console.log('resultHalf', resultHalf);
+      console.log(resultHalf);
+      const maxVal = Math.max(...resultHalf);
+      const maxCnt = resultHalf.filter((cnt) => cnt === maxVal).length;
+      if (maxCnt === 1) {
+        state.maxIdx = resultHalf.indexOf(maxVal);
+      } else {
+        // 과반으로 했을 때 퍼컬이 두개 이상
+        finalCount.map((cnt, idx) => {
+          resultCount[idx % 10] += cnt;
+        });
+        console.log('resultCount', resultCount);
+        const maxVal = Math.max(...resultCount);
+        state.maxIdx = resultCount.findIndex(maxVal);
+      }
+      console.log(state.maxIdx);
     },
   },
   extraReducers: (builder) => {

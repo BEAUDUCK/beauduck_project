@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import {
   setAllExerciseResult,
   setExerciseStatus,
@@ -20,6 +21,7 @@ const HostVideoComponent = ({
   isHost,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isExercising, isFinished } = useSelector((state) => state.consulting);
 
   const resultUsers = useRef({
@@ -72,8 +74,10 @@ const HostVideoComponent = ({
 
         dispatch(setAllExerciseResult(res.allResults));
         console.log('res.allResults', res.allResults);
-        // leaveSession();
-        // navigate('/result');
+        setTimeout(() => {
+          leaveSession();
+          navigate('/help/result');
+        }, 10000);
       }
     });
 
