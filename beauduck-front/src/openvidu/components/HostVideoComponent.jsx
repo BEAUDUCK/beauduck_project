@@ -46,10 +46,11 @@ const HostVideoComponent = ({
           // 모든 참여자의 정보를 수신하면 4초후 결과창 이동
           console.log('모든 참여자들의 결과 기록 수신 완료 ');
           console.log(resultUsers.current.allResults);
-          setTimeout(() => {
-            console.log('결과 전송 끝 !', isFinished);
-            dispatch(setFinishStatus(true));
-          }, 4000);
+          // setTimeout(() => {
+          dispatch(setAllExerciseResult(resultUsers.current.allResults));
+          dispatch(setFinishStatus(true));
+          console.log('결과 전송 끝 !', isFinished);
+          // }, 4000);
         }
 
         // setExercising(false);
@@ -83,15 +84,15 @@ const HostVideoComponent = ({
     });
   }, []);
 
-  useEffect(() => {
-    if (isFinished) {
-      user.getStreamManager().stream.session.signal({
-        data: JSON.stringify(resultUsers.current),
-        type: 'result',
-      });
-      console.log('전송 끝 ');
-    }
-  }, [isFinished]);
+  // useEffect(() => {
+  //   if (isFinished) {
+  //     user.getStreamManager().stream.session.signal({
+  //       data: JSON.stringify(resultUsers.current),
+  //       type: 'result',
+  //     });
+  //     console.log('전송 끝 ');
+  //   }
+  // }, [isFinished]);
 
   return (
     <div className="host-stream">
