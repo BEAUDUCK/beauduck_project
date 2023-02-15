@@ -13,11 +13,11 @@ export const UserLogin = createAsyncThunk(
     const res = await axios.get(
       `${global}naver/login?accessToken=${newAccessToken}`,
     );
-    if (res.data) {
-      state.loginRejected = false
-    } else {
-      state.loginRejected = true
-    }
+    // if (res.data) {
+    //   state.loginRejected = false
+    // } else {
+    //   state.loginRejected = true
+    // }
     return res.data;
   },
 );
