@@ -20,7 +20,7 @@ import TogetherSubscriberStreamComponent from './stream/TogetherSubscriberStream
 
 var localUser = new UserModel();
 // const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'localhost:5000/';
-const OPENVIDU_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'https://i8b306.p.ssafy.io:9000/'
+const OPENVIDU_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'https://beauduck.store:9000/'
 
 class TogetherRoomComponent extends Component {
     constructor(props) {
@@ -271,9 +271,9 @@ class TogetherRoomComponent extends Component {
 				// 		})
 				// }
 				const userData = {
-					"nickname": this.props.user,
-					"roomId": this.props.sessionName,
-					"userId": this.props.myId
+					nickname: this.props.user,
+					roomId: this.props.sessionName,
+					userId: this.props.myId
 				}
 				axios
 					.post("https://i8b306.p.ssafy.io:8084/together/out", userData)
@@ -621,18 +621,18 @@ class TogetherRoomComponent extends Component {
                             </div>
                         ))}
                     </div>
-                    <div className='left-div2' style={{ width: "25vw" }}>
+										<div className='right-div' style={{ width: "50vw", display: "flex", justifyContent: "center", alignItems: "center"}} >
+														{localUser !== undefined && localUser.getStreamManager() !== undefined && (
+															<TogetherLocalStreamComponent user={localUser}/>
+														)}
+                        </div>
+                    <div className='left-div2' style={{ width: "25vw", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                         {this.state.subscribers.slice(3, 6).map((sub, i) => (
                             <div key={i} style={{ width: "100%", display: "flex", justifyContent: "center", position: "relative" }}>
                                 <TogetherSubscriberStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
                             </div>
                         ))}
                     </div>
-										<div className='right-div' style={{ width: "50vw", display: "flex", justifyContent: "center", alignItems: "center"}} >
-														{localUser !== undefined && localUser.getStreamManager() !== undefined && (
-															<TogetherLocalStreamComponent user={localUser}/>
-														)}
-                        </div>
                     {/* 나 자신 화면*/}
                     {/* {localUser !== undefined && localUser.getStreamManager() !== undefined && (
                         <div className="host" style={{ position: "absolute", left: "28vw", top: "20vh", }}>
