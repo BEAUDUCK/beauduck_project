@@ -13,6 +13,8 @@ const GuestVideoComponent = ({
   leaveSession,
   isHost,
   nowIdx,
+  subIdx,
+  myStyle,
 }) => {
   const dispatch = useDispatch();
   const { isExercising, isFinished } = useSelector((state) => state.consulting);
@@ -41,7 +43,13 @@ const GuestVideoComponent = ({
   }, [isExercising]);
 
   return (
-    <div className="guest-stream">
+    <div
+      className={[
+        'guest-stream',
+        subIdx % 2 ? 'even-guest' : 'odd-guest',
+        `${myStyle}`,
+      ].join(' ')}
+    >
       <StreamComponent user={user} />
       {isExercising === 'consult' && (
         <GetScore nowIdx={nowIdx} user={user} resultUsers={resultUsers} />

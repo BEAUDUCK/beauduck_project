@@ -60,23 +60,35 @@ const AllComp = ({
           isHost={isHost}
         />
       ) : (
-        <GuestVideoComponent user={user} isHost={isHost} nowIdx={nowIdx} />
+        <GuestVideoComponent
+          user={user}
+          isHost={isHost}
+          nowIdx={nowIdx}
+          myStyle={'guest-mine'}
+        />
       )}
-      {subscribers.map((sub, i) =>
-        sub.nickname !== hostNickname ? (
-          <GuestVideoComponent user={sub} isHost={isHost} nowIdx={nowIdx} />
-        ) : (
-          <HostVideoComponent
-            user={sub}
-            sessionId={sessionId}
-            showNotification={showNotification}
-            camStatusChanged={camStatusChanged}
-            micStatusChanged={micStatusChanged}
-            leaveSession={leaveSession}
-            isHost={isHost}
-          />
-        ),
-      )}
+      <div className="other-guest">
+        {subscribers.map((sub, subIdx) =>
+          sub.nickname !== hostNickname ? (
+            <GuestVideoComponent
+              user={sub}
+              isHost={isHost}
+              nowIdx={nowIdx}
+              subIdx={subIdx}
+            />
+          ) : (
+            <HostVideoComponent
+              user={sub}
+              sessionId={sessionId}
+              showNotification={showNotification}
+              camStatusChanged={camStatusChanged}
+              micStatusChanged={micStatusChanged}
+              leaveSession={leaveSession}
+              isHost={isHost}
+            />
+          ),
+        )}
+      </div>
       {isExercising === 'consult' && <Timer changeIdx={changeIdx} />}
       {isExercising === 'consult' && <Photos nowIdx={nowIdx} />}
     </>
