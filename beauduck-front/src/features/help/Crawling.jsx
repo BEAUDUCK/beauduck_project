@@ -9,26 +9,27 @@ const Crawling = () => {
   const { infoNews, infoBlog, infoShop } = useSelector(
     (state) => state.consulting,
   );
-  const newsTitle = infoNews[0].title.replace('&apos;', '');
-  const blogTitle = infoBlog[0].title.replace('/', '').replace(/<b>/g, ' ');
 
-  const newsContent = infoNews[0].description
+  const newsTitle = infoNews[0]?.title.replace('&apos;', '');
+  const blogTitle = infoBlog[0]?.title.replace('/', '').replace(/<b>/g, ' ');
+
+  const newsContent = infoNews[0]?.description
     .replace('/', '')
     .replace(/<b>/g, ' ');
 
-  const blogContent = infoBlog[0].description
+  const blogContent = infoBlog[0]?.description
     .replace('/', '')
     .replace(/<b>/g, ' ');
 
   const goToNews = () => {
-    window.open(infoNews[0].link);
+    window.open(infoNews[0]?.link);
   };
   const goToBlog = () => {
-    window.open(infoBlog[0].link);
+    window.open(infoBlog[0]?.link);
   };
 
   const goToShop = (idx) => {
-    window.open(infoShop[idx].link);
+    window.open(infoShop[idx]?.link);
   };
 
   return (
@@ -70,7 +71,8 @@ const Crawling = () => {
       </div>
       <div className="shop-div">
         <h1>메이크업 제품</h1>
-        {infoShop.map((item, idx) => (
+
+        {infoShop?.map((item, idx) => (
           <div className="shop-item">
             <div>
               <img
