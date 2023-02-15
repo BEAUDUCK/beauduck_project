@@ -25,7 +25,7 @@ export const getMakeupDetail = createAsyncThunk(
 export const createNewMakeup = createAsyncThunk(
   'single/createNewMakeup',
   async (newProcess) => {
-    console.log(newProcess)
+    console.log(newProcess);
     const res = await client.post('/makeup/', newProcess);
     return res.data;
   },
@@ -158,7 +158,7 @@ export const singleSlice = createSlice({
         state.makeupList = action.payload;
       })
       .addCase(recommendMakeup.fulfilled, (state, action) => {
-        state.recommendList = action.payload;
+        state.recommendList = action.payload.answer;
       })
       .addCase(startMakeup.fulfilled, (state, action) => {
         state.nowMakeup = action.payload;

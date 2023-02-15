@@ -75,7 +75,8 @@
   }
 
   #help-banner {
-    width: 65vw;
+    width: 50vw;
+    margin-bottom: 200px;
   }
 
 }
@@ -111,6 +112,68 @@
     background-color: white;
     border-radius: 30px;
     box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+    .consult-nickname {
+      display: inline-block;
+      width: 120px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 30px;
+      background-color: rgb(204, 210, 240);
+      font-weight: 500;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin: 0;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 200px;
+      height: 45px;
+      border-radius: 10px;
+      border: none;
+      font-size: 22px;
+      font-weight: 600;
+      background-color: rgb(47, 165, 153);
+      color: white;
+      cursor: pointer;
+    }
+
+    div { 
+      width: 220px;
+      height: 220px;
+      margin: auto;
+      background-color: #F5DE5E;
+      border-radius: 200px;
+      text-align: center;
+      img {
+        margin-top: 20px;
+        width: 200px;
+        border-radius: 100px;
+      }  
+    }
+    .user-count {
+      position: absolute;
+      top: 90px;
+      left: calc(50% - 110px);
+      opacity: 0;
+      width: 220px;
+      height: 220px;
+      line-height: 220px;
+      border-radius: 200px;
+      background-color: rgba(255, 255, 255, 0.7);
+      font-size: 50px;
+      font-family: 'Jalnan';
+
+      &:hover {
+        opacity: 1;
+        transition: .5s ease-in-out;
+      }
+    }
   }
 }
 
@@ -120,6 +183,21 @@
   flex-wrap: wrap;
   // text-align: center;
   justify-content: start;
+  padding-top: 50px;
+
+  .logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  h1 {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    line-height: 500px;
+    vertical-align: middle;
+  
+  }
 
 
   .consulting-list-child {
@@ -286,7 +364,7 @@
 
     label {
       display: inline-block;
-      width: 50px;
+      width: 60px;
       text-align: center;
       margin-right: 20px;
     }
@@ -305,7 +383,7 @@
 
 // 대기창 모달
 .loading-modal {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -314,12 +392,17 @@
   z-index: 991;
 
   width: 500px;
-  height: 600px;
+  height: 250px;
+  margin-bottom: 100px;
+  
   text-align: center;
   border: 2px solid rgb(220, 220, 220);
   border-radius: 10px;
   box-shadow: 0px 0px 5px 0px #bdbdbd;
 
+  .guest-bigbtn {
+    margin-top: 0;
+  }
 
   .loading-bigbtn {
     width: 180px;
@@ -335,9 +418,20 @@
     font-size: xx-large;
     text-shadow: 1px 1px #bdbdbd;
 
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 10px;
 
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 1px rgb(224, 224, 224);
+    }
+  }
+  .back-icon {
+    color: rgb(85, 85, 85);
+    width: 30px;
+    font-size: 20px;
     cursor: pointer;
   }
 
@@ -346,53 +440,10 @@
     width: 400px;
     height: 35px;
     line-height: 35px;
-    margin-bottom: 0;
-  }
-
-  .loading-h3 {
-    background-color: #FFE27C;
-  }
-
-  .loading-list {
-    width: 394px;
-    height: 300px;
-    border: 3px solid #FFE27C;
-    margin: auto;
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-    .each-user {
-      width: 350px;
-      margin: auto;
-
-      .username {
-        display: inline-block;
-        width: 200px;
-      }
-      .onoff {
-        display: inline-block;
-        line-height: 25px;
-        width: 50px;
-        height: 25px;
-        background-color: #D3D3D3;
-        border-radius: 30px;
-        box-shadow: 1px 1px rgb(187, 187, 187);
-
-        color: white;
-        font-weight: 600;
-        text-shadow: 1px 1px gray;
-      }
-      .on-btn {
-        background-color: #FFC368;
-      }
-    }
-  }
-
-  .back-icon {
-    margin: auto;
-    color:rgb(117, 117, 117);
-    font-size: 25px;
-    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: 'Jalnan';
+    font-size: 22px;
   }
 }
 
@@ -404,18 +455,18 @@
     margin-top: 0;
   }
 
-  .battery{
-    display: block;
-    margin: auto;
-    font-size: 60px;
-  }
+  // .battery{
+  //   display: block;
+  //   margin: auto;
+  //   font-size: 60px;
+  // }
 
-  .full {
-    color: #02BC7D;
-  }
-  .less {
-    color: #FC5C65;
-  }
+  // .full {
+  //   color: #02BC7D;
+  // }
+  // .less {
+  //   color: #FC5C65;
+  // }
 
   p {
     margin-top: 10px;
@@ -428,7 +479,7 @@
 .crawling-div {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 150vh;
   margin-top: 10vh;
   display: flex;
   flex-wrap: wrap;
@@ -460,25 +511,29 @@
       word-break: keep-all;
     }
 
-    .speech {
-      width: 290px;
-      height: 150px;
-      margin-top: 30px;
-      margin-left: 50px;
+    .content-div {
+      position: relative;
+      .speech {
+        width: 290px;
+        height: 150px;
+        margin-top: 30px;
+        margin-left: 50px;
+      }
+      p {
+        position: absolute;
+        top: 40px;
+        left: 80px;
+        line-height: 25px;
+        display: -webkit-box;
+        width: 200px;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+        font-size: 15px;
+      }
     }
 
-    p {
-      position: absolute;
-      top: 200px;
-      left: 80px;
-      line-height: 25px;
-      display: -webkit-box;
-      width: 200px;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 4;
-      overflow: hidden;
-      font-size: 15px;
-    }
+    
 
     #person2 {
       position: absolute;
@@ -509,22 +564,55 @@
     }
   }
   .shop-div {
-    width: 80%;
-    height: 300px;
+    width: 1100px;
+    height: 500px;
     text-align: center;
 
     h1 {
       font-family: 'CookieRun';
     }
 
-    .shop-img {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      margin-top: 30px;
-      margin-left: 50px;
-      border-radius: 20px;
-      box-shadow: 0 0 10px gainsboro;
+    .shop-item {
+      display: inline-block;
+      width: 200px;
+      height: 240px;
+      text-align: center;
+      vertical-align: middle;
+      margin-left: 10px;
+      margin-right: 10px;
+
+      div {
+        overflow: hidden;
+        margin: auto;
+        width: 160px;
+        height: 160px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px gainsboro;
+
+        .shop-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          cursor: pointer;
+          transform: scale(1.0);
+          transition: transform 0.5s;
+
+          &:hover {
+            transform: scale(1.2);
+            transition: transform 0.5s;
+          }
+        }
+      }
+
+
+      p {
+        display: inline-block;
+        width: 180px;
+        height: 30px;
+        font-size: 14px;
+        word-break: keep-all;
+        margin-top: 5px;
+      }
     }
   }
 
