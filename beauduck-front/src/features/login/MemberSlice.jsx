@@ -76,8 +76,10 @@ export const memberSlice = createSlice({
     checkLogin: (state, action) => {
       if (action.payload) {
         state.loginRejected = false
+        console.log("회원가입 된사람")
       } else {
         state.loginRejected = true
+        console.log("회원가입 안된사람")
       }
     }
   },
