@@ -26,7 +26,7 @@ const AllComp = ({
   useEffect(() => {
     // ⭐ 버튼 클릭시 signal : start
     user.getStreamManager().stream.session.on('signal:start', (event) => {
-      dispatch(setExerciseStatus(true));
+      dispatch(setExerciseStatus('consult'));
     });
   }, []);
   console.log('isExercising', isExercising);
@@ -43,7 +43,7 @@ const AllComp = ({
   useEffect(() => {
     if (nowIdx === 5) {
       console.log('인덱스 종료');
-      dispatch(setExerciseStatus(false));
+      dispatch(setExerciseStatus('done'));
     }
   }, [nowIdx]);
 
@@ -77,8 +77,8 @@ const AllComp = ({
           />
         ),
       )}
-      {isExercising && <Timer changeIdx={changeIdx} />}
-      {isExercising && <Photos nowIdx={nowIdx} />}
+      {isExercising === 'consult' && <Timer changeIdx={changeIdx} />}
+      {isExercising === 'consult' && <Photos nowIdx={nowIdx} />}
     </>
   );
 };

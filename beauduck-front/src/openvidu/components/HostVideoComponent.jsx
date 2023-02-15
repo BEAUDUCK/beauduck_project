@@ -19,11 +19,12 @@ const HostVideoComponent = ({
   leaveSession,
   isHost,
 }) => {
-  console.log('나는 호스트다!', user);
   const dispatch = useDispatch();
   const { isExercising, isFinished } = useSelector((state) => state.consulting);
 
-  const allResults = useRef([]);
+  const resultUsers = useRef({
+    allResults: [],
+  });
 
   let participantCount = undefined;
   let recivedCount = 0;
@@ -33,7 +34,7 @@ const HostVideoComponent = ({
       if (isHost) {
         const session = user.getStreamManager().stream.session;
         console.log('finish : event.data', event.data);
-        allResults.push(JSON.parse(event.data));
+        resultUsers.current.allResults.push(JSON.parse(event.data));
 
         if (!participantCount) {
           participantCount = session.streamManagers.length;
@@ -44,7 +45,7 @@ const HostVideoComponent = ({
         if (recivedCount === participantCount) {
           // 모든 참여자의 정보를 수신하면 4초후 결과창 이동
           console.log('모든 참여자들의 결과 기록 수신 완료 ');
-          console.log(allResults);
+          console.log(resultUsers.current.allResults);
           setTimeout(() => {
             console.log('결과 전송 끝 !', isFinished);
             dispatch(setFinishStatus(true));
@@ -77,7 +78,7 @@ const HostVideoComponent = ({
 
     user.getStreamManager().stream.session.on('signal:exit', (event) => {
       console.log('비정상종료 ', event.data);
-      dispatch(setExerciseStatus(false));
+      dispatch(setExerciseStatus('done'));
       leaveSession();
     });
   }, []);
@@ -85,7 +86,7 @@ const HostVideoComponent = ({
   useEffect(() => {
     if (isFinished) {
       user.getStreamManager().stream.session.signal({
-        data: JSON.stringify(allResults),
+        data: JSON.stringify(resultUsers.current),
         type: 'result',
       });
       console.log('전송 끝 ');
