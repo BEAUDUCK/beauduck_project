@@ -10,27 +10,28 @@ const GetScore = ({ nowIdx, resultUsers }) => {
   console.log('isClick', isClick);
   console.log('beforeIdx', beforeIdx);
   console.log('nowIdx', nowIdx);
+  const { memberId } = useSelector((state) => state.member);
 
   // 🦴 인덱스가 바뀌면 isClick을 false로 초기화
   useEffect(() => {
     if (didMount.current) {
       if (isClick) {
-        // resultUsers.current.personalResults.push(parseInt(1)); // 눌렀으면 1 추가
-        resultUsers.current.personalResults = [
-          ...resultUsers.current.personalResults,
-          parseInt(1),
-        ]; // 눌렀으면 1 추가
-      } else {
-        // resultUsers.current.personalResults.push(parseInt(0)); // 안 눌렀으면 0 추가
-        resultUsers.current.personalResults = [
-          ...resultUsers.current.personalResults,
-          parseInt(0),
-        ];
+        if (resultUsers.current.memberId === memberId) {
+          resultUsers.current.personalResults = [
+            ...resultUsers.current.personalResults,
+            parseInt(1),
+          ];
+        } else {
+          resultUsers.current.personalResults = [
+            ...resultUsers.current.personalResults,
+            parseInt(0),
+          ];
+        }
+        console.log(
+          'resultUsers.current.personalResults',
+          resultUsers.current.personalResults,
+        );
       }
-      console.log(
-        'resultUsers.current.personalResults',
-        resultUsers.current.personalResults,
-      );
       setIsClick(false);
     } else {
       didMount.current = true;
