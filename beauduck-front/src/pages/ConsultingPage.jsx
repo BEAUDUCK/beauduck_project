@@ -15,6 +15,10 @@ import banner from '../assets/help_banner.gif';
 import '../features/help/Help.style.scss';
 import Swal from 'sweetalert2';
 import { SimpleDialog } from '../features/login/LoginModal';
+import Button from '../components/button/Button';
+import megaphone from '../assets/megaphone.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Crawling from '../features/help/Crawling';
 
 const ConsultingPage = () => {
   const dispatch = useDispatch();
@@ -41,19 +45,30 @@ const ConsultingPage = () => {
     dispatch(loadingOut());
   };
   useEffect(() => {
-    const payload = {
-      keyword: 'personal color',
-    };
-
     dispatch(getConsultingList());
-    dispatch(getMakeupInfo(payload));
+    dispatch(getMakeupInfo());
   }, []);
 
   return (
     <>
       {/* <Banner bannerStyle={'help-ban'} /> */}
       <div className="banner-div">
-        <button onClick={isOpenModal}>컨설팅 받기</button>
+        <div className="consulting-make-div">
+          <div className="fake-border1"></div>
+          <div className="fake-border2"></div>
+          <h1>WHAT IS YOUR PERSONAL COLOR???</h1>
+          <p>아직도 내 퍼스널 컬러를 모르겠다면???</p>
+          <p>뷰덕에게 도움을 요청해덕!!</p>
+          <div>
+            <Button
+              text={'컬러 진단받기'}
+              onClickEvent={isOpenModal}
+              btnStyle={'color-btn'}
+            />
+            <FontAwesomeIcon icon="fa-solid fa-circle-chevron-right" />
+          </div>
+          <img src={megaphone} alt="" />
+        </div>
         <img src={banner} alt="" id="help-banner" />
       </div>
       {/* <h2 className="help-h2">도와주라덕</h2> */}
@@ -62,7 +77,7 @@ const ConsultingPage = () => {
       {isOpen && <BlackOut onClickEvent={isOpenModal} />}
       {isActive && <ConsultingModalLoadingHost />}
       {isActive && <BlackOut onClickEvent={loadingOff} />}
-      <div className="consulting-bottom"></div>
+      <Crawling />
     </>
   );
 };

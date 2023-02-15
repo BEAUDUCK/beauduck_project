@@ -45,18 +45,21 @@ export const outUser = createAsyncThunk('help/outUser', async (payload) => {
 });
 
 // 뉴스 크롤링
-export const getMakeupInfo = createAsyncThunk(
-  'help/getNews',
-  async (payload) => {
-    const res1 = await client.get('/naver/news', payload);
-    const res2 = await client.get('/naver/shop', payload);
-    const res3 = await client.get('/naver/blog', payload);
-    console.log(res1.data);
-    console.log(res2.data);
-    console.log(res3.data);
-    return [res1.data, res2.data, res3.data];
-  },
-);
+export const getMakeupInfo = createAsyncThunk('help/getNews', async () => {
+  const payload1 = {
+    keyword: 'personal color',
+  };
+  const payload2 = {
+    keyword: 'makeup',
+  };
+  const res1 = await client.get('/naver/news', payload1);
+  const res2 = await client.get('/naver/blog', payload1);
+  const res3 = await client.get('/naver/shop', payload2);
+  console.log(res1.data);
+  console.log(res2.data);
+  console.log(res3.data);
+  return [res1.data, res2.data, res3.data];
+});
 
 export const consultSlice = createSlice({
   name: 'consulting',
@@ -123,7 +126,7 @@ export const consultSlice = createSlice({
     },
     setMyExerciseResult: (state, action) => {
       console.log('여기는 액션입니다.', action.payload);
-      state.result.myResult = action.payload;
+      state.result.myResult = [...state.result.myResult, action.payload];
     },
     setAllExerciseResult: (state, action) => {
       state.result.allResult = action.payload;
