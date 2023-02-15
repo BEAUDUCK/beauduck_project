@@ -34,7 +34,6 @@ const NaverLogin = () => {
           },
         );
         dispatch(UserLogin(accessToken)).then(() => {
-          console.log('간다');
           if (loginRejected) {
             navigate('/signup');
           } else {
