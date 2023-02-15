@@ -251,7 +251,10 @@ class TogetherRoomComponent extends Component {
         if (mySession) {
             mySession.disconnect();
         }
-
+				
+				if (this.state.isHost) {
+					console.log("내가 호스트입니다.")
+				}
         // Empty all properties...
         // 모든 설정 초기화
         this.OV = null;
@@ -265,12 +268,20 @@ class TogetherRoomComponent extends Component {
         if (this.props.leaveSession) {
             this.props.leaveSession();
         }
+				// 추가한 부분
+				// if (this.state.isHost) {
+				// 	localUser.getStreamManager().stream.session.on("signal: finish", (event) => {
+				// 		const session = localUser.getStreamManager().stream.session;
+				// 		session.disconnect()
+				// 	})
+				// }
 				
 				const outUserData = {
 					nickname: this.props.user,
 					roomId: this.props.sessionName,
 					userId: this.props.myId
 				}
+
 				axios
 					.post("https://i8b306.p.ssafy.io:8084/together/out", outUserData)
 					.then((res) => {
@@ -614,19 +625,31 @@ class TogetherRoomComponent extends Component {
                     <div className='left-div1' style={{ width: "25vw", display: "flex", flexDirection: "column" , justifyContent: "space-evenly", alignItems: "center" }}>
                         {this.state.subscribers.slice(0, 3).map((sub, i) => (
                             <div key={i} style={{ width: "100%", display: "flex", justifyContent: "center", position: "relative" }}>
-                                <TogetherSubscriberStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                                <TogetherSubscriberStreamComponent 
+																	user={sub} 
+																	streamId={sub.streamManager.stream.streamId}
+																	leaveSession={this.leaveSession}
+																/>
                             </div>
                         ))}
                     </div>
 										<div className='right-div' style={{ width: "50vw", display: "flex", justifyContent: "center", alignItems: "center"}} >
 														{localUser !== undefined && localUser.getStreamManager() !== undefined && (
-															<TogetherLocalStreamComponent user={localUser} />
+															<TogetherLocalStreamComponent 
+																user={localUser}
+																isHost={this.state.isHost}
+																leaveSession={this.leaveSession} 
+															/>
 														)}
                         </div>
                     <div className='left-div2' style={{ width: "25vw", display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
                         {this.state.subscribers.slice(3, 6).map((sub, i) => (
                             <div key={i} style={{ width: "100%", display: "flex", justifyContent: "center", position: "relative" }}>
-                                <TogetherSubscriberStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
+                                <TogetherSubscriberStreamComponent 
+																	user={sub} 
+																	streamId={sub.streamManager.stream.streamId}
+																	leaveSession={this.leaveSession}
+																/>
                             </div>
                         ))}
                     </div>

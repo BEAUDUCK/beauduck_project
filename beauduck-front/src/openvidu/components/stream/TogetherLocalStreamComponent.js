@@ -1,5 +1,7 @@
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { changeIsActive } from '../../../features/together/TogetherSlice';
 import './StreamComponent.css';
 import TogetherLocalOvVideoComponent from './TogetherLocalOvVideo';
 
@@ -26,11 +28,18 @@ const TogetherLocalStreamComponent = (props) => {
 	"#90E5D8","#5AC9E5","#F4CFFB","#F15D57","#B4BAD2","#006A8A","#535617","#546E6C","#5B2D41","#0000FE"]
 
 	const myColor = _.sample(color)
+	const { isHost, leaveSession } = props
+	const dispatch = useDispatch()
 
 	console.log(props)
-	// const toggleSound = () => {
-	// 	setMutedSound(!mutedSound)
-	// }
+	// 추가한 부분
+	useEffect(() => {
+		if (leaveSession) {
+			if (isHost) {
+				dispatch(changeIsActive())
+			}
+		}
+	}, [])
 
 	console.log(nickname)
 	return (
