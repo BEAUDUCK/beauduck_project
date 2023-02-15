@@ -16,6 +16,7 @@ import BlackOut from '../../components/blackout/BlackOut';
 import TogetherRoomPage from '../../pages/TogetherRoomPage';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { getTogetherDetail } from './TogetherSlice';
 
 
 const TogetherListItem = ({ togetherItem }) => {
@@ -64,11 +65,24 @@ const TogetherListItem = ({ togetherItem }) => {
       )
     }
     setIsOpen(!isOpen)
+
+    if (togetherItem.userList.length > 7) {
+      Swal.fire(
+        "인원이 꽉찼습니다.",
+        "",
+        "error"
+      )
+      return
+    }
   }
 
   const goTogether = () => {
     navigate("/together/room", { state: togetherItem })
   }
+
+  useEffect(() => {
+    dispatch(getTogetherDetail(togetherItem.roomId))
+  }, [togetherItem])
 
 
   return (

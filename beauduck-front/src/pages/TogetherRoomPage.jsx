@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TogetherRoomComponent from "../openvidu/components/TogetherRoomComponent";
-import getTogetherDetail from "../features/together/TogetherSlice"
+import getTogetherDetail, { enterUser } from "../features/together/TogetherSlice"
 import { useLocation, useNavigate } from "react-router-dom";
 
 const TogetherRoomPage = ({ roomId, host }) => {
@@ -23,18 +23,25 @@ const TogetherRoomPage = ({ roomId, host }) => {
   const [isHost, setIsHost] = useState(myNickname === state.hostNickname)
   const navigate = useNavigate()
   console.log(state)
+  useEffect(() => {
+    const newUser = {
+      nickname: myNickname,
+      roomId: state.roomId,
+      userId: myId
+    }
+    dispatch(enterUser(newUser))
+  }, [])
 
-  console.log(isHost)
   return (
     <div style={{ position: "fixed", zIndex: "999" ,width: "100vw", height: "100vh", backgroundColor: "#FFF8BC" }}>
-      {/* <TogetherRoomComponent 
+      <TogetherRoomComponent 
         sessionName={state.roomId}
         hostNickname={state.hostNickname}
         user={myNickname}
         isHost={isHost}
         navigate={navigate}
         myId={myId}
-      /> */}
+      />
     </div>
   );
 };

@@ -9,6 +9,7 @@ import logo from '../assets/logo_original.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router';
 import loginImg from '../assets/login.png';
+import Swal from 'sweetalert2';
 
 const SignupPage = () => {
   const dispatch = useDispatch();
@@ -83,6 +84,11 @@ const SignupPage = () => {
     // formData.append('data', JSON.stringify(signupRequestDto));
     // console.log(formData.get('img'));
     // console.log(formData);
+    Swal.fire(
+      "회원가입이 완료되었습니다!",
+      "",
+      "success"
+    )
     dispatch(signUp(payload)).then(() => navigate('/'));
   };
 
