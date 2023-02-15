@@ -37,6 +37,7 @@ const SingleModalRecommend = ({ popRecommend }) => {
           <>
             {recommendList?.map((item) => (
               <SwiperSlide>
+                {/* 02.15 현혁 이부분 key 추가해야함 */}
                 <div className="recommended-makeup-div">
                   <img src={item?.img} alt="img" />
                   <p>{item?.title}</p>

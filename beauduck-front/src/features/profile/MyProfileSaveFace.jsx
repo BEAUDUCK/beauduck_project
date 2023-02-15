@@ -15,7 +15,6 @@ const MyProfileSaveFace = () => {
   console.log(isOpen);
 
   const downloadCapture = () => {
-    setIsOpen(!isOpen);
     const imgDiv = document.querySelector('#main_capture');
     const transform = imgDiv.style.transform;
     imgDiv.style.setProperty('transform', 'none');
@@ -33,6 +32,8 @@ const MyProfileSaveFace = () => {
         img: imgUri,
       };
       dispatch(postSaveFace(payload));
+
+      // setIsOpen(!isOpen);
     });
   };
 
