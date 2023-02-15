@@ -34,8 +34,8 @@ const GuestVideoComponent = ({
           type: 'finish',
           to: [admin],
         });
+        dispatch(setMyExerciseResult(resultUsers.current.personalResults));
       }
-      dispatch(setMyExerciseResult(resultUsers.current.personalResults));
     }
     return;
   });
