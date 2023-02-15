@@ -111,7 +111,7 @@ const UserVideoComponent = ({
           console.log('모든 참여자들의 결과 기록 수신 완료 ');
           console.log(resultUsers.current);
           setTimeout(() => {
-            console.log('결과 전송 끝 !');
+            console.log('결과 전송 끝 !', isFinished);
             setFinished(true);
           }, 4000);
         }

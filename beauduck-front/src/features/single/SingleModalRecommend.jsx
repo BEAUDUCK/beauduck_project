@@ -7,6 +7,8 @@ import 'swiper/css/scrollbar';
 import { FontAwesomeIcon } from '../../../node_modules/@fortawesome/react-fontawesome/index';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import Button from '../../components/button/Button';
+import logo from '../../assets/logo_original.png';
 
 const SingleModalRecommend = ({ popRecommend }) => {
   const navigate = useNavigate();
@@ -44,17 +46,25 @@ const SingleModalRecommend = ({ popRecommend }) => {
           </>
         </Swiper>
       ) : (
-        <>
-          <p>메이크업 추천에 사용될 사진이 없습니다.</p>
-          <button onClick={() => navigate('/profile')}>찍으러 가기</button>
-        </>
+        <div className="no-recommend-div">
+          <img src={logo} alt="" />
+          <p>메이크업 추천에 사용될 사진이 없덕!!</p>
+          <Button
+            text={'찍으러 가기'}
+            onClickEvent={() => navigate('/profile')}
+          />
+        </div>
       )}
       {recommendList === 'error' ? (
-        <>
+        <div className="no-recommend-div">
+          <img src={logo} alt="" />
           <p>얼굴 사진이 정확하지 않아 인식할 수 없습니다</p>
           <p>가이드를 준수하여 재촬영하십시오.</p>
-          <button onClick={() => navigate('/profile')}>찍으러 가기</button>
-        </>
+          <Button
+            text={'찍으러 가기'}
+            onClickEvent={() => navigate('/profile')}
+          />
+        </div>
       ) : (
         <></>
       )}

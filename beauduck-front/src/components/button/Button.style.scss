@@ -13,18 +13,22 @@
     font-size: 15px;
 
     cursor: pointer;
+
+    border: 2px solid #FFF5D1;
+    box-shadow: 3px 3px 0px 0px #FFF5D1;
+    color: #ffd952;
+
+    // &:active {
+    //     background-color: #FFF5D1;
+    //     color: white;
+    // }
 }
 
 .board-btn {
     border: 2px solid #FFDF38;
     box-shadow: 3px 3px 0px 0px #FFDF38;
     color: #FFDF38;
-    width: 130px;
-
-    &:hover {
-        background-color: #fdefa7;
-        color: white;
-    }
+    width: 100px;
 }
 
 .single-create-btn {

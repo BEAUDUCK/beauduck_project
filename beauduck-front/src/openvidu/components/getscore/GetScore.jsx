@@ -15,9 +15,17 @@ const GetScore = ({ nowIdx, resultUsers }) => {
   useEffect(() => {
     if (didMount.current) {
       if (isClick) {
-        resultUsers.current.personalResults.push(parseInt(1)); // 눌렀으면 1 추가
+        // resultUsers.current.personalResults.push(parseInt(1)); // 눌렀으면 1 추가
+        resultUsers.current.personalResults = [
+          ...resultUsers.current.personalResults,
+          parseInt(1),
+        ]; // 눌렀으면 1 추가
       } else {
-        resultUsers.current.personalResults.push(parseInt(0)); // 안 눌렀으면 0 추가
+        // resultUsers.current.personalResults.push(parseInt(0)); // 안 눌렀으면 0 추가
+        resultUsers.current.personalResults = [
+          ...resultUsers.current.personalResults,
+          parseInt(0),
+        ];
       }
       console.log(
         'resultUsers.current.personalResults',

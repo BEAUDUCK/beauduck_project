@@ -15,8 +15,9 @@ export const getConsultingList = createAsyncThunk(
 export const postNewConsulting = createAsyncThunk(
   'help/newConsulting',
   async (newConsulting) => {
-    const res = await client.post('/consult/', newConsulting);
-    return res.data.data;
+    const res1 = await client.post('/consult/', newConsulting);
+    const res2 = await client.get('/consult/');
+    return [res1.data.data, res2.data.data];
   },
 );
 
@@ -46,15 +47,9 @@ export const outUser = createAsyncThunk('help/outUser', async (payload) => {
 
 // 뉴스 크롤링
 export const getMakeupInfo = createAsyncThunk('help/getNews', async () => {
-  const payload1 = {
-    keyword: 'personal color',
-  };
-  const payload2 = {
-    keyword: 'makeup',
-  };
-  const res1 = await client.get('/naver/news', payload1);
-  const res2 = await client.get('/naver/blog', payload1);
-  const res3 = await client.get('/naver/shop', payload2);
+  const res1 = await client.get('/naver/news');
+  const res2 = await client.get('/naver/blog');
+  const res3 = await client.get('/naver/shop/?keyword=makeup');
   console.log(res1.data);
   console.log(res2.data);
   console.log(res3.data);
@@ -126,7 +121,8 @@ export const consultSlice = createSlice({
     },
     setMyExerciseResult: (state, action) => {
       console.log('여기는 액션입니다.', action.payload);
-      state.result.myResult = [...state.result.myResult, action.payload];
+      state.result.myResult = [...state.result.myResult, ...action.payload];
+      console.log('저장해쒀', state.result.myResult);
     },
     setAllExerciseResult: (state, action) => {
       state.result.allResult = action.payload;
@@ -140,7 +136,8 @@ export const consultSlice = createSlice({
         state.consultingList = action.payload;
       })
       .addCase(postNewConsulting.fulfilled, (state, action) => {
-        state.roomId = action.payload.roomId;
+        state.roomId = action.payload[0].roomId;
+        state.consultingList = action.payload[1];
         state.isActive = true;
         state.isHost = true;
       })
@@ -159,9 +156,9 @@ export const consultSlice = createSlice({
         state.userList = action.payload.data.userList;
       })
       .addCase(getMakeupInfo.fulfilled, (state, action) => {
-        state.infoNews = action.payload[0];
-        state.infoBlog = action.payload[1];
-        state.infoShop = action.payload[2];
+        state.infoNews = action.payload[0].items;
+        state.infoBlog = action.payload[1].items;
+        state.infoShop = action.payload[2].items;
       });
   },
 });
