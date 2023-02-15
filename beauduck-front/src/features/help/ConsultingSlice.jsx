@@ -135,9 +135,11 @@ export const consultSlice = createSlice({
       console.log('resultHalf', resultHalf);
       console.log(resultHalf);
       const maxVal = Math.max(...resultHalf);
+      console.log('첫번째 maxVal', maxVal);
       const maxCnt = resultHalf.filter((cnt) => cnt === maxVal).length;
       if (maxCnt === 1) {
         state.maxIdx = resultHalf.indexOf(maxVal);
+        console.log('완료', state.maxIdx);
       } else {
         // 과반으로 했을 때 퍼컬이 두개 이상
         finalCount.map((cnt, idx) => {
@@ -146,9 +148,9 @@ export const consultSlice = createSlice({
         console.log('resultCount', resultCount);
         const maxVal = Math.max(...resultCount);
         console.log('두번째 maxVal', maxVal);
-        state.maxIdx = resultCount.findIndex(parseInt(maxVal));
+        state.maxIdx = resultCount.indexOf(maxVal);
+        console.log('여기서 완료', state.maxIdx);
       }
-      console.log(state.maxIdx);
     },
   },
   extraReducers: (builder) => {

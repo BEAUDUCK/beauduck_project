@@ -62,6 +62,7 @@ const AllComp = ({
       ) : (
         <GuestVideoComponent
           user={user}
+          leaveSession={leaveSession}
           isHost={isHost}
           nowIdx={nowIdx}
           myStyle={'guest-mine'}
@@ -72,6 +73,7 @@ const AllComp = ({
           sub.nickname !== hostNickname ? (
             <GuestVideoComponent
               user={sub}
+              leaveSession={leaveSession}
               isHost={isHost}
               nowIdx={nowIdx}
               subIdx={subIdx}
