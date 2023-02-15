@@ -623,7 +623,7 @@ class TogetherRoomComponent extends Component {
 															<TogetherLocalStreamComponent user={localUser} />
 														)}
                         </div>
-                    <div className='left-div2' style={{ width: "25vw", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                    <div className='left-div2' style={{ width: "25vw", display: "flex", flexDirection: "column", justifyContent: "space-evenly" }}>
                         {this.state.subscribers.slice(3, 6).map((sub, i) => (
                             <div key={i} style={{ width: "100%", display: "flex", justifyContent: "center", position: "relative" }}>
                                 <TogetherSubscriberStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
