@@ -21,7 +21,9 @@ import AllComp from './AllComp';
 var localUser = new UserModel();
 // const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'localhost:5000/';
 const OPENVIDU_SERVER_URL =
-  process.env.NODE_ENV === 'production' ? '' : 'https://beauduck.store:9000/';
+  process.env.NODE_ENV === 'production'
+    ? ''
+    : 'https://i8b306.p.ssafy.io:9000/';
 
 // 비디오 전체를 담당하는 컴포넌트
 class VideoRoomComponent extends Component {
