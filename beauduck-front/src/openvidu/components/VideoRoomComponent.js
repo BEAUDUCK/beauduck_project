@@ -16,6 +16,7 @@ import GetScore from './getscore/GetScore';
 import { div } from '@tensorflow/tfjs';
 import UserVideoComponent from './UserVideoComponent';
 import HostVideoComponent from './HostVideoComponent';
+import AllComp from './AllComp';
 
 var localUser = new UserModel();
 // const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'localhost:5000/';
@@ -654,8 +655,20 @@ class VideoRoomComponent extends Component {
     return (
       <>
         {this.state.localUser !== undefined && (
-          <>
-            {this.state.myUserName === this.state.hostNickname ? (
+          <AllComp
+            myUserName={this.state.myUserName}
+            hostNickname={this.state.hostNickname}
+            user={localUser}
+            sessionId={mySessionId}
+            showNotification={this.handleChangeResult}
+            camStatusChanged={this.camStatusChanged}
+            micStatusChanged={this.micStatusChanged}
+            leaveSession={this.leaveSession}
+            isHost={this.state.isHost}
+            subscribers={this.state.subscribers}
+          />
+        )}
+        {/* {this.state.myUserName === this.state.hostNickname ? (
               <UserVideoComponent
                 hostNickname={this.state.hostNickname}
                 user={localUser}
@@ -722,9 +735,9 @@ class VideoRoomComponent extends Component {
                 ),
               )}
             </div>
-          )}
+          )} */}
 
-          {/* {localUser !== undefined &&
+        {/* {localUser !== undefined &&
             localUser.getStreamManager() !== undefined && (
               <div
               className="host"
@@ -752,7 +765,7 @@ class VideoRoomComponent extends Component {
                   />{' '}
                   </div>
                 )} */}
-          {/* <div className="right-div" style={{ width: '20%', height: '100%' }}>
+        {/* <div className="right-div" style={{ width: '20%', height: '100%' }}>
             {this.state.subscribers.slice(5, 10).map((sub, i) => (
               <div
               key={i}
@@ -770,7 +783,7 @@ class VideoRoomComponent extends Component {
               </div>
               ))}
             </div> */}
-        </div>
+        {/* </div> */}
         {/* {this.props.user === this.props.host ? (
           ) : (
             <div style={{ width: "100%", height: "100vh", display: "flex", justifyContent: "space-evenly" }}>
