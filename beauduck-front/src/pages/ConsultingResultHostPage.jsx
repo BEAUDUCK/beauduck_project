@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import './InfoPage.style.scss';
 import result1 from '../assets/consultresult/springlight.png';
 import result2 from '../assets/consultresult/springbright.png';
 import result3 from '../assets/consultresult/summerlight.png';
@@ -32,7 +33,7 @@ const ConsultingResultHostPage = () => {
     <>
       <div className="container">
         <h1>컨설팅 결과</h1>
-        <img src={resultList[maxIdx]} alt="" />
+        <img src={resultList[maxIdx]} alt="" className="personal-detail" />
       </div>
     </>
   );
