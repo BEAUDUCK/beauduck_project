@@ -15,6 +15,18 @@
     cursor: pointer;
 }
 
+.board-btn {
+    border: 2px solid #FFDF38;
+    box-shadow: 3px 3px 0px 0px #FFDF38;
+    color: #FFDF38;
+    width: 130px;
+
+    &:hover {
+        background-color: #fdefa7;
+        color: white;
+    }
+}
+
 .single-create-btn {
     border: 2px solid #23C4B1;
     box-shadow: 3px 3px 0px 0px #23C4B1;
@@ -48,6 +60,24 @@
     border: 2px solid #DD4470;
     box-shadow: 3px 3px 0px 0px #DD4470;
     color: #DD4470;
+}
+
+.color-btn {
+    border: 2px solid #ff86a9;
+    box-shadow: 3px 3px 0px 0px #ff86a9;
+    color: #ff86a9;
+    margin-top: 50px;
+    margin-left: 30px;
+    width: 190px;
+}
+
+.href-btn {
+    border: 2px solid rgb(35, 196, 177);
+    box-shadow: 3px 3px 0px 0px rgb(35, 196, 177);
+    color: rgb(35, 196, 177);
+    height: 40px;
+    width: 220px;
+    font-size: 16px;
 }
 
 .tab-btn {
