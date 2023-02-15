@@ -69,7 +69,8 @@ export const consultSlice = createSlice({
     nowIdx: 0,
     nowCount: 0,
     // 집중s
-    isExercising: false,
+    isExercising: 'start',
+    isFinished: undefined,
     myResult: [],
     allResult: [],
     // 뉴스 크롤링
@@ -85,34 +86,12 @@ export const consultSlice = createSlice({
     loadingOut: (state, action) => {
       state.isActive = false;
     },
-    // 과반체크
-    setScoreFirst: (state, action) => {
-      const idx = action.payload;
-      const stageIdx = idx % 10;
-      console.log('idx :', idx);
-      if (idx === state.nowIdx) {
-        state.nowCount += 1;
-        console.log('state의 nowCount :', state.nowCount);
-        if (state.nowCount >= state.userCount) {
-          console.log(
-            'state.resultList[idx % 10] :',
-            state.resultList[stageIdx],
-          );
-          state.resultList[stageIdx] += 1;
-        }
-      } else {
-        state.nowCount = 1;
-        state.nowIdx = idx;
-      }
-      console.log('첫번째 결과 리스트', state.resultList);
-    },
-    // 카운트 전부 체크
-    setScoreSecond: (state, action) => {
-      state.secondResult = [...state.secondResult, ...action.payload];
-    },
     // 집중 참고
     setExerciseStatus: (state, action) => {
       state.isExercising = action.payload;
+    },
+    setFinishStatus: (state, action) => {
+      state.isFinished = action.payload;
     },
     setMyExerciseResult: (state, action) => {
       const beforeResult = [...state.myResult];
@@ -122,6 +101,7 @@ export const consultSlice = createSlice({
     },
     setAllExerciseResult: (state, action) => {
       console.log('제발 action.payload', action.payload);
+      state.allResult = action.payload[0].personalResults;
       state.allResult = action.payload[0].personalResults;
       console.log('잘들어왔슴니다', state.allResult);
 
@@ -140,6 +120,7 @@ export const consultSlice = createSlice({
         state.isHost = true;
         state.myResult = [];
         state.allResult = [];
+        state.isExercising = 'start';
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;
@@ -151,6 +132,7 @@ export const consultSlice = createSlice({
         state.isHost = false;
         state.myResult = [];
         state.allResult = [];
+        state.isExercising = 'start';
       })
       .addCase(outUser.fulfilled, (state, action) => {
         state.consultDetail = action.payload.data;
@@ -168,9 +150,8 @@ export default consultSlice.reducer;
 export const {
   checkIsHost,
   loadingOut,
-  setScoreFirst,
-  setScoreSecond,
   setExerciseStatus,
+  setFinishStatus,
   setMyExerciseResult,
   setAllExerciseResult,
 } = consultSlice.actions;
