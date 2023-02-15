@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const Timer = ({ changeIdx }) => {
   const didMount = useRef(false);
-  const [second, setSecond] = useState(4);
+  const [second, setSecond] = useState(3);
 
   useEffect(() => {
     // if (didMount.current) {
@@ -13,7 +13,7 @@ const Timer = ({ changeIdx }) => {
       } else if (parseInt(second) === 0) {
         changeIdx();
         clearInterval(countdown);
-        setSecond(4);
+        setSecond(3);
       }
     }, 1000);
     return () => clearInterval(countdown);

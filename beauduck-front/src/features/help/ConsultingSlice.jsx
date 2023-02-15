@@ -145,7 +145,8 @@ export const consultSlice = createSlice({
         });
         console.log('resultCount', resultCount);
         const maxVal = Math.max(...resultCount);
-        state.maxIdx = resultCount.findIndex(maxVal);
+        console.log('두번째 maxVal', maxVal);
+        state.maxIdx = resultCount.findIndex(parseInt(maxVal));
       }
       console.log(state.maxIdx);
     },
