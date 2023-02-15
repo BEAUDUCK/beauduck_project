@@ -48,11 +48,11 @@ public class NaverController {
     }
 
     @GetMapping("/shop")
-    public String shop() { // 메인 안쪽
+    public String shop(@PathVariable("keyword") String keyword) { // 메인 안쪽
         String clientId = "VWNZOvu3gslKfyEfwwJz"; //애플리케이션 클라이언트 아이디
         String clientSecret = "tenyS6xFcR"; //애플리케이션 클라이언트 시크릿
 
-        String text = "퍼스널컬러";
+        String text = keyword;
         try {
             text = URLEncoder.encode(text, "UTF-8");
         } catch (UnsupportedEncodingException e) {
