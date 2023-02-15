@@ -10,7 +10,6 @@ import {
   rejectedMakeup,
 } from '../features/single/SingleSlice';
 import SingleModalRecommend from '../features/single/SingleModalRecommend';
-import SingelModalNoRecommend from '../features/single/SingleModalNoRecommend';
 import SingleMake from '../features/single/SingleMake';
 import Alert from '../components/modal/Alert';
 import SinglePopular from '../features/single/SinglePopular';
@@ -37,15 +36,11 @@ const SinglePage = () => {
   const popRecommend = () => {
     if (!memberId) {
       Swal.fire(
-        "로그인이 필요한 서비스 입니다.",
-        "로그인 페이지로 이동합니다.",
-        "warning"
-      )
-      return (
-        <>
-          {/* 로그인 모달창 이동 */}
-        </>
-      )
+        '로그인이 필요한 서비스 입니다.',
+        '로그인 페이지로 이동합니다.',
+        'warning',
+      );
+      return <>{/* 로그인 모달창 이동 */}</>;
     }
 
     const payload = {
@@ -60,15 +55,11 @@ const SinglePage = () => {
   const onToggleMake = () => {
     if (!memberId) {
       Swal.fire(
-        "로그인이 필요한 서비스 입니다.",
-        "로그인 페이지로 이동합니다.",
-        "warning"
-      )
-      return (
-        <>
-          {/* 로그인 모달창 이동 */}
-        </>
-      )
+        '로그인이 필요한 서비스 입니다.',
+        '로그인 페이지로 이동합니다.',
+        'warning',
+      );
+      return <>{/* 로그인 모달창 이동 */}</>;
     }
     setIsMake(!isMake);
     dispatch(rejectedMakeup());
@@ -122,10 +113,7 @@ const SinglePage = () => {
           {/* 추천 받을 수 있는지 없는지 */}
           {isRecommend && <SingleModalRecommend popRecommend={popRecommend} />}
           {isRecommend && <BlackOut onClickEvent={popRecommend} />}
-          {/* <SingelModalNoRecommend /> */}
 
-          {/* <h2 className="single-h2">인기 메이크업</h2>
-      <hr className="single-hr" /> */}
           {isMake && (
             <SingleMake
               onToggleMake={onToggleMake}
