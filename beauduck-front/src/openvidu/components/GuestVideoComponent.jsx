@@ -19,18 +19,22 @@ const GuestVideoComponent = ({
   const dispatch = useDispatch();
   const { isExercising, isFinished } = useSelector((state) => state.consulting);
   const admin = useSelector((state) => state.consulting.consultDetail.hostId);
+  const { memberId } = useSelector((state) => state.member);
   const resultUsers = useRef({
+    memberId,
     personalResults: [],
   });
 
   const finishExercise = useCallback(() => {
     console.log('진단 끝! 내 어쩌구저쩌구 :  ', resultUsers);
-    user.getStreamManager().stream.session.signal({
-      data: JSON.stringify(resultUsers.current),
-      type: 'finish',
-      to: [admin],
-    });
-    dispatch(setMyExerciseResult(resultUsers.current.personalResults));
+    if (resultUsers.current.memberId === memberId) {
+      user.getStreamManager().stream.session.signal({
+        data: JSON.stringify(resultUsers.current),
+        type: 'finish',
+        to: [admin],
+      });
+      dispatch(setMyExerciseResult(resultUsers.current.personalResults));
+    }
     return;
   });
 
