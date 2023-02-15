@@ -15,8 +15,8 @@ const GetScore = ({ nowIdx, resultUsers }) => {
   // 🦴 인덱스가 바뀌면 isClick을 false로 초기화
   useEffect(() => {
     if (didMount.current) {
-      if (isClick) {
-        if (resultUsers.current.memberId === memberId) {
+      if (resultUsers.current.memberId === memberId) {
+        if (isClick) {
           resultUsers.current.personalResults = [
             ...resultUsers.current.personalResults,
             parseInt(1),
@@ -27,15 +27,15 @@ const GetScore = ({ nowIdx, resultUsers }) => {
             parseInt(0),
           ];
         }
-        console.log(
-          'resultUsers.current.personalResults',
-          resultUsers.current.personalResults,
-        );
       }
       setIsClick(false);
     } else {
       didMount.current = true;
     }
+    console.log(
+      'resultUsers.current.personalResults',
+      resultUsers.current.personalResults,
+    );
   }, [nowIdx]);
 
   // 버튼 클릭 이벤트
