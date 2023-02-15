@@ -98,7 +98,7 @@ const SignupPage = () => {
         <img src={loginImg} alt="" />
       </div>
       <div className="signup-right">
-        <img className="logo" src={logo} alt="" />
+        {/* <img className="logo" src={logo} alt="" /> */}
         <h1>회원가입</h1>
         <form onSubmit={submitSignup} className="signup-form">
           {/* <img
