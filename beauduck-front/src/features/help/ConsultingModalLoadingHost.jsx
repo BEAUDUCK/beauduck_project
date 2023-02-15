@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useMemo } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -5,23 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getConsultDetail, loadingOut } from './ConsultingSlice';
 
-const ConsultingModalLoadingHost = () => {
+const ConsultingModalLoadingHost = ({ loadingOff }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { roomId, consultDetail } = useSelector((state) => state.consulting);
   const { userList } = useSelector((state) => state.consulting);
-  console.log('roomIdㅐㅐ', roomId);
-  console.log('유저리스트', userList);
-
-  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     dispatch(getConsultDetail(roomId));
   }, []);
-
-  useEffect(() => {
-    setUsers(userList);
-  }, [userList]);
 
   // useEffect(() => {
   //   setInterval(() => {
@@ -36,6 +29,13 @@ const ConsultingModalLoadingHost = () => {
 
   return (
     <div className="loading-modal">
+      {/* 다만 방 삭제 로직을 넣어야 함 */}
+      <FontAwesomeIcon
+        className="back-icon"
+        icon="fa-solid fa-circle-chevron-left"
+        onClick={loadingOff}
+      />
+      <h3>시작하기</h3>
       <button
         type="button"
         className="loading-bigbtn"
@@ -45,17 +45,8 @@ const ConsultingModalLoadingHost = () => {
       >
         START
       </button>
-      <h3 className="loading-h3">대기 리스트</h3>
-      <p>{users.length}</p>
-      <div className="loading-list">
-        {users?.map((user) => (
-          <div className="each-user">
-            <span className="username">{user.nickname}</span>
-            <span className={['onoff', 'on-btn'].join(' ')}>ON</span>
-            <span className={['onoff', 'off-btn'].join(' ')}>OFF</span>
-          </div>
-        ))}
-      </div>
+      {/* <h3 className="loading-h3">대기 리스트</h3> */}
+      {/* <p>{userList.length}</p> */}
     </div>
   );
 };

@@ -383,7 +383,7 @@
 
 // 대기창 모달
 .loading-modal {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -392,12 +392,17 @@
   z-index: 991;
 
   width: 500px;
-  height: 600px;
+  height: 250px;
+  margin-bottom: 100px;
+  
   text-align: center;
   border: 2px solid rgb(220, 220, 220);
   border-radius: 10px;
   box-shadow: 0px 0px 5px 0px #bdbdbd;
 
+  .guest-bigbtn {
+    margin-top: 0;
+  }
 
   .loading-bigbtn {
     width: 180px;
@@ -413,9 +418,20 @@
     font-size: xx-large;
     text-shadow: 1px 1px #bdbdbd;
 
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 10px;
 
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 1px rgb(224, 224, 224);
+    }
+  }
+  .back-icon {
+    color: rgb(85, 85, 85);
+    width: 30px;
+    font-size: 20px;
     cursor: pointer;
   }
 
@@ -424,53 +440,10 @@
     width: 400px;
     height: 35px;
     line-height: 35px;
-    margin-bottom: 0;
-  }
-
-  .loading-h3 {
-    background-color: #FFE27C;
-  }
-
-  .loading-list {
-    width: 394px;
-    height: 300px;
-    border: 3px solid #FFE27C;
-    margin: auto;
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-    .each-user {
-      width: 350px;
-      margin: auto;
-
-      .username {
-        display: inline-block;
-        width: 200px;
-      }
-      .onoff {
-        display: inline-block;
-        line-height: 25px;
-        width: 50px;
-        height: 25px;
-        background-color: #D3D3D3;
-        border-radius: 30px;
-        box-shadow: 1px 1px rgb(187, 187, 187);
-
-        color: white;
-        font-weight: 600;
-        text-shadow: 1px 1px gray;
-      }
-      .on-btn {
-        background-color: #FFC368;
-      }
-    }
-  }
-
-  .back-icon {
-    margin: auto;
-    color:rgb(117, 117, 117);
-    font-size: 25px;
-    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: 'Jalnan';
+    font-size: 22px;
   }
 }
 
@@ -482,18 +455,18 @@
     margin-top: 0;
   }
 
-  .battery{
-    display: block;
-    margin: auto;
-    font-size: 60px;
-  }
+  // .battery{
+  //   display: block;
+  //   margin: auto;
+  //   font-size: 60px;
+  // }
 
-  .full {
-    color: #02BC7D;
-  }
-  .less {
-    color: #FC5C65;
-  }
+  // .full {
+  //   color: #02BC7D;
+  // }
+  // .less {
+  //   color: #FC5C65;
+  // }
 
   p {
     margin-top: 10px;

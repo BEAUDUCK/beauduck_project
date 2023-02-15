@@ -24,10 +24,15 @@ input, textarea, select {
   padding-right: 10px;
 }
 
+input, textarea {
+  font-size: 15px;
+}
+
 textarea { 
   padding-top: 10px;
   padding-bottom: 10px;
   resize: none;
+  word-break: keep-all;
 }
 
 h1 {

@@ -50,9 +50,6 @@ export const getMakeupInfo = createAsyncThunk('help/getNews', async () => {
   const res1 = await client.get('/naver/news');
   const res2 = await client.get('/naver/blog');
   const res3 = await client.get('/naver/shop/?keyword=makeup');
-  console.log(res1.data);
-  console.log(res2.data);
-  console.log(res3.data);
   return [res1.data, res2.data, res3.data];
 });
 
@@ -73,10 +70,8 @@ export const consultSlice = createSlice({
     nowCount: 0,
     // 집중s
     isExercising: false,
-    result: {
-      myResult: undefined,
-      allResult: undefined,
-    },
+    myResult: [],
+    allResult: [],
     // 뉴스 크롤링
     infoNews: [],
     infoBlog: [],
@@ -113,19 +108,22 @@ export const consultSlice = createSlice({
     },
     // 카운트 전부 체크
     setScoreSecond: (state, action) => {
-      state.secondResult.concat(action.payload);
+      state.secondResult = [...state.secondResult, ...action.payload];
     },
     // 집중 참고
     setExerciseStatus: (state, action) => {
       state.isExercising = action.payload;
     },
     setMyExerciseResult: (state, action) => {
-      console.log('여기는 액션입니다.', action.payload);
-      state.result.myResult = [...state.result.myResult, ...action.payload];
-      console.log('저장해쒀', state.result.myResult);
+      const beforeResult = [...state.myResult];
+      const newResult = [...action.payload];
+      state.myResult = beforeResult.concat(newResult);
+      console.log('저장해쒀', state.myResult);
     },
     setAllExerciseResult: (state, action) => {
-      state.result.allResult = action.payload;
+      console.log('제발 action.payload', action.payload);
+      state.allResult = action.payload[0].personalResults;
+      console.log('잘들어왔슴니다', state.allResult);
 
       //콘솔 찍어보고 반복문 고민
     },
@@ -140,6 +138,8 @@ export const consultSlice = createSlice({
         state.consultingList = action.payload[1];
         state.isActive = true;
         state.isHost = true;
+        state.myResult = [];
+        state.allResult = [];
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;
@@ -149,7 +149,8 @@ export const consultSlice = createSlice({
         state.consultDetail = action.payload.data;
         state.userList = action.payload.data.userList;
         state.isHost = false;
-        console.log('durl', state.userList);
+        state.myResult = [];
+        state.allResult = [];
       })
       .addCase(outUser.fulfilled, (state, action) => {
         state.consultDetail = action.payload.data;
