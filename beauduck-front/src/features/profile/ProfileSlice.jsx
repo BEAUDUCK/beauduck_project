@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import memberAxios from '../../api/memberAxios';
 
 // 회원 정보 조회 GET
@@ -76,7 +77,17 @@ export const postSaveFace = createAsyncThunk(
       'https://i8b306.p.ssafy.io:5000/save',
       payload,
     );
-    console.log('얼굴', res.data);
+    if (res.data.answer === "Try Again") {
+      Swal.fire(
+        "재촬영 해주시길 바랍니다.",
+        "",
+        "error"
+      )
+      return
+    } else {
+      console.log("성공")
+      console.log('얼굴', res.data);
+    }
     return res.data;
   },
 );
