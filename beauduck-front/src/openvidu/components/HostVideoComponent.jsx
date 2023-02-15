@@ -76,6 +76,7 @@ const HostVideoComponent = ({
         console.log('res.allResults', res.allResults);
         setTimeout(() => {
           leaveSession();
+          console.log('슝');
           navigate('/help/result');
         }, 10000);
       }
