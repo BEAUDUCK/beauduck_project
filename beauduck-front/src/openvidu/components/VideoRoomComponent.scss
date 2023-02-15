@@ -895,9 +895,9 @@
 
 // 호스트 화면
 .host-stream {
-  position: absolute;
+  position: fixed;
   top: 20px;
-  left: calc(50% - 370px);
+  left: calc(50% - 380px);
   width: 700px;
   height: 650px;
   overflow: hidden;
@@ -941,54 +941,24 @@
   }
 }
 
-// 다른 게스트들 화면
-.subscriber-div {
-  margin-top: 450px;
+.other-guest {
+  position: relative;
+  width: 100%;
   display: flex;
-  width: 100vw;
   justify-content: space-between;
-
-  
+  flex-wrap: wrap;
 }
 
-
-.guest-stream {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 300px;
-  height: 300px;
-  // overflow: hidden;
-  // border: 3px solid yellow;
-  text-align: left;
-
-  .OT_widget-container {
-    width: 300px;
-    height: 300px;
-  }
-
-  .select-button {
-    width: 200px;
-    height: 40px;
-  }
-
-
-  #volumeButton {
-    bottom: 60px;
-    right: calc(50vw - 290px);
-  }
-
-  video {
-    width: 300px;
-    object-fit: cover;
-  }
+.odd-guest {
+  justify-content: start;
+  margin-left: 5vw;
 
   .select-button {
     position: absolute;
-    top: 250px;
-    left: 100px;
+    top: 200px;
+    left: 40px;
     display: inline-block;
-    width: 100px;
+    width: 150px;
     height: 35px;
     border-radius: 10px;
     border: none;
@@ -996,17 +966,68 @@
     font-size: 15px;
     background-color: #f8fac0;
   }
-  #volumeButton {
-    color: white;
-    background-color: white;
-    z-index: 999;
+}
+.even-guest {
+  // margin-left: calc(50% - 220px);
+  justify-content: end;
+  margin-right: 5vw;
+
+  .select-button {
+    position: absolute;
+    top: 200px;
+    right: 40px;
+    display: inline-block;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Jalnan';
+    font-size: 15px;
+    background-color: #f8fac0;
   }
 }
 
+
+.guest-stream {
+  position: relative;
+  // display: inline-block;
+  display: flex;
+  width: 40%;
+  height: 220px;
+  // overflow: hidden;
+  // border: 3px solid yellow;
+  // text-align: left;
+
+  .OT_widget-container {
+    position: relative;
+    width: 240px;
+    height: 300px;
+
+  }
+
+  #volumeButton {
+    bottom: 130px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(248, 250, 192, 0.5);
+
+    svg {
+      font-size: 20px;
+    }
+  }
+
+  video {
+    width: 240px;
+    object-fit: cover;
+  }
+
+}
+
 .color-div {
-  position: absolute;
+  position: fixed;
   top: 70px;
-  left: calc(50% - 310px);
+  left: calc(50% - 320px);
   width: 700px;
   height: 525px;
 
@@ -1017,8 +1038,9 @@
 }
 .timer {
   position: absolute;
-  top: 550px;
-  left: 250px;
+  top: 100px;
+  left: calc(50% + 200px);
+  z-index: 999;
   width: 70px;
   height: 70px;
   border: 5px solid rgb(255, 224, 224);
@@ -1027,6 +1049,8 @@
   text-align: center;
   h1 {
     margin: 0;
+    font-size: 50px;
+    color: white;
   }
 }
 
@@ -1043,4 +1067,9 @@
     background-color: #FFDF38;
     color: white;
   }
+}
+
+.guest-mine {
+  position: fixed;
+  bottom: 70px;
 }
