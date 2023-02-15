@@ -33,7 +33,7 @@ const GuestVideoComponent = ({
   });
 
   useEffect(() => {
-    if (!isExercising) {
+    if (isExercising === false) {
       console.log('끝났엉 isExercising', isExercising);
       finishExercise();
     }
