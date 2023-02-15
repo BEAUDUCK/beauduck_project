@@ -30,7 +30,7 @@ def getEmps(memberId): #imgai 테이블에서 메이크업이 있는 멤버만 �
     sql = "select member_id, img from imgai where is_makeup=true or member_id =%s"
     curs.execute(sql,[memberId])
     rows = curs.fetchall()
-    for e in rows:
+    for e in rows: 
         ret.append({"member_id" : e[0], "img" : e[1]})
     db.commit()
     db.close()
