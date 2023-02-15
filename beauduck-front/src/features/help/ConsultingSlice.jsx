@@ -104,10 +104,13 @@ export const consultSlice = createSlice({
       console.log('저장하러 왔어 results', results);
       const newResult = [];
       for (let i = 0; i < results.length; i++) {
-        newResult.concat(results.personalResults);
+        console.log(
+          i,
+          'results[i].personalResults',
+          results[i].personalResults,
+        );
+        state.allResult.push(results[i].personalResults);
       }
-      console.log('newResult', newResult);
-      state.allResult = newResult;
       console.log('잘들어왔슴니다', state.allResult);
 
       //콘솔 찍어보고 반복문 고민
