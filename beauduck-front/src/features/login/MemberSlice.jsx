@@ -13,7 +13,11 @@ export const UserLogin = createAsyncThunk(
     const res = await axios.get(
       `${global}naver/login?accessToken=${newAccessToken}`,
     );
-    console.log('로그인', res);
+    // if (res.data) {
+    //   state.loginRejected = false
+    // } else {
+    //   state.loginRejected = true
+    // }
     return res.data;
   },
 );
@@ -74,16 +78,16 @@ export const memberSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(UserLogin.fulfilled, (state, action) => {
-        console.log('dsds', action);
-        state.loginRejected = false;
+        console.log("이미 회원가입 한 사람입니다.")
+        // state.loginRejected = false;
         state.memberId = action.payload.data.memberId;
         state.name = action.payload.data.name;
         state.nickName = action.payload.data.nickName;
       })
       .addCase(UserLogin.rejected, (state, action) => {
-        console.log('dldl');
+        console.log('회원가입 되지 않은 사람입니다.');
         console.log(action);
-        state.loginRejected = true;
+        // state.loginRejected = true;
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.memberId = action.payload.data.memberId;
