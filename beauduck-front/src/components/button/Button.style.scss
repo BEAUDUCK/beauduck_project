@@ -15,6 +15,18 @@
     cursor: pointer;
 }
 
+.board-btn {
+    border: 2px solid #FFDF38;
+    box-shadow: 3px 3px 0px 0px #FFDF38;
+    color: #FFDF38;
+    width: 130px;
+
+    &:hover {
+        background-color: #fdefa7;
+        color: white;
+    }
+}
+
 .single-create-btn {
     border: 2px solid #23C4B1;
     box-shadow: 3px 3px 0px 0px #23C4B1;
