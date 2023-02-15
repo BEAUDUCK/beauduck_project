@@ -45,12 +45,8 @@ const ConsultingPage = () => {
     dispatch(loadingOut());
   };
   useEffect(() => {
-    const payload = {
-      keyword: 'personal color',
-    };
-
     dispatch(getConsultingList());
-    dispatch(getMakeupInfo(payload));
+    dispatch(getMakeupInfo());
   }, []);
 
   return (
