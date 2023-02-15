@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router';
 import { setMyExerciseResult } from '../../features/help/ConsultingSlice';
 import GetScore from './getscore/GetScore';
 import StreamComponent from './stream/StreamComponent';
@@ -17,6 +18,7 @@ const GuestVideoComponent = ({
   myStyle,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isExercising, isFinished } = useSelector((state) => state.consulting);
   const admin = useSelector((state) => state.consulting.consultDetail.hostId);
   const { memberId } = useSelector((state) => state.member);
@@ -44,6 +46,10 @@ const GuestVideoComponent = ({
     if (isExercising === 'done') {
       console.log('끝났엉 isExercising', isExercising);
       finishExercise();
+      setTimeout(() => {
+        leaveSession();
+        navigate('/help/result');
+      }, 10000);
     }
   }, [isExercising]);
 

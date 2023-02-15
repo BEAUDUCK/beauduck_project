@@ -19,8 +19,8 @@ import SingleModePage from './pages/SingleModePage';
 import SingupPage from './pages/SignupPage';
 import ScrollToTop from './components/scrolltotop/ScrollToTop';
 import ConsultingRoomPage from './pages/ConsultingRoomPage';
-import ConsultingResultHostPage from "./pages/ConsultingResultHostPage"
-import TogetherRoomPage from "./pages/TogetherRoomPage"
+import ConsultingResultHostPage from './pages/ConsultingResultHostPage';
+import TogetherRoomPage from './pages/TogetherRoomPage';
 
 // import { getInfoList, getQaList } from './features/board/BoardSlice';
 
@@ -84,30 +84,6 @@ function App() {
     dispatch(accessLogin());
   }, []);
 
-  const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
-  const refreshToken = localStorage.getItem('refreshToken');
-  // const accessToken = getAccessToken();
-  const server = 'https://i8b306.p.ssafy.io:8080/';
-  const { memberId } = useSelector((state) => state.member);
-
-  // useEffect(async () => {
-  //   if (memberId) {
-  //     console.log('아이디있졍');
-  //     const accessToken = getAccessToken();
-  //     console.log(accessToken);
-  //   } else {
-  //     console.log('없졍');
-  //   }
-  //   console.log('토큰 재발급');
-  //   const res = await axios.get(
-  //     `${server}refresh?refreshToken=${refreshToken}`,
-  //   );
-
-  //   console.log('토큰 재발급 성공?');
-  //   console.log(res.data.data.accessToken);
-  //   setCookie(res.data.data.accessToken);
-  // });
-
   return (
     <>
       <BrowserRouter>
@@ -119,7 +95,7 @@ function App() {
           {/* 도와덕 */}
           <Route path="/help" element={<ConsultingPage />} />
           <Route path="/help/room" element={<ConsultingRoomPage />} />
-          <Route path='/help/result' element={<ConsultingResultHostPage />} />
+          <Route path="/help/result" element={<ConsultingResultHostPage />} />
           {/* 따라해덕 */}
           <Route path="/single" element={<SinglePage />} />
           <Route path="/single/mode" element={<SingleModePage />} />
