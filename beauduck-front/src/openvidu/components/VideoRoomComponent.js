@@ -1,21 +1,10 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import React, { Component } from 'react';
-import ChatComponent from './chat/ChatComponent';
-import DialogExtensionComponent from './dialog-extension/DialogExtension';
-import StreamComponent from './stream/StreamComponent';
 import './VideoRoomComponent.scss';
 
 import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
-import ToolbarComponent from './toolbar/ToolbarComponent';
-import { textAlign } from '@mui/system';
-import Timer from '../../components/timer/Timer';
-import Photos from './photos/Photos';
-import GetScore from './getscore/GetScore';
-import { div } from '@tensorflow/tfjs';
-import UserVideoComponent from './UserVideoComponent';
-import HostVideoComponent from './HostVideoComponent';
 import AllComp from './AllComp';
 
 var localUser = new UserModel();
