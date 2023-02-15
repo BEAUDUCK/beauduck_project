@@ -15,7 +15,7 @@ const NaverLogin = () => {
 
   // 토큰 발급
   const getToken = async () => {
-    console.log('토큰 발급');
+    console.log('토큰 발급 시작');
     axios
       .get(
         `https://i8b306.p.ssafy.io:8080/naver/callback?code=${code}&state=${state}`,
@@ -50,14 +50,14 @@ const NaverLogin = () => {
   // 로그인 실패 시 회원가입 창으로 이동
   const { loginRejected } = useSelector((state) => state.member);
   useEffect(() => {
+    getToken();
+  }, []);
+  
+  useEffect(() => {
     console.log(loginRejected);
     if (loginRejected) {
       navigate('/signup');
     }
   }, [loginRejected]);
-
-  useEffect(() => {
-    getToken();
-  }, []);
 };
 export default NaverLogin;
