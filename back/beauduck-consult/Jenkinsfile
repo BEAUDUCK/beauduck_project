@@ -32,7 +32,7 @@ pipeline {
                     sh 'ls -al'
                     sh 'chmod +x ./gradlew'
                     sh './gradlew build'
-//                     sh 'docker-compose -f "docker-compose.yml" up -d --build'
+                    sh 'docker-compose -f "docker-compose.yml" up -d --build'
                     sh 'docker build -t feat-back-consult .'
                 }
                 echo 'Build image...'
