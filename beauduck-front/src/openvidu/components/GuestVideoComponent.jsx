@@ -28,11 +28,13 @@ const GuestVideoComponent = ({
   const finishExercise = useCallback(() => {
     console.log('진단 끝! 내 어쩌구저쩌구 :  ', resultUsers);
     if (resultUsers.current.memberId === memberId) {
-      user.getStreamManager().stream.session.signal({
-        data: JSON.stringify(resultUsers.current),
-        type: 'finish',
-        to: [admin],
-      });
+      if (resultUsers.current.personalResults.length > 0) {
+        user.getStreamManager().stream.session.signal({
+          data: JSON.stringify(resultUsers.current),
+          type: 'finish',
+          to: [admin],
+        });
+      }
       dispatch(setMyExerciseResult(resultUsers.current.personalResults));
     }
     return;
