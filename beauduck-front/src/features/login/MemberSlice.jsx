@@ -13,11 +13,10 @@ export const UserLogin = createAsyncThunk(
     const res = await axios.get(
       `${global}naver/login?accessToken=${newAccessToken}`,
     );
-    // if (res.data) {
-    //   state.loginRejected = false
-    // } else {
-    //   state.loginRejected = true
-    // }
+    console.log(res)
+    checkLogin(res.data)
+    // 성공 시 data 있음
+    // 실패 시 data 없음(payload 도 없음)
     return res.data;
   },
 );
@@ -74,6 +73,13 @@ export const memberSlice = createSlice({
     accessLogin: (state, action) => {
       state.loginRejected = false;
     },
+    checkLogin: (state, action) => {
+      if (action.payload) {
+        state.loginRejected = false
+      } else {
+        state.loginRejected = true
+      }
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -109,5 +115,6 @@ export const {
   goToLogin,
   goToSignup,
   accessLogin,
+  checkLogin
 } = memberSlice.actions;
 export default memberSlice.reducer;
