@@ -8,12 +8,9 @@ verify_ssl = true
 [packages]
 flask = "*"
 flask-cors = "*"
-tensorflow = "*"
 pillow = "*"
 numpy = "*"
 opencv-python = "*"
-keras = "*"
-flask_sslify = "*"
 
 [requires]
 python_version = "3.8"
