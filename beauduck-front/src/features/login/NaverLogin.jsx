@@ -33,13 +33,17 @@ const NaverLogin = () => {
             expires: expireDate,
           },
         );
-        dispatch(UserLogin(accessToken)).then(() => {
-          console.log('간다');
-          if (loginRejected) {
-            navigate('/signup');
+        dispatch(UserLogin(accessToken)).then((res) => {
+          if (!res.data) {
+            navigate("/signup")
           } else {
-            navigate('/');
+            navigate("/")
           }
+          // if (loginRejected) {
+          //   navigate('/signup');
+          // } else {
+          //   navigate('/');
+          // }
         });
       })
       .catch((error) => {

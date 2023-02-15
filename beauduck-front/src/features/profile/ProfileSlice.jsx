@@ -79,12 +79,17 @@ export const postSaveFace = createAsyncThunk(
     );
     if (res.data.answer === "Try Again") {
       Swal.fire(
-        "재촬영 해주시길 바랍니다.",
-        "",
+        "실패",
+        "재촬영 해주시기 바랍니다.",
         "error"
       )
       return
     } else {
+      Swal.fire(
+        "성공",
+        "재촬영 해주시기 바랍니다.",
+        "success"
+      )
       console.log("성공")
       console.log('얼굴', res.data);
     }
