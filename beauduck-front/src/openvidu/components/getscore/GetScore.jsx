@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const GetScore = ({ nowIdx, resultUsers }) => {
+const GetScore = ({ nowIdx, personalResults }) => {
   const [beforeIdx, setBeforeIdx] = useState(0);
   const didMount = useRef(false);
 
@@ -16,21 +16,12 @@ const GetScore = ({ nowIdx, resultUsers }) => {
     if (didMount.current) {
       if (isClick) {
         // resultUsers.current.personalResults.push(parseInt(1)); // 눌렀으면 1 추가
-        resultUsers.current.personalResults = [
-          ...resultUsers.current.personalResults,
-          parseInt(1),
-        ]; // 눌렀으면 1 추가
+        personalResults = [...personalResults, parseInt(1)]; // 눌렀으면 1 추가
       } else {
         // resultUsers.current.personalResults.push(parseInt(0)); // 안 눌렀으면 0 추가
-        resultUsers.current.personalResults = [
-          ...resultUsers.current.personalResults,
-          parseInt(0),
-        ];
+        personalResults = [...personalResults, parseInt(0)];
       }
-      console.log(
-        'resultUsers.current.personalResults',
-        resultUsers.current.personalResults,
-      );
+      console.log('personalResults', personalResults);
       setIsClick(false);
     } else {
       didMount.current = true;
