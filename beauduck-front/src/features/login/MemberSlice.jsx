@@ -13,10 +13,9 @@ export const UserLogin = createAsyncThunk(
     const res = await axios.get(
       `${global}naver/login?accessToken=${newAccessToken}`,
     );
-    console.log(res)
-    checkLogin(res.data)
-    // 성공 시 data 있음
-    // 실패 시 data 없음(payload 도 없음)
+    console.log("res :", res)
+    // checkLogin(res.data)
+
     return res.data;
   },
 );
@@ -73,15 +72,15 @@ export const memberSlice = createSlice({
     accessLogin: (state, action) => {
       state.loginRejected = false;
     },
-    checkLogin: (state, action) => {
-      if (action.payload) {
-        state.loginRejected = false
-        console.log("회원가입 된사람")
-      } else {
-        state.loginRejected = true
-        console.log("회원가입 안된사람")
-      }
-    }
+    // checkLogin: (state, action) => {
+    //   if (action.payload) {
+    //     state.loginRejected = false
+    //     console.log("회원가입 된사람")
+    //   } else {
+    //     state.loginRejected = true
+    //     console.log("회원가입 안된사람")
+    //   }
+    // }
   },
   extraReducers: (builder) => {
     builder
