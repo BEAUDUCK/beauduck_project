@@ -21,8 +21,8 @@ public class RoomRepository {
     private final RedisTemplate redisTemplate;
 
 
-    private static final String TO_ROOMS = "TO_ROOMS"; // 룸 저장
-    public static final String ENTER_INFO = "ENTER_INFO"; // 룸에 입장한 사용자의 sessionId(사용자 id)와 룸 id를 맵핑한 정보 저장
+    private static final String TO_ROOMS = "TO_ROOMS_CONSULT"; // 룸 저장
+    public static final String ENTER_INFO = "ENTER_INFO_CONSULT"; // 룸에 입장한 사용자의 sessionId(사용자 id)와 룸 id를 맵핑한 정보 저장
 
 
     @Resource(name = "redisTemplate")
