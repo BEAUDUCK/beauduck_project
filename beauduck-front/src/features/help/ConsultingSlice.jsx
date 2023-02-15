@@ -104,7 +104,8 @@ export const consultSlice = createSlice({
       console.log('저장하러 왔어 results', results);
       const newResult = [];
       for (let i = 0; i < results.length; i++) {
-        newResult.concat(results.personalResults);
+        newResult.concat(results[i].personalResults);
+        console.log(i, '넣는 중 ', newResult);
       }
       console.log('newResult', newResult);
       state.allResult = newResult;
