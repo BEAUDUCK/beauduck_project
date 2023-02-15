@@ -37,7 +37,7 @@ const HostVideoComponent = ({
         resultUsers.current.allResults.push(JSON.parse(event.data));
 
         if (!participantCount) {
-          participantCount = session.streamManagers.length;
+          participantCount = session.streamManagers.length - 1;
           console.log('인원수 : ', participantCount);
         }
         recivedCount++;
