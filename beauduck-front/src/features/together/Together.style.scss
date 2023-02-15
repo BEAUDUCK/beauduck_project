@@ -1,4 +1,31 @@
 /* TogetherPage */
+.together-banner {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .together-banner-img {
+    width: 70%;
+    height: 600px;
+  }
+
+  .together-banner-div {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .together-btn {
+      width: 50%;
+      height: 100px;
+      background-color: #FFEBCD;
+    }
+
+  }
+
+}
+
 .together-h2 {
   font-family: "Jalnan";
   font-size: 40px;

@@ -9,8 +9,12 @@ import { getTogetherList } from "../features/together/TogetherSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../components/button/Button';
 import Swal from 'sweetalert2';
+import TogetherBanner from "../assets/together_banner.gif"
+import { useLocation } from 'react-router-dom';
+import axios from "axios"
 
 const TogetherPage = () => {
+  const location = useLocation()
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false);
   const myNickname = useSelector(state => state.member.nickName)
@@ -31,18 +35,35 @@ const TogetherPage = () => {
   };
 
   const { togetherList } = useSelector((state) => state.together)
+  const { state } = location
+  
 
   useEffect(() => {
     dispatch(getTogetherList())
+    // if (state) {
+    //     axios
+		// 			.post("https://i8b306.p.ssafy.io:8084/together/out", state)
+		// 			.then((res) => {
+		// 				console.log("삭제 완료")
+		// 			})
+    // }
   }, [])
 
   return (
     <>
-      <Banner bannerStyle={'together-ban'} />
-      <div className="container">
-        <h2 className='together-h2'>투게덕</h2>
-        {/* <button onClick={isOpenModal}>방 만들기</button> */}
+    <div className='together-banner'>
+      <img
+        className='together-banner-img'
+        src={TogetherBanner}
+        alt="together-banner"
+      />
+      <div className='together-banner-div'>
         <Button onClickEvent={isOpenModal} text={"방만들기"} btnStyle={"together-btn"} />
+      </div>
+    </div>
+      <div className="container">
+        <h2 className='together-h2'>진행중인 방</h2>
+        {/* <button onClick={isOpenModal}>방 만들기</button> */}
         <TogetherList togetherList={togetherList} />
         {isOpen && <TogetherModalCreate isOpenModal={isOpenModal} />}
         {isOpen && <BlackOut onClickEvent={isOpenModal} />}

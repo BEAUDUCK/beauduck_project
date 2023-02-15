@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, useState, useEffect, useRef } from 'react';
 import './StreamComponent.css';
 
@@ -40,7 +41,7 @@ export default class TogetherLocalOvVideoComponent extends Component {
 							id={'video-' + this.props.user.getStreamManager().stream.streamId}
 							ref={this.videoRef}
 							muted={this.props.mutedSound}
-							style={{ width: "100%", height: "100%", borderRadius: "25px"}}
+							style={{ width: "100%", height: "100%", borderRadius: "25px", border: `5px solid ${this.props.myColor}`}}
 					/>
 				</div>
 			);
