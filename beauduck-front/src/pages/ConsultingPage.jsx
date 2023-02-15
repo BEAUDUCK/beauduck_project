@@ -77,7 +77,7 @@ const ConsultingPage = () => {
       {isOpen && <BlackOut onClickEvent={isOpenModal} />}
       {isActive && <ConsultingModalLoadingHost loadingOff={loadingOff} />}
       {isActive && <BlackOut />}
-      <Crawling />
+      {/* <Crawling /> */}
     </>
   );
 };
