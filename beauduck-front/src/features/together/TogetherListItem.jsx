@@ -26,8 +26,18 @@ const TogetherListItem = ({ togetherItem }) => {
   const [nowColor, setNowColor] = useState("")
   const [nowFace, setNowFace] = useState("")
   const [nowNum, setNowNum] = useState(_.random(0, 7))
-
+  
+  const myNickname = useSelector(state => state.member.nickName)
+  
   useEffect(() => {
+    if (myNickname === undefined) {
+      Swal.fire(
+        "회원이 아닙니다.",
+        "회원가입 후 이용할 수 있습니다.",
+        "error"
+      )
+      navigate(-1)
+    }
     randomFace()
   }, [])
   
@@ -46,7 +56,6 @@ const TogetherListItem = ({ togetherItem }) => {
     setNowFace(faces[nowNum])
     setNowColor(colors[nowNum])
   }
-  const myNickname = useSelector(state => state.member.nickName)
 
   const [isOpen, setIsOpen] = useState()
 
@@ -64,16 +73,16 @@ const TogetherListItem = ({ togetherItem }) => {
         </>
       )
     }
-    setIsOpen(!isOpen)
-
+    
     if (togetherItem.userList.length > 7) {
       Swal.fire(
         "인원이 꽉찼습니다.",
-        "",
+        "접속할 수 없습니다.",
         "error"
-      )
-      return
-    }
+        )
+        return navigate("/together")
+      }
+      setIsOpen(!isOpen)
   }
 
   const goTogether = () => {
@@ -119,7 +128,7 @@ const TogetherListItem = ({ togetherItem }) => {
             <div className="back-content"> 
               <div className="back-content-index">인원</div>
               {/* <div>{consultingItem.people}</div> 사람 수 들어가야 함  */}
-              <div className="back-content-context">{togetherItem.userList.length} / 7</div>
+              <div className="back-content-context">{togetherItem.userList.length - 1} / 7</div>
             </div>
           </div>
         </div>

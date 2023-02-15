@@ -40,7 +40,7 @@ export default class TogetherSubscriberOvVideoComponent extends Component {
 							id={'video-' + this.props.user.getStreamManager().stream.streamId}
 							ref={this.videoRef}
 							muted={this.props.mutedSound}
-							style={{ width: "100%", height: "100%", borderRadius: "25px" }}
+							style={{ width: "100%", height: "100%", borderRadius: "25px", border: `2px solid ${this.props.myColor}` }}
 					/>
 				</div>
 			);

@@ -52,6 +52,7 @@ import InfoPage from './pages/InfoPage';
 import { getAccessToken } from './api/cookie';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import InfoDetailPage from './pages/InfoDetailPage';
 
 library.add(
   faXmark,
@@ -138,6 +139,7 @@ function App() {
           <Route path="/signup" element={<SingupPage />} />
           {/* 정보성페이지 */}
           <Route path="/color" element={<InfoPage />} />
+          <Route path="/color/detail" element={<InfoDetailPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

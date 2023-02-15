@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import React, { Component } from 'react';
-import ChatComponent from './chat/ChatComponent';
-import DialogExtensionComponent from './dialog-extension/DialogExtension';
-import StreamComponent from './stream/StreamComponent';
+// import ChatComponent from './chat/ChatComponent';
+// import DialogExtensionComponent from './dialog-extension/DialogExtension';
+// import StreamComponent from './stream/StreamComponent';
 // import './VideoRoomComponent.css';
 
 import OpenViduLayout from '../layout/openvidu-layout';
 import UserModel from '../models/user-model';
-import ToolbarComponent from './toolbar/ToolbarComponent';
-import { textAlign } from '@mui/system';
-import Timer from '../../components/timer/Timer';
-import Photos from './photos/Photos';
-import GetScore from './getscore/GetScore';
+// import ToolbarComponent from './toolbar/ToolbarComponent';
+// import { textAlign } from '@mui/system';
+// import Timer from '../../components/timer/Timer';
+// import Photos from './photos/Photos';
+// import GetScore from './getscore/GetScore';
 import TogetherToolbarComponent from './toolbar/TogetherToolbarComponent';
 import TogetherLocalStreamComponent from './stream/TogetherLocalStreamComponent';
 import TogetherSubscriberStreamComponent from './stream/TogetherSubscriberStreamComponent';
@@ -41,7 +41,8 @@ class TogetherRoomComponent extends Component {
             chatDisplay: 'none',
             currentVideoDevice: undefined,
             hostNickname: this.props.hostNickname,
-						isHost: this.props.isHost
+            isHost: this.props.isHost,
+            myColor: this.props.myColor
         };
         // 메서드 바인딩 과정
         // joinSession : 세션 접속
@@ -245,7 +246,7 @@ class TogetherRoomComponent extends Component {
 
     leaveSession() {
         const mySession = this.state.session;
-
+        // mySession.unpublish(localUser.getStreamManager());
         if (mySession) {
             mySession.disconnect();
         }
@@ -263,23 +264,18 @@ class TogetherRoomComponent extends Component {
         if (this.props.leaveSession) {
             this.props.leaveSession();
         }
-				// if (this.props.isHost) {
-				// 	axios
-				// 		.delete(`https://i8b306.p.ssafy.io:8084/together/${this.props.sessionName}`)
-				// 		.then((response) => {
-				// 			console.log(response)
-				// 		})
-				// }
-				const userData = {
+				
+				const outUserData = {
 					nickname: this.props.user,
 					roomId: this.props.sessionName,
 					userId: this.props.myId
 				}
 				axios
-					.post("https://i8b306.p.ssafy.io:8084/together/out", userData)
+					.post("https://i8b306.p.ssafy.io:8084/together/out", outUserData)
 					.then((res) => {
 						console.log(res)
 					})
+				// this.props.navigate("/together", { state: outUserData })
 				this.props.navigate("/together")
     }
 
@@ -616,14 +612,14 @@ class TogetherRoomComponent extends Component {
                 <div id="layout" className="bounds" style={{ width: "100vw", height: "90vh", display: "flex", justifyContent: "space-between", backgroundColor: "white" }}>
                     <div className='left-div1' style={{ width: "25vw", display: "flex", flexDirection: "column" , justifyContent: "space-evenly", alignItems: "center" }}>
                         {this.state.subscribers.slice(0, 3).map((sub, i) => (
-                            <div key={i} style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                            <div key={i} style={{ width: "100%", display: "flex", justifyContent: "center", position: "relative" }}>
                                 <TogetherSubscriberStreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
                             </div>
                         ))}
                     </div>
 										<div className='right-div' style={{ width: "50vw", display: "flex", justifyContent: "center", alignItems: "center"}} >
 														{localUser !== undefined && localUser.getStreamManager() !== undefined && (
-															<TogetherLocalStreamComponent user={localUser}/>
+															<TogetherLocalStreamComponent user={localUser} />
 														)}
                         </div>
                     <div className='left-div2' style={{ width: "25vw", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
