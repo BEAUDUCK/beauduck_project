@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 import './MainPage.style.scss'
+import help from "../assets/main/help.gif"
+import single from "../assets/main/single.gif"
+import together from "../assets/main/together.gif"
+
 // 스타일 App.css 에 넣음
 const MainPage = () => {
 
@@ -17,7 +21,7 @@ const MainPage = () => {
             <div>
               <img 
                 className="img-box2-1" 
-                src={require("../assets/test.gif")}
+                src={help}
                 alt="이미지"
               />
             </div>
@@ -38,7 +42,7 @@ const MainPage = () => {
             <div>
               <img 
                 className="img-box2-2" 
-                src={require("../assets/test.gif")}
+                src={single}
                 alt="이미지"
               />
             </div>
@@ -47,7 +51,7 @@ const MainPage = () => {
             <div className>
               <img 
                 className="img-box2-1" 
-                src={require("../assets/test.gif")}
+                src={together}
                 alt="이미지"
               />
             </div>
