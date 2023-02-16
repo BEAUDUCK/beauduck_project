@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeInfoComment, updateInfoComment } from './BoardSlice';
+import board2 from "../../assets/board/board2.png"
 
 const BoardCommentListItem = ({ comment, boardId }) => {
   const dispatch = useDispatch();
@@ -53,7 +54,12 @@ const BoardCommentListItem = ({ comment, boardId }) => {
 
   return (
     <div className={['user-box', 'user-comment'].join(' ')}>
-      <button className="comment-img" />
+      <img 
+        className="comment-img"
+        src={board2}
+        alt="작성자이미지"
+        style={{ border: "1px solid black" }}
+      />
       <div className="user-text">
         <p className="comment-username">{comment?.writer}</p>
         {!isUpdate ? (
