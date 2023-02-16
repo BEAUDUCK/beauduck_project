@@ -17,7 +17,6 @@ export const checkNickname = createAsyncThunk(
   'members/checkNickname',
   async (nickName) => {
     const res = await memberAxios.get(`/members/check/${nickName}`);
-    console.log('닉네임 중복?', res.data);
     return res.data;
   },
 );
@@ -27,7 +26,6 @@ export const updateMemberInfo = createAsyncThunk(
   'members/UpdateMemberInfo',
   async (payload) => {
     const res = await memberAxios.put('/members/update', payload);
-    console.log('수정', res.data);
     return res.data.data;
   },
 );
@@ -37,7 +35,6 @@ export const getRecentMakeupList = createAsyncThunk(
   'members/getRecentMakeupList',
   async (memberId) => {
     const res = await memberAxios.get(`/members/${memberId}/recent-makeup`);
-    console.log('최근', res.data);
     return res.data;
   },
 );
@@ -47,7 +44,6 @@ export const getMyMakeupList = createAsyncThunk(
   'members/getMyMakeupList',
   async (memberId) => {
     const res = await memberAxios.get(`/members/${memberId}/my-makeup`);
-    console.log('내가 만든 쿠키~', res.data);
     return res.data;
   },
 );
@@ -57,7 +53,6 @@ export const getMyGalleryList = createAsyncThunk(
   'member/getMyGallery',
   async (memberId) => {
     const res = await memberAxios.get(`/members/${memberId}/gallery`);
-    console.log('갤러리', res.data);
     return res.data;
   },
 );
@@ -72,18 +67,13 @@ export const getMyGalleryList = createAsyncThunk(
 export const postSaveFace = createAsyncThunk(
   'member/postSaveFace',
   async (payload) => {
-    console.log('페이로드', payload);
     const res = await axios.post(
       'https://i8b306.p.ssafy.io:5000/save',
       payload,
     );
-    if (res.data.answer === "Try Again") {
-      Swal.fire(
-        "실패",
-        "재촬영 해주시기 바랍니다.",
-        "error"
-      )
-      return
+    if (res.data.answer === 'Try Again') {
+      Swal.fire('실패', '재촬영 해주시기 바랍니다.', 'error');
+      return;
     } else {
       Swal.fire(
         "성공",
@@ -100,7 +90,6 @@ export const postSaveFace = createAsyncThunk(
 // 내 랭킹
 export const getRank = createAsyncThunk('member/getRank', async (memberId) => {
   const res = await memberAxios.get(`/rank/${memberId}`);
-  console.log('랭킹', res.data);
   return res.data;
 });
 
