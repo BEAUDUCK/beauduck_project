@@ -9,5 +9,5 @@ import java.util.List;
 public interface MakeupRepository extends JpaRepository<MakeupEntity, Integer> {
 
 //    List<MakeupEntity> findTop10ByScore(float score, Sort sort);
-
+    List<MakeupEntity> findAllByOrderByIdDesc();
 }

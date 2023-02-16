@@ -71,7 +71,7 @@ public class MakeupService {
 
     @Transactional
     public List<MakeupResponseDto> selectAll() {
-        List<MakeupEntity> makeupList = makeupRepository.findAll();
+        List<MakeupEntity> makeupList = makeupRepository.findAllByOrderByIdDesc();
         List<MakeupResponseDto> makeupDtoList = new ArrayList<>();
 
         for(MakeupEntity e: makeupList) {
