@@ -18,7 +18,7 @@ const MyProfileSaveFace = () => {
 
   const downloadCapture = () => {
     const imgDiv = document.querySelector('#main_capture');
-    const transform = imgDiv.style.transform;
+    // const transform = imgDiv.style.transform;
     imgDiv.style.setProperty('transform', 'none');
     html2canvas(imgDiv).then((canvas) => {
       const imgUri = canvas.toDataURL('image/jpeg');
@@ -39,18 +39,18 @@ const MyProfileSaveFace = () => {
     });
   };
 
-  const saveAsImg = (uri, filename) => {
-    const link = document.createElement('a');
-    if (typeof link.download === 'string') {
-      link.href = uri;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      window.open(uri);
-    }
-  };
+  // const saveAsImg = (uri, filename) => {
+  //   const link = document.createElement('a');
+  //   if (typeof link.download === 'string') {
+  //     link.href = uri;
+  //     link.download = filename;
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link);
+  //   } else {
+  //     window.open(uri);
+  //   }
+  // };
 
   const { haveSavedFace } = useSelector(state => state.profile)
   console.log("haveSavedFace :", haveSavedFace)
