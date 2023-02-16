@@ -23,14 +23,9 @@ const HostVideoComponent = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-<<<<<<< HEAD
   const { isExercising, isFinished, maxIdx } = useSelector(
     (state) => state.consulting,
   );
-=======
-  // isExercising 지움
-  const { isFinished } = useSelector((state) => state.consulting);
->>>>>>> 1b4cafb09db5fcc3a9500ff67c76b2ca5268a28c
 
   const resultUsers = useRef({
     allResults: [],
@@ -72,7 +67,7 @@ const HostVideoComponent = ({
           setTimeout(() => {
             leaveSession();
             navigate('/help/result');
-          }, 10000);
+          }, 2000);
         }
 
         // setExercising(false);
