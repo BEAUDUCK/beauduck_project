@@ -11,7 +11,7 @@ const SingleList = ({ modeList }) => {
   const handlePageChange = (page) => {
     setPage(page);
   };
-  const [postPerPage] = useState(12);
+  const [postPerPage] = useState(8);
   const indefOfLastPost = page * postPerPage;
   const indefOfFirstPost = indefOfLastPost - postPerPage;
 
@@ -25,7 +25,7 @@ const SingleList = ({ modeList }) => {
 
   return (
     <>
-      <h1>MAKEUP LIST</h1>
+      <h1 className="modeList-h1">MAKEUP LIST</h1>
       <div className="modeList">
         {currentPosts?.map((item, idx) => (
           <SingleListItem key={item.id} modeItem={item} idx={idx + 1} />

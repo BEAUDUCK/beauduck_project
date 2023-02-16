@@ -21,7 +21,7 @@ const SinglePopular = ({ modeList }) => {
     1280: {
       items: 4,
     },
-    1536: {
+    1680: {
       items: 5,
     },
   };
