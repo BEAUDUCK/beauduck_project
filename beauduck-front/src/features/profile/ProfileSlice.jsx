@@ -92,8 +92,8 @@ export const postSaveFace = createAsyncThunk(
       )
       console.log("성공")
       console.log('얼굴', res.data);
+      return res.data;
     }
-    return res.data;
   },
 );
 
@@ -111,6 +111,7 @@ export const profileSlice = createSlice({
     recentMakeupList: [],
     myMakeupList: [],
     myGalleryList: [],
+    haveSavedFace: false
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -135,6 +136,14 @@ export const profileSlice = createSlice({
     builder.addCase(getMyGalleryList.fulfilled, (state, action) => {
       state.myGalleryList = action.payload.data;
     });
+    // poseSaveFace 성공 시
+    builder.addCase(postSaveFace.fulfilled, (state, action) => {
+      state.haveSavedFace = action.payload
+    })
+    // postSaveFace 실패 시
+    // builder.addCase(postSaveFace.rejected, (state, action) => {
+    //   state.haveSavedFace = false
+    // })
   },
 });
 
