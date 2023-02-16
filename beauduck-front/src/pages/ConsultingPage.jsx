@@ -1,10 +1,6 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-<<<<<<< HEAD
-=======
-// import Banner from '../components/banner/Banner';
->>>>>>> 1b4cafb09db5fcc3a9500ff67c76b2ca5268a28c
 import ConsultingList from '../features/help/ConsultingList';
 import ConsultingModalCreate from '../features/help/ConsultingModalCreate ';
 import {
