@@ -21,6 +21,14 @@ export const postNewConsulting = createAsyncThunk(
   },
 );
 
+// 방 파괴
+export const deleteConsultingRoom = createAsyncThunk(
+  'help/deleteConsultingRoom',
+  async (roomId) => {
+    await client.delete(`/consult/${roomId}/`);
+  },
+);
+
 // 방 상세조회 (대기열)
 export const getConsultDetail = createAsyncThunk(
   'help/getConsultDetail',
