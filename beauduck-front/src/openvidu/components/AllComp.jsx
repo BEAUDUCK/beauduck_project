@@ -5,6 +5,7 @@ import Timer from '../../components/timer/Timer';
 import Photos from './photos/Photos';
 import { setExerciseStatus } from '../../features/help/ConsultingSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import Information from './Information';
 
 const AllComp = ({
   myUserName,
@@ -19,6 +20,12 @@ const AllComp = ({
   subscribers,
 }) => {
   const dispatch = useDispatch();
+
+  const [isInfo, setIsInfo] = useState(true);
+
+  const exitInfo = () => {
+    setIsInfo(!isInfo);
+  };
 
   // 진행 시작
   const { isExercising, isFinished } = useSelector((state) => state.consulting);
@@ -41,7 +48,7 @@ const AllComp = ({
 
   // 진단 종료
   useEffect(() => {
-    if (nowIdx === 10) {
+    if (nowIdx === 30) {
       console.log('인덱스 종료');
       dispatch(setExerciseStatus('done'));
     }
@@ -49,6 +56,7 @@ const AllComp = ({
 
   return (
     <>
+      {isInfo && <Information exitInfo={exitInfo} />}
       {isHost ? (
         <HostVideoComponent
           user={user}
@@ -58,6 +66,7 @@ const AllComp = ({
           micStatusChanged={micStatusChanged}
           leaveSession={leaveSession}
           isHost={isHost}
+          subscribers={subscribers}
         />
       ) : (
         <GuestVideoComponent
@@ -97,4 +106,4 @@ const AllComp = ({
   );
 };
 
-export default React.memo(AllComp);
+export default AllComp;
