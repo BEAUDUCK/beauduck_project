@@ -12,10 +12,6 @@ const InfoPage = () => {
     navigate('/color/detail', { state: num });
   };
 
-<<<<<<< HEAD
-=======
-  
->>>>>>> 1b4cafb09db5fcc3a9500ff67c76b2ca5268a28c
   return (
     <div className="personal-color">
       <div className="color-info ball">

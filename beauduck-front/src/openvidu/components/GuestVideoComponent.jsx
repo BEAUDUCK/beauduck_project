@@ -37,10 +37,10 @@ const GuestVideoComponent = ({
           to: [admin],
         });
         dispatch(setMyExerciseResult(resultUsers.current.personalResults));
+        setTimeout(() => {
+          navigate('/help/result/guest', { replace: true });
+        }, 2000);
       }
-      setTimeout(() => {
-        navigate('/help/result/guest', { replace: true });
-      });
       // console.log('여기는..?');
       // user.getStreamManager().stream.session.on('signal:result', (event) => {
       //   console.log('이게 찍히면 끝', event.data);
@@ -52,19 +52,19 @@ const GuestVideoComponent = ({
     }
   });
 
-  useEffect(() => {
-    console.log('언제 바뀌니...');
-    if (isFinished) {
-      console.log('여기는..?');
-      user.getStreamManager().stream.session.on('signal:result', (event) => {
-        console.log('이게 찍히면 끝', event.data);
-        setTimeout(() => {
-          leaveSession();
-          navigate('/help/result/guest', { state: event.data });
-        });
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   console.log('언제 바뀌니...');
+  //   if (isFinished) {
+  //     console.log('여기는..?');
+  //     user.getStreamManager().stream.session.on('signal:result', (event) => {
+  //       console.log('이게 찍히면 끝', event.data);
+  //       setTimeout(() => {
+  //         leaveSession();
+  //         navigate('/help/result/guest', { state: event.data });
+  //       });
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (isExercising === 'done') {
