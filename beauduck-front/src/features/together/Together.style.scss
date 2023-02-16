@@ -12,24 +12,27 @@
 
 }
 
-.together-btn {
-  color: #89695E;
-  border-color: #89695E;
-  box-shadow: 3px 3px 0px 0px #89695E;
-  height: 50px;
-  margin: auto;
-
-}
-
 .together-btn-div {
   position: relative;
   width: 200px;
   height: 56px;
   margin: auto;
+
+.together-btn {
+  position: absolute;
+  color: #89695E;
+  border-color: #89695E;
+  box-shadow: 3px 3px 0px 0px #89695E;
+  height: 150px;
+  margin: auto;
+  bottom: 30px;
+  font-size: 18px;
+
+}
   svg {
     position: absolute;
-    right: 24px;
-    bottom: 22px;
+    right: 20px;
+    bottom: 97px;
     color: #89695E;
     cursor: pointer;
 }
