@@ -14,10 +14,28 @@
 }
 
 .together-btn {
-  color: #DEB048;
-  border-color: #DEB048;
-  box-shadow: 3px 3px 0px 0px #DEB048;
+  color: #89695E;
+  border-color: #89695E;
+  box-shadow: 3px 3px 0px 0px #89695E;
+  height: 50px;
+  margin: auto;
+
 }
+
+.together-btn-div {
+  position: relative;
+  width: 200px;
+  height: 56px;
+  margin: auto;
+  svg {
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    color: #89695E;
+    cursor: pointer;
+}
+}
+
 
 .together-h2 {
   font-family: "Jalnan";
