@@ -104,14 +104,14 @@ const HostVideoComponent = ({
       <StreamComponent user={user} />
       {isHost ? (
         <>
-          <ToolbarComponent
+          {/* <ToolbarComponent
             sessionId={sessionId}
             user={user}
             showNotification={showNotification}
             camStatusChanged={camStatusChanged}
             micStatusChanged={micStatusChanged}
             leaveSession={leaveSession}
-          />
+          /> */}
           <StartBtn user={user} />
         </>
       ) : (

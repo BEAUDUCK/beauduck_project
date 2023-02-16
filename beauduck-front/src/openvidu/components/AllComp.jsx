@@ -41,7 +41,7 @@ const AllComp = ({
 
   // 진단 종료
   useEffect(() => {
-    if (nowIdx === 10) {
+    if (nowIdx === 30) {
       console.log('인덱스 종료');
       dispatch(setExerciseStatus('done'));
     }
@@ -97,4 +97,4 @@ const AllComp = ({
   );
 };
 
-export default React.memo(AllComp);
+export default AllComp;
