@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import {
@@ -19,6 +19,7 @@ const HostVideoComponent = ({
   micStatusChanged,
   leaveSession,
   isHost,
+  subscribers,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,6 +31,8 @@ const HostVideoComponent = ({
 
   let participantCount = undefined;
   let recivedCount = 0;
+
+  const [finalIdx, setFinalIdx] = useState(-1);
 
   useEffect(() => {
     user.getStreamManager().stream.session.on('signal:finish', (event) => {
@@ -72,11 +75,20 @@ const HostVideoComponent = ({
         const res = JSON.parse(event.data);
         console.log('운동 결과 데이터 수신', res);
 
-        dispatch(setAllExerciseResult(res.allResults));
+        dispatch(setAllExerciseResult(res.allResults)).then((res) => {
+          console.log('결과', res);
+          setFinalIdx(res);
+        });
         console.log('res.allResults', res.allResults);
+
+        user.getStreamManager().stream.session.signal({
+          data: finalIdx,
+          type: 'result',
+          to: subscribers,
+        });
+
         setTimeout(() => {
           leaveSession();
-          console.log('슝');
           navigate('/help/result');
         }, 10000);
       }

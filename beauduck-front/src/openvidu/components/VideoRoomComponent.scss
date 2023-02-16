@@ -1098,3 +1098,19 @@
     color: white;
   }
 }
+
+// 시작 시 설명
+.information {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  opacity: 0.5;
+
+  .exit-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 50px;
+  }
+}

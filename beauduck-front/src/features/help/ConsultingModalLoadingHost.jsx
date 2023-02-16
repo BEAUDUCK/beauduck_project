@@ -24,12 +24,11 @@ const ConsultingModalLoadingHost = ({ loadingOff }) => {
 
   const handleStart = () => {
     dispatch(loadingOut());
-    navigate('/help/room');
+    navigate('/help/room', { replace: true });
   };
 
   return (
     <div className="loading-modal">
-      {/* 다만 방 삭제 로직을 넣어야 함 */}
       <FontAwesomeIcon
         className="back-icon"
         icon="fa-solid fa-circle-chevron-left"

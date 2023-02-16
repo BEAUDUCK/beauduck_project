@@ -159,6 +159,7 @@ export const consultSlice = createSlice({
         state.maxIdx = resultCount.indexOf(maxVal);
         console.log('여기서 완료', state.maxIdx);
       }
+      return state.maxIdx;
     },
   },
   extraReducers: (builder) => {
