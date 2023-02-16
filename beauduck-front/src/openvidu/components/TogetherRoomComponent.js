@@ -596,13 +596,8 @@ class TogetherRoomComponent extends Component {
     render() {
         const mySessionId = this.state.mySessionId;
         const localUser = this.state.localUser;
-        const chatDisplay = { display: this.state.chatDisplay };
-        const subscribers = this.state.subscribers
-        console.log("내 세션 아이디 :", mySessionId)
-        console.log("내 구독자", this.state.subscribers)
-        console.log(localUser)
-        console.log(this.props.user)
-				console.log("isHost: ", this.state.isHost)
+        // const chatDisplay = { display: this.state.chatDisplay };
+        // const subscribers = this.state.subscribers
 
         return (
             <div id="container">

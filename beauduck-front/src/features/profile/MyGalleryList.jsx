@@ -1,7 +1,7 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const MyGalleryList = ({ myGalleryList }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  // const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className="gallery">

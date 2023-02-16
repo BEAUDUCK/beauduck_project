@@ -95,7 +95,7 @@ const BoardQnAPage = () => {
             />
           )}
         </div>
-        {memberId == nowBoard.memberId && (
+        {memberId === nowBoard.memberId && (
           <div>
             {!isUpdate ? (
               <Button

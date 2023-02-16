@@ -1,13 +1,12 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './InfoPage.style.scss';
 
 const InfoPage = () => {
-  const [result, setResult] = useState(0);
+  // const [result, setResult] = useState(0);
   const navigate = useNavigate();
 
   const showResult = (num) => {
-    console.log('클릭되었어요');
     navigate('/color/detail', { state: num });
   };
 

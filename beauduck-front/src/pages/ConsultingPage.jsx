@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Banner from '../components/banner/Banner';
+// import Banner from '../components/banner/Banner';
 import ConsultingList from '../features/help/ConsultingList';
 import ConsultingModalCreate from '../features/help/ConsultingModalCreate ';
 import {
@@ -14,7 +14,7 @@ import ConsultingModalLoadingHost from '../features/help/ConsultingModalLoadingH
 import banner from '../assets/help_banner.gif';
 import '../features/help/Help.style.scss';
 import Swal from 'sweetalert2';
-import { SimpleDialog } from '../features/login/LoginModal';
+// import { SimpleDialog } from '../features/login/LoginModal';
 import Button from '../components/button/Button';
 import megaphone from '../assets/megaphone.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
