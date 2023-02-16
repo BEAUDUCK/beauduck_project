@@ -1029,8 +1029,8 @@
   }
   .select-button {
     position: absolute;
-    top: 250px;
-    left: 40px;
+    top: 510px;
+    left: 110px;
     display: inline-block;
     width: 200px;
     height: 60px;
@@ -1101,16 +1101,30 @@
 
 // 시작 시 설명
 .information {
-  position: relative;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   background-color: white;
   opacity: 0.5;
+  z-index: 100;
 
   .exit-icon {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 50px;
     font-size: 50px;
+    cursor: pointer;
+    z-index: 998;
+  }
+
+  div {
+    position: relative;
+    z-index: 998;
+    h1 {
+      position: relative;
+      z-index: 998;
+      opacity: 1;
+      color: red;
+    }
   }
 }

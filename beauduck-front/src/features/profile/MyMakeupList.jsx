@@ -13,7 +13,7 @@ const MyMakeupList = ({ recentMakeup, madeMakeup }) => {
       </div>
       <div className="made-div">
         <h2>내가 만든 메이크업</h2>
-        <div>
+        <div className="MyMakeup-item">
           {madeMakeup?.map((item) => (
             <MyMakeupListItem key={item.id} makeup={item} />
           ))}

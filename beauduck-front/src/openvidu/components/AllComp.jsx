@@ -25,6 +25,7 @@ const AllComp = ({
 
   const exitInfo = () => {
     setIsInfo(!isInfo);
+    console.log('누르');
   };
 
   // 진행 시작
@@ -48,7 +49,7 @@ const AllComp = ({
 
   // 진단 종료
   useEffect(() => {
-    if (nowIdx === 30) {
+    if (nowIdx === 5) {
       console.log('인덱스 종료');
       dispatch(setExerciseStatus('done'));
     }
@@ -56,7 +57,6 @@ const AllComp = ({
 
   return (
     <>
-      {isInfo && <Information exitInfo={exitInfo} />}
       {isHost ? (
         <HostVideoComponent
           user={user}
@@ -69,13 +69,18 @@ const AllComp = ({
           subscribers={subscribers}
         />
       ) : (
-        <GuestVideoComponent
-          user={user}
-          leaveSession={leaveSession}
-          isHost={isHost}
-          nowIdx={nowIdx}
-          myStyle={'guest-mine'}
-        />
+        <>
+          <GuestVideoComponent
+            user={user}
+            leaveSession={leaveSession}
+            isHost={isHost}
+            nowIdx={nowIdx}
+            myStyle={'guest-mine'}
+          />
+          {/* {isInfo && (
+            <Information exitInfo={exitInfo} hostNickname={hostNickname} />
+          )} */}
+        </>
       )}
       <div className="other-guest">
         {subscribers.map((sub, subIdx) =>

@@ -32,7 +32,7 @@ const ConsultingModalLoadingHost = ({ loadingOff }) => {
         icon="fa-solid fa-circle-chevron-left"
         onClick={loadingOff}
       />
-      <h3>시작하기</h3>
+      <h2>시작하기</h2>
       <button
         type="button"
         className="loading-bigbtn"
