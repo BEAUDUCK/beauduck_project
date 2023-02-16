@@ -63,8 +63,8 @@ const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
 
     dispatch(selectMain(category));
     dispatch(startMakeup(payload)).then((res) => {
-      dispatch(setMakeupId(makeupId));
-      navigate('/single/mode', { replace: true });
+    dispatch(setMakeupId(makeupId));
+    navigate('/single/mode', { replace: true });
     });
   };
 
@@ -83,7 +83,7 @@ const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
         <p className="makeup-duration">소요시간 : {makeupDetail.duration} 분</p>
         <p className="makeup-content">{makeupDetail.content}</p>
       </div>
-      <div className="select-course">
+      <div className="select-course" style={{ width: "600px"}}>
         <button
           onClick={() => setIsSelected1(!isSelected1)}
           className={isSelected1 ? 'selected' : ''}

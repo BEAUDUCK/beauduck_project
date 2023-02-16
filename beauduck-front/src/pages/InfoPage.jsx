@@ -11,9 +11,11 @@ const InfoPage = () => {
     navigate('/color/detail', { state: num });
   };
 
+  
+  
   return (
     <div className="personal-color">
-      <div className="color-info">
+      <div className="color-info ball">
         <h1>퍼스널 컬러</h1>
         <p>사람의 피부톤과 가장 어울리는 색상을 찾는 색채학 이론</p>
         <p>

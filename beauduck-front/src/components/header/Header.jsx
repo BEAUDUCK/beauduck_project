@@ -25,16 +25,13 @@ const Header = () => {
         <img className="header-logo" src={logo} alt="logo" />
         <h3>뷰덕</h3>
       </div>
-      <ul className={isOpen ? 'header-menu' : 'header-menu2'}>
-        {/* 화면 작아졌을 때 토글로 온 오프 가능능 */}
-        {/* <li onClick={() => navigate('/help')}>도와덕</li>
+      <ul className={isOpen ? "header-menu" : "header-menu2"}>
+        {/* 화면 작아졌을 때 토글로 온 오프 가능 */}
+        <li onClick={() => navigate('/help')}>도와덕</li>
         <li onClick={() => navigate('/single')}>따라해덕</li>
         <li onClick={() => navigate('/together')}>투게덕</li>
-        <li onClick={() => navigate('/board')}>쑥덕쑥덕</li>*/}
-        <li onClick={() => navigate('/no')}>도와덕</li>
-        <li onClick={() => navigate('/no')}>따라해덕</li>
-        <li onClick={() => navigate('/no')}>투게덕</li>
-        <li onClick={() => navigate('/no')}>쑥덕쑥덕</li>
+        <li onClick={() => navigate('/board')}>쑥덕쑥덕</li>
+        <li onClick={() => navigate('/color')}>퍼스널 컬러</li>
       </ul>
       <ul className="header-auth">
         {memberId ? (

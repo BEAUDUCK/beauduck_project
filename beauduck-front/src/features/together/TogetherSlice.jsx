@@ -65,8 +65,17 @@ export const TogetherSlice = createSlice({
     togetherDetail: [],
     roomId: "",
     userList: [],
+    isHost: false,
+    isActive: false,
   },
-  reducers: {},
+  reducers: {
+    checkIsHost: (state, action) => {
+      state.isHost = true
+    },
+    changeIsActive: (state, action) => {
+      state.isActive = true
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getTogetherList.fulfilled, (state, action) => {
@@ -78,9 +87,11 @@ export const TogetherSlice = createSlice({
       })
       .addCase(postNewTogether.fulfilled, (state, action) => {
         state.togetherlist = action.payload
+        state.isHost = true
       })
       .addCase(enterUser.fulfilled, (state, action) => {
         state.userList = action.payload.userList
+        state.isHost = false
       })
       .addCase(outUser.fulfilled, (state, action) => {
         state.userList = action.payload.userList
@@ -90,3 +101,6 @@ export const TogetherSlice = createSlice({
 });
 
 export default TogetherSlice.reducer;
+export const {
+  changeIsActive
+} = TogetherSlice.actions
