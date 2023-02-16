@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useRef } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './Signup.style.scss';
 import { goToLogin, signUp, UserLogin } from '../features/login/MemberSlice';
 import { getAccessToken } from '../api/cookie';
@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router';
 import loginImg from '../assets/login.png';
 import Swal from 'sweetalert2';
+import { useEffect } from 'react';
 
 const SignupPage = () => {
   const dispatch = useDispatch();
@@ -91,6 +92,16 @@ const SignupPage = () => {
     )
     dispatch(signUp(payload)).then(() => navigate('/'));
   };
+
+  // 230216 현혁 추가
+  const { loginRejected } = useSelector(state => state.member)
+  
+  useEffect(() => {
+    console.log(loginRejected)
+    if (!loginRejected) {
+      navigate("/")
+    }
+  }, [])
 
   return (
     <div className="signup-div">

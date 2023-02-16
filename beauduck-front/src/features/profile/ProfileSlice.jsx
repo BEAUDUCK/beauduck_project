@@ -87,7 +87,7 @@ export const postSaveFace = createAsyncThunk(
     } else {
       Swal.fire(
         "성공",
-        "재촬영 해주시기 바랍니다.",
+        "촬영이 완료되었습니다.",
         "success"
       )
       console.log("성공")
