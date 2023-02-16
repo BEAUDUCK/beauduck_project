@@ -1,6 +1,8 @@
 // import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './InfoPage.style.scss';
+import color1 from '../assets/color1.png';
+import color2 from '../assets/color2.png';
 
 const InfoPage = () => {
   // const [result, setResult] = useState(0);
@@ -10,21 +12,18 @@ const InfoPage = () => {
     navigate('/color/detail', { state: num });
   };
 
+<<<<<<< HEAD
+=======
   
+>>>>>>> 1b4cafb09db5fcc3a9500ff67c76b2ca5268a28c
   return (
     <div className="personal-color">
       <div className="color-info ball">
+        {/* <img src={color1} alt="" className="color1" /> */}
+        {/* <img src={color2} alt="" className="color2" /> */}
         <h1>퍼스널 컬러</h1>
         <p>사람의 피부톤과 가장 어울리는 색상을 찾는 색채학 이론</p>
-        <p>
-          피부톤에 어울리는 색을 웜톤 쿨톤이나 봄, 여름, 가을, 겨울로 나눈다.
-        </p>
-        <p>
-          어떤 색조 화장품, 옷, 장신구가 어울리는지를 찾기 위해 주로 사용한다.
-        </p>
-
-        <p>본인에게 어떤 색이 베스트, 워스트인지 알고 싶을 때 이용하면 좋다.</p>
-        <p>주의해야 할 것은 어디까지나 과학적인 이론이 아니라는 점이다. </p>
+        <p>본인에게 어떤 색이 베스트, 워스트인지 알고 싶을 때 이용하면 좋다</p>
       </div>
       <div>
         <div className="spring-div">

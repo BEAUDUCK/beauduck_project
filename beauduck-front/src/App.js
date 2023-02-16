@@ -53,6 +53,7 @@ import { getAccessToken } from './api/cookie';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import InfoDetailPage from './pages/InfoDetailPage';
+import ConsultingResultGuestPage from './pages/ConsultingResultGuestPage';
 
 library.add(
   faXmark,
@@ -96,6 +97,10 @@ function App() {
           <Route path="/help" element={<ConsultingPage />} />
           <Route path="/help/room" element={<ConsultingRoomPage />} />
           <Route path="/help/result" element={<ConsultingResultHostPage />} />
+          <Route
+            path="/help/result/guest"
+            element={<ConsultingResultGuestPage />}
+          />
           {/* 따라해덕 */}
           <Route path="/single" element={<SinglePage />} />
           <Route path="/single/mode" element={<SingleModePage />} />
