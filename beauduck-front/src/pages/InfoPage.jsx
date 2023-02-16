@@ -1,8 +1,7 @@
 // import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './InfoPage.style.scss';
-import color1 from '../assets/color1.png';
-import color2 from '../assets/color2.png';
+import color from '../assets/colors.png';
 
 const InfoPage = () => {
   // const [result, setResult] = useState(0);
@@ -14,9 +13,12 @@ const InfoPage = () => {
 
   return (
     <div className="personal-color">
-      <div className="color-info ball">
-        {/* <img src={color1} alt="" className="color1" /> */}
-        {/* <img src={color2} alt="" className="color2" /> */}
+      <div className="color-info">
+        <div>
+          <div>
+            <img src={color} alt="" />
+          </div>
+        </div>
         <h1>퍼스널 컬러</h1>
         <p>사람의 피부톤과 가장 어울리는 색상을 찾는 색채학 이론</p>
         <p>본인에게 어떤 색이 베스트, 워스트인지 알고 싶을 때 이용하면 좋다</p>
