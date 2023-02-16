@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './InfoPage.style.scss';
 import result1 from '../assets/consultresult/springlight.png';
 import result2 from '../assets/consultresult/springbright.png';
@@ -12,8 +12,12 @@ import result7 from '../assets/consultresult/falldeep.png';
 import result8 from '../assets/consultresult/fallmute.png';
 import result9 from '../assets/consultresult/winterdeep.png';
 import result10 from '../assets/consultresult/winterbright.png';
+import { deleteConsultingRoom } from '../features/help/ConsultingSlice';
 
 const ConsultingResultHostPage = () => {
+  const dispatch = useDispatch();
+  const { roomId } = useSelector((state) => state.consulting);
+
   const resultList = [
     result1,
     result2,
@@ -28,11 +32,13 @@ const ConsultingResultHostPage = () => {
   ];
 
   const { maxIdx } = useSelector((state) => state.consulting);
+  useEffect(() => {
+    dispatch(deleteConsultingRoom(roomId));
+  });
 
   return (
     <>
-      <div className="container">
-        <h1>컨설팅 결과</h1>
+      <div className="container" style={{ textAlign: 'center' }}>
         <img src={resultList[maxIdx]} alt="" className="personal-detail" />
       </div>
     </>

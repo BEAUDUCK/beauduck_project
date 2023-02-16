@@ -57,7 +57,7 @@ const GuestVideoComponent = ({
     <div
       className={[
         'guest-stream',
-        subIdx % 2 ? 'even-guest' : 'odd-guest',
+        subIdx < 3 ? 'even-guest' : 'odd-guest',
         `${myStyle}`,
       ].join(' ')}
     >
