@@ -17,29 +17,15 @@
         text-align: center;
         box-shadow: 0px 0px 20px gray;
 
-        // 230216 현혁
-        // background-image: url("../assets/duckpattern.jpg");
-        // background-size: cover;
-        // background-repeat: no-repeat;
-        border: 3px solid black;
-
-
+        img {
+            width: 800px;
+        }
         p {
             margin: 0;
             margin-bottom: 5px;
             font-size: 16px;
         }
     }
-    img {
-        width: 200px;
-        height: 200px;
-        border-radius: 100px;
-        padding: 4px;
-        border: 2px dashed rgb(224, 183, 183);
-        vertical-align: middle;
-        margin-left: 10px;
-        margin-right: 10px;
-    } 
 
     div {
         div {
@@ -48,7 +34,18 @@
             height: 500px;
             text-align: center;
             line-height: 500px;
+            img {
+                width: 200px;
+                height: 200px;
+                border-radius: 100px;
+                padding: 4px;
+                border: 2px dashed rgb(224, 183, 183);
+                vertical-align: middle;
+                margin-left: 10px;
+                margin-right: 10px;
+            } 
         }
+
         .spring-div {
             background-color: rgb(215, 235, 184);
 

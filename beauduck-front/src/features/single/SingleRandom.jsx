@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -12,8 +13,17 @@ const SingleRandom = () => {
 
   return (
     <div className="random-one">
-      <img src={random?.img} alt="" />
-      <p>{random?.title}</p>
+      <div className="random-one-inside">
+        <img src={random?.img} alt="" />
+        <div>
+          <p>{random?.title}</p>
+          <div className="star-info">
+            <FontAwesomeIcon className="star-icon" icon="fa-solid fa-star" />
+            <p>{Math.round(random.score * 10) / 10}</p>
+            <p>({random.count})</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
