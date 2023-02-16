@@ -12,7 +12,6 @@ const InfoPage = () => {
   };
 
   
-  
   return (
     <div className="personal-color">
       <div className="color-info ball">
