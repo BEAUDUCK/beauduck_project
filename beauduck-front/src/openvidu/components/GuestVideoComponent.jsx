@@ -19,7 +19,7 @@ const GuestVideoComponent = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isExercising } = useSelector((state) => state.consulting);
+  const { isExercising, isFinished } = useSelector((state) => state.consulting);
   const admin = useSelector((state) => state.consulting.consultDetail.hostId);
   const { memberId } = useSelector((state) => state.member);
   const resultUsers = useRef({
