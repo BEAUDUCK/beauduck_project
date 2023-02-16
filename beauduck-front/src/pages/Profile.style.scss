@@ -365,15 +365,13 @@ hr {
     padding-bottom: 10px;
   }
 
-  div {
-    width: 50%;
-    text-align: center;
-  }
   .recent-div {
     background-color: rgba(225, 233, 252, 0.8);
     border-top-right-radius: 100px;
     padding-top: 30px;
     padding-bottom: 30px;
+    width: 50%;
+    text-align: center;
 
     h2 {
       width: 280px;
@@ -381,7 +379,7 @@ hr {
       color: rgb(127, 142, 201)
     }
 
-    div {
+    .MyMakeup-item {
       width: 90%;
       margin: auto;
       
@@ -434,6 +432,8 @@ hr {
     padding-top: 30px;
     padding-bottom: 30px;
     min-height: 300px;
+    width: 50%;
+    text-align: center;
 
     h2 {
       width: 260px;

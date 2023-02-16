@@ -7,183 +7,192 @@
   // z-index: 10;
   justify-content: end;
 
-  .consulting-make-div {
-    position: absolute;
-    top: 100px;
-    left: 90px;
-
-    width: 410px;
-    height: 350px;
-    // background-color: rgb(200, 200, 200);
-    border-radius: 30px;
-    // box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.5);
-
-    .fake-border1 {
-      position: absolute;
-      top: -10px;
-      left: -20px;
-      border-top: 5px solid #fddddf;
-      border-left: 5px solid #fddddf;
-      border-top-left-radius: 50px;
-      width: 100px;
-      height: 100px;
-    }
-    .fake-border2 {
-      position: absolute;
-      top: 250px;
-      left: 350px;
-      border-bottom: 5px solid #fddddf;
-      border-right: 5px solid #fddddf;
-      border-bottom-right-radius: 50px;
-      width: 100px;
-      height: 100px;
-    }
-    h1 {
-      display: inline-block;
-      width: 400px;
-      font-size: 33px;
-      margin-top: 40px;
-      margin-left: 30px;
-      color: #ff86a9;
-      text-shadow: 2px 2px #fddddf;
-    }
-
-    p {
-      margin: 0;
-      margin-left: 30px;
-    }
-
-    div {
-      position: relative;
-      width: 200px;
-      height: 75px;
-      svg {
-          position: absolute;
-          right: -8px;
-          bottom: 0px;
-          color: #ff86a9;
-          cursor: pointer;
-      }
-  }
-    img {
-      position: absolute;
-      top: 170px;
-      left: 250px;
-      
-      width: 150px;
-    }
-  }
-
   #help-banner {
     width: 50vw;
     margin-bottom: 200px;
   }
-
 }
 
-.consulting-div {
+.consulting-section1 {
   position: relative;
-  width: 100%;
-  height: 100vh;
   display: flex;
-  justify-content: end;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 50px);
+  margin-top: 100px;
+  background-color: white;
+  flex-wrap: wrap;
 
-  .back-shape3 {
-    position: absolute;
-    top: -50px;
-    left: -50px;
-    width: 35%;
-    z-index: 5;
-  }
-  .back-shape4 {
-    position: absolute;
-    top: 350px;
-    left: 230px;
-    width: 27%;
-    z-index: 6;
-  }
-  .random-consulting {
-    position: absolute;
-    top: 100px;
-    left: 100px;
-    width: 410px;
-    height: 500px;
-    z-index: 7;
-    background-color: white;
-    border-radius: 30px;
-    box-shadow: 20px 20px 8px rgba(0, 0, 0, 0.5);
-    text-align: center;
+  .consulting-section1-left {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    width: 40%;
+    height: 700px;
+    margin-right: 80px;
 
-    .consult-nickname {
-      display: inline-block;
-      width: 120px;
-      height: 30px;
-      line-height: 30px;
+    .consulting-make-div {
+      position: relative;
+      width: 500px;
+      height: 300px;
       border-radius: 30px;
-      background-color: rgb(204, 210, 240);
-      font-weight: 500;
-      margin-top: 40px;
-      margin-bottom: 20px;
-    }
-
-    p {
-      margin: 0;
-      margin-bottom: 15px;
-    }
-
-    button {
-      width: 200px;
-      height: 45px;
-      border-radius: 10px;
-      border: none;
-      font-size: 22px;
-      font-weight: 600;
-      background-color: rgb(47, 165, 153);
-      color: white;
-      cursor: pointer;
-    }
-
-    div { 
-      width: 220px;
-      height: 220px;
-      margin: auto;
-      background-color: #F5DE5E;
-      border-radius: 200px;
-      text-align: center;
-      img {
-        margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      word-break: keep-all;
+  
+      background-color: #feebb6;
+      border-radius: 70px;
+      box-shadow: 8px 8px 5px rgba(210, 210, 210, 0.8);
+      padding-left: 30px;
+      padding-right: 30px;
+  
+      h1 {
+        display: inline-block;
+        width: 400px;
+        font-size: 33px;
+        margin-top: 40px;
+        margin-left: 30px;
+        font-family: 'CookieRun';
+        line-height: 35px;
+        // color: #ff86a9;
+        // text-shadow: 2px 2px #fddddf;
+      }
+  
+      p {
+        margin: 0;
+        margin-left: 30px;
+      }
+  
+      div {
+        position: relative;
         width: 200px;
-        border-radius: 100px;
-      }  
+        height: 56px;
+        svg {
+            position: absolute;
+            right: -8px;
+            bottom: 0px;
+            color: #ff86a9;
+            cursor: pointer;
+        }
     }
-    .user-count {
-      position: absolute;
-      top: 90px;
-      left: calc(50% - 110px);
-      opacity: 0;
-      width: 220px;
-      height: 220px;
-      line-height: 220px;
-      border-radius: 200px;
-      background-color: rgba(255, 255, 255, 0.7);
-      font-size: 50px;
-      font-family: 'Jalnan';
+      img {
+        position: absolute;
+        top: 100px;
+        right: 35px;
+        
+        width: 170px;
+      }
+    }
 
-      &:hover {
-        opacity: 1;
-        transition: .5s ease-in-out;
+    .random-consulting{
+      margin-top: 0px;
+      border-radius: 70px;
+      background-color: #ddecca;
+      box-shadow: 8px 8px 5px rgba(210, 210, 210, 0.8);
+      width: 500px;
+      height: 300px;
+      padding-left: 30px;
+      padding-right: 30px;
+      display: flex;
+      align-items: center;
+
+      .random-cosult-left {
+        display: inline-block;
+        width: 250px;
+        height: 280px;
+        margin-top: 10px;
+        text-align: center;
+
+        img {
+          margin-top: 20px;
+          width: 200px;
+          border-radius: 100px;
+        }  
+
+        .consult-nickname {
+          display: inline-block;
+          width: 150px;
+          height: 30px;
+          line-height: 30px;
+          border-radius: 30px;
+          background-color: rgb(204, 210, 240);
+          font-weight: 500;
+          margin-top: 0px;
+          margin-bottom: 20px;
+        }
+      }
+      .random-consult-right {
+        display: inline-block;
+        width: 230px;
+        height: 240px;
+        margin-top: 30px;
+        text-align: left;
+        padding-left: 20px;
+
+        h3 { 
+          display: inline-block;
+          height: 40px;
+          width: 230px;
+        }
+            
+        p {
+          display: inline-block;
+          width: 230px;
+          height: 60px;
+          word-break: break-all;
+          margin: 0;
+          margin-bottom: 15px;
+          
+        }
+
+        button {
+          width: 200px;
+          height: 45px;
+          border-radius: 10px;
+          border: none;
+          font-size: 22px;
+          font-weight: 600;
+          background-color: rgb(47, 165, 153);
+          color: white;
+          cursor: pointer;
+        }
+        .user-count {
+          position: absolute;
+          top: 90px;
+          left: calc(50% - 110px);
+          opacity: 0;
+          width: 220px;
+          height: 220px;
+          line-height: 220px;
+          border-radius: 200px;
+          background-color: rgba(255, 255, 255, 0.7);
+          font-size: 50px;
+          font-family: 'Jalnan';
+    
+          &:hover {
+            opacity: 1;
+            transition: .5s ease-in-out;
+          }
+        }
       }
     }
   }
 }
 
+.consulting-div {
+  position: relative;
+  width: 45%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+}
+
 .consulting-list {
-  width: 60%;
   display: flex;
   flex-wrap: wrap;
   // text-align: center;
   justify-content: start;
-  padding-top: 50px;
 
   .logo {
     width: 100px;
@@ -204,17 +213,18 @@
     // display: grid;
     // grid-template-columns: repeat(3, minmax(15vw, 15vw));
     // grid-template-columns: repeat(3, minmax(200, 200));
-    margin-top: 30px;
+    margin-bottom: 30px;
   }
 
   .flip {
     display: inline-block;
-    width: 210px;
-    height: 200px;
+    width: 200px;
+    height: 180px;
     perspective: 1100px;
     margin: 5px;
     text-align: center;
-
+    margin-left: 10px;
+    margin-bottom: 10px;
   }
 
   .card {
@@ -244,8 +254,8 @@
       border-top-right-radius: 50px;
 
       img {
-        width: 150;
-        height: 140px;
+        width: 140;
+        height: 125px;
         border-radius: 30px;
       }
 
@@ -255,7 +265,7 @@
       height: 30%;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items:center;
     }
   
   .back {

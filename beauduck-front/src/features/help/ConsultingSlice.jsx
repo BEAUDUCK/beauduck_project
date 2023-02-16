@@ -159,6 +159,7 @@ export const consultSlice = createSlice({
         state.maxIdx = resultCount.indexOf(maxVal);
         console.log('여기서 완료', state.maxIdx);
       }
+      return state.maxIdx;
     },
   },
   extraReducers: (builder) => {
@@ -174,6 +175,7 @@ export const consultSlice = createSlice({
         state.myResult = [];
         state.allResult = [];
         state.isExercising = 'start';
+        state.maxIdx = -1; // 퍼컬 결과 초기화
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;
