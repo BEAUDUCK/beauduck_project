@@ -10,7 +10,10 @@ const Crawling = () => {
     (state) => state.consulting,
   );
 
-  const newsTitle = infoNews[0]?.title.replace('&apos;', '');
+  const newsTitle = infoNews[0]?.title
+    .replace('&apos;', '')
+    .replace('/', '')
+    .replace(/<b>/g, ' ');
   const blogTitle = infoBlog[0]?.title.replace('/', '').replace(/<b>/g, ' ');
 
   const newsContent = infoNews[0]?.description

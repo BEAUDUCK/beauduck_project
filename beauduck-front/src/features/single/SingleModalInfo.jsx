@@ -32,14 +32,19 @@ const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
   const main = ['skin', 'eyebrow', 'eye', 'conture', 'lip'];
 
   const selectSubmit = () => {
-
-    if (!isSelected1 && !isSelected2 && !isSelected3 && !isSelected4 && !isSelected5) {
+    if (
+      !isSelected1 &&
+      !isSelected2 &&
+      !isSelected3 &&
+      !isSelected4 &&
+      !isSelected5
+    ) {
       Swal.fire(
-        "모든 과정이 선택되지 않았습니다.",
-        "최소 하나의 과정을 선택해야 합니다.",
-        "error"
-      )
-      return
+        '모든 과정이 선택되지 않았습니다.',
+        '최소 하나의 과정을 선택해야 합니다.',
+        'error',
+      );
+      return;
     }
 
     for (let i = 1; i < 6; i++) {
@@ -65,22 +70,18 @@ const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
 
   return (
     <div className="makeup-detail">
-      <div className="makeup-detail-top" onClick={() => isToggleInfo()}>
-        <div className="makeup-detail-left">
-          <h3 >{makeupDetail.title}</h3>
-          <div className="star-info">
-            <FontAwesomeIcon className="star-icon" icon="fa-solid fa-star" />
-            <p>{makeupDetail.score}</p>
-            <p>({makeupDetail.count})</p>
-          </div>
-          <p className="makeup-duration">
-            소요시간 : {makeupDetail.duration} 분
-          </p>
-          <p className="makeup-content">{makeupDetail.content}</p>
+      <div className="makeup-detail-left">
+        <img src={makeupDetail.img} alt="" />
+      </div>
+      <div className="makeup-detail-right">
+        <h3>{makeupDetail.title}</h3>
+        <div className="star-info">
+          <FontAwesomeIcon className="star-icon" icon="fa-solid fa-star" />
+          <p>{Math.round(makeupDetail.score * 10) / 10}</p>
+          <p>({makeupDetail.count})</p>
         </div>
-        <div className="makeup-detail-right">
-          <img src={makeupDetail.img} alt="" />
-        </div>
+        <p className="makeup-duration">소요시간 : {makeupDetail.duration} 분</p>
+        <p className="makeup-content">{makeupDetail.content}</p>
       </div>
       <div className="select-course" style={{ width: "600px"}}>
         <button

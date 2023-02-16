@@ -5,18 +5,18 @@ const MyGalleryList = ({ myGalleryList }) => {
 
   return (
     <div className="gallery">
-      <button onClick={() => setIsOpen(!isOpen)}>
+      {/* <button onClick={() => setIsOpen(!isOpen)}>
         {isOpen ? '공개' : '비공개'}
-      </button>
-      {isOpen ? (
-        <div>
-          {myGalleryList?.map((item) => (
-            <img src={item.img} key={item.id} alt="" className="gallery-pic" />
-          ))}
-        </div>
-      ) : (
+      </button> */}
+      {/* {isOpen ? ( */}
+      <div>
+        {myGalleryList?.map((item) => (
+          <img src={item.img} key={item.id} alt="" className="gallery-pic" />
+        ))}
+      </div>
+      {/* ) : (
         <></>
-      )}
+      )} */}
     </div>
   );
 };

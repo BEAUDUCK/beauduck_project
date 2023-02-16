@@ -10,26 +10,23 @@ const SinglePopularItem = ({ modeItem, idx }) => {
     setIsInfo(!isInfo);
   };
 
-  const bgColor = [
-    ['#BAB2DB', '#3E2868'],
-    ['#E3CDD6', '#E97694'],
-    ['#E9DFD0', '#F5BA5C'],
-    ['#F4C3A5', '#E66E32'],
-  ];
+  const bgColor = ['#feccbe', '#feebb6', '#ddecca', '#b8e6e1'];
   const color = parseInt(idx % 4);
   return (
     <>
       <div
-        className={['makeup-div', idx % 2 ? 'makeup-div-odd' : ''].join(' ')}
-        style={{ backgroundColor: `${bgColor[color][0]}` }}
+        className="makeup-div"
+        style={{ backgroundColor: `${bgColor[color]}` }}
       >
-        <div onClick={isToggleInfo}>
+        <div className="makeup-div-inside" onClick={isToggleInfo}>
           <img src={modeItem.img} alt="img" />
-          <p style={{ color: `${bgColor[color][1]}` }}>{modeItem.title}</p>
-          <div className="star-info">
-            <FontAwesomeIcon className="star-icon" icon="fa-solid fa-star" />
-            <p>{Math.round(modeItem.score * 10) / 10}</p>
-            <p>({modeItem.count})</p>
+          <div>
+            <p>{modeItem.title}</p>
+            <div className="star-info">
+              <FontAwesomeIcon className="star-icon" icon="fa-solid fa-star" />
+              <p>{Math.round(modeItem.score * 10) / 10}</p>
+              <p>({modeItem.count})</p>
+            </div>
           </div>
         </div>
       </div>
