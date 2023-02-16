@@ -1,52 +1,31 @@
 .single-main {
-    // background-color: rgb(255, 235, 235);
+    background-color: white;
     margin-top: 50px;
     
+    .makeup-popular {
+        height: calc(100vh - 50px);
 
-    .best-text{
-        position: absolute;
-        display: inline-block;
-        width: 100%;
-        text-align: center;
-        z-index: 9;
-        font-size: 400px;
-        margin: auto;
-        // color: white;
-        color : rgb(255, 235, 235);
-        font-family: 'Abril Fatface', cursive;
-    }
-
-    .hide-div {
-        position: absolute;
-        top: 600px;
-        width: 100%;
-        height: 50px;
-        z-index: 9;
-        // background-color: rgb(255, 235, 235);
-        // background-color: white;
-    }
-
-    .single-h2 {
-        padding-left: 4%;
-        display: inline-block;
-        width: 150px;
-        margin: 0;
-    }
+        .best-text{
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            z-index: 9;
+            font-size: 70px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            color: rgb(31, 31, 31);
+            text-shadow: 2px 2px rgb(201, 201, 201);
+            font-family: 'Abril Fatface', cursive;
+        }
     
-    .single-hr {
-        width: 140px;
-        height: 2px;
-        background-color: #444444;
-        border-radius: 10px;
-        text-align: left;
-        margin-left: 4%;
-        margin-bottom: 30px;
+        .alice-carousel {
+            z-index: 10;
+        }
     }
+
 }
 
-.alice-carousel {
-    z-index: 10;
-}
 
 .capture-div {
     text-align: center;
@@ -396,8 +375,8 @@
 
         .finish-btn {
             position: absolute;
-            top: 700px;
-            right: 150px;
+            top: 650px;
+            right: 120px;
 
             width: 150px;
             height: 45px;
@@ -422,15 +401,22 @@
 // 메인 하단
 .makeup-special {
     position: relative;
+    display: flex;
+    justify-content: center;
     width: 100%;
-    height: 900px;
-    // background-color: #FFF5D1;
+    height: calc(100vh - 50px);
+    margin-top: 100px;
+    background-color: white;
+    flex-wrap: wrap;
 
     .makeup-special-section1 {
         position: relative;
-        height: 500px;
         display: flex;
-        align-items: center;
+        flex-wrap: wrap;
+        justify-content: end;
+        width: 45%;
+        height: 550px;
+        margin-right: 30px;
 
         h1 {
             display: inline-block;
@@ -442,49 +428,164 @@
         }
 
         .section1-create{
-            margin-left: 100px;
+            position: relative;
+            width: 550px;
+            height: 250px;
             display: flex;
             flex-direction: column;
+            word-break: keep-all;
 
-            
-            h2 {
-                display: inline-block;
-                max-width: 450px;
-                font-size: 30px;
-            }
-            p {
-                display: inline-block;
-                max-width: 400px;
-                font-size: 17px;
-                margin: 0;
+            background-color: #feccbe;
+            border-radius: 70px;
+            box-shadow: 8px 8px 5px rgba(210, 210, 210, 0.8);
+            padding-left: 30px;
+            padding-right: 30px;
+
+            img {
+                position: absolute;
+                width: 140px;
+                top: 70px;
             }
 
-            div {
-                position: relative;
-                width: 200px;
-                height: 75px;
-                svg {
-                    position: absolute;
-                    right: 10px;
-                    bottom: 20px;
-                    color: #23C4B1;
-                    cursor: pointer;
+            div {       
+                margin-top: 20px;
+                margin-left: 160px;
+                display: inline-block;
+                width: 370px;    
+
+                h2 {
+                    display: inline-block;
+                    max-width: 450px;
+                    font-size: 27px;
+                    font-family: 'CookieRun';
+                }
+                p {
+                    display: inline-block;
+                    max-width: 400px;
+                    font-size: 17px;
+                    margin: 0;
+                }
+
+                div {
+                    position: relative;
+                    margin-top: 0;
+                    width: 200px;
+                    height: 75px;
+                    svg {
+                        position: absolute;
+                        right: 10px;
+                        bottom: 20px;
+                        color: #23C4B1;
+                        cursor: pointer;
+                    }
                 }
             }
         }
+        .section1-random{
+            margin-top: 30px;
+            border-radius: 70px;
+            background-color: #feebb6;
+            box-shadow: 8px 8px 5px rgba(210, 210, 210, 0.8);
+            width: 550px;
+            height: 260px;
+            padding-left: 30px;
+            padding-right: 30px;
+            display: flex;
+            align-items: center;
 
-        .section1-ai {
-            position: absolute;
-            top: 170px;
-            right: 80px;
+            .random-header {
+                margin-top: 20px;
+                display: inline-block;
+                width: 270px;
+                height: 220px;
+                text-align: center;
+
+                .miniDuck {
+                    width: 130px;
+                    display: inline-block;
+                }
+                h1 {
+                    display: inline-block;
+                    text-align: center;
+                    width: 270px;
+                    margin: 0;
+                    line-height: 40px;
+                    color:rgb(52, 52, 52);
+                    font-size: 33px;
+                    font-family: 'CookieRun';
+                    letter-spacing: 1.5px;
+                    // text-shadow: 3px 3px #fcd750;
+                }
+                .random-h1-two {
+                    font-size: 28px;
+                }
+            } 
+        .random-one {
+            display: inline-block;
+            width: 280px;
+            height: 200px;
+            text-align: center;
+            // background-color: #feccbe;
+            border-radius: 70px;
+            .random-one-inside {
+                width: 240px;
+                height: 160px;
+                margin-top: 20px;
+                margin-left: 20px;
+                border-radius: 50px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 100px;
+                }
+                
+                div {
+                    width: 110px;
+                    p {
+                        display: inline-block;
+                        word-break: keep-all;
+                        font-size: 17px;
+                        font-family: 'Jalnan';
+                    }
+                    .star-info {
+                        p {
+                            display: inline;
+                            margin-left: 5px;
+                            font-size: 13px;
+                            color: rgb(86, 86, 86);
+                        }
+                    }
+                }
+            }
+        }
+        }
+    }
+
+    .makeup-special-section2 {
+        display: flex;
+        justify-content: start;
+        position: relative;
+        width: 45%;
+        height: 550px;
+        margin-left: 30px;
+
+        .section2-ai {
+            position: relative;
+            display: inline-block;
             z-index: 100;
             width: 500px;
             height: 550px;
-            background-color: white;
-            border-radius: 100px;
+            background-color: #ddecca;
+            border-radius: 70px;
             box-shadow: 8px 8px 5px rgba(210, 210, 210, 0.8);
-            padding-left: 50px;
-            padding-right: 30px;
+            padding-left: 60px;
+            padding-right: 50px;
 
             h1 {
                 width: 430px;
@@ -496,87 +597,26 @@
             p {
                 margin: 0;
             }
-            
-            .section1-bottom {
-                display: flex;
-                margin-top: 40px;
-
-                div {
-                    position: relative;
-                    width: 200px;
-                    height: 35px;
-                    svg {
-                        position: absolute;
-                        right: 15px;
-                        bottom: 10px;
-                        color: #4D8AF0;
-                        cursor: pointer;
-                    }
-                }
-                img { 
-                    width: 300px;
-                }
-            }
         }
-
-        #backShape1 {
-            position: absolute;
-            top: 0px;
-            left: 40%;
-            width: 550px;
-            z-index: 1;
-        }
-        
-        #backShape2 {
-            position: absolute;
-            top: 200px;
-            left: 38%;
-            width:700px;
-            z-index: 0;
-        }
-    }
-
-    .makeup-special-section2 {
-        position: absolute;
-        top: 450px;
-        width: 40vw;
-        min-width: 500px;
-        height: 450px;
-
-        background-color: #fbe9a7;
-        border-top-right-radius: 100px;
-
-        .random-header {
+        .section2-bottom {
             display: flex;
-            justify-content: start;
-            align-items: center;
-            padding-left:20px;
-        }
+            margin-top: 50px;
 
-        .random-h1 {
-            display: inline-block;
-            width: 350px;
-            height: 100px;
-            padding-top: 25px;
-            padding-bottom: 25px;
-            h1 {
-                display: inline-block;
-                text-align: center;
-                margin: 0;
-                line-height: 50px;
-                color:rgb(52, 52, 52);
-                // text-shadow: 3px 3px #fcd750;
+            div {
+                position: relative;
+                width: 200px;
+                height: 35px;
+                svg {
+                    position: absolute;
+                    right: 15px;
+                    bottom: 10px;
+                    color: #4D8AF0;
+                    cursor: pointer;
+                }
             }
-            .random-h1-one {
-                font-size: 37px;
+            img { 
+                width: 310px;
             }
-            .random-h1-two {
-                margin-left: 50px;
-            }
-        }
-        .miniDuck {
-            width: 150px;
-            display: inline-block;
         }
     }
 }   

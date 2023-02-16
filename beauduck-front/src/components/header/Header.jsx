@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './Header.style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/logo_original.png';
 import { useState } from 'react';
 import LoginModal from '../../features/login/LoginModal';
@@ -16,17 +16,16 @@ const Header = () => {
   const { memberId } = useSelector((state) => state.member);
   const [isOpen, setMenu] = useState(false);
   const toggleMenu = () => {
-    setMenu(isOpen => !isOpen);
-  }
+    setMenu((isOpen) => !isOpen);
+  };
 
   return (
     <nav className="header">
-      <div className="header-name"
-      onClick={() => navigate('/')}>
+      <div className="header-name" onClick={() => navigate('/')}>
         <img className="header-logo" src={logo} alt="logo" />
         <h3>뷰덕</h3>
       </div>
-      <ul className={isOpen ? "header-menu" : "header-menu2"}>
+      <ul className={isOpen ? 'header-menu' : 'header-menu2'}>
         {/* 화면 작아졌을 때 토글로 온 오프 가능능 */}
         {/* <li onClick={() => navigate('/help')}>도와덕</li>
         <li onClick={() => navigate('/single')}>따라해덕</li>
@@ -39,17 +38,20 @@ const Header = () => {
       </ul>
       <ul className="header-auth">
         {memberId ? (
-        <li onClick={() => navigate('/profile')}>
-          <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user"/>
-        </li>
+          <li onClick={() => navigate('/profile')}>
+            <FontAwesomeIcon className="user-icon" icon="fa-regular fa-user" />
+          </li>
         ) : null}
         <li className="header-not-auth">
-            {!memberId ? <LoginModal /> : <LogoutModal />}
+          {!memberId ? <LoginModal /> : <LogoutModal />}
         </li>
       </ul>
       <>
-        <FontAwesomeIcon onClick={()=>toggleMenu()}
-        className="user-toggle" icon={faBars}/>
+        <FontAwesomeIcon
+          onClick={() => toggleMenu()}
+          className="user-toggle"
+          icon={faBars}
+        />
       </>
     </nav>
   );
