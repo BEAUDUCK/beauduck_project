@@ -1,6 +1,15 @@
 .single-main {
     background-color: white;
     margin-top: 50px;
+
+    .single-banner-div {
+        width: 100%;
+        text-align: center;
+        .single-banner {
+            width: 80%;
+            margin: auto;
+        }
+    }
     
     .makeup-popular {
         height: calc(100vh - 50px);
@@ -11,10 +20,12 @@
             width: 100%;
             text-align: center;
             z-index: 9;
-            font-size: 70px;
+            font-size: 60px;
             margin-top: 30px;
             margin-bottom: 50px;
-            color: rgb(31, 31, 31);
+            color: #568A35;
+            text-underline-offset : 10px;
+            text-decoration: 2px underline #568A35;
             text-shadow: 2px 2px rgb(201, 201, 201);
             font-family: 'Abril Fatface', cursive;
         }

@@ -38,22 +38,39 @@ const GuestVideoComponent = ({
         });
         dispatch(setMyExerciseResult(resultUsers.current.personalResults));
       }
+      setTimeout(() => {
+        navigate('/help/result/guest', { replace: true });
+      });
+      // console.log('여기는..?');
+      // user.getStreamManager().stream.session.on('signal:result', (event) => {
+      //   console.log('이게 찍히면 끝', event.data);
+      //   setTimeout(() => {
+      //     leaveSession();
+      //     navigate('/help/result/guest', { state: event.data });
+      //   });
+      // });
     }
-    return;
   });
 
   useEffect(() => {
-    user.getStreamManager().stream.session.on('signal:result', (event) => {
-      console.log(event.data);
-      if (isExercising === 'done') {
-        console.log('끝났엉 isExercising', isExercising);
-        finishExercise();
+    console.log('언제 바뀌니...');
+    if (isFinished) {
+      console.log('여기는..?');
+      user.getStreamManager().stream.session.on('signal:result', (event) => {
+        console.log('이게 찍히면 끝', event.data);
         setTimeout(() => {
           leaveSession();
-          navigate('/help/result');
-        }, 10000);
-      }
-    });
+          navigate('/help/result/guest', { state: event.data });
+        });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isExercising === 'done') {
+      console.log('끝났엉 isExercising', isExercising);
+      finishExercise();
+    }
   }, [isExercising]);
 
   const color = ['#feccbe', '#feebb6', '#ddecca', '#b8e6e1', '#e3dbeb'];

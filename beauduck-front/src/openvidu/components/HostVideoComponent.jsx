@@ -23,7 +23,9 @@ const HostVideoComponent = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isExercising, isFinished } = useSelector((state) => state.consulting);
+  const { isExercising, isFinished, maxIdx } = useSelector(
+    (state) => state.consulting,
+  );
 
   const resultUsers = useRef({
     allResults: [],
@@ -51,11 +53,21 @@ const HostVideoComponent = ({
           // 모든 참여자의 정보를 수신하면 4초후 결과창 이동
           console.log('모든 참여자들의 결과 기록 수신 완료 ');
           console.log(resultUsers.current.allResults);
-          // setTimeout(() => {
+
           dispatch(setAllExerciseResult(resultUsers.current.allResults));
           dispatch(setFinishStatus(true));
+
+          user.getStreamManager().stream.session.signal({
+            data: maxIdx,
+            type: 'result',
+            to: [resultUsers.current.allResults.memberId],
+          });
+
           console.log('결과 전송 끝 !', isFinished);
-          // }, 4000);
+          setTimeout(() => {
+            leaveSession();
+            navigate('/help/result');
+          }, 10000);
         }
 
         // setExercising(false);
@@ -69,30 +81,31 @@ const HostVideoComponent = ({
     });
 
     // ⭐ signal : result
-    user.getStreamManager().stream.session.on('signal:result', (event) => {
-      if (isHost) {
-        console.log('signal: result', event.data);
-        const res = JSON.parse(event.data);
-        console.log('운동 결과 데이터 수신', res);
+    // user.getStreamManager().stream.session.on('signal:result', (event) => {
+    //   if (isHost) {
+    //     console.log('signal: result', event.data);
+    //     const res = JSON.parse(event.data);
+    //     console.log('운동 결과 데이터 수신', res);
 
-        dispatch(setAllExerciseResult(res.allResults)).then((res) => {
-          console.log('결과', res);
-          setFinalIdx(res);
-        });
-        console.log('res.allResults', res.allResults);
+    //     dispatch(setAllExerciseResult(res.allResults));
+    // .then((res) => {
+    //   console.log('결과', res);
+    //   setFinalIdx(res);
+    // });
+    // console.log('res.allResults', res.allResults);
 
-        user.getStreamManager().stream.session.signal({
-          data: finalIdx,
-          type: 'result',
-          to: subscribers,
-        });
+    // user.getStreamManager().stream.session.signal({
+    //   data: finalIdx,
+    //   type: 'result',
+    //   to: subscribers,
+    // });
 
-        setTimeout(() => {
-          leaveSession();
-          navigate('/help/result');
-        }, 10000);
-      }
-    });
+    //     setTimeout(() => {
+    // leaveSession();
+    // navigate('/help/result');
+    //     }, 10000);
+    //   }
+    // });
 
     user.getStreamManager().stream.session.on('signal:exit', (event) => {
       console.log('비정상종료 ', event.data);
@@ -104,8 +117,9 @@ const HostVideoComponent = ({
   // useEffect(() => {
   //   if (isFinished) {
   //     user.getStreamManager().stream.session.signal({
-  //       data: JSON.stringify(resultUsers.current),
+  //       data: maxIdx,
   //       type: 'result',
+  //       to: []
   //     });
   //     console.log('전송 끝 ');
   //   }

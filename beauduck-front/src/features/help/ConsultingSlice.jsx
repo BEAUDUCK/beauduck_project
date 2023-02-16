@@ -105,6 +105,7 @@ export const consultSlice = createSlice({
       console.log('저장해쒀', state.myResult);
     },
     setAllExerciseResult: (state, action) => {
+      state.isFinished = action.payload;
       const results = action.payload;
       console.log('저장하러 왔어 results', results);
       for (let i = 0; i < results.length; i++) {
@@ -159,7 +160,7 @@ export const consultSlice = createSlice({
         state.maxIdx = resultCount.indexOf(maxVal);
         console.log('여기서 완료', state.maxIdx);
       }
-      return state.maxIdx;
+      // return state.maxIdx;
     },
   },
   extraReducers: (builder) => {
@@ -175,6 +176,7 @@ export const consultSlice = createSlice({
         state.myResult = [];
         state.allResult = [];
         state.isExercising = 'start';
+        state.isFinished = undefined;
         state.maxIdx = -1; // 퍼컬 결과 초기화
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
@@ -187,6 +189,7 @@ export const consultSlice = createSlice({
         state.isHost = false;
         state.myResult = [];
         state.allResult = [];
+        state.isFinished = undefined;
         state.isExercising = 'start';
       })
       .addCase(outUser.fulfilled, (state, action) => {
