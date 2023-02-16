@@ -11,7 +11,7 @@ import Button from '../components/button/Button';
 import Swal from 'sweetalert2';
 import TogetherBanner from "../assets/together_banner.gif"
 import { useLocation } from 'react-router-dom';
-import axios from "axios"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const TogetherPage = () => {
   const location = useLocation()
@@ -57,11 +57,12 @@ const TogetherPage = () => {
         src={TogetherBanner}
         alt="together-banner"
       />
-      <div className='together-banner-div'>
-        <Button onClickEvent={isOpenModal} text={"방만들기"} btnStyle={"together-btn"} />
-      </div>
     </div>
       <div className="container">
+        <div className='together-btn-div'>
+          <Button onClickEvent={isOpenModal} text={"방 만들러 가기"} btnStyle={"together-btn"} />
+          <FontAwesomeIcon icon="fa-solid fa-circle-chevron-right" />
+        </div>
         <h2 className='together-h2'>진행중인 방</h2>
         {/* <button onClick={isOpenModal}>방 만들기</button> */}
         <TogetherList togetherList={togetherList} />

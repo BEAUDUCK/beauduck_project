@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { async } from 'q';
+// import { async } from 'q';
 import client from '../../api/consultAxios';
 
 // 전체 컨설팅 리스트 불러오기

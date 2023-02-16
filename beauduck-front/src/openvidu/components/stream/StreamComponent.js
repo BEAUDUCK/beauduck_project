@@ -12,8 +12,8 @@ import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';
 import HighlightOff from '@mui/icons-material/HighlightOff';
 import FormHelperText from '@mui/material/FormHelperText';
-import { Timer } from '@mui/icons-material';
-import Photos from '../photos/Photos';
+// import { Timer } from '@mui/icons-material';
+// import Photos from '../photos/Photos';
 
 // 스트림된 요소들을 컨트롤하는 요소들을 담은 컴포넌트
 export default class StreamComponent extends Component {

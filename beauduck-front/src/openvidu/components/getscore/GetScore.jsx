@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const GetScore = ({ nowIdx, user, resultUsers }) => {
   const [beforeIdx, setBeforeIdx] = useState(0);

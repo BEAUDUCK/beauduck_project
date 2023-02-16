@@ -424,7 +424,7 @@
         position: relative;
         display: flex;
         flex-wrap: wrap;
-        justify-content: end;
+        justify-content: flex-end;
         width: 45%;
         height: 550px;
         margin-right: 30px;
@@ -580,7 +580,7 @@
 
     .makeup-special-section2 {
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         position: relative;
         width: 45%;
         height: 550px;

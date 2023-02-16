@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
 
 const server = 'https://i8b306.p.ssafy.io/';
 const global = 'https://i8b306.p.ssafy.io:8080/';
@@ -16,6 +15,7 @@ export const UserLogin = createAsyncThunk(
     );
     console.log("res :", res)
     // checkLogin(res.data)
+
     return res.data;
   },
 );

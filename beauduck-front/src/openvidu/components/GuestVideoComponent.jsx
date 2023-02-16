@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { setMyExerciseResult } from '../../features/help/ConsultingSlice';
 import GetScore from './getscore/GetScore';
 import StreamComponent from './stream/StreamComponent';
@@ -19,7 +19,7 @@ const GuestVideoComponent = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isExercising, isFinished } = useSelector((state) => state.consulting);
+  const { isExercising } = useSelector((state) => state.consulting);
   const admin = useSelector((state) => state.consulting.consultDetail.hostId);
   const { memberId } = useSelector((state) => state.member);
   const resultUsers = useRef({

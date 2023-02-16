@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
 import { useState } from 'react';
 import BlackOut from '../../components/blackout/BlackOut';
 import SingleModalInfo from './SingleModalInfo';
