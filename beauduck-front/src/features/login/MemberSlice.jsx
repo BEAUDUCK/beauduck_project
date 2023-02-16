@@ -86,7 +86,7 @@ export const memberSlice = createSlice({
     builder
       .addCase(UserLogin.fulfilled, (state, action) => {
         console.log("이미 회원가입 한 사람입니다.")
-        // state.loginRejected = false;
+        state.loginRejected = false;
         state.memberId = action.payload.data.memberId;
         state.name = action.payload.data.name;
         state.nickName = action.payload.data.nickName;
@@ -94,7 +94,7 @@ export const memberSlice = createSlice({
       .addCase(UserLogin.rejected, (state, action) => {
         console.log('회원가입 되지 않은 사람입니다.');
         console.log(action);
-        // state.loginRejected = true;
+        state.loginRejected = true;
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.memberId = action.payload.data.memberId;
