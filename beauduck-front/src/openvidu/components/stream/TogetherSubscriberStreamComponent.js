@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 // import './StreamComponent.css';
 import TogetherSubscriberOvVideoComponent from './TogetherLocalOvVideo';
 
@@ -12,14 +12,17 @@ import VolumeOff from '@mui/icons-material/VolumeOff';
 import IconButton from '@mui/material/IconButton';
 import HighlightOff from '@mui/icons-material/HighlightOff';
 import _ from 'lodash';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 // import FormHelperText from '@material-ui/core/FormHelperText';
 
 const TogetherSubscriberStreamComponent = (props) => {
+	const navigate = useNavigate()
 	const [nickname, setNickname] = useState(props.user.getNickname())
 	const [showForm, setShowForm] = useState(false)
 	const [mutedSound, setMutedSound] = useState(false)
 	const [isFormValid, setIsFormValid] = useState(true)
-
+	const { leaveSession } = props
 	const toggleSound = () => {
 		setMutedSound(!mutedSound)
 	}
@@ -28,8 +31,21 @@ const TogetherSubscriberStreamComponent = (props) => {
 	"#D1EEFB","#FDF650","#FEDCF5","#8884BE","#CEA9CB","#99A401","#422944","#818C75","#70491B","#FFFD36",
 	"#FEBC60","#B2B099","#DBBAC7","#C189CA","#96B09D","#DD3737","#BCA548","#B8616D","#2F124E","#D73A6F",
 	"#90E5D8","#5AC9E5","#F4CFFB","#F15D57","#B4BAD2","#006A8A","#535617","#546E6C","#5B2D41","#0000FE"]
-
 	const myColor = _.sample(color)
+	const { isActive } = useSelector(state => state.together)
+
+	// 이부분 추가
+	// useEffect(() => {
+	// 	if (isActive) {
+	// 		leaveSession()
+	// 	}
+	// }, [isActive])
+
+	useEffect(() => {
+		if (!props.session) {
+			navigate("/together")
+		}
+	}, [props.session])
 
 	return (
 		<>

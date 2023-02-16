@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const server = 'https://i8b306.p.ssafy.io/';
 const global = 'https://i8b306.p.ssafy.io:8080/';
@@ -13,11 +14,8 @@ export const UserLogin = createAsyncThunk(
     const res = await axios.get(
       `${global}naver/login?accessToken=${newAccessToken}`,
     );
-    // if (res.data) {
-    //   state.loginRejected = false
-    // } else {
-    //   state.loginRejected = true
-    // }
+    console.log("res :", res)
+    // checkLogin(res.data)
     return res.data;
   },
 );
@@ -74,12 +72,21 @@ export const memberSlice = createSlice({
     accessLogin: (state, action) => {
       state.loginRejected = false;
     },
+    // checkLogin: (state, action) => {
+    //   if (action.payload) {
+    //     state.loginRejected = false
+    //     console.log("회원가입 된사람")
+    //   } else {
+    //     state.loginRejected = true
+    //     console.log("회원가입 안된사람")
+    //   }
+    // }
   },
   extraReducers: (builder) => {
     builder
       .addCase(UserLogin.fulfilled, (state, action) => {
         console.log("이미 회원가입 한 사람입니다.")
-        // state.loginRejected = false;
+        state.loginRejected = false;
         state.memberId = action.payload.data.memberId;
         state.name = action.payload.data.name;
         state.nickName = action.payload.data.nickName;
@@ -87,7 +94,7 @@ export const memberSlice = createSlice({
       .addCase(UserLogin.rejected, (state, action) => {
         console.log('회원가입 되지 않은 사람입니다.');
         console.log(action);
-        // state.loginRejected = true;
+        state.loginRejected = true;
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.memberId = action.payload.data.memberId;
@@ -109,5 +116,6 @@ export const {
   goToLogin,
   goToSignup,
   accessLogin,
+  checkLogin
 } = memberSlice.actions;
 export default memberSlice.reducer;

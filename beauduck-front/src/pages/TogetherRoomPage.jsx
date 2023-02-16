@@ -12,7 +12,7 @@ const TogetherRoomPage = ({ roomId, host }) => {
   const myNickname = useSelector(state => state.member.nickName)
   const myId = useSelector(state => state.member.memberId)
   const { state } = location
-  const [isHost, setIsHost] = useState(myNickname === state.hostNickname)
+  const { isHost } = useSelector(state => state.together)
   const navigate = useNavigate()
   console.log(state)
   useEffect(() => {
