@@ -65,7 +65,7 @@ export default class StreamComponent extends Component {
 
   render() {
     return (
-      <div className="OT_widget-container" style={{ marginTop: '20px' }}>
+      <div className="OT_widget-container">
         {/* 닉네임 보여주는 div */}
         <div className="pointer nickname">
           {this.state.showForm ? (

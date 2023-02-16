@@ -53,13 +53,12 @@ const GuestVideoComponent = ({
     }
   }, [isExercising]);
 
+  const color = ['#feccbe', '#feebb6', '#ddecca', '#b8e6e1', '#e3dbeb'];
+
   return (
     <div
-      className={[
-        'guest-stream',
-        subIdx < 3 ? 'even-guest' : 'odd-guest',
-        `${myStyle}`,
-      ].join(' ')}
+      className={['guest-stream', `${myStyle}`].join(' ')}
+      style={{ borderColor: `${color[subIdx]}` }}
     >
       <StreamComponent user={user} />
       {isExercising === 'consult' && (

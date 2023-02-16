@@ -174,6 +174,7 @@ export const consultSlice = createSlice({
         state.myResult = [];
         state.allResult = [];
         state.isExercising = 'start';
+        state.maxIdx = -1; // 퍼컬 결과 초기화
       })
       .addCase(getConsultDetail.fulfilled, (state, action) => {
         state.consultDetail = action.payload;

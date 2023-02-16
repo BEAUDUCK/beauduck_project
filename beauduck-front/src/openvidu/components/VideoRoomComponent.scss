@@ -899,7 +899,7 @@
   top: 20px;
   left: calc(50% - 380px);
   width: 700px;
-  height: 650px;
+  height: 600px;
   overflow: hidden;
   text-align: center;
   display: flex;
@@ -911,17 +911,18 @@
   .nickname {
     width: 100px;
     background-color: rgba(206, 206, 0, 0.5);
-    border-radius: 10px;
-    margin-top: 5px;
+    border-radius: 25px;
+    margin-top: 25px;
     margin-left: 5px;
   }
 
   .streamComponent {
+    margin-top: 20px;
     height: 480px;
   }
   .toolbar {
     position: absolute;
-    top: 520px;
+    top: 500px;
   }
   video {
     width: 100%;
@@ -929,7 +930,7 @@
   }
   .start-button {
     position: absolute;
-    top: 580px;
+    top: 550px;
     display: inline-block;
     width: 200px;
     height: 40px;
@@ -943,71 +944,45 @@
 
 .other-guest {
   position: relative;
-  width: 100%;
+  width: calc((100% - 700px) / 2);
+  height: 100vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
-
-.odd-guest {
-  justify-content: start;
-  margin-left: 5vw;
-
-  .select-button {
-    position: absolute;
-    top: 200px;
-    left: 40px;
-    display: inline-block;
-    width: 150px;
-    height: 35px;
-    border-radius: 10px;
-    border: none;
-    font-family: 'Jalnan';
-    font-size: 15px;
-    background-color: #f8fac0;
-  }
-}
-.even-guest {
-  // margin-left: calc(50% - 220px);
-  justify-content: end;
-  margin-right: 5vw;
-
-  .select-button {
-    position: absolute;
-    top: 200px;
-    right: 40px;
-    display: inline-block;
-    width: 150px;
-    height: 35px;
-    border-radius: 10px;
-    border: none;
-    font-family: 'Jalnan';
-    font-size: 15px;
-    background-color: #f8fac0;
-  }
-}
-
 
 .guest-stream {
   position: relative;
-  // display: inline-block;
+  display: inline-block;
   display: flex;
-  width: 40%;
-  height: 220px;
-  // overflow: hidden;
-  // border: 3px solid yellow;
-  // text-align: left;
+  width: 180px;
+  height: 120px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+  padding: 2px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: #fdffcd;
 
   .OT_widget-container {
     position: relative;
-    width: 240px;
-    height: 300px;
+    width: 180px;
+    height: 120px;
+  }
 
+  .nickname {
+    border-radius: 25px;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-left: 10px;
   }
 
   #volumeButton {
-    bottom: 130px;
-    right: 10px;
+    bottom: 5px;
+    right: 5px;
     width: 30px;
     height: 30px;
     background-color: rgba(248, 250, 192, 0.5);
@@ -1018,11 +993,63 @@
   }
 
   video {
-    width: 240px;
+    width: 180px;
+    height: 120px;
     object-fit: cover;
   }
-
 }
+
+.guest-mine {
+  width: calc((100% - 700px) / 2);
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  border: none;
+  // width: 280px;
+  // height: 220px;
+  // padding: 5px;
+  // border: 5px dashed #feebb6;
+  // border-radius: 30px;
+
+  .OT_widget-container {
+    width: 280px;
+    height: 220px;
+    padding: 5px;
+    border: 5px dashed #feebb6;
+    border-radius: 30px;
+    margin: auto;
+  }
+
+  video {
+    width: 280px;
+    height: 220px;
+    object-fit: cover;
+    border: none;
+  }
+  .select-button {
+    position: absolute;
+    top: 250px;
+    left: 40px;
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Jalnan';
+    font-size: 30px;
+    background-color: white;
+    border: 2px solid #FFDF38;
+    box-shadow: 3px 3px 0px 0px #FFDF38;
+    color: #FFDF38;
+
+    &:active {
+      background-color: #FFDF38;
+      color: white;
+    }
+  }
+}
+
 
 .color-div {
   position: fixed;
@@ -1034,23 +1061,26 @@
   img {
     width: 640px;
     height: 480px;
+    border-radius: 25px;
   }
 }
+
 .timer {
   position: absolute;
   top: 100px;
-  left: calc(50% + 200px);
+  right: 160px;
   z-index: 999;
-  width: 70px;
-  height: 70px;
-  border: 5px solid rgb(255, 224, 224);
+  width: 120px;
+  height: 120px;
+  background-color: rgb(255, 224, 224);
+  // border: 5px solid rgb(255, 224, 224);
   border-radius: 100px;
-  line-height: 70px;
+  line-height: 120px;
   text-align: center;
   h1 {
     margin: 0;
-    font-size: 50px;
-    color: white;
+    font-size: 65px;
+    color: rgb(65, 65, 65);
   }
 }
 
@@ -1061,15 +1091,10 @@
   border-radius: 10px;
   font-size: 25px;
   font-family: 'Jalnan';
-  margin-top: 40px;
+  margin-top: 15px;
 
   &:active {
     background-color: #FFDF38;
     color: white;
   }
-}
-
-.guest-mine {
-  position: fixed;
-  bottom: 70px;
 }
