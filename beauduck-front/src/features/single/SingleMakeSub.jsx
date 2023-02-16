@@ -145,7 +145,8 @@ const SingleMakeSub = ({ main, sub, makeupMiddleList }) => {
 
   // 소분류 삭제
   const removeSubMakeup = () => {
-    makeupMiddleList[idx] = null;
+    // makeupMiddleList[idx] = null;
+    makeupMiddleList.splice(idx, 1)
     console.log(makeupMiddleList);
 
     const subBox = document.getElementById(`sub-${main}`);

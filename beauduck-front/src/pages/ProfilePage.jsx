@@ -171,7 +171,7 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <div className="ProfilePage">
         <MyProfile />
         <MyRanking />
@@ -200,7 +200,7 @@ const ProfilePage = () => {
         </div>
       </div>
       <ChangeTab />
-    </div>
+    </>
   );
 };
 

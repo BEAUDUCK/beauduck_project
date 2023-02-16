@@ -13,9 +13,11 @@ import IconButton from '@mui/material/IconButton';
 import HighlightOff from '@mui/icons-material/HighlightOff';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 // import FormHelperText from '@material-ui/core/FormHelperText';
 
 const TogetherSubscriberStreamComponent = (props) => {
+	const navigate = useNavigate()
 	const [nickname, setNickname] = useState(props.user.getNickname())
 	const [showForm, setShowForm] = useState(false)
 	const [mutedSound, setMutedSound] = useState(false)
@@ -33,11 +35,17 @@ const TogetherSubscriberStreamComponent = (props) => {
 	const { isActive } = useSelector(state => state.together)
 
 	// 이부분 추가
+	// useEffect(() => {
+	// 	if (isActive) {
+	// 		leaveSession()
+	// 	}
+	// }, [isActive])
+
 	useEffect(() => {
-		if (isActive) {
-			leaveSession()
+		if (!props.session) {
+			navigate("/together")
 		}
-	}, [isActive])
+	}, [props.session])
 
 	return (
 		<>

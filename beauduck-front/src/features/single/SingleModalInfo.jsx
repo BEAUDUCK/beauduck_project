@@ -58,8 +58,8 @@ const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
 
     dispatch(selectMain(category));
     dispatch(startMakeup(payload)).then((res) => {
-      dispatch(setMakeupId(makeupId));
-      navigate('/single/mode', { replace: true });
+    dispatch(setMakeupId(makeupId));
+    navigate('/single/mode', { replace: true });
     });
   };
 
@@ -67,7 +67,7 @@ const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
     <div className="makeup-detail">
       <div className="makeup-detail-top" onClick={() => isToggleInfo()}>
         <div className="makeup-detail-left">
-          <h3>{makeupDetail.title}</h3>
+          <h3 >{makeupDetail.title}</h3>
           <div className="star-info">
             <FontAwesomeIcon className="star-icon" icon="fa-solid fa-star" />
             <p>{makeupDetail.score}</p>
@@ -82,7 +82,7 @@ const SingleModalInfo = ({ makeupId, isToggleInfo }) => {
           <img src={makeupDetail.img} alt="" />
         </div>
       </div>
-      <div className="select-course">
+      <div className="select-course" style={{ width: "600px"}}>
         <button
           onClick={() => setIsSelected1(!isSelected1)}
           className={isSelected1 ? 'selected' : ''}

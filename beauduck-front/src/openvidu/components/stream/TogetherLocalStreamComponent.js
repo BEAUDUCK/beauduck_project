@@ -33,13 +33,19 @@ const TogetherLocalStreamComponent = (props) => {
 
 	console.log(props)
 	// 추가한 부분
-	useEffect(() => {
-		if (leaveSession) {
-			if (isHost) {
-				dispatch(changeIsActive())
-			}
-		}
-	}, [])
+	// useEffect(() => {
+	// 	if (leaveSession) {
+	// 		if (isHost) {
+	// 			dispatch(changeIsActive())
+	// 		}
+	// 	}
+	// }, [])
+
+	// useEffect(() => {
+	// 	if (props.deleteRoom) {
+	// 		dispatch(changeIsActive())
+	// 	}
+	// }, [props])
 
 	console.log(nickname)
 	return (

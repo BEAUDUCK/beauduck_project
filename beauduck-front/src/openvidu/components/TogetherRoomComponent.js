@@ -43,7 +43,8 @@ class TogetherRoomComponent extends Component {
             currentVideoDevice: undefined,
             hostNickname: this.props.hostNickname,
             isHost: this.props.isHost,
-            myColor: this.props.myColor
+            myColor: this.props.myColor,
+						deleteRoom: false,
         };
         // 메서드 바인딩 과정
         // joinSession : 세션 접속
@@ -253,7 +254,7 @@ class TogetherRoomComponent extends Component {
         }
 				
 				if (this.state.isHost) {
-					console.log("내가 호스트입니다.")
+					this.setState({ deleteRoom: true })
 				}
         // Empty all properties...
         // 모든 설정 초기화
@@ -629,6 +630,7 @@ class TogetherRoomComponent extends Component {
 																	user={sub} 
 																	streamId={sub.streamManager.stream.streamId}
 																	leaveSession={this.leaveSession}
+																	session={this.state.session}
 																/>
                             </div>
                         ))}
@@ -638,7 +640,8 @@ class TogetherRoomComponent extends Component {
 															<TogetherLocalStreamComponent 
 																user={localUser}
 																isHost={this.state.isHost}
-																leaveSession={this.leaveSession} 
+																leaveSession={this.leaveSession}
+																session={this.state.session}
 															/>
 														)}
                         </div>
@@ -649,6 +652,7 @@ class TogetherRoomComponent extends Component {
 																	user={sub} 
 																	streamId={sub.streamManager.stream.streamId}
 																	leaveSession={this.leaveSession}
+																	session={this.state.session}
 																/>
                             </div>
                         ))}
