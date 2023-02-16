@@ -16,7 +16,7 @@ public class RedisConfiguration {
         RedisSentinelConfiguration redisSentinelConfiguration = new RedisSentinelConfiguration()
                 .master("mymaster")
                 .sentinel("3.35.134.38", 26378)
-                .sentinel("13.35.134.38", 26380)
+                .sentinel("3.35.134.38", 26380)
                 .sentinel("3.35.134.38", 26381);
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(redisSentinelConfiguration);
         return lettuceConnectionFactory;
