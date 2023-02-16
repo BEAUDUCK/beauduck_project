@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration {
     private ApiInfo commonInfo() {
         return new ApiInfoBuilder()
-                .title("Board API")
+                .title("따라해덕 API")
                 //.description("")
                 //.license("leeys")
                 //.licenseUrl("http://leeys.tistory.com")
@@ -26,7 +26,7 @@ public class SwaggerConfiguration {
     @Bean
     public Docket allApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("Board")
+                .groupName("Makeup")
                 .useDefaultResponseMessages(false)
                 .select()
                 //.apis(RequestHandlerSelectors.any())
