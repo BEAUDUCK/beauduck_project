@@ -20,9 +20,16 @@ const SingleListItem = ({ modeItem, idx }) => {
     setIsInfo(!isInfo);
   };
 
+  const bgColor = ['#feccbe', '#feebb6', '#ddecca', '#b8e6e1'];
+  const color = parseInt(idx % 4);
+
   return (
     <>
-      <div className="makeup-list" onClick={isToggleInfo}>
+      <div
+        className="makeup-list"
+        style={{ backgroundColor: `${bgColor[color]}` }}
+        onClick={isToggleInfo}
+      >
         <div className="makeup-list-inside">
           <div>
             <img src={modeItem.img} alt="img" />

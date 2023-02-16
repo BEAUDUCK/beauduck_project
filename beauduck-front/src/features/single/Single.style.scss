@@ -107,20 +107,21 @@
 }
 
 .modeList {
-    height: calc(100vh - 250px);
+    height: calc(100vh - 320px);
     padding-top: 20px;
-    width: calc(100% - 200px);
+    width: 1300px;
     padding-left: 100px;
     padding-right: 100px;
     margin: auto;
+    text-align: left;
 
     .makeup-list {
         display: inline-block;
         width: 310px;
-        height: 220px;
+        height: 200px;
         text-align: center;
         position: relative;
-        background: #feccbe;
+        // background: #feccbe;
         cursor: pointer;
         overflow: hidden;
         box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
@@ -133,7 +134,7 @@
             justify-content: center;
             align-items: center;
             width: 270px;
-            height: 180px;
+            height: 160px;
             background-color: white;
             margin-top: 20px;
             margin-left: 20px;

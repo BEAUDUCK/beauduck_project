@@ -9,26 +9,43 @@
         width: 450px;
         height: 220px;
         background-color: white;
-        border-radius: 100px;
+        border-radius: 30px;
         padding-left: 50px;
         padding-right: 50px;
         padding-top: 30px;
         padding-bottom: 30px;
         text-align: center;
-        box-shadow: 0px 0px 20px gray;
+        // box-shadow: 0px 0px 5px gray;
 
-        .color2 {
+        div {
             position: absolute;
-            top: 5px;
-            left: 100px;
-            width: 100px;
-        }
+            width: 120px;
+            height: 120px;
+            top: -50px;
+            left: calc(50% - 60px);
+            border-radius: 100px;
+            background-color: white;
 
-        .color1 {
-            position: absolute;
-            width: 250px;
-            top: 200px;
-            right: 20px;
+            div  {
+                position: absolute;
+                top: 7px;
+                left: 8px;
+                width: 100px;
+                height: 100px;
+                border: 2px dashed rgb(224, 183, 183);
+
+            }
+            img {
+                position: absolute;
+                left: -2px;
+                top: 3px;
+                width: 70px;
+                height: 70px;
+                object-fit: cover;
+                border-radius: 10px;
+                border: none;
+                padding: 10px;
+            }
         }
 
         img {
@@ -38,6 +55,8 @@
         h1 {
             font-family: 'CookieRun';
             font-size: 40px;
+            margin-top: 50px;
+            color: rgb(250, 140, 158);
         }
         p {
             margin: 0;
