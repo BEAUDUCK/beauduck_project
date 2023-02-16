@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import BlackOut from '../../components/blackout/BlackOut';
-// import SingleModalInfo from './SingleModalInfo';
+import SingleModalInfo from './SingleModalInfo';
 
 const SinglePopularItem = ({ modeItem, idx }) => {
   const [isInfo, setIsInfo] = useState(false);
