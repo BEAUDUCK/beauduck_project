@@ -5,11 +5,10 @@
   width: 100%;
   display: flex;
   // z-index: 10;
-  justify-content: end;
+  justify-content: center;
 
   #help-banner {
-    width: 50vw;
-    margin-bottom: 200px;
+    width: 80%;
   }
 }
 
@@ -19,7 +18,7 @@
   justify-content: center;
   width: 100%;
   height: calc(100vh - 50px);
-  margin-top: 100px;
+  margin-top: 30px;
   background-color: white;
   flex-wrap: wrap;
 
@@ -170,10 +169,10 @@
           font-size: 50px;
           font-family: 'Jalnan';
     
-          &:hover {
-            opacity: 1;
-            transition: .5s ease-in-out;
-          }
+          // &:hover {
+          //   opacity: 1;
+          //   transition: .5s ease-in-out;
+          // }
         }
       }
     }
@@ -185,14 +184,14 @@
   width: 45%;
   height: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: start;
 }
 
 .consulting-list {
   display: flex;
   flex-wrap: wrap;
   // text-align: center;
-  justify-content: start;
+  justify-content: flex-start;
 
   .logo {
     width: 100px;
@@ -210,6 +209,7 @@
 
 
   .consulting-list-child {
+    width: 100%;
     // display: grid;
     // grid-template-columns: repeat(3, minmax(15vw, 15vw));
     // grid-template-columns: repeat(3, minmax(200, 200));
@@ -315,7 +315,7 @@
 
 // 컨설팅 방 생성하기 모달
 .consult-create-modal {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -415,8 +415,8 @@
   }
 
   .loading-bigbtn {
-    width: 180px;
-    height: 70px;
+    width: 220px;
+    height: 100px;
 
     background: #FFC368;
     border-radius: 100px;
@@ -425,10 +425,10 @@
     font-family: 'Jalnan';
     font-weight: 600;
     color: white;
-    font-size: xx-large;
+    font-size: 40px;
     text-shadow: 1px 1px #bdbdbd;
 
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 10px;
 
     cursor: pointer;
@@ -439,13 +439,16 @@
     }
   }
   .back-icon {
-    color: rgb(85, 85, 85);
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    color: rgb(150, 150, 150);
     width: 30px;
-    font-size: 20px;
+    font-size: 30px;
     cursor: pointer;
   }
 
-  h3 {
+  h2 {
     display: inline-block;
     width: 400px;
     height: 35px;
@@ -453,7 +456,7 @@
     margin-top: 30px;
     margin-bottom: 30px;
     font-family: 'Jalnan';
-    font-size: 22px;
+    font-size: 30px;
   }
 }
 
@@ -463,6 +466,13 @@
 
   .guest-bigbtn {
     margin-top: 0;
+  }
+
+  h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-family: 'Jalnan';
+    font-size: 20px;
   }
 
   // .battery{

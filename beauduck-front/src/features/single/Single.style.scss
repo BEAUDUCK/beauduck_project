@@ -97,9 +97,13 @@
 .modeList-h1 {
     color: rgb(31, 31, 31);
     font-family: 'Abril Fatface', cursive;
-    font-size: 70px;
+    font-size: 60px;
     text-shadow: 2px 2px rgb(201, 201, 201);
     margin: 0;
+    color: #568A35;
+    text-underline-offset : 10px;
+    text-decoration: 2px underline #568A35;
+
 }
 
 .modeList {

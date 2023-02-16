@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Banner from '../components/banner/Banner';
 import ConsultingList from '../features/help/ConsultingList';
 import ConsultingModalCreate from '../features/help/ConsultingModalCreate ';
 import {
@@ -11,7 +10,6 @@ import {
 } from '../features/help/ConsultingSlice';
 import BlackOut from '../components/blackout/BlackOut';
 import ConsultingModalLoadingHost from '../features/help/ConsultingModalLoadingHost';
-import banner from '../assets/help_banner.gif';
 import '../features/help/Help.style.scss';
 import Swal from 'sweetalert2';
 import Button from '../components/button/Button';
@@ -21,6 +19,7 @@ import Crawling from '../features/help/Crawling';
 import face from '../assets/faces/face3.png';
 import _ from 'lodash';
 import ConsultingModalLoadingGuest from '../features/help/ConsultingModalLoadingGuest';
+import banner from '../assets/help_banner.gif';
 
 const ConsultingPage = () => {
   const dispatch = useDispatch();
@@ -86,20 +85,20 @@ const ConsultingPage = () => {
               <p className="consult-nickname">{randomOne?.hostNickname}</p>
             </div>
             <div className="random-consult-right">
-              <p className="user-count">{randomOne?.userCount} / 6</p>
+              {/* <p className="user-count">{randomOne?.userCount} / 6</p> */}
               <h3>{randomOne?.title}</h3>
               <p>{randomOne?.content}</p>
               <button onClick={isOpenRandom}>입장하기</button>
             </div>
           </div>
-          {isOpen && (
+          {isRandom && (
             <ConsultingModalLoadingGuest
               roomId={randomOne.roomId}
               host={randomOne.hostNickname}
               isOpenClick={isOpenRandom}
             />
           )}
-          {isOpen && <BlackOut />}
+          {isRandom && <BlackOut />}
         </div>
         <ConsultingList consultingList={consultingList} />
       </div>

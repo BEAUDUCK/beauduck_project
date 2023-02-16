@@ -19,6 +19,7 @@ import miniDuck from '../assets/logo_no_back.png';
 import aiPic from '../assets/ai.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Swal from 'sweetalert2';
+import banner from '../assets/single_banner.gif';
 
 const SinglePage = () => {
   const dispatch = useDispatch();
@@ -71,6 +72,9 @@ const SinglePage = () => {
 
   return (
     <div className="single-main">
+      <div className="single-banner-div">
+        <img src={banner} alt="" className="single-banner" />
+      </div>
       <div className="makeup-popular">
         <h1 className="best-text">BEST 10</h1>
         <SinglePopular modeList={popularList} />

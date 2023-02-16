@@ -16,7 +16,7 @@ import { deleteConsultingRoom } from '../features/help/ConsultingSlice';
 
 const ConsultingResultHostPage = () => {
   const dispatch = useDispatch();
-  const { roomId } = useSelector((state) => state.consulting);
+  const { roomId, maxIdx } = useSelector((state) => state.consulting);
 
   const resultList = [
     result1,
@@ -31,7 +31,6 @@ const ConsultingResultHostPage = () => {
     result10,
   ];
 
-  const { maxIdx } = useSelector((state) => state.consulting);
   useEffect(() => {
     dispatch(deleteConsultingRoom(roomId));
   });
