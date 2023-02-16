@@ -14,6 +14,7 @@ import ConsultingModalLoadingHost from '../features/help/ConsultingModalLoadingH
 import banner from '../assets/help_banner.gif';
 import '../features/help/Help.style.scss';
 import Swal from 'sweetalert2';
+
 import Button from '../components/button/Button';
 import megaphone from '../assets/megaphone.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -32,7 +33,7 @@ const ConsultingPage = () => {
     if (!myNickname) {
       Swal.fire(
         '로그인이 필요한 서비스 입니다.',
-        '로그인 페이지로 이동합니다.',
+        '로그인 해주시기 바랍니다.',
         'warning',
       );
       return <>{/* 로그인 모달창 이동 */}</>;

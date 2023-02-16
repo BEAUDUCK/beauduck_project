@@ -57,11 +57,9 @@ const TogetherPage = () => {
         src={TogetherBanner}
         alt="together-banner"
       />
-      <div className='together-banner-div'>
-        <Button onClickEvent={isOpenModal} text={"방만들기"} btnStyle={"together-btn"} />
-      </div>
     </div>
       <div className="container">
+        <Button onClickEvent={isOpenModal} text={"방만들기"} btnStyle={"together-btn"} />
         <h2 className='together-h2'>진행중인 방</h2>
         {/* <button onClick={isOpenModal}>방 만들기</button> */}
         <TogetherList togetherList={togetherList} />

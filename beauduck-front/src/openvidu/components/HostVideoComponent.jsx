@@ -8,7 +8,7 @@ import {
 } from '../../features/help/ConsultingSlice';
 import StartBtn from './StartBtn';
 import StreamComponent from './stream/StreamComponent';
-import ToolbarComponent from './toolbar/ToolbarComponent';
+// import ToolbarComponent from './toolbar/ToolbarComponent';
 
 const HostVideoComponent = ({
   hostNickname,
@@ -23,7 +23,8 @@ const HostVideoComponent = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isExercising, isFinished } = useSelector((state) => state.consulting);
+  // isExercising 지움
+  const { isFinished } = useSelector((state) => state.consulting);
 
   const resultUsers = useRef({
     allResults: [],

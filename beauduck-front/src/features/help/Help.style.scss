@@ -5,7 +5,7 @@
   width: 100%;
   display: flex;
   // z-index: 10;
-  justify-content: end;
+  justify-content: flex-end;
 
   #help-banner {
     width: 50vw;
@@ -27,7 +27,7 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    justify-content: end;
+    justify-content: flex-end;
     width: 40%;
     height: 700px;
     margin-right: 80px;
@@ -185,14 +185,14 @@
   width: 45%;
   height: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .consulting-list {
   display: flex;
   flex-wrap: wrap;
   // text-align: center;
-  justify-content: start;
+  justify-content: flex-start;
 
   .logo {
     width: 100px;
@@ -295,7 +295,7 @@
         background-color: white;
         margin-left: 10px;
         padding-left: 5px;
-        text-align: start;
+        text-align: flex-start;
       } 
 
     }

@@ -2,10 +2,10 @@ import './Help.style.scss';
 import ConsultingListItem from '../help/ConsultingListItem';
 import logo from '../../assets/logo_original.png';
 import _ from 'lodash';
-import { useEffect, useState } from 'react';
-import face from '../../assets/faces/face3.png';
-import ConsultingModalLoadingGuest from './ConsultingModalLoadingGuest';
-import BlackOut from '../../components/blackout/BlackOut';
+import { useState } from 'react';
+// import face from '../../assets/faces/face3.png';
+// import ConsultingModalLoadingGuest from './ConsultingModalLoadingGuest';
+// import BlackOut from '../../components/blackout/BlackOut';
 import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
 
