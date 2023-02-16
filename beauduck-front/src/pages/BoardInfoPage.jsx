@@ -13,6 +13,7 @@ import {
   RemoveInfoBoard,
   UpdateInfoBoard,
 } from '../features/board/BoardSlice';
+import board1 from "../assets/board/board1.png"
 
 const BoardInfoPage = () => {
   const { id } = useParams();
@@ -92,7 +93,7 @@ const BoardInfoPage = () => {
             />
           )}
         </div>
-        {memberId == nowBoard.memberId && (
+        {memberId === nowBoard.memberId && (
           <div>
             {!isUpdate ? (
               <Button
@@ -133,7 +134,12 @@ const BoardInfoPage = () => {
           </div>
         )}
         <div className="user-box">
-          <button className="img-replace" />
+          <img
+            className="img-replace"
+            src={board1}
+            alt="이미지"
+            style={{ border: "1px solid black" }}
+            />
           <div className="user-text">
             <p>{nowBoard?.writer}</p>
             <div>

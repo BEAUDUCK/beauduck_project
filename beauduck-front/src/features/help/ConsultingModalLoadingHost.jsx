@@ -1,6 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useMemo } from 'react';
-import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +8,7 @@ const ConsultingModalLoadingHost = ({ loadingOff }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { roomId, consultDetail } = useSelector((state) => state.consulting);
-  const { userList } = useSelector((state) => state.consulting);
+  // const { userList } = useSelector((state) => state.consulting);
 
   useEffect(() => {
     dispatch(getConsultDetail(roomId));

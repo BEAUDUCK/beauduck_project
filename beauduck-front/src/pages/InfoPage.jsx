@@ -1,18 +1,21 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './InfoPage.style.scss';
 import color1 from '../assets/color1.png';
 import color2 from '../assets/color2.png';
 
 const InfoPage = () => {
-  const [result, setResult] = useState(0);
+  // const [result, setResult] = useState(0);
   const navigate = useNavigate();
 
   const showResult = (num) => {
-    console.log('클릭되었어요');
     navigate('/color/detail', { state: num });
   };
 
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 1b4cafb09db5fcc3a9500ff67c76b2ca5268a28c
   return (
     <div className="personal-color">
       <div className="color-info ball">

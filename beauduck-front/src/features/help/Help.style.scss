@@ -5,7 +5,11 @@
   width: 100%;
   display: flex;
   // z-index: 10;
+<<<<<<< HEAD
   justify-content: center;
+=======
+  justify-content: flex-end;
+>>>>>>> 1b4cafb09db5fcc3a9500ff67c76b2ca5268a28c
 
   #help-banner {
     width: 80%;
@@ -26,7 +30,7 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    justify-content: end;
+    justify-content: flex-end;
     width: 40%;
     height: 700px;
     margin-right: 80px;
@@ -184,7 +188,7 @@
   width: 45%;
   height: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .consulting-list {
@@ -295,7 +299,7 @@
         background-color: white;
         margin-left: 10px;
         padding-left: 5px;
-        text-align: start;
+        text-align: flex-start;
       } 
 
     }

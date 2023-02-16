@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+<<<<<<< HEAD
+=======
+// import Banner from '../components/banner/Banner';
+>>>>>>> 1b4cafb09db5fcc3a9500ff67c76b2ca5268a28c
 import ConsultingList from '../features/help/ConsultingList';
 import ConsultingModalCreate from '../features/help/ConsultingModalCreate ';
 import {
@@ -12,6 +16,7 @@ import BlackOut from '../components/blackout/BlackOut';
 import ConsultingModalLoadingHost from '../features/help/ConsultingModalLoadingHost';
 import '../features/help/Help.style.scss';
 import Swal from 'sweetalert2';
+
 import Button from '../components/button/Button';
 import megaphone from '../assets/megaphone.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -31,7 +36,7 @@ const ConsultingPage = () => {
     if (!myNickname) {
       Swal.fire(
         '로그인이 필요한 서비스 입니다.',
-        '로그인 페이지로 이동합니다.',
+        '로그인 해주시기 바랍니다.',
         'warning',
       );
       return <>{/* 로그인 모달창 이동 */}</>;

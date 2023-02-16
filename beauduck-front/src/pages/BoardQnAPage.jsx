@@ -11,6 +11,7 @@ import {
   removeQaBoard,
   updateQaBoard,
 } from '../features/board/BoardSlice';
+import board3 from "../assets/board/board3.png"
 
 const BoardQnAPage = () => {
   const { id } = useParams();
@@ -94,7 +95,7 @@ const BoardQnAPage = () => {
             />
           )}
         </div>
-        {memberId == nowBoard.memberId && (
+        {memberId === nowBoard.memberId && (
           <div>
             {!isUpdate ? (
               <Button
@@ -135,7 +136,12 @@ const BoardQnAPage = () => {
         )}
         {isRemove && <BlackOut onClickEvent={onToggleRemove} />}
         <div className="user-box">
-          <button className="img-replace" />
+          <img 
+            className="img-replace"
+            src={board3}
+            alt="작성자이미지"
+            style={{ border: "1px solid black" }}
+          />
           <div className="user-text">
             <p>{nowBoard?.writer}</p>
             <div>

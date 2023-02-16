@@ -1,11 +1,11 @@
 import './Single.style.scss';
-import SingleListItem from './SingleListItem';
+// import SingleListItem from './SingleListItem';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import SinglePopularItem from './SinglePopularItem';
-import BlackOut from '../../components/blackout/BlackOut';
-import SingleModalInfo from './SingleModalInfo';
-import { useState } from 'react';
+// import BlackOut from '../../components/blackout/BlackOut';
+// import SingleModalInfo from './SingleModalInfo';
+
 
 const SinglePopular = ({ modeList }) => {
   const responsive = {

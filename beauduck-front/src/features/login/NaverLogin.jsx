@@ -54,7 +54,7 @@ const NaverLogin = () => {
           .then(() => {
             setTimeout(() => {
               navigate("/signup")
-            }, 100)
+            }, 200)
           })
   }
 

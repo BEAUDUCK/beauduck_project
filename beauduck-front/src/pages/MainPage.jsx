@@ -1,9 +1,7 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './MainPage.style.scss'
 // 스타일 App.css 에 넣음
 const MainPage = () => {
-
-  const navigate = useNavigate()
 
   return (
     <>
@@ -17,7 +15,11 @@ const MainPage = () => {
         <section id='section2'>
           <div className='section2-1'>
             <div>
-              <img className="img-box2-1" src={require("../assets/test.gif")}/>
+              <img 
+                className="img-box2-1" 
+                src={require("../assets/test.gif")}
+                alt="이미지"
+              />
             </div>
             <div className="txt-box2-1">
               <h1>도와덕</h1>
@@ -34,12 +36,20 @@ const MainPage = () => {
               <Link to="/single">자세히 보기</Link>
             </div>
             <div>
-              <img className="img-box2-2" src={require("../assets/test.gif")}/>
+              <img 
+                className="img-box2-2" 
+                src={require("../assets/test.gif")}
+                alt="이미지"
+              />
             </div>
           </div>
           <div className='section2-3'>
             <div className>
-              <img className="img-box2-1" src={require("../assets/test.gif")}/>
+              <img 
+                className="img-box2-1" 
+                src={require("../assets/test.gif")}
+                alt="이미지"
+              />
             </div>
             <div className="txt-box2-1">
               <h1>투게덕</h1>

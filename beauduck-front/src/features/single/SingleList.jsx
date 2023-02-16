@@ -1,6 +1,6 @@
 import './Single.style.scss';
 import SingleListItem from './SingleListItem';
-import AliceCarousel from 'react-alice-carousel';
+// import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import Paging from '../../components/pagination/Paging';
 import { useEffect, useState } from 'react';

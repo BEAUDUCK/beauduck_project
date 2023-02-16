@@ -3,9 +3,9 @@ import { useState, useRef } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import './Signup.style.scss';
-import { goToLogin, signUp, UserLogin } from '../features/login/MemberSlice';
+import { signUp } from '../features/login/MemberSlice';
 import { getAccessToken } from '../api/cookie';
-import logo from '../assets/logo_original.png';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router';
 import loginImg from '../assets/login.png';

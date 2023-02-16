@@ -8,85 +8,34 @@
   .together-banner-img {
     width: 70%;
     height: 600px;
-  }
-
-  .together-banner-div {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-  .together-btn,
-  .together-btn *,
-  .together-btn :after,
-  .together-btn :before,
-  .together-btn:after,
-  .together-btn:before {
-    border: 0 solid;
-    box-sizing: border-box;
-  }
-  .together-btn {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-appearance: button;
-    background-color: #000;
-    background-image: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 100%;
-    line-height: 1.5;
-    margin: 0;
-    -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
-    padding: 0;
-  }
-  .together-btn:disabled {
-    cursor: default;
-  }
-  .together-btn:-moz-focusring {
-    outline: auto;
-  }
-  .together-btn svg {
-    display: block;
-    vertical-align: middle;
-  }
-  .together-btn [hidden] {
-    display: none;
-  }
-  .together-btn {
-    -webkit-animation: pulse 2s infinite;
-    animation: pulse 2s infinite;
-    border: 1px solid;
-    border-radius: 999px;
-    box-shadow: 0 0 0 2em transparent;
-    box-sizing: border-box;
-    display: block;
-    font-weight: 900;
-    -webkit-mask-image: none;
-    overflow: hidden;
-    padding: 1.2rem 3rem;
-    position: relative;
-    text-transform: uppercase;
-  }
-  @-webkit-keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 #fff;
-    }
-  }
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 #fff;
-    }
-  }
-
-    .together-btn {
-      width: 50%;
-      height: 100px;
-      background-color: #FFEBCD;
-      color: black;
-    }
-
+    margin: auto;
   }
 
 }
+
+.together-btn {
+  color: #89695E;
+  border-color: #89695E;
+  box-shadow: 3px 3px 0px 0px #89695E;
+  height: 50px;
+  margin: auto;
+
+}
+
+.together-btn-div {
+  position: relative;
+  width: 200px;
+  height: 56px;
+  margin: auto;
+  svg {
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    color: #89695E;
+    cursor: pointer;
+}
+}
+
 
 .together-h2 {
   font-family: "Jalnan";

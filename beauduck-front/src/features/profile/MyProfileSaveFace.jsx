@@ -1,5 +1,5 @@
 import html2canvas from 'html2canvas';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Webcam from 'react-webcam';
 import camera from '../../assets/camera.png';
@@ -12,11 +12,13 @@ const MyProfileSaveFace = () => {
   const { memberId } = useSelector((state) => state.member);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isActive, setIsActive] = useState(false)
+  console.log("isActive :", isActive)
   console.log(isOpen);
 
   const downloadCapture = () => {
     const imgDiv = document.querySelector('#main_capture');
-    const transform = imgDiv.style.transform;
+    // const transform = imgDiv.style.transform;
     imgDiv.style.setProperty('transform', 'none');
     html2canvas(imgDiv).then((canvas) => {
       const imgUri = canvas.toDataURL('image/jpeg');
@@ -37,18 +39,29 @@ const MyProfileSaveFace = () => {
     });
   };
 
-  const saveAsImg = (uri, filename) => {
-    const link = document.createElement('a');
-    if (typeof link.download === 'string') {
-      link.href = uri;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+  // const saveAsImg = (uri, filename) => {
+  //   const link = document.createElement('a');
+  //   if (typeof link.download === 'string') {
+  //     link.href = uri;
+  //     link.download = filename;
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link);
+  //   } else {
+  //     window.open(uri);
+  //   }
+  // };
+
+  const { haveSavedFace } = useSelector(state => state.profile)
+  console.log("haveSavedFace :", haveSavedFace)
+
+  useEffect(() => {
+    if (haveSavedFace) {
+      setIsActive(true)
     } else {
-      window.open(uri);
+      setIsActive(false)
     }
-  };
+  }, [])
 
   return (
     <div className="face-capture-div">
@@ -83,7 +96,9 @@ const MyProfileSaveFace = () => {
             <p> 2. 원 위에 얼굴을 위치시켜 주세요.</p>
             <p> 3. 카메라 버튼을 클릭하세요.</p>
           </div>
-          <a href="/single#section1-ai">메이크업 추천 받기</a>
+          {isActive ? (
+            <a href="/single#section1-ai">메이크업 추천 받기</a>
+          ) : null}
         </div>
       </div>
     </div>
