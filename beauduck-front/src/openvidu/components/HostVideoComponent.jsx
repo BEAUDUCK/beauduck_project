@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import ExitModal from '../../components/modal/ExitModal';
 import {
   setAllExerciseResult,
   setExerciseStatus,
@@ -64,6 +65,7 @@ const HostVideoComponent = ({
           });
 
           console.log('결과 전송 끝 !', isFinished);
+
           setTimeout(() => {
             leaveSession();
             navigate('/help/result');
