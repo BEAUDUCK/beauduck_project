@@ -49,7 +49,7 @@ const AllComp = ({
 
   // 진단 종료
   useEffect(() => {
-    if (nowIdx === 30) {
+    if (nowIdx === 10) {
       console.log('인덱스 종료');
       dispatch(setExerciseStatus('done'));
     }
