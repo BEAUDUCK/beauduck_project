@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeQaAnswer, updateQaAnswer } from './BoardSlice';
+import board4 from "../../assets/board/board4.png"
 
 const BoardAnswerListItem = ({ answer, boardId }) => {
   const dispatch = useDispatch();
@@ -51,7 +52,12 @@ const BoardAnswerListItem = ({ answer, boardId }) => {
     <div className={['qna-board', 'qna-answer'].join(' ')}>
       <div className="alpha-mark">A</div>
       <div className={['user-box', 'user-comment'].join(' ')}>
-        <button className="comment-img" />
+        <img 
+          className="comment-img"
+          src={board4}
+          alt="작성자 이미지"
+          style={{ border: "1px solid black" }}
+        />
         <div className="user-text">
           <p className="comment-username">{answer.writer}</p>
           <div className="comment-last">
