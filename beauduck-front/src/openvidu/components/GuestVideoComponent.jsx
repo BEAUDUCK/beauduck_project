@@ -43,14 +43,17 @@ const GuestVideoComponent = ({
   });
 
   useEffect(() => {
-    if (isExercising === 'done') {
-      console.log('끝났엉 isExercising', isExercising);
-      finishExercise();
-      setTimeout(() => {
-        leaveSession();
-        navigate('/help/result');
-      }, 10000);
-    }
+    user.getStreamManager().stream.session.on('signal:result', (event) => {
+      console.log(event.data);
+      if (isExercising === 'done') {
+        console.log('끝났엉 isExercising', isExercising);
+        finishExercise();
+        setTimeout(() => {
+          leaveSession();
+          navigate('/help/result');
+        }, 10000);
+      }
+    });
   }, [isExercising]);
 
   const color = ['#feccbe', '#feebb6', '#ddecca', '#b8e6e1', '#e3dbeb'];
