@@ -1,7 +1,5 @@
 import './Help.style.scss';
 import ConsultingListItem from '../help/ConsultingListItem';
-import backShape3 from '../../assets/backShape3.png';
-import backShape4 from '../../assets/backShape4.png';
 import logo from '../../assets/logo_original.png';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
@@ -35,28 +33,6 @@ const ConsultingList = ({ consultingList }) => {
   const randomOne = _.sample(consultingList);
   return (
     <div className="consulting-div">
-      <div>
-        <img src={backShape3} alt="" className="back-shape3" />
-        <img src={backShape4} alt="" className="back-shape4" />
-        <div className="random-consulting">
-          <p className="consult-nickname">{randomOne?.hostNickname}</p>
-          <div>
-            <img src={face} alt="" />
-          </div>
-          <p className="user-count">{randomOne?.userCount} / 8</p>
-          <h3>{randomOne?.title}</h3>
-          <p>{randomOne?.content}</p>
-          <button onClick={isOpenClick}>입장하기</button>
-        </div>
-        {isOpen && (
-          <ConsultingModalLoadingGuest
-            roomId={randomOne.roomId}
-            host={randomOne.hostNickname}
-            isOpenClick={isOpenClick}
-          />
-        )}
-        {isOpen && <BlackOut />}
-      </div>
       <div className="consulting-list">
         {consultingList.length > 0 ? (
           <div className="consulting-list-child">

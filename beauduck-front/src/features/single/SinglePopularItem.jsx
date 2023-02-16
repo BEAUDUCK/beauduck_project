@@ -16,9 +16,10 @@ const SinglePopularItem = ({ modeItem, idx }) => {
     <>
       <div
         className="makeup-div"
+        onClick={isToggleInfo}
         style={{ backgroundColor: `${bgColor[color]}` }}
       >
-        <div className="makeup-div-inside" onClick={isToggleInfo}>
+        <div className="makeup-div-inside">
           <img src={modeItem.img} alt="img" />
           <div>
             <p>{modeItem.title}</p>
@@ -31,10 +32,7 @@ const SinglePopularItem = ({ modeItem, idx }) => {
         </div>
       </div>
       {isInfo && (
-        <div className="detail-test">
-          <img src={modeItem.img} alt="" />
-        </div>
-        // <SingleModalInfo makeupId={modeItem.id} isToggleInfo={isToggleInfo} />
+        <SingleModalInfo makeupId={modeItem.id} isToggleInfo={isToggleInfo} />
       )}
       {isInfo && <BlackOut onClickEvent={isToggleInfo} />}
     </>

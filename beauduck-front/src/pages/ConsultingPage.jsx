@@ -14,11 +14,13 @@ import ConsultingModalLoadingHost from '../features/help/ConsultingModalLoadingH
 import banner from '../assets/help_banner.gif';
 import '../features/help/Help.style.scss';
 import Swal from 'sweetalert2';
-import { SimpleDialog } from '../features/login/LoginModal';
 import Button from '../components/button/Button';
 import megaphone from '../assets/megaphone.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Crawling from '../features/help/Crawling';
+import face from '../assets/faces/face3.png';
+import _ from 'lodash';
+import ConsultingModalLoadingGuest from '../features/help/ConsultingModalLoadingGuest';
 
 const ConsultingPage = () => {
   const dispatch = useDispatch();
@@ -39,6 +41,11 @@ const ConsultingPage = () => {
     }
   };
 
+  const [isRandom, setIsRandom] = useState(false);
+  const isOpenRandom = () => {
+    setIsRandom(!isRandom);
+  };
+
   const { isActive } = useSelector((state) => state.consulting);
 
   const loadingOff = () => {
@@ -49,30 +56,53 @@ const ConsultingPage = () => {
     dispatch(getMakeupInfo());
   }, []);
 
+  const randomOne = _.sample(consultingList);
+
   return (
     <>
       {/* <Banner bannerStyle={'help-ban'} /> */}
       <div className="banner-div">
-        <div className="consulting-make-div">
-          <div className="fake-border1"></div>
-          <div className="fake-border2"></div>
-          <h1>WHAT IS YOUR PERSONAL COLOR???</h1>
-          <p>아직도 내 퍼스널 컬러를 모르겠다면???</p>
-          <p>뷰덕에게 도움을 요청해덕!!</p>
-          <div>
-            <Button
-              text={'컬러 진단받기'}
-              onClickEvent={isOpenModal}
-              btnStyle={'color-btn'}
-            />
-            <FontAwesomeIcon icon="fa-solid fa-circle-chevron-right" />
-          </div>
-          <img src={megaphone} alt="" />
-        </div>
         <img src={banner} alt="" id="help-banner" />
       </div>
-      {/* <h2 className="help-h2">도와주라덕</h2> */}
-      <ConsultingList consultingList={consultingList} />
+      <div className="consulting-section1">
+        <div className="consulting-section1-left">
+          <div className="consulting-make-div">
+            <h1>WHAT IS YOUR PERSONAL COLOR???</h1>
+            <p>아직도 내 퍼스널 컬러를 모르겠다면???</p>
+            <p>뷰덕에게 도움을 요청해덕!!</p>
+            <div>
+              <Button
+                text={'컬러 진단받기'}
+                onClickEvent={isOpenModal}
+                btnStyle={'color-btn'}
+              />
+              <FontAwesomeIcon icon="fa-solid fa-circle-chevron-right" />
+            </div>
+            <img src={megaphone} alt="" />
+          </div>
+          <div className="random-consulting">
+            <div className="random-cosult-left">
+              <img src={face} alt="" />
+              <p className="consult-nickname">{randomOne?.hostNickname}</p>
+            </div>
+            <div className="random-consult-right">
+              <p className="user-count">{randomOne?.userCount} / 6</p>
+              <h3>{randomOne?.title}</h3>
+              <p>{randomOne?.content}</p>
+              <button onClick={isOpenRandom}>입장하기</button>
+            </div>
+          </div>
+          {isOpen && (
+            <ConsultingModalLoadingGuest
+              roomId={randomOne.roomId}
+              host={randomOne.hostNickname}
+              isOpenClick={isOpenRandom}
+            />
+          )}
+          {isOpen && <BlackOut />}
+        </div>
+        <ConsultingList consultingList={consultingList} />
+      </div>
       {isOpen && <ConsultingModalCreate isOpenModal={isOpenModal} />}
       {isOpen && <BlackOut onClickEvent={isOpenModal} />}
       {isActive && <ConsultingModalLoadingHost loadingOff={loadingOff} />}
