@@ -1,0 +1,47 @@
+.container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 70%;
+  /* display: flex; */
+  /* justify-content: center; */
+
+  /* 컨테이너 중앙 정렬 */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-colored {
+  background-color: rgb(255, 252, 233, 0.8);
+}
+
+input, textarea, select {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  border: none;
+  border-radius: 5px;
+  background-color: #F1F1F1;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+input, textarea {
+  font-size: 15px;
+}
+
+textarea { 
+  padding-top: 10px;
+  padding-bottom: 10px;
+  resize: none;
+  word-break: keep-all;
+}
+
+h1 {
+  font-family: 'Jalnan';
+}
+
+/* .main-logo {
+  position: relative;
+  top: 50px;
+  width: 1000px;
+  height: 500px;
+} */

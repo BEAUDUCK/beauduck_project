@@ -1,0 +1,35 @@
+.login-container{
+  top: 200px;
+}
+
+.logout-container{
+  top: 200px;
+}
+
+// 모달 문구
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  text-align: center;
+}
+
+// 버튼 div
+.css-1tnift2-MuiListItem-root {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.signup-btn {
+  display: inline-block;
+  width: 250px;
+  height: 60px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(222, 222, 222);
+  color: black;
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 60px;
+}

@@ -1,0 +1,521 @@
+/* ProfilePage.jsx */
+.ProfilePage {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  margin-top: 40px;
+  margin-bottom: 30px;
+
+  /* MyProfile.jsx */
+  .MyProfile {
+    position: relative;
+    width: 50%;
+    // border-right: 3px dashed rgb(232, 232, 232);
+    text-align: center;
+
+    .profile-nickname { 
+      display: inline-block;
+      position: relative;
+      z-index: 10;
+      width: 70%;
+      margin-top: 50px;
+      text-align: center;
+      background-color: #FFE27C;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 10px;
+
+      .circle {
+        display: inline-block;
+        position: absolute;
+        top: 13px;
+        left: 20px;
+        width: 25px;
+        height: 25px;
+        border-radius: 30px;
+        background-color: #FFE27C;
+      }
+      h2 {
+        margin: 0;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgb(216, 216, 216);
+        font-family: 'Jalnan';
+        font-size: 22px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+      }
+    }
+    .background-div {
+      position: absolute;
+      top: 65px;
+      left: 5%;
+      z-index: 1;
+      width: 90%;
+      height: 290px;
+      border-radius: 20px;
+      background-color: #FFF5D1;
+    }
+    
+    .profile-div {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+
+      .profile-img{
+        width: 200px;
+        height: 200px;
+      }
+      
+      .profile-content {
+        width: calc(80% - 220px);
+        height: 150px;
+        text-align: left;
+        margin-left: 20px;
+        // margin: auto;
+        p {
+          margin: 0;
+        }
+      }
+      textarea {
+        width: calc(80% - 240px);
+        height: 140px;
+        text-align: left;
+        margin-left: 20px;
+      }
+    }
+      
+    .nickname-update {
+      margin-top: 50px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+        input {
+          width: 60%;
+          height: 50px;
+        }
+        svg {
+          width: 30px;
+          height: 30px;
+          margin-left: 10px;
+        }
+        .checked {
+          color: #FACA0F;
+        }
+    }
+
+    .profile-btn {
+      display: inline-block;
+      position: relative;
+      z-index: 10;
+      width: 100px;
+      height: 30px;
+      margin: auto;
+      border: none;
+      border-radius: 5px;
+      background-color: #FBDB48;
+      box-shadow: 3px 3px #FACA0F;
+      font-weight: 800;
+      font-family: 'Jalnan';
+      font-size: 16px;
+      text-shadow: 1px 1px rgb(185, 185, 185);
+      color: white;
+      cursor: pointer;
+    }
+  }
+
+
+  /* MyRanking.jsx */
+  .MyRanking {
+    position: relative;
+    width: 50%;
+    text-align: center;
+    // display: flex;
+    // justify-content: space-evenly;
+    // align-items: center;
+
+    h1 {
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+
+    .rank-img {
+      position: absolute;
+      bottom: 5%;
+      right: 10%;
+      width: 30%;
+      min-width: 100px;
+    }
+
+    .exp-box {
+      position: relative;
+
+      .exp-bar {
+        width: 80%;
+        height: 40px;
+        margin: auto;
+        border-radius: 10px;
+        background-color: rgb(222, 222, 222);
+      }
+      .my-exp {
+        position: absolute;
+        top: 0;
+        left: 10%;
+        height: 40px;
+        margin: auto;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        background-color: rgb(255, 230, 104);
+      }
+      p {
+        margin: 0;
+        font-family: 'Jalnan';
+      }
+      .exp-text {
+        position: absolute;
+        top: 13px;
+        left: 50%;
+        transform: translate(-50%);
+      }
+      .badge-div {
+        width: 80%;
+        height: 150px;
+        margin: auto;
+        display: flex;
+        // flex-direction: column;
+        justify-content: center;
+        margin-top: 10px;
+        align-items: baseline;
+
+        div {
+          position: relative;
+          .ment {
+            position: absolute;
+            display: inline-block;
+            width: 150px;
+            text-align: center;
+            margin-left: 10px;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+          }
+        }
+        img {
+          height: 100px;
+        }
+        .speechBubble {
+          height: 150px;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+
+hr {
+  position: absolute;
+  top: 480px;
+  width: 100%;
+  border: 0;
+  size: 15px;
+  background-color: #eeeeee;
+  height: 4px;
+}
+
+.btn-div {
+  position: relative;
+  width: 470px;
+  margin: auto;
+  background-color: white;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+
+  div {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+
+    p {
+      position: absolute;
+      top: 40px;
+      font-weight: 600;
+      font-size: 18px;
+      color: white;
+    }
+    .btn-ma {
+      left: 45px;
+    }
+    .btn-ga {
+      left: 53px;
+    }
+    .btn-pi {
+      left: 46px;
+    }
+
+    img {
+      width: 130px;
+      height: 130px;
+    }
+
+    .tab-selected {
+      width: 150px;
+      height: 150px;
+    }
+  }
+}
+
+.face-capture-div {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h3 {
+    font-weight: 600;
+    font-family: 'Jalnan';
+  }
+  
+  .user-face {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+  
+    background-color: white;
+    border: 2px solid rgb(220, 220, 220);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #bdbdbd;
+  
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  
+    z-index: 990;
+  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  
+  
+    #main_capture {
+      position: relative;
+      width: 360px;
+      height: 270px;
+      max-width: 700px;
+      .webcam {
+        width: 100%;
+      }
+      // #main_capture {
+      //   position: absolute;
+      //   top: 0px;
+      //   left: 90px;
+      //   width: 300px;
+      //   height: 360px;
+      //   // background-color: pink;
+      // }
+    }
+  
+    #faceCircle {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+  
+      z-index: 991;
+      width: 50%;
+      height: 80%;
+      max-width: 420px;
+    }
+
+    .guide-div {
+      padding-left: 20px;
+      padding-right: 20px;
+
+      .camera-img {
+        width: 80px;
+        height: 80px;
+        margin: 10px;
+      }
+
+      a {
+        text-decoration: none;
+        display: inline-block;
+        width: 180px;
+        background-color: #ffedab;
+        padding: 5px;
+        border-radius: 20px;
+      }
+    }
+  
+  }
+}
+
+.MyMakeupList {
+  display: flex;
+  justify-content: space-between;
+  
+  h2 {
+    font-family: 'Jalnan';
+    display: inline-block;
+    padding-bottom: 10px;
+  }
+
+  .recent-div {
+    background-color: rgba(225, 233, 252, 0.8);
+    border-top-right-radius: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 50%;
+    text-align: center;
+
+    h2 {
+      width: 280px;
+      border-bottom: 3px solid rgb(127, 142, 201);
+      color: rgb(127, 142, 201)
+    }
+
+    .MyMakeup-item {
+      width: 90%;
+      margin: auto;
+      
+      .makeup-item {
+        display: inline-block;
+        width: 13vw;
+        height: 17vw;
+        // border: 1px solid gray;
+        border-radius: 20px;
+        background-color: white;
+        margin: 5px;
+        padding-top: 1.5vw;
+        box-shadow: 0 0 5px rgb(225, 225, 225);
+
+        img {
+          width: 9vw;
+          height: 9vw;
+          border-radius: 100px;
+          object-fit: cover;
+          margin-bottom: 5px;
+        }
+        p {
+          display: inline-block;
+          height: 50px;
+          width: 170px;
+          margin: 0;
+          padding-left: 15px;
+          padding-right: 15px;
+          margin-bottom: 5px;
+        }
+
+        button {
+          width: 10vw;
+          height: 35px;
+          border: none;
+          border-radius: 50px;
+          background-color: rgb(225, 233, 252);
+          color: rgb(127, 142, 201);
+          font-weight: 800;
+          font-size: 16px;
+          cursor: pointer;
+        }
+      }
+    }
+      
+  }
+  .made-div {
+    background-color: rgba(250, 222, 225, 0.5);
+    border-top-left-radius: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    min-height: 300px;
+    width: 50%;
+    text-align: center;
+
+    h2 {
+      width: 260px;
+      border-bottom: 3px solid #FDAFAB;
+      color: #FDAFAB;
+    }
+
+    .MyMakeup-item {
+      width: 90%;
+      margin: auto;
+      
+      .makeup-item {
+        display: inline-block;
+        width: 13vw;
+        height: 17vw;
+        // border: 1px solid gray;
+        border-radius: 20px;
+        background-color: white;
+        margin: 5px;
+        padding-top: 1.5vw;
+        box-shadow: 0 0 5px rgb(225, 225, 225);
+
+        img {
+          width: 9vw;
+          height: 9vw;
+          border-radius: 100px;
+          object-fit: cover;
+          margin-bottom: 5px;
+        }
+        p {
+          display: inline-block;
+          width: 170px;
+          height: 50px;
+          margin: 0;
+          padding-left: 15px;
+          padding-right: 15px;
+          margin-bottom: 5px;
+        }
+
+        button {
+          width: 10vw;
+          height: 35px;
+          border: none;
+          border-radius: 50px;
+          background-color: rgba(250, 222, 225, 0.6);
+          color: #FDAFAB;
+          font-weight: 800;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.gallery {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 30px;
+  text-align: center;
+
+  button {
+    width: 300px;
+    height: 30px;
+    border-radius: 10px;
+    border: 0;
+    background-color: #fcdcda;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+      .gallery-pic {
+        width: 210px;
+        height: 160px;
+        object-fit: cover;
+        border: 3px solid #bdbdbd;
+        border-radius: 10px;
+        margin: 2px;
+      }
+  }
+}
