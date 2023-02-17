@@ -1,0 +1,3 @@
+FROM adoptopenjdk/openjdk11
+COPY target/openvidu-basic-java-2.25.0.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
