@@ -1,0 +1,53 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+
+  ssl:
+    enabled: true
+#    key-store: keystore.p12
+    key-store: classpath:keystore.p12
+    key-store-password: 123456
+    key-store-type: PKCS12
+#    key-alias: bns-ssl
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://i8b306.p.ssafy.io:3306/common_pjt?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIAZ5J66THQWELIHMOW      # AWS IAM AccessKey 적기
+      secretKey: T9mT2FHYQ0Hk2aSP0uimGGQpew+wQs/kcwwxCga/   # AWS IAM SecretKey 적기
+    s3:
+      dir: S3 /makeup
+      bucket: ssafybeauduck
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
