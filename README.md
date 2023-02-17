@@ -1,4 +1,4 @@
-![D8302E54-C8A0-4832-88F8-6E3325027DFC.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e76a4961-82d8-4100-9073-9fd241deed34/D8302E54-C8A0-4832-88F8-6E3325027DFC.png)
+<img src="/uploads/0f563c6004a8e216242a2d39fb44ccde/D8302E54-C8A0-4832-88F8-6E3325027DFC.png" width="200" height="200" />
 
 # 뷰덕 - BeauDuck 뷰티 서비스
 
@@ -36,18 +36,7 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 
 뷰덕의 핵심 컨셉은 비용 부담 없이 퍼스널 컬러 진단, 메이크업 튜토리얼 등 뷰티 컨텐츠를 즐길 수 있는 웹 서비스입니다. 
 
-## 🐥 BeauDuck - 컨셉
 
----
-
-- 테마 컬러
-    
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d6dadca9-045c-4f20-94ff-2ebfe28fb0f2/Untitled.png)
-    
-- 프로젝트 심볼
-    
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7d662361-9dbc-4260-a6c1-5e8308d8f599/Untitled.png)
-    
 
 ## 🐥 주요 기능
 
@@ -272,7 +261,7 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 
 ---
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/426f6a7c-ae1e-453e-beef-7ed547251ba1/Untitled.png)
+<img src="/uploads/4501a7e2e0c2168c89ee55c4b710c388/Untitled__2_.png" width="800" height="500" />
 
 ### 프로젝트 파일 구조
 
