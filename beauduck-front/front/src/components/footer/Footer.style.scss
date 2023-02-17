@@ -1,0 +1,23 @@
+.footer {
+    width: 100%;
+    height: 150px;
+    margin: 0;
+    text-align: center;
+    font-weight: 400;
+    font-size: medium;
+    color: gray;
+    border-top: 1px solid rgb(220, 220, 220);
+    // background-color: yellowgreen;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #F1F1F1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+        p {
+            text-align: left;
+        }
+        a {
+            text-decoration: none;
+            color: gray;
+    }}

@@ -1,0 +1,634 @@
+.single-main {
+    background-color: white;
+    margin-top: 50px;
+
+    .single-banner-div {
+        width: 100%;
+        text-align: center;
+        .single-banner {
+            width: 80%;
+            margin: auto;
+        }
+    }
+    
+    .makeup-popular {
+        height: calc(100vh - 50px);
+
+        .best-text{
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            z-index: 9;
+            font-size: 60px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            color: #568A35;
+            text-underline-offset : 10px;
+            text-decoration: 2px underline #568A35;
+            text-shadow: 2px 2px rgb(201, 201, 201);
+            font-family: 'Abril Fatface', cursive;
+        }
+    
+        .alice-carousel {
+            z-index: 10;
+        }
+    }
+
+}
+
+
+.capture-div {
+    text-align: center;
+    
+    .capture-h1 {
+        margin-top: 30px;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-capture {
+        width: 700px;
+        height: 540px;
+        position: relative;
+    }
+
+    .download-btn {
+        width: 200px;
+        height: 50px;
+        margin-top: 20px;
+        background: #FFF5D1;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 30px;
+        border: none;
+        font-family: 'Jalnan';
+        font-size: large;
+        color: #2c2c2c;
+    }
+    
+    .webcam-result {
+        margin-top: 0px;
+        position: absolute;
+        top: 0;
+        z-index: 10;
+
+        width: 640px;
+        height: 480px;
+
+        border: 30px solid #F0F0F0;
+        border-radius: 15px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .captured-img {
+        position: absolute;
+        top: 0;      
+        left: 0px;  
+        width: 100%;
+        height: 100%;
+        z-index: 11;
+        animation: fadeout 1s;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    } 
+    to {
+        opacity: 0;
+    }
+}
+
+// 따라해덕 진행 화면
+.full-screen {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    z-index: 990;
+    margin: 0;
+
+    display: flex;
+    justify-content: space-around;
+
+    .left-div {
+        width: calc((100% - 700px) / 2);
+        height: 100vh;
+        text-align: center;
+
+        .out {
+            margin-top: 10px;
+            margin-bottom: 25px;
+            margin-left: 30px;
+            width: 270px;
+            height: 80px;
+            font-size: 20px;
+            text-align: left;
+            color: gray;
+            cursor: pointer;
+    
+            p {
+                display: inline-block;
+                margin-left: 10px;
+            }   
+        }
+
+        .color-code-div {
+            width: 280px;
+            height: 100px;
+            border: 3px solid rgb(222, 222, 222);
+            margin-left: 30px;
+            margin-top: 10px;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            display: flex;
+
+            .color-rectangle {
+                width: 220px;
+                height: 100px;
+                border-top-right-radius: 50px;
+                border-bottom-right-radius: 50px;
+                
+            }
+
+            p {
+                display: inline-block;
+                width: 60px;
+                height: 100px;
+                padding-top: 25px;
+                margin: 0;
+                word-break: keep-all;
+                color: rgb(125, 125, 125);
+            }
+        }
+
+        .makeup-sequence {
+            width: 250px;
+            height: 400px;
+            position: relative;
+            padding-top: 45px;
+
+            .sub-step-content {
+                position: relative;
+                width: 230px;
+                height: 170px;
+                margin-left: 30px;
+
+                padding-top: 160px;
+                padding-bottom: 50px;
+                padding-left: 20px;
+                padding-right: 20px;
+
+                text-align: left;
+
+                border: 10px solid rgb(231, 229, 229);
+                border-style: double;
+                border-radius: 30px;
+
+                background-color: #FFF5D1;
+
+                .sub-ing-img{
+                    width: 100px;
+                    height: 120px;
+                    position: absolute;
+                    top: 10px;
+                    left: calc(50% - 50px);
+                }
+            }
+        }
+    }
+    
+    .center-div {
+        position: relative;
+        width: 700px;
+        height: 100vh;
+        align-items: center;
+
+        .Facemesh {
+            position: relative;
+
+            .webcam {
+                width: 640px;
+                height: 480px;
+                border: 30px solid #F0F0F0;
+                border-radius: 15px;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            }
+            .canvas {
+                position: absolute;
+                top: 30px;
+                left: 30px;
+            }
+        }
+        .guide-btn {
+            position: absolute;
+            left: calc(50% - 80px);
+            top: 700px;
+            width: 160px;
+            height: 30px;
+            font-family: 'Jalnan';
+            font-size: 15px;
+
+            &:hover {
+                font-size: 17px;
+                width: 166px;
+                height: 32px;
+                left: calc(50% - 83px);
+            }
+        }
+
+        .main-img-div {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            
+
+            .main-ing-img {
+                width: 80px;
+                height: 80px;
+                opacity: 0.5;
+                // box-shadow: 0 0 3px #838383;
+                // border-radius: 15px;
+            }
+
+            .selected {
+                opacity: 1;
+            }
+    
+            .next-makeup-icon {
+                width: 15px;
+                height: 80px;
+                margin-left: 5px;
+                margin-right: 5px;
+                color: gray;
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+        }
+
+        .center-cam {
+            position: relative;
+            width: 100%;
+            height: 600px;
+
+            .move {
+                position: absolute;
+                top: calc(50% - 100px);
+                font-size: 100px;
+                color: rgb(188, 188, 188);
+                cursor: pointer;
+                z-index: 998;
+            }
+            .move-left {
+                left: -80px;
+            }
+        
+            .move-right {
+                right: -80px
+            }
+        }
+
+        
+            .progress-bar {
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                width: 620px;
+                height: 20px;
+                margin-left: 30px;
+                margin-bottom: 10px;
+
+                .progress-hr {
+                    position: absolute;
+                    left: 3px;
+                    height: 4px;
+                    width: 614px;
+                    background-color:rgb(210, 210, 210);
+                    border: none;
+                    transition: width ease 1s 0s;
+                }
+    
+                .progress-inside {
+                    display: inline-block;
+                    position: relative;
+                    width: 18px;
+                    height: 18px;
+                    border-radius: 100px;
+                    background-color: white;
+                    color: rgb(210, 210, 210);
+                    box-shadow: 0 0 7px rgb(210, 210, 210);
+                    margin-left: 2px;
+                    margin-right: 2px;
+                    margin-top: auto;
+                    margin-bottom: auto;
+    
+                }
+                .already {
+                    background-color: #FFE27C;
+                    transition-delay: 1s;
+                }
+        }
+
+        // }
+    }
+
+    .right-div {
+        // position: relative;
+        width: calc((100% - 700px) / 2);
+        height: 100vh;
+        padding-top: 120px;
+
+        .right-detail {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            // justify-content: center;
+            align-items: center;
+
+            .textBack {
+                width: 120px;
+            }
+
+            p {
+                display: inline-block;
+                width: 50px;
+                margin: 0;
+                position: absolute;
+                top: 14px;
+                left: calc(50% - 25px);
+            }
+            
+            .thumbnail {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                padding-bottom: 50px;
+                padding-left: 20px;
+                padding-right: 20px;
+                border-radius: 150px;
+            }
+            .guide-img {
+                max-width: 200px;
+                max-height: 200px;
+                border-radius: 20px;
+            }
+        }
+
+        .finish-btn {
+            position: absolute;
+            top: 650px;
+            right: 120px;
+
+            width: 150px;
+            height: 45px;
+
+            font-family: 'Jalnan';
+            font-size: 18px;
+
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgb(210, 210, 210);
+
+            cursor: pointer;
+            
+            &:hover {
+                background-color: #FFE27C;
+            }
+        }
+    }
+
+}
+
+// 메인 하단
+.makeup-special {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 50px);
+    margin-top: 100px;
+    background-color: white;
+    flex-wrap: wrap;
+
+    .makeup-special-section1 {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        width: 45%;
+        height: 550px;
+        margin-right: 30px;
+
+        h1 {
+            display: inline-block;
+            margin: 0;
+            width: 60%;
+            text-align: center;
+            font-size: 40px;
+            letter-spacing: 0.2rem;
+        }
+
+        .section1-create{
+            position: relative;
+            width: 550px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            word-break: keep-all;
+
+            background-color: #feccbe;
+            border-radius: 70px;
+            box-shadow: 8px 8px 5px rgba(210, 210, 210, 0.8);
+            padding-left: 30px;
+            padding-right: 30px;
+
+            img {
+                position: absolute;
+                width: 140px;
+                top: 70px;
+            }
+
+            div {       
+                margin-top: 20px;
+                margin-left: 160px;
+                display: inline-block;
+                width: 370px;    
+
+                h2 {
+                    display: inline-block;
+                    max-width: 450px;
+                    font-size: 27px;
+                    font-family: 'CookieRun';
+                }
+                p {
+                    display: inline-block;
+                    max-width: 400px;
+                    font-size: 17px;
+                    margin: 0;
+                }
+
+                div {
+                    position: relative;
+                    margin-top: 0;
+                    width: 200px;
+                    height: 75px;
+                    svg {
+                        position: absolute;
+                        right: 10px;
+                        bottom: 20px;
+                        color: #23C4B1;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .section1-random{
+            margin-top: 30px;
+            border-radius: 70px;
+            background-color: #feebb6;
+            box-shadow: 8px 8px 5px rgba(210, 210, 210, 0.8);
+            width: 550px;
+            height: 260px;
+            padding-left: 30px;
+            padding-right: 30px;
+            display: flex;
+            align-items: center;
+
+            .random-header {
+                margin-top: 20px;
+                display: inline-block;
+                width: 270px;
+                height: 220px;
+                text-align: center;
+
+                .miniDuck {
+                    width: 130px;
+                    display: inline-block;
+                }
+                h1 {
+                    display: inline-block;
+                    text-align: center;
+                    width: 270px;
+                    margin: 0;
+                    line-height: 40px;
+                    color:rgb(52, 52, 52);
+                    font-size: 33px;
+                    font-family: 'CookieRun';
+                    letter-spacing: 1.5px;
+                    // text-shadow: 3px 3px #fcd750;
+                }
+                .random-h1-two {
+                    font-size: 28px;
+                }
+            } 
+        .random-one {
+            display: inline-block;
+            width: 280px;
+            height: 200px;
+            text-align: center;
+            // background-color: #feccbe;
+            border-radius: 70px;
+            .random-one-inside {
+                width: 260px;
+                height: 190px;
+                margin-top: 5px;
+                margin-left: 20px;
+                border-radius: 50px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 120px;
+                    height: 120px;
+                    object-fit: cover;
+                    border-radius: 100px;
+                }
+                
+                div {
+                    width: 110px;
+                    p {
+                        display: inline-block;
+                        word-break: keep-all;
+                        font-size: 17px;
+                        font-family: 'Jalnan';
+                    }
+                    .star-info {
+                        p {
+                            display: inline;
+                            margin-left: 5px;
+                            font-size: 13px;
+                            color: rgb(86, 86, 86);
+                        }
+                    }
+                }
+            }
+        }
+        }
+    }
+
+    .makeup-special-section2 {
+        display: flex;
+        justify-content: flex-start;
+        position: relative;
+        width: 45%;
+        height: 550px;
+        margin-left: 30px;
+
+        .section2-ai {
+            position: relative;
+            display: inline-block;
+            z-index: 100;
+            width: 500px;
+            height: 550px;
+            background-color: #ddecca;
+            border-radius: 70px;
+            box-shadow: 8px 8px 5px rgba(210, 210, 210, 0.8);
+            padding-left: 60px;
+            padding-right: 50px;
+
+            h1 {
+                width: 410px;
+                line-height: 40px;
+                word-break: keep-all;
+                text-align: left;
+                margin-top: 80px;
+                margin-bottom: 30px;
+            }
+            p {
+                margin: 0;
+            }
+        }
+        .section2-bottom {
+            display: flex;
+            margin-top: 50px;
+
+            div {
+                position: relative;
+                width: 200px;
+                height: 35px;
+                svg {
+                    position: absolute;
+                    right: 15px;
+                    bottom: 10px;
+                    color: #4D8AF0;
+                    cursor: pointer;
+                }
+            }
+            img { 
+                width: 310px;
+            }
+        }
+    }
+}   

@@ -1,0 +1,344 @@
+/* TogetherPage */
+.together-banner {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .together-banner-img {
+    width: 80%;
+    margin: auto;
+  }
+
+}
+
+.together-btn-div {
+  position: relative;
+  width: 200px;
+  height: 56px;
+  margin: auto;
+
+.together-btn {
+  position: absolute;
+  color: #89695E;
+  border-color: #89695E;
+  box-shadow: 3px 3px 0px 0px #89695E;
+  height: 150px;
+  margin: auto;
+  bottom: 30px;
+  font-size: 18px;
+
+}
+  svg {
+    position: absolute;
+    right: 20px;
+    bottom: 97px;
+    color: #89695E;
+    cursor: pointer;
+}
+}
+
+
+.together-h2 {
+  font-family: "Jalnan";
+  font-size: 40px;
+}
+
+/* TogetherList, TogetherListItem */
+
+.together-list {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: flex-start;
+  width: 1000px;
+
+  .together-list-child {
+    // display: grid;
+    // grid-template-columns: repeat(4, minmax(20%, auto));
+    // grid-template-columns: repeat(4, minmax(200, auto));
+  }
+
+  .flip {
+    display: inline-block;
+    // width: 250px;
+    // height: 200px;
+    width: 200px;
+    height: 150px;
+    perspective: 1100px;
+    margin: 0px 25px 30px 25px;
+
+  }
+
+  .card {
+    width: 100%; 
+    height: 100%; 
+    position: relative;
+    transition: .4s;
+    transform-style: preserve-3d;
+    border-radius: 50px;
+    box-shadow: 5px 5px #D3D3D3;
+    border-left: 1px solid #D3D3D3;
+    
+    &:hover {
+      box-shadow: none;
+    }
+  }	
+
+  .front, .back {
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+  }
+
+    .front-top {
+      height: 70%;
+      border-top-left-radius: 50px;
+      border-top-right-radius: 50px;
+
+      img {
+        width: 150;
+        height: 100px;
+      }
+
+    }
+
+    .front-bottom {
+      height: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+  .back {
+    border-radius: 50px;
+    backface-visibility: hidden;
+    box-shadow: 0px 0px 10px gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    &:hover {
+      box-shadow: 0px 0px 10px gray;
+    }
+
+    .back-content {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 5px;
+      margin-top: 5px;
+
+      .back-content-index {
+        margin-left: 20px;
+        font-size: 14px;
+      }
+
+      .back-content-context {
+        width: 120px;
+        background-color: white;
+        margin-left: 10px;
+        padding-left: 5px;
+        text-align: start;
+        font-size: 14px;
+      } 
+
+    }
+
+  }
+}
+// 뒷면은 사전에 미리 뒤집기
+.back { 
+  transform: rotateY(180deg);
+}
+
+// 호버 시 뒤집기
+.flip:hover .card {
+  transform: rotateY(-180deg);
+}
+
+// 투게덕 방 생성하기 모달
+.together-create-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 500px;
+  height: 350px;
+  
+  background-color: white;
+  border: 2px solid rgb(220, 220, 220);
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px #bdbdbd;
+  z-index: 990;
+
+  .together-create-header {
+    width: 500px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #FFF5D1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    h3 {
+      margin: 0;
+      width: 300px;
+      line-height: 50px;
+      font-family: 'Jalnan';
+    }
+
+    .xmark {
+        margin: auto;
+        color: rgb(68, 68, 68);
+        font-size: x-large;
+        cursor: pointer;
+
+        position: absolute;
+        top: 12px;
+        right: 20px;
+    }
+  }
+
+  .together-form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+
+    text-align: center;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: inline-block;
+      width: 50px;
+      text-align: center;
+      margin-right: 20px;
+    }
+
+    input{
+      width: 300px;
+      height: 30px;
+    }
+
+    textarea { 
+      width: 300px;
+      min-height: 120px;
+    }
+  }
+}
+
+// ----- 투게덕 대기 리스트
+
+// .together-rooms {
+//   margin: auto;
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+// }
+
+// ------- 개별 룸 --------
+// .room-div {
+//   min-width: 280px;
+//   min-height: 150px;
+
+//   border: 2px solid rgb(220, 220, 220);
+//   border-radius: 10px;
+//   box-shadow: 0px 0px 5px 0px #bdbdbd;
+
+//   padding-left: 20px;
+//   padding-right: 20px;
+
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+
+//   .room-div-sub {
+//     display: flex;
+//     flex-direction: column;
+//   }
+
+//   .img-div {
+//     justify-content: center;
+//     align-items: center;
+//     height: 120px;
+
+//     p {
+//       width: 100px;
+//       height: 20px;
+//       font-size: 13px;
+//       text-align: center;
+//       background-color: rgb(220, 220, 220);
+//     }
+//   }
+
+//   .random-img {
+//     width: 100px;
+//     height: 100px;
+//   }
+
+//   .text-div {
+//     justify-content: start;
+//     height: 120px;
+//     min-width: 170px;
+//     margin-left: 1rem;
+
+//     .text-first {
+//       background-color: #F5E166;
+//       border-radius: 10px;
+//       height: 30px;
+//       line-height: 30px;
+//       box-shadow: 2px 2px 0px 0px #bdbdbd;
+
+//       span {
+//         font-family: 'Jalnan';
+//         font-size: 16px;
+//       }
+
+//       .id-num {
+//         margin-left: 15px;
+//         margin-right: 10px;
+//         font-size: 20px;
+//       }
+//     }
+//   }
+
+//   p {
+//     display: inline-block;
+//     margin: 0;
+//   }
+
+//   .p-content {
+//     margin-top: -5px;
+//     z-index: -1;
+//     font-size: 15px;
+//     background-color: #fff6b8;
+//     min-width: 170px;
+//     height: 40px;
+
+//     padding-left: 10px;
+//     padding-right: 10px;
+//     padding-top: 15px;
+//     padding-bottom: 5px;
+//   }
+
+//   h3 {
+//     margin: 0;
+//     margin-top: 5px;
+//     font-size: 20px;
+//     font-family: 'Jalnan';
+//     text-align: center;
+//     color: #F5E166;
+//     text-shadow: 1px 1px 2px #787878;
+//   }
+// }
