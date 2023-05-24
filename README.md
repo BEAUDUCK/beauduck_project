@@ -99,50 +99,159 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/f0af7626-b691-4410-9f63-2c117539581e">
       </div>
     <br><br>
-
 </details>
 
 <br><br>
 
 ## ✨ 따라해덕
 
-- 메이크업 튜토리얼
-  - 상위 10개 메이크업, 랜덤 추천 메이크업, AI 추천 메이크업, 전체 메이크업 리스트 등 화면 내 유저가 다양한 접근 방식으로 메이크업 튜토리얼을 선택할 수 있습니다.
-  - 원하는 대분류 카테고리를 선택하여 튜토리얼을 실행합니다.
-  - 메이크업 대표사진, 각 세부 과정에 대한 상세설명, 사용 색상, 가이드 이미지를 제공합니다.
-  - facemesh를 사용하여 유저의 얼굴 좌표에 가이드라인을 제공합니다.
-  - 메이크업을 완성한 모습을 화면 캡쳐를 통해 저장할 수 있고, “마이페이지>갤러리” 탭에서 모아보기가 가능합니다.
-  - 메이크업이 종료되면 해당 메이크업을 평가할 수 있습니다. 별점과 조회수가 높으면 화면 상단부인 TOP10 에 노출되어 더 많은 유저가 이용할 수 있도록 유도할 수 있습니다.
-- 메이크업 컨텐츠 커스터마이징
-  - 원하는 단계와 원하는 컬러, 모양 등 디테일한 부분을 하나의 메이크업 컨텐츠로 커스터마이징하는 것이 가능합니다.
-  - 모든 단계는 초보자도 알기 쉽게 시각화된 UI를 통해 제공됩니다.
-  - 완성한 각 컨텐츠는 마이페이지에서 모아보기가 가능합니다.
-- 닮은꼴 메이크업 추천
-  - 사용자의 정면 얼굴 사진을 등록하여 닮은꼴 회원들이 만든 메이크업을 추천해줍니다.
-  - “마이페이지>이미지 저장” 탭에서 화면 캡쳐를 통해 정면 사진을 저장할 수 있습니다.
-  - 이때 저장된 이미지는 추천을 위해서만 사용되며 저장되지 않습니다.
-  - 최대 5개의 메이크업을 추천해주며 닮은 회원이 없을 경우 추천 메이크업이 없을 수 있습니다.
+<details>
+  <summary>
+    <b>메이크업 튜토리얼</b>
+  </summary>
+    <br>
+<div markdown="1">
+    <p>▫ 상위 10개 메이크업, 랜덤 추천 메이크업, AI 추천 메이크업, 전체 메이크업 리스트 등 화면 내 유저가 다양한 접근 방식으로 메이크업 튜토리얼을 선택할 수 있습니다.</p>
+<img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/1e5c9428-e38b-433a-a20b-a2e9cbd047f8">
+<img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/09650118-cbd0-41f8-8dbe-7b6211ea7d73">
+<img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/7c3fe738-8015-487f-b8e5-4801cceb463f">
+  </div>
+    <br><br>
+  <div markdown="2">
+    <p>▫ 메이크업 대표사진, 각 세부 과정에 대한 상세설명, 사용 색상, 가이드 이미지를 제공합니다.</p>
+    <p>▫ facemesh를 사용하여 유저의 얼굴 좌표에 가이드라인을 제공합니다.</p>
+    
+      </div>
+    <br><br>
+      <div markdown="3">
+    <p>▫ 메이크업을 완성한 모습을 화면 캡쳐를 통해 저장할 수 있고, “마이페이지>갤러리” 탭에서 모아보기가 가능합니다.</p>
+      </div>
+    <br><br>
+      <div markdown="4">
+    <p>▫ 메이크업이 종료되면 해당 메이크업을 평가할 수 있습니다. 별점과 조회수가 높으면 화면 상단부인 TOP10 에 노출되어 더 많은 유저가 이용할 수 있도록 유도할 수 있습니다.</p>
+    <br>
+     </div>
 
-### 투게덕
+</details>
+<br>
+<details>
+  <summary>
+    <b>메이크업 컨텐츠 커스터마이징</b>
+  </summary>
+    <br>
+<div markdown="1">
+    <p>▫ 원하는 단계와 원하는 컬러, 모양 등 디테일한 부분을 하나의 메이크업 컨텐츠로 커스터마이징하는 것이 가능합니다.</p>
+    <p>▫ 모든 단계는 초보자도 알기 쉽게 시각화된 UI를 통해 제공됩니다.</p>
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/17ed8eef-55b2-4332-8c98-1d6c4c98cf57">
+    <br>
+      </div>
+    <br><br>
+    <div markdown="2">
+    <p>▫ 완성한 각 컨텐츠는 마이페이지에서 모아보기가 가능합니다.</p>
+    </div>
+</details>
+<br>
+<details>
+  <summary>
+    <b>닮은꼴 메이크업 추천</b>
+  </summary>
+    <br>
+<div markdown="1">
+    <p>▫ 사용자의 정면 얼굴 사진을 등록하여 닮은꼴 회원들이 만든 메이크업을 추천해줍니다.</p>
+    <p>▫ “마이페이지>이미지 저장” 탭에서 화면 캡쳐를 통해 정면 사진을 저장할 수 있습니다.</p>
+    <p>▫ 이때 저장된 이미지는 추천을 위해서만 사용되며 저장되지 않습니다.</p>
+    <br>
+      </div>
+    <br><br>
+    <div markdown="2">
+    <p>▫ 최대 5개의 메이크업을 추천해주며 닮은 회원이 없을 경우 추천 메이크업이 없을 수 있습니다.</p>
+    </div>
+</details>
 
-- 실시간 화상 채팅
-  - WebRTC를 이용하여 유저들과 자유롭게 화상으로 소통할 수 있습니다.
-  - Openvidu 라이브러리를 통해 간단히 Custom하였습니다.
+<br><br>
 
-### 쑥덕쑥덕
+## 👨‍👧‍👧 투게덕
 
-- 뷰티와 관련된 정보, 사담 등을 작성할 수 있습니다.
-- 작성하는 게시물의 목적에 따라 정보 게시판과 질문 게시판으로 분리하였습니다.
-- 댓글을 작성하여 다른 사용자들과 소통할 수 있습니다.
+<details>
+  <summary>
+    <b>실시간 화상 채팅</b>
+  </summary>
+    <br>
+<div markdown="1">
+    <p>▫ WebRTC를 이용하여 유저들과 자유롭게 화상으로 소통할 수 있습니다.</p>
+    <p>▫ Openvidu 라이브러리를 통해 간단히 Custom하였습니다.</p>
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/d07bcf64-54d5-40fa-92b7-dde3dee3ebef">
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/075e5b82-14d5-4ae4-8628-f73fbc25c21d">
+    <br>
 
-### 마이페이지
+<br>
+</div>
+</details>
 
-- 메이크업
-  - 따라해덕에서 실행한 메이크업과 만든 메이크업 정보를 확인할 수 있습니다.
-- 갤러리
-  - 메이크업 튜토리얼 종료 후 저장한 사진을 볼 수 있습니다.
-- 사진 저장
-  - 메이크업 추천에 사용되는 얼굴 사진을 촬영할 수 있습니다.
+<br><br>
+
+## 🤼‍♂️ 쑥덕쑥덕
+
+<details>
+  <summary>
+    <b>게시판</b>
+  </summary>
+    <br>
+<div markdown="1">
+    <p>▫ 뷰티와 관련된 정보, 사담 등을 작성할 수 있습니다.</p>
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/d8635ab7-b66c-4b70-a53a-78f142236013">
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/a15620c8-456f-445e-a6f5-bebc9427501d">
+</div>
+<br>
+<div markdown="2">
+    <p>▫ 작성하는 게시물의 목적에 따라 정보 게시판과 질문 게시판으로 분리하였습니다.</p>
+    <p>▫ 댓글을 작성하여 다른 사용자들과 소통할 수 있습니다.</p>
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/65988f59-3e72-4bd9-ae86-4617c6c98220">
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/559bd795-5d9d-4fef-a794-35bcb1d87e82">
+    <br>
+<br>
+</div>
+</details>
+
+<br><br>
+
+## 🏠 마이페이지
+
+<details>
+  <summary>
+    <b>메이크업</b>
+  </summary>
+    <br>
+<div markdown="1">
+    <p>▫ 따라해덕에서 실행한 메이크업과 만든 메이크업 정보를 확인할 수 있습니다.</p>
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/87c72833-85bd-43e2-bd45-e0a314ef2b07">
+<br>
+</div>
+</details>
+<br>
+<details>
+  <summary>
+    <b>갤러리</b>
+  </summary>
+    <br>
+<div markdown="1">
+    <p>▫ 메이크업 튜토리얼 종료 후 저장한 사진을 볼 수 있습니다.</p>
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/598cb98b-d4dc-4da8-9793-f7008e5eb6ea">
+<br>
+</div>
+</details>
+<br>
+<details>
+  <summary>
+    <b>사진 저장</b>
+  </summary>
+    <br>
+<div markdown="1">
+    <p>▫ 메이크업 추천에 사용되는 얼굴 사진을 촬영할 수 있습니다.</p>
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/079f2994-6648-4890-b91e-faf1b83f910a">
+<br>
+</div>
+</details>
 
 <br><br>
 
