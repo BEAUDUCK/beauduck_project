@@ -66,17 +66,22 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 <div markdown="1">
     <p>▫ 퍼스널 컬러를 무료로 쉽고 빠르게 진단받을 수 있습니다.</p>
 <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/e297dbc3-0a3d-4df4-b03c-7a227f1ac4f2">
-<br>
+    <br/>
+  </div>
+  <div markdown="2">
     <p>▫ 진단을 받고자 하는 유저(호스트)의 화면 배경이 3초마다 바뀝니다.</p>
     <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/82df56df-227e-43ab-8785-df3070c7a9fc">
-    <br>
+    <br/>
+      </div>
+      <div markdown="3">
     <p>▫ 다수의 평가단이 호스트의 화면을 보고 색상이 어울리는지 선택합니다.</p>
     <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/f451f7d1-8cb0-4368-918d-743634706b63">
     <br>
+      </div>
+      <div markdown="4">
     <p>▫ 모든 평가단의 투표 결과를 수집하여 퍼스널 컬러 진단 결과를 도출합니다.</p>
     <br>
     <p>▫ 호스트는 평가 결과 진단서를 평가 종료 직후 실시간으로 확인 가능합니다.</p>
-
   </div>
 </details>
 
