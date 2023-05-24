@@ -4,15 +4,9 @@
 
 **뷰티 덕후를 위한 Web RTC 기반 뷰티 컨텐츠 제공 서비스**
 
-▫ 뷰티에 관심있는 모든 사람이 비용 부담 없이 퍼스널 컬러 진단, 메이크업 튜토리얼 등 뷰티 컨텐츠를 즐길 수 있습니다.
+뷰티에 관심있는 모든 사람이 비용 부담 없이 퍼스널 컬러 진단, 메이크업 튜토리얼 등 뷰티 컨텐츠를 즐길 수 있습니다.
 
 <br><br>
-
-## 🐥 BeauDuck 링크 ( 웹 모바일 화면 ) : [https://i8b306.p.ssafy.io/](https://i8b306.p.ssafy.io/)
-
-<br>
-
-<br>
 
 ## 🐥 소개 영상 보기 : [https://youtu.be/O0s7edaADMQ](https://youtu.be/O0s7edaADMQ)
 
@@ -32,7 +26,7 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 
 뷰티의 주체가 “남”에서 “나”로 옮겨가고 있다는 것을 알고 계신가요? 남들이 많이 입는 코디, 남들이 자주 하는 메이크업이 아닌 나에게 잘 어울리는 코디와 메이크업을 요구하는, **퍼스널 뷰티**의 시대가 도래했습니다!
 
-나를 더 잘 이해하고 나에게 꼭 맞는 메이크업을 찾고 싶지 않으신가요?? **비대면 무료 퍼스널 컬러 진단**부터 **다양한 메이크업 콘텐츠와 가이드**를 제공하는 웹 서비스 플랫폼 “뷰덕(Beauduck)”에 모두 준비되어 있습니다.
+나를 더 잘 이해하고 나에게 꼭 맞는 메이크업을 찾고 싶지 않으신가요?? **비대면 무료 퍼스널 컬러 진단**부터 **다양한 메이크업 콘텐츠와 가이드**를 제공하는 웹 서비스 플랫폼 **“뷰덕(Beauduck)”**에 모두 준비되어 있습니다.
 
 <br><br>
 
@@ -48,7 +42,7 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 
 <br><br>
 
-## 🐥 주요 기능
+# 🐥 주요 기능
 
 1️⃣ Web RTC를 이용한 퍼스널컬러 진단
 
@@ -59,8 +53,6 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 4️⃣ 유저 실시간 소통 서비스 및 자유 게시판
 
 <br>
-
----
 
 <br>
 
@@ -116,11 +108,11 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 - 사진 저장
   - 메이크업 추천에 사용되는 얼굴 사진을 촬영할 수 있습니다.
 
+<br><br>
+
 ## 🐥 기술 스택
 
----
-
-### FrontEnd
+### 🧙‍♂️ FrontEnd
 
 - React 버전 : 18.2.0
 - node.js 18.13.0
@@ -134,7 +126,7 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 - Facemesh 라이브러리
 - SCSS
 
-### BackEnd
+### 👷‍♂️ BackEnd
 
 - Intellij 2022.3.1
 - Spring boot 2.7.7
@@ -164,9 +156,20 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 
 <br><br>
 
-## 🐥 산출물
+# 🐥 산출물
+
+<details>
+  <summary>
+    <b>ERD</b>
+  </summary>
+
+<div markdown="1">
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/140d4608-aeed-4c9d-9bc7-ab2da5d29cea">
+  </div>
+</details>
 
 - [ERD](https://www.notion.so/ERD-f09d523efac346abb97bd019b1d616f8)
+- [와이어프레임](https://www.figma.com/file/4V9LFPQxk4quhAxluP8zeu/B306?type=design&node-id=0-1&t=qOwHpJUOuz9lBjWK-0)
 - [API 문서](https://www.notion.so/API-e3e7dd6cce2742daa1b85ce2954fa4d5)
 - [요구사항 명세서](https://www.notion.so/d3f388295401410bbc602f72e09d218a)
 - [테스트 케이스](https://www.notion.so/f475836b027840d5baaf02ff5f1d33b1)
