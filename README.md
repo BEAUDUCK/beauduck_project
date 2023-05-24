@@ -70,12 +70,8 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
     <br><br>
   <div markdown="2">
     <p>▫ 진단을 받고자 하는 유저(호스트)의 화면 배경이 3초마다 바뀝니다.</p>
-    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/82df56df-227e-43ab-8785-df3070c7a9fc">
-      </div>
-    <br><br>
-      <div markdown="3">
     <p>▫ 다수의 평가단이 호스트의 화면을 보고 색상이 어울리는지 선택합니다.</p>
-    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/f451f7d1-8cb0-4368-918d-743634706b63">
+    <img src="https://github.com/BEAUDUCK/beauduck_project/blob/main/exec/gif/%EB%8F%84%EC%99%80%EB%8D%95%20%EC%B0%B8%EA%B0%80.gif?raw=true">
       </div>
     <br><br>
       <div markdown="4">
@@ -120,6 +116,7 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
   <div markdown="2">
     <p>▫ 메이크업 대표사진, 각 세부 과정에 대한 상세설명, 사용 색상, 가이드 이미지를 제공합니다.</p>
     <p>▫ facemesh를 사용하여 유저의 얼굴 좌표에 가이드라인을 제공합니다.</p>
+    <img src="https://github.com/BEAUDUCK/beauduck_project/blob/main/exec/gif/%EB%A9%94%EC%9D%B4%ED%81%AC%EC%97%85%20%EB%94%B0%EB%9D%BC%ED%95%98%EA%B8%B0%20%EB%B0%B0%EC%86%8D.gif?raw=true">
       </div>
     <br><br>
       <div markdown="3">
@@ -140,7 +137,7 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
 <div markdown="1">
     <p>▫ 원하는 단계와 원하는 컬러, 모양 등 디테일한 부분을 하나의 메이크업 컨텐츠로 커스터마이징하는 것이 가능합니다.</p>
     <p>▫ 모든 단계는 초보자도 알기 쉽게 시각화된 UI를 통해 제공됩니다.</p>
-    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/17ed8eef-55b2-4332-8c98-1d6c4c98cf57">
+    <img src="https://github.com/BEAUDUCK/beauduck_project/blob/main/exec/gif/%EB%A9%94%EC%9D%B4%ED%81%AC%EC%97%85%20%EB%A7%8C%EB%93%A4%EA%B8%B0%20%EB%B0%B0%EC%86%8D.gif?raw=true">
     <br>
       </div>
     <br><br>
