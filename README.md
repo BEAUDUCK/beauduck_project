@@ -152,15 +152,14 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
   </summary>
     <br>
 <div markdown="1">
+<img src="https://github.com/BEAUDUCK/beauduck_project/blob/main/exec/gif/%EC%B6%94%EC%B2%9C%20%EB%B0%B0%EC%86%8D.gif?raw=true">
     <p>▫ 사용자의 정면 얼굴 사진을 등록하여 닮은꼴 회원들이 만든 메이크업을 추천해줍니다.</p>
     <p>▫ “마이페이지>이미지 저장” 탭에서 화면 캡쳐를 통해 정면 사진을 저장할 수 있습니다.</p>
     <p>▫ 이때 저장된 이미지는 추천을 위해서만 사용되며 저장되지 않습니다.</p>
+    <p>▫ 최대 5개의 메이크업을 추천해주며 닮은 회원이 없을 경우 추천 메이크업이 없을 수 있습니다.</p>
     <br>
       </div>
-    <br><br>
-    <div markdown="2">
-    <p>▫ 최대 5개의 메이크업을 추천해주며 닮은 회원이 없을 경우 추천 메이크업이 없을 수 있습니다.</p>
-    </div>
+
 </details>
 
 <br><br>
