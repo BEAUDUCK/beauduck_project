@@ -62,40 +62,49 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
   <summary>
     <b>퍼스널 컬러 진단</b>
   </summary>
-
+    <br>
 <div markdown="1">
     <p>▫ 퍼스널 컬러를 무료로 쉽고 빠르게 진단받을 수 있습니다.</p>
 <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/e297dbc3-0a3d-4df4-b03c-7a227f1ac4f2">
   </div>
-    <br/>
+    <br><br>
   <div markdown="2">
     <p>▫ 진단을 받고자 하는 유저(호스트)의 화면 배경이 3초마다 바뀝니다.</p>
     <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/82df56df-227e-43ab-8785-df3070c7a9fc">
       </div>
-    <br/>
+    <br><br>
       <div markdown="3">
     <p>▫ 다수의 평가단이 호스트의 화면을 보고 색상이 어울리는지 선택합니다.</p>
     <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/f451f7d1-8cb0-4368-918d-743634706b63">
       </div>
-    <br>
+    <br><br>
       <div markdown="4">
     <p>▫ 모든 평가단의 투표 결과를 수집하여 퍼스널 컬러 진단 결과를 도출합니다.</p>
     <br>
     <p>▫ 호스트는 평가 결과 진단서를 평가 종료 직후 실시간으로 확인 가능합니다.</p>
   </div>
 </details>
+<br>
+<details>
+  <summary>
+    <b>뷰티 관련 정보 제공</b>
+  </summary>
+    <br>
+<div markdown="1">
+    <p>▫ 네이버 검색 API를 사용한 데이터 크롤링을 통해 퍼스널 컬러, 메이크업 등 뷰티 관련 키워드의 기사, 블로그, 상품 정보를 제공합니다.</p>
+    <p>▫  해당 정보를 클릭하면 원본 링크로 이동할 수 있습니다.</p>
+    <br>
+<img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/42cf40e2-e72d-428b-9301-1841845a27e6">
+<br>
+<img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/f0af7626-b691-4410-9f63-2c117539581e">
+      </div>
+    <br><br>
 
-- 퍼스널 컬러 진단
-  - 퍼스널 컬러를 무료로 쉽고 빠르게 진단받을 수 있습니다.
-  - 진단을 받고자 하는 유저(호스트)의 화면 배경이 3초마다 바뀝니다.
-  - 다수의 평가단이 호스트의 화면을 보고 색상이 어울리는지 선택합니다.
-  - 모든 평가단의 투표 결과를 수집하여 퍼스널 컬러 진단 결과를 도출합니다.
-  - 호스트는 평가 결과 진단서를 평가 종료 직후 실시간으로 확인 가능합니다.
-- 뷰티 관련 정보 제공
-  - 네이버 검색 API를 사용한 데이터 크롤링을 통해 퍼스널 컬러, 메이크업 등 뷰티 관련 키워드의 기사, 블로그, 상품 정보를 제공합니다.
-  - 해당 정보를 클릭하면 원본 링크로 이동할 수 있습니다.
+</details>
 
-## 따라해덕
+<br><br>
+
+## ✨ 따라해덕
 
 - 메이크업 튜토리얼
   - 상위 10개 메이크업, 랜덤 추천 메이크업, AI 추천 메이크업, 전체 메이크업 리스트 등 화면 내 유저가 다양한 접근 방식으로 메이크업 튜토리얼을 선택할 수 있습니다.
