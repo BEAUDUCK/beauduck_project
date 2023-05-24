@@ -168,12 +168,27 @@ SSAFY 8기 2학기 공통 프로젝트 - BeauDuck
   </div>
 </details>
 
-- [ERD](https://www.notion.so/ERD-f09d523efac346abb97bd019b1d616f8)
-- [와이어프레임](https://www.figma.com/file/4V9LFPQxk4quhAxluP8zeu/B306?type=design&node-id=0-1&t=qOwHpJUOuz9lBjWK-0)
-- [API 문서](https://www.notion.so/API-e3e7dd6cce2742daa1b85ce2954fa4d5)
-- [요구사항 명세서](https://www.notion.so/d3f388295401410bbc602f72e09d218a)
-- [테스트 케이스](https://www.notion.so/f475836b027840d5baaf02ff5f1d33b1)
-- [포팅 매뉴얼](https://www.notion.so/a3d23311125b41fd80c21accf9ccbd51)
+<br>
+
+<details>
+  <summary>
+    <b>와이어프레임</b>
+  </summary>
+
+<div markdown="1">
+    <img src="https://github.com/BEAUDUCK/beauduck_project/assets/93974908/c2e6537c-5930-4b40-a61e-decad2bb3c0b">
+  </div>
+</details>
+
+<br>
+
+[API 문서](https://www.notion.so/API-e3e7dd6cce2742daa1b85ce2954fa4d5)
+
+[요구사항 명세서](https://www.notion.so/d3f388295401410bbc602f72e09d218a)
+
+[테스트 케이스](https://www.notion.so/f475836b027840d5baaf02ff5f1d33b1)
+
+[포팅 매뉴얼](https://www.notion.so/a3d23311125b41fd80c21accf9ccbd51)
 
 <br>
 
